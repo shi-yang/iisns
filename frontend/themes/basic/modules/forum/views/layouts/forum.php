@@ -32,8 +32,16 @@ AppAsset::register($this);
     <div class="modal-shiftfix wrap">
         <!-- Navigation -->
         <div class="navbar navbar-fixed-top scroll-hide">
+            <div class="container-fluid top-bar visible-xs">
+                <button class="navbar-toggle">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="logo" href="<?= Url::toRoute(['/forum/forum/view', 'id' => $this->params['forum']['forum_url']]) ?>"><?= Html::encode($this->params['forum']['forum_name']) ?></a>
+            </div>
             <div class="container-fluid main-nav clearfix">
-                <div class="nav-collapse">
+                <div class="nav-collapse ">
                     <div class="pull-left">
                         <div class="page-title">
                             <h1><?= Html::a(Html::encode($this->params['forum']['forum_name']), ['/forum/forum/view', 'id' => $this->params['forum']['forum_url']]) ?></h1>
@@ -115,6 +123,11 @@ AppAsset::register($this);
         </div>
     </footer>
     <?php $this->endBody() ?>
+    <script type="text/javascript">
+        $('.navbar-toggle').click(function() {
+          return $('body, html').toggleClass("nav-open");
+        });
+    </script>
 </body>
 </html>
 <?php $this->endPage() ?>
