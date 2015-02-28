@@ -160,7 +160,7 @@ class ForumController extends FrontController
         if ($newBoard->load(Yii::$app->request->post())) {
             $newBoard->forum_id = $model->id;
             if ($newBoard->save()) {
-                Yii::$app->getSession()->setFlash('success', 'Create successfully.');
+                Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Create successfully.'));
             } else {
                 Yii::$app->getSession()->setFlash('error', 'Server error.');
             }
@@ -184,7 +184,7 @@ class ForumController extends FrontController
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate() && $model->save()) {
-                Yii::$app->getSession()->setFlash('success', 'Save successfully.');
+                Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Save successfully.'));
             }
         }
         

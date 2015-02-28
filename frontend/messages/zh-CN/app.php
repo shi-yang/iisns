@@ -98,6 +98,8 @@ return [
 	'Today {time}' => '今天 {time}',
 	'{min} minutes ago' => '{min} 分钟前',
 	'Just now' => '刚刚',
+	'Create successfully.' => '创建成功',
+	'Save successfully.' => '保存成功',
 
 	'No data to display.' => '没有数据展示',
 	'Unfinished,continue reading' => '未完，继续阅读',
