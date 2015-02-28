@@ -23,7 +23,7 @@ $this->registerCss('
 
         <p><a class="btn btn-lg btn-success" href="https://github.com/shi-yang/iisns2/archive/master.zip">Download Source</a></p>
         <p id="version">
-          Version 2.0.0 Alpha &nbsp;&nbsp;·&nbsp;&nbsp;
+          Version 2.1.0 Alpha &nbsp;&nbsp;·&nbsp;&nbsp;
           <a href="https://github.com/shi-yang/iisns2"  target="_blank">
             GitHub Project</a> &nbsp;&nbsp;·&nbsp;&nbsp;
           Created by <a href="http://www.shiyang.me">Shiyang</a>
