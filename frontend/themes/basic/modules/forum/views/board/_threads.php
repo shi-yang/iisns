@@ -39,6 +39,6 @@ use yii\bootstrap\Modal;
 	<?php endforeach; ?>
 <?php else: ?>
 	<div class="jumbotron">
-		<h2><?= Yii::t('app', 'No threads found.'); ?></h2>
+		<h2><?= Yii::t('app', 'No data to display.') ?></h2>
 	</div>
 <?php endif ?>
