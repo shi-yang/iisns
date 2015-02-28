@@ -23,7 +23,6 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         '//cdn.bootcss.com/jQuery-slimScroll/1.3.3/jquery.slimscroll.min.js',
-        '//cdn.bootcss.com/modernizr/2.8.3/modernizr.min.js',
         '//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js',
         'js/lightbox/js/lightbox.min.js',
         'js/user.js',

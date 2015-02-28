@@ -21,7 +21,7 @@ $this->registerCss('
 
         <p class="lead">I hope you like it.</p>
 
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Download Source</a></p>
+        <p><a class="btn btn-lg btn-success" href="https://github.com/shi-yang/iisns2/archive/master.zip">Download Source</a></p>
         <p id="version">
           Version 2.0.0 Alpha &nbsp;&nbsp;·&nbsp;&nbsp;
           <a href="https://github.com/shi-yang/iisns2"  target="_blank">
