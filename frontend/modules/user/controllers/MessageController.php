@@ -8,6 +8,7 @@ use yii\data\SqlDataProvider;
 use app\components\FrontController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 use app\components\Tools;
 use app\modules\user\models\User;
 use app\modules\user\models\Message;
@@ -26,6 +27,16 @@ class MessageController extends FrontController
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['inbox', 'outbox', 'create', 'view', 'update'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
         ];
