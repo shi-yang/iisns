@@ -26,7 +26,7 @@ $this->registerCss('
           Version 2.0.0 Alpha &nbsp;&nbsp;·&nbsp;&nbsp;
           <a href="https://github.com/shi-yang/iisns2"  target="_blank">
             GitHub Project</a> &nbsp;&nbsp;·&nbsp;&nbsp;
-          Created by <a href="#footerwrap">Shiyang</a>
+          Created by <a href="http://www.shiyang.me">Shiyang</a>
         </p>
     </div>
 
