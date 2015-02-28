@@ -12,3 +12,23 @@
 配置好后，backend\web\为后台根目录，frontend\web\为前台根目录
 
 backend\web\index.php 可配置站点信息
+
+预览
+-------
+
+![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns2_0228/item-01.png)
+
+![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns2_0228/item-02.png)
+
+![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns2_0228/item-03.png)
+
+![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns2_0228/item-04.png)
+
+![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns2_0228/item-05.png)
+
+![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns2_0228/item-06.png)
+
+演示
+----
+
+[www.iisns.com](http://www.iisns.com)
