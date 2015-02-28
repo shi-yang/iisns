@@ -1,0 +1,26 @@
+/*use on forum.views.layouts.user */
+.header {
+	-webkit-box-shadow: 0px 1px 1px rgba(0,0,0,.15), 0px 2px 1px rgba(0,0,0,.10), 0px 3px 1px rgba(0,0,0,.05);
+	-moz-box-shadow: 0px 1px 1px rgba(0,0,0,.15), 0px 2px 1px rgba(0,0,0,.10), 0px 3px 1px rgba(0,0,0,.05);
+	box-shadow: 0px 1px 1px rgba(0,0,0,.15), 0px 2px 1px rgba(0,0,0,.10), 0px 3px 1px rgba(0,0,0,.05);
+}
+.header .navbar-nav > li > a:hover {
+background-color: #E7E7E7;
+}
+.main{
+padding: 77px 43px;
+background: #E2EEFD;
+-webkit-border-radius: 0 0 3px 3px;
+border-radius: 0 0 3px 3px;
+}
+.callout-info {
+border-left-color: #5bc0de !important;
+}
+.callout {
+background-color: #fff;
+padding: 20px;
+margin-top: 40px;
+border: 1px solid #eee;
+border-left-width: 5px;
+border-radius: 3px;
+}

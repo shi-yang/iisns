@@ -1,0 +1,22 @@
+{
+    "name": "shiyang/yii2-login-widget",
+    "description": "This extension provides a login portlet  that provides user login functionality.",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Shiyang",
+            "email": "dr@shiyang.me"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "shiyang\\login\\": ""
+        }
+    }
+}

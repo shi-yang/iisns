@@ -1,0 +1,36 @@
+{
+	"name": "philippfrenzel/yii2masonry",
+	"description": "Yii2 Masonry Integration for Yii2",
+	"keywords": ["yii2","masonry"],
+	"homepage": "http://www.frenzel.net/",
+	"type": "yii2-extension",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Philipp Frenzel",
+			"email": "philipp@frenzel.net",
+			"homepage": "http://www.frenzel.net/",
+			"role": "Developer"
+		}
+	],
+	"support": {
+		"source": "https://github.com/philippfrenzel/yii2masonry"
+	},
+	"minimum-stability": "dev",
+	"require": {
+		"php": ">=5.4.0",
+		"yiisoft/yii2": "*",
+		"bower-asset/masonry" : "^3.2",
+		"bower-asset/imagesloaded" : "*",
+		"bower-asset/eventEmitter" : "^4.2",
+		"bower-asset/outlayer" : "^1.3"
+	},
+	"require-dev": {
+		"codeception/codeception": "*"
+	},
+	"autoload": {
+		"psr-4": { 
+			"yii2masonry\\": "" 
+		}
+	}
+}

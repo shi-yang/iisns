@@ -1,0 +1,22 @@
+{
+    "name": "shiyang/yii2-setting",
+    "description": "Yii2 Setting for other application",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","setting"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Shiyang",
+            "email": "dr@shiyang.me"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "shiyang\\setting\\": ""
+        }
+    }
+}

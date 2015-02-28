@@ -1,0 +1,27 @@
+.user-name {
+	margin-bottom: 10px;
+	margin-right: 5px;
+	font-weight: bold;
+	font-size: 40px;
+	color: #888;
+	display: inline-block;
+	vertical-align: middle;
+}
+.post-item {
+	background: #fff;
+	padding: 15px 20px;
+	box-shadow: 0 2px 5px rgba(0,0,0,0.46);
+	word-wrap: break-word;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+.profile {
+	background: #fff;
+	padding: 15px !important;
+	box-shadow: 0 2px 5px rgba(0,0,0,0.46);
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+.post-time {color:#ACACAC;}

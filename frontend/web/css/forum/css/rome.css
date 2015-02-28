@@ -1,0 +1,194 @@
+.item {
+width: 180px;
+margin: 8px;
+padding: 10px;
+background: #f6f6f6;
+color: #444;
+cursor:pointer;
+border: 1px solid #B9B9B9;
+text-shadow: 0px 1px 0px #fff;
+-webkit-box-shadow: 0px 1px 1px rgba(0,0,0,.15), 0px 2px 1px rgba(0,0,0,.10), 0px 3px 1px rgba(0,0,0,.05);
+-moz-box-shadow: 0px 1px 1px rgba(0,0,0,.15), 0px 2px 1px rgba(0,0,0,.10), 0px 3px 1px rgba(0,0,0,.05);
+box-shadow: 0px 1px 1px rgba(0,0,0,.15), 0px 2px 1px rgba(0,0,0,.10), 0px 3px 1px rgba(0,0,0,.05);
+overflow:hidden;
+text-overflow:ellipsis;
+}
+.item:hover {
+	color: #777
+}
+.index-name {
+	border-bottom: 1px solid #ccc;
+margin: 10px 0;
+display: block;
+padding: 0 0 5px;
+font-size: 17px;
+}
+@media (max-width: 767px) {
+.nav-head-span{
+display: inline !important;
+ }
+ .item {
+ width: 100%;
+ height: 120px;
+ margin: 0
+ }
+}
+.description {
+white-space: normal;
+word-wrap: break-word;
+}
+.item .picture img {
+	width: 120px;
+	height: 120px;
+}
+
+
+#page { margin-top: 70px; }
+#sidebar { padding: 20px 20px 20px 0; }
+.view { padding: 10px; }
+
+.cell{padding: 10px;border-bottom: 1px solid #D3D3D3;display:block;}
+.block {cursor: pointer;}
+.add-block span {font-size: 50px}
+.add-block {float:none}
+.gtitle .title_edit {
+	height: 49px;
+	font-size: 49px; 
+	width: 250px;
+	font-weight: bold;
+	color: #08c;
+}
+
+.my_forum {
+	font-size: 14px;
+	color: #646464
+}
+
+.add-on {
+	display: inline-block;
+	width: auto;
+	height: 16px;
+	min-width: 16px;
+	padding: 4px 0 5px 5px;
+	margin-right: -4px;
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 17px;
+	text-align: center;
+	text-shadow: 0 1px 0 #fff;
+	background-color: #eee;
+	border: 1px solid #ccc;
+}
+.post-form { padding: 21px;box-shadow: 0 0px 2px rgba(0,0,0,0.46);margin-bottom: 20px;}
+.post-content { 
+	margin: 0px;
+	width: 503px;
+	height: 66px;
+	float: left;
+}
+.post-list{padding: 0;}
+.post-item { 
+	position: relative;
+	padding: 15px 15px 15px 20px;
+	border-bottom: #d1d1d1 1px dotted;
+}
+.hg-bg {display: block;height: 20px;position: relative;}
+.post-item:hover {
+background-color: #f3f8f9;
+}
+.post-item {
+-moz-transition: background-color .2s;
+-webkit-transition: background-color .2s;
+transition: background-color .2s;
+}
+.post-time {color: #aaa;font-size: 13px;}
+.about-view {padding: 6px;white-space: normal;word-wrap: break-word;}
+.post-right a {font-size: 15px;}
+.post-right a:hover {
+    color: #ff7e51;
+}
+.post_container {
+padding: 20px 20px 5px 20px;
+background-color: #fff;
+margin-top: 20px;
+border-top: 1px dashed #d7d7d7;
+}
+.u_image {width: 64px;height: 64px;}
+.content {
+	line-height: 24px;
+	white-space:normal;
+	 word-break:break-all;
+	 overflow:hidden;
+}
+.comment_id {float: right;position: relative;top: 15px;color: #727272;}
+.create-post {color: #868686;margin: 0;font-weight: bold;}
+.avatar{width:62px; height:62px}
+.topic:hover {background: #f6f6f6;}
+.comment-wrap {border-top: 1px solid #D9E0E6;padding-top:20px}
+#comments {clear: both;}
+#comments h3 {
+font-size: 22px;
+line-height: 1.3;
+margin: 0 0 20px;
+padding: 0 20px;
+color: #919191;
+font-weight: normal;
+}
+.comment_container {
+padding: 20px;
+border-top: 1px solid rgb(206, 206, 206);
+}
+.comments{
+list-style: none;
+padding: 0;
+margin: 0;
+}
+.leave-comment {
+padding:0 20px 20px 20px;
+background: #f7f8f9;
+border-top: 1px solid #D9E0E6;
+border-bottom: 1px solid #D9E0E6;
+color: #646668;
+}
+.post-wrap{padding: 20px;}
+.post-meta {
+color: #656B6E;
+border-bottom: 1px solid #D9E0E6;
+margin: 0;
+padding: 13px;
+}
+.post-end{
+	border-top: 1px solid #D9E0E6;
+	padding: 9px 20px;
+	color: #aaa;
+}
+.post-end .ii-btn {
+margin-top: -4px;
+}
+.floor-number {
+	float: right;
+	font-size: 22px;
+	color: #999;
+}
+.comment-time {color: #bebdbd;font-size: 12px;}
+.media-title {margin:0;font-size: 20px;color:#434a54}
+.media-title:hover, .media-title:focus {color: #ff6f3d}
+.post-nickname {color: #a7a7a7;word-wrap: normal;font-weight: bold;font-size: 14px;}
+.no-posts-found {
+color: #829bb3;
+text-align: center;
+padding: 61px 20px;
+background: #fff;
+font-size: 34px;
+font-weight: bold;
+box-shadow: 0 2px 5px rgba(0,0,0,0.46);
+word-wrap: break-word;
+border-radius: 4px;
+-moz-border-radius: 4px;
+-webkit-border-radius: 4px;
+}
+.landlord-name {
+overflow: hidden;
+white-space: nowrap;
+text-overflow: ellipsis;
+}
