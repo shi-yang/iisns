@@ -79,6 +79,7 @@ return [
 	'Board Manage' => '版块管理',
 	'Add a board' => '添加版块',
 	'New Category' => '新分类',
+	'No board!' => '没有发现版块',
 	'Create new category' => '添加分类',
 	'Note:This board does not belong to any category.' => '提示：这个版块不属于任何分类',
 	'Category : {name}' => '所属分类：{name}',

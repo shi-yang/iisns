@@ -51,7 +51,7 @@ $this->params['forum'] = $model->toArray;
   	  <?php else: ?>
   	  	<div class="widget-container">
   	  		<div style="padding:50px">
-  	  			<h1><?= Yii::t('app', 'No broadcast found!') ?></h1>
+  	  			<h1><?= Yii::t('app', 'No data to display.') ?></h1>
   	  		</div>
   	  	</div>
   	  <?php endif ?>
