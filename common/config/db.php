@@ -3,6 +3,6 @@ return [
     'class' => 'yii\db\Connection',
     'dsn' => 'mysql:host=localhost;dbname=iisns',
     'username' => 'root',
-    'password' => 'adminadmin',
+    'password' => '123456',
     'tablePrefix' => 'pre_',
 ];
