@@ -10,13 +10,3 @@ frontend/uploads/user/avatar/*
 !frontend/uploads/user/avatar/.gitignore
 frontend/uploads/user/avatar/*
 !frontend/runtime/.gitignore
-
-backend/config/main-local.php
-backend/web/index.php
-common/config/db.php
-common/config/main-local.php
-frontend/config/main-local.php
-frontend/web/index.php
-init
-yii
-
