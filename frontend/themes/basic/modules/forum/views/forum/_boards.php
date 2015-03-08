@@ -41,7 +41,7 @@ use app\modules\forum\models\Board;
                     ?>
                     <?php for ($i=0; $i < $rowsCount; $i++): ?>
                         <tr>
-                            <? for ($j=0; $j < $board->columns; $j++): ?>
+                            <?php for ($j=0; $j < $board->columns; $j++): ?>
                                 <?php if ($counter < $totalRecords): ?>
                                     <?php $subBoard = $board->subBoards[$counter]; ?>
                                     <td class="boardinfo" width="<?= (100.0 / $board->columns) ?>%" onclick="window.location.href= '<?= Url::toRoute(['/forum/board/view', 'id' => $subBoard['id']]) ?>';return false">

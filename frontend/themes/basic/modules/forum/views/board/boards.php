@@ -27,7 +27,7 @@ $subBoards = $forum->getBoards($parentId);
 		        ?>
 		        <?php for ($i=0; $i < $rowsCount; $i++): ?>
 		            <tr>
-		                <? for ($j=0; $j < $columnsCount; $j++): ?>
+		                <?php for ($j=0; $j < $columnsCount; $j++): ?>
 		                    <?php if ($counter < $totalRecords): ?>
 		                        <?php $subBoard = $subBoards[$counter]; ?>
 	                            <td class="boardinfo" width="<?= (100.0 / $columnsCount) ?>%" onclick="window.location.href= '<?= Url::toRoute(['/forum/board/view', 'id' => $subBoard['id']]) ?>';return false">
