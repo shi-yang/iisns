@@ -35,7 +35,9 @@ $this->registerCssFile(Yii::getAlias('@web').'/css/forum/css/forum.css');
         <div class="panel panel-default">
           <div class="panel-heading"><?= Yii::t('app', 'Albums') ?></div>
           <div class="panel-body">
-            <?= $this->render('_album', ['albums' => $albums]) ?>
+            <div class="row">
+                <?= $this->render('_album', ['albums' => $albums]) ?>
+            </div>
           </div>
         </div>
     </div>
