@@ -15,7 +15,7 @@ $this->registerCssFile(Yii::getAlias('@web').'/css/forum/css/forum.css');
 <div class="forum-index">
     <?php if (!Yii::$app->user->isGuest): ?>
         <p>
-            <?= Html::a(Yii::t('app', 'Create Forum'), ['create'], ['class' => 'btn btn-success']) ?>
+            <?= Html::a(Yii::t('app', 'Create Forum'), ['/forum/forum/create'], ['class' => 'btn btn-success']) ?>
         </p>
     <?php endif ?>
 
