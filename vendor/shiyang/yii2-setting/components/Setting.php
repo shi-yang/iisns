@@ -68,7 +68,7 @@ class Setting extends Component
     {
         if ($this->_data === null) {
             if ($this->cache instanceof Cache) {
-                $this->cache->cachePath = Yii::getAlias('@app').'\..\common\cache';
+                $this->cache->cachePath = Yii::getAlias('@app/../common/cache');
                 $data = $this->cache->get($this->cacheKey);
                 if ($data === false) {
                     $data = $this->getData();
