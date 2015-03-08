@@ -30,7 +30,7 @@ list-style-type: none;
 ');
 $this->registerCssFile(Yii::getAlias('@web').'/css/forum/css/forum.css');
 ?>
-<div class="index-all container">
+<div class="index-all">
     <div class="album-all">
         <div class="panel panel-default">
           <div class="panel-heading"><?= Yii::t('app', 'Albums') ?></div>

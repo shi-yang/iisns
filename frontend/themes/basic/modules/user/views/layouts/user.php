@@ -229,7 +229,9 @@ AppAsset::register($this);
 
             <div class="padding-md">
                 <?= Alert::widget() ?>
-                <?= $content ?>
+                <div class="container-fluid">
+                    <?= $content ?>
+                </div>
             </div><!-- /.padding-md -->
         </div>
         <footer>
