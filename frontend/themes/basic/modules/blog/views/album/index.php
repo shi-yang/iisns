@@ -26,7 +26,7 @@ $this->registerCss('
 }
 ');
 ?>
-<div class="album-index container">
+<div class="album-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

@@ -1507,11 +1507,11 @@ input[type="text"]:focus,
    no data found styles
 ----------------------------------------- */
 .no-data-found {
-  background-color: rgba(255,255,255,0.05);
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.1), 0px 0px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 2px 2px 2px 2px;
   color: #555;
   text-align: center;
-  border: 1px solid rgba(0,0,0,0.18);
-  border-radius: 6px;
   padding: 100px 20px;
   font-size: 22px;
   font-weight: bold;

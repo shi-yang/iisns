@@ -73,17 +73,17 @@ a:hover {
 /*
  * No posts found styles
  */
-.no-posts-found {
-  background-color: rgba(255,255,255,0.05);
+.no-data-found {
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.1), 0px 0px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 2px 2px 2px 2px;
   color: #555;
   text-align: center;
-  border: 1px solid rgba(0,0,0,0.18);
-  border-radius: 6px;
   padding: 100px 20px;
   font-size: 22px;
   font-weight: bold;
 }
-.no-posts-found i {
+.no-data-found i {
   display: block;
   height: 100px;
   width: 150px;
