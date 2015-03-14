@@ -16,7 +16,7 @@ $this->params['forum'] = $model->toArray;
         <div class="widget-container stats-container">
             <div class="col-md-3">
                 <div class="number">
-                    <div class="icon globe"></div>
+                    <div class="icon glyphicon glyphicon-search"></div>
                     99<small>%</small>
                 </div>
                 <div class="text">
@@ -25,7 +25,7 @@ $this->params['forum'] = $model->toArray;
             </div>
             <div class="col-md-3">
                 <div class="number">
-                    <div class="icon visitors"></div>
+                    <div class="icon glyphicon glyphicon-search"></div>
                     <?= $model->followerCount ?>
                 </div>
                 <div class="text">
@@ -34,7 +34,7 @@ $this->params['forum'] = $model->toArray;
             </div>
             <div class="col-md-3">
                 <div class="number">
-                    <div class="icon money"></div>
+                    <div class="icon glyphicon glyphicon-search"></div>
                     999
                 </div>
                 <div class="text">
@@ -43,7 +43,7 @@ $this->params['forum'] = $model->toArray;
             </div>
             <div class="col-md-3">
                 <div class="number">
-                    <div class="icon chat-bubbles"></div>
+                    <div class="icon glyphicon glyphicon-search"></div>
                     <?= $model->threadCount ?>
                 </div>
                 <div class="text">
