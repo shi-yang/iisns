@@ -23,17 +23,15 @@ use yii\helpers\Html;
                     'autosave' => false,
                     'wordCount' => false,
                     'toolbars' => [
-                        [
-                            'fullscreen', 'preview', 'source', 'undo', 'redo', 'insertcode',
-                            'justifyleft', 'justifyright', 'justifycenter', 'justifyjustify'
-                        ],
-                        [
-                            'emotion', 'simpleupload', 'insertimage', 'link', 'insertvideo', 'music', '|',
-                            'autotypeset', 'customstyle', 'fontfamily', 'fontsize',
-                            'bold', 'italic', 'underline', 'strikethrough', 'removeformat',
-                            'formatmatch', 'blockquote', 'pasteplain', '|',
-                            'forecolor', 'backcolor', '|',
-                        ],
+                      [
+                          'fullscreen', 'preview', 'source', 'undo', 'redo', 'insertcode',
+                          'justifyleft', 'justifyright', 'justifycenter', 'justifyjustify'
+                      ],
+                      [
+                          'emotion', 'simpleupload', 'insertimage', 'link', 'insertvideo', 'music', '|',
+                          'autotypeset', 'bold', 'italic', 'underline', 'removeformat',
+                          'formatmatch', 'blockquote', 'pasteplain', '|',
+                      ],
                     ],
                 ]
             ]) ?>

@@ -28,10 +28,8 @@ use yii\widgets\ActiveForm;
                 ],
                 [
                     'emotion', 'simpleupload', 'insertimage', 'link', 'insertvideo', 'music', '|',
-                    'autotypeset', 'customstyle', 'fontfamily', 'fontsize',
-                    'bold', 'italic', 'underline', 'strikethrough', 'removeformat',
+                    'autotypeset', 'bold', 'italic', 'underline', 'removeformat',
                     'formatmatch', 'blockquote', 'pasteplain', '|',
-                    'forecolor', 'backcolor', '|',
                 ],
             ],
         ]
