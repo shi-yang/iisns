@@ -16,8 +16,6 @@ use app\modules\forum\models\Thread;
  */
 class BoardController extends FrontController
 {
-    const ROOT_BOARD = 0;
-
     public $layout = 'forum';
 
     public function behaviors()
@@ -49,7 +47,7 @@ class BoardController extends FrontController
     public function actionView($id)
     {
         $model = $this->findModel($id);
-        if ($model->parent_id == self::ROOT_BOARD) {
+        if ($model->parent_id == Board::AS_CATEGORY) {
             return $this->render('boards', [
                 'model' => $model,
                 'forum' => $model->forumModel,

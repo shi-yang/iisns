@@ -3,15 +3,12 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use app\components\Tools;
 use app\modules\forum\models\Board;
-?>
-<?php
+
 $this->params['forum'] = $forum->toArray;
 
-$subBoards = $forum->getBoards($parentId);
-?>
-<?php
-    $totalRecords = count($subBoards);
-    $columnsCount = $model->columns;
+$subBoards = $model->getSubBoards($parentId);
+$totalRecords = count($subBoards);
+$columnsCount = $model->columns;
 ?>
 
 <div class="tbox boarder">

@@ -22,6 +22,7 @@ class Board extends \yii\db\ActiveRecord
 {
     const AS_CATEGORY = 0;
     const AS_BOARD = 1;
+    
     /**
      * @inheritdoc
      */
@@ -131,6 +132,10 @@ class Board extends \yii\db\ActiveRecord
         return ;
     }
     
+    /**
+     * 取得当前版块下最新的一条消息的发布作者，发布时间
+     * @
+     */
     public static function getLastThread($id)
     {
         $query = new Query;
@@ -153,6 +158,7 @@ class Board extends \yii\db\ActiveRecord
 	}
 
     /**
+     * 取得当前版块下的子版块
      * @return array
      */
     public function getSubBoards()
