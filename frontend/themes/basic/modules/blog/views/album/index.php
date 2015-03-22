@@ -6,7 +6,7 @@ use yii\widgets\ListView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Albums');
+$this->title = Yii::t('app', 'My Albums');
 $this->params['breadcrumbs'][] = $this->title;
 $this->registerCss('
 .album-all {

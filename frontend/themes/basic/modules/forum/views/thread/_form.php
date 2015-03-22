@@ -32,8 +32,7 @@ use yii\bootstrap\ActiveForm;
                 ],
                 [
                     'emotion', 'simpleupload', 'insertimage', 'link', 'insertvideo', 'music', '|',
-                    'autotypeset', 'bold', 'italic', 'underline', 'removeformat',
-                    'formatmatch', 'blockquote', 'pasteplain', '|',
+                    'autotypeset', 'bold', 'italic', 'underline','blockquote', '|',
                 ],
             ],
         ]

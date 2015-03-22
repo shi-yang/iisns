@@ -17,6 +17,7 @@ return [
 	'Send' => '发送',
 	'Name' => '名称',
 	'Upload' => '上传',
+	'Delete' => '删除',
 
 	'Username or Email' => '用户名/邮箱',
 	'Remember Me' => '保持登录状态',
@@ -27,11 +28,15 @@ return [
 	'Please fill out your email. A link to reset password will be sent there.' => '请填写您注册时使用的邮箱，将会发送一封邮件到您注册邮箱那里。',
 
 	'Text' => '文字',
+	'Posts' => '文章',
+	'My Posts' => '我的文章',
+	'Create Post' => '发布文章',
 	'Photo' => '照片',
-	'Link' => '链接',
+	'Music' => '音乐',
 	'Video' => '视频',
 	'Album' => '相册',
 	'Albums' => '相册',
+	'My Albums' => '我的相册',
 	'Create Album' => '创建相册',
 	'Edit Album' => '编辑相册',
 	'Privilege Setting' => '权限设置',
@@ -93,6 +98,7 @@ return [
 	'Broadcast' => '广播',
 	'Content' => '内容',
 	'Title' => '标题',
+	'Reply' => '回复',
 
 	'Optional' => '可不填',
 	'Time error' => '时间出错',

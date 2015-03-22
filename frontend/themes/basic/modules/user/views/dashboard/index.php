@@ -1,7 +1,6 @@
 <?php
 use yii\helpers\Url;
 use yii\helpers\Html;
-use yii\widgets\Pjax;
 use app\modules\user\models\User;
 
 /* @var $this yii\web\View */

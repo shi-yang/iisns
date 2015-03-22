@@ -39,10 +39,13 @@ class DashboardController extends FrontController
     {
         $model = $this->findModel();
         $query = new Query;
+        
         $query = $query->select('*')
-                    ->from('{{%blog_post}}')
-                    ->where(['user_id' => $model->id])
-                    ->orderBy('create_time desc');
+            ->from('{{%blog_post}} as p')
+            ->join('LEFT JOIN','{{%user_follow}} as u', 'p.user_id=u.people_id')
+            ->where('p.user_id=:user_id OR u.user_id=:user_id', [':user_id' => $model->id])
+            ->orderBy('create_time DESC');
+
         $pages = Tools::Pagination($query);
         return $this->render('index', [
             'model' => $model,

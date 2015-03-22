@@ -11,7 +11,7 @@ use yii\helpers\Url;
             <div class="widget-container share-widget fluid-height clearfix">
                 <div class="clearfix">
                     <div class="col-xs-3 share-options">
-                        <a href="<?= Url::toRoute(['/blog/post/create']) ?>">
+                        <a href="<?= Url::toRoute(['/blog/post']) ?>">
                             <i class="glyphicon glyphicon-pencil"></i>
                             <p><?= Yii::t('app', 'Text') ?></p>
                         </a>
@@ -24,8 +24,8 @@ use yii\helpers\Url;
                     </div>
                     <div class="col-xs-3 share-options">
                         <a href="<?= Url::toRoute(['/blog/photo']) ?>">
-                            <i class="glyphicon glyphicon-link"></i>
-                            <p><?= Yii::t('app', 'Link') ?></p>
+                            <i class="glyphicon glyphicon-music"></i>
+                            <p><?= Yii::t('app', 'Music') ?></p>
                         </a>
                     </div>
                     <div class="col-xs-3 share-options">

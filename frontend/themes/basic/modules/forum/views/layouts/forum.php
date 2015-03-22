@@ -90,6 +90,10 @@ AppAsset::register($this);
                             <li><a href="<?= Url::toRoute(['/site/login']) ?>">
                                     <span aria-hidden="true" class="glyphicon glyphicon-log-in"></span><?= Yii::t('app', 'Login') ?></a>
                             </li>
+                            <?php else: ?>
+                            <li><a href="<?= Url::toRoute(['/user/dashboard']) ?>">
+                                    <span aria-hidden="true" class="glyphicon glyphicon-user"></span><?= Yii::t('app', 'Personal Center') ?></a>
+                            </li>
                             <?php endif ?>
                         </ul>
                     </div>

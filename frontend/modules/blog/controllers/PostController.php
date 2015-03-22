@@ -3,13 +3,15 @@
 namespace app\modules\blog\controllers;
 
 use Yii;
-use app\modules\blog\models\Post;
+use yii\db\Query;
 use yii\data\ActiveDataProvider;
-use app\components\FrontController;
 use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use app\modules\blog\models\Post;
+use app\components\Tools;
+use app\components\FrontController;
 
 /**
  * PostController implements the CRUD actions for Post model.
@@ -30,7 +32,7 @@ class PostController extends FrontController
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['create', 'update', 'view', 'upload'],
+                        'actions' => ['create', 'update', 'view', 'upload', 'index'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -51,6 +53,22 @@ class PostController extends FrontController
                 'class' => 'kucha\ueditor\UEditorAction',
             ]
         ];
+    }
+
+    public function actionIndex()
+    {
+        $this->layout = '@app/modules/user/views/layouts/user';
+        $query = new Query;
+        $query = $query->select('*')
+            ->from('{{%blog_post}}')
+            ->where('user_id=:user_id', [':user_id' => Yii::$app->user->id])
+            ->orderBy('create_time DESC');
+
+        $pages = Tools::Pagination($query);
+        return $this->render('index', [
+            'posts' => $pages['result'],
+            'pages' => $pages['pages']
+        ]);
     }
     
     /**

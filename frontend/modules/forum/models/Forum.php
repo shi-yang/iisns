@@ -117,7 +117,7 @@ class Forum extends \yii\db\ActiveRecord
     public function getFollowerCount()
     {
         return Yii::$app->db
-            ->createCommand("SELECT count(*) FROM {{%follow_forum}} WHERE forum_id={$this->id}")
+            ->createCommand("SELECT count(*) FROM {{%forum_follow}} WHERE forum_id={$this->id}")
             ->queryScalar();
     }
 

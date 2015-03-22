@@ -242,14 +242,14 @@ a:hover {
   margin-bottom: 60px;
 }
 .post-item {
-  float: left;
-  width: 650px;
-  clear: both;
+  width: 100%;
   margin-bottom: 10px;
   padding: 20px;
   box-shadow: 0 2px 1px rgba(0,0,0,0.1), 0 0 1px rgba(0,0,0,0.1);
   border-radius: 2px;
   background-color: #fff;
+  white-space: normal;
+  word-break: break-all;
 }
 .post-item .post-title {
   margin: 0;
@@ -270,6 +270,8 @@ a:hover {
  * Post view
  */
 .post-view {
+  white-space: normal;
+  word-break: break-all;
   padding: 30px;
   box-shadow: 0 2px 1px rgba(0,0,0,0.1), 0 0 1px rgba(0,0,0,0.1);
   border-radius: 2px;

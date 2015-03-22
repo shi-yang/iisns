@@ -7,7 +7,7 @@ use yii\helpers\Url;
 /* @var $model app\modules\blog\models\Album */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Albums'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'My Albums'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 

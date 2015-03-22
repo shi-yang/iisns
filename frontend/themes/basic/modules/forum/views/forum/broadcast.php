@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\widgets\LinkPager;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\forum\models\Forum */
@@ -48,6 +49,9 @@ $this->params['forum'] = $model->toArray;
     	        </div>
     	      </div>
     	  <?php endforeach; ?>
+        <?= LinkPager::widget([
+            'pagination' => $model->broadcasts['pages'],
+        ]); ?>
   	  <?php else: ?>
   	  	<div class="widget-container">
   	  		<div style="padding:50px">

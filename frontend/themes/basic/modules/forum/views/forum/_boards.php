@@ -40,11 +40,11 @@ use app\modules\forum\models\Board;
                         $counter = 0; 
                     ?>
                     <?php for ($i=0; $i < $rowsCount; $i++): ?>
-                        <tr>
+                        <tr class="boardinfo">
                             <?php for ($j=0; $j < $board->columns; $j++): ?>
                                 <?php if ($counter < $totalRecords): ?>
                                     <?php $subBoard = $board->subBoards[$counter]; ?>
-                                    <td class="boardinfo" width="<?= (100.0 / $board->columns) ?>%" onclick="window.location.href= '<?= Url::toRoute(['/forum/board/view', 'id' => $subBoard['id']]) ?>';return false">
+                                    <td width="<?= (100.0 / $board->columns) ?>%" onclick="window.location.href= '<?= Url::toRoute(['/forum/board/view', 'id' => $subBoard['id']]) ?>';return false">
                                         <div class="pull-left">
                                             <a href="<?= Url::toRoute(['/forum/board/view', 'id' => $subBoard['id']]) ?>">
                                                 <img src="<?= Yii::getAlias('@forum_icon') . '../forum.gif' ?>">
@@ -67,8 +67,8 @@ use app\modules\forum\models\Board;
                     <?php endfor ?>
                 <?php else: ?>
                     <?php foreach ($board->subBoards as $subBoard): ?>
-                        <tr  onclick="window.location.href= '<?= Url::toRoute(['/forum/board/view', 'id' => $subBoard['id']]) ?>';return false">
-                            <td class="boardinfo" style="vertical-align:middle;">
+                        <tr class="boardinfo" onclick="window.location.href= '<?= Url::toRoute(['/forum/board/view', 'id' => $subBoard['id']]) ?>';return false">
+                            <td style="vertical-align:middle;">
                                 <div class="pull-left">
                                     <a href="<?= Url::toRoute(['/forum/board/view', 'id' => $subBoard['id']]) ?>">
                                         <img src="<?= Yii::getAlias('@forum_icon') . '../forum.gif' ?>">
