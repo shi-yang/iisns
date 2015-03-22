@@ -22,8 +22,8 @@ use yii\helpers\Html;
             If you forgot your password you can <?= Html::a('reset it', ['/site/request-password-reset']) ?>.
         </div>
         <div class="form-group">
-            <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-            <?= Html::a('Signup', ['/site/signup']) ?>
+            <?= Html::submitButton(Yii::t('app', 'Log in'), ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+            <?= Html::a(Yii::t('app', 'Sign up now!'), ['/site/signup']) ?>
         </div>
     <?php ActiveForm::end(); ?>
   </div>
