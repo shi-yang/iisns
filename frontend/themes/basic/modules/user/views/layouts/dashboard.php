@@ -23,13 +23,13 @@ use yii\helpers\Url;
                         </a>
                     </div>
                     <div class="col-xs-3 share-options">
-                        <a href="<?= Url::toRoute(['/blog/photo']) ?>">
+                        <a href="<?= Url::toRoute(['/site/develop']) ?>">
                             <i class="glyphicon glyphicon-music"></i>
                             <p><?= Yii::t('app', 'Music') ?></p>
                         </a>
                     </div>
                     <div class="col-xs-3 share-options">
-                        <a href="<?= Url::toRoute(['/blog/photo']) ?>">
+                        <a href="<?= Url::toRoute(['/site/develop']) ?>">
                             <i class="glyphicon glyphicon-facetime-video"></i>
                             <p><?= Yii::t('app', 'Video') ?></p>
                         </a>

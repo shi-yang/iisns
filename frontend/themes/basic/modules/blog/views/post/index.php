@@ -44,6 +44,9 @@ $this->params['breadcrumbs'][] = $this->title;
 			                    <?php endif ?>
 			                    <?= $post['content'] ?>
 			                </p>
+			                <a href="<?= Url::toRoute(['/blog/post/delete', 'id' => $post['id']]) ?>" data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="post">
+			                    <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
+			                </a>
 			            </div>
 			        </div>
 			    <?php endforeach; ?>

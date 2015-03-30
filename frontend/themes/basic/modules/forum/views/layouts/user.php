@@ -46,8 +46,8 @@ AppAsset::register($this);
                     ['label' => 'Dashboard', 'url' => ['/user/dashboard'], 'visible' => !Yii::$app->user->isGuest],
                     ['label' => 'Setting', 'url' => ['/user/setting'], 'visible' => !Yii::$app->user->isGuest],
                     ['label' => 'Forum', 'url' => ['/forum/forum']],
-                    ['label' => 'Signup', 'url' => ['/site/signup'], 'visible' => Yii::$app->user->isGuest],
-                    ['label' => 'Login', 'url' => ['/site/login'], 'visible' => Yii::$app->user->isGuest],
+                    ['label' => 'Sign up', 'url' => ['/site/signup'], 'visible' => Yii::$app->user->isGuest],
+                    ['label' => 'Log in', 'url' => ['/site/login'], 'visible' => Yii::$app->user->isGuest],
                     [
                         'label' => 'Logout',
                         'url' => ['/site/logout'],

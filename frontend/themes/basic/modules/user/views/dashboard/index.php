@@ -2,6 +2,7 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use app\modules\user\models\User;
+use app\components\Tools;
 
 /* @var $this yii\web\View */
 
@@ -19,7 +20,7 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Dashboard'
                             <?= Html::encode(User::getInfo($post['user_id'])['username']) ?>
                         </a>
                         <p>
-                            <em><?= \app\components\Tools::formatTime($post['create_time']) ?></em>
+                            <em><?= Tools::formatTime($post['create_time']) ?></em>
                         </p>
                     </div>
                 </div>
@@ -29,6 +30,12 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Dashboard'
                     <?php endif ?>
                     <?= $post['content'] ?>
                 </p>
+                <a href="<?= Url::toRoute(['/blog/post/delete', 'id' => $post['id']]) ?>" data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="post">
+                    <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
+                </a>
+                <a href="<?= Url::toRoute(['/blog/post/delete', 'id' => $post['id']]) ?>" data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="delete">
+                    <span class="glyphicon glyphicon-star"></span> <?= Yii::t('app', 'Favor') ?>
+                </a>
             </div>
         </div>
     <?php endforeach; ?>

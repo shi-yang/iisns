@@ -32,7 +32,7 @@ class PostController extends FrontController
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['create', 'update', 'view', 'upload', 'index'],
+                        'actions' => ['create', 'update', 'view', 'upload', 'index', 'delete'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -140,7 +140,13 @@ class PostController extends FrontController
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        if ($model->user_id !== Yii::$app->user->id) {
+            throw new ForbiddenHttpException('You are not allowed to perform this action.');
+        } else {
+            $model->delete();
+            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Delete successfully.'));
+        }
 
         return $this->redirect(['index']);
     }

@@ -1,9 +1,10 @@
 <?php
 return [
 	'Home' => '首页',
-	'Login' => '登录',
-	'Logout' => '注销',
-	'Signup' => '注册',
+	'Log in' => '登录',
+	'Log out' => '注销',
+	'Sign up' => '注册',
+	'Sign up now!' => '注册',
 	'Explore' => '探索',
 	'Username' => '用户名',
 	'Password' => '密码',
@@ -18,6 +19,7 @@ return [
 	'Name' => '名称',
 	'Upload' => '上传',
 	'Delete' => '删除',
+	'Favor' => '收藏',
 
 	'Username or Email' => '用户名/邮箱',
 	'Remember Me' => '保持登录状态',
@@ -107,6 +109,7 @@ return [
 	'Just now' => '刚刚',
 	'Create successfully.' => '创建成功',
 	'Save successfully.' => '保存成功',
+	'Delete successfully.' => '已删除',
 
 	'No data to display.' => '没有数据展示',
 	'Unfinished,continue reading' => '未完，继续阅读',

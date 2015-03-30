@@ -85,10 +85,10 @@ AppAsset::register($this);
                             </li>
                             <?php if (Yii::$app->user->isGuest): ?>
                             <li><a href="<?= Url::toRoute(['/site/signup']) ?>">
-                                    <span aria-hidden="true" class="glyphicon glyphicon-plus-sign"></span><?= Yii::t('app', 'Signup') ?></a>
+                                    <span aria-hidden="true" class="glyphicon glyphicon-plus-sign"></span><?= Yii::t('app', 'Sign up') ?></a>
                             </li>
                             <li><a href="<?= Url::toRoute(['/site/login']) ?>">
-                                    <span aria-hidden="true" class="glyphicon glyphicon-log-in"></span><?= Yii::t('app', 'Login') ?></a>
+                                    <span aria-hidden="true" class="glyphicon glyphicon-log-in"></span><?= Yii::t('app', 'Log in') ?></a>
                             </li>
                             <?php else: ?>
                             <li><a href="<?= Url::toRoute(['/user/dashboard']) ?>">

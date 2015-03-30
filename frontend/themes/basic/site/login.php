@@ -6,7 +6,7 @@ use yii\bootstrap\ActiveForm;
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \common\models\LoginForm */
 
-$this->title = Yii::t('app', 'Login');
+$this->title = Yii::t('app', 'Log in');
 
 $this->registerCss('
     body {
@@ -77,6 +77,6 @@ $this->registerCss('
       If you forgot your password you can <?= Html::a('reset it', ['site/request-password-reset']) ?>.
   </div>
   <div class="form-group">
-      <?= Html::submitButton(Yii::t('app', 'Login'), ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+      <?= Html::submitButton(Yii::t('app', 'Log in'), ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
   </div>
 <?php ActiveForm::end(); ?>

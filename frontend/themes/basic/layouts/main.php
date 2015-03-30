@@ -44,8 +44,8 @@ AppAsset::register($this);
                 ['label' => Yii::t('app', 'Explore'), 'url' => ['/explore/index']],
             ];
             if (Yii::$app->user->isGuest) {
-                $menuItems[] = ['label' => Yii::t('app', 'Signup'), 'url' => ['/site/signup']];
-                $menuItems[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];
+                $menuItems[] = ['label' => Yii::t('app', 'Sign up'), 'url' => ['/site/signup']];
+                $menuItems[] = ['label' => Yii::t('app', 'Log in'), 'url' => ['/site/login']];
             } else {
                 $menuItems[] = ['label' => Yii::t('app', 'Dashboard'), 'url' => ['/user/dashboard']];
                 $menuItems[] = [

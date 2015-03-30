@@ -6,7 +6,7 @@ use yii\bootstrap\ActiveForm;
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \frontend\models\SignupForm */
 
-$this->title = Yii::t('app', 'Signup');
+$this->title = Yii::t('app', 'Sign up');
 $this->registerCss('
     body {
       padding-top: 40px;
@@ -65,7 +65,7 @@ $this->registerCss('
         ]) ?>
 
         <div class="form-group">
-            <?= Html::submitButton(Yii::t('app', 'Signup'), ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+            <?= Html::submitButton(Yii::t('app', 'Sign up'), ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
         </div>
     <?php ActiveForm::end(); ?>
 </div>
