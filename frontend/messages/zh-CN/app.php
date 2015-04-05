@@ -33,6 +33,8 @@ return [
 	'Posts' => '文章',
 	'My Posts' => '我的文章',
 	'Create Post' => '发布文章',
+	'Update Post:' => '修改文章：',
+	'Tags' => '标签',
 	'Photo' => '照片',
 	'Music' => '音乐',
 	'Video' => '视频',

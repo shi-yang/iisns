@@ -118,6 +118,7 @@ class PostController extends FrontController
      */
     public function actionUpdate($id)
     {
+        $this->layout = '@app/modules/user/views/layouts/user';
         $model = $this->findModel($id);
         if ($model->user_id !== Yii::$app->user->id) {
             throw new ForbiddenHttpException('You are not allowed to perform this action.');
