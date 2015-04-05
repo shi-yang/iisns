@@ -30,7 +30,6 @@ class FrontController extends Controller
             Yii::$app->language = Yii::$app->request->cookies['lang']->value;
         } elseif (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
             // According to the browser language to set the language
-            explode(',', str_replace('-', '_', $lang))[0];
             $lang = explode(',',$_SERVER['HTTP_ACCEPT_LANGUAGE']);
             Yii::$app->language = str_replace('-', '_', $lang[0]);
         } else {
