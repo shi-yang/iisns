@@ -1194,16 +1194,7 @@ a:focus {
 svg {
   width: 100% !important;
 }
-@media (min-width: 481px) and (max-width: 979px) {
-}
-@media (min-width: 481px) and (max-width: 979px) {
-}
-@media (max-width: 480px) {
-}
-@media (min-width: 481px) and (max-width: 767px) {
-}
-@media (max-width: 480px) {
-}
+
 footer {
   position: relative;
   padding: 10px 15px;
@@ -1239,12 +1230,7 @@ footer .footer-brand {
 footer p {
   display: inline-block;
 }
-@media (max-width: 480px) {
-}
-@media (max-width: 767px) {
-}
-@media (max-width: 767px) {
-}
+
 .btn {
   transition: all 0.3s ease;
   -webkit-transition: all 0.3s ease;
