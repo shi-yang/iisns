@@ -48,7 +48,7 @@ $(function	()	{
 		$('#wrapper').toggleClass('sidebar-mini');
 		$('.main-menu').find('.openable').removeClass('open');
 		$('.main-menu').find('.submenu').removeAttr('style');
-		$.cookie('sizeToggle', $('#wrapper').attr('class'), {expires:365});
+		$.cookie('sizeToggle', $('#wrapper').attr('class'), {expires:365,path:'/'});
 	});
 
 	if(jQuery.type($.cookie('sizeToggle')) != 'undefined')	{
