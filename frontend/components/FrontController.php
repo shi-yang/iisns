@@ -14,14 +14,14 @@ class FrontController extends Controller
          */
         if(isset($_GET['lang']) && $_GET['lang'] != "") {
             // By passing a parameter to change the language
-            Yii::$app->language = $_GET['lang'];
+            Yii::$app->language = htmlspecialchars($_GET['lang']);
 
             // get the cookie collection (yii\web\CookieCollection) from the "response" component
             $cookies = Yii::$app->response->cookies;
             // add a new cookie to the response to be sent
             $cookies->add(new \yii\web\Cookie([
                 'name' => 'lang',
-                'value' => $_GET['lang'],
+                'value' => htmlspecialchars($_GET['lang']),
                 'expire' => time() + (365 * 24 * 60 * 60),
             ]));
         } elseif (isset(Yii::$app->request->cookies['lang']) && 
@@ -31,7 +31,7 @@ class FrontController extends Controller
         } elseif (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
             // According to the browser language to set the language
             $lang = explode(',',$_SERVER['HTTP_ACCEPT_LANGUAGE']);
-            Yii::$app->language = str_replace('-', '_', $lang[0]);
+            Yii::$app->language = $lang[0];
         } else {
             Yii::$app->language = 'zh-CN';
         }
