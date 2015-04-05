@@ -18,19 +18,6 @@ use yii\helpers\Url;
 		<div class="thread-head">
 			<span class="glyphicon glyphicon-time"></span>
 			<?= \app\components\Tools::formatTime($data->create_time) ?>
-			<?php 
-				if (!$data->isFavor()) {
-					echo Html::a('<span class="glyphicon glyphicon-star-empty"></span> '.Yii::t('app', 'Favor'), 
-						'javascript:;', 
-						['id'=>'favor', 'class'=>'pull-right']
-					);
-				} else {
-					echo Html::a('<span class="glyphicon glyphicon-star"></span> '.Yii::t('app', 'Unfavor'), 
-						'javascript:;', 
-						['id'=>'unfavor', 'class'=>'pull-right']
-					);
-				}
-			?>
 		</div>
 		<div class="thread-main">
 			<h3><?= Html::a(Html::encode($data->title), $data->url) ?></h3>
