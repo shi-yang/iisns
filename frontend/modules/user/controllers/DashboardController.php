@@ -40,7 +40,7 @@ class DashboardController extends FrontController
         $model = $this->findModel();
         $query = new Query;
         
-        $query = $query->select('*')
+        $query = $query->select('p.id, p.user_id, p.content, p.create_time, p.title')
             ->from('{{%blog_post}} as p')
             ->join('LEFT JOIN','{{%user_follow}} as u', 'p.user_id=u.people_id')
             ->where('p.user_id=:user_id OR u.user_id=:user_id', [':user_id' => $model->id])
