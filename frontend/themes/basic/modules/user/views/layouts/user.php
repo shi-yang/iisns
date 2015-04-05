@@ -151,12 +151,45 @@ AppAsset::register($this);
                             </a>
                         </li>
                         <li>
+                            <a href="<?= Url::toRoute('/blog/post') ?>">
+                            <span class="menu-icon">
+                                <i class="glyphicon glyphicon-pencil"></i>
+                            </span>
+                            <span class="text">
+                                <?= Yii::t('app', 'Text') ?>
+                            </span>
+                                <span class="menu-hover"></span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="<?= Url::toRoute('/blog/album') ?>">
                             <span class="menu-icon">
                                 <i class="glyphicon glyphicon-picture"></i>
                             </span>
                             <span class="text">
                                 <?= Yii::t('app', 'Album') ?>
+                            </span>
+                                <span class="menu-hover"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?= Url::toRoute('/site/develop') ?>">
+                            <span class="menu-icon">
+                                <i class="glyphicon glyphicon-music"></i>
+                            </span>
+                            <span class="text">
+                                <?= Yii::t('app', 'Music') ?>
+                            </span>
+                                <span class="menu-hover"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?= Url::toRoute('/site/develop') ?>">
+                            <span class="menu-icon">
+                                <i class="glyphicon glyphicon-facetime-video"></i>
+                            </span>
+                            <span class="text">
+                                <?= Yii::t('app', 'Video') ?>
                             </span>
                                 <span class="menu-hover"></span>
                             </a>
@@ -172,36 +205,6 @@ AppAsset::register($this);
                                 <span class="badge badge-danger bounceIn animation-delay6"><?= $user->unReadMessageCount ?></span>
                                 <span class="menu-hover"></span>
                             </a>
-                        </li>
-                        <li class="openable">
-                            <a href="#">
-							<span class="menu-icon">
-								<i class="glyphicon glyphicon-heart"></i>
-							</span>
-							<span class="text">
-								<?= Yii::t('app', 'Follows') ?>
-							</span>
-                                <span class="menu-hover"></span>
-                            </a>
-                            <ul class="submenu">
-                                <li><a href="<?= Url::toRoute('/site/develop') ?>"><span class="submenu-label">Following</span></a></li>
-                                <li><a href="<?= Url::toRoute('/site/develop') ?>"><span class="submenu-label">Followed</span></a></li>
-                            </ul>
-                        </li>
-                        <li class="openable">
-                            <a href="#">
-							<span class="menu-icon">
-								<i class="glyphicon glyphicon-duplicate"></i>
-							</span>
-							<span class="text">
-								<?= Yii::t('app', 'Posts') ?>
-							</span>
-                                <span class="menu-hover"></span>
-                            </a>
-                            <ul class="submenu">
-                                <li><a href="<?= Url::toRoute(['/user/dashboard/forumpost']) ?>"><span class="submenu-label"><?= Yii::t('app', 'Forum Posts') ?></span></a></li>
-                                <li><a href="<?= Url::toRoute(['/user/dashboard/blogpost']) ?>"><span class="submenu-label"><?= Yii::t('app', 'Blog Posts') ?></span></a></li>
-                            </ul>
                         </li>
                         <li>
                             <a href="<?= Url::toRoute('/site/help') ?>">
