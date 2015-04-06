@@ -4,6 +4,7 @@ namespace app\modules\user\models;
 
 use Yii;
 use yii\db\Query;
+use app\components\Tools;
 use app\modules\blog\models\Post;
 
 /**
@@ -149,8 +150,18 @@ class User extends \common\models\User
         return $this->hasOne(Profile::className(), ['user_id' => 'id']);
     }
 
-    public function getProfileCount()
+    /**
+     * 获取论坛的评论
+     */
+    public function getComments()
     {
-        # code...
+        $query = new Query;
+        $query = $query->select('t.id, t.title, t.content, p.user_id, p.content as comment, p.create_time')
+            ->from('{{%forum_post}} as p')
+            ->join('LEFT JOIN','{{%forum_thread}} as t', 'p.thread_id=t.id')
+            ->where('t.user_id=:user_id and p.user_id !=:user_id', [':user_id' => $this->id])
+            ->orderBy('p.create_time DESC');
+
+        return Tools::Pagination($query);
     }
 }

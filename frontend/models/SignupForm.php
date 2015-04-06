@@ -67,6 +67,9 @@ class SignupForm extends Model
             $user->generateAuthKey();
             $user->avatar = 'default/' . rand(1, 40) . '.jpg';
             $user->save();
+            Yii::$app->db->createCommand()->insert('{{%user_data}}', [
+                'user_id' => $user->id,
+            ])->execute();
             return $user;
         }
 

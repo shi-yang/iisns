@@ -200,7 +200,7 @@ AppAsset::register($this);
                                 <i class="glyphicon glyphicon-inbox"></i>
                             </span>
                             <span class="text">
-                                <?= Yii::t('app', 'Inbox') ?>
+                                <?= Yii::t('app', 'Notification') ?>
                             </span>
                                 <span class="badge badge-danger bounceIn animation-delay6"><?= $user->unReadMessageCount ?></span>
                                 <span class="menu-hover"></span>

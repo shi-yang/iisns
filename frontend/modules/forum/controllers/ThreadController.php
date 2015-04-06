@@ -67,8 +67,12 @@ class ThreadController extends FrontController
         
         if ($newPost->load(Yii::$app->request->post())) {
             $newPost->thread_id = $model->id;
-            if ($newPost->save())
+            if ($newPost->save()){
+                if ($model->user_id !== Yii::$app->user->id) {
+                    Yii::$app->db->createCommand("UPDATE {{%user_data}} SET unread_comment_count=unread_comment_count+1 WHERE user_id=".$model->user_id)->execute();
+                }
                 return $this->redirect(['view', 'id' => $model->id]);
+            }
         } 
         
         $query = Post::find()->where(['thread_id' => $model->id])->orderBy('create_time desc');

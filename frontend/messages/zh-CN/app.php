@@ -11,6 +11,7 @@ return [
 	'Captcha' => '验证码',
 	'Email' => '邮箱',
 	'Inbox' => '收件箱',
+	'Notification' => '消息',
 	'Help' => '帮助',
 	'Update' => '更新',
 	'Save' => '保存',
@@ -56,6 +57,7 @@ return [
 	'eg: Jack' => '例如：张三',
 	'Compose' => '写信',
 	'Sent' => '已发送',
+	'Comment' => '评论',
 
 	'Setting' => '设置',
 	'Security' => '安全',

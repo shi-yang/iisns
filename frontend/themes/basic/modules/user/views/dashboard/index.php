@@ -3,10 +3,11 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use app\modules\user\models\User;
 use app\components\Tools;
+use yii\helpers\HtmlPurifier;
 
 /* @var $this yii\web\View */
 
-$this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Dashboard');
+$this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
 ?>
 
 <?php if (!empty($posts)): ?>
@@ -28,7 +29,7 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Dashboard'
                     <?php if (!empty($post['title'])): ?>
                         <h3><?= Html::a(Html::encode($post['title']), ['/blog/post/view', 'id' => $post['id']]) ?></h3>
                     <?php endif ?>
-                    <?= $post['content'] ?>
+                    <?= HtmlPurifier::process($post['content']) ?>
                 </p>
                 <a href="<?= Url::toRoute(['/blog/post/delete', 'id' => $post['id']]) ?>" data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="post">
                     <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>

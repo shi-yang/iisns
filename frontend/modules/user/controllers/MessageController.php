@@ -33,7 +33,7 @@ class MessageController extends FrontController
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['inbox', 'outbox', 'create', 'view', 'update'],
+                        'actions' => ['inbox', 'outbox', 'create', 'view', 'update', 'comment'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -56,6 +56,16 @@ class MessageController extends FrontController
         return $this->render('inbox', [
             'messages' => $pages['result'],
             'pages' => $pages['pages'],
+            'count' => $this->getMessageCount()
+        ]);
+    }
+
+    public function actionComment()
+    {
+        $user = $this->findModel();
+        Yii::$app->db->createCommand('UPDATE {{%user_data}} SET unread_comment_count=0 WHERE user_id='.$user->id)->execute();
+        return $this->render('comment', [
+            'user' => $user,
             'count' => $this->getMessageCount()
         ]);
     }
@@ -170,6 +180,9 @@ class MessageController extends FrontController
             ->queryScalar();
         $count['outbox'] = Yii::$app->db
             ->createCommand("SELECT count(*) FROM {{%user_message}} WHERE outbox=1 and sendfrom=". Yii::$app->user->id)
+            ->queryScalar();
+        $count['comment'] = Yii::$app->db
+            ->createCommand("SELECT unread_comment_count FROM {{%user_data}} WHERE user_id=". Yii::$app->user->id)
             ->queryScalar();
         return $count;
     }
