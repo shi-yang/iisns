@@ -116,5 +116,6 @@ return [
 	'No data to display.' => '没有数据展示',
 	'Unfinished,continue reading' => '未完，继续阅读',
  	'Note: This section is under development.' => '提示：这部分内容正在开发中。',
-	'I am very sorry to let you see this page. I will try to go to this page and complete, stay tuned!' => '我很抱歉让你看到这个页面，我会尽快完成它，保持关注！'
+	'I am very sorry to let you see this page. I will try to go to this page and complete, stay tuned!' => '我很抱歉让你看到这个页面，我会尽快完成它，保持关注！',
+	'You are welcome to develop together.' => '欢迎你也一起来开发。'
 ];
