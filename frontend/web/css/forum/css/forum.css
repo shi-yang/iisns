@@ -203,7 +203,9 @@ overflow: hidden;
 white-space: nowrap;
 text-overflow: ellipsis;
 }
-
+.widget-containera {
+background-color: #fff
+}
 
 .tbox{
 margin-bottom: 10px;  background: white;  overflow: hidden; 
