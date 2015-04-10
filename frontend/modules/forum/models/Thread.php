@@ -5,6 +5,8 @@ namespace app\modules\forum\models;
 use Yii;
 use yii\helpers\Url;
 use yii\db\Query;
+use app\components\Tools;
+
 /**
  * This is the model class for table "{{%forum_thread}}".
  *
@@ -123,5 +125,21 @@ class Thread extends \yii\db\ActiveRecord
             ->createCommand("SELECT count(*) FROM {{%forum_board}} WHERE forum_id={$forum_id}")
             ->queryScalar();
         return ($count == 1) ? true : false;
+    }
+
+    /**
+     * 获取回复的帖子
+     * @return array
+     */
+    public function getPosts()
+    {
+        $query = new Query;
+        $query->select('p.id,  p.content, p.create_time, p.user_id, u.username, u.avatar')
+            ->from('{{%forum_post}} as p')
+            ->join('LEFT JOIN','{{%user}} as u', 'u.id=p.user_id')
+            ->where('p.thread_id=:id', [':id' => $this->id])
+            ->orderBy('create_time DESC');
+        $result = Tools::Pagination($query);
+        return ['posts' => $result['result'], 'pages' => $result['pages']];
     }
 }

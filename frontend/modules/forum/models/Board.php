@@ -4,6 +4,7 @@ namespace app\modules\forum\models;
 
 use Yii;
 use app\modules\forum\models\Thread;
+use app\components\Tools;
 use yii\helpers\Url;
 use yii\db\Query;
 
@@ -108,18 +109,19 @@ class Board extends \yii\db\ActiveRecord
     }
 
     /**
+     * 获取话题
      * @return array
      */
     public function getThreads()
     {
-        $query = Thread::find()->where(['board_id' => $this->id])->orderBy('create_time desc');
-        $countQuery = clone $query;
-        $pages = new \yii\data\Pagination(['totalCount' => $countQuery->count()]);
-        $pages->defaultPageSize = 14;
-        $threads = $query->offset($pages->offset)
-            ->limit($pages->limit)
-            ->all();
-        return ['threads' => $threads, 'pages' => $pages];
+        $query = new Query;
+        $query->select('t.id, t.title, t.content, t.create_time, t.user_id, u.username, u.avatar')
+            ->from('{{%forum_thread}} as t')
+            ->join('LEFT JOIN','{{%user}} as u', 'u.id=t.user_id')
+            ->where('t.board_id=:id', [':id' => $this->id])
+            ->orderBy('create_time DESC');
+        $result = Tools::Pagination($query);
+        return ['threads' => $result['result'], 'pages' => $result['pages']];
     }
     
     public static function getThreadCount($id)

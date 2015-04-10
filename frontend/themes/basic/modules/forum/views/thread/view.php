@@ -30,12 +30,12 @@ $this->params['breadcrumbs'][] = $model->user['username'];
 	</div>
 
 	<?= $this->render('_posts', [
-			'posts'=>$posts,
-			'floor'=>$postCount,	
-			'pageSize'=>$pages->pageSize,
+			'posts'=>$model->posts['posts'],
+			'floor'=> count($model->posts['posts']),	
+			'pageSize'=>$model->posts['pages']->pageSize,
 		]); 
 	?>
 	<?= LinkPager::widget([
-       'pagination' => $pages,
+       'pagination' => $model->posts['pages'],
     ]);?>
 </div>

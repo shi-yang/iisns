@@ -74,22 +74,10 @@ class ThreadController extends FrontController
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } 
-        
-        $query = Post::find()->where(['thread_id' => $model->id])->orderBy('create_time desc');
-        $countQuery = clone $query;
-        $postCount = $countQuery->count();
-        $pages = new Pagination(['totalCount' => $postCount]);
-        $pages->defaultPageSize = 14;
-        $posts = $query->offset($pages->offset)
-            ->limit($pages->limit)
-            ->all();
-        
+
         return $this->render('view', [
             'model' => $model,
-            'posts' => $posts,
-            'postCount' => $postCount,
             'newPost' => $newPost,
-            'pages' => $pages
         ]);
     }
 
