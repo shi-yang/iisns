@@ -13,7 +13,7 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'title', [
-      'template' => "<div class=\"input-group\"><span class=\"input-group-addon\">Title</span>{input}</div>",
+      'template' => "<div class=\"input-group\"><span class=\"input-group-addon\">" . Yii::t('app', 'Title') . "</span>{input}</div>",
     ])->textInput(['maxlength' => 128, 'autocomplete'=>'off']) ?>
 
     <?= $form->field($model, 'content')->widget('kucha\ueditor\UEditor', [
