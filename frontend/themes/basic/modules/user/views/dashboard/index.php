@@ -15,10 +15,10 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
         <div class="item widget-container fluid-height social-entry">
             <div class="widget-content padded">
                 <div class="profile-info clearfix">
-                    <img width="50" height="50" class="social-avatar pull-left" src="<?= Yii::getAlias('@avatar') . User::getInfo($post['user_id'])['avatar'] ?>" />
+                    <img width="50" height="50" class="social-avatar pull-left" src="<?= Yii::getAlias('@avatar') . $post['avatar'] ?>" />
                     <div class="profile-details">
-                        <a class="user-name" href="<?= Url::toRoute(['/user/view', 'id'=>User::getInfo($post['user_id'])['username']]) ?>">
-                            <?= Html::encode(User::getInfo($post['user_id'])['username']) ?>
+                        <a class="user-name" href="<?= Url::toRoute(['/user/view', 'id'=>$post['username']]) ?>">
+                            <?= Html::encode($post['username']) ?>
                         </a>
                         <p>
                             <em><?= Tools::formatTime($post['create_time']) ?></em>
@@ -31,9 +31,11 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
                     <?php endif ?>
                     <?= HtmlPurifier::process($post['content']) ?>
                 </p>
-                <a href="<?= Url::toRoute(['/blog/post/delete', 'id' => $post['id']]) ?>" data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="post">
-                    <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
-                </a>
+                <?php if(Yii::$app->user->id == $post['user_id']): ?>
+                    <a href="<?= Url::toRoute(['/blog/post/delete', 'id' => $post['id']]) ?>" data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="post">
+                        <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
+                    </a>
+                <?php endif ?>
             </div>
         </div>
     <?php endforeach; ?>
