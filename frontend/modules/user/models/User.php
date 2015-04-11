@@ -5,7 +5,7 @@ namespace app\modules\user\models;
 use Yii;
 use yii\db\Query;
 use app\components\Tools;
-use app\modules\blog\models\Post;
+use app\modules\home\models\Post;
 
 /**
  * This is the model class for table "{{%user}}".
@@ -112,7 +112,7 @@ class User extends \common\models\User
     }
 
     /**
-     * app\modules\blog\models\Post
+     * app\modules\home\models\Post
      * @return array
      */
     public function getPosts()

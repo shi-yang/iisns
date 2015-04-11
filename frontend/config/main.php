@@ -25,14 +25,14 @@ return [
             'class' => 'app\modules\user\UserModule',
             'aliases' => [
                 '@avatar' => '@web/uploads/user/avatar/',
-                '@photo' => '@web/uploads/blog/photo/'
+                '@photo' => '@web/uploads/home/photo/'
             ]
         ],
-        'blog' => [
-            'class' => 'app\modules\blog\BlogModule',
+        'home' => [
+            'class' => 'app\modules\home\HomeModule',
             'aliases' => [
                 '@avatar' => '@web/uploads/user/avatar/',
-                '@photo' => '@web/uploads/blog/photo/'
+                '@photo' => '@web/uploads/home/photo/'
             ]
         ],
     ],
@@ -45,7 +45,7 @@ return [
                 '<id:[\x{4e00}-\x{9fa5}a-zA-Z0-9_]*>' => 'user/view',
                 'forum/<id:[\x{4e00}-\x{9fa5}a-zA-Z0-9_]*>' => 'forum/forum/view',
                 'thread/<id:\d+>' => 'forum/thread/view',
-                'p/<id:\d+>' => 'blog/post/view'
+                'p/<id:\d+>' => 'home/post/view'
             ],
         ],
         'user' => [

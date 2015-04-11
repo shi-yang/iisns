@@ -7,7 +7,7 @@ use app\modules\user\models\User;
 use app\modules\user\models\UserSearch;
 use app\components\FrontController;
 use yii\web\NotFoundHttpException;
-use app\modules\blog\models\Post;
+use app\modules\home\models\Post;
 
 /**
  * UserController implements the CRUD actions for User model.

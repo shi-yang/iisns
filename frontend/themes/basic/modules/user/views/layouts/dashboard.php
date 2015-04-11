@@ -11,13 +11,13 @@ use yii\helpers\Url;
             <div class="widget-container share-widget fluid-height clearfix">
                 <div class="clearfix">
                     <div class="col-xs-3 share-options">
-                        <a href="<?= Url::toRoute(['/blog/post']) ?>">
+                        <a href="<?= Url::toRoute(['/home/post']) ?>">
                             <i class="glyphicon glyphicon-pencil"></i>
                             <p><?= Yii::t('app', 'Text') ?></p>
                         </a>
                     </div>
                     <div class="col-xs-3 share-options">
-                        <a href="<?= Url::toRoute(['/blog/album']) ?>">
+                        <a href="<?= Url::toRoute(['/home/album']) ?>">
                             <i class="glyphicon glyphicon-picture"></i>
                             <p><?= Yii::t('app', 'Photo') ?></p>
                         </a>

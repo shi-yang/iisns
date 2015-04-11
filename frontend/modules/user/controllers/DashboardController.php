@@ -7,7 +7,7 @@ use yii\data\Pagination;
 use yii\filters\AccessControl;
 use yii\db\Query;
 use app\modules\user\models\User;
-use app\modules\blog\models\Post;
+use app\modules\home\models\Post;
 use app\components\Tools;
 use app\components\FrontController;
 
@@ -26,7 +26,7 @@ class DashboardController extends FrontController
                 'rules' => [
                     [
                         'actions' => ['index', 'myposts', 'myfavor', 'followpeople',
-                             'followforum', 'forumpost', 'blogpost'],
+                             'followforum', 'forumpost', 'homepost'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -41,7 +41,7 @@ class DashboardController extends FrontController
         $query = new Query;
         
         $query = $query->select('p.id, p.user_id, p.title, p.content, p.create_time, u.username, u.avatar')
-            ->from('{{%blog_post}} as p')
+            ->from('{{%home_post}} as p')
             ->join('LEFT JOIN','{{%user_follow}} as f', 'p.user_id=f.people_id')
             ->join('LEFT JOIN','{{%user}} as u', 'u.id=p.user_id')
             ->where('p.user_id=:user_id OR f.user_id=:user_id', [':user_id' => $model->id])
@@ -63,7 +63,7 @@ class DashboardController extends FrontController
         $model = $this->findModel();
         $query = new Query;
         $query = $query->select('*')
-            ->from('{{%blog_post}}' . ' p')
+            ->from('{{%home_post}}' . ' p')
             ->join('JOIN','{{%follow_people}}'. ' u', 'u.people_id=p.user_id')
             ->where('u.user_id=:user_id', [':user_id' => $model->id])
             ->orderBy('create_time DESC');
@@ -104,7 +104,7 @@ class DashboardController extends FrontController
         $model = $this->findModel();
         $query = new Query;
         $query = $query->select('*')
-                    ->from('{{%blog_post}}')
+                    ->from('{{%home_post}}')
                     ->where(['user_id' => $model->id])
                     ->orderBy('create_time desc');
         $pages = Tools::Pagination($query);

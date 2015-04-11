@@ -33,20 +33,20 @@ ProfileAsset::register($this);
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
-        <div class="blog-header">
+        <div class="home-header">
           <div>
-            <img src="<?= Yii::getAlias('@avatar') . $this->params['user']['avatar'] ?>" alt="User Avatar" class="img-thumbnail blog-img">
-            <h1 class="blog-title"><?= Html::a(Html::encode($this->params['user']['username']), ['/user/view', 'id' => Html::encode($this->params['user']['username'])]) ?></h1>
+            <img src="<?= Yii::getAlias('@avatar') . $this->params['user']['avatar'] ?>" alt="User Avatar" class="img-thumbnail home-img">
+            <h1 class="home-title"><?= Html::a(Html::encode($this->params['user']['username']), ['/user/view', 'id' => Html::encode($this->params['user']['username'])]) ?></h1>
           </div>
           <div class="clearfix"></div>
-          <p class="lead blog-description"><?= Html::encode($this->params['profile']['signature']) ?></p>
+          <p class="lead home-description"><?= Html::encode($this->params['profile']['signature']) ?></p>
         </div>
         <div class="clearfix"></div>
-        <div class="row blog-content">
-          <div class="col-sm-9 blog-main">
+        <div class="row home-content">
+          <div class="col-sm-9 home-main">
             <?= $content ?>
-          </div><!-- /.blog-main -->
-          <div class="col-sm-3 blog-sidebar hidden-xs">
+          </div><!-- /.home-main -->
+          <div class="col-sm-3 home-sidebar hidden-xs">
             <?php if(!empty($this->params['profile']['description'])): ?>
               <div class="panel">
                 <div class="panel-heading">About me</div>
@@ -64,7 +64,7 @@ ProfileAsset::register($this);
                   $query = new \justinvoelker\tagging\TaggingQuery;
                   $tags = $query
                       ->select('tags')
-                      ->from('{{%blog_post}}')
+                      ->from('{{%home_post}}')
                       ->where('user_id=:user_id', [':user_id' => $this->params['profile']['user_id']])
                       ->getTags();
                   echo \justinvoelker\tagging\TaggingWidget::widget([
@@ -75,7 +75,7 @@ ProfileAsset::register($this);
               </div>
             </div>
             <!-- /.pancel -->
-          </div><!-- /.blog-sidebar -->
+          </div><!-- /.home-sidebar -->
         </div><!-- /.row -->
       </div>
     </div>

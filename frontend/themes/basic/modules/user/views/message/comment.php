@@ -48,14 +48,14 @@ $this->params['count'] = $count;
 					                </div>
 					                <p class="content">
 					                    <?php if (!empty($comment['title'])): ?>
-					                        <h3><?= Html::a(Html::encode($comment['title']), ['/blog/comment/view', 'id' => $comment['id']]) ?></h3>
+					                        <h3><?= Html::a(Html::encode($comment['title']), ['/home/comment/view', 'id' => $comment['id']]) ?></h3>
 					                    <?php endif ?>
 					                    <?= HtmlPurifier::process($comment['content']) ?>
 					                </p>
 					            </div>
 					        </div>
 		                    <?php if (!empty($comment['title'])): ?>
-		                        <h3><?= Html::a(Html::encode($comment['title']), ['/blog/comment/view', 'id' => $comment['id']]) ?></h3>
+		                        <h3><?= Html::a(Html::encode($comment['title']), ['/home/comment/view', 'id' => $comment['id']]) ?></h3>
 		                    <?php endif ?>
 		                    <?= HtmlPurifier::process($comment['comment']) ?>
 		                </p>

@@ -27,12 +27,12 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
                 </div>
                 <p class="content">
                     <?php if (!empty($post['title'])): ?>
-                        <h3><?= Html::a(Html::encode($post['title']), ['/blog/post/view', 'id' => $post['id']]) ?></h3>
+                        <h3><?= Html::a(Html::encode($post['title']), ['/home/post/view', 'id' => $post['id']]) ?></h3>
                     <?php endif ?>
                     <?= HtmlPurifier::process($post['content']) ?>
                 </p>
                 <?php if(Yii::$app->user->id == $post['user_id']): ?>
-                    <a href="<?= Url::toRoute(['/blog/post/delete', 'id' => $post['id']]) ?>" data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="post">
+                    <a href="<?= Url::toRoute(['/home/post/delete', 'id' => $post['id']]) ?>" data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="post">
                         <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
                     </a>
                 <?php endif ?>

@@ -14,11 +14,11 @@ $this->params['profile'] = ArrayHelper::toArray($model->profile);
 
 ?>
 <?php if (!empty($model->posts['posts'])): ?>
-<div class="blog-post">
+<div class="home-post">
     <ul class="clearfix">
         <?php foreach ($model->posts['posts'] as $post): ?>
             <li class="post-item">
-                <h2 class="post-title"><?= Html::a(Html::encode($post->title), ['/blog/post/view', 'id' => $post->id]) ?></h2>
+                <h2 class="post-title"><?= Html::a(Html::encode($post->title), ['/home/post/view', 'id' => $post->id]) ?></h2>
                 <div class="post-content">
                     <?= Tools::htmlSubString($post->content, 300, $post->url) ?>
                 </div>

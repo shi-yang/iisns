@@ -151,7 +151,7 @@ AppAsset::register($this);
                             </a>
                         </li>
                         <li>
-                            <a href="<?= Url::toRoute('/blog/post') ?>">
+                            <a href="<?= Url::toRoute('/home/post') ?>">
                             <span class="menu-icon">
                                 <i class="glyphicon glyphicon-pencil"></i>
                             </span>
@@ -162,7 +162,7 @@ AppAsset::register($this);
                             </a>
                         </li>
                         <li>
-                            <a href="<?= Url::toRoute('/blog/album') ?>">
+                            <a href="<?= Url::toRoute('/home/album') ?>">
                             <span class="menu-icon">
                                 <i class="glyphicon glyphicon-picture"></i>
                             </span>

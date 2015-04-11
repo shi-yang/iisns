@@ -18,7 +18,7 @@ class ProfileAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/user/blog.css'
+        'css/user/home.css'
     ];
     public $js = [
     ];
