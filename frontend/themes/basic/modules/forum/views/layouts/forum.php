@@ -60,7 +60,7 @@ AppAsset::register($this);
                                             <i class="glyphicon glyphicon-cog"></i><?= Yii::t('app', 'Setting') ?></a>
                                     </li>
                                     <li><a href="<?= Url::toRoute(['/site/logout']) ?>">
-                                            <i class="glyphicon glyphicon-log-out"></i><?= Yii::t('app', 'Logout') ?></a>
+                                            <i class="glyphicon glyphicon-log-out"></i><?= Yii::t('app', 'Log out') ?></a>
                                     </li>
                                 </ul>
                             </li>
@@ -91,8 +91,11 @@ AppAsset::register($this);
                                     <span aria-hidden="true" class="glyphicon glyphicon-log-in"></span><?= Yii::t('app', 'Log in') ?></a>
                             </li>
                             <?php else: ?>
-                            <li><a href="<?= Url::toRoute(['/user/dashboard']) ?>">
+                            <li class="visible-xs"><a href="<?= Url::toRoute(['/user/dashboard']) ?>">
                                     <span aria-hidden="true" class="glyphicon glyphicon-user"></span><?= Yii::t('app', 'Personal Center') ?></a>
+                            </li>
+                            <li class="visible-xs"><a href="<?= Url::toRoute(['/site/logout']) ?>">
+                                    <span aria-hidden="true" class="glyphicon glyphicon-log-out"></span><?= Yii::t('app', 'Log out') ?></a>
                             </li>
                             <?php endif ?>
                         </ul>
