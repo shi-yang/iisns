@@ -22,7 +22,10 @@ h6, .h6 {
   font-weight: normal;
   color: #333;
 }
-ul { list-style-type:none;}
+ul {
+  list-style-type:none;
+  padding: 0;
+}
 a {
   color: #f60;
   text-decoration:none !important;
