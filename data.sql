@@ -1,95 +1,32 @@
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
--- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
 
 --
--- 表的结构 `pre_blog_album`
+-- 数据库: `iisns`
 --
-
-CREATE TABLE IF NOT EXISTS `pre_blog_album` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(128) NOT NULL,
-  `description` varchar(128) NOT NULL,
-  `cover_id` bigint(20) NOT NULL,
-  `created_at` int(10) NOT NULL,
-  `updated_at` int(10) NOT NULL,
-  `created_by` int(11) NOT NULL,
-  `enable_comment` tinyint(4) NOT NULL DEFAULT '1',
-  `privilege_type` tinyint(1) NOT NULL DEFAULT '0',
-  `privilege_password` char(60) NOT NULL,
-  `privilege_question` varchar(255) NOT NULL,
-  `privilege_answer` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `pre_blog_photo`
+-- 表的结构 `pre_favorite`
 --
 
-CREATE TABLE IF NOT EXISTS `pre_blog_photo` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `album_id` bigint(20) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `thumb` varchar(255) NOT NULL,
-  `path` varchar(255) NOT NULL,
-  `created_at` int(11) NOT NULL,
-  `created_by` int(11) NOT NULL,
-  `is_cover` tinyint(4) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;
-
--- --------------------------------------------------------
-
---
--- 表的结构 `pre_blog_post`
---
-
-CREATE TABLE IF NOT EXISTS `pre_blog_post` (
+CREATE TABLE IF NOT EXISTS `pre_favorite` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(128) NOT NULL,
-  `content` text NOT NULL,
-  `tags` text NOT NULL,
+  `source_id` bigint(20) NOT NULL,
+  `source_table_name` varchar(255) NOT NULL,
+  `created_at` text NOT NULL,
   `user_id` int(11) NOT NULL,
-  `create_time` int(11) NOT NULL,
-  `update_time` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;
-
--- --------------------------------------------------------
-
---
--- 表的结构 `pre_follow_forum`
---
-
-CREATE TABLE IF NOT EXISTS `pre_follow_forum` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `forum_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `forum_id` (`forum_id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- 表的结构 `pre_follow_people`
---
-
-CREATE TABLE IF NOT EXISTS `pre_follow_people` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `people_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
-  KEY `people_id` (`people_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
+  KEY `post_id` (`source_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='用户收藏' AUTO_INCREMENT=2 ;
 
 --
 -- 表的结构 `pre_forum`
@@ -105,9 +42,7 @@ CREATE TABLE IF NOT EXISTS `pre_forum` (
   `forum_icon` char(26) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;
-
--- --------------------------------------------------------
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1001 ;
 
 --
 -- 表的结构 `pre_forum_board`
@@ -119,14 +54,14 @@ CREATE TABLE IF NOT EXISTS `pre_forum_board` (
   `name` char(32) NOT NULL,
   `description` varchar(128) NOT NULL,
   `columns` tinyint(4) NOT NULL DEFAULT '1',
+  `update_time` int(10) DEFAULT NULL,
+  `update_user` int(11) NOT NULL,
   `forum_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `forum_id` (`forum_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;
-
--- --------------------------------------------------------
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1006 ;
 
 --
 -- 表的结构 `pre_forum_broadcast`
@@ -143,7 +78,22 @@ CREATE TABLE IF NOT EXISTS `pre_forum_broadcast` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `forum_id` (`forum_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1006 ;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `pre_forum_follow`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_forum_follow` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `forum_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `forum_id` (`forum_id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -160,9 +110,7 @@ CREATE TABLE IF NOT EXISTS `pre_forum_post` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `thread_id` (`thread_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;
-
--- --------------------------------------------------------
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1024 ;
 
 --
 -- 表的结构 `pre_forum_thread`
@@ -179,26 +127,59 @@ CREATE TABLE IF NOT EXISTS `pre_forum_thread` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `board_id` (`board_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;
-
--- --------------------------------------------------------
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1038 ;
 
 --
--- 表的结构 `pre_post_favor`
+-- 表的结构 `pre_home_album`
 --
 
-CREATE TABLE IF NOT EXISTS `pre_post_favor` (
+CREATE TABLE IF NOT EXISTS `pre_home_album` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(128) NOT NULL,
+  `description` varchar(128) NOT NULL,
+  `cover_id` bigint(20) NOT NULL,
+  `created_at` int(10) NOT NULL,
+  `updated_at` int(10) NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `enable_comment` tinyint(4) NOT NULL DEFAULT '1',
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `status_password` char(60) NOT NULL,
+  `status_question` varchar(255) NOT NULL,
+  `status_answer` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1005 ;
+
+--
+-- 表的结构 `pre_home_photo`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_home_photo` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `album_id` bigint(20) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `thumb` varchar(255) NOT NULL,
+  `path` varchar(255) NOT NULL,
+  `created_at` int(11) NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `is_cover` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1023 ;
+
+--
+-- 表的结构 `pre_home_post`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_home_post` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `post_id` int(11) NOT NULL,
-  `post_title` varchar(255) NOT NULL,
-  `post_content` text NOT NULL,
+  `title` varchar(128) NOT NULL,
+  `content` text NOT NULL,
+  `tags` text NOT NULL,
   `user_id` int(11) NOT NULL,
+  `create_time` int(11) NOT NULL,
+  `update_time` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  KEY `post_id` (`post_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1008 ;
 
 --
 -- 表的结构 `pre_setting`
@@ -256,9 +237,30 @@ CREATE TABLE IF NOT EXISTS `pre_user` (
   `avatar` char(24) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=10000;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10003 ;
 
--- --------------------------------------------------------
+--
+-- 表的结构 `pre_user_data`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_user_data` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `unread_comment_count` int(11) NOT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10003 ;
+
+--
+-- 表的结构 `pre_user_follow`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_user_follow` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `people_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `people_id` (`people_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- 表的结构 `pre_user_message`
@@ -278,9 +280,7 @@ CREATE TABLE IF NOT EXISTS `pre_user_message` (
   PRIMARY KEY (`id`),
   KEY `sendfrom` (`sendfrom`),
   KEY `sendto` (`sendto`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- 表的结构 `pre_user_profile`
@@ -300,26 +300,6 @@ CREATE TABLE IF NOT EXISTS `pre_user_profile` (
 --
 -- 限制导出的表
 --
-
---
--- 限制表 `pre_blog_post`
---
-ALTER TABLE `pre_blog_post`
-  ADD CONSTRAINT `pre_blog_post_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `pre_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- 限制表 `pre_follow_forum`
---
-ALTER TABLE `pre_follow_forum`
-  ADD CONSTRAINT `pre_follow_forum_ibfk_1` FOREIGN KEY (`forum_id`) REFERENCES `pre_forum` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `pre_follow_forum_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `pre_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- 限制表 `pre_follow_people`
---
-ALTER TABLE `pre_follow_people`
-  ADD CONSTRAINT `pre_follow_people_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `pre_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `pre_follow_people_ibfk_4` FOREIGN KEY (`people_id`) REFERENCES `pre_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- 限制表 `pre_forum`
@@ -342,6 +322,13 @@ ALTER TABLE `pre_forum_broadcast`
   ADD CONSTRAINT `pre_forum_broadcast_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `pre_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- 限制表 `pre_forum_follow`
+--
+ALTER TABLE `pre_forum_follow`
+  ADD CONSTRAINT `pre_forum_follow_ibfk_1` FOREIGN KEY (`forum_id`) REFERENCES `pre_forum` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pre_forum_follow_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `pre_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- 限制表 `pre_forum_post`
 --
 ALTER TABLE `pre_forum_post`
@@ -354,6 +341,19 @@ ALTER TABLE `pre_forum_post`
 ALTER TABLE `pre_forum_thread`
   ADD CONSTRAINT `pre_forum_thread_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `pre_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `pre_forum_thread_ibfk_3` FOREIGN KEY (`board_id`) REFERENCES `pre_forum_board` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- 限制表 `pre_home_post`
+--
+ALTER TABLE `pre_home_post`
+  ADD CONSTRAINT `pre_home_post_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `pre_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- 限制表 `pre_user_follow`
+--
+ALTER TABLE `pre_user_follow`
+  ADD CONSTRAINT `pre_user_follow_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `pre_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pre_user_follow_ibfk_4` FOREIGN KEY (`people_id`) REFERENCES `pre_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- 限制表 `pre_user_message`
