@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\blog\models\Album */
+/* @var $model app\modules\home\models\Album */
 
 $this->title = $model->name . '_' . Yii::$app->setting->get('siteName');
 $this->params['title'] = $model->name;
@@ -63,7 +63,7 @@ margin-bottom: 20px;
                     <div><?= Yii::t('app', 'No photo in this album, click "Upload new photo" to make up your album.') ?></div>
                     <div class="button">
                         <div class="bigbutton">
-                            <a href="<?= Url::toRoute(['/blog/album/upload', 'id' => $model->id]) ?>" class="btn btn-default">
+                            <a href="<?= Url::toRoute(['/home/album/upload', 'id' => $model->id]) ?>" class="btn btn-default">
                                 <span class="glyphicon glyphicon-plus"></span> <?= Yii::t('app', 'Upload a new photo') ?>
                             </a>
                         </div>
@@ -78,7 +78,7 @@ margin-bottom: 20px;
         <?php endif ?>
     <?php else: ?>
         <?php if ($model->created_by === Yii::$app->user->id): ?>
-            <a href="<?= Url::toRoute(['/blog/album/upload', 'id' => $model->id]) ?>" class="btn btn-default">
+            <a href="<?= Url::toRoute(['/home/album/upload', 'id' => $model->id]) ?>" class="btn btn-default">
                 <span class="glyphicon glyphicon-plus"></span> <?= Yii::t('app', 'Upload a new photo') ?>
             </a>
         <?php endif ?>

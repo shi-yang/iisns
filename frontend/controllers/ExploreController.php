@@ -8,11 +8,11 @@ use yii\web\ForbiddenHttpException;
 use yii\data\SqlDataProvider;
 use app\components\FrontController;
 use app\components\Tools;
-use app\modules\blog\models\Album;
+use app\modules\home\models\Album;
 
 Yii::setAlias('forum_icon', '@web/uploads/forum/icon/');
 Yii::setAlias('avatar', '@web/uploads/user/avatar/');
-Yii::setAlias('photo', '@web/uploads/blog/photo/');
+Yii::setAlias('photo', '@web/uploads/home/photo/');
 
 /**
  * Explore controller
@@ -44,7 +44,7 @@ class ExploreController extends FrontController
         $forumResult = Tools::Pagination($query);
 
         $albums = Yii::$app->db
-            ->createCommand('SELECT id, name, cover_id FROM {{%blog_album}} WHERE privilege_type='.Album::TYPE_PUBLIC.' ORDER BY `id` DESC limit 12')
+            ->createCommand('SELECT id, name, cover_id FROM {{%home_album}} WHERE privilege_type='.Album::TYPE_PUBLIC.' ORDER BY `id` DESC limit 12')
             ->queryAll();
         return $this->render('index', [
             'forums' => $forumResult['result'],
@@ -71,7 +71,7 @@ class ExploreController extends FrontController
     {
         $query = new Query;
         $query->select('id, name, cover_id')
-            ->from('{{%blog_album}}')
+            ->from('{{%home_album}}')
             ->where('privilege_type=:type', [':type' => Album::TYPE_PUBLIC])
             ->orderBy('id DESC');
         $albumResult = Tools::Pagination($query, 18);

@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Url;
 use yii\helpers\Html;
-use app\modules\blog\models\Album;
+use app\modules\home\models\Album;
 ?>
 
 <?php foreach ($albums as $model): ?>
