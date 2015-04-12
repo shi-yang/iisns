@@ -62,10 +62,10 @@ class Board extends \yii\db\ActiveRecord
     }
     
     /**
-	    *string the URL that shows the detail of the forumblock
-	    */
+        *string the URL that shows the detail of the forumblock
+        */
     public function getUrl()
-    {		
+    {        
         return Url::toRoute(['/forum/board/view', 'id' => $this->id]);
     }
     
@@ -76,9 +76,9 @@ class Board extends \yii\db\ActiveRecord
     public function beforeSave($insert)
     {
        if (parent::beforeSave($insert)) {
-	       if ($this->isNewRecord) {
-	         	$this->user_id = Yii::$app->user->identity->id;
-        	}
+           if ($this->isNewRecord) {
+                 $this->user_id = Yii::$app->user->identity->id;
+            }
            return true;
        } else {
               return false;
@@ -141,23 +141,16 @@ class Board extends \yii\db\ActiveRecord
     public static function getLastThread($id)
     {
         $query = new Query;
-        $thread = $query->select('user_id, create_time')
-            ->from('{{%forum_thread}}')
-            ->where('board_id=:id', [':id'=>$id])
-            ->orderBy('create_time DESC')
-            ->limit(1);
-        if ($thread->exists()) {
-            $thread = $thread->one();
-            $user = Yii::$app->db
-                ->createCommand('SELECT username FROM {{%user}} WHERE id=' . $thread['user_id'])
-                ->queryOne();
-            return [
-                'username' => $user['username'],
-                'create_time'=>$thread['create_time'],
-            ];
-        }
-        return ;
-	}
+        $thread = $query->select('u.username, t.update_time')
+            ->from('{{%forum_board}} as t')
+            ->join('LEFT JOIN','{{%user}} as u', 'u.id=t.update_user')
+            ->where('t.id=:id', [':id'=>$id])
+            ->one();
+        return [
+            'username' => $thread['username'],
+            'create_time'=>$thread['update_time'],
+        ];
+    }
 
     /**
      * 取得当前版块下的子版块

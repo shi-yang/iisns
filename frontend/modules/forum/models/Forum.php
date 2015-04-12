@@ -63,10 +63,10 @@ class Forum extends \yii\db\ActiveRecord
         ];
     }
 
-	/**
-	 * This is invoked before the record is saved.
-	 * @return boolean whether the record should be saved.
-	 */
+    /**
+     * This is invoked before the record is saved.
+     * @return boolean whether the record should be saved.
+     */
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)) {
@@ -109,9 +109,9 @@ class Forum extends \yii\db\ActiveRecord
     {
         $query = new Query;
         return $query->select('id')
-		        ->from('{{%forum_follow}}')
-		        ->where('forum_id=:id and user_id=:user_id', [':id'=>$this->id, ':user_id'=>Yii::app()->user->id])
-		        ->exists();
+                ->from('{{%forum_follow}}')
+                ->where('forum_id=:id and user_id=:user_id', [':id'=>$this->id, ':user_id'=>Yii::app()->user->id])
+                ->exists();
     }
 
     public function getFollowerCount()

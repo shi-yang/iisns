@@ -59,8 +59,13 @@ class BoardController extends FrontController
 
         if ($newThread->load(Yii::$app->request->post())) {
             $newThread->board_id = $model->id;
-            if ($newThread->save())
+            if ($newThread->save()) {
+                Yii::$app->db->createCommand()->update('{{%forum_board}}', [
+                    'update_time' => time(),
+                    'update_user' => Yii::$app->user->id
+                ], 'id=:id', [':id' => $model->id])->execute();
                 return $this->refresh();
+            }
         }
         
         return $this->render('view', [
