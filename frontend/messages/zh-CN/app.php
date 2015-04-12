@@ -117,6 +117,7 @@ return [
 	'Save successfully.' => '保存成功',
 	'Delete successfully.' => '已删除',
 
+	'Are you sure you want to Log out?' => '你确定要注销？',
 	'No data to display.' => '没有数据展示',
 	'Unfinished,continue reading' => '未完，继续阅读',
  	'Note: This section is under development.' => '提示：这部分内容正在开发中。',
