@@ -14,11 +14,11 @@ use yii\widgets\ActiveForm;
 
 
     <?= $form->field($model, 'sendto', [
-        'template' => "<div class=\"input-group\"><span class=\"input-group-addon\">Sendto</span>{input}</div>{error}",
+        'template' => "<div class=\"input-group\"><span class=\"input-group-addon\">" . Yii::t('app', 'Sendto') . "</span>{input}</div>{error}",
     ])->textInput(['maxlength' => 32, 'autocomplete'=>'off']) ?>
 
     <?= $form->field($model, 'subject', [
-        'template' => "<div class=\"input-group\"><span class=\"input-group-addon\">Subject</span>{input}</div>{error}",
+        'template' => "<div class=\"input-group\"><span class=\"input-group-addon\">" . Yii::t('app', 'Subject') . "</span>{input}</div>{error}",
     ])->textInput(['maxlength' => 32, 'autocomplete'=>'off']) ?>
 
     <?= $form->field($model, 'content')->widget('kucha\ueditor\UEditor', [

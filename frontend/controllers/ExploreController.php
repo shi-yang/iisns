@@ -44,7 +44,7 @@ class ExploreController extends FrontController
         $forumResult = Tools::Pagination($query);
 
         $albums = Yii::$app->db
-            ->createCommand('SELECT id, name, cover_id FROM {{%home_album}} WHERE privilege_type='.Album::TYPE_PUBLIC.' ORDER BY `id` DESC limit 12')
+            ->createCommand('SELECT id, name, cover_id FROM {{%home_album}} WHERE status='.Album::TYPE_PUBLIC.' ORDER BY `id` DESC limit 12')
             ->queryAll();
         return $this->render('index', [
             'forums' => $forumResult['result'],
@@ -72,7 +72,7 @@ class ExploreController extends FrontController
         $query = new Query;
         $query->select('id, name, cover_id')
             ->from('{{%home_album}}')
-            ->where('privilege_type=:type', [':type' => Album::TYPE_PUBLIC])
+            ->where('status=:type', [':type' => Album::TYPE_PUBLIC])
             ->orderBy('id DESC');
         $albumResult = Tools::Pagination($query, 18);
 
@@ -87,7 +87,7 @@ class ExploreController extends FrontController
         if (($model = Album::findOne($id)) === null) {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-        if ($model->privilege_type != Album::TYPE_PUBLIC) {
+        if ($model->status != Album::TYPE_PUBLIC) {
             throw new ForbiddenHttpException('You are not allowed to perform this action.');
         }
 

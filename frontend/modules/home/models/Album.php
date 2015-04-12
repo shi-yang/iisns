@@ -15,10 +15,10 @@ use Yii;
  * @property integer $updated_at
  * @property integer $created_by
  * @property integer $enable_comment
- * @property integer $privilege_type
- * @property string $privilege_password
- * @property string $privilege_question
- * @property string $privilege_answer
+ * @property integer $status
+ * @property string $status_password
+ * @property string $status_question
+ * @property string $status_answer
  */
 class Album extends \yii\db\ActiveRecord
 {
@@ -44,8 +44,8 @@ class Album extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['cover_id', 'created_at', 'updated_at', 'created_by', 'enable_comment', 'privilege_type'], 'integer'],
-            [['privilege_password', 'privilege_question', 'privilege_answer'], 'string'],
+            [['cover_id', 'created_at', 'updated_at', 'created_by', 'enable_comment', 'status'], 'integer'],
+            [['status_password', 'status_question', 'status_answer'], 'string'],
             [['name', 'description'], 'string', 'max' => 128]
         ];
     }
@@ -64,10 +64,10 @@ class Album extends \yii\db\ActiveRecord
             'updated_at' => Yii::t('app', 'Updated At'),
             'created_by' => Yii::t('app', 'Created By'),
             'enable_comment' => Yii::t('app', 'Enable Comment'),
-            'privilege_type' => Yii::t('app', 'Privilege Setting'),
-            'privilege_password' => Yii::t('app', 'Password'),
-            'privilege_question' => Yii::t('app', 'Question'),
-            'privilege_answer' => Yii::t('app', 'Answer'),
+            'status' => Yii::t('app', 'Privilege Setting'),
+            'status_password' => Yii::t('app', 'Password'),
+            'status_question' => Yii::t('app', 'Question'),
+            'status_answer' => Yii::t('app', 'Answer'),
         ];
     }
 
@@ -90,6 +90,12 @@ class Album extends \yii\db\ActiveRecord
                 $this->created_at = time();
                 $this->updated_at = time();
                 $this->cover_id = self::COVER_NONE;
+            }
+            if (!empty($this->status_password)) {
+                $this->status_password = Yii::$app->security->generatePasswordHash($this->status_password);
+            }
+            if (!empty($this->status_answer)) {
+                $this->status_answer = Yii::$app->security->generatePasswordHash($this->status_answer);
             }
             return true;
         } else {

@@ -48,7 +48,7 @@ class AlbumController extends FrontController
     public function actionIndex()
     {
         $dataProvider = new SqlDataProvider([
-            'sql' => 'SELECT id, cover_id, privilege_type, name FROM {{%home_album}} WHERE created_by = :user_id',
+            'sql' => 'SELECT id, cover_id, status, name FROM {{%home_album}} WHERE created_by = :user_id',
             'params' => [':user_id' => Yii::$app->user->id],
         ]);
 

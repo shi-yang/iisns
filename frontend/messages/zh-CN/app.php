@@ -12,6 +12,8 @@ return [
 	'Email' => '邮箱',
 	'Inbox' => '收件箱',
 	'Notification' => '消息',
+	'Sendto' => '收件人',
+	'Subject' => '主题',
 	'Help' => '帮助',
 	'Update' => '更新',
 	'Save' => '保存',
