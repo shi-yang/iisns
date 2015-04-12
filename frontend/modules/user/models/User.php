@@ -156,9 +156,10 @@ class User extends \common\models\User
     public function getComments()
     {
         $query = new Query;
-        $query = $query->select('t.id, t.title, t.content, p.user_id, p.content as comment, p.create_time')
+        $query = $query->select('t.id, t.title, t.content, p.user_id, p.content as comment, p.create_time, u.username, u.avatar')
             ->from('{{%forum_post}} as p')
             ->join('LEFT JOIN','{{%forum_thread}} as t', 'p.thread_id=t.id')
+            ->join('LEFT JOIN','{{%user}} as u', 'u.id=p.user_id')
             ->where('t.user_id=:user_id and p.user_id !=:user_id', [':user_id' => $this->id])
             ->orderBy('p.create_time DESC');
 
