@@ -66,7 +66,9 @@ use app\modules\forum\models\Board;
                         </tr>
                     <?php endfor ?>
                 <?php else: ?>
-                    <?php foreach ($board->subBoards as $subBoard): ?>
+                    <?php foreach ($board->subBoards as $subBoard): 
+                        $lastThread = Board::getLastThread($subBoard['id']);
+                    ?>
                         <tr class="boardinfo" onclick="window.location.href= '<?= Url::toRoute(['/forum/board/view', 'id' => $subBoard['id']]) ?>';return false">
                             <td style="vertical-align:middle;">
                                 <div class="pull-left">
@@ -83,8 +85,8 @@ use app\modules\forum\models\Board;
                                 <i class="glyphicon glyphicon-comment"></i> <?= Board::getThreadCount($subBoard['id']) ?> 
                             </td>
                             <td class="hidden-xs" style="width:150px;">
-                                <i class="glyphicon glyphicon-user"></i> <?= Board::getLastThread($subBoard['id'])['username'] ?> <br>
-                                <i class="glyphicon glyphicon-time"></i> <?= Tools::formatTime(Board::getLastThread($subBoard['id'])['create_time']) ?>
+                                <i class="glyphicon glyphicon-user"></i> <?= $lastThread['username'] ?> <br>
+                                <i class="glyphicon glyphicon-time"></i> <?= Tools::formatTime($lastThread['create_time']) ?>
                             </td>
                         </tr>
                     <?php endforeach ?>
