@@ -95,10 +95,7 @@ class PostController extends FrontController
 
         if ($model->load(Yii::$app->request->post())) {
 
-            $tags = trim($_POST['Post']['tags']);    		
-            $explodeTags = array_unique(explode(',', str_replace(array (' ' , '，' ), array('',','), $tags)));    		
-    		
-            $explodeTags = array_slice($explodeTags, 0, 10);  
+            $tags = trim($_POST['Post']['tags']);    	                $explodeTags = array_unique(explode(',', str_replace(array (' ' , '，' ), array('',','), $tags)));    	        	                $explodeTags = array_slice($explodeTags, 0, 10);  
             $model->tags = implode(',',$explodeTags);
             
             if ($model->save())

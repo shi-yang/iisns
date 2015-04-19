@@ -31,8 +31,7 @@ $this->params['breadcrumbs'][] = $model->user['username'];
 
 	<?= $this->render('_posts', [
 			'posts'=>$model->posts['posts'],
-			'floor'=> count($model->posts['posts']),	
-			'pageSize'=>$model->posts['pages']->pageSize,
+			'floor'=> count($model->posts['posts']),    			'pageSize'=>$model->posts['pages']->pageSize,
 		]); 
 	?>
 	<?= LinkPager::widget([

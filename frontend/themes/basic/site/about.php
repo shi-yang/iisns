@@ -87,8 +87,7 @@ a:after {
 	margin-top: 30px;
 	color: white;
 	font-size: 70px;
-	
-}
+    }
 
 #headerwrap h3 {
 	color: white;
@@ -200,8 +199,7 @@ $this->registerCss($css);
 				<h3><?= Yii::$app->setting->get('siteDescription') ?></h3>
 				<br>
     		</div>
-    		
-    		<div class="col-lg-2">
+    	        		<div class="col-lg-2">
     			<h5>Amazing Results</h5>
     			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
     			<img class="hidden-xs hidden-sm hidden-md" src="/assets/img/arrow1.png">
@@ -264,8 +262,7 @@ $this->registerCss($css);
 			<div class="col-lg-6 centered">
 				<img class="centered" src="/assets/img/mobile.png" alt="">
 			</div>
-			
-			<div class="col-lg-6">
+		    			<div class="col-lg-6">
 				<h3>Some Features</h3>
 				<br>
 			<!-- ACCORDION -->
@@ -283,8 +280,7 @@ $this->registerCss($css);
 	                    </div><!-- /collapse -->
 	                </div><!-- /accordion-group -->
 	                <br>
-	
-	                <div class="accordion-group">
+    	                <div class="accordion-group">
 	                    <div class="accordion-heading">
 	                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
 	                        Retina Ready Theme
@@ -297,8 +293,7 @@ $this->registerCss($css);
 	                    </div><!-- /collapse -->
 	                </div><!-- /accordion-group -->
 	                <br>
-	
-	                 <div class="accordion-group">
+    	                 <div class="accordion-group">
 	                    <div class="accordion-heading">
 	                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
 	                        Awesome Support
@@ -324,8 +319,7 @@ $this->registerCss($css);
 							</div><!-- /accordion-inner -->
 	                    </div><!-- /collapse -->
 	                </div><!-- /accordion-group -->
-	                <br>			
-				</div><!-- Accordion -->
+	                <br>		    				</div><!-- Accordion -->
 			</div>
 		</div>
 	</div><!--/ .container -->
@@ -345,8 +339,7 @@ $this->registerCss($css);
 				    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
 				    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
 				  </ol>
-				
-				  <!-- Wrapper for slides -->
+			    				  <!-- Wrapper for slides -->
 				  <div class="carousel-inner">
 				    <div class="item active">
 				      <img src="/assets/img/item-01.png" alt="">
@@ -360,10 +353,8 @@ $this->registerCss($css);
 		</div>
 		<br>
 		<br>
-		<br>	
-	</div><!-- /container -->
-</div>	
-
+		<br>    	</div><!-- /container -->
+</div>    
 
 <section id="contact" name="contact"></section>
 <div id="footerwrap">
@@ -377,8 +368,7 @@ $this->registerCss($css);
 			United States
 			</p>
 		</div>
-		
-		<div class="col-lg-7">
+	    		<div class="col-lg-7">
 			<h3>Drop Us A Line</h3>
 			<br>
 			<form role="form" action="#" method="post" enctype="plain"> 
@@ -403,6 +393,5 @@ $this->registerCss($css);
 <div id="c">
 	<div class="container">
 		<p>Created by <a href="http://www.blacktie.co">BLACKTIE.CO</a></p>
-	
-	</div>
+    	</div>
 </div>
