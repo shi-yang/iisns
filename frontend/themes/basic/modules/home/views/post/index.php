@@ -10,6 +10,8 @@ use app\modules\user\models\User;
 
 $this->title = Yii::t('app', 'My Posts');
 $this->params['breadcrumbs'][] = $this->title;
+
+$user = Yii::$app->user->identity;
 ?>
 <div class="album-index">
 
@@ -28,10 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
 			        <div class="item widget-container fluid-height social-entry">
 			            <div class="widget-content padded">
 			                <div class="profile-info clearfix">
-			                    <img width="50" height="50" class="social-avatar pull-left" src="<?= Yii::getAlias('@avatar') . User::getInfo($post['user_id'])['avatar'] ?>" />
+			                    <img width="50" height="50" class="social-avatar pull-left" src="<?= Yii::getAlias('@avatar') . $user->avatar ?>" />
 			                    <div class="profile-details">
-			                        <a class="user-name" href="<?= Url::toRoute(['/user/view', 'id'=>User::getInfo($post['user_id'])['username']]) ?>">
-			                            <?= Html::encode(User::getInfo($post['user_id'])['username']) ?>
+			                        <a class="user-name" href="<?= Url::toRoute(['/user/view', 'id' => $user->username]) ?>">
+			                            <?= Html::encode($user->username) ?>
 			                        </a>
 			                        <p>
 			                            <em><?= \app\components\Tools::formatTime($post['create_time']) ?></em>

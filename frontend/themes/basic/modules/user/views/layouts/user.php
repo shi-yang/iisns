@@ -9,7 +9,9 @@ use frontend\widgets\Alert;
 /* @var $this \yii\web\View */
 /* @var $content string */
 /* @var $user string */
+
 $user = Yii::$app->user->identity;
+$unReadMessageCount = $user->unReadMessageCount;
 
 AppAsset::register($this);
 ?>
@@ -51,10 +53,10 @@ AppAsset::register($this);
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="glyphicon glyphicon-envelope"></i>
-                        <span class="notification-label bounceIn animation-delay4"><?= $user->unReadMessageCount ?></span>
+                        <span class="notification-label bounceIn animation-delay4"><?= $unReadMessageCount  ?></span>
                     </a>
                     <ul class="dropdown-menu message dropdown-1">
-                        <li><a>You have <?= $user->unReadMessageCount ?> new unread messages</a></li>
+                        <li><a>You have <?= $unReadMessageCount ?> new unread messages</a></li>
                         <li>
                             <a class="clearfix" href="#">
                                 <img src="<?= Yii::getAlias('@avatar'). $user->avatar ?>" alt="User Avatar">
@@ -202,7 +204,7 @@ AppAsset::register($this);
                             <span class="text">
                                 <?= Yii::t('app', 'Notification') ?>
                             </span>
-                                <span class="badge badge-danger bounceIn animation-delay6"><?= $user->unReadMessageCount ?></span>
+                                <span class="badge badge-danger bounceIn animation-delay6"><?= $unReadMessageCount ?></span>
                                 <span class="menu-hover"></span>
                             </a>
                         </li>
