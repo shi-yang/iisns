@@ -1,8 +1,8 @@
 # Outlayer
 
-_Layout class_
+_Brains and guts of a layout library_
 
-Outlayer is a base layout class for layout libraries like [Packery](http://packery.metafizzy.co) and [Masonry](http://masonry.desandro.com)
+Outlayer is a base layout class for layout libraries like [Isotope](http://isotope.metafizzy.co), [Packery](http://packery.metafizzy.co), and [Masonry](http://masonry.desandro.com)
 
 Outlayer layouts work with a container element and children item elements.
 

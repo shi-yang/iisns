@@ -1,5 +1,5 @@
 /**
- * matchesSelector v1.0.2
+ * matchesSelector v1.0.3
  * matchesSelector( element, '.selector' )
  * MIT license
  */
@@ -12,6 +12,10 @@
   'use strict';
 
   var matchesMethod = ( function() {
+    // check for the standard method name first
+    if ( ElemProto.matches ) {
+      return 'matches';
+    }
     // check un-prefixed
     if ( ElemProto.matchesSelector ) {
       return 'matchesSelector';

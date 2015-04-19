@@ -94,11 +94,11 @@ abstract class BaseActiveRecord extends Model implements ActiveRecordInterface
 
     /**
      * @inheritdoc
-     * @return static ActiveRecord instance matching the condition, or `null` if nothing matches.
+     * @return static|null ActiveRecord instance matching the condition, or `null` if nothing matches.
      */
     public static function findOne($condition)
     {
-        return static::findByCondition($condition, true);
+        return static::findByCondition($condition)->one();
     }
 
     /**
@@ -107,19 +107,18 @@ abstract class BaseActiveRecord extends Model implements ActiveRecordInterface
      */
     public static function findAll($condition)
     {
-        return static::findByCondition($condition, false);
+        return static::findByCondition($condition)->all();
     }
 
     /**
      * Finds ActiveRecord instance(s) by the given condition.
      * This method is internally called by [[findOne()]] and [[findAll()]].
      * @param mixed $condition please refer to [[findOne()]] for the explanation of this parameter
-     * @param boolean $one whether this method is called by [[findOne()]] or [[findAll()]]
-     * @return static|static[]
+     * @return ActiveQueryInterface the newly created [[ActiveQueryInterface|ActiveQuery]] instance. 
      * @throws InvalidConfigException if there is no primary key defined
      * @internal
      */
-    protected static function findByCondition($condition, $one)
+    protected static function findByCondition($condition)
     {
         $query = static::find();
 
@@ -133,7 +132,7 @@ abstract class BaseActiveRecord extends Model implements ActiveRecordInterface
             }
         }
 
-        return $one ? $query->andWhere($condition)->one() : $query->andWhere($condition)->all();
+        return $query->andWhere($condition);
     }
 
     /**
@@ -768,7 +767,7 @@ abstract class BaseActiveRecord extends Model implements ActiveRecordInterface
      * In the above step 1 and 3, events named [[EVENT_BEFORE_DELETE]] and [[EVENT_AFTER_DELETE]]
      * will be raised by the corresponding methods.
      *
-     * @return integer|boolean the number of rows deleted, or false if the deletion is unsuccessful for some reason.
+     * @return integer|false the number of rows deleted, or false if the deletion is unsuccessful for some reason.
      * Note that it is possible the number of rows deleted is 0, even though the deletion execution is successful.
      * @throws StaleObjectException if [[optimisticLock|optimistic locking]] is enabled and the data
      * being deleted is outdated.
@@ -981,7 +980,7 @@ abstract class BaseActiveRecord extends Model implements ActiveRecordInterface
     public function getPrimaryKey($asArray = false)
     {
         $keys = $this->primaryKey();
-        if (count($keys) === 1 && !$asArray) {
+        if (!$asArray && count($keys) === 1) {
             return isset($this->_attributes[$keys[0]]) ? $this->_attributes[$keys[0]] : null;
         } else {
             $values = [];
@@ -1015,7 +1014,7 @@ abstract class BaseActiveRecord extends Model implements ActiveRecordInterface
         if (empty($keys)) {
             throw new Exception(get_class($this) . ' does not have a primary key. You should either define a primary key for the corresponding table or override the primaryKey() method.');
         }
-        if (count($keys) === 1 && !$asArray) {
+        if (!$asArray && count($keys) === 1) {
             return isset($this->_oldAttributes[$keys[0]]) ? $this->_oldAttributes[$keys[0]] : null;
         } else {
             $values = [];

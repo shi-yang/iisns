@@ -7,7 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'yii\\swiftmailer\\' => array($vendorDir . '/yiisoft/yii2-swiftmailer'),
-    'yii\\jui\\' => array($vendorDir . '/yiisoft/yii2-jui'),
     'yii\\imagine\\' => array($vendorDir . '/yiisoft/yii2-imagine'),
     'yii\\gii\\' => array($vendorDir . '/yiisoft/yii2-gii'),
     'yii\\faker\\' => array($vendorDir . '/yiisoft/yii2-faker'),
@@ -19,7 +18,6 @@ return array(
     'yii2masonry\\' => array($vendorDir . '/philippfrenzel/yii2masonry'),
     'shiyang\\setting\\' => array($vendorDir . '/shiyang/yii2-setting'),
     'shiyang\\login\\' => array($vendorDir . '/shiyang/yii2-login-widget'),
-    'nirvana\\infinitescroll\\' => array($vendorDir . '/nirvana-msu/yii2-infinite-scroll'),
     'kucha\\ueditor\\' => array($vendorDir . '/kucha/ueditor'),
     'justinvoelker\\tagging\\' => array($vendorDir . '/justinvoelker/yii2-tagging'),
     'cebe\\markdown\\' => array($vendorDir . '/cebe/markdown'),

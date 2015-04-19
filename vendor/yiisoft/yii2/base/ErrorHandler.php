@@ -196,8 +196,9 @@ abstract class ErrorHandler extends Component
     /**
      * Logs the given exception
      * @param \Exception $exception the exception to be logged
+     * @since 2.0.3 this method is now public.
      */
-    protected function logException($exception)
+    public function logException($exception)
     {
         $category = get_class($exception);
         if ($exception instanceof HttpException) {

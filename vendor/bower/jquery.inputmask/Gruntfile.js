@@ -69,7 +69,7 @@ module.exports = function (grunt) {
         },
         bump: {
             options: {
-                files: ['package.json', 'bower.json', 'composer.json'],
+                files: ['package.json', 'bower.json', 'composer.json', 'component.json'],
                 updateConfigs: ['pkg'],
                 commit: false,
                 createTag: false,
@@ -123,6 +123,6 @@ module.exports = function (grunt) {
     grunt.registerTask('publish:major', ['clean', 'bump:major', 'uglify', 'shell:gitcommitchanges', 'release', 'nugetpack', 'nugetpush']);
 
     // Default task(s).
-    grunt.registerTask('default', ['clean', 'uglify']);
+    grunt.registerTask('default', ['bump:prerelease','clean', 'uglify']);
 
 };

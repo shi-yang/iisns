@@ -15,6 +15,21 @@ use yii\helpers\Url;
 /**
  * Dropdown renders a Bootstrap dropdown menu component.
  *
+ * For example,
+ *
+ * ```php
+ * <div class="dropdown">
+ *     <a href="#" data-toggle="dropdown" class="dropdown-toggle">Label <b class="caret"></b></a>
+ *     <?php
+ *         echo Dropdown::widget([
+ *             'items' => [
+ *                 ['label' => 'DropdownA', 'url' => '/'],
+ *                 ['label' => 'DropdownB', 'url' => '#'],
+ *             ],
+ *         ]);
+ *     ?>
+ * </div>
+ * ```
  * @see http://getbootstrap.com/javascript/#dropdowns
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
  * @since 2.0
@@ -58,9 +73,9 @@ class Dropdown extends Widget
      */
     public function run()
     {
-        echo $this->renderItems($this->items, $this->options);
         BootstrapPluginAsset::register($this->getView());
         $this->registerClientEvents();
+        return $this->renderItems($this->items, $this->options);
     }
 
     /**
@@ -75,7 +90,6 @@ class Dropdown extends Widget
         $lines = [];
         foreach ($items as $i => $item) {
             if (isset($item['visible']) && !$item['visible']) {
-                unset($items[$i]);
                 continue;
             }
             if (is_string($item)) {

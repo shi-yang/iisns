@@ -341,7 +341,13 @@ class ActiveField extends Component
      * @param array $options the tag options in terms of name-value pairs. These will be rendered as
      * the attributes of the resulting tag. The values will be HTML-encoded using [[Html::encode()]].
      *
-     * If you set a custom `id` for the input element, you may need to adjust the [[$selectors]] accordingly.
+     * The following special options are recognized:
+     *
+     * - maxlength: integer|boolean, when `maxlength` is set true and the model attribute is validated
+     *   by a string validator, the `maxlength` option will take the value of [[\yii\validators\StringValidator::max]].
+     *   This is available since version 2.0.3.
+     *
+     * Note that if you set a custom `id` for the input element, you may need to adjust the value of [[selectors]] accordingly.
      *
      * @return static the field object itself
      */
@@ -449,10 +455,11 @@ class ActiveField extends Component
      * - uncheck: string, the value associated with the uncheck state of the radio button. If not set,
      *   it will take the default value '0'. This method will render a hidden input so that if the radio button
      *   is not checked and is submitted, the value of this attribute will still be submitted to the server
-     *   via the hidden input.
+     *   via the hidden input. If you do not want any hidden input, you should explicitly set this option as null.
      * - label: string, a label displayed next to the radio button. It will NOT be HTML-encoded. Therefore you can pass
      *   in HTML code such as an image tag. If this is coming from end users, you should [[Html::encode()|encode]] it to prevent XSS attacks.
-     *   When this option is specified, the radio button will be enclosed by a label tag.
+     *   When this option is specified, the radio button will be enclosed by a label tag. If you do not want any label, you should
+     *   explicitly set this option as null.
      * - labelOptions: array, the HTML attributes for the label tag. This is only used when the "label" option is specified.
      *
      * The rest of the options will be rendered as the attributes of the resulting tag. The values will
@@ -477,7 +484,8 @@ class ActiveField extends Component
                     $this->labelOptions = $options['labelOptions'];
                 }
             }
-            unset($options['label'], $options['labelOptions']);
+            unset($options['labelOptions']);
+            $options['label'] = null;
             $this->parts['{input}'] = Html::activeRadio($this->model, $this->attribute, $options);
         }
         $this->adjustLabelFor($options);
@@ -493,10 +501,11 @@ class ActiveField extends Component
      * - uncheck: string, the value associated with the uncheck state of the radio button. If not set,
      *   it will take the default value '0'. This method will render a hidden input so that if the radio button
      *   is not checked and is submitted, the value of this attribute will still be submitted to the server
-     *   via the hidden input.
+     *   via the hidden input. If you do not want any hidden input, you should explicitly set this option as null.
      * - label: string, a label displayed next to the checkbox. It will NOT be HTML-encoded. Therefore you can pass
      *   in HTML code such as an image tag. If this is coming from end users, you should [[Html::encode()|encode]] it to prevent XSS attacks.
-     *   When this option is specified, the checkbox will be enclosed by a label tag.
+     *   When this option is specified, the checkbox will be enclosed by a label tag. If you do not want any label, you should
+     *   explicitly set this option as null.
      * - labelOptions: array, the HTML attributes for the label tag. This is only used when the "label" option is specified.
      *
      * The rest of the options will be rendered as the attributes of the resulting tag. The values will
@@ -601,7 +610,8 @@ class ActiveField extends Component
      *   except that the array keys represent the optgroup labels specified in $items.
      * - unselect: string, the value that will be submitted when no option is selected.
      *   When this attribute is set, a hidden field will be generated so that if no option is selected in multiple
-     *   mode, we can still obtain the posted unselect value.
+     *   mode, we can still obtain the posted unselect value. If you do not want any hidden input,
+     *   you should explicitly set this option as null.
      *
      * The rest of the options will be rendered as the attributes of the resulting tag. The values will
      * be HTML-encoded using [[Html::encode()]]. If a value is null, the corresponding attribute will not be rendered.
@@ -630,7 +640,8 @@ class ActiveField extends Component
      * @param array $options options (name => config) for the checkbox list. The following options are specially handled:
      *
      * - unselect: string, the value that should be submitted when none of the checkboxes is selected.
-     *   By setting this option, a hidden input will be generated.
+     *   By setting this option, a hidden input will be generated. If you do not want any hidden input,
+     *   you should explicitly set this option as null.
      * - separator: string, the HTML code that separates items.
      * - item: callable, a callback that can be used to customize the generation of the HTML code
      *   corresponding to a single item in $items. The signature of this callback must be:
@@ -662,7 +673,8 @@ class ActiveField extends Component
      * @param array $options options (name => config) for the radio button list. The following options are specially handled:
      *
      * - unselect: string, the value that should be submitted when none of the radio buttons is selected.
-     *   By setting this option, a hidden input will be generated.
+     *   By setting this option, a hidden input will be generated. If you do not want any hidden input,
+     *   you should explicitly set this option as null.
      * - separator: string, the HTML code that separates items.
      * - item: callable, a callback that can be used to customize the generation of the HTML code
      *   corresponding to a single item in $items. The signature of this callback must be:
@@ -787,7 +799,7 @@ class ActiveField extends Component
         }
 
         if (!empty($validators)) {
-            $options['validate'] = new JsExpression("function (attribute, value, messages, deferred) {" . implode('', $validators) . '}');
+            $options['validate'] = new JsExpression("function (attribute, value, messages, deferred, \$form) {" . implode('', $validators) . '}');
         }
 
         // only get the options that are different from the default ones (set in yii.activeForm.js)

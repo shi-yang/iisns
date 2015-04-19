@@ -1,6 +1,150 @@
 Yii Framework 2 Change Log
 ==========================
 
+2.0.3 March 01, 2015
+--------------------
+
+- Bug #5457: `yii\web\Cors` should handle `Access-Control-Request-Headers` in a case-insensitive manner (qiangxue)
+- Bug #6553: DateValidator returned valid for date "2012-12-12foo" with intl extension enabled (gajahlemu)
+- Bug #6919: Fixed wrong namespaces under advanced application's TestCase classes (ivokund)
+- Bug #6940: `yii\web\Response::sendContentAsFile()` may not send correct `content-length` header (sadgnome)
+- Bug #6969: `yii\helpers\ArrayHelper::htmlEncode()` and `htmlDecode()` should not remove non-string data (qiangxue)
+- Bug #7037: `yii\console\controllers\AssetController` now correctly handles relative image URLs if source and target CSS are under same directory (klimov-paul)
+- Bug #7055: composite IN condition was not generated correctly for certain DBMS (nineinchnick)
+- Bug #7074: `yii\data\ArrayDataProvider` did not correctly handle the case `Pagination::pageSize = 0` (kirsenn, qiangxue)
+- Bug #7172: Fixed problem with EmailValidator which did not extract domain correctly for DNS check (nbogol)
+- Bug #7209: Html::getInputId() now also replaces `.` with `-` to ensure a valid ID is generated (omnilight)
+- Bug #7211: Query caching should properly deal with the case when query result is false (qiangxue)
+- Bug #7218: `yii\captcha\CaptchaAction` should send response in JSON format (InteLigent, qiangxue)
+- Bug #7226: `yii\web\Request::getEtag()` should strip off `-gzip` which may be added by Apache (mcd-php)
+- Bug #7227: Query builder should respect column alias setting when `yii\db\Expression` is being selected (mdmunir, qiangxue)
+- Bug #7271: `ActiveRecord::populateRecord()` should be called in late binding approach (jlorente)
+- Bug #7258: Response was sending HTML content type when formatter was set to JSON or XML, nulls were handled wrong (slavcodev, samdark)
+- Bug #7358: Fix trimming PHPDoc prefix with TAB indent in `yii\console\Controller::parseDocCommentSummary()` (gugglegum)
+- Bug #7384: Fix precision loss in log timestamps when using `yii\log\DBTarget` (samdark)
+- Bug #7425: `yii\widgets\ActiveField::radio()` should not generate the label twice (justinvoelker)
+- Enh #3168: Improved the performance of `yii\rbac\DbManager::checkAccess()` by caching mechanism (qiangxue)
+- Enh #3723: `yii\filters\PageCache` now supports caching response headers as well as non-HTML response content (qiangxue)
+- Enh #4710: Added `yii\web\AssetManager::appendTimestamp` to support cache busting for assets  (qiangxue)
+- Enh #5663: Added support for using `data-params` to specify additional form data to be submitted via the `data-method` approach (usualdesigner, qiangxue)
+- Enh #5681: Allow customization of Menu::submenuTemplate in menu items (RobertBoes, otsec)
+- Enh #6106: Added ability to specify `encode` for each item of `yii\widgets\Breadcrumbs` (samdark, aleksanderd)
+- Enh #6361: Added `validateAttribute()` to `yii.activeForm.js` to support manually triggering data validation of an input (Alex-Code, qiang)
+- Enh #6493: Added support for the `Access-Control-Expose-Headers` header by `yii\filters\Cors` (usualdesigner)
+- Enh #6697: Added `yii\helpers\Url::current()` method that allows adding or removing parameters from current URL (samdark, callmez)
+- Enh #6852: Added `yii\helpers\BaseHtmlPurifier::helpers()` in order to be able to configure `HtmlPurifier` helper globally via subclassing (Alex-Code)
+- Enh #6882: Added `yii\web\ErrorHandler::getTypeUrl()` in order to allow providing custom types/classes/methods URLs for subclasses (brandonkelly)
+- Enh #6883: `yii\base\ErrorHandler::logException()` is now public (samdark)
+- Enh #6896: Added `yii\log\FileTarget::$enableRotation` to allow disabling log rotation when external tools are configured for this (cebe)
+- Enh #7008: Removed extra white space in GridView filter cell (uran1980)
+- Enh #7051: Added support for preventing swapping values between different cookies (pavimus, qiangxue)
+- Enh #7150: FormatConverter for date formats now supports single quote escaping (brandonkelly)
+- Enh #7255: Added support to allow widgets that use text input to specify input types (qiangxue)
+- Enh #7269: `yii\console\controllers\BaseMigrateController` now throws exception if directory specified doesn't exist and action isn't `create` (lynicidn, samdark)
+- Enh #7301: Added checking for ICU version in requirements warning about plural problems when it is lower than 49 (sidtj)
+- Enh #7332: Added ability to remove `yii\widgets\Menu` container tag by setting `options['tag']` to `false` (dynasource, samdark)
+- Enh #7350: Added `yii\helpers\Html::$dataAttributes` to support customizing data attributes (Faryshta, qiangxue)
+- Enh #7357: Refactored `yii\db\ColumnSchema` by adding `typecast()` method to decouple `phpTypecast()` from `dbTypecast()` (mcd-php, qiangxue)
+- Enh #7361: The `trim` validator now works on the client side too (qiangxue)
+- Enh #7440: Added support to automatically set the `maxlength` attribute for `Html::activeTextInput()` (llfm)
+- Enh #7446: Added `Schema::TYPE_DOUBLE` to represent ANSI SQL Double Precision type (samdark)
+- Enh #7449: Added `encode` option to allow not encoding select options for `Html::dropDownList()` and `Html::listBox()` (yapi68, qiangxue)
+- Enh: Added support to `yii\di\Container` to instantiate and configure an object that implements `yii\base\Configurable` (qiangxue)
+- Chg #5690: adjusted paths in message config generated by `yii message/config` to reflect directory structure better (mikehaertl, samdark)
+- Chg #6661: Hyperlinks that are enclosed within an exist form will use the same form for submission if they specify both of the `href` and `data-method` attributes (qiangxue)
+- Chg #7094: Console confirmation must be answered correctly. To return `true`: `y` or `yes`. To return `false`: `n` or `no`. Any other input the question will be asked again (thiagotalma)
+- Chg #7130: Changed the signature of `ActiveRecord::findByCondition()` to simplify the implementation and usage (Faryshta)
+- Chg #7215: Uses OpenSSL crypto lib instead of Mcrypt. Added testing of encrypted data compatibility, both backward and forward (tom--)
+
+
+### Apidoc Extension (yii2-apidoc)
+
+- no changes in this release.
+
+
+### Authclient Extension (yii2-authclient)
+
+- Enh #6892: Default value of `yii\authclient\clients\Twitter::$authUrl` changed to 'authenticate', allowing usage of previous logged user without request an access (kotchuprik)
+
+
+### Bootstrap Extension (yii2-bootstrap)
+
+- no changes in this release.
+
+
+### Codeception Extension (yii2-codeception)
+
+- Bug #6978: DI Container is not reset when destroying application in functional tests (ivokund)
+
+
+### Composer Extension (yii2-composer)
+
+- no changes in this release.
+
+
+### Debug Extension (yii2-debug)
+
+- Bug #6903: Fixed display issue with phpinfo() table (kalayda, cebe)
+- Bug #7222: Debug toolbar wasn't displayed properly in rtl pages (mohammadhosain, johonunu, samdark)
+- Enh #6890: Added ability to filter by query type (pana1990)
+
+
+### Elasticsearch Extension (yii2-elasticsearch)
+
+- no changes in this release.
+
+
+### Faker Extension (yii2-faker)
+
+- no changes in this release.
+
+
+### Gii Extension (yii2-gii)
+
+- Chg #7328: Changed the way CRUD generator translates "Create X". Now it's a whole string because of translation difficulties (samdark)
+
+
+### Imagine Extension (yii2-imagine)
+
+- no changes in this release.
+
+
+### Jui Extension (yii2-jui)
+
+- Enh #7127: `name` or `model` and `attribute` are no longer required properties of `yii\jui\InputWidget` (nirvana-msu, cebe)
+
+
+### Mongodb Extension (yii2-mongodb)
+
+- Bug #7010: Fixed `yii\mongodb\Query::select` now allows excluding fields (Sammaye, klimov-paul)
+
+
+### Redis Extension (yii2-redis)
+
+- no changes in this release.
+
+
+### Smarty Extension (yii2-smarty)
+
+- Bug #6845: Fixed incorrect implementation of `{registerCssFile` and `{registerJsFile` (TomassunGitHub, samdark)
+- Bug #6991: Fixed exception when using `{use class='yii\bootstrap\Nav' type='function'}` (ivanlemeshev)
+
+
+### Sphinx Extension (yii2-sphinx)
+
+- Bug #7198: `yii\sphinx\Query` no longer attempts to call snippets for the empty query result set (Hrumpa)
+
+
+### Swiftmailer Extension (yii2-swiftmailer)
+
+- no changes in this release.
+
+
+### Twig Extension (yii2-twig)
+
+- no changes in this release.
+
+
 2.0.2 January 11, 2015
 ----------------------
 
