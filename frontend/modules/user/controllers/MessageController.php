@@ -63,7 +63,6 @@ class MessageController extends FrontController
     public function actionComment()
     {
         $user = $this->findModel();
-        Yii::$app->db->createCommand('UPDATE {{%user_data}} SET unread_comment_count=0 WHERE user_id='.$user->id)->execute();
         return $this->render('comment', [
             'user' => $user,
             'count' => $this->getMessageCount()

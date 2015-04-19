@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Url;
 
-$this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Setting');
+$this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Notification');
 ?>
 <?php $this->beginContent('@app/modules/user/views/layouts/user.php'); ?>
 <div class="row">

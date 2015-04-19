@@ -25,7 +25,7 @@ $this->params['count'] = $count;
                             <img width="50" height="50" class="social-avatar pull-left" src="<?= Yii::getAlias('@avatar') . $comment['avatar'] ?>" />
                             <div class="profile-details">
                                 <a class="user-name" href="<?= Url::toRoute(['/user/view', 'id' =>$comment['username']]) ?>">
-                                    <?= Html::encode(User::getInfo($comment['user_id'])['username']) ?>
+                                    <?= Html::encode($comment['username']) ?>
                                 </a>
                                 <p>
                                     <em><?= Tools::formatTime($comment['create_time']) ?></em>
@@ -36,10 +36,10 @@ $this->params['count'] = $count;
                             <div class="item widget-container fluid-height social-entry" style="margin:0">
                                 <div class="widget-content padded">
                                     <div class="profile-info clearfix">
-                                        <img width="50" height="50" class="social-avatar pull-left" src="<?= Yii::getAlias('@avatar') . Yii::$app->user->identity->avatar ?>" />
+                                        <img width="50" height="50" class="social-avatar pull-left" src="<?= Yii::getAlias('@avatar') . $user->avatar ?>" />
                                         <div class="profile-details">
-                                            <a class="user-name" href="<?= Url::toRoute(['/user/view', 'id'=>Yii::$app->user->identity->username]) ?>">
-                                                <?= Html::encode(Yii::$app->user->identity->username) ?>
+                                            <a class="user-name" href="<?= Url::toRoute(['/user/view', 'id'=>$user->username]) ?>">
+                                                <?= Html::encode($user->username) ?>
                                             </a>
                                             <p>
                                                 <em><?= Tools::formatTime($comment['create_time']) ?></em>
