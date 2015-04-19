@@ -77,8 +77,7 @@ class Thread extends \yii\db\ActiveRecord
      *string the URL that shows the detail of the thread
      */
     public function getUrl()
-    {		
-        return Url::toRoute(['/forum/thread/view', 'id' => $this->id]);
+    {	            return Url::toRoute(['/forum/thread/view', 'id' => $this->id]);
     }
 
     public function getUser()
