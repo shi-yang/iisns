@@ -2,6 +2,7 @@
 use yii\helpers\Html;
 use yii\helpers\HtmlPurifier;
 use yii\helpers\Url;
+use shiyang\infinitescroll\InfiniteScrollPager;
 
 if (isset($_GET['page']) >= 2) //分页标识大于2才开始计算
     $floor -= ($pageSize * $_GET['page']) - $pageSize;
@@ -35,4 +36,8 @@ if (isset($_GET['page']) >= 2) //分页标识大于2才开始计算
 			</div>
 		</div>
 	<?php endforeach; ?>
+    <?= InfiniteScrollPager::widget([
+        'pagination' => $pages,
+        'widgetId' => '#post-view',
+    ]);?>
 </div>

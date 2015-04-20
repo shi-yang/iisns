@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\widgets\LinkPager;
+use shiyang\infinitescroll\InfiniteScrollPager;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\forum\models\Forum */
@@ -49,9 +49,10 @@ $this->params['forum'] = $model->toArray;
     	        </div>
     	      </div>
     	  <?php endforeach; ?>
-        <?= LinkPager::widget([
+        <?= InfiniteScrollPager::widget([
             'pagination' => $model->broadcasts['pages'],
-        ]); ?>
+            'widgetId' => '.thread-list',
+        ]);?>
   	  <?php else: ?>
   	  	<div class="widget-container">
   	  		<div style="padding:50px">

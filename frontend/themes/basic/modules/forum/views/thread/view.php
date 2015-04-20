@@ -1,8 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
-use yii\widgets\LinkPager;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\forum\models\Post */
@@ -13,6 +11,8 @@ if (!$model->isOneBoard()):
 	$this->params['breadcrumbs'][] = ['label' => $model->board['name'], 'url' => ['/forum/board/view', 'id' => $model->board['id']]];
 endif;
 $this->params['breadcrumbs'][] = $model->user['username'];
+
+$posts = $model->posts;
 ?>
 <div class="widget-container">
 	<?= $this->render('_view', array('data'=>$model)); ?>
@@ -30,11 +30,10 @@ $this->params['breadcrumbs'][] = $model->user['username'];
 	</div>
 
 	<?= $this->render('_posts', [
-			'posts'=>$model->posts['posts'],
-			'floor'=> count($model->posts['posts']),    			'pageSize'=>$model->posts['pages']->pageSize,
+			'posts'=>$posts['posts'],
+			'floor'=> count($posts['posts']),
+			'pageSize'=>$posts['pages']->pageSize,
+       		'pages' => $posts['pages'],
 		]); 
 	?>
-	<?= LinkPager::widget([
-       'pagination' => $model->posts['pages'],
-    ]);?>
 </div>

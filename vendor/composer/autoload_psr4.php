@@ -18,6 +18,7 @@ return array(
     'yii2masonry\\' => array($vendorDir . '/philippfrenzel/yii2masonry'),
     'shiyang\\setting\\' => array($vendorDir . '/shiyang/yii2-setting'),
     'shiyang\\login\\' => array($vendorDir . '/shiyang/yii2-login-widget'),
+    'shiyang\\infinitescroll\\' => array($vendorDir . '/shiyang/yii2-infinite-scroll'),
     'kucha\\ueditor\\' => array($vendorDir . '/kucha/ueditor'),
     'justinvoelker\\tagging\\' => array($vendorDir . '/justinvoelker/yii2-tagging'),
     'cebe\\markdown\\' => array($vendorDir . '/cebe/markdown'),

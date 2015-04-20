@@ -75,7 +75,7 @@ class AlbumController extends FrontController
         $model = $this->findModel($id);
 
         if (Yii::$app->request->isPost) {
-            $this->process($model->id);
+            $this->process($model->id, $model->name);
             // $origFileName = $_FILES['file']['name'];
             // $extension =  strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
             // $fileName = $model->id . '_' . time() . rand(1 , 10000) . '.' . $extension;
@@ -166,7 +166,7 @@ class AlbumController extends FrontController
     /**
      * 接收图片
      */
-    protected function process($album_id)
+    protected function process($album_id, $name)
     {
         // Make sure file is not cached (as it happens for example on iOS devices)
         header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
@@ -325,7 +325,7 @@ class AlbumController extends FrontController
         }
 
         Yii::$app->db->createCommand()->insert('{{%home_photo}}', [
-            'name' => $origFileName,
+            'name' => $name,
             'path' => $fileName,
             'album_id' => $album_id,
             'created_at' => time(),

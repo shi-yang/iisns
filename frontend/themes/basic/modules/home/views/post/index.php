@@ -2,8 +2,8 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\widgets\LinkPager;
 use app\modules\user\models\User;
+use shiyang\infinitescroll\InfiniteScrollPager;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -24,7 +24,7 @@ $user = Yii::$app->user->identity;
 </div>
 <div class="social-wrapper row">
     <div id="social-container">
-        <div class="col-xs-12 col-sm-8 col-md-8">
+        <div class="col-xs-12 col-sm-8 col-md-8" id="content">
 			<?php if (!empty($posts)): ?>
 			    <?php foreach($posts as $post): ?>
 			        <div class="item widget-container fluid-height social-entry">
@@ -55,8 +55,9 @@ $user = Yii::$app->user->identity;
 			            </div>
 			        </div>
 			    <?php endforeach; ?>
-				<?= LinkPager::widget([
-			       'pagination' => $pages,
+				<?= InfiniteScrollPager::widget([
+			       	'pagination' => $pages,
+			       	'widgetId' => '#content',
 			    ]);?>
 			<?php else: ?>
 			    <div class="no-data-found">

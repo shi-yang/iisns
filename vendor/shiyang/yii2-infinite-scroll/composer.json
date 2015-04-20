@@ -1,0 +1,37 @@
+{
+    "name": "shiyang/yii2-infinite-scroll",
+    "description": "Yii2 extension for infinite-scroll jQuery plugin",
+    "keywords": [
+        "yii2",
+        "infinite-scroll",
+        "widget",
+        "jQuery",
+        "plugin"
+    ],
+    "type": "yii2-extension",
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/shi-yang/yii2-infinite-scroll/issues",
+        "source": "https://github.com/shi-yang/yii2-infinite-scroll"
+    },
+    "authors": [
+        {
+            "name": "Shiyang",
+            "email": "dr@shiyang.me"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*",
+        "bower-asset/jquery-infinite-scroll": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "shiyang\\infinitescroll\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}

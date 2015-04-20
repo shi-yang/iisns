@@ -111,4 +111,13 @@ return array (
       '@yii/faker' => $vendorDir . '/yiisoft/yii2-faker',
     ),
   ),
+  'shiyang/yii2-infinite-scroll' => 
+  array (
+    'name' => 'shiyang/yii2-infinite-scroll',
+    'version' => '1.1.0.0',
+    'alias' => 
+    array (
+      '@shiyang/infinitescroll' => $vendorDir . '/shiyang/yii2-infinite-scroll',
+    ),
+  ),
 );

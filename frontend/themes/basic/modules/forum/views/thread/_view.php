@@ -2,15 +2,17 @@
 use yii\helpers\Html;
 use yii\helpers\HtmlPurifier;
 use yii\helpers\Url;
+
+$user = $data->user;
 ?>
 <div class="row thread-view" id="thread-wrap">
 	<div class="col-sm-2">
 		<div class="thread-meta">
 			<div class="author hidden-xs">
-				<img src="<?= Yii::getAlias('@avatar') . $data->user['avatar'] ?>" alt="User avatar">
+				<img src="<?= Yii::getAlias('@avatar') . $user['avatar'] ?>" alt="User avatar">
 			</div>
 			<p style="margin: 0;font-weight: bold;white-space: normal;word-break: break-all;<?php if($data->is_broadcast) echo "color:#ff6f3d;"; ?>">
-			  	<?= Html::a(Html::encode($data->user['username']), ['/user/view', 'id' => $data->user['username']]) ?>
+			  	<?= Html::a(Html::encode($user['username']), ['/user/view', 'id' => $user['username']]) ?>
 			</p>
 		</div>
 	</div>

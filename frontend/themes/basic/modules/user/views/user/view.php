@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
-use yii\widgets\LinkPager;
+use shiyang\infinitescroll\InfiniteScrollPager;
 use app\modules\user\models\User;
 use app\components\Tools;
 
@@ -15,7 +15,7 @@ $this->params['profile'] = ArrayHelper::toArray($model->profile);
 ?>
 <?php if (!empty($model->posts['posts'])): ?>
 <div class="home-post">
-    <ul class="clearfix">
+    <ul class="clearfix" id="content">
         <?php foreach ($model->posts['posts'] as $post): ?>
             <li class="post-item">
                 <h2 class="post-title"><?= Html::a(Html::encode($post->title), ['/home/post/view', 'id' => $post->id]) ?></h2>
@@ -28,7 +28,10 @@ $this->params['profile'] = ArrayHelper::toArray($model->profile);
                 </div>
           </li>
         <?php endforeach; ?>
-        <?= LinkPager::widget(['pagination' => $model->posts['pages']]) ?>
+        <?= InfiniteScrollPager::widget([
+            'pagination' => $model->posts['pages'],
+            'widgetId' => '#content',
+        ]) ?>
     </ul>
 </div>
 <?php else: ?>

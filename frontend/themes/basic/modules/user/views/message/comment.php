@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\helpers\HtmlPurifier;
 use yii\helpers\Url;
-use yii\widgets\LinkPager;
+use shiyang\infinitescroll\InfiniteScrollPager;
 use app\modules\user\models\User;
 use app\components\Tools;
 
@@ -65,8 +65,9 @@ $this->params['count'] = $count;
                     </div>
                 </div>
             <?php endforeach ?>
-            <?= LinkPager::widget([
+            <?= InfiniteScrollPager::widget([
                 'pagination' => $user->comments['pages'],
+                'widgetId' => '.col-md-12',
             ]); ?>
         </div>
     </div>

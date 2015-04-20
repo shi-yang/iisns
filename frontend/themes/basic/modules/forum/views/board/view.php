@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\LinkPager;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\forum\models\Board */
@@ -23,12 +22,8 @@ endif;
         'model' => $newThread,
         'forumName' => $model->forum['forum_name']
     ]) ?>
-
     <?= $this->render('_threads', [
         'threads' => $model->threads['threads'],
         'model' => $model,
     ]) ?>
-    <?= LinkPager::widget([
-		'pagination' => $model->threads['pages'],
-	]) ?>
 <?php if (!$model->isOneBoard()) echo '</div></div>'; ?>

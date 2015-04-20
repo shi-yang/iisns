@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1e83c19493acfb171396fa0982aa47c8",
+    "hash": "f530de31ae22abbd66ed794613856410",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -360,6 +360,40 @@
                 "javascript",
                 "jquery",
                 "library"
+            ]
+        },
+        {
+            "name": "bower-asset/jquery-infinite-scroll",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/infinite-scroll/infinite-scroll.git",
+                "reference": "f0d9eecb55a428b2fd4027964a22b84633ba6e3e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/infinite-scroll/infinite-scroll/zipball/f0d9eecb55a428b2fd4027964a22b84633ba6e3e",
+                "reference": "f0d9eecb55a428b2fd4027964a22b84633ba6e3e",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "jquery.infinitescroll.js",
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "node_modules",
+                    "bower_components",
+                    "test",
+                    "tests"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "jQuery Infinite Scroll Plugin",
+            "keywords": [
+                "infinitescroll",
+                "jquery"
             ]
         },
         {
@@ -902,6 +936,55 @@
                 "yii2"
             ],
             "time": "2015-02-19 20:24:19"
+        },
+        {
+            "name": "shiyang/yii2-infinite-scroll",
+            "version": "v1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/shi-yang/yii2-infinite-scroll.git",
+                "reference": "1e1e100677aa0058e97f2ec91124c3be956b5aae"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/shi-yang/yii2-infinite-scroll/zipball/1e1e100677aa0058e97f2ec91124c3be956b5aae",
+                "reference": "1e1e100677aa0058e97f2ec91124c3be956b5aae",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery-infinite-scroll": "*",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "shiyang\\infinitescroll\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Shiyang",
+                    "email": "dr@shiyang.me"
+                }
+            ],
+            "description": "Yii2 extension for infinite-scroll jQuery plugin",
+            "keywords": [
+                "infinite-scroll",
+                "jquery",
+                "plugin",
+                "widget",
+                "yii2"
+            ],
+            "time": "2015-04-20 02:34:51"
         },
         {
             "name": "shiyang/yii2-login-widget",
