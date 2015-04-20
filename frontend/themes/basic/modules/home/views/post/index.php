@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\widgets\ListView;
+use yii\widgets\LinkPager;
 use app\modules\user\models\User;
 
 /* @var $this yii\web\View */
@@ -55,6 +55,9 @@ $user = Yii::$app->user->identity;
 			            </div>
 			        </div>
 			    <?php endforeach; ?>
+				<?= LinkPager::widget([
+			       'pagination' => $pages,
+			    ]);?>
 			<?php else: ?>
 			    <div class="no-data-found">
 			        <i class="glyphicon glyphicon-folder-open"></i>

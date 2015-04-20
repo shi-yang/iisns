@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use app\modules\user\models\User;
 use app\components\Tools;
 use yii\helpers\HtmlPurifier;
+use yii\widgets\LinkPager;
 
 /* @var $this yii\web\View */
 
@@ -39,6 +40,9 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
             </div>
         </div>
     <?php endforeach; ?>
+    <?= LinkPager::widget([
+       'pagination' => $pages,
+    ]);?>
 <?php else: ?>
     <div class="no-data-found">
         <i class="glyphicon glyphicon-folder-open"></i>
