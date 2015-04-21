@@ -46,6 +46,7 @@ class ExploreController extends FrontController
         $albums = Yii::$app->db
             ->createCommand('SELECT id, name, cover_id FROM {{%home_album}} WHERE status='.Album::TYPE_PUBLIC.' ORDER BY `id` DESC limit 12')
             ->queryAll();
+
         return $this->render('index', [
             'forums' => $forumResult['result'],
             'pages' => $forumResult['pages'],
@@ -70,10 +71,11 @@ class ExploreController extends FrontController
     public function actionAlbums()
     {
         $query = new Query;
-        $query->select('id, name, cover_id')
-            ->from('{{%home_album}}')
+        $query->select('a.id, a.name, p.path')
+            ->from('{{%home_album}} as a')
+            ->join('LEFT JOIN','{{%home_photo}} as p', 'p.album_id=a.id')
             ->where('status=:type', [':type' => Album::TYPE_PUBLIC])
-            ->orderBy('id DESC');
+            ->orderBy('a.id DESC');
         $albumResult = Tools::Pagination($query, 18);
 
         return $this->render('albums', [
