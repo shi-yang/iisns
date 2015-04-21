@@ -77,6 +77,7 @@ class SiteController extends FrontController
 
     public function actionIndex()
     {
+        $this->layout = 'basic';
         return $this->render('index');
     }
 
