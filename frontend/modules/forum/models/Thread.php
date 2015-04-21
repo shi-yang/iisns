@@ -141,4 +141,21 @@ class Thread extends \yii\db\ActiveRecord
         $result = Tools::Pagination($query);
         return ['posts' => $result['result'], 'pages' => $result['pages']];
     }
+
+    /**
+     * 获取SEO信息，标题，关键字，描述
+     * @return array ['title', 'keywords', 'description']
+     */
+    public function getSeoInfo()
+    {
+        $data = strip_tags($this->content);
+        $title = (empty($this->title)) ? mb_substr($data, 0, 80) : $this->title;
+        $description = mb_substr($data, 0, 200, 'utf-8');
+        $keywords = $title;
+        return [
+            'title' => $title,
+            'keywords' => $keywords,
+            'description' => $description
+        ];
+    }
 }

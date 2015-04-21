@@ -5,7 +5,11 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\modules\forum\models\Post */
 
-$this->title = $model->title;
+$seoInfo = $model->seoInfo;
+$this->title = $seoInfo['title'];
+$this->registerMetaTag(['name' => 'keywords', 'content' => $seoInfo['keywords']]);
+$this->registerMetaTag(['name' => 'description', 'content' => $seoInfo['description']]);
+
 $this->params['forum'] = $model->forum;
 if (!$model->isOneBoard()):
 	$this->params['breadcrumbs'][] = ['label' => $model->board['name'], 'url' => ['/forum/board/view', 'id' => $model->board['id']]];
