@@ -36,7 +36,12 @@ $this->registerCssFile(Yii::getAlias('@web').'/css/forum/css/forum.css');
           <div class="panel-heading"><?= Yii::t('app', 'Albums') ?></div>
           <div class="panel-body">
             <div class="row">
-                <?= $this->render('_album', ['albums' => $albums]) ?>
+                <?php 
+                    if ($this->beginCache('explore-album', ['duration' => 3600])) {
+                        echo $this->render('_album', ['albums' => $albums]);
+                        $this->endCache();
+                    }
+                ?>
             </div>
           </div>
         </div>

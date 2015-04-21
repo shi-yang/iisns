@@ -44,7 +44,7 @@ class ExploreController extends FrontController
         $forumResult = Tools::Pagination($query);
 
         $albums = Yii::$app->db
-            ->createCommand('SELECT id, name, cover_id FROM {{%home_album}} WHERE status='.Album::TYPE_PUBLIC.' ORDER BY `id` DESC limit 12')
+            ->createCommand('SELECT `a`.`id`, `a`.`name`, `p`.`path` FROM {{%home_album}} `a` LEFT JOIN {{%home_photo}} `p` ON p.album_id=a.id WHERE a.status=0 ORDER BY `a`.`id` DESC LIMIT 18')
             ->queryAll();
 
         return $this->render('index', [
@@ -74,7 +74,7 @@ class ExploreController extends FrontController
         $query->select('a.id, a.name, p.path')
             ->from('{{%home_album}} as a')
             ->join('LEFT JOIN','{{%home_photo}} as p', 'p.album_id=a.id')
-            ->where('status=:type', [':type' => Album::TYPE_PUBLIC])
+            ->where('a.status=:type', [':type' => Album::TYPE_PUBLIC])
             ->orderBy('a.id DESC');
         $albumResult = Tools::Pagination($query, 18);
 
