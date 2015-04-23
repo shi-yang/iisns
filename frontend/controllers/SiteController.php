@@ -191,6 +191,11 @@ class SiteController extends FrontController
 
     public function actionDevelop()
     {
+        if (!Yii::$app->user->isGuest) {
+            Yii::setAlias('avatar', '@web/uploads/user/avatar/');
+            $this->layout = '@app/modules/user/views/layouts/user.php';
+        }
+        
         return $this->render('develop');
     }
 }
