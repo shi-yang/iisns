@@ -17,13 +17,13 @@ $this->params['profile'] = $model->userProfile;
     <div class="post-content">
        <?= HtmlPurifier::process($model->content) ?>
     </div>
-   	<?php $post_tags = $model->tags ? explode(',',$model->tags):array(); $tags_len = count($post_tags);?>
-	<?php if($tags_len > 0):?>
-		<span class="tags">
-			<?php $i = 1; foreach((array)$post_tags as $ptag):?>
-			<span class="label label-default"><i class="glyphicon glyphicon-tag"></i> <?= Html::encode($ptag) ?></span>
-			<?php if($i<$tags_len):?>&nbsp;&nbsp;<?php endif;?>
-			<?php $i++;?>
-			<?php endforeach;?>							    		</span>
-	<?php endif;?>
+       <?php $post_tags = $model->tags ? explode(',',$model->tags):array(); $tags_len = count($post_tags);?>
+    <?php if($tags_len > 0):?>
+        <span class="tags">
+            <?php $i = 1; foreach((array)$post_tags as $ptag):?>
+            <span class="label label-default"><i class="glyphicon glyphicon-tag"></i> <?= Html::encode($ptag) ?></span>
+            <?php if($i<$tags_len):?>&nbsp;&nbsp;<?php endif;?>
+            <?php $i++;?>
+            <?php endforeach;?>                                        </span>
+    <?php endif;?>
 </div>

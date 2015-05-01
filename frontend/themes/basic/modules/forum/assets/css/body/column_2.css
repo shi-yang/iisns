@@ -13,10 +13,10 @@ box-shadow: 0px 1px 5px rgba(0,0,0,0.15);
 margin: 4px;
 }
 .board-avatar, .board-title, .board-last-thread, .board {
-	float: left;
-	position: relative;
-	min-height: 1px;
-	padding-bottom: 7px
+    float: left;
+    position: relative;
+    min-height: 1px;
+    padding-bottom: 7px
 }
 .board-avatar {
 width: 20%;
@@ -39,11 +39,11 @@ color: #aaa;
 width: 50%;
 }
 .board-last-thread-time {
-	float: left;
-	margin:0;
-	font-size:14px;
-	color: #aaa;
-	width: 50%;
+    float: left;
+    margin:0;
+    font-size:14px;
+    color: #aaa;
+    width: 50%;
 }
 .board-name {
 font-weight:bold; 
@@ -53,14 +53,14 @@ white-space: nowrap;
 text-overflow: ellipsis;
 }
 .board-span {font-size: 20px;
-	color: #f60;}
+    color: #f60;}
 
 @media (max-width: 767px) {
-	.board {width: 100%}
-	.board-title {
-		width: 100%;
-	}
-	.board-span {position: relative; top: 0;font-size: 20px}
+    .board {width: 100%}
+    .board-title {
+        width: 100%;
+    }
+    .board-span {position: relative; top: 0;font-size: 20px}
 }
 
 /* admin */
@@ -69,8 +69,8 @@ height: 38px !important;
 font-size: 24px !important;
 }
 .board-thread {
-	float: left;
-	width: 88px
+    float: left;
+    width: 88px
 }
 .board-thread-count {
 margin: 0;
@@ -85,7 +85,7 @@ text-overflow: ellipsis;
 .board-button{float: left;}
 .admin-board {background: none;border-radius:none;box-shadow:none;}
 @media (max-width: 767px) {
-	.admin-board .cell .board-title {
-		width: 65%;
-	}
+    .admin-board .cell .board-title {
+        width: 65%;
+    }
 }

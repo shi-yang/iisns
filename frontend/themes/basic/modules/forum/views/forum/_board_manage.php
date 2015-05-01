@@ -52,8 +52,8 @@ use app\modules\forum\models\Board;
                                             <?= Html::a(Html::encode($subBoard['name']), ['/forum/board/view', 'id' => $subBoard['id']]) ?>
                                         </dt>
                                         <dd>
-	           								<a href="<?= Url::toRoute(['/forum/board/update', 'id' => $subBoard['id']]) ?>"><span class="glyphicon glyphicon-pencil"></span></a>
-											<a href="<?= Url::toRoute(['/forum/board/delete', 'id' => $subBoard['id']]) ?>" data-confirm="Are you sure to delete it?" data-method="board"><span class="glyphicon glyphicon-trash"></span></a>
+                                               <a href="<?= Url::toRoute(['/forum/board/update', 'id' => $subBoard['id']]) ?>"><span class="glyphicon glyphicon-pencil"></span></a>
+                                            <a href="<?= Url::toRoute(['/forum/board/delete', 'id' => $subBoard['id']]) ?>" data-confirm="Are you sure to delete it?" data-method="board"><span class="glyphicon glyphicon-trash"></span></a>
                                         </dd>
                                         <dd class="hidden-xs"></dd>
                                     </dl>
@@ -75,8 +75,8 @@ use app\modules\forum\models\Board;
                                 <dl style="margin-bottom:0">
                                     <dt><?= Html::a(Html::encode($subBoard['name']), ['/forum/board/view', 'id' => $subBoard['id']]) ?></dt>
                                     <dd>
-	           							<a href="<?= Url::toRoute(['/forum/board/update', 'id' => $subBoard['id']]) ?>"><span class="glyphicon glyphicon-pencil"></span></a>
-										<a href="<?= Url::toRoute(['/forum/board/delete', 'id' => $subBoard['id']]) ?>" data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="board"><span class="glyphicon glyphicon-trash"></span></a>
+                                           <a href="<?= Url::toRoute(['/forum/board/update', 'id' => $subBoard['id']]) ?>"><span class="glyphicon glyphicon-pencil"></span></a>
+                                        <a href="<?= Url::toRoute(['/forum/board/delete', 'id' => $subBoard['id']]) ?>" data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="board"><span class="glyphicon glyphicon-trash"></span></a>
                                     </dd>
                                 </dl>
                             </td>
@@ -117,37 +117,37 @@ use app\modules\forum\models\Board;
 <?php endforeach; ?>
 
 <div class="new-category tbox">
-	<?php Modal::begin([
-		'header' => '<h3>'.Yii::t('app','New Category').'</h3>',
-		'toggleButton' => [
-			'label' => '<span class="glyphicon glyphicon-plus"></span>' . Yii::t('app', 'Create new category'), 
-			'class' => 'btn btn-lg btn-block btn-default'
-		]
-	]); ?>
-		<?php $form = ActiveForm::begin(); ?>
+    <?php Modal::begin([
+        'header' => '<h3>'.Yii::t('app','New Category').'</h3>',
+        'toggleButton' => [
+            'label' => '<span class="glyphicon glyphicon-plus"></span>' . Yii::t('app', 'Create new category'), 
+            'class' => 'btn btn-lg btn-block btn-default'
+        ]
+    ]); ?>
+        <?php $form = ActiveForm::begin(); ?>
 
-			<?= $form->field($newBoard, 'parent_id')->textInput(['readonly' => true, 'value' => Board::AS_CATEGORY, 'style' => 'display:none'])->label(false) ?>
+            <?= $form->field($newBoard, 'parent_id')->textInput(['readonly' => true, 'value' => Board::AS_CATEGORY, 'style' => 'display:none'])->label(false) ?>
 
             <label class="control-label" for="board-name"><?= Yii::t('app', 'Category Name') ?></label>
-			<?= $form->field($newBoard, 'name')->textInput(['maxlength' => 32])->label(false) ?>
+            <?= $form->field($newBoard, 'name')->textInput(['maxlength' => 32])->label(false) ?>
 
-			<?= $form->field($newBoard, 'columns', ['options'=>['id' => 'sub-column']])
-				->radioList(
-					[
+            <?= $form->field($newBoard, 'columns', ['options'=>['id' => 'sub-column']])
+                ->radioList(
+                    [
                         1 => Yii::t('app', 'One'), 
                         2 => Yii::t('app', 'Two'), 
                         3 => Yii::t('app', 'Three'), 
                         4 => Yii::t('app', 'Four'), 
                     ],
-					['unselect' => 1]
-				)
-			?>
+                    ['unselect' => 1]
+                )
+            ?>
 
-			<div class="form-group">
-		  		<?= Html::submitButton(Yii::t('app', 'Create'), ['class' => 'btn btn-primary']) ?>
-			</div>
-		<?php ActiveForm::end(); ?>
-	<?php Modal::end(); ?>
+            <div class="form-group">
+                  <?= Html::submitButton(Yii::t('app', 'Create'), ['class' => 'btn btn-primary']) ?>
+            </div>
+        <?php ActiveForm::end(); ?>
+    <?php Modal::end(); ?>
 
     <?php Modal::begin([
         'header' => '<h3>'.Yii::t('app','Add a board').'</h3>',

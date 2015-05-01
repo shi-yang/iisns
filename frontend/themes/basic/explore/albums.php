@@ -13,20 +13,24 @@ $this->registerCss('
     list-style-type: none;
 }
 .album-item {
-    float:left;
-    padding: 6px;
-    border-width: 0;
-    border-bottom-width: 1px\9;
-    box-shadow: 0 1px 4px rgba(0,0,0,.15);
-    width: 170px;
+      background: #fcfcfc;
+      margin-bottom: 20px;
+      -moz-border-radius: 3px;
+      -webkit-border-radius: 3px;
+      border-radius: 3px;
+      -moz-box-shadow: 0 3px 0 rgba(12,12,12,0.03);
+      -webkit-box-shadow: 0 3px 0 rgba(12,12,12,0.03);
+      box-shadow: 0 3px 0 rgba(12,12,12,0.03);
+      position: relative;
 }
-.album-cover {
-    width:158px;
-    height:158px;
+.album-img img {
+  -moz-border-radius: 3px 3px 0 0;
+  -webkit-border-radius: 3px 3px 0 0;
+  border-radius: 3px 3px 0 0;
 }
 ');
 ?>
-<div class="album-index container">
+<div class="album-index container-fluid">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?= $this->render('_album', ['albums' => $albums]) ?>

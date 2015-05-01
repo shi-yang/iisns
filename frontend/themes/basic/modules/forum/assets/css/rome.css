@@ -14,10 +14,10 @@ overflow:hidden;
 text-overflow:ellipsis;
 }
 .item:hover {
-	color: #777
+    color: #777
 }
 .index-name {
-	border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
 margin: 10px 0;
 display: block;
 padding: 0 0 5px;
@@ -38,8 +38,8 @@ white-space: normal;
 word-wrap: break-word;
 }
 .item .picture img {
-	width: 120px;
-	height: 120px;
+    width: 120px;
+    height: 120px;
 }
 
 
@@ -52,45 +52,45 @@ word-wrap: break-word;
 .add-block span {font-size: 50px}
 .add-block {float:none}
 .gtitle .title_edit {
-	height: 49px;
-	font-size: 49px; 
-	width: 250px;
-	font-weight: bold;
-	color: #08c;
+    height: 49px;
+    font-size: 49px; 
+    width: 250px;
+    font-weight: bold;
+    color: #08c;
 }
 
 .my_forum {
-	font-size: 14px;
-	color: #646464
+    font-size: 14px;
+    color: #646464
 }
 
 .add-on {
-	display: inline-block;
-	width: auto;
-	height: 16px;
-	min-width: 16px;
-	padding: 4px 0 5px 5px;
-	margin-right: -4px;
-	font-size: 14px;
-	font-weight: normal;
-	line-height: 17px;
-	text-align: center;
-	text-shadow: 0 1px 0 #fff;
-	background-color: #eee;
-	border: 1px solid #ccc;
+    display: inline-block;
+    width: auto;
+    height: 16px;
+    min-width: 16px;
+    padding: 4px 0 5px 5px;
+    margin-right: -4px;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 17px;
+    text-align: center;
+    text-shadow: 0 1px 0 #fff;
+    background-color: #eee;
+    border: 1px solid #ccc;
 }
 .thread-form { padding: 21px;box-shadow: 0 0px 2px rgba(0,0,0,0.46);margin-bottom: 20px;}
 .thread-content { 
-	margin: 0px;
-	width: 503px;
-	height: 66px;
-	float: left;
+    margin: 0px;
+    width: 503px;
+    height: 66px;
+    float: left;
 }
 .thread-list{padding: 0;}
 .thread-item { 
-	position: relative;
-	padding: 15px 15px 15px 20px;
-	border-bottom: #d1d1d1 1px dotted;
+    position: relative;
+    padding: 15px 15px 15px 20px;
+    border-bottom: #d1d1d1 1px dotted;
 }
 .hg-bg {display: block;height: 20px;position: relative;}
 .thread-item:hover {
@@ -115,10 +115,10 @@ border-top: 1px dashed #d7d7d7;
 }
 .u_image {width: 64px;height: 64px;}
 .content {
-	line-height: 24px;
-	white-space:normal;
-	 word-break:break-all;
-	 overflow:hidden;
+    line-height: 24px;
+    white-space:normal;
+     word-break:break-all;
+     overflow:hidden;
 }
 .thread_id {float: right;position: relative;top: 15px;color: #727272;}
 .create-thread {color: #868686;margin: 0;font-weight: bold;}
@@ -158,17 +158,17 @@ margin: 0;
 padding: 13px;
 }
 .thread-end{
-	border-top: 1px solid #D9E0E6;
-	padding: 9px 20px;
-	color: #aaa;
+    border-top: 1px solid #D9E0E6;
+    padding: 9px 20px;
+    color: #aaa;
 }
 .thread-end .ii-btn {
 margin-top: -4px;
 }
 .floor-number {
-	float: right;
-	font-size: 22px;
-	color: #999;
+    float: right;
+    font-size: 22px;
+    color: #999;
 }
 .thread-time {color: #bebdbd;font-size: 12px;}
 .media-title {margin:0;font-size: 20px;color:#434a54}

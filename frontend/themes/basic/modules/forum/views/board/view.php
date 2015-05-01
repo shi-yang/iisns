@@ -15,7 +15,7 @@ endif;
 
 <?php if (!$model->isOneBoard()): ?>
 <div class="col-xs-12 col-sm-12 col-md-10">
-	<div class="widget-container">
+    <div class="widget-container">
 <?php endif; ?>
 
     <?= $this->render('/thread/_form', [

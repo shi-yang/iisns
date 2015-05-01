@@ -18,7 +18,7 @@ $domain = Yii::$app->request->hostInfo;
     <?= $form->field($model, 'forum_desc')->textarea(['rows' => 6, 'autocomplete'=>'off', 'maxlength' => 128]) ?>
 
     <?= $form->field($model, 'forum_url', [
-    	'template' => "<div class=\"input-group\"><span class=\"input-group-addon\">{$domain}/forum/</span>{input}</div>{error}",
+        'template' => "<div class=\"input-group\"><span class=\"input-group-addon\">{$domain}/forum/</span>{input}</div>{error}",
     ])->textInput(['maxlength' => 32, 'autocomplete'=>'off']) ?>
 
     <div class="form-group">

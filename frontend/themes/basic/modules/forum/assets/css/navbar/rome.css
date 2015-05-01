@@ -1,13 +1,13 @@
 .header {
-	-webkit-box-shadow: 0 2px 1px -1px rgba(0,0,0,0.07);
-	-moz-box-shadow: 0 2px 1px -1px rgba(0,0,0,0.07);
-	box-shadow: 0 2px 1px -1px rgba(0,0,0,0.07);
-	border-bottom: 1px solid #ccc;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	width: 100%;
-	z-index: 1000;
+    -webkit-box-shadow: 0 2px 1px -1px rgba(0,0,0,0.07);
+    -moz-box-shadow: 0 2px 1px -1px rgba(0,0,0,0.07);
+    box-shadow: 0 2px 1px -1px rgba(0,0,0,0.07);
+    border-bottom: 1px solid #ccc;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    z-index: 1000;
 }
 .ii-nav {
 width: 100%;
@@ -28,7 +28,7 @@ color: #fff;
     color: #fff;
 }
 #title, #logo, #isfollow {
-	float: left !important;
+    float: left !important;
 }
 .profile {
 margin-top: 16px;
@@ -36,7 +36,7 @@ width: 208px;
 height: 105px;
 }
 .profile .info {
-	position: relative;
+    position: relative;
 float: right;
 height: 42px;
 width: 264px;
@@ -48,25 +48,25 @@ width:56px;
 border: 1px solid #c4c4c4;
 }
 .profile .btn-group {
-	width: 100%;
+    width: 100%;
 }
 .profile .btn-group .btn {
-	background-color: #fff;
-	overflow: hidden;
+    background-color: #fff;
+    overflow: hidden;
 text-overflow: ellipsis;
 white-space: nowrap;
 }
 #logo img{
-	width: 110px;
-	height: 110px;
-	padding: 3px;
+    width: 110px;
+    height: 110px;
+    padding: 3px;
 }
 #isfollow {
 width: 105px;
 margin-top:46px
 }
 #logo {
-	margin-top:12px
+    margin-top:12px
 }
 #profile_nav {float: right; margin-top: 15px;}
 #header .pl { margin-top: 23px;float: left;}
@@ -74,7 +74,7 @@ margin-top:46px
     font-size: 42px;
     text-decoration: none;
     margin-left: 10px;
-	font-weight:bold;
+    font-weight:bold;
 }
 .nav-font{font-size: 18px;color: #ff6f3d;}
 .edit-font{font-size: 30px}

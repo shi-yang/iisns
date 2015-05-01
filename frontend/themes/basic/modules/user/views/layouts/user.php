@@ -123,21 +123,21 @@ AppAsset::register($this);
                 <div class="search-block">
                     <div class="input-group">
                         <input type="text" class="form-control input-sm" placeholder="search here...">
-					<span class="input-group-btn">
-						<button class="btn btn-default btn-sm" type="button"><i class="glyphicon glyphicon-search"></i></button>
-					</span>
+                    <span class="input-group-btn">
+                        <button class="btn btn-default btn-sm" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                    </span>
                     </div><!-- /input-group -->
                 </div><!-- /search-block -->
                 <div class="main-menu">
                     <ul>
                         <li>
                             <a href="<?= Url::toRoute(['/user/dashboard']) ?>">
-							<span class="menu-icon">
-								<i class="glyphicon glyphicon-home"></i>
-							</span>
-							<span class="text">
-								<?= Yii::t('app', 'Home') ?>
-							</span>
+                            <span class="menu-icon">
+                                <i class="glyphicon glyphicon-home"></i>
+                            </span>
+                            <span class="text">
+                                <?= Yii::t('app', 'Home') ?>
+                            </span>
                                 <span class="menu-hover"></span>
                             </a>
                         </li>
