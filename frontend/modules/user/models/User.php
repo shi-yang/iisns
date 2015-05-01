@@ -150,6 +150,11 @@ class User extends \common\models\User
         return $this->hasOne(Profile::className(), ['user_id' => 'id']);
     }
 
+    public function getUserData()
+    {
+        return $this->hasOne(UserData::className(), ['user_id' => 'id']);
+    }
+
     /**
      * 获取论坛的评论
      */

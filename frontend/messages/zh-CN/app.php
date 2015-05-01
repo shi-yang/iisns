@@ -23,6 +23,7 @@ return [
 	'Upload' => '上传',
 	'Delete' => '删除',
 	'Favor' => '收藏',
+	'Timeline' => '时光轴',
 
 	'Username or Email' => '用户名/邮箱',
 	'Remember Me' => '保持登录状态',
@@ -58,6 +59,7 @@ return [
 	'eg: My name?' => '例如：我的名字？',
 	'eg: Jack' => '例如：张三',
 	'Compose' => '写信',
+	'Message' => '发消息',
 	'Sent' => '已发送',
 	'Comment' => '评论',
 
@@ -73,10 +75,13 @@ return [
 	'Female' => '女',
 	'Birthdate' => '出生日期',
 	'Signature' => '个性签名',
-	'Position' => '位置',
+	'Position' => '地址',
 	'Description' => '描述',
 	'User Avatar' => '用户头像',
 	'Personal Center' => '个人中心',
+	'Follower' => '粉丝',
+	'Follow' => '关注',
+	'Following' => '关注',
 
 	'Forum' => '论坛',
 	'Forums' => '论坛',

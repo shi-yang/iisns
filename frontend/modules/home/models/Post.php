@@ -82,45 +82,16 @@ class Post extends \yii\db\ActiveRecord
 
     public function getUser()
     {
-        $connection = Yii::$app->db;
-        $command = $connection->createCommand("SELECT avatar, email, username FROM {{%user}} WHERE id={$this->user_id}");
-        $user = $command->queryOne();
-        return $user;
+        return Yii::$app->db->createCommand("SELECT avatar, email, username FROM {{%user}} WHERE id={$this->user_id}")->queryOne();
     }
 
     public function getUserProfile()
     {
-        $connection = Yii::$app->db;
-        $command = $connection->createCommand("SELECT * FROM {{%user_profile}} WHERE user_id={$this->user_id}");
-        return $command->queryOne();
+        return Yii::$app->db->createCommand("SELECT * FROM {{%user_profile}} WHERE user_id={$this->user_id}")->queryOne();
     }
 
-    public function getMainContent()
+    public function getUserData()
     {
-/*        $content = mb_substr(strip_tags($this->content), 0, 200,"utf-8");
-        $pattern="/<[img|IMG].*?src=\"([^^]*?)\".*?>/"; 
-        preg_match_all($pattern,$this->content, $match);
-        if (!empty($match[1][0])) {
-            echo '<div class="pull-left">';
-            echo \yii\helpers\Html::img($match[1][0], ['style'=>'width:161px;height:127px;']);
-            echo '</div>';
-            echo '<div class="pull-left" style="width: 440px;padding-left: 11px;">';
-            echo $content;
-            echo '</div>';
-        } else {
-            echo $content;
-        }*/
-    }
-
-    public function getImgView()
-    {
- /*       $pattern="/<[img|IMG].*?src=\"([^^]*?)\".*?>/"; 
-        preg_match_all($pattern,$this->content, $match);
-        if (!empty($match[1][0])) {
-            echo '<div class="pull-left">';
-            echo \yii\helpers\Html::img($match[1][0]);
-            echo '</div>';
-        }
-        return;*/
+        return Yii::$app->db->createCommand("SELECT * FROM {{%user_data}} WHERE user_id={$this->user_id}")->queryOne();
     }
 }

@@ -33,53 +33,53 @@ ProfileAsset::register($this);
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
-        <div class="home-header">
-          <div>
-            <img src="<?= Yii::getAlias('@avatar') . $this->params['user']['avatar'] ?>" alt="User Avatar" class="img-thumbnail home-img">
-            <h1 class="home-title"><?= Html::a(Html::encode($this->params['user']['username']), ['/user/view', 'id' => Html::encode($this->params['user']['username'])]) ?></h1>
-          </div>
-          <div class="clearfix"></div>
-          <p class="lead home-description"><?= Html::encode($this->params['profile']['signature']) ?></p>
-        </div>
-        <div class="clearfix"></div>
-        <div class="row home-content">
-          <div class="col-sm-9 home-main">
-            <?= $content ?>
-          </div><!-- /.home-main -->
-          <div class="col-sm-3 home-sidebar hidden-xs">
-            <?php if(!empty($this->params['profile']['description'])): ?>
-              <div class="panel">
-                <div class="panel-heading">About me</div>
-                <div class="panel-body">
-                  <?= Html::encode($this->params['profile']['description']) ?>
-                </div>
-              </div>
-            <?php endif ?>
-            <div class="panel">
-              <div class="panel-heading">
-                <span class="glyphicon glyphicon-tags"></span> <?= Yii::t('app', 'Tags') ?>
-              </div>
+        <div class="row">
+          <div class="col-sm-3">
+            <img src="<?= Yii::getAlias('@avatar') . $this->params['user']['avatar'] ?>" class="thumbnail img-responsive" alt="user-avatar">
+            <div class="panel m-top-md">
               <div class="panel-body">
-                <?php
-                  $query = new \justinvoelker\tagging\TaggingQuery;
-                  $tags = $query
-                      ->select('tags')
-                      ->from('{{%home_post}}')
-                      ->where('user_id=:user_id', [':user_id' => $this->params['profile']['user_id']])
-                      ->getTags();
-                  echo \justinvoelker\tagging\TaggingWidget::widget([
-                      'items' => $tags,
-                      'liOptions' => ['class' => 'label label-success tags'],
-                  ]);
-                ?>
+                <div class="row">
+                  <div class="col-xs-4 text-center">
+                    <span class="block font-14"><?= $this->params['userData']['following_count'] ?></span><br>
+                    <small class="text-muted"><?= Yii::t('app', 'Following') ?></small>
+                  </div><!-- /.col -->
+                  <div class="col-xs-4 text-center">
+                    <span class="block font-14"><?= $this->params['userData']['follower_count'] ?></span><br>
+                    <small class="text-muted"><?= Yii::t('app', 'Follower') ?></small>
+                  </div><!-- /.col -->
+                  <div class="col-xs-4 text-center">
+                    <span class="block font-14"><?= $this->params['userData']['post_count'] ?></span><br>
+                    <small class="text-muted"><?= Yii::t('app', 'Posts') ?></small>
+                  </div><!-- /.col -->
+                </div><!-- /.row -->
               </div>
             </div>
-            <!-- /.pancel -->
-          </div><!-- /.home-sidebar -->
-        </div><!-- /.row -->
+            <?php if (!empty($this->params['profile']['description'])): ?>
+              <h5 class="subtitle">About me</h5>
+              <p class="mb30"><?= Html::encode($this->params['profile']['description']) ?></p>
+            <?php endif ?>
+          </div>
+          <div class="col-sm-9">
+            <div class="profile-header">
+              <h2 class="profile-name"><?= Html::a(Html::encode($this->params['user']['username']), ['/user/view', 'id' => Html::encode($this->params['user']['username'])]) ?></h2>
+              <div class="profile-location"><i class="glyphicon glyphicon-map-marker"></i> <?= Html::encode($this->params['profile']['position']) ?></div>
+              <div class="profile-signature"><i class="glyphicon glyphicon-pushpin"></i> <?= Html::encode($this->params['profile']['signature']) ?></div>
+              <div class="mb20"></div>
+              <button class="btn btn-success mr5"><i class="glyphicon glyphicon-plus"></i> <?= Yii::t('app', 'Follow') ?></button>
+              <button class="btn btn-white"><i class="glyphicon glyphicon-envelope"></i> <?= Yii::t('app', 'Message') ?></button>
+            </div>
+            <ul class="nav nav-tabs nav-justified nav-profile">
+              <li class="active"><a href="#timeline" data-toggle="tab"><strong><i class="glyphicon glyphicon-list-alt"></i> <?= Yii::t('app', 'Posts') ?></strong></a></li>
+              <li class=""><a href="#photo" data-toggle="tab"><strong><i class="glyphicon glyphicon-picture"></i> <?= Yii::t('app', 'Photo') ?></strong></a></li>
+<!--               <li class=""><a href="#music" data-toggle="tab"><strong><i class="glyphicon glyphicon-music"></i> Music</strong></a></li>
+              <li class=""><a href="#video" data-toggle="tab"><strong><i class="glyphicon glyphicon-facetime-video"></i> Video</strong></a></li> -->
+              <li class=""><a href="#profile" data-toggle="tab"><strong><i class="glyphicon glyphicon-user"></i> <?= Yii::t('app', 'Profile') ?></strong></a></li>
+            </ul>
+            <?= $content ?>
+          </div>
+        </div>
       </div>
     </div>
-
     <footer class="footer">
         <div class="container">
         <p class="pull-left">&copy; iiSNS <?= date('Y') ?>
@@ -90,7 +90,6 @@ ProfileAsset::register($this);
         <p class="pull-right"><?= Yii::powered() ?></p>
         </div>
     </footer>
-
     <?php $this->endBody() ?>
 </body>
 </html>

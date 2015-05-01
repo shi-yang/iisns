@@ -9,6 +9,7 @@ use yii\helpers\HtmlPurifier;
 $this->title = $model->title . '_' . $model->user['username'];
 $this->params['user'] = $model->user;
 $this->params['profile'] = $model->userProfile;
+$this->params['userData'] = $model->userData;
 ?>
 <div class="post-view">
 
