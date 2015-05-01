@@ -52,6 +52,9 @@ return [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
         ],
+        'userData' => [
+            'class' => 'app\modules\user\models\UserData',
+        ],
         'view' => [
             'theme' => [
                 'pathMap' => [

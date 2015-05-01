@@ -11,11 +11,11 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Notificati
             <a id="write-inbox" href="<?= Url::toRoute(['/user/message/create']) ?>" class="btn btn-success btn-block uppercase"><?= Yii::t('app', 'Compose') ?></a>
         </div>
         <ul id="inbox-nav" class="nav nav-pills nav-stacked">
-            <li><a href="<?= Url::toRoute(['/user/message/inbox']) ?>"><i class="glyphicon glyphicon-inbox"></i> <?= Yii::t('app', 'Inbox') ?> <span class="label label-danger"><?= $this->params['count']['inbox'] ?></span></a>
+            <li><a href="<?= Url::toRoute(['/user/message/inbox']) ?>"><i class="glyphicon glyphicon-inbox"></i> <?= Yii::t('app', 'Inbox') ?> <span class="label label-danger"><?= $this->params['count']['unread_message_count'] ?></span></a>
             </li>
             <li><a href="<?= Url::toRoute(['/user/message/outbox']) ?>"><i class="glyphicon glyphicon-send"></i> <?= Yii::t('app', 'Sent') ?> <span class="label label-success"><?= $this->params['count']['outbox'] ?></span></a>
             </li>
-            <li><a href="<?= Url::toRoute(['/user/message/comment']) ?>"><i class="glyphicon glyphicon-comment"></i> <?= Yii::t('app', 'Comment') ?> <span class="label label-success"><?= $this->params['count']['comment'] ?></span></a>
+            <li><a href="<?= Url::toRoute(['/user/message/comment']) ?>"><i class="glyphicon glyphicon-comment"></i> <?= Yii::t('app', 'Comment') ?> <span class="label label-success"><?= $this->params['count']['unread_comment_count'] ?></span></a>
             </li>
         </ul>
     </div>

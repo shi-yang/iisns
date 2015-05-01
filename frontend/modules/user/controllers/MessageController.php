@@ -44,7 +44,7 @@ class MessageController extends FrontController
 
     public function actionInbox()
     {
-        $user = $this->findModel();
+        $user = $this->findUserModel();
 
         $query = new Query;
         $query->select('*')
@@ -62,7 +62,8 @@ class MessageController extends FrontController
 
     public function actionComment()
     {
-        $user = $this->findModel();
+        $user = $this->findUserModel();
+        Yii::$app->userData->updateKey('unread_comment_count', $user->id, 0, false);
         return $this->render('comment', [
             'user' => $user,
             'count' => $this->getMessageCount()
@@ -71,7 +72,7 @@ class MessageController extends FrontController
 
     public function actionOutbox()
     {
-        $user = $this->findModel();
+        $user = $this->findUserModel();
         $dataProvider = new SqlDataProvider([
             'sql' => 'SELECT * FROM {{%user_message}} WHERE sendfrom=:sendfrom',
             'params' => [':sendfrom' => $user->id],
@@ -92,10 +93,11 @@ class MessageController extends FrontController
      */
     public function actionView($id)
     {
-        $model = Message::findOne($id);
+        $model = $this->findModel($id);
         if (!$model->read_indicator) {
             $model->read_indicator = 1;
             $model->update();
+            Yii::$app->userData->updateKey('unread_message_count', Yii::$app->user->id, -1);
         }
         
         return $this->render('view', [
@@ -117,6 +119,7 @@ class MessageController extends FrontController
             if (!empty($model->userid)) {
                 $model->sendto = $model->userid;
                 if ($model->save()) {
+                    Yii::$app->userData->updateKey('unread_message_count', $model->sendto, 1);
                     Yii::$app->getSession()->setFlash('success', 'Sent successfully');
                 }
             } else {
@@ -163,25 +166,34 @@ class MessageController extends FrontController
     }
 
     /**
-     * Finds the User model based on its primary key value.
-     * @return User the loaded model
+     * Finds the Message model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param string $id
+     * @return Message the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel()
+    protected function findModel($id)
     {
-        $id = Yii::$app->user->identity->id;
-        return User::findOne($id);
+        if (($model = Message::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    protected function findUserModel()
+    {
+        return User::findOne(Yii::$app->user->id);
     }
 
     protected function getMessageCount()
     {
-        $count['inbox'] = Yii::$app->db
-            ->createCommand("SELECT count(*) FROM {{%user_message}} WHERE inbox=1 and sendto=". Yii::$app->user->id)
-            ->queryScalar();
+        $userId = Yii::$app->user->id;
+        $count = Yii::$app->db
+            ->createCommand("SELECT unread_comment_count, unread_message_count FROM {{%user_data}} WHERE user_id = " . $userId)
+            ->queryOne();
         $count['outbox'] = Yii::$app->db
-            ->createCommand("SELECT count(*) FROM {{%user_message}} WHERE outbox=1 and sendfrom=". Yii::$app->user->id)
-            ->queryScalar();
-        $count['comment'] = Yii::$app->db
-            ->createCommand("SELECT unread_comment_count FROM {{%user_data}} WHERE user_id=". Yii::$app->user->id)
+            ->createCommand("SELECT count(*) FROM {{%user_message}} WHERE outbox=1 and sendfrom=" . $userId)
             ->queryScalar();
         return $count;
     }

@@ -98,8 +98,10 @@ class PostController extends FrontController
             $tags = trim($_POST['Post']['tags']);    	                $explodeTags = array_unique(explode(',', str_replace(array (' ' , '，' ), array('',','), $tags)));    	        	                $explodeTags = array_slice($explodeTags, 0, 10);  
             $model->tags = implode(',',$explodeTags);
             
-            if ($model->save())
+            if ($model->save()) {
+                Yii::$app->userData->updateKey('post_count', Yii::$app->user->id);
                 return $this->redirect(['/user/dashboard']);
+            }
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -139,11 +141,12 @@ class PostController extends FrontController
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
-        if ($model->user_id !== Yii::$app->user->id) {
-            throw new ForbiddenHttpException('You are not allowed to perform this action.');
-        } else {
+        if ($model->user_id === Yii::$app->user->id) {
             $model->delete();
+            Yii::$app->userData->updateKey('post_count', Yii::$app->user->id);
             Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Delete successfully.'));
+        } else {
+            throw new ForbiddenHttpException('You are not allowed to perform this action.');
         }
 
         return $this->redirect(['index']);

@@ -69,7 +69,7 @@ class ThreadController extends FrontController
             $newPost->thread_id = $model->id;
             if ($newPost->save()){
                 if ($model->user_id !== Yii::$app->user->id) {
-                    Yii::$app->db->createCommand("UPDATE {{%user_data}} SET unread_comment_count=unread_comment_count+1 WHERE user_id=".$model->user_id)->execute();
+                    Yii::$app->userData->updateKey('unread_comment_count', $model->user_id);
                 }
                 return $this->redirect(['view', 'id' => $model->id]);
             }

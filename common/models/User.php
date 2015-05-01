@@ -200,13 +200,10 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function getUnReadMessageCount()
     {
-        $message_count = Yii::$app->db
-            ->createCommand("SELECT count(*) as num FROM {{%user_message}} WHERE read_indicator = 0 and sendto = " . $this->id)
-            ->queryScalar();
-        $comment_count = Yii::$app->db
-            ->createCommand("SELECT unread_comment_count as num FROM {{%user_data}} WHERE user_id = " . $this->id)
-            ->queryScalar();
-        $count = $message_count + $comment_count;
+        $count = Yii::$app->db
+            ->createCommand("SELECT unread_comment_count, unread_message_count FROM {{%user_data}} WHERE user_id = " . $this->id)
+            ->queryOne();
+        $count = $count['unread_comment_count'] + $count['unread_message_count'];
         return ($count != 0) ? $count : '' ;
     }
 }
