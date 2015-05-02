@@ -6,37 +6,37 @@ use yii\helpers\Url;
 
 <div class="social-wrapper row">
     <div id="social-container">
-        <div class="col-xs-12 col-sm-8 col-md-8">
-            <!-- Share Form -->
-            <div class="widget-container share-widget fluid-height clearfix">
-                <div class="clearfix">
-                    <div class="col-xs-3 share-options">
-                        <a href="<?= Url::toRoute(['/home/post']) ?>">
-                            <i class="glyphicon glyphicon-pencil"></i>
-                            <p><?= Yii::t('app', 'Text') ?></p>
-                        </a>
-                    </div>
-                    <div class="col-xs-3 share-options">
-                        <a href="<?= Url::toRoute(['/home/album']) ?>">
-                            <i class="glyphicon glyphicon-picture"></i>
-                            <p><?= Yii::t('app', 'Photo') ?></p>
-                        </a>
-                    </div>
-                    <div class="col-xs-3 share-options">
-                        <a href="<?= Url::toRoute(['/site/develop']) ?>">
-                            <i class="glyphicon glyphicon-music"></i>
-                            <p><?= Yii::t('app', 'Music') ?></p>
-                        </a>
-                    </div>
-                    <div class="col-xs-3 share-options">
-                        <a href="<?= Url::toRoute(['/site/develop']) ?>">
-                            <i class="glyphicon glyphicon-facetime-video"></i>
-                            <p><?= Yii::t('app', 'Video') ?></p>
-                        </a>
-                    </div>
+        <div class="row hidden-xs">
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <div class="main-box infographic-box">
+                    <i class="glyphicon glyphicon-list-alt text-primary"></i>
+                    <span class="headline"><?= Yii::t('app', 'Posts') ?></span>
+                    <span class="value">2.562</span>
                 </div>
             </div>
-            <!-- end Share Form -->
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <div class="main-box infographic-box">
+                    <i class="glyphicon glyphicon-user text-success"></i>
+                    <span class="headline"><?= Yii::t('app', 'Following') ?></span>
+                    <span class="value">658</span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <div class="main-box infographic-box">
+                    <i class="glyphicon glyphicon-eye-open text-info"></i>
+                    <span class="headline"><?= Yii::t('app', 'Follower') ?></span>
+                    <span class="value">$12.400</span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <div class="main-box infographic-box">
+                    <i class="glyphicon glyphicon-star text-warning"></i>
+                    <span class="headline"><?= Yii::t('app', 'Favor') ?></span>
+                    <span class="value">0</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-8 col-md-8">
             <?= $content ?>
         </div>
     </div>
