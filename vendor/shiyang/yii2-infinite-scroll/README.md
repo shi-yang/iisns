@@ -87,9 +87,39 @@ echo ListView::widget([
 ```
 
 Or
+
+Controller action:
+```
+function actionIndex()
+{
+    $query = Article::find()->where(['status' => 1]);
+    $countQuery = clone $query;
+    $pages = new Pagination(['totalCount' => $countQuery->count()]);
+    $models = $query->offset($pages->offset)
+        ->limit($pages->limit)
+        ->all();
+    
+    return $this->render('index', [
+        'models' => $models,
+        'pages' => $pages,
+    ]);
+}
+```
+ 
+  View:
+ 
 ```
 use shiyang\infinitescroll\InfiniteScrollPager;
 
+<div id="content">
+<?php 
+foreach ($models as $model) {
+    // display $model here
+}
+?>
+</div>
+ 
+// display pagination
 echo InfiniteScrollPager::widget([
    	'pagination' => $pages,
    	'widgetId' => '#content',

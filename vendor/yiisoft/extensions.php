@@ -30,15 +30,6 @@ return array (
       '@shiyang/webuploader' => $vendorDir . '/shiyang/yii2-webuploader',
     ),
   ),
-  'philippfrenzel/yii2masonry' => 
-  array (
-    'name' => 'philippfrenzel/yii2masonry',
-    'version' => '1.1.3.0',
-    'alias' => 
-    array (
-      '@yii2masonry' => $vendorDir . '/philippfrenzel/yii2masonry',
-    ),
-  ),
   'justinvoelker/yii2-tagging' => 
   array (
     'name' => 'justinvoelker/yii2-tagging',
@@ -114,10 +105,19 @@ return array (
   'shiyang/yii2-infinite-scroll' => 
   array (
     'name' => 'shiyang/yii2-infinite-scroll',
-    'version' => '1.1.0.0',
+    'version' => '1.2.0.0',
     'alias' => 
     array (
       '@shiyang/infinitescroll' => $vendorDir . '/shiyang/yii2-infinite-scroll',
+    ),
+  ),
+  'shiyang/yii2-masonry' => 
+  array (
+    'name' => 'shiyang/yii2-masonry',
+    'version' => '1.0.1.0',
+    'alias' => 
+    array (
+      '@shiyang/masonry' => $vendorDir . '/shiyang/yii2-masonry',
     ),
   ),
 );

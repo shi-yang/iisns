@@ -1,0 +1,24 @@
+{
+    "name": "shiyang/yii2-masonry",
+    "description": "Masonry Yii2 Extension width infinitescroll",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","masonry","infinitescroll"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Shiyang",
+            "email": "dr@shiyang.me"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*",
+        "shiyang/yii2-infinite-scroll": "*",
+	"bower-asset/masonry" : "^3.2",
+	"bower-asset/imagesloaded" : "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "shiyang\\masonry\\": ""
+        }
+    }
+}
