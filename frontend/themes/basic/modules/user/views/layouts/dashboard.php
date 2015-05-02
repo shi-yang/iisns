@@ -2,8 +2,6 @@
 use yii\helpers\Url;
 ?>
 <?php $this->beginContent('@app/modules/user/views/layouts/user.php'); ?>
-
-
 <div class="social-wrapper row">
     <div id="social-container">
         <div class="row hidden-xs">
@@ -16,14 +14,14 @@ use yii\helpers\Url;
             </div>
             <div class="col-lg-3 col-sm-6 col-xs-12">
                 <div class="main-box infographic-box">
-                    <i class="glyphicon glyphicon-user text-success"></i>
+                    <i class="glyphicon glyphicon-eye-open text-success"></i>
                     <span class="headline"><?= Yii::t('app', 'Following') ?></span>
                     <span class="value">658</span>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6 col-xs-12">
                 <div class="main-box infographic-box">
-                    <i class="glyphicon glyphicon-eye-open text-info"></i>
+                    <i class="glyphicon glyphicon-user text-info"></i>
                     <span class="headline"><?= Yii::t('app', 'Follower') ?></span>
                     <span class="value">$12.400</span>
                 </div>
@@ -41,6 +39,4 @@ use yii\helpers\Url;
         </div>
     </div>
 </div>
-
-
 <?php $this->endContent(); ?>
