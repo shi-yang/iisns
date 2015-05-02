@@ -33,10 +33,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'forum_desc:ntext',
             'forum_url:url',
             'user_id',
-            'create_time:datetime',
+            'created_at:datetime',
             'forum_icon',
-            'theme',
-            'layout',
         ],
     ]) ?>
 

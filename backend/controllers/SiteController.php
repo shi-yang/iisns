@@ -26,7 +26,7 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index', 'phpinfo'],
+                        'actions' => ['logout', 'index', 'phpinfo', 'cache'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -99,5 +99,19 @@ class SiteController extends Controller
         Yii::$app->user->logout();
 
         return $this->goHome();
+    }
+
+    public function actionCache($action = null)
+    {
+        switch ($action) {
+            case 'clearall':
+                Yii::$app->cache->flush();
+                break;
+            
+            default:
+                
+                break;
+        }
+        return $this->render('cache');
     }
 }

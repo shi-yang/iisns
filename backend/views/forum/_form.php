@@ -20,13 +20,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'user_id')->textInput() ?>
 
-    <?= $form->field($model, 'create_time')->textInput() ?>
+    <?= $form->field($model, 'created_at')->textInput() ?>
 
     <?= $form->field($model, 'forum_icon')->textInput(['maxlength' => 26]) ?>
-
-    <?= $form->field($model, 'theme')->textInput(['maxlength' => 9]) ?>
-
-    <?= $form->field($model, 'layout')->textInput(['maxlength' => 9]) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

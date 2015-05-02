@@ -25,14 +25,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'user_id') ?>
 
-    <?php // echo $form->field($model, 'create_time') ?>
-
-    <?php // echo $form->field($model, 'forum_icon') ?>
-
-    <?php // echo $form->field($model, 'theme') ?>
-
-    <?php // echo $form->field($model, 'layout') ?>
-
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>

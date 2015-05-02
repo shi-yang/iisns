@@ -16,9 +16,6 @@ return [
         'setting' => [
             'class' => 'shiyang\setting\Module',
             'controllerNamespace' => 'shiyang\setting\controllers'
-        ],
-        'install' => [
-            'class' => 'backend\modules\install\Module',
         ]
     ],
     'components' => [

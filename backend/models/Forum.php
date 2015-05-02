@@ -12,10 +12,8 @@ use Yii;
  * @property string $forum_desc
  * @property string $forum_url
  * @property integer $user_id
- * @property integer $create_time
+ * @property integer $created_at
  * @property string $forum_icon
- * @property string $theme
- * @property string $layout
  *
  * @property ForumBoard[] $forumBoards
  */
@@ -35,12 +33,11 @@ class Forum extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['forum_name', 'forum_desc', 'forum_url', 'user_id', 'create_time', 'forum_icon', 'theme', 'layout'], 'required'],
+            [['forum_name', 'forum_desc', 'forum_url', 'user_id', 'created_at', 'forum_icon'], 'required'],
             [['forum_desc'], 'string'],
-            [['user_id', 'create_time'], 'integer'],
+            [['user_id', 'created_at'], 'integer'],
             [['forum_name', 'forum_url'], 'string', 'max' => 32],
             [['forum_icon'], 'string', 'max' => 26],
-            [['theme', 'layout'], 'string', 'max' => 9]
         ];
     }
 
@@ -55,10 +52,8 @@ class Forum extends \yii\db\ActiveRecord
             'forum_desc' => Yii::t('app', 'Forum Desc'),
             'forum_url' => Yii::t('app', 'Forum Url'),
             'user_id' => Yii::t('app', 'User ID'),
-            'create_time' => Yii::t('app', 'Create Time'),
+            'created_at' => Yii::t('app', 'Create Time'),
             'forum_icon' => Yii::t('app', 'Forum Icon'),
-            'theme' => Yii::t('app', 'Theme'),
-            'layout' => Yii::t('app', 'Layout'),
         ];
     }
 

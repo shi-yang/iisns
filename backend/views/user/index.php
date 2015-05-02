@@ -26,20 +26,19 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
+            ['class' => 'yii\grid\ActionColumn'],
             'id',
             'username',
-            'password_hash',
-            'password_reset_token',
-            'auth_key',
+            //'password_hash',
+           //'password_reset_token',
+            //'auth_key',
             // 'role',
-            // 'email:email',
-            // 'status',
-            // 'created_at',
-            // 'updated_at',
-            // 'avatar',
+             'email:email',
+             'status',
+             'created_at:datetime',
+             'updated_at:datetime',
+             'avatar',
 
-            ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 

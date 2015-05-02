@@ -18,8 +18,8 @@ class ForumSearch extends Forum
     public function rules()
     {
         return [
-            [['id', 'user_id', 'create_time'], 'integer'],
-            [['forum_name', 'forum_desc', 'forum_url', 'forum_icon', 'theme', 'layout'], 'safe'],
+            [['id', 'user_id', 'created_at'], 'integer'],
+            [['forum_name', 'forum_desc', 'forum_url', 'forum_icon'], 'safe'],
         ];
     }
 
@@ -58,15 +58,13 @@ class ForumSearch extends Forum
         $query->andFilterWhere([
             'id' => $this->id,
             'user_id' => $this->user_id,
-            'create_time' => $this->create_time,
+            'created_at' => $this->created_at,
         ]);
 
         $query->andFilterWhere(['like', 'forum_name', $this->forum_name])
             ->andFilterWhere(['like', 'forum_desc', $this->forum_desc])
             ->andFilterWhere(['like', 'forum_url', $this->forum_url])
-            ->andFilterWhere(['like', 'forum_icon', $this->forum_icon])
-            ->andFilterWhere(['like', 'theme', $this->theme])
-            ->andFilterWhere(['like', 'layout', $this->layout]);
+            ->andFilterWhere(['like', 'forum_icon', $this->forum_icon]);
 
         return $dataProvider;
     }

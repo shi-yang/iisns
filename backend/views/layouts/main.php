@@ -19,9 +19,6 @@ AppAsset::register($this);
         <?= Html::csrfMetaTags() ?>
         <title><?= Html::encode($this->title) ?></title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <!-- Ionicons -->
-        <link href="//code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" rel="stylesheet" type="text/css" />
-
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -58,7 +55,7 @@ AppAsset::register($this);
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header bg-light-blue">
-                                <img src="../img/avatar3.png" class="img-circle" alt="User Image" />
+                                <img src="" class="img-circle" alt="User Image" />
                                 <p>
                                     Jane Doe - Web Developer
                                     <small>Member since Nov. 2012</small>
@@ -99,7 +96,7 @@ AppAsset::register($this);
                 <!-- Sidebar user panel -->
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="../img/avatar3.png" class="img-circle" alt="User Image" />
+                        <img src="" class="img-circle" alt="User Image" />
                     </div>
                     <div class="pull-left info">
                         <p>Hello, <?= Yii::$app->user->identity->username ?></p>
@@ -120,7 +117,7 @@ AppAsset::register($this);
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu">
                     <li>
-                        <a href="/">
+                        <a href="<?= Url::toRoute('/site/index') ?>">
                             <i class="glyphicon glyphicon-dashboard"></i> <span>Dashboard</span>
                         </a>
                     </li>
@@ -140,6 +137,11 @@ AppAsset::register($this);
                             <li><a href="<?= Url::toRoute('/forum') ?>"><i class="glyphicon glyphicon-menu-right"></i> Forum</a></li>
                             <li><a href="<?= Url::toRoute('/blog-post') ?>"><i class="glyphicon glyphicon-menu-right"></i> Blog</a></li>
                         </ul>
+                    </li>
+                    <li>
+                        <a href="<?= Url::toRoute(['/site/cache']) ?>">
+                            <i class="glyphicon glyphicon-road"></i> <span>Cache</span>
+                        </a>
                     </li>
                     <li>
                         <a href="<?= Url::toRoute(['/site/phpinfo']) ?>">
