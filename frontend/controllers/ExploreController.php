@@ -24,7 +24,7 @@ class ExploreController extends FrontController
         return [
             [
                 'class' => 'yii\filters\PageCache',
-                'only' => ['index', 'forums', 'albums'],
+                'only' => ['index', 'forums', 'photos'],
                 'duration' => 60 * 60,
                 'variations' => [
                     Yii::$app->language,
@@ -68,22 +68,6 @@ class ExploreController extends FrontController
         ]);
     }
 
-    public function actionAlbums()
-    {
-        $query = new Query;
-        $query->select('a.id, a.name, p.path')
-            ->from('{{%home_album}} as a')
-            ->join('LEFT JOIN','{{%home_photo}} as p', 'p.album_id=a.id')
-            ->where('a.status=:type', [':type' => Album::TYPE_PUBLIC])
-            ->orderBy('a.id DESC');
-        $albumResult = Tools::Pagination($query, 18);
-
-        return $this->render('albums', [
-            'albums' => $albumResult['result'],
-            'pages' => $albumResult['pages'],
-        ]);
-    }
-
     public function actionPhotos()
     {
         $query = new Query;
@@ -92,7 +76,7 @@ class ExploreController extends FrontController
             ->join('LEFT JOIN','{{%home_photo}} as p', 'p.album_id=a.id')
             ->where('a.status=:type', [':type' => Album::TYPE_PUBLIC])
             ->orderBy('a.id DESC');
-        $albumResult = Tools::Pagination($query, 18);
+        $albumResult = Tools::Pagination($query, 25);
 
         return $this->render('photos', [
             'albums' => $albumResult['result'],

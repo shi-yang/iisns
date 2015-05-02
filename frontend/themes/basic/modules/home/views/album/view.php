@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use shiyang\masonry\Masonry;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\home\models\Album */
@@ -81,12 +82,13 @@ margin-bottom: 20px;
             <span class="glyphicon glyphicon-plus"></span> <?= Yii::t('app', 'Upload a new photo') ?>
         </a>
         <div class="img-all row">
-            <?php \yii2masonry\yii2masonry::begin([
-                'clientOptions' => [
-                    'itemSelector' => '.img-item'
-                ]
+            <?php Masonry::begin([
+                'options' => [
+                  'id' => 'photos'
+                ],
+                'pagination' => $model->photos['pages']
             ]); ?>
-            <?php foreach ($model->photos as $photo): ?>
+            <?php foreach ($model->photos['photos'] as $photo): ?>
                 <div class="img-item col-md-3">
                     <a class="img-edit" href="<?= Url::toRoute(['/home/photo/delete', 'id' => $photo['id']]) ?>" data-confirm=<?= Yii::t('app', 'Are you sure to delete it?') ?> data-method="photo"><span class="glyphicon glyphicon-remove"></span></a>
                     <div class="img-main">
@@ -97,7 +99,7 @@ margin-bottom: 20px;
                     </div>
                 </div>
             <?php endforeach ?>
-            <?php \yii2masonry\yii2masonry::end(); ?>
+            <?php Masonry::end(); ?>
         </div>
     <?php endif ?>
 </div>

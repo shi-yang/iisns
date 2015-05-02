@@ -3,6 +3,8 @@
 namespace app\modules\home\models;
 
 use Yii;
+use yii\db\Query;
+use app\components\Tools;
 
 /**
  * This is the model class for table "{{%home_album}}".
@@ -105,9 +107,15 @@ class Album extends \yii\db\ActiveRecord
 
     public function getPhotos()
     {
-        return Yii::$app->db
-            ->createCommand("SELECT name, path, id FROM {{%home_photo}} WHERE album_id={$this->id}")
-            ->queryAll();
+        $query = new Query;
+        $query->select('id, name, path')
+            ->from('{{%home_photo}}')
+            ->where('album_id=:id', [':id' => $this->id]);
+        $photos = Tools::Pagination($query);
+        return [
+            'photos' => $photos['result'],
+            'pages' => $photos['pages']
+        ];
     }
 
     public function getUser()
