@@ -245,7 +245,11 @@ CREATE TABLE IF NOT EXISTS `pre_user` (
 
 CREATE TABLE IF NOT EXISTS `pre_user_data` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `post_count` int(11) NOT NULL,
+  `following_count` int(11) NOT NULL,
+  `follower_count` int(11) NOT NULL,
   `unread_comment_count` int(11) NOT NULL,
+  `unread_message_count` int(11) NOT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10003 ;
 
