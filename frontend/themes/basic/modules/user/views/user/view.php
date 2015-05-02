@@ -23,7 +23,7 @@ $this->params['userData'] = ArrayHelper::toArray($model->userData);
                 </div>
                 <div class="clearfix"></div>
                 <div class="post-info">
-                    <i class="glyphicon glyphicon-time icon-muted"></i> <?= Tools::formatTime($post->create_time) ?>
+                    <i class="glyphicon glyphicon-time icon-muted"></i> <?= Tools::formatTime($post->created_at) ?>
                 </div>
             </li>
         <?php endforeach; ?>
@@ -83,7 +83,7 @@ $this->params['userData'] = ArrayHelper::toArray($model->userData);
         <div class="form-group">
           <label class="col-sm-2 control-label"><?= Yii::t('app', 'Position') ?></label>
           <div class="col-sm-10">
-            <p class="form-control-static"><?= Html::encode($model->profile->position) ?></p>
+            <p class="form-control-static"><?= Html::encode($model->profile->address) ?></p>
           </div>
         </div>
       </div>

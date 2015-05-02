@@ -39,7 +39,7 @@ $this->params['forum'] = $model->toArray;
                       <?php if ($broadcast['thread_id']): ?>
                         <span class="glyphicon glyphicon-list"></span> <?php //echo Html::encode(Broadcast::getBlockName($broadcast['thread_id'])); ?> | 
                       <?php endif; ?>
-                      <span class="glyphicon glyphicon-time"></span> <?= \app\components\Tools::formatTime($broadcast['create_time']) ?>
+                      <span class="glyphicon glyphicon-time"></span> <?= \app\components\Tools::formatTime($broadcast['created_at']) ?>
                     </span>
                     <div class="media-content">
                         <?php echo $broadcast['content']; ?>

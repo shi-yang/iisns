@@ -13,7 +13,7 @@ use app\components\Tools;
  * @property integer $id
  * @property string $title
  * @property string $content
- * @property integer $create_time
+ * @property integer $created_at
  * @property integer $user_id
  * @property integer $board_id
  * @property integer $is_broadcast
@@ -36,7 +36,7 @@ class Thread extends \yii\db\ActiveRecord
         return [
             [['content'], 'required'],
             [['content'], 'string'],
-            [['create_time', 'user_id', 'board_id', 'is_broadcast'], 'integer'],
+            [['created_at', 'user_id', 'board_id', 'is_broadcast'], 'integer'],
             [['title'], 'string']
         ];
     }
@@ -50,7 +50,7 @@ class Thread extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'title' => Yii::t('app', 'Title'),
             'content' => Yii::t('app', 'Content'),
-            'create_time' => Yii::t('app', 'Create Time'),
+            'created_at' => Yii::t('app', 'Create Time'),
             'user_id' => Yii::t('app', 'User ID'),
             'board_id' => Yii::t('app', 'Block ID'),
         ];
@@ -65,7 +65,7 @@ class Thread extends \yii\db\ActiveRecord
        if (parent::beforeSave($insert)) {
         	if ($this->isNewRecord) {
         	  $this->user_id = Yii::$app->user->identity->id;
-        	  $this->create_time = time();
+        	  $this->created_at = time();
         	}
             return true;
        } else {
@@ -133,11 +133,11 @@ class Thread extends \yii\db\ActiveRecord
     public function getPosts()
     {
         $query = new Query;
-        $query->select('p.id,  p.content, p.create_time, p.user_id, u.username, u.avatar')
+        $query->select('p.id,  p.content, p.created_at, p.user_id, u.username, u.avatar')
             ->from('{{%forum_post}} as p')
             ->join('LEFT JOIN','{{%user}} as u', 'u.id=p.user_id')
             ->where('p.thread_id=:id', [':id' => $this->id])
-            ->orderBy('create_time DESC');
+            ->orderBy('p.created_at DESC');
         $result = Tools::Pagination($query);
         return ['posts' => $result['result'], 'pages' => $result['pages']];
     }

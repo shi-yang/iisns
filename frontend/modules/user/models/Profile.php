@@ -11,7 +11,7 @@ use Yii;
  * @property integer $gender
  * @property string $birthdate
  * @property string $signature
- * @property string $position
+ * @property string $address
  * @property string $description
  *
  * @property User $user
@@ -35,7 +35,7 @@ class Profile extends \yii\db\ActiveRecord
             [['gender',], 'required'],
             [['user_id', 'gender'], 'integer'],
             [['birthdate'], 'safe'],
-            [['position', 'description'], 'string'],
+            [['address', 'description'], 'string'],
             [['signature'], 'string', 'max' => 120]
         ];
     }
@@ -50,7 +50,7 @@ class Profile extends \yii\db\ActiveRecord
             'gender' => Yii::t('app', 'Gender'),
             'birthdate' => Yii::t('app', 'Birthdate'),
             'signature' => Yii::t('app', 'Signature'),
-            'position' => Yii::t('app', 'Position'),
+            'address' => Yii::t('app', 'Position'),
             'description' => Yii::t('app', 'Description'),
         ];
     }

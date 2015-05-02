@@ -39,7 +39,7 @@ $this->registerCssFile(Yii::getAlias('@web').'/css/forum/css/forum.css');
                 <?php 
                     if ($this->beginCache('explore-album', ['duration' => 3600])) {
                         
-                        echo $this->render('_album', ['albums' => $albums]);
+                        //echo $this->render('_album', ['albums' => $albums]);
                         $this->endCache();
                     }
                 ?>

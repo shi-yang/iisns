@@ -18,7 +18,7 @@ class ThreadSearch extends Thread
     public function rules()
     {
         return [
-            [['id', 'create_time', 'user_id', 'block_id'], 'integer'],
+            [['id', 'created_at', 'user_id', 'block_id'], 'integer'],
             [['title', 'content'], 'safe'],
         ];
     }
@@ -53,7 +53,7 @@ class ThreadSearch extends Thread
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'create_time' => $this->create_time,
+            'created_at' => $this->created_at,
             'user_id' => $this->user_id,
             'block_id' => $this->block_id,
         ]);

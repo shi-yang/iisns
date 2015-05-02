@@ -9,7 +9,7 @@ use Yii;
  *
  * @property integer $id
  * @property string $content
- * @property integer $create_time
+ * @property integer $created_at
  * @property string $author
  * @property string $email
  * @property integer $post_id
@@ -31,9 +31,9 @@ class Comment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['content', 'create_time', 'author', 'email', 'post_id', 'user_id'], 'required'],
+            [['content', 'created_at', 'author', 'email', 'post_id', 'user_id'], 'required'],
             [['content'], 'string'],
-            [['create_time', 'post_id', 'user_id'], 'integer'],
+            [['created_at', 'post_id', 'user_id'], 'integer'],
             [['author', 'email'], 'string', 'max' => 128]
         ];
     }
@@ -46,7 +46,7 @@ class Comment extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'content' => Yii::t('app', 'Content'),
-            'create_time' => Yii::t('app', 'Create Time'),
+            'created_at' => Yii::t('app', 'Create Time'),
             'author' => Yii::t('app', 'Author'),
             'email' => Yii::t('app', 'Email'),
             'post_id' => Yii::t('app', 'Post ID'),

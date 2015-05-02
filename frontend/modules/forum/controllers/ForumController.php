@@ -229,8 +229,8 @@ class ForumController extends FrontController
             $newThread->board_id = $id;
             $newThread->save();
             Yii::$app->db->createCommand()->update('{{%forum_board}}', [
-                'update_time' => time(),
-                'update_user' => Yii::$app->user->id
+                'updated_at' => time(),
+                'updated_by' => Yii::$app->user->id
             ], 'id=:id', [':id' => $id])->execute();
             $this->refresh();
         }

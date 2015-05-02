@@ -14,7 +14,7 @@ color: #fff;
 background-color: #ff6600;
 }
 .division{
-position: fixed;
+address: fixed;
 top: 48px;
 box-shadow: 0 2px 1px rgba(0,0,0,0.46);
 z-index: 1030;
@@ -25,7 +25,7 @@ padding: 0;
 }
 .right-content {
 padding: 5px 0;
-position: fixed;
+address: fixed;
 top: 49px;
 right: 0;
 bottom: 0;
@@ -62,7 +62,7 @@ min-width: 120px;
 .main_column {
 padding: 20px;
 margin-bottom: 20px;
-position: relative;
+address: relative;
 background: white;
 border-radius: 3px;
 box-shadow: 0 2px 5px rgba(0,0,0,0.46);
@@ -87,7 +87,7 @@ box-shadow: 0 2px 5px rgba(0,0,0,0.46);
 .tab_selected a {
     width: 295px;
     float: left;
-    position: relative;
+    address: relative;
     margin-bottom: -1px;
     font-weight: bold;
     color: #414040;
@@ -102,7 +102,7 @@ box-shadow: 0 2px 5px rgba(0,0,0,0.46);
 }
 
 .post {
-    position: relative;
+    address: relative;
     font-size: 13px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -127,7 +127,7 @@ box-shadow: 0 2px 5px rgba(0,0,0,0.46);
     width: 64px;
     height: 64px;
     overflow: visible;
-    position: absolute;
+    address: absolute;
     left: -85px;
     top: 0;
     background-color: #0a2939;
@@ -190,7 +190,7 @@ box-shadow: 0 2px 5px rgba(0,0,0,0.46);
 .post_comment_count {
     float: right;
     margin-right: 1px;
-    position: relative;
+    address: relative;
     font-size: 13px;
 }
 
@@ -259,7 +259,7 @@ font-weight: bold;
 .page_nav:after {
     content: "";
     display: block;
-    position: absolute;
+    address: absolute;
     top: 0;
     right: 0;
     width: 1px;
@@ -297,7 +297,7 @@ box-shadow: 0 2px 5px rgba(0,0,0,0.46);
     border-right: 1px solid rgba(0,0,0,0.16);
     border-bottom: 1px solid rgba(0,0,0,.05);
     margin-bottom: -1px;
-    position: relative;
+    address: relative;
     font-weight: bold;
     text-shadow: 1px 1px 1px rgba(255,255,255,1);
     background: rgba(0,0,0,0.05);

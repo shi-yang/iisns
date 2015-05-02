@@ -19,7 +19,7 @@ use yii\widgets\ActiveForm;
 
         <?= $form->field($profile, 'signature')->textarea() ?>
 
-        <?= $form->field($profile, 'position')->textarea() ?>
+        <?= $form->field($profile, 'address')->textarea() ?>
 
         <?= $form->field($profile, 'description')->textarea() ?>
 

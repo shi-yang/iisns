@@ -23,7 +23,7 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
                                 <?= Html::encode($post['username']) ?>
                             </a>
                             <p>
-                                <em><?= Tools::formatTime($post['create_time']) ?></em>
+                                <em><?= Tools::formatTime($post['created_at']) ?></em>
                             </p>
                         </div>
                     </div>

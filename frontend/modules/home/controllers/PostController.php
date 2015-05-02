@@ -62,7 +62,7 @@ class PostController extends FrontController
         $query = $query->select('*')
             ->from('{{%home_post}}')
             ->where('user_id=:user_id', [':user_id' => Yii::$app->user->id])
-            ->orderBy('create_time DESC');
+            ->orderBy('created_at DESC');
 
         $pages = Tools::Pagination($query);
         return $this->render('index', [

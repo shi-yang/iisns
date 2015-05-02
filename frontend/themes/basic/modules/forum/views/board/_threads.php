@@ -22,7 +22,7 @@ use shiyang\infinitescroll\InfiniteScrollPager;
                                 <a href="<?= Url::toRoute(['/forum/thread/view', 'id' => $thread['id']]) ?>"><span class="media-title" <?php //if($thread->is_broadcast) echo 'style="color:#ff6f3d"'; ?>><?= Html::encode($thread['title']); ?></span></a>
                             </h4>
                             <?= Html::a(Html::encode($thread['username']), ['/user/view', 'id'=>$thread['username']], ['class'=>'thread-nickname']); ?>
-                            <span class="thread-time">| <?= \app\components\Tools::formatTime($thread['create_time']) ?></span>
+                            <span class="thread-time">| <?= \app\components\Tools::formatTime($thread['created_at']) ?></span>
                         </div>
                         <div class="thread-main">
                             <?= HtmlPurifier::process($thread['content']) ?>

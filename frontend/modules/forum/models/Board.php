@@ -115,11 +115,11 @@ class Board extends \yii\db\ActiveRecord
     public function getThreads()
     {
         $query = new Query;
-        $query->select('t.id, t.title, t.content, t.create_time, t.user_id, u.username, u.avatar')
+        $query->select('t.id, t.title, t.content, t.created_at, t.user_id, u.username, u.avatar')
             ->from('{{%forum_thread}} as t')
             ->join('LEFT JOIN','{{%user}} as u', 'u.id=t.user_id')
             ->where('t.board_id=:id', [':id' => $this->id])
-            ->orderBy('create_time DESC');
+            ->orderBy('t.created_at DESC');
         $result = Tools::Pagination($query);
         return ['threads' => $result['result'], 'pages' => $result['pages']];
     }
@@ -141,14 +141,14 @@ class Board extends \yii\db\ActiveRecord
     public static function getLastThread($id)
     {
         $query = new Query;
-        $thread = $query->select('u.username, t.update_time')
+        $thread = $query->select('u.username, t.updated_at')
             ->from('{{%forum_board}} as t')
-            ->join('LEFT JOIN','{{%user}} as u', 'u.id=t.update_user')
+            ->join('LEFT JOIN','{{%user}} as u', 'u.id=t.updated_by')
             ->where('t.id=:id', [':id'=>$id])
             ->one();
         return [
             'username' => $thread['username'],
-            'create_time'=>$thread['update_time'],
+            'created_at'=>$thread['updated_at'],
         ];
     }
 

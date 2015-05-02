@@ -12,8 +12,8 @@ use yii\helpers\Url;
  * @property string $title
  * @property string $content
  * @property string $tags
- * @property integer $create_time
- * @property integer $update_time
+ * @property integer $created_at
+ * @property integer $updated_at
  * @property integer $user_id
  */
 class Post extends \yii\db\ActiveRecord
@@ -34,7 +34,7 @@ class Post extends \yii\db\ActiveRecord
         return [
             [['content'], 'required'],
             [['content', 'tags'], 'string'],
-            [['create_time', 'update_time', 'user_id'], 'integer'],
+            [['created_at', 'updated_at', 'user_id'], 'integer'],
             [['title'], 'string', 'max' => 128]
         ];
     }
@@ -49,8 +49,8 @@ class Post extends \yii\db\ActiveRecord
             'title' => Yii::t('app', 'Title'),
             'content' => Yii::t('app', 'Content'),
             'tags' => Yii::t('app', 'Tags'),
-            'create_time' => Yii::t('app', 'Create Time'),
-            'update_time' => Yii::t('app', 'Update Time'),
+            'created_at' => Yii::t('app', 'Create Time'),
+            'updated_at' => Yii::t('app', 'Update Time'),
             'user_id' => Yii::t('app', 'User ID'),
         ];
     }
@@ -64,7 +64,7 @@ class Post extends \yii\db\ActiveRecord
        if (parent::beforeSave($insert)) {
             if ($this->isNewRecord) {
               $this->user_id = Yii::$app->user->identity->id;
-              $this->create_time = time();
+              $this->created_at = time();
             }
            return true;
        } else {

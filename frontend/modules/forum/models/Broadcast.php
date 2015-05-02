@@ -13,7 +13,7 @@ use Yii;
  * @property integer $forum_id
  * @property integer $user_id
  * @property integer $thread_id
- * @property integer $create_time
+ * @property integer $created_at
  */
 class Broadcast extends \yii\db\ActiveRecord
 {
@@ -33,7 +33,7 @@ class Broadcast extends \yii\db\ActiveRecord
         return [
             [['content'], 'required'],
             [['content'], 'string'],
-            [['thread_id', 'forum_id', 'user_id', 'create_time'], 'integer'],
+            [['thread_id', 'forum_id', 'user_id', 'created_at'], 'integer'],
             [['title'], 'string', 'max' => 128]
         ];
     }
@@ -49,7 +49,7 @@ class Broadcast extends \yii\db\ActiveRecord
             'content' => Yii::t('app', 'Content'),
             'forum_id' => Yii::t('app', 'Forum ID'),
             'user_id' => Yii::t('app', 'User ID'),
-            'create_time' => Yii::t('app', 'Create Time'),
+            'created_at' => Yii::t('app', 'Create Time'),
         ];
     }
 
@@ -62,7 +62,7 @@ class Broadcast extends \yii\db\ActiveRecord
         if (parent::beforeSave($insert)) {
 	        if ($this->isNewRecord) {
     	        $this->user_id = Yii::$app->user->identity->id;
-    	        $this->create_time = time();
+    	        $this->created_at = time();
 	        }
             return true;
         } else {

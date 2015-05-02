@@ -161,7 +161,7 @@
                     <div class="media-body">
                       <h3 class="follower-name">Ray Sin</h3>
                       <div class="profile-location"><i class="fa fa-map-marker"></i> San Francisco, California, USA</div>
-                      <div class="profile-position"><i class="fa fa-briefcase"></i> Software Engineer at <a href="">SomeCompany, Inc.</a></div>
+                      <div class="profile-address"><i class="fa fa-briefcase"></i> Software Engineer at <a href="">SomeCompany, Inc.</a></div>
                       
                       <div class="mb20"></div>
                       
@@ -177,7 +177,7 @@
                     <div class="media-body">
                       <h3 class="follower-name">Weno Carasbong</h3>
                       <div class="profile-location"><i class="fa fa-map-marker"></i> Cebu City, Philippines</div>
-                      <div class="profile-position"><i class="fa fa-briefcase"></i> Software Engineer at <a href="">ITCompany, Inc.</a></div>
+                      <div class="profile-address"><i class="fa fa-briefcase"></i> Software Engineer at <a href="">ITCompany, Inc.</a></div>
                       
                       <div class="mb20"></div>
                       
@@ -193,7 +193,7 @@
                     <div class="media-body">
                       <h3 class="follower-name">Nusja Nawancali</h3>
                       <div class="profile-location"><i class="fa fa-map-marker"></i> Madrid, Spain</div>
-                      <div class="profile-position"><i class="fa fa-briefcase"></i> CEO at <a href="">SomeCompany, Inc.</a></div>
+                      <div class="profile-address"><i class="fa fa-briefcase"></i> CEO at <a href="">SomeCompany, Inc.</a></div>
                       
                       <div class="mb20"></div>
                       
@@ -209,7 +209,7 @@
                     <div class="media-body">
                       <h3 class="follower-name">Zaham Sindilmaca</h3>
                       <div class="profile-location"><i class="fa fa-map-marker"></i> Bangkok, Thailand</div>
-                      <div class="profile-position"><i class="fa fa-briefcase"></i> Java Developer at <a href="">ITCompany, Inc.</a></div>
+                      <div class="profile-address"><i class="fa fa-briefcase"></i> Java Developer at <a href="">ITCompany, Inc.</a></div>
                       
                       <div class="mb20"></div>
                       
@@ -225,7 +225,7 @@
                     <div class="media-body">
                       <h3 class="follower-name">Christopher Atam</h3>
                       <div class="profile-location"><i class="fa fa-map-marker"></i> Tokyo, Japan</div>
-                      <div class="profile-position"><i class="fa fa-briefcase"></i> QA Engineer at <a href="">SomeCompany, Inc.</a></div>
+                      <div class="profile-address"><i class="fa fa-briefcase"></i> QA Engineer at <a href="">SomeCompany, Inc.</a></div>
                       
                       <div class="mb20"></div>
                       
@@ -241,7 +241,7 @@
                     <div class="media-body">
                       <h3 class="follower-name">Venro Leonga</h3>
                       <div class="profile-location"><i class="fa fa-map-marker"></i> Paris, France</div>
-                      <div class="profile-position"><i class="fa fa-briefcase"></i> UX Designer at <a href="">ITCompany, Inc.</a></div>
+                      <div class="profile-address"><i class="fa fa-briefcase"></i> UX Designer at <a href="">ITCompany, Inc.</a></div>
                       
                       <div class="mb20"></div>
                       

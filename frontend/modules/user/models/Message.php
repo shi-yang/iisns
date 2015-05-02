@@ -13,7 +13,7 @@ use yii\db\Query;
  * @property integer $sendto
  * @property string $subject
  * @property string $content
- * @property integer $create_time
+ * @property integer $created_at
  * @property integer $read_indicator
  * @property integer $inbox
  * @property integer $outbox
@@ -39,7 +39,7 @@ class Message extends \yii\db\ActiveRecord
     {
         return [
             [['sendto', 'subject', 'content'], 'required'],
-            [['sendfrom', 'create_time', 'read_indicator', 'inbox', 'outbox', 'post_id'], 'integer'],
+            [['sendfrom', 'created_at', 'read_indicator', 'inbox', 'outbox', 'post_id'], 'integer'],
             [['content'], 'string'],
             [['subject'], 'string', 'max' => 255]
         ];
@@ -56,7 +56,7 @@ class Message extends \yii\db\ActiveRecord
             'sendto' => Yii::t('app', 'Sendto'),
             'subject' => Yii::t('app', 'Subject'),
             'content' => Yii::t('app', 'Content'),
-            'create_time' => Yii::t('app', 'Create Time'),
+            'created_at' => Yii::t('app', 'Create Time'),
             'read_indicator' => Yii::t('app', 'Read Indicator'),
             'inbox' => Yii::t('app', 'Inbox'),
             'outbox' => Yii::t('app', 'Outbox'),
@@ -73,7 +73,7 @@ class Message extends \yii\db\ActiveRecord
         if (parent::beforeSave($insert)) {
             if ($this->isNewRecord) {
                 $this->sendfrom = Yii::$app->user->identity->id;
-                $this->create_time = time();
+                $this->created_at = time();
             }
             return true;
         } else {

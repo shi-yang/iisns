@@ -50,7 +50,7 @@ class MessageController extends FrontController
         $query->select('*')
             ->from('{{%user_message}}')
             ->where('sendto=:sendto', [':sendto' => $user->id])
-            ->orderBy('create_time DESC');
+            ->orderBy('created_at DESC');
         $pages = Tools::Pagination($query);
 
         return $this->render('inbox', [

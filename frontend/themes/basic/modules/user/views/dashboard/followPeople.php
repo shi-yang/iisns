@@ -13,7 +13,7 @@ use app\modules\user\models\User;
           <div class="profile-details">
             <a class="user-name" href="#"><?= Html::encode(User::getUser($post['user_id'])) ?></a>
             <p>
-              <em><?= \app\components\Tools::formatTime($post['create_time']) ?></em>
+              <em><?= \app\components\Tools::formatTime($post['created_at']) ?></em>
             </p>
           </div>
         </div>

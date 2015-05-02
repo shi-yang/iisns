@@ -19,7 +19,7 @@ $user = $data->user;
     <div class="col-sm-10">
         <div class="thread-head">
             <span class="glyphicon glyphicon-time"></span>
-            <?= \app\components\Tools::formatTime($data->create_time) ?>
+            <?= \app\components\Tools::formatTime($data->created_at) ?>
         </div>
         <div class="thread-main">
             <h3><?= Html::a(Html::encode($data->title), $data->url) ?></h3>

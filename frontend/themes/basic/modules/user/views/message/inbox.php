@@ -18,7 +18,7 @@ $this->params['count'] = $count;
                 <div class="header">
                     <span class="action"><i class="fa fa-square-o"></i></span>
                     <span class="from"><i class="glyphicon glyphicon-user"></i> <?= Html::encode(\app\modules\user\models\User::getInfo($message['sendfrom'])['username']) ?></span>
-                    <span class="date"><span class="glyphicon glyphicon-time"></span> <?= \app\components\Tools::formatTime($message['create_time']) ?></span>
+                    <span class="date"><span class="glyphicon glyphicon-time"></span> <?= \app\components\Tools::formatTime($message['created_at']) ?></span>
                 </div>
                 <div class="title">
                     <span class="action"><i class="fa fa-star-o"></i><i class="fa fa-star bg"></i></span>

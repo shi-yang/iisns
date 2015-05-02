@@ -28,7 +28,7 @@ $this->params['count'] = $count;
                                     <?= Html::encode($comment['username']) ?>
                                 </a>
                                 <p>
-                                    <em><?= Tools::formatTime($comment['create_time']) ?></em>
+                                    <em><?= Tools::formatTime($comment['created_at']) ?></em>
                                 </p>
                             </div>
                         </div>
@@ -42,7 +42,7 @@ $this->params['count'] = $count;
                                                 <?= Html::encode($user->username) ?>
                                             </a>
                                             <p>
-                                                <em><?= Tools::formatTime($comment['create_time']) ?></em>
+                                                <em><?= Tools::formatTime($comment['created_at']) ?></em>
                                             </p>
                                         </div>
                                     </div>

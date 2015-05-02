@@ -40,7 +40,7 @@ $columnsCount = $model->columns;
                                         <dd class="hidden-xs" data-toggle="tooltip" data-placement="top" title="Thread Count">
                                             <i class="glyphicon glyphicon-comment"></i> <?= Board::getThreadCount($subBoard['id']) ?> 
                                         </dd>
-                                        <dd class="hidden-xs"><i class="glyphicon glyphicon-time"></i> <?= Tools::formatTime(Board::getLastThread($subBoard['id'])['create_time']) ?></dd>
+                                        <dd class="hidden-xs"><i class="glyphicon glyphicon-time"></i> <?= Tools::formatTime(Board::getLastThread($subBoard['id'])['created_at']) ?></dd>
                                     </dl>
                                 </td>
                             <?php endif ?>

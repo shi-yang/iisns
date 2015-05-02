@@ -40,12 +40,12 @@ class DashboardController extends FrontController
         $model = $this->findModel();
         $query = new Query;
         
-        $query = $query->select('p.id, p.user_id, p.title, p.content, p.create_time, u.username, u.avatar')
+        $query = $query->select('p.id, p.user_id, p.title, p.content, p.created_at, u.username, u.avatar')
             ->from('{{%home_post}} as p')
             ->join('LEFT JOIN','{{%user_follow}} as f', 'p.user_id=f.people_id')
             ->join('LEFT JOIN','{{%user}} as u', 'u.id=p.user_id')
             ->where('p.user_id=:user_id OR f.user_id=:user_id', [':user_id' => $model->id])
-            ->orderBy('create_time DESC');
+            ->orderBy('p.created_at DESC');
 
         $pages = Tools::Pagination($query);
         return $this->render('index', [
@@ -66,7 +66,7 @@ class DashboardController extends FrontController
             ->from('{{%home_post}}' . ' p')
             ->join('JOIN','{{%follow_people}}'. ' u', 'u.people_id=p.user_id')
             ->where('u.user_id=:user_id', [':user_id' => $model->id])
-            ->orderBy('create_time DESC');
+            ->orderBy('created_at DESC');
         $pages = Tools::Pagination($query);
         return $this->render('followPeople', [
             'model' => $model,
@@ -86,7 +86,7 @@ class DashboardController extends FrontController
             ->from('{{%forum_broadcast}}' . ' p')
             ->join('JOIN','{{%follow_forum}}'. ' u', 'u.forum_id=p.forum_id')
             ->where('u.user_id=:user_id', [':user_id' => $model->id])
-            ->orderBy('create_time DESC');
+            ->orderBy('created_at DESC');
         $pages = Tools::Pagination($query);
 
         return $this->render('followForum', [
@@ -106,7 +106,7 @@ class DashboardController extends FrontController
         $query = $query->select('*')
                     ->from('{{%home_post}}')
                     ->where(['user_id' => $model->id])
-                    ->orderBy('create_time desc');
+                    ->orderBy('created_at desc');
         $pages = Tools::Pagination($query);
         return $this->render('myposts', [
             'model' => $model,
@@ -122,7 +122,7 @@ class DashboardController extends FrontController
         $query = $query->select('*')
                     ->from('{{%forum_post}}')
                     ->where(['user_id' => $model->id])
-                    ->orderBy('create_time desc');
+                    ->orderBy('created_at desc');
         $pages = Tools::Pagination($query);
         return $this->render('myposts', [
             'model' => $model,

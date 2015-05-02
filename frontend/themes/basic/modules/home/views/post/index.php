@@ -36,7 +36,7 @@ $user = Yii::$app->user->identity;
                                         <?= Html::encode($user->username) ?>
                                     </a>
                                     <p>
-                                        <em><?= \app\components\Tools::formatTime($post['create_time']) ?></em>
+                                        <em><?= \app\components\Tools::formatTime($post['created_at']) ?></em>
                                     </p>
                                 </div>
                             </div>

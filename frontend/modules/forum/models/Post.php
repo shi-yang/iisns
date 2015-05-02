@@ -12,7 +12,7 @@ use app\modules\forum\models\Thread;
  * @property string $content
  * @property integer $user_id
  * @property integer $thread_id
- * @property integer $create_time
+ * @property integer $created_at
  */
 class Post extends \yii\db\ActiveRecord
 {
@@ -32,7 +32,7 @@ class Post extends \yii\db\ActiveRecord
         return [
             [['content'], 'required'],
             [['content'], 'string'],
-            [['user_id', 'thread_id', 'create_time'], 'integer']
+            [['user_id', 'thread_id', 'created_at'], 'integer']
         ];
     }
     
@@ -47,7 +47,7 @@ class Post extends \yii\db\ActiveRecord
             'content' => Yii::t('app', 'Content'),
             'user_id' => Yii::t('app', 'User ID'),
             'thread_id' => Yii::t('app', 'Thread ID'),
-            'create_time' => Yii::t('app', 'Create Time'),
+            'created_at' => Yii::t('app', 'Create Time'),
         ];
     }
     
@@ -60,7 +60,7 @@ class Post extends \yii\db\ActiveRecord
         if (parent::beforeSave($insert)) {
             if ($this->isNewRecord) {
             	$this->user_id = Yii::$app->user->identity->id;
-            	$this->create_time = time();
+            	$this->created_at = time();
             }
             return true;
         } else {

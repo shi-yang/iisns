@@ -16,7 +16,7 @@ use yii\data\Pagination;
  * @property string $forum_desc
  * @property string $forum_url
  * @property integer $user_id
- * @property integer $create_time
+ * @property integer $created_at
  * @property string $forum_icon
  */
 class Forum extends \yii\db\ActiveRecord
@@ -40,7 +40,7 @@ class Forum extends \yii\db\ActiveRecord
             [['forum_url'], 'string', 'min' => 5, 'max' => 32],
             [['forum_url'], 'match', 'pattern' => '/^(?!_)(?!.*?_$)(?!\d{5,32}$)[a-z\d_]{5,32}$/i'],
             [['forum_desc'], 'string'],
-            [['user_id', 'create_time'], 'integer'],
+            [['user_id', 'created_at'], 'integer'],
             [['forum_name'], 'string', 'max' => 32],
             [['forum_url'], 'string', 'min' => 5, 'max' => 32],
             [['forum_icon'], 'file', 'extensions' => 'jpg, png', 'mimeTypes' => 'image/jpeg, image/png',],
@@ -58,7 +58,7 @@ class Forum extends \yii\db\ActiveRecord
             'forum_desc' => Yii::t('app', 'Forum Description'),
             'forum_url' => Yii::t('app', 'Forum Url'),
             'user_id' => Yii::t('app', 'User ID'),
-            'create_time' => Yii::t('app', 'Create Time'),
+            'created_at' => Yii::t('app', 'Create Time'),
             'forum_icon' => Yii::t('app', 'Forum Icon'),
         ];
     }
@@ -72,7 +72,7 @@ class Forum extends \yii\db\ActiveRecord
         if (parent::beforeSave($insert)) {
             if ($this->isNewRecord) {
                 $this->user_id = Yii::$app->user->identity->id;
-                $this->create_time = time();
+                $this->created_at = time();
                 $this->forum_icon = 'default/' . rand(1, 12) . '.png';
             }
             return true;
@@ -145,7 +145,7 @@ class Forum extends \yii\db\ActiveRecord
         $query = $query->select('*')
             ->from('{{%forum_broadcast}}' . ' p')
             ->where('forum_id=:forum_id', [':forum_id' => $this->id])
-            ->orderBy('create_time DESC');
+            ->orderBy('created_at DESC');
             
         return \app\components\Tools::Pagination($query);
     }

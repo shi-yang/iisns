@@ -18,7 +18,7 @@ class ForumSearch extends Forum
     public function rules()
     {
         return [
-            [['id', 'user_id', 'create_time'], 'integer'],
+            [['id', 'user_id', 'created_at'], 'integer'],
             [['forum_name', 'forum_desc', 'forum_url', 'forum_icon'], 'safe'],
         ];
     }
@@ -54,7 +54,7 @@ class ForumSearch extends Forum
         $query->andFilterWhere([
             'id' => $this->id,
             'user_id' => $this->user_id,
-            'create_time' => $this->create_time,
+            'created_at' => $this->created_at,
         ]);
 
         $query->andFilterWhere(['like', 'forum_name', $this->forum_name])

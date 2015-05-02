@@ -62,7 +62,7 @@ ProfileAsset::register($this);
           <div class="col-sm-9">
             <div class="profile-header">
               <h2 class="profile-name"><?= Html::a(Html::encode($this->params['user']['username']), ['/user/view', 'id' => Html::encode($this->params['user']['username'])]) ?></h2>
-              <div class="profile-location"><i class="glyphicon glyphicon-map-marker"></i> <?= Html::encode($this->params['profile']['position']) ?></div>
+              <div class="profile-location"><i class="glyphicon glyphicon-map-marker"></i> <?= Html::encode($this->params['profile']['address']) ?></div>
               <div class="profile-signature"><i class="glyphicon glyphicon-pushpin"></i> <?= Html::encode($this->params['profile']['signature']) ?></div>
               <div class="mb20"></div>
               <button class="btn btn-success mr5"><i class="glyphicon glyphicon-plus"></i> <?= Yii::t('app', 'Follow') ?></button>

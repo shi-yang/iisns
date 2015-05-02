@@ -43,7 +43,7 @@ h6, .h6 {
 
 /* Nav links */
 .home-nav-item {
-  position: relative;
+  address: relative;
   display: inline-block;
   padding: 10px;
   font-weight: 500;
@@ -60,7 +60,7 @@ h6, .h6 {
   color: #fff;
 }
 .home-nav .active:after {
-  position: absolute;
+  address: absolute;
   bottom: 0;
   left: 50%;
   width: 0;

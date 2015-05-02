@@ -26,7 +26,7 @@ if (isset($_GET['page']) >= 2) //分页标识大于2才开始计算
                 <div class="post-meta">
                     <a class="floor-number" id="<?= $post['id'] ;?>" href="#<?= $floor_number ?>">
                         <span class="post-time">
-                            <?= \app\components\Tools::formatTime($post['create_time']) ?>
+                            <?= \app\components\Tools::formatTime($post['created_at']) ?>
                         </span>   <span class="badge">#<?= $floor_number ?></span>
                     </a>
                 </div>

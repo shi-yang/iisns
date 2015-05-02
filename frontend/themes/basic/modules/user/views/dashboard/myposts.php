@@ -17,7 +17,7 @@ use yii\helpers\Html;
                         </div>
                         <div class="post-footer">
                             <div class="time">
-                                <?= \app\components\Tools::formatTime($post['create_time']) ?>
+                                <?= \app\components\Tools::formatTime($post['created_at']) ?>
                             </div>
                         </div>
                     </div>
