@@ -59,6 +59,9 @@ $this->registerCssFile(Yii::getAlias('@web').'/css/forum/css/forum.css');
         </div>
     </div>
     <div class="forum-all">
-        <?= $this->render('_forum', ['forums' => $forums]) ?>
+        <?php if ($this->beginCache('explore-forum', ['duration' => 3600])) { 
+            echo $this->render('_forum', ['forums' => $forums]);
+            $this->endCache();
+        }?>
     </div>
 </div>

@@ -73,7 +73,7 @@ class Forum extends \yii\db\ActiveRecord
             if ($this->isNewRecord) {
                 $this->user_id = Yii::$app->user->identity->id;
                 $this->created_at = time();
-                $this->forum_icon = 'default/' . rand(1, 12) . '.png';
+                $this->forum_icon = 'default/' . rand(1, 11) . '.png';
             }
             return true;
         } else {
