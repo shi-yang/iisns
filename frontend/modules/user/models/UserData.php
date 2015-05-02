@@ -50,6 +50,27 @@ class UserData extends \yii\db\ActiveRecord
         ];
     }
 
+    /**
+     * 获取某个用户的指定Key值的统计数目
+     * Key值：
+     * post_count：微博总数
+     * following_count：关注数
+     * follower_count：粉丝数
+     * unread_comment_count：评论未读数
+     * unread_message_count：未读消息
+     * @param boolean $all 取得所有的数据
+     * @param string $key Key值
+     * @param integer $userId 用户id 默认为当前登录的用户
+     * @return integer
+     */
+    public function getKey($all, $key = null, $userId = null)
+    {
+        $userId = ($userId === null) ? Yii::$app->user->id : $userId ;
+        if ($all == true) {
+            return Yii::$app->db->createCommand('SELECT * FROM {{%user_data}} WHERE user_id='.$userId)->queryOne();
+        }
+        return Yii::$app->db->createCommand("SELECT $key FROM {{%user_data}} WHERE user_id=$userId")->queryScalar();
+    }
 
     /**
      * 更新某个用户的指定Key值的统计数目

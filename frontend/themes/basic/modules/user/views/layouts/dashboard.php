@@ -1,29 +1,31 @@
 <?php
 use yii\helpers\Url;
+
+$userData = Yii::$app->userData->getKey(true);
 ?>
 <?php $this->beginContent('@app/modules/user/views/layouts/user.php'); ?>
 <div class="social-wrapper row">
     <div id="social-container">
         <div class="row hidden-xs">
-            <div class="col-lg-3 col-sm-6 col-xs-12">
+            <a class="col-lg-3 col-sm-6 col-xs-12" href="<?= Url::toRoute(['/home/post']) ?>">
                 <div class="main-box infographic-box">
                     <i class="glyphicon glyphicon-list-alt text-primary"></i>
                     <span class="headline"><?= Yii::t('app', 'Posts') ?></span>
-                    <span class="value">2.562</span>
+                    <span class="value"><?= $userData['post_count'] ?></span>
                 </div>
-            </div>
+            </a>
             <div class="col-lg-3 col-sm-6 col-xs-12">
                 <div class="main-box infographic-box">
                     <i class="glyphicon glyphicon-eye-open text-success"></i>
                     <span class="headline"><?= Yii::t('app', 'Following') ?></span>
-                    <span class="value">658</span>
+                    <span class="value"><?= $userData['following_count'] ?></span>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6 col-xs-12">
                 <div class="main-box infographic-box">
                     <i class="glyphicon glyphicon-user text-info"></i>
                     <span class="headline"><?= Yii::t('app', 'Follower') ?></span>
-                    <span class="value">$12.400</span>
+                    <span class="value"><?= $userData['follower_count'] ?></span>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6 col-xs-12">
