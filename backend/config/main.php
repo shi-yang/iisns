@@ -16,7 +16,15 @@ return [
         'setting' => [
             'class' => 'shiyang\setting\Module',
             'controllerNamespace' => 'shiyang\setting\controllers'
-        ]
+        ],
+        'forum' => [
+            'class' => 'backend\modules\forum\ForumModule',
+            'aliases' => [
+                '@forum_icon' => '@web/uploads/forum/icon/', //图标上传路径
+                '@avatar' => '@web/uploads/user/avatar/',
+                '@photo' => '@web/uploads/blog/photo/'
+            ],
+        ],
     ],
     'components' => [
         'db' => $db,

@@ -134,7 +134,7 @@ AppAsset::register($this);
                         </a>
                         <ul class="treeview-menu">
                             <li><a href="<?= Url::toRoute('/user') ?>"><i class="glyphicon glyphicon-menu-right"></i> User</a></li>
-                            <li><a href="<?= Url::toRoute('/forum') ?>"><i class="glyphicon glyphicon-menu-right"></i> Forum</a></li>
+                            <li><a href="<?= Url::toRoute('/forum/forum/index') ?>"><i class="glyphicon glyphicon-menu-right"></i> Forum</a></li>
                             <li><a href="<?= Url::toRoute('/blog-post') ?>"><i class="glyphicon glyphicon-menu-right"></i> Blog</a></li>
                         </ul>
                     </li>
