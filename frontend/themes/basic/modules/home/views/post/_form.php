@@ -21,6 +21,7 @@ use yii\widgets\ActiveForm;
             'elementPathEnabled' => false,
             'autosave' => false,
             'focus' => true,
+            'initialFrameHeight' => 230,
             'toolbars' => [
                 [
                     'fullscreen', 'preview', 'source', 'undo', 'redo', 'insertcode',
