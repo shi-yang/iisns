@@ -2,12 +2,6 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 ?>
-<?php \yii2masonry\yii2masonry::begin([
-    'clientOptions' => [
-        'columnWidth' => 50,
-        'itemSelector' => '.item'
-    ]
-]); ?>
 <?php foreach($forums as $model): ?>
     <div class="item" onclick="window.location.href= '<?= \yii\helpers\Url::toRoute(['/forum/forum/view', 'id' => $model['forum_url']]) ?>';return false">
       <div class="row">
@@ -21,4 +15,3 @@ use yii\helpers\Url;
       </div>
     </div>
 <?php endforeach; ?>
-<?php \yii2masonry\yii2masonry::end(); ?>

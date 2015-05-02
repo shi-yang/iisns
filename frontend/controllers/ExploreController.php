@@ -84,6 +84,22 @@ class ExploreController extends FrontController
         ]);
     }
 
+    public function actionPhotos()
+    {
+        $query = new Query;
+        $query->select('a.id, a.name, p.path')
+            ->from('{{%home_album}} as a')
+            ->join('LEFT JOIN','{{%home_photo}} as p', 'p.album_id=a.id')
+            ->where('a.status=:type', [':type' => Album::TYPE_PUBLIC])
+            ->orderBy('a.id DESC');
+        $albumResult = Tools::Pagination($query, 18);
+
+        return $this->render('photos', [
+            'albums' => $albumResult['result'],
+            'pages' => $albumResult['pages'],
+        ]);
+    }
+
     public function actionViewAlbum($id)
     {
         if (($model = Album::findOne($id)) === null) {

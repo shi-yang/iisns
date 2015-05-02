@@ -38,6 +38,7 @@ $this->registerCssFile(Yii::getAlias('@web').'/css/forum/css/forum.css');
             <div class="row">
                 <?php 
                     if ($this->beginCache('explore-album', ['duration' => 3600])) {
+                        
                         echo $this->render('_album', ['albums' => $albums]);
                         $this->endCache();
                     }

@@ -1,9 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
-use yii\widgets\ListView;
-use yii\widgets\LinkPager;
+use shiyang\masonry\Masonry;
 
 /* @var $this yii\web\View */
 
@@ -20,9 +18,13 @@ $this->registerCssFile(Yii::getAlias('@web').'/css/forum/css/forum.css');
     <?php endif ?>
 
     <div class="forum-all">
-        <?= $this->render('_forum', ['forums' => $forums]) ?>
-        <?= LinkPager::widget([
-            'pagination' => $pages,
+        <?php Masonry::begin([
+            'options' => [
+              'id' => 'forums'
+            ],
+            'pagination' => $pages
         ]); ?>
+            <?= $this->render('_forum', ['forums' => $forums, 'pages' => $pages]) ?>
+        <?php Masonry::end(); ?>
     </div>
 </div>

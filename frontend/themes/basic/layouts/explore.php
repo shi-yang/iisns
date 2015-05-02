@@ -27,8 +27,8 @@ $this->registerMetaTag(['name' => 'description', 'content' => Yii::$app->setting
                 'url' => ['/explore/forums'],
             ],
             [
-                'label' => '<i class="glyphicon glyphicon-picture"></i> '. Yii::t('app', 'Albums'),
-                'url' => ['/explore/albums'],
+                'label' => '<i class="glyphicon glyphicon-picture"></i> '. Yii::t('app', 'Photos'),
+                'url' => ['/explore/photos'],
             ],
         ],
         'encodeLabels' => false,

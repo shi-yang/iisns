@@ -40,6 +40,7 @@ return [
 	'Update Post:' => '修改文章：',
 	'Tags' => '标签',
 	'Photo' => '照片',
+	'Photos' => '照片',
 	'Music' => '音乐',
 	'Video' => '视频',
 	'Album' => '相册',
