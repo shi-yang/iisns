@@ -18,11 +18,11 @@
         "yiisoft/yii2": "*",
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
-        "philippfrenzel/yii2masonry": "*",
         "yiisoft/yii2-imagine": "*",
         "shiyang/yii2-login-widget": "*",
         "shiyang/yii2-setting": "*",
         "shiyang/yii2-infinite-scroll": "*",
+        "shiyang/yii2-masonry": "*",
         "kucha/ueditor": "*",
         "justinvoelker/yii2-tagging": "*"
     },

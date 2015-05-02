@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f530de31ae22abbd66ed794613856410",
+    "hash": "b18947baf21724524661724e28b6c61e",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -321,16 +321,16 @@
         },
         {
             "name": "bower-asset/jquery",
-            "version": "2.1.3",
+            "version": "2.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jquery/jquery.git",
-                "reference": "8f2a9d9272d6ed7f32d3a484740ab342c02541e0"
+                "reference": "7751e69b615c6eca6f783a81e292a55725af6b85"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jquery/jquery/zipball/8f2a9d9272d6ed7f32d3a484740ab342c02541e0",
-                "reference": "8f2a9d9272d6ed7f32d3a484740ab342c02541e0",
+                "url": "https://api.github.com/repos/jquery/jquery/zipball/7751e69b615c6eca6f783a81e292a55725af6b85",
+                "reference": "7751e69b615c6eca6f783a81e292a55725af6b85",
                 "shasum": ""
             },
             "require-dev": {
@@ -345,6 +345,7 @@
                 "bower-asset-ignore": [
                     "**/.*",
                     "build",
+                    "dist/cdn",
                     "speed",
                     "test",
                     "*.md",
@@ -887,68 +888,17 @@
             "time": "2015-02-06 02:01:30"
         },
         {
-            "name": "philippfrenzel/yii2masonry",
-            "version": "1.1.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/philippfrenzel/yii2masonry.git",
-                "reference": "a1ea4c7406c3bc63ab9a39240cf4156ce2df6950"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/philippfrenzel/yii2masonry/zipball/a1ea4c7406c3bc63ab9a39240cf4156ce2df6950",
-                "reference": "a1ea4c7406c3bc63ab9a39240cf4156ce2df6950",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/eventemitter": "^4.2",
-                "bower-asset/imagesloaded": "*",
-                "bower-asset/masonry": "^3.2",
-                "bower-asset/outlayer": "^1.3",
-                "php": ">=5.4.0",
-                "yiisoft/yii2": "*"
-            },
-            "require-dev": {
-                "codeception/codeception": "*"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "yii2masonry\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Philipp Frenzel",
-                    "email": "philipp@frenzel.net",
-                    "homepage": "http://www.frenzel.net/",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Yii2 Masonry Integration for Yii2",
-            "homepage": "http://www.frenzel.net/",
-            "keywords": [
-                "masonry",
-                "yii2"
-            ],
-            "time": "2015-02-19 20:24:19"
-        },
-        {
             "name": "shiyang/yii2-infinite-scroll",
-            "version": "v1.1",
+            "version": "v1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shi-yang/yii2-infinite-scroll.git",
-                "reference": "1e1e100677aa0058e97f2ec91124c3be956b5aae"
+                "reference": "83e2cd6eac6213241471827f78f6cc991fdc2b32"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shi-yang/yii2-infinite-scroll/zipball/1e1e100677aa0058e97f2ec91124c3be956b5aae",
-                "reference": "1e1e100677aa0058e97f2ec91124c3be956b5aae",
+                "url": "https://api.github.com/repos/shi-yang/yii2-infinite-scroll/zipball/83e2cd6eac6213241471827f78f6cc991fdc2b32",
+                "reference": "83e2cd6eac6213241471827f78f6cc991fdc2b32",
                 "shasum": ""
             },
             "require": {
@@ -984,7 +934,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2015-04-20 02:34:51"
+            "time": "2015-04-20 02:44:47"
         },
         {
             "name": "shiyang/yii2-login-widget",
@@ -1025,6 +975,51 @@
                 "yii2"
             ],
             "time": "2015-02-10 15:53:34"
+        },
+        {
+            "name": "shiyang/yii2-masonry",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/shi-yang/yii2-masonry.git",
+                "reference": "7f50f65325af9d7e3a24eb20b99594ed4df14b44"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/shi-yang/yii2-masonry/zipball/7f50f65325af9d7e3a24eb20b99594ed4df14b44",
+                "reference": "7f50f65325af9d7e3a24eb20b99594ed4df14b44",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/imagesloaded": "*",
+                "bower-asset/masonry": "^3.2",
+                "shiyang/yii2-infinite-scroll": "*",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "shiyang\\masonry\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Shiyang",
+                    "email": "dr@shiyang.me"
+                }
+            ],
+            "description": "Masonry Yii2 Extension width infinitescroll",
+            "keywords": [
+                "extension",
+                "infinitescroll",
+                "masonry",
+                "yii2"
+            ],
+            "time": "2015-05-02 06:18:32"
         },
         {
             "name": "shiyang/yii2-setting",
