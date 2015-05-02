@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use shiyang\masonry\Masonry;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\home\models\Album */
@@ -10,7 +11,6 @@ $this->title = $model->name . '_' . Yii::$app->setting->get('siteName');
 $this->params['title'] = $model->name;
 $this->registerMetaTag(['name' => 'keywords', 'content' => $model->name . Yii::$app->setting->get('siteKeyword')]);
 $this->registerMetaTag(['name' => 'description', 'content' => $model->description]);
-//$view = new \yii\web\View;
 
 $this->registerCss('
 .no-photo {
@@ -25,32 +25,36 @@ $this->registerCss('
     padding-left: 50px;
     font-size: 14px;
 }
-.img-all {
-
+.photo-item {
+      background: #fcfcfc;
+      margin-bottom: 20px;
+      -moz-border-radius: 3px;
+      -webkit-border-radius: 3px;
+      border-radius: 3px;
+      -moz-box-shadow: 0 3px 0 rgba(12,12,12,0.03);
+      -webkit-box-shadow: 0 3px 0 rgba(12,12,12,0.03);
+      box-shadow: 0 3px 0 rgba(12,12,12,0.03);
+      position: relative;
 }
-.img-item {
-box-shadow: 0 1px 2px 0 rgba(210,210,210,.31);
--webkit-box-shadow: 0 1px 2px 0 rgba(180,180,180,.5);
-overflow: hidden;
-margin-bottom: 20px;
+.photo-img img {
+  -moz-border-radius: 3px 3px 0 0;
+  -webkit-border-radius: 3px 3px 0 0;
+  border-radius: 3px 3px 0 0;
 }
-.img-item:hover {
-    opacity: .8;
-    filter: alpha(opacity=80);
+.photo-details {
+  padding: 10px;
+  font-weight: bold;
+  border-top: 1px solid #e7e7e7;
+  color: #777;
+  line-height: 15px;
+  font-size: 11px;
 }
-.img-main {
-    margin-bottom: 5px;
-    background-color: #fff;
+.photo-details:hover {
+  background: #f1f1f1;
 }
-.img-main img {
-    min-width:100%;
-    max-width: 100%;
-}
-.img-name {
-    display:block;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
+.photo-title {
+  margin: 0;
+  font-weight: normal;
 }
 ');
 ?>
@@ -89,22 +93,26 @@ margin-bottom: 20px;
             </a>
         </div>
         <div class="img-all row">
-            <?php \yii2masonry\yii2masonry::begin([
-                'clientOptions' => [
-                    'itemSelector' => '.img-item'
-                ]
+            <?php Masonry::begin([
+                'options' => [
+                  'id' => 'photos'
+                ],
+                'pagination' => $model->photos['pages']
             ]); ?>
-            <?php foreach ($model->photos as $photo): ?>
-                <div class="img-item col-md-3">
-                    <div class="img-main">
-                        <a title="<?= Html::encode($photo['name']) ?>" href="<?= Yii::getAlias('@photo').$photo['path']?>" data-lightbox="image-1" data-title="<?= Html::encode($photo['name']) ?>">
-                            <img src="<?= Yii::getAlias('@photo').$photo['path'] ?>"> 
+            <?php foreach ($model->photos['photos'] as $photo): ?>
+                <?php
+                    $albumUrl = Url::toRoute(['/explore/view-album', 'id' => $photo['id']]);
+                    $src = (empty($photo['path'])) ? Yii::getAlias('@web/images/pic-none.png') : Yii::getAlias('@photo') . $photo['path'] ;
+                ?>
+                <div class="col-xs-6 col-sm-4 col-md-3">
+                    <div class="photo-item">
+                        <a title="<?= Html::encode($photo['name']) ?>" href="<?= Yii::getAlias('@photo').$photo['path']?>" data-lightbox="image-1" data-title="<?= Html::encode($model['name']) ?>">
+                            <img src="<?= $src ?>" class="img-responsive" alt="photo-cover">
                         </a>
-                        <div class="img-name"><?= Html::encode($photo['name']) ?></div> 
                     </div>
                 </div>
             <?php endforeach ?>
-            <?php \yii2masonry\yii2masonry::end(); ?>
+            <?php Masonry::end(); ?>
         </div>
     <?php endif ?>
 </div>

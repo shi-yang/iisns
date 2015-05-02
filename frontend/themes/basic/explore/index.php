@@ -1,8 +1,8 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ListView;
-use nirvana\infinitescroll\InfiniteScrollPager;
+use yii\helpers\Url;
+use app\modules\home\models\Album;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -38,9 +38,20 @@ $this->registerCssFile(Yii::getAlias('@web').'/css/forum/css/forum.css');
             <div class="row">
                 <?php 
                     if ($this->beginCache('explore-album', ['duration' => 3600])) {
-                        
-                        //echo $this->render('_album', ['albums' => $albums]);
-                        $this->endCache();
+                        foreach ($albums as $album) :
+                            $coverSrc = Album::getCoverPhoto($album['id']);
+                            $link = Url::toRoute(['/explore/view-album', 'id' => $album['id']]);
+                ?>
+                        <div class="album-item col-md-2 col-sm-6">
+                            <div class="album-img">
+                                <a href="<?= $link ?>">
+                                    <img src="<?= $coverSrc ?>" class="album-cover" alt="album-cover">
+                                </a>
+                            </div>
+                            <?= Html::a(Html::encode($album['name']), ['/explore/view-album', 'id' => $album['id']]) ?>
+                        </div>
+                        <?php endforeach;
+                       $this->endCache();
                     }
                 ?>
             </div>

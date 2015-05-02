@@ -44,7 +44,7 @@ class ExploreController extends FrontController
         $forumResult = Tools::Pagination($query);
 
         $albums = Yii::$app->db
-            ->createCommand('SELECT `a`.`id`, `a`.`name`, `p`.`path` FROM {{%home_album}} `a` LEFT JOIN {{%home_photo}} `p` ON p.album_id=a.id WHERE a.status=0 ORDER BY `a`.`id` DESC LIMIT 18')
+            ->createCommand('SELECT `a`.`id`, `a`.`name` FROM {{%home_album}} `a` WHERE a.status=0 ORDER BY `a`.`id` DESC LIMIT 10')
             ->queryAll();
 
         return $this->render('index', [
@@ -71,16 +71,17 @@ class ExploreController extends FrontController
     public function actionPhotos()
     {
         $query = new Query;
-        $query->select('a.id, a.name, p.path')
+        $query->select('a.id, a.name, p.path, u.username, u.avatar')
             ->from('{{%home_album}} as a')
             ->join('LEFT JOIN','{{%home_photo}} as p', 'p.album_id=a.id')
+            ->join('LEFT JOIN','{{%user}} as u', 'a.created_by=u.id')
             ->where('a.status=:type', [':type' => Album::TYPE_PUBLIC])
             ->orderBy('a.id DESC');
-        $albumResult = Tools::Pagination($query, 25);
+        $photosResult = Tools::Pagination($query, 25);
 
         return $this->render('photos', [
-            'albums' => $albumResult['result'],
-            'pages' => $albumResult['pages'],
+            'photos' => $photosResult['result'],
+            'pages' => $photosResult['pages'],
         ]);
     }
 
