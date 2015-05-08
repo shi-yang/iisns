@@ -143,7 +143,7 @@ class PostController extends FrontController
         $model = $this->findModel($id);
         if ($model->user_id === Yii::$app->user->id) {
             $model->delete();
-            Yii::$app->userData->updateKey('post_count', Yii::$app->user->id);
+            Yii::$app->userData->updateKey('post_count', Yii::$app->user->id, -1);
             Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Delete successfully.'));
         } else {
             throw new ForbiddenHttpException('You are not allowed to perform this action.');
