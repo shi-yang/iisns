@@ -4,6 +4,7 @@ use yii\helpers\HtmlPurifier;
 use yii\helpers\Url;
 use yii\bootstrap\Modal;
 use shiyang\infinitescroll\InfiniteScrollPager;
+use app\components\Tools;
 ?>
 
 <?php if ($model->getThreadCount($model->id) > 0): ?>
@@ -22,12 +23,15 @@ use shiyang\infinitescroll\InfiniteScrollPager;
                                 <a href="<?= Url::toRoute(['/forum/thread/view', 'id' => $thread['id']]) ?>"><span class="media-title" <?php //if($thread->is_broadcast) echo 'style="color:#ff6f3d"'; ?>><?= Html::encode($thread['title']); ?></span></a>
                             </h4>
                             <?= Html::a(Html::encode($thread['username']), ['/user/view', 'id'=>$thread['username']], ['class'=>'thread-nickname']); ?>
-                            <span class="thread-time">| <?= \app\components\Tools::formatTime($thread['created_at']) ?></span>
+                            <span class="thread-time">| <?= Tools::formatTime($thread['created_at']) ?></span>
                         </div>
                         <div class="thread-main">
-                            <?= HtmlPurifier::process($thread['content']) ?>
+                            <?= HtmlPurifier::process(Tools::htmlSubString($thread['content'], 300, Url::toRoute(['/forum/thread/view', 'id' => $thread['id']]))) ?>
                         </div>
                         <div class="pull-right thread-right">
+                            <?php if (Yii::$app->user->id == $thread['user_id']) {
+                                echo Html::a('<span class="glyphicon glyphicon-pencil"></span> '.Yii::t('app', 'Update'), ['/forum/thread/update', 'id' => $thread['id']]);
+                            }?>
                             <?= Html::a('<span class="glyphicon glyphicon-comment"></span> '.Yii::t('app', 'Reply'), ['/forum/thread/view', 'id' => $thread['id']]); ?> 
                             <?php if (Yii::$app->user->id == $thread['user_id'] || Yii::$app->user->id == $model->user_id): ?>
                                 <a href="<?= Url::toRoute(['/forum/thread/delete', 'id' => $thread['id']]) ?>"  data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="thread">

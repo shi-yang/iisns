@@ -108,8 +108,12 @@ class ThreadController extends FrontController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        if ($model->user_id !== Yii::$app->user->id) {
+            throw new ForbiddenHttpException('You are not allowed to perform this action.');
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->getSession()->setFlash('success', 'Save successfully.');
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
