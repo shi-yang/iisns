@@ -16,7 +16,7 @@ $this->params['count'] = $count;
     'columns' => [
         'subject',
         'content',
-        'created_at'
+        'created_at:datetime'
 
         // [
         //     'class' => 'yii\grid\DataColumn', // can be omitted, as it is the default
