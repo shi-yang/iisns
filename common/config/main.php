@@ -4,6 +4,7 @@ return [
     'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',
+            'cachePath' => '@app/../common/cache'
         ],
         'setting' => [
             'class' => 'shiyang\setting\components\Setting',
