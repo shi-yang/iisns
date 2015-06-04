@@ -6,6 +6,7 @@ use Yii;
 use yii\db\Query;
 use app\components\Tools;
 use app\modules\home\models\Post;
+use app\modules\home\models\Feed;
 
 /**
  * This is the model class for table "{{%user}}".
@@ -128,6 +129,22 @@ class User extends \common\models\User
         return ['posts' => $posts, 'pages' => $pages];
     }
     
+    /**
+     * app\modules\home\models\Feed
+     * @return array
+     */
+    public function getFeeds()
+    {
+        $query = Feed::find()->where(['user_id' => $this->id])->orderBy('id desc');
+        $countQuery = clone $query;
+        $pages = new \yii\data\Pagination(['totalCount' => $countQuery->count()]);
+        $pages->defaultPageSize = 14;
+        $feeds = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+        return ['feeds' => $feeds, 'pages' => $pages];
+    }
+
     public function getForumPosts()
     {
         // $query = new Query;

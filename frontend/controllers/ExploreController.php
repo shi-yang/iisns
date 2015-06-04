@@ -24,7 +24,7 @@ class ExploreController extends FrontController
         return [
             [
                 'class' => 'yii\filters\PageCache',
-                'only' => ['index', 'forums', 'photos'],
+                'only' => ['forums', 'photos'],
                 'duration' => 60 * 60,
                 'variations' => [
                     Yii::$app->language,

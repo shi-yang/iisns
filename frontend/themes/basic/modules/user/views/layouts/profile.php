@@ -69,7 +69,7 @@ ProfileAsset::register($this);
               <button class="btn btn-white"><i class="glyphicon glyphicon-envelope"></i> <?= Yii::t('app', 'Message') ?></button>
             </div>
             <ul class="nav nav-tabs nav-justified nav-profile">
-              <li class="active"><a href="#timeline" data-toggle="tab"><strong><i class="glyphicon glyphicon-list-alt"></i> <?= Yii::t('app', 'Posts') ?></strong></a></li>
+              <li class="active"><a href="#timeline" data-toggle="tab"><strong><i class="glyphicon glyphicon-time"></i> <?= Yii::t('app', 'Timeline') ?></strong></a></li>
               <li class=""><a href="#photo" data-toggle="tab"><strong><i class="glyphicon glyphicon-picture"></i> <?= Yii::t('app', 'Photo') ?></strong></a></li>
 <!--               <li class=""><a href="#music" data-toggle="tab"><strong><i class="glyphicon glyphicon-music"></i> Music</strong></a></li>
               <li class=""><a href="#video" data-toggle="tab"><strong><i class="glyphicon glyphicon-facetime-video"></i> Video</strong></a></li> -->

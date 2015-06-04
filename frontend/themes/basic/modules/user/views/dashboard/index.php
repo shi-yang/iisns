@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use app\modules\user\models\User;
 use app\components\Tools;
 use yii\helpers\HtmlPurifier;
+use yii\widgets\ActiveForm;
 use shiyang\infinitescroll\InfiniteScrollPager;
 
 /* @var $this yii\web\View */
@@ -11,30 +12,41 @@ use shiyang\infinitescroll\InfiniteScrollPager;
 $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
 ?>
 
-<?php if (!empty($posts)): ?>
+<div class="feed-form">
+
+    <?php $form = ActiveForm::begin(); ?>
+
+    <?= $form->field($newFeed, 'content')->textarea(['rows' => 6]) ?>
+
+    <div class="form-group">
+        <?= Html::submitButton(Yii::t('app', 'Create'), ['class' => 'btn btn-success']) ?>
+    </div>
+
+    <?php ActiveForm::end(); ?>
+
+</div>
+
+<?php if (!empty($feeds)): ?>
     <div id="content">
-        <?php foreach($posts as $post): ?>
+        <?php foreach($feeds as $feed): ?>
             <div class="item widget-container fluid-height social-entry">
                 <div class="widget-content padded">
                     <div class="profile-info clearfix">
-                        <img width="50" height="50" class="social-avatar pull-left" src="<?= Yii::getAlias('@avatar') . $post['avatar'] ?>" />
+                        <img width="50" height="50" class="social-avatar pull-left" src="<?= Yii::getAlias('@avatar') . $feed['avatar'] ?>" />
                         <div class="profile-details">
-                            <a class="user-name" href="<?= Url::toRoute(['/user/view', 'id'=>$post['username']]) ?>">
-                                <?= Html::encode($post['username']) ?>
+                            <a class="user-name" href="<?= Url::toRoute(['/user/view', 'id'=>$feed['username']]) ?>">
+                                <?= Html::encode($feed['username']) ?>
                             </a>
                             <p>
-                                <em><?= Tools::formatTime($post['created_at']) ?></em>
+                                <em><?= Tools::formatTime($feed['created_at']) ?></em>
                             </p>
                         </div>
                     </div>
                     <p class="content">
-                        <?php if (!empty($post['title'])): ?>
-                            <h3><?= Html::a(Html::encode($post['title']), ['/home/post/view', 'id' => $post['id']]) ?></h3>
-                        <?php endif ?>
-                        <?= HtmlPurifier::process($post['content']) ?>
+                        <?= Html::encode($feed['content']) ?>
                     </p>
-                    <?php if(Yii::$app->user->id == $post['user_id']): ?>
-                        <a href="<?= Url::toRoute(['/home/post/delete', 'id' => $post['id']]) ?>" data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="post">
+                    <?php if(Yii::$app->user->id == $feed['user_id']): ?>
+                        <a href="<?= Url::toRoute(['/home/feed/delete', 'id' => $feed['id']]) ?>" data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="feed">
                             <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
                         </a>
                     <?php endif ?>
@@ -49,6 +61,6 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
 <?php else: ?>
     <div class="no-data-found">
         <i class="glyphicon glyphicon-folder-open"></i>
-        No post to display.
+        No feed to display.
     </div>
 <?php endif; ?>

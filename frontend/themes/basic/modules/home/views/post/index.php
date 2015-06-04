@@ -29,21 +29,8 @@ $user = Yii::$app->user->identity;
                 <?php foreach($posts as $post): ?>
                     <div class="item widget-container fluid-height social-entry">
                         <div class="widget-content padded">
-                            <div class="profile-info clearfix">
-                                <img width="50" height="50" class="social-avatar pull-left" src="<?= Yii::getAlias('@avatar') . $user->avatar ?>" />
-                                <div class="profile-details">
-                                    <a class="user-name" href="<?= Url::toRoute(['/user/view', 'id' => $user->username]) ?>">
-                                        <?= Html::encode($user->username) ?>
-                                    </a>
-                                    <p>
-                                        <em><?= \app\components\Tools::formatTime($post['created_at']) ?></em>
-                                    </p>
-                                </div>
-                            </div>
                             <p class="content">
-                                <?php if (!empty($post['title'])): ?>
-                                    <h3><?= Html::a(Html::encode($post['title']), ['/home/post/view', 'id' => $post['id']]) ?></h3>
-                                <?php endif ?>
+                                <h3><?= Html::a(Html::encode($post['title']), ['/home/post/view', 'id' => $post['id']]) ?></h3>
                                 <?= $post['content'] ?>
                             </p>
                             <a href="<?= Url::toRoute(['/home/post/delete', 'id' => $post['id']]) ?>" data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="post">

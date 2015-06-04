@@ -25,6 +25,7 @@ $this->params['userData'] = $model->userData;
             <span class="label label-default"><i class="glyphicon glyphicon-tag"></i> <?= Html::encode($ptag) ?></span>
             <?php if($i<$tags_len):?>&nbsp;&nbsp;<?php endif;?>
             <?php $i++;?>
-            <?php endforeach;?>                                        </span>
+            <?php endforeach;?>
+        </span>
     <?php endif;?>
 </div>
