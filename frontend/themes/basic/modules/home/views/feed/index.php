@@ -28,7 +28,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="item widget-container fluid-height social-entry">
                             <div class="widget-content padded">
                                 <p class="content">
-                                    <?= Html::encode($feed['content']) ?>
+                                    <?php
+                                        if (!empty($feed['content'])) {
+                                            echo Html::encode($feed['content']);
+                                        } else {
+                                            print_r(str_replace( ['{title}', '{summary}'], unserialize($feed['feed_data']), $feed['template']));
+                                        }
+                                    ?>
                                 </p>
                                 <a href="<?= Url::toRoute(['/home/feed/delete', 'id' => $feed['id']]) ?>" data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="feed">
                                     <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>

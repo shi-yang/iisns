@@ -18,7 +18,13 @@ $this->params['userData'] = ArrayHelper::toArray($model->userData);
         <?php foreach ($model->feeds['feeds'] as $feed): ?>
             <li class="post-item">
                 <div class="post-content">
-                    <?= Html::encode($feed->content) ?>
+                    <?php
+                        if (!empty($feed->content)) {
+                            echo Html::encode($feed->content);
+                        } else {
+                            print_r(str_replace( ['{title}', '{summary}'], unserialize($feed->feed_data), $feed->template));
+                        }
+                    ?>
                 </div>
                 <div class="clearfix"></div>
                 <div class="post-info">

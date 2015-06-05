@@ -38,7 +38,7 @@ class FeedController extends FrontController
         $this->layout = '@app/modules/user/views/layouts/user';
 
         $query = new Query;
-        $query->select('id, content, created_at')
+        $query->select('id, content, feed_data, template, created_at')
             ->from('{{%home_feed}}')
             ->where('user_id=:user_id', [':user_id' => Yii::$app->user->id])
             ->orderBy('created_at DESC');
