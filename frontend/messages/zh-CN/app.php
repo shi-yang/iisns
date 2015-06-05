@@ -124,9 +124,11 @@ return [
 	'Today {time}' => '今天 {time}',
 	'{min} minutes ago' => '{min} 分钟前',
 	'Just now' => '刚刚',
+    'More' => '更多',
 	'Create successfully.' => '创建成功',
 	'Save successfully.' => '保存成功',
 	'Delete successfully.' => '已删除',
+    'Recommendation' => '推荐',
 
 	'Are you sure you want to Log out?' => '你确定要注销？',
 	'No data to display.' => '没有数据展示',

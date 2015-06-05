@@ -16,24 +16,6 @@ $this->registerMetaTag(['name' => 'description', 'content' => Yii::$app->setting
 <div class="page-header">
   <h1><?= $this->params['title'] ?> <small><?= Yii::$app->setting->get('siteTitle') ?></small></h1>
 </div>
-<?= Nav::widget([
-        'items' => [
-            [
-                'label' => '<i class="glyphicon glyphicon-home"></i> ',
-                'url' => ['/explore/index'],
-            ],
-            [
-                'label' => '<i class="glyphicon glyphicon-comment"></i> '. Yii::t('app', 'Forums'),
-                'url' => ['/explore/forums'],
-            ],
-            [
-                'label' => '<i class="glyphicon glyphicon-picture"></i> '. Yii::t('app', 'Photos'),
-                'url' => ['/explore/photos'],
-            ],
-        ],
-        'encodeLabels' => false,
-        'options' => ['class' =>'nav-pills'], 
-]) ?>
 
 <?= $content; ?>
 

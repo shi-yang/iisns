@@ -7,7 +7,7 @@ use app\modules\home\models\Album;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->params['title'] = Yii::t('app', 'Explore');
+$this->title = Yii::t('app', 'Explore');
 $this->registerCss('
 .content {
   margin: 0 auto;
@@ -42,16 +42,7 @@ $this->registerCss('
 .carousel-indicators li {
   border: 1px solid #C3C3C3;
 }
-.heading a {
-  font-size: 18px;
-  font-weight: bold;
-  color: #FF7B4C;
-  padding-right: 25px;
-  background-position: center right;
-  right: 0px;
-  transition: all 0.5s ease-out;
-  text-decoration: none;
-}
+
 .album-all {
 list-style-type: none;
 }
@@ -68,7 +59,7 @@ list-style-type: none;
     height:158px;
 }
 ');
-$this->registerCssFile(Yii::getAlias('@web').'/css/forum/css/forum.css');
+
 ?>
 <div class="content">
     <div class="recommend">
@@ -119,32 +110,16 @@ $this->registerCssFile(Yii::getAlias('@web').'/css/forum/css/forum.css');
                     <div class="panel-heading"><?= Yii::t('app', 'Albums') ?></div>
                     <div class="panel-body">
                         <div class="row">
-                            <?php
-                            if ($this->beginCache('explore-album', ['duration' => 1])) {
-                                foreach ($albums as $album) :
-                                    $coverSrc = Album::getCoverPhoto($album['id']);
-                                    $link = Url::toRoute(['/explore/view-album', 'id' => $album['id']]);
-                                    ?>
-                                    <div class="album-item col-md-2 col-sm-6">
-                                        <div class="album-img">
-                                            <a href="<?= $link ?>">
-                                                <img src="<?= $coverSrc ?>" class="album-cover" alt="album-cover">
-                                            </a>
-                                        </div>
-                                        <?= Html::a(Html::encode($album['name']), ['/explore/view-album', 'id' => $album['id']]) ?>
-                                    </div>
-                                <?php endforeach;
-                                $this->endCache();
-                            }
-                            ?>
+
                         </div>
                     </div>
                 </div>
             </div>
             <div class="post-all">
-                <?php foreach($posts['result'] as $post): ?>
+                <?= Html::a(Yii::t('app', 'Create a post'), ['/explore/create', 'category' => 'post'], ['class' => 'btn btn-success']) ?>
+                <?php foreach($posts as $post): ?>
                     <div class="post-list">
-                        <h2 class="heading">
+                        <h2 class="heading"><span class="new-icon"></span>
                             <a href="<?= Url::toRoute(['/explore/view', 'id' => $post['id']]) ?>" title="?" target="_blank"><?= Html::encode($post['title']) ?></a>
                         </h2>
                         <div class="info"> <span>2015-06-05</span> <span><i class="icons th-list-icon"></i><span class="hidden"> </div>
@@ -158,20 +133,17 @@ $this->registerCssFile(Yii::getAlias('@web').'/css/forum/css/forum.css');
             </div>
         </div>
         <div class="col-md-4">
-            <?= \shiyang\login\Login::widget(['visible' => Yii::$app->user->isGuest]); ?>
             <p class="bg-success" style="padding:15px;">
                 <b><?= Yii::t('app', 'Recommendation') ?></b>
-                <?= Html::a(Yii::t('app', 'More'), ['/explore/forums'], ['class' => 'pull-right']) ?>
             </p>
+            <a href="<?= Url::toRoute(['/explore/create', 'category' => 'forum']) ?>" style=" border-bottom: 1px dotted #ccc;">
+                <?= Yii::t('app', 'Add Recommendation') ?>
+            </a>
             <?php foreach($forums as $forum): ?>
-                <a href="<?= Url::toRoute(['/forum/forum/view', 'id' => $forum['forum_url']]) ?>" style=" border-bottom: 1px dotted #ccc;">
+                <a href="<?= Url::toRoute(['/explore/view', 'id' => $forum['id']]) ?>" style=" border-bottom: 1px dotted #ccc;">
                     <div class="media">
-                        <div class="media-left">
-                            <img class="media-object" style="height: 64px;width: 64px" src="<?= Yii::getAlias('@forum_icon') . $forum['forum_icon'] ?>" alt="<?= Html::encode($forum['forum_name']) ?>">
-                        </div>
                         <div class="media-body">
-                            <h4 class="media-heading"><?= Html::encode($forum['forum_name']) ?></h4>
-                            <?= Html::encode($forum['forum_desc']) ?>
+                            <h4 class="media-heading"><?= Html::encode($forum['table_id']) ?></h4>
                         </div>
                     </div>
                 </a>

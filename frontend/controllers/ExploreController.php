@@ -37,20 +37,25 @@ class ExploreController extends FrontController
 
     public function actionIndex()
     {
-        $query = new Query;
-        $query->select('forum_url,forum_name,forum_desc,forum_icon')
-            ->from('{{%forum}}')
-            ->orderBy('id DESC');
-        $forumResult = Tools::Pagination($query);
-
         $albums = Yii::$app->db
-            ->createCommand('SELECT `a`.`id`, `a`.`name` FROM {{%home_album}} `a` WHERE a.status=0 ORDER BY `a`.`id` DESC LIMIT 10')
+            ->createCommand('SELECT `a`.`id`, `a`.`name` FROM {{%home_album}} `a` WHERE a.status=0 ORDER BY `a`.`id` DESC LIMIT 4')
             ->queryAll();
 
+        $forums = Yii::$app->db
+            ->createCommand('SELECT forum_name, forum_desc, forum_icon, forum_url FROM {{%forum}} ORDER BY id DESC LIMIT 4')
+            ->queryAll();
+
+        $query = new Query;
+        $query->select('id, title, summary, created_at, user_id, username, table_id, table_name')
+            ->from('{{%explore_recommend}}')
+            ->where(['category' => 'post'])
+            ->orderBy('id DESC');
+        $posts = Tools::Pagination($query);
+
         return $this->render('index', [
-            'forums' => $forumResult['result'],
-            'pages' => $forumResult['pages'],
+            'forums' => $forums,
             'albums' => $albums,
+            'posts' => $posts,
         ]);
     }
 

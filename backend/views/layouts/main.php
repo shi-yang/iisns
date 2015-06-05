@@ -118,7 +118,12 @@ AppAsset::register($this);
                 <ul class="sidebar-menu">
                     <li>
                         <a href="<?= Url::toRoute('/site/index') ?>">
-                            <i class="glyphicon glyphicon-dashboard"></i> <span>Dashboard</span>
+                            <i class="glyphicon glyphicon-dashboard"></i> <span><?= Yii::t('app', 'Dashboard') ?></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?= Url::toRoute('/explore/index') ?>">
+                            <i class="glyphicon glyphicon-globe"></i> <span><?= Yii::t('app', 'Explore') ?></span>
                         </a>
                     </li>
                     <li class="active">
