@@ -43,11 +43,9 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
                             if (!empty($feed['content'])) {
                                 echo Html::encode($feed['content']);
                             } else {
-                                echo $feed['template'];
-                                print_r(unserialize($feed['feed_data']));
+                                print_r(str_replace( ['{title}', '{summary}'], unserialize($feed['feed_data']), $feed['template']));
                             }
                         ?>
-                        {title}My Page{/title}
                     </p>
                     <?php if(Yii::$app->user->id == $feed['user_id']): ?>
                         <a href="<?= Url::toRoute(['/home/feed/delete', 'id' => $feed['id']]) ?>" data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="feed">

@@ -42,6 +42,7 @@ return [
 	'Feed' => '记录',
 	'Feeds' => '记录',
 	'Create Feed' => '创建记录',
+    'Record people around, things around.' => '记录身边人，身边事',
 	'Blog' => '日志',
 	'Photo' => '照片',
 	'Photos' => '照片',

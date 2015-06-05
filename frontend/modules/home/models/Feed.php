@@ -83,6 +83,9 @@ class Feed extends \yii\db\ActiveRecord
                 $setarr['created_at'] = time();
                 Yii::$app->db->createCommand()->insert('{{%home_feed}}', $setarr)->execute();
                 break;
+            case 'album':
+                ;
+                break;
         }
     }
 }
