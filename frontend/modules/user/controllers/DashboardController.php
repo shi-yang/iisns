@@ -46,7 +46,7 @@ class DashboardController extends FrontController
             return $this->refresh();
         }
 
-        $query = $query->select('p.id, p.user_id, p.content, p.created_at, u.username, u.avatar')
+        $query = $query->select('p.id, p.user_id, p.content, p.feed_data, p.template, p.created_at, u.username, u.avatar')
             ->from('{{%home_feed}} as p')
             ->join('LEFT JOIN','{{%user_follow}} as f', 'p.user_id=f.people_id')
             ->join('LEFT JOIN','{{%user}} as u', 'u.id=p.user_id')

@@ -4,12 +4,12 @@ namespace app\modules\home\controllers;
 
 use Yii;
 use yii\db\Query;
-use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use app\modules\home\models\Post;
+use app\modules\home\models\Feed;
 use app\components\Tools;
 use app\components\FrontController;
 
@@ -94,11 +94,16 @@ class PostController extends FrontController
         $model = new Post();
 
         if ($model->load(Yii::$app->request->post())) {
+            //标签分割
             $tags = trim($_POST['Post']['tags']);
-            $explodeTags = array_unique(explode(',', str_replace(array (' ' , '，' ), array('',','), $tags)));    	        	                $explodeTags = array_slice($explodeTags, 0, 10);  
+            $explodeTags = array_unique(explode(',', str_replace(array (' ' , '，' ), array('',','), $tags)));
+            $explodeTags = array_slice($explodeTags, 0, 10);
             $model->tags = implode(',',$explodeTags);
             if ($model->save()) {
                 Yii::$app->userData->updateKey('post_count', Yii::$app->user->id);
+                $data = ['title' => $model->title, 'summary' => mb_substr(strip_tags($model->content), 0, 140, 'utf-8')];
+                $data = serialize($data);
+                Feed::addFeed('post', $data);
                 return $this->redirect(['/home/post']);
             }
         }

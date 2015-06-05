@@ -1,10 +1,8 @@
 <?php
 use yii\helpers\Url;
 use yii\helpers\Html;
-use app\modules\user\models\User;
 use app\components\Tools;
-use yii\helpers\HtmlPurifier;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
 use shiyang\infinitescroll\InfiniteScrollPager;
 
 /* @var $this yii\web\View */
@@ -16,13 +14,10 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
 
     <div class="widget-content padded">
         <?php $form = ActiveForm::begin(); ?>
-
-        <?= $form->field($newFeed, 'content')->textarea(['rows' => 3]) ?>
-
+        <?= $form->field($newFeed, 'content', ['inputOptions' => ['placeholder' => Yii::t('app', 'Record people around, things around.')]])->textarea(['rows' => 3])->label(false) ?>
         <div class="form-group">
             <?= Html::submitButton(Yii::t('app', 'Create'), ['class' => 'btn btn-success']) ?>
         </div>
-
         <?php ActiveForm::end(); ?>
     </div>
 </div>
@@ -44,7 +39,15 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
                         </div>
                     </div>
                     <p class="content">
-                        <?= Html::encode($feed['content']) ?>
+                        <?php
+                            if (!empty($feed['content'])) {
+                                echo Html::encode($feed['content']);
+                            } else {
+                                echo $feed['template'];
+                                print_r(unserialize($feed['feed_data']));
+                            }
+                        ?>
+                        {title}My Page{/title}
                     </p>
                     <?php if(Yii::$app->user->id == $feed['user_id']): ?>
                         <a href="<?= Url::toRoute(['/home/feed/delete', 'id' => $feed['id']]) ?>" data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="feed">

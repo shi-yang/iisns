@@ -10,6 +10,7 @@ use Yii;
  * @property integer $id
  * @property string $type
  * @property string $content
+ * @property string $template
  * @property integer $comment_count
  * @property integer $repost_count
  * @property integer $feed_data
@@ -69,5 +70,19 @@ class Feed extends \yii\db\ActiveRecord
        } else {
               return false;
        }
+    }
+
+    public static function addFeed($type, $data){
+        $setarr = [];
+        switch ($type) {
+            //发表日志
+            case 'post':
+                $setarr['template'] = '<b>{title}</b><br>{summary}';
+                $setarr['feed_data'] = $data;
+                $setarr['user_id'] = Yii::$app->user->id;
+                $setarr['created_at'] = time();
+                Yii::$app->db->createCommand()->insert('{{%home_feed}}', $setarr)->execute();
+                break;
+        }
     }
 }
