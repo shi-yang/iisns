@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-use app\modules\user\models\User;
 use shiyang\infinitescroll\InfiniteScrollPager;
 
 /* @var $this yii\web\View */

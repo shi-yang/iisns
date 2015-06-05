@@ -2,7 +2,6 @@
 use yii\helpers\Html;
 use yii\helpers\HtmlPurifier;
 use yii\helpers\Url;
-use yii\bootstrap\Modal;
 use shiyang\infinitescroll\InfiniteScrollPager;
 use app\components\Tools;
 ?>
