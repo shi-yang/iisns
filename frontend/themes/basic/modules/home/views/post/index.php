@@ -2,7 +2,9 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\helpers\HtmlPurifier;
 use shiyang\infinitescroll\InfiniteScrollPager;
+use app\components\Tools;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -30,7 +32,7 @@ $user = Yii::$app->user->identity;
                         <div class="widget-content padded">
                             <p class="content">
                                 <h3><?= Html::a(Html::encode($post['title']), ['/home/post/view', 'id' => $post['id']]) ?></h3>
-                                <?= $post['content'] ?>
+                                <?= HtmlPurifier::process(Tools::htmlSubString($post['content'], 300, Url::toRoute(['/home/post/view', 'id' => $post['id']]))) ?>
                             </p>
                             <a href="<?= Url::toRoute(['/home/post/delete', 'id' => $post['id']]) ?>" data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="post">
                                 <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
