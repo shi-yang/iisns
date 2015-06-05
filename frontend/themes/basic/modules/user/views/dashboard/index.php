@@ -12,18 +12,19 @@ use shiyang\infinitescroll\InfiniteScrollPager;
 $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
 ?>
 
-<div class="feed-form">
+<div class="item widget-container share-widget fluid-height clearfix">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <div class="widget-content padded">
+        <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($newFeed, 'content')->textarea(['rows' => 6]) ?>
+        <?= $form->field($newFeed, 'content')->textarea(['rows' => 3]) ?>
 
-    <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Create'), ['class' => 'btn btn-success']) ?>
+        <div class="form-group">
+            <?= Html::submitButton(Yii::t('app', 'Create'), ['class' => 'btn btn-success']) ?>
+        </div>
+
+        <?php ActiveForm::end(); ?>
     </div>
-
-    <?php ActiveForm::end(); ?>
-
 </div>
 
 <?php if (!empty($feeds)): ?>

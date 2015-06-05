@@ -13,18 +13,18 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $user = Yii::$app->user->identity;
 ?>
-<div class="album-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Post'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-</div>
 <div class="social-wrapper row">
     <div id="social-container">
-        <div class="col-xs-12 col-sm-8 col-md-8" id="content">
+        <div class="col-xs-12 col-sm-8 col-md-8 col-lg-offset-1 col-lg-6" id="content">
+            <div class="post-index">
+
+                <h1><?= Html::encode($this->title) ?></h1>
+
+                <p>
+                    <?= Html::a(Yii::t('app', 'Create Post'), ['create'], ['class' => 'btn btn-success']) ?>
+                </p>
+
+            </div>
             <?php if (!empty($posts)): ?>
                 <?php foreach($posts as $post): ?>
                     <div class="item widget-container fluid-height social-entry">
@@ -55,3 +55,4 @@ $user = Yii::$app->user->identity;
         </div>
     </div>
 </div>
+
