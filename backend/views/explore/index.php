@@ -126,9 +126,14 @@ list-style-type: none;
                         <div class="main row-fluid">
                             <div class="desc pull-left">
                                 <p><?= Html::encode($post['summary']) ?> ... </p>
-                                <span class="more pull-right"><a href="<?= Url::toRoute(['/explore/view', 'id' => $post['id']]) ?>" target="_blank">查看详情</a></span> </div>
+                                <a class="pull-right" href="<?= Url::toRoute(['/explore/delete', 'id' => $post['id']]) ?>" data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="post">
+                                    <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
+                                </a>
+                                <span class="more pull-right"><a href="<?= Url::toRoute(['/explore/view', 'id' => $post['id']]) ?>" target="_blank">查看详情</a></span>
+                            </div>
                         </div>
                     </div>
+                    <div class="clearfix"></div>
                 <?php endforeach ?>
             </div>
         </div>
@@ -143,7 +148,7 @@ list-style-type: none;
                 <a href="<?= Url::toRoute(['/explore/view', 'id' => $forum['id']]) ?>" style=" border-bottom: 1px dotted #ccc;">
                     <div class="media">
                         <div class="media-body">
-                            <h4 class="media-heading"><?= Html::encode($forum['table_id']) ?></h4>
+                            <h4 class="media-heading"><?= Html::encode($forum['forum_name']) ?></h4>
                         </div>
                     </div>
                 </a>

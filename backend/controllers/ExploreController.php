@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use backend\models\ExploreRecommend;
 use yii\data\SqlDataProvider;
+use yii\db\Query;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -33,7 +34,13 @@ class ExploreController extends Controller
     public function actionIndex()
     {
         $posts = ExploreRecommend::findAll(['category' => 'post']);
-        $forums  = ExploreRecommend::findAll(['category' => 'forum']);
+        $forums = new Query;
+        $forums = $forums->select('f.forum_name, f.forum_url, f.forum_desc, f.forum_icon, e.id')
+            ->from('{{%forum}} as f')
+            ->join('LEFT JOIN','{{%explore_recommend}} as e', 'e.table_id=f.id')
+            ->where(['e.category' => 'forum'])
+            ->orderBy('e.id DESC')
+            ->all();
         return $this->render('index', [
             'posts' => $posts,
             'forums' => $forums
@@ -66,6 +73,23 @@ class ExploreController extends Controller
             switch ($category) {
                 case 'post':
                     $category = 'post';
+                    if (empty($model->summary)) {
+                        $model->summary = mb_substr(strip_tags($model->content), 0, 140, 'utf-8');
+                    }
+                    if (!empty($model->table_id) && !empty($model->table_name)) {
+                        $post = Yii::$app->db->createCommand("SELECT * FROM {{%{$model->table_name}}} WHERE id=:id")->bindValue(':id', $model->table_id)->queryOne();
+                        if ($post == null) {
+                            echo '没有这个帖子';
+                            return false;
+                        } else {
+                            $model->title = $post['title'];
+                            $model->summary = mb_substr(strip_tags($post['content']), 0, 140, 'utf-8');
+                            $model->content = $post['content'];
+                            $model->user_id = $post['user_id'];
+                            $table_id = $model->table_id;
+                            $table_name = $model->table_name;
+                        }
+                    }
                     break;
                 case 'album':
                     $category = 'album';
@@ -74,8 +98,6 @@ class ExploreController extends Controller
                     $category = 'forum';
                     $table_id = Yii::$app->db->createCommand('SELECT id FROM {{%forum}} WHERE forum_name=:name')->bindValue(':name', $model->table_id)->queryScalar();
                     if ($table_id == null) {
-                        echo '没有这个论坛';
-                        return false;
                     }
                     $table_name = 'forum';
                     break;
@@ -86,6 +108,7 @@ class ExploreController extends Controller
             $model->category = $category;
             $model->table_id = $table_id;
             $model->table_name = $table_name;
+            $model->created_at = time();
             $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }

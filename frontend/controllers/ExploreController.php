@@ -41,16 +41,20 @@ class ExploreController extends FrontController
             ->createCommand('SELECT `a`.`id`, `a`.`name` FROM {{%home_album}} `a` WHERE a.status=0 ORDER BY `a`.`id` DESC LIMIT 4')
             ->queryAll();
 
-        $forums = Yii::$app->db
-            ->createCommand('SELECT forum_name, forum_desc, forum_icon, forum_url FROM {{%forum}} ORDER BY id DESC LIMIT 4')
-            ->queryAll();
+        $forums = new Query;
+        $forums->select('f.forum_name, f.forum_url, f.forum_desc, f.forum_icon')
+            ->from('{{%forum}} as f')
+            ->join('LEFT JOIN','{{%explore_recommend}} as e', 'e.table_id=f.id')
+            ->where(['e.category' => 'forum']);
+        $forums = Tools::Pagination($forums);
 
-        $query = new Query;
-        $query->select('id, title, summary, created_at, user_id, username, table_id, table_name')
-            ->from('{{%explore_recommend}}')
+        $posts = new Query;
+        $posts->select('e.id, title, summary, e.created_at, e.username, u.username as author, table_id, table_name')
+            ->from('{{%explore_recommend}} as e')
+            ->join('LEFT JOIN','{{%user}} as u', 'u.id=e.user_id')
             ->where(['category' => 'post'])
-            ->orderBy('id DESC');
-        $posts = Tools::Pagination($query);
+            ->orderBy('e.id DESC');
+        $posts = Tools::Pagination($posts);
 
         return $this->render('index', [
             'forums' => $forums,

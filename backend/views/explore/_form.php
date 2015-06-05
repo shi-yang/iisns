@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\ExploreRecommend */
@@ -38,7 +38,13 @@ use yii\widgets\ActiveForm;
         ]
     ]) ?>
 
-    <?= $form->field($model, 'username')->textInput() ?>
+    <?= $form->field($model, 'user_id')->textInput() ?>
+
+    <?= $form->field($model, 'username')->textInput()->hint('提示：用户名和用户ID只需填一个即可') ?>
+
+    <?= $form->field($model, 'table_id')->textInput() ?>
+
+    <?= $form->field($model, 'table_name')->inline()->radioList(['home_post' => 'Home Post', 'forum_thread' => 'Forum Thread']) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

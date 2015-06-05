@@ -3,12 +3,21 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use app\modules\home\models\Album;
+use app\components\Tools;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->params['title'] = Yii::t('app', 'Explore');
 $this->registerCss('
+a {
+  color: #FF7B4C;
+  text-decoration: none;
+}
+a:hover {
+  color: #ff7e51;
+  text-decoration: none;
+}
 .content {
   margin: 0 auto;
   margin-bottom: 20px;
@@ -68,7 +77,6 @@ list-style-type: none;
     height:158px;
 }
 ');
-$this->registerCssFile(Yii::getAlias('@web').'/css/forum/css/forum.css');
 ?>
 <div class="content">
     <div class="recommend">
@@ -116,7 +124,10 @@ $this->registerCssFile(Yii::getAlias('@web').'/css/forum/css/forum.css');
         <div class="col-md-8">
             <div class="album-all">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><?= Yii::t('app', 'Albums') ?></div>
+                    <div class="panel-heading">
+                      <?= Yii::t('app', 'Albums') ?>
+                      <?= Html::a(Yii::t('app', 'More'), ['/explore/photos'], ['class' => 'pull-right']) ?>
+                    </div>
                     <div class="panel-body">
                         <div class="row">
                             <?php
@@ -145,15 +156,26 @@ $this->registerCssFile(Yii::getAlias('@web').'/css/forum/css/forum.css');
                 <?php foreach($posts['result'] as $post): ?>
                     <div class="post-list">
                         <h2 class="heading">
-                            <a href="<?= Url::toRoute(['/explore/view', 'id' => $post['id']]) ?>" title="?" target="_blank"><?= Html::encode($post['title']) ?></a>
+                            <a href="<?= Url::toRoute(['/explore/view', 'id' => $post['id']]) ?>" title="<?= Html::encode($post['title']) ?>" target="_blank"><?= Html::encode($post['title']) ?></a>
                         </h2>
-                        <div class="info"> <span>2015-06-05</span> <span><i class="icons th-list-icon"></i><span class="hidden"> </div>
+                        <div class="info">
+                          <span class="glyphicon glyphicon-time"></span> <?= Tools::formatTime($post['created_at']) ?>
+                          <?php
+                            if (!empty($post['author'])) {
+                              echo Html::a('<span class="glyphicon glyphicon-user"></span> ' . Html::encode($post['author']), ['/user/view', 'id' => $post['author']]);
+                            } else {
+                              echo '<span class="glyphicon glyphicon-user"></span> ' . Html::encode($post['username']);
+                            }
+                          ?>
+                        </div>
                         <div class="main row-fluid">
                             <div class="desc pull-left">
                                 <p><?= Html::encode($post['summary']) ?> ... </p>
-                                <span class="more pull-right"><a href="<?= Url::toRoute(['/explore/view', 'id' => $post['id']]) ?>" target="_blank">查看详情</a></span> </div>
+                                <span class="more pull-right"><a href="<?= Url::toRoute(['/explore/view', 'id' => $post['id']]) ?>" target="_blank">查看详情</a></span>
+                            </div>
                         </div>
                     </div>
+                    <div class="clearfix"></div>
                 <?php endforeach ?>
             </div>
         </div>
@@ -163,8 +185,8 @@ $this->registerCssFile(Yii::getAlias('@web').'/css/forum/css/forum.css');
                 <b><?= Yii::t('app', 'Recommendation') ?></b>
                 <?= Html::a(Yii::t('app', 'More'), ['/explore/forums'], ['class' => 'pull-right']) ?>
             </p>
-            <?php foreach($forums as $forum): ?>
-                <a href="<?= Url::toRoute(['/forum/forum/view', 'id' => $forum['forum_url']]) ?>" style=" border-bottom: 1px dotted #ccc;">
+            <?php foreach($forums['result'] as $forum): ?>
+                <a href="<?= Url::toRoute(['/forum/forum/view', 'id' => $forum['forum_url']]) ?>" style="border-bottom: 1px dotted #ccc;">
                     <div class="media">
                         <div class="media-left">
                             <img class="media-object" style="height: 64px;width: 64px" src="<?= Yii::getAlias('@forum_icon') . $forum['forum_icon'] ?>" alt="<?= Html::encode($forum['forum_name']) ?>">

@@ -15,7 +15,6 @@ use yii\bootstrap\ActiveForm;
 
     <?= $form->field($model, 'title', [
         'template' => "<div class=\"input-group\"><span class=\"input-group-addon\">". Yii::t('app', 'Title') ."</span>{input}</div>",
-        'inputOptions' => ['placeholder' => Yii::t('app', 'Optional')]
         ])->textInput(['maxlength' => 128, 'autocomplete'=>'off'])
     ?>
 
