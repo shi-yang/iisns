@@ -26,6 +26,11 @@ class DashboardController extends FrontController
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
+                        'actions' => ['index'],
+                        'allow' => true,
+                        'roles' => ['?']
+                    ],
+                    [
                         'actions' => ['index', 'myposts', 'myfavor', 'followpeople',
                              'followforum', 'forumpost', 'homepost'],
                         'allow' => true,
@@ -38,6 +43,9 @@ class DashboardController extends FrontController
 
     public function actionIndex()
     {
+        if (Yii::$app->user->isGuest) {
+            $this->redirect(['/explore/index']);
+        }
         $model = $this->findModel();
         $newFeed = new Feed;
         $query = new Query;
