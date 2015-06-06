@@ -1,5 +1,7 @@
 <?php
+
 use yii\bootstrap\Nav;
+use yii\widgets\Breadcrumbs;
 
 if (!isset($this->title)) {
     $this->title = Yii::$app->setting->get('siteTitle');
@@ -16,7 +18,9 @@ $this->registerMetaTag(['name' => 'description', 'content' => Yii::$app->setting
 <div class="page-header">
   <h1><?= $this->params['title'] ?> <small><?= Yii::$app->setting->get('siteTitle') ?></small></h1>
 </div>
-
+<?= Breadcrumbs::widget([
+	'homeLink' => ['label' => Yii::t('app', 'Explore'), 'url' => ['/explore/index']],
+	'links' => isset($this->params['breadcrumb']) ? $this->params['breadcrumb'] : [],
+]) ?>
 <?= $content; ?>
-
 <?php $this->endContent(); ?>

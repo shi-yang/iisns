@@ -8,6 +8,7 @@ use shiyang\masonry\Masonry;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->params['title'] = Yii::t('app', 'Explore') . ' - ' . Yii::t('app', 'Photos');
+$this->params['breadcrumb'][] = Yii::t('app', 'Photos');
 $this->registerCss('
 .photo-index {
   padding:0

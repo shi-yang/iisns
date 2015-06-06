@@ -49,7 +49,7 @@ class ExploreController extends FrontController
         $forums = Tools::Pagination($forums);
 
         $posts = new Query;
-        $posts->select('e.id, title, summary, content, e.created_at, e.username, u.username as author, table_id, table_name')
+        $posts->select('e.id, title, summary, content, view_count, e.created_at, e.username, u.username as author, table_id, table_name')
             ->from('{{%explore_recommend}} as e')
             ->join('LEFT JOIN','{{%user}} as u', 'u.id=e.user_id')
             ->where(['category' => 'post'])
@@ -104,6 +104,30 @@ class ExploreController extends FrontController
         }
 
         return $this->render('viewAlbum', [
+            'model' => $model
+        ]);
+    }
+
+    public function actionViewPost($id)
+    {
+        $query = new Query;
+        $id = intval($id);
+        $model = $query->select('e.id, title, summary, content, view_count, e.created_at, e.username, u.username as author, table_id, table_name')
+            ->from('{{%explore_recommend}} as e')
+            ->join('LEFT JOIN','{{%user}} as u', 'u.id=e.user_id')
+            ->where('e.id=:id AND category="post"', [':id' => $id])
+            ->one();
+        if ($model == null) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+
+        Yii::$app->db->createCommand("UPDATE {{%explore_recommend}} SET view_count=view_count+1 WHERE id=:id")->bindValue(':id', $id)->execute();
+
+        if (!empty($model['author'])) {
+            return $this->redirect(['/home/post/view', 'id' => $model['table_id']]);
+        }
+
+        return $this->render('viewPost', [
             'model' => $model
         ]);
     }
