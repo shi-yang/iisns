@@ -98,6 +98,8 @@ class ExploreController extends Controller
                     $category = 'forum';
                     $table_id = Yii::$app->db->createCommand('SELECT id FROM {{%forum}} WHERE forum_name=:name')->bindValue(':name', $model->table_id)->queryScalar();
                     if ($table_id == null) {
+                        echo '没有这个论坛';
+                        return false;
                     }
                     $table_name = 'forum';
                     break;
@@ -106,8 +108,6 @@ class ExploreController extends Controller
                     break;
             }
             $model->category = $category;
-            $model->table_id = $table_id;
-            $model->table_name = $table_name;
             $model->created_at = time();
             $model->save();
             return $this->redirect(['view', 'id' => $model->id]);

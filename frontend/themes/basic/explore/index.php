@@ -76,6 +76,51 @@ list-style-type: none;
     width:158px;
     height:158px;
 }
+.post-list {
+  width: 100%;
+  border-bottom: 2px dashed #f2f1f1;
+  padding: 30px 0px;
+  position: relative;
+}
+.titleimg {
+  display: block;
+  float: left;
+  height: 110px;
+  overflow: hidden;
+  background: url(images/xxx.gif);
+  background-size: 180px auto;
+}
+.mecc {
+
+}
+.mecc p {
+  line-height: 30px;
+  margin-top: 6px;
+  color: #656565;
+  letter-spacing: 0.5px;
+}
+.mecctitle {
+  padding: 0;
+  margin: 0;
+  height: 20px;
+  line-height: 18px;
+}
+.mecctitle a {
+  font-size: 18px;
+  font-weight: bold;
+  color: #383838;
+  padding-right: 25px;
+  background-position: center right;
+  right: 0px;
+  transition: all 0.5s ease-out;
+}
+.meccaddress {
+  color: #a2a2a2;
+  margin-top: 12px;
+  margin-bottom: 0;
+  font-style: normal;
+  display: block;
+}
 ');
 ?>
 <div class="content">
@@ -154,12 +199,28 @@ list-style-type: none;
             </div>
             <div class="post-all">
                 <?php foreach($posts['result'] as $post): ?>
-                    <div class="post-list">
-                        <h2 class="heading">
-                            <a href="<?= Url::toRoute(['/explore/view', 'id' => $post['id']]) ?>" title="<?= Html::encode($post['title']) ?>" target="_blank"><?= Html::encode($post['title']) ?></a>
+                  <section class="post-list">
+                    <div class="row">
+                      <span class="titleimg col-md-3">
+                        <a href="<?= Url::toRoute(['/explore/view', 'id' => $post['id']]) ?>" target="_blank">
+                          <?php
+                            $pattern="/<[img|IMG].*?src=\"([^^]*?)\".*?>/"; 
+                            preg_match_all($pattern,$post['content'], $match);
+                            if (!empty($match[1][0])) {
+                              echo \yii\helpers\Html::img($match[1][0], ['style'=>'width:270px;height:165px;']);
+                            }
+                          ?>
+                        </a>
+                      </span>
+                      <div class="mecc col-md-9">
+                        <h2 class="mecctitle">
+                          <a href="<?= Url::toRoute(['/explore/view', 'id' => $post['id']]) ?>" target="_blank">
+                            <?= Html::encode($post['title']) ?>
+                          </a>
                         </h2>
-                        <div class="info">
-                          <span class="glyphicon glyphicon-time"></span> <?= Tools::formatTime($post['created_at']) ?>
+                        <address class="meccaddress">
+                          <time><span class="glyphicon glyphicon-time"></span> <?= Tools::formatTime($post['created_at']) ?></time>
+                          - 
                           <?php
                             if (!empty($post['author'])) {
                               echo Html::a('<span class="glyphicon glyphicon-user"></span> ' . Html::encode($post['author']), ['/user/view', 'id' => $post['author']]);
@@ -167,15 +228,12 @@ list-style-type: none;
                               echo '<span class="glyphicon glyphicon-user"></span> ' . Html::encode($post['username']);
                             }
                           ?>
-                        </div>
-                        <div class="main row-fluid">
-                            <div class="desc pull-left">
-                                <p><?= Html::encode($post['summary']) ?> ... </p>
-                                <span class="more pull-right"><a href="<?= Url::toRoute(['/explore/view', 'id' => $post['id']]) ?>" target="_blank">查看详情</a></span>
-                            </div>
-                        </div>
+                        </address>
+                        <p><?= Html::encode($post['summary']) ?> ... </p>
+                      </div>
                     </div>
                     <div class="clearfix"></div>
+                  </section>
                 <?php endforeach ?>
             </div>
         </div>

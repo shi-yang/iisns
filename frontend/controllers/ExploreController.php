@@ -49,7 +49,7 @@ class ExploreController extends FrontController
         $forums = Tools::Pagination($forums);
 
         $posts = new Query;
-        $posts->select('e.id, title, summary, e.created_at, e.username, u.username as author, table_id, table_name')
+        $posts->select('e.id, title, summary, content, e.created_at, e.username, u.username as author, table_id, table_name')
             ->from('{{%explore_recommend}} as e')
             ->join('LEFT JOIN','{{%user}} as u', 'u.id=e.user_id')
             ->where(['category' => 'post'])
