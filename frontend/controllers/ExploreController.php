@@ -37,9 +37,12 @@ class ExploreController extends FrontController
 
     public function actionIndex()
     {
-        $albums = Yii::$app->db
-            ->createCommand('SELECT `a`.`id`, `a`.`name` FROM {{%home_album}} `a` WHERE a.status=0 ORDER BY `a`.`id` DESC LIMIT 4')
-            ->queryAll();
+        $albums = new Query;
+        $albums = $albums->select('h.id, h.name')
+            ->from('{{%home_album}} as h')
+            ->join('LEFT JOIN','{{%explore_recommend}} as e', 'e.table_id=h.id')
+            ->where(['e.category' => 'album'])
+            ->all();
 
         $forums = new Query;
         $forums->select('f.forum_name, f.forum_url, f.forum_desc, f.forum_icon')
@@ -54,7 +57,7 @@ class ExploreController extends FrontController
             ->join('LEFT JOIN','{{%user}} as u', 'u.id=e.user_id')
             ->where(['category' => 'post'])
             ->orderBy('e.id DESC');
-        $posts = Tools::Pagination($posts);
+        $posts = Tools::Pagination($posts, 15);
 
         return $this->render('index', [
             'forums' => $forums,

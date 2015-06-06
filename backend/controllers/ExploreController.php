@@ -33,7 +33,16 @@ class ExploreController extends Controller
      */
     public function actionIndex()
     {
-        $posts = ExploreRecommend::findAll(['category' => 'post']);
+        $query = new Query;
+        $query->select('id, summary, created_at, title, username, user_id')
+            ->from('{{%explore_recommend}}')
+            ->where(['category' => 'post'])
+            ->orderBy('id DESC');
+        $pages = new \yii\data\Pagination(['totalCount' => $query->count()]);
+        $posts = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+
         $forums = new Query;
         $forums = $forums->select('f.forum_name, f.forum_url, f.forum_desc, f.forum_icon, e.id')
             ->from('{{%forum}} as f')
@@ -41,9 +50,19 @@ class ExploreController extends Controller
             ->where(['e.category' => 'forum'])
             ->orderBy('e.id DESC')
             ->all();
+
+        $albums = new Query;
+        $albums = $albums->select('id, table_id')
+            ->from('{{%explore_recommend}}')
+            ->where(['category' => 'album'])
+            ->orderBy('id DESC')
+            ->all();
+
         return $this->render('index', [
             'posts' => $posts,
-            'forums' => $forums
+            'pages' => $pages,
+            'forums' => $forums,
+            'albums' => $albums
         ]);
     }
 
@@ -93,6 +112,12 @@ class ExploreController extends Controller
                     break;
                 case 'album':
                     $category = 'album';
+                    $table_id = Yii::$app->db->createCommand('SELECT id FROM {{%home_album}} WHERE id=:id')->bindValue(':id', $model->table_id)->queryScalar();
+                    if ($table_id == null) {
+                        echo '没有这个相册';
+                        return false;
+                    }
+                    $table_name = 'home_album';
                     break;
                 case 'forum':
                     $category = 'forum';
@@ -107,6 +132,8 @@ class ExploreController extends Controller
                     throw new NotFoundHttpException('The requested page does not exist.');
                     break;
             }
+            $model->table_id = $table_id;
+            $model->table_name = $table_name;
             $model->category = $category;
             $model->created_at = time();
             $model->save();
@@ -123,14 +150,23 @@ class ExploreController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id, $category)
     {
         $model = $this->findModel($id);
+        switch ($category) {
+            case 'post':
+            case 'forum':
+            case 'album':
+                break;
+            default:
+                throw new NotFoundHttpException('The requested page does not exist.');
+                break;
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            return $this->render('update', [
+            return $this->render('add-' . $category, [
                 'model' => $model,
             ]);
         }

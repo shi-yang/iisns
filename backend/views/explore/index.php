@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-use app\modules\home\models\Album;
+use shiyang\infinitescroll\InfiniteScrollPager;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -53,6 +53,9 @@ list-style-type: none;
     border-bottom-width: 1px\9;
     box-shadow: 0 1px 4px rgba(0,0,0,.15);
     width: 170px;
+}
+.add-album {
+    font-size:100px
 }
 .album-cover {
     width:158px;
@@ -110,7 +113,27 @@ list-style-type: none;
                     <div class="panel-heading"><?= Yii::t('app', 'Albums') ?></div>
                     <div class="panel-body">
                         <div class="row">
-
+                            <div class="album-item col-md-2 col-sm-6">
+                                <div class="album-img">
+                                    <a href="<?= Url::toRoute(['/explore/create', 'category' => 'album']) ?>">
+                                        <span class="add-album"><span class="glyphicon glyphicon-plus"></span></span>
+                                    </a>
+                                </div>
+                            </div>
+                            <?php foreach($albums as $album): ?>
+                                <div class="album-item col-md-2 col-sm-6">
+                                    <div class="album-img">
+                                        <span>Album Id: <?= $album['table_id'] ?></span>
+                                        <br>
+                                        <a href="<?= Url::toRoute(['/explore/delete', 'id' => $album['id'], 'category' => 'album']) ?>" data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="post">
+                                            <span class="glyphicon glyphicon-remove"></span> <?= Yii::t('app', 'Delete') ?>
+                                        </a>
+                                        <a href="<?= Url::toRoute(['/explore/update', 'id' => $album['id'], 'category' => 'album']) ?>">
+                                            <span class="glyphicon glyphicon-pencil"></span> <?= Yii::t('app', 'Edit') ?>
+                                        </a>
+                                    </div>
+                                </div>
+                            <?php endforeach ?>
                         </div>
                     </div>
                 </div>
@@ -135,6 +158,10 @@ list-style-type: none;
                     </div>
                     <div class="clearfix"></div>
                 <?php endforeach ?>
+                <?= InfiniteScrollPager::widget([
+                    'pagination' => $pages,
+                    'widgetId' => '.post-all',
+                ]);?>
             </div>
         </div>
         <div class="col-md-4">

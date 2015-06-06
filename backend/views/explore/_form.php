@@ -38,11 +38,9 @@ use yii\bootstrap\ActiveForm;
         ]
     ]) ?>
 
-    <?= $form->field($model, 'user_id')->textInput() ?>
+    <?= $form->field($model, 'username')->textInput() ?>
 
-    <?= $form->field($model, 'username')->textInput()->hint('提示：用户名和用户ID只需填一个即可') ?>
-
-    <?= $form->field($model, 'table_id')->textInput() ?>
+    <?= $form->field($model, 'table_id')->textInput()->hint('提示：如果填了上面的内容，Table Id 及 Table Name 都不用填。Table ID 是指那个帖子的ID，而Table Name是指帖子所在表。') ?>
 
     <?= $form->field($model, 'table_name')->inline()->radioList(['home_post' => 'Home Post', 'forum_thread' => 'Forum Thread']) ?>
 
