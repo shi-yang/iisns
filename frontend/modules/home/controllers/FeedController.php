@@ -72,6 +72,7 @@ class FeedController extends FrontController
         $model = new Feed();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->userData->updateKey('feed_count', Yii::$app->user->id);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [

@@ -72,6 +72,11 @@ class Feed extends \yii\db\ActiveRecord
        }
     }
 
+    /**
+     * 增加记录
+     * @param string $type 记录的类型，发布日志、相册、音乐、视频等
+     * @param string $data 内容，序列化保存
+     */
     public static function addFeed($type, $data){
         $setarr = [];
         switch ($type) {
@@ -81,7 +86,7 @@ class Feed extends \yii\db\ActiveRecord
                 $setarr['feed_data'] = $data;
                 $setarr['user_id'] = Yii::$app->user->id;
                 $setarr['created_at'] = time();
-                Yii::$app->db->createCommand()->insert('{{%home_feed}}', $setarr)->execute();
+                return Yii::$app->db->createCommand()->insert('{{%home_feed}}', $setarr)->execute();
                 break;
             case 'album':
                 ;

@@ -102,9 +102,9 @@ class PostController extends FrontController
             $model->tags = implode(',',$explodeTags);
             if ($model->save()) {
                 Yii::$app->userData->updateKey('post_count', Yii::$app->user->id);
-                $data = ['title' => Html::a($model->title, ['/home/post/view', 'id' => $model->id]), 'summary' => mb_substr(strip_tags($model->content) . '...', 0, 140, 'utf-8')];
-                $data = serialize($data);
-                Feed::addFeed('post', $data);
+                Yii::$app->userData->updateKey('feed_count', Yii::$app->user->id);
+                $postData = ['title' => Html::a($model->title, ['/home/post/view', 'id' => $model->id]), 'summary' => mb_substr(strip_tags($model->content) . '...', 0, 140, 'utf-8')];
+                Feed::addFeed('post', serialize($postData));
                 return $this->redirect(['/home/post']);
             }
         }

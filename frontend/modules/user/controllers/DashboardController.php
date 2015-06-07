@@ -48,12 +48,12 @@ class DashboardController extends FrontController
         }
         $model = $this->findModel();
         $newFeed = new Feed;
-        $query = new Query;
-
         if ($newFeed->load(Yii::$app->request->post()) && $newFeed->save()) {
+            Yii::$app->userData->updateKey('feed_count', Yii::$app->user->id);
             return $this->refresh();
         }
 
+        $query = new Query;
         $query = $query->select('p.id, p.user_id, p.content, p.feed_data, p.template, p.created_at, u.username, u.avatar')
             ->from('{{%home_feed}} as p')
             ->join('LEFT JOIN','{{%user_follow}} as f', 'p.user_id=f.people_id')

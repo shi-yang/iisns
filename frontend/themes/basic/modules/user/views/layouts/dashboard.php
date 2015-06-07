@@ -18,7 +18,7 @@ $userData = Yii::$app->userData->getKey(true);
                 <div class="main-box infographic-box">
                     <i class="glyphicon glyphicon-pencil text-primary"></i>
                     <span class="headline"><?= Yii::t('app', 'Feed') ?></span>
-                    <span class="value"><?= $userData['post_count'] ?></span>
+                    <span class="value"><?= $userData['feed_count'] ?></span>
                 </div>
             </a>
             <div class="col-lg-3 col-sm-6 col-xs-12">
