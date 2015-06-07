@@ -64,12 +64,12 @@ $this->params['title'] = Yii::t('app', 'Explore');
                     <div class="panel-body">
                         <div class="row">
                             <?php
-                            if ($this->beginCache('explore-album', ['duration' => 1])) {
+                            if ($this->beginCache('explore-album', ['duration' => 3600])) {
                                 foreach ($albums as $album) :
                                     $coverSrc = Album::getCoverPhoto($album['id']);
                                     $link = Url::toRoute(['/explore/view-album', 'id' => $album['id']]);
                                     ?>
-                                    <div class="album-item col-md-2 col-sm-6">
+                                    <div class="album-item col-md-3 col-sm-6">
                                         <div class="album-img">
                                             <a href="<?= $link ?>">
                                                 <img src="<?= $coverSrc ?>" class="album-cover" alt="album-cover">
