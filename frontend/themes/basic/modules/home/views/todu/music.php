@@ -1,3 +1,9 @@
+<?php
+$this->title = Yii::t('app', 'Music');
+?>
+<audio src="<?= Yii::getAlias('@web') ?>/css/D-canon.mp3" controls="controls">
+	Your browser does not support the audio element.
+</audio>
 <div class="page-title">
   <h1><?= Yii::t('app', 'Note: This section is under development.') ?></h1>
   <h3>

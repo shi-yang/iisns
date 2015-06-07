@@ -175,7 +175,7 @@ AppAsset::register($this);
                             </a>
                         </li>
                         <li>
-                            <a href="<?= Url::toRoute('/site/develop') ?>">
+                            <a href="<?= Url::toRoute('/home/todu/music') ?>">
                             <span class="menu-icon">
                                 <i class="glyphicon glyphicon-music"></i>
                             </span>
@@ -186,7 +186,7 @@ AppAsset::register($this);
                             </a>
                         </li>
                         <li>
-                            <a href="<?= Url::toRoute('/site/develop') ?>">
+                            <a href="<?= Url::toRoute('/home/todu/video') ?>">
                             <span class="menu-icon">
                                 <i class="glyphicon glyphicon-facetime-video"></i>
                             </span>
