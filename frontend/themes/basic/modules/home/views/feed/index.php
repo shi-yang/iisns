@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                             }
                                         ?>
                                     </p>
-                                    <a href="<?= Url::toRoute(['/home/feed/delete', 'id' => $feed['id']]) ?>" data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="feed">
+                                    <a href="<?= Url::toRoute(['/home/feed/delete', 'id' => $feed['id']]) ?>" data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="post">
                                         <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
                                     </a>
                                     &nbsp;&nbsp;<a href="<?= Url::toRoute(['/home/feed/update', 'id' => $feed['id']]) ?>">

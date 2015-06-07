@@ -48,7 +48,7 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
                         ?>
                     </p>
                     <?php if(Yii::$app->user->id == $feed['user_id']): ?>
-                        <a href="<?= Url::toRoute(['/home/feed/delete', 'id' => $feed['id']]) ?>" data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="feed">
+                        <a href="<?= Url::toRoute(['/home/feed/delete', 'id' => $feed['id']]) ?>" data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="post">
                             <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
                         </a>
                     <?php endif ?>

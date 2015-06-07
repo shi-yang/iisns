@@ -17,6 +17,8 @@ use app\components\FrontController;
  */
 class FeedController extends FrontController
 {
+    public $layout = '@app/modules/user/views/layouts/user';
+
     public function behaviors()
     {
         return [
@@ -35,8 +37,6 @@ class FeedController extends FrontController
      */
     public function actionIndex()
     {
-        $this->layout = '@app/modules/user/views/layouts/user';
-
         $query = new Query;
         $query->select('id, content, feed_data, template, created_at')
             ->from('{{%home_feed}}')
@@ -116,6 +116,8 @@ class FeedController extends FrontController
             throw new ForbiddenHttpException('You are not allowed to perform this action.');
         } else {
             $model->delete();
+            Yii::$app->userData->updateKey('feed_count', Yii::$app->user->id, -1);
+            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Delete successfully.'));
         }
 
         return $this->redirect(['index']);
