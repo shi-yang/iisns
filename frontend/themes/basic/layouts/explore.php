@@ -10,6 +10,7 @@ if (!isset($this->title)) {
 if (Yii::$app->user->isGuest) {
     $this->beginContent(__DIR__.'/main.php');
 } else {
+	$this->registerCssFile('@web/css/site.css');
     $this->beginContent('@app/modules/user/views/layouts/user.php');
 }
 $this->registerMetaTag(['name' => 'keywords', 'content' => Yii::$app->setting->get('siteKeyword')]);
