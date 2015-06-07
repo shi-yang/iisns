@@ -142,6 +142,17 @@ AppAsset::register($this);
                             </a>
                         </li>
                         <li>
+                            <a href="<?= Url::toRoute('/explore/index') ?>">
+                            <span class="menu-icon">
+                                <i class="glyphicon glyphicon-globe"></i>
+                            </span>
+                            <span class="text">
+                                <?= Yii::t('app', 'Explore') ?>
+                            </span>
+                                <span class="menu-hover"></span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="<?= Url::toRoute('/home/post') ?>">
                             <span class="menu-icon">
                                 <i class="glyphicon glyphicon-list-alt"></i>
