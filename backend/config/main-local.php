@@ -1,9 +1,21 @@
 <?php
-return [
+
+$config = [
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => 'mOfe242T8Wpt8HBUzb8t4H4dQ-tn-pP1',
+            'cookieValidationKey' => 'nVB9OqYamRq9ihi_BLsZ1xEI9iJtSnOQ',
         ],
     ],
 ];
+
+if (!YII_ENV_TEST) {
+    // configuration adjustments for 'dev' environment
+    $config['bootstrap'][] = 'debug';
+    $config['modules']['debug'] = 'yii\debug\Module';
+
+    $config['bootstrap'][] = 'gii';
+    $config['modules']['gii'] = 'yii\gii\Module';
+}
+
+return $config;
