@@ -1033,7 +1033,7 @@ hr {
   border-bottom-color: #fff;
 }
 a {
-  color: #555;
+  color: #FF7B4C;
   transition: all 0.2s ease;
   -webkit-transition: all 0.2s ease;
   -moz-transition: all 0.2s ease;
@@ -1045,7 +1045,7 @@ p {
 }
 a:hover,
 a:focus {
-  color: #999;
+  color: #ff4a00;
   text-decoration: none;
   transition: all 0.2s ease;
   -webkit-transition: all 0.2s ease;

@@ -137,6 +137,7 @@ class ExploreController extends Controller
             $model->category = $category;
             $model->created_at = time();
             $model->save();
+            Yii::$app->cache->flush();
             return $this->redirect(['view', 'id' => $model->id]);
         }
         return $this->render('add-' . $category, [
