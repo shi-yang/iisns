@@ -187,6 +187,9 @@ a:hover {
   line-height: 24px;
 }
 
+.post-content img {
+  max-width: 100%
+}
 
 /*
  * Footer
