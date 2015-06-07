@@ -19,20 +19,6 @@ Yii::setAlias('photo', '@web/uploads/home/photo/');
  */
 class ExploreController extends FrontController
 {
-    public function behaviors()
-    {
-        return [
-            [
-                'class' => 'yii\filters\PageCache',
-                'only' => ['forums', 'photos'],
-                'duration' => 60 * 60,
-                'variations' => [
-                    Yii::$app->language,
-                    Yii::$app->user->isGuest,
-                ],
-            ],
-        ];
-    }
     public $layout = 'explore';
 
     public function actionIndex()
