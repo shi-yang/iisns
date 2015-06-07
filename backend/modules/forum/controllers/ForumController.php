@@ -47,11 +47,6 @@ class ForumController extends Controller
                         'allow' => true,
                         'roles' => ['@'],
                     ],
-                    [
-                        'actions' => ['index', 'view', 'broadcast'],
-                        'allow' => true,
-                        'roles' => ['?'],
-                    ],
                 ],
             ],
             'verbs' => [
