@@ -147,7 +147,7 @@ $(window).scroll(function(){
 	
 	 //Display a scroll to top button
 	 if(position >= 200)	{
-		$('#scroll-to-top').attr('style','bottom:8px;');	
+		$('#scroll-to-top').attr('style','bottom:16%;');	
 	 }
 	 else	{
 		$('#scroll-to-top').removeAttr('style');

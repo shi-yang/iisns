@@ -16,33 +16,6 @@ $this->registerCss('
   background: #fff;
   box-shadow: 0 0 3px 1px rgba(0,0,0,0.05),0 1px 2px 0 rgba(0,0,0,0.1);
 }
-.recommend {
-  margin-bottom: 20px;
-  padding-bottom: 30px;
-  border-bottom: 1px solid #ddd;
-}
-.carousel .item {
-  height: 184px;
-  width: 100%;
-  background-color: #777;
-}
-.carousel-inner > .item > img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  min-width: 100%;
-  height: 184px;
-}
-.carousel-indicators {
-  bottom: -30px;
-}
-.carousel-indicators .active {
-    background-color: #CFCFCF;
-}
-.carousel-indicators li {
-  border: 1px solid #C3C3C3;
-}
-
 .album-all {
 list-style-type: none;
 }
@@ -65,47 +38,6 @@ list-style-type: none;
 
 ?>
 <div class="content">
-    <div class="recommend">
-        <!-- Carousel ================================================== -->
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-                <li data-target="#myCarousel" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner" role="listbox">
-                <div class="item active">
-                    <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
-                    <div class="container">
-                        <div class="carousel-caption">
-                            <h1>Example headline.</h1>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <img class="second-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
-                    <div class="container">
-                        <div class="carousel-caption">
-                            <h1>Another example headline.</h1>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <img class="third-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
-                    <div class="container">
-                        <div class="carousel-caption">
-                            <h1>One more for good measure.</h1>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div><!-- /.carousel -->
-    </div>
-
     <div class="row">
         <div class="col-md-8">
             <div class="album-all">

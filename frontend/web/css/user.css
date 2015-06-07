@@ -1109,7 +1109,7 @@ a:focus {
   -moz-border-radius: 50em;
   -webkit-border-radius: 50em;
   padding: 10px 14px;
-  background: rgba(60, 141, 188, 0.5);
+  background: #FF7B4C;
   transition: all 0.3s ease-in-out;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
@@ -1119,7 +1119,7 @@ a:focus {
 #scroll-to-top:hover,
 #scroll-to-top:focus {
   text-decoration: none;
-  background: #3c8dbc;
+  background: #f75733;
   color: #fff;
   transition: all 0.3s linear;
   -webkit-transition: all 0.3s linear;
