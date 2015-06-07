@@ -6,6 +6,7 @@ use shiyang\masonry\Masonry;
 /* @var $this yii\web\View */
 
 $this->params['title'] = Yii::t('app', 'Explore') . ' - ' . Yii::t('app', 'Forums');
+$this->params['breadcrumb'][] = Yii::t('app', 'Forums');
 $this->registerMetaTag(['name' => 'keywords', 'content' => Yii::$app->setting->get('siteKeyword')]);
 $this->registerMetaTag(['name' => 'description', 'content' => Yii::$app->setting->get('siteDescription')]);
 $this->registerCssFile(Yii::getAlias('@web').'/css/forum/css/forum.css');

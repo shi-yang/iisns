@@ -142,7 +142,7 @@ AppAsset::register($this);
                             </a>
                         </li>
                         <li>
-                            <a href="<?= Url::toRoute(['/explore/index']) ?>">
+                            <a href="<?= Url::toRoute('/explore/index') ?>">
                             <span class="menu-icon">
                                 <i class="glyphicon glyphicon-globe"></i>
                             </span>
@@ -155,10 +155,10 @@ AppAsset::register($this);
                         <li>
                             <a href="<?= Url::toRoute('/home/post') ?>">
                             <span class="menu-icon">
-                                <i class="glyphicon glyphicon-pencil"></i>
+                                <i class="glyphicon glyphicon-list-alt"></i>
                             </span>
                             <span class="text">
-                                <?= Yii::t('app', 'Text') ?>
+                                <?= Yii::t('app', 'Blog') ?>
                             </span>
                                 <span class="menu-hover"></span>
                             </a>
@@ -175,7 +175,7 @@ AppAsset::register($this);
                             </a>
                         </li>
                         <li>
-                            <a href="<?= Url::toRoute('/site/develop') ?>">
+                            <a href="<?= Url::toRoute('/home/todu/music') ?>">
                             <span class="menu-icon">
                                 <i class="glyphicon glyphicon-music"></i>
                             </span>
@@ -186,7 +186,7 @@ AppAsset::register($this);
                             </a>
                         </li>
                         <li>
-                            <a href="<?= Url::toRoute('/site/develop') ?>">
+                            <a href="<?= Url::toRoute('/home/todu/video') ?>">
                             <span class="menu-icon">
                                 <i class="glyphicon glyphicon-facetime-video"></i>
                             </span>

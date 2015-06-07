@@ -15,15 +15,20 @@ $this->params['userData'] = ArrayHelper::toArray($model->userData);
   <div class="tab-pane active" id="timeline">
     <div class="activity-list">
       <ul class="clearfix" id="content">
-        <?php foreach ($model->posts['posts'] as $post): ?>
+        <?php foreach ($model->feeds['feeds'] as $feed): ?>
             <li class="post-item">
-                <h2 class="post-title"><?= Html::a(Html::encode($post->title), ['/home/post/view', 'id' => $post->id]) ?></h2>
                 <div class="post-content">
-                    <?= Tools::htmlSubString($post->content, 300, $post->url) ?>
+                    <?php
+                        if (!empty($feed->content)) {
+                            echo Html::encode($feed->content);
+                        } else {
+                            print_r(str_replace( ['{title}', '{summary}'], unserialize($feed->feed_data), $feed->template));
+                        }
+                    ?>
                 </div>
                 <div class="clearfix"></div>
                 <div class="post-info">
-                    <i class="glyphicon glyphicon-time icon-muted"></i> <?= Tools::formatTime($post->created_at) ?>
+                    <i class="glyphicon glyphicon-time icon-muted"></i> <?= Tools::formatTime($feed->created_at) ?>
                 </div>
             </li>
         <?php endforeach; ?>

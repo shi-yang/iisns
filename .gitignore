@@ -10,3 +10,6 @@ frontend/uploads/user/avatar/*
 !frontend/uploads/user/avatar/.gitignore
 frontend/uploads/user/avatar/*
 !frontend/runtime/.gitignore
+
+.idea
+

@@ -43,7 +43,7 @@ class SiteController extends FrontController
             ],
             'cache' => [
                 'class' => 'yii\filters\PageCache',
-                'only' => ['index', 'login', 'signup', 'about'],
+                'only' => ['index', 'about'],
                 'duration' => 3600,
                 'variations' => [
                     Yii::$app->language,

@@ -7,9 +7,16 @@ $userData = Yii::$app->userData->getKey(true);
 <div class="social-wrapper row">
     <div id="social-container">
         <div class="row hidden-xs">
+            <a class="col-lg-3 col-sm-6 col-xs-12" href="<?= Url::toRoute(['/home/feed']) ?>">
+                <div class="main-box infographic-box">
+                    <i class="glyphicon glyphicon-pencil text-primary"></i>
+                    <span class="headline"><?= Yii::t('app', 'Feed') ?></span>
+                    <span class="value"><?= $userData['feed_count'] ?></span>
+                </div>
+            </a>
             <a class="col-lg-3 col-sm-6 col-xs-12" href="<?= Url::toRoute(['/home/post']) ?>">
                 <div class="main-box infographic-box">
-                    <i class="glyphicon glyphicon-list-alt text-primary"></i>
+                    <i class="glyphicon glyphicon-list-alt text-warning"></i>
                     <span class="headline"><?= Yii::t('app', 'Posts') ?></span>
                     <span class="value"><?= $userData['post_count'] ?></span>
                 </div>
@@ -28,15 +35,8 @@ $userData = Yii::$app->userData->getKey(true);
                     <span class="value"><?= $userData['follower_count'] ?></span>
                 </div>
             </div>
-            <div class="col-lg-3 col-sm-6 col-xs-12">
-                <div class="main-box infographic-box">
-                    <i class="glyphicon glyphicon-star text-warning"></i>
-                    <span class="headline"><?= Yii::t('app', 'Favor') ?></span>
-                    <span class="value">0</span>
-                </div>
-            </div>
         </div>
-        <div class="col-xs-12 col-sm-8 col-md-8">
+        <div class="col-xs-12 col-sm-8 col-md-8 col-lg-offset-1 col-lg-6">
             <?= $content ?>
         </div>
     </div>

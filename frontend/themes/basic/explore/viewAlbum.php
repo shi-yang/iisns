@@ -9,6 +9,8 @@ use shiyang\masonry\Masonry;
 
 $this->title = $model->name . '_' . Yii::$app->setting->get('siteName');
 $this->params['title'] = $model->name;
+$this->params['breadcrumb'][] = ['label' => Yii::t('app', 'Photos'), 'url' => ['/explore/photos']];
+$this->params['breadcrumb'][] = $model->name;
 $this->registerMetaTag(['name' => 'keywords', 'content' => $model->name . Yii::$app->setting->get('siteKeyword')]);
 $this->registerMetaTag(['name' => 'description', 'content' => $model->description]);
 

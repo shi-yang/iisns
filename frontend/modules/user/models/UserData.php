@@ -9,6 +9,7 @@ use Yii;
  *
  * @property integer $user_id
  * @property integer $post_count
+ * @property integer $feed_count
  * @property integer $following_count
  * @property integer $follower_count
  * @property integer $unread_comment_count
@@ -43,6 +44,7 @@ class UserData extends \yii\db\ActiveRecord
         return [
             'user_id' => Yii::t('app', 'User ID'),
             'post_count' => Yii::t('app', 'Post Count'),
+            'feed_count' => Yii::t('app', 'Feed Count'),
             'following_count' => Yii::t('app', 'Following Count'),
             'follower_count' => Yii::t('app', 'Follower Count'),
             'unread_comment_count' => Yii::t('app', 'Unread Comment Count'),
@@ -53,7 +55,8 @@ class UserData extends \yii\db\ActiveRecord
     /**
      * 获取某个用户的指定Key值的统计数目
      * Key值：
-     * post_count：微博总数
+     * post_count：日志总数
+     * feed_count：记录总数
      * following_count：关注数
      * follower_count：粉丝数
      * unread_comment_count：评论未读数
@@ -75,7 +78,8 @@ class UserData extends \yii\db\ActiveRecord
     /**
      * 更新某个用户的指定Key值的统计数目
      * Key值：
-     * post_count：微博总数
+     * post_count：日志总数
+     * feed_count：记录总数
      * following_count：关注数
      * follower_count：粉丝数
      * unread_comment_count：评论未读数
@@ -90,6 +94,7 @@ class UserData extends \yii\db\ActiveRecord
     {
         switch ($key) {
             case 'post_count':
+            case 'feed_count':
             case 'following_count':
             case 'follower_count':
             case 'unread_comment_count':

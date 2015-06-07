@@ -34,7 +34,7 @@ class Thread extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['content'], 'required'],
+            [['title', 'content'], 'required'],
             [['content'], 'string'],
             [['created_at', 'user_id', 'board_id', 'is_broadcast'], 'integer'],
             [['title'], 'string']

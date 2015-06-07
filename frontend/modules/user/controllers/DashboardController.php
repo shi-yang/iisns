@@ -8,6 +8,7 @@ use yii\filters\AccessControl;
 use yii\db\Query;
 use app\modules\user\models\User;
 use app\modules\home\models\Post;
+use app\modules\home\models\Feed;
 use app\components\Tools;
 use app\components\FrontController;
 
@@ -25,6 +26,11 @@ class DashboardController extends FrontController
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
+                        'actions' => ['index'],
+                        'allow' => true,
+                        'roles' => ['?']
+                    ],
+                    [
                         'actions' => ['index', 'myposts', 'myfavor', 'followpeople',
                              'followforum', 'forumpost', 'homepost'],
                         'allow' => true,
@@ -37,11 +43,19 @@ class DashboardController extends FrontController
 
     public function actionIndex()
     {
+        if (Yii::$app->user->isGuest) {
+            $this->redirect(['/explore/index']);
+        }
         $model = $this->findModel();
+        $newFeed = new Feed;
+        if ($newFeed->load(Yii::$app->request->post()) && $newFeed->save()) {
+            Yii::$app->userData->updateKey('feed_count', Yii::$app->user->id);
+            return $this->refresh();
+        }
+
         $query = new Query;
-        
-        $query = $query->select('p.id, p.user_id, p.title, p.content, p.created_at, u.username, u.avatar')
-            ->from('{{%home_post}} as p')
+        $query = $query->select('p.id, p.user_id, p.content, p.feed_data, p.template, p.created_at, u.username, u.avatar')
+            ->from('{{%home_feed}} as p')
             ->join('LEFT JOIN','{{%user_follow}} as f', 'p.user_id=f.people_id')
             ->join('LEFT JOIN','{{%user}} as u', 'u.id=p.user_id')
             ->where('p.user_id=:user_id OR f.user_id=:user_id', [':user_id' => $model->id])
@@ -50,48 +64,8 @@ class DashboardController extends FrontController
         $pages = Tools::Pagination($query);
         return $this->render('index', [
             'model' => $model,
-            'posts' => $pages['result'],
-            'pages' => $pages['pages']
-        ]);
-    }
-    
-    /**
-     * 获取用户所关注的人所发的帖子、动态
-     */
-    public function actionFollowpeople()
-    {
-        $model = $this->findModel();
-        $query = new Query;
-        $query = $query->select('*')
-            ->from('{{%home_post}}' . ' p')
-            ->join('JOIN','{{%follow_people}}'. ' u', 'u.people_id=p.user_id')
-            ->where('u.user_id=:user_id', [':user_id' => $model->id])
-            ->orderBy('created_at DESC');
-        $pages = Tools::Pagination($query);
-        return $this->render('followPeople', [
-            'model' => $model,
-            'posts' => $pages['result'],
-            'pages' => $pages['pages']
-        ]);
-    }
-    
-    /**
-     * 获取用户所关注的论坛所发的帖子、动态
-     */
-    public function actionFollowforum()
-    {
-        $model = $this->findModel();
-        $query = new Query;
-        $query = $query->select('*')
-            ->from('{{%forum_broadcast}}' . ' p')
-            ->join('JOIN','{{%follow_forum}}'. ' u', 'u.forum_id=p.forum_id')
-            ->where('u.user_id=:user_id', [':user_id' => $model->id])
-            ->orderBy('created_at DESC');
-        $pages = Tools::Pagination($query);
-
-        return $this->render('followForum', [
-            'model' => $model,
-            'posts' => $pages['result'],
+            'newFeed' => $newFeed,
+            'feeds' => $pages['result'],
             'pages' => $pages['pages']
         ]);
     }

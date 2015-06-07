@@ -10,7 +10,7 @@ $this->title = Yii::t('app', 'Sign up');
 $this->registerCss('
     body {
       padding-top: 40px;
-      background-color: #eee;
+      background-color: #eef0f3;
     }
 
     .form-signin {
