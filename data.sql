@@ -17,6 +17,21 @@ SET time_zone = "+00:00";
 -- 表的结构 `pre_favorite`
 --
 
+CREATE TABLE IF NOT EXISTS `pre_explore_recommend` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(128) NOT NULL,
+  `summary` text NOT NULL,
+  `content` text NOT NULL,
+  `view_count` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `username` varchar(60) NOT NULL,
+  `category` char(50) NOT NULL,
+  `table_id` int(11) DEFAULT NULL,
+  `table_name` char(30) NOT NULL,
+  `created_at` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='探索页面的推荐列表' AUTO_INCREMENT=1 ;
+
 CREATE TABLE IF NOT EXISTS `pre_favorite` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `source_id` bigint(20) NOT NULL,
@@ -26,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `pre_favorite` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `post_id` (`source_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='用户收藏' AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='用户收藏' AUTO_INCREMENT=1 ;
 
 --
 -- 表的结构 `pre_forum`
@@ -42,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `pre_forum` (
   `forum_icon` char(26) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1001 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;
 
 --
 -- 表的结构 `pre_forum_board`
@@ -61,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `pre_forum_board` (
   PRIMARY KEY (`id`),
   KEY `forum_id` (`forum_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1006 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;
 
 --
 -- 表的结构 `pre_forum_broadcast`
@@ -78,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `pre_forum_broadcast` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `forum_id` (`forum_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1006 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;
 
 -- --------------------------------------------------------
 
@@ -110,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `pre_forum_post` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `thread_id` (`thread_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1024 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;
 
 --
 -- 表的结构 `pre_forum_thread`
@@ -127,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `pre_forum_thread` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `board_id` (`board_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1038 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;
 
 --
 -- 表的结构 `pre_home_album`
@@ -147,7 +162,7 @@ CREATE TABLE IF NOT EXISTS `pre_home_album` (
   `status_question` varchar(255) NOT NULL,
   `status_answer` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1005 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;
 
 --
 -- 表的结构 `pre_home_photo`
@@ -163,7 +178,24 @@ CREATE TABLE IF NOT EXISTS `pre_home_photo` (
   `created_by` int(11) NOT NULL,
   `is_cover` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1023 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;
+
+--
+-- 表的结构 `pre_home_feed`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_home_feed` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` char(50) NOT NULL,
+  `content` text NOT NULL,
+  `template` text NOT NULL,
+  `comment_count` int(11) NOT NULL,
+  `repost_count` int(11) NOT NULL,
+  `feed_data` text NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `created_at` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;
 
 --
 -- 表的结构 `pre_home_post`
@@ -179,7 +211,7 @@ CREATE TABLE IF NOT EXISTS `pre_home_post` (
   `updated_at` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1008 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;
 
 --
 -- 表的结构 `pre_setting`
@@ -195,7 +227,7 @@ CREATE TABLE IF NOT EXISTS `pre_setting` (
   `value` text NOT NULL,
   `sort_order` int(11) DEFAULT '50',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=gbk AUTO_INCREMENT=3116 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3116 ;
 
 --
 -- 转存表中的数据 `pre_setting`
@@ -237,7 +269,7 @@ CREATE TABLE IF NOT EXISTS `pre_user` (
   `avatar` char(24) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10003 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10000 ;
 
 --
 -- 表的结构 `pre_user_data`
@@ -246,12 +278,13 @@ CREATE TABLE IF NOT EXISTS `pre_user` (
 CREATE TABLE IF NOT EXISTS `pre_user_data` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `post_count` int(11) NOT NULL,
+  `feed_count` int(11) NOT NULL,
   `following_count` int(11) NOT NULL,
   `follower_count` int(11) NOT NULL,
   `unread_comment_count` int(11) NOT NULL,
   `unread_message_count` int(11) NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10003 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10000 ;
 
 --
 -- 表的结构 `pre_user_follow`
@@ -264,7 +297,7 @@ CREATE TABLE IF NOT EXISTS `pre_user_follow` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `people_id` (`people_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- 表的结构 `pre_user_message`
@@ -284,7 +317,7 @@ CREATE TABLE IF NOT EXISTS `pre_user_message` (
   PRIMARY KEY (`id`),
   KEY `sendfrom` (`sendfrom`),
   KEY `sendto` (`sendto`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- 表的结构 `pre_user_profile`
