@@ -26,7 +26,7 @@ class ExploreController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'view', 'create', 'delete', 'update'],
+                        'actions' => ['index', 'view', 'create', 'delete', 'update', 'upload'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
