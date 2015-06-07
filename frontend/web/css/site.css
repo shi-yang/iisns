@@ -189,8 +189,8 @@ list-style-type: none;
   float: left;
   height: 110px;
   overflow: hidden;
-  background: url(images/xxx.gif);
-  background-size: 180px auto;
+/*  background: url(images/xxx.gif);
+  background-size: 180px auto;*/
 }
 .mecc {
 
