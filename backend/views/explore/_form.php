@@ -38,6 +38,8 @@ use yii\bootstrap\ActiveForm;
         ]
     ]) ?>
 
+    <?= $form->field($model, 'origin')->textInput() ?>
+    
     <?= $form->field($model, 'username')->textInput() ?>
 
     <?= $form->field($model, 'table_id')->textInput()->hint('提示：如果填了上面的内容，Table Id 及 Table Name 都不用填。Table ID 是指那个帖子的ID，而Table Name是指帖子所在表。') ?>

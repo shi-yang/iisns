@@ -235,9 +235,9 @@ body {
         <div class="jumbotron">
             <h1>Everyone is an artist</h1>
             <p class="lead">I hope you like it.</p>
-            <p><a class="btn btn-lg btn-success" href="https://github.com/shi-yang/iisns/archive/v2.1.1.zip">Download Source</a></p>
+            <p><a class="btn btn-lg btn-success" href="https://github.com/shi-yang/iisns/archive/v2.1.2.zip">Download Source</a></p>
             <p id="version">
-              Version 2.1.0 Alpha &nbsp;&nbsp;·&nbsp;&nbsp;
+              Version 2.1.2 Alpha &nbsp;&nbsp;·&nbsp;&nbsp;
               <a href="https://github.com/shi-yang/iisns" target="_blank">
                 GitHub Project</a> &nbsp;&nbsp;·&nbsp;&nbsp;
               Created by <a href="http://www.shiyang.me" target="_blank">Shiyang</a>

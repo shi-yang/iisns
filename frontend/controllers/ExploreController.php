@@ -101,7 +101,7 @@ class ExploreController extends FrontController
     {
         $query = new Query;
         $id = intval($id);
-        $model = $query->select('e.id, title, summary, content, view_count, e.created_at, e.username, u.username as author, table_id, table_name')
+        $model = $query->select('e.id, title, summary, content, view_count, e.created_at, origin, e.username, u.username as author, table_id, table_name')
             ->from('{{%explore_recommend}} as e')
             ->join('LEFT JOIN','{{%user}} as u', 'u.id=e.user_id')
             ->where('e.id=:id AND category="post"', [':id' => $id])

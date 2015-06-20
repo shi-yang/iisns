@@ -14,10 +14,14 @@ $this->params['count'] = $count;
     'dataProvider' => $dataProvider,
     'showHeader' => false,
     'columns' => [
+        [
+            'attribute' => 'sendto',
+            'value' => function($model) {
+                return Yii::$app->db->createCommand("SELECT username FROM {{%user}} WHERE id={$model['sendto']}")->queryScalar();
+            },
+        ],
         'subject',
-        'content',
         'created_at:datetime'
-
         // [
         //     'class' => 'yii\grid\DataColumn', // can be omitted, as it is the default
         //     'value' => function ($data) {
