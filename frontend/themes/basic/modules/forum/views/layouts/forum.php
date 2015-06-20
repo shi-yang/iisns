@@ -121,7 +121,7 @@ AppAsset::register($this);
     </div>
     <footer class="footer">
         <div class="container">
-        <p class="pull-left">&copy; <?= Html::a(Yii::$app->setting->get('siteName'), ['/site/about']) ?> <?= date('Y') ?>
+        <p class="pull-left">&copy; <?= Html::a(Yii::$app->setting->get('siteName'), ['/site/index']) ?> <?= date('Y') ?>
             <?= Html::a (' 中文简体 ', '?lang=zh-CN') . '| ' . 
             Html::a (' English ', '?lang=en') ;  
             ?>

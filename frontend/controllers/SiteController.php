@@ -41,21 +41,6 @@ class SiteController extends FrontController
                     ],
                 ],
             ],
-            'cache' => [
-                'class' => 'yii\filters\PageCache',
-                'only' => ['index', 'about'],
-                'duration' => 3600,
-                'variations' => [
-                    Yii::$app->language,
-                ],
-            ]
-            /*
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],*/
         ];
     }
 
