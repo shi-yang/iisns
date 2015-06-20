@@ -43,17 +43,17 @@ class ViewController extends FrontController
             }
             
             $html =<<<HTML
-<div class="media">
-  <div class="media-left">
-    <a href="{$userUrl}">
-      <img class="media-object" src="{$avatar}" alt="{$username}">
-    </a>
-  </div>
-  <div class="media-body">
-    <h4 class="media-heading">$model->username</h4>
-  </div>
-  <div class="media-footer">
-<div class="row">
+              <div class="media">
+                <div class="media-left">
+                  <a href="{$userUrl}">
+                    <img class="media-object" src="{$avatar}" alt="{$username}">
+                  </a>
+                </div>
+                <div class="media-body">
+                  <h4 class="media-heading">$model->username</h4>
+                </div>
+                <div class="media-footer">
+                <div class="row">
                   <div class="col-xs-4 text-center">
                     <span class="block font-14">{$userData['following_count']}</span><br>
                     <small class="text-muted">关注</small>
@@ -67,13 +67,10 @@ class ViewController extends FrontController
                     <small class="text-muted">文章</small>
                   </div><!-- /.col -->
                 </div>
-    <a class="btn btn-xs btn-success btn-follow" href="{$followUrl}">
-        {$followBtn}
-    </a>
-    <a class="btn btn-xs btn-primary" href="/user/message/create?id=30211">
-        <span class="glyphicon glyphicon-envelope"></span> 发私信
-    </a>
-</div>
+                <a class="btn btn-xs btn-success btn-follow" href="{$followUrl}">
+                    {$followBtn}
+                </a>
+              </div>
 HTML;
             return $html;
         }
