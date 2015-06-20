@@ -28,9 +28,11 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
             <div class="item widget-container fluid-height social-entry">
                 <div class="widget-content padded">
                     <div class="profile-info clearfix">
-                        <img width="50" height="50" class="social-avatar pull-left" src="<?= Yii::getAlias('@avatar') . $feed['avatar'] ?>" />
+                        <a href="<?= Url::toRoute(['/user/view', 'id'=>$feed['username']]) ?>" rel="author">
+                            <img width="50" height="50" class="social-avatar pull-left" src="<?= Yii::getAlias('@avatar') . $feed['avatar'] ?>" />
+                        </a>
                         <div class="profile-details">
-                            <a class="user-name" href="<?= Url::toRoute(['/user/view', 'id'=>$feed['username']]) ?>">
+                            <a class="user-name" href="<?= Url::toRoute(['/user/view', 'id'=>$feed['username']]) ?>" rel="author">
                                 <?= Html::encode($feed['username']) ?>
                             </a>
                             <p>
@@ -43,7 +45,7 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
                             if (!empty($feed['content'])) {
                                 echo Html::encode($feed['content']);
                             } else {
-                                print_r(str_replace( ['{title}', '{summary}'], unserialize($feed['feed_data']), $feed['template']));
+                                echo strtr($feed['template'], unserialize($feed['feed_data']));
                             }
                         ?>
                     </p>

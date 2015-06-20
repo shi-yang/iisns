@@ -138,6 +138,48 @@ $(function	()	{
 	
 	// Tooltip
     $("[data-toggle=tooltip]").tooltip();
+
+    //头像提示用户信息
+	$('[rel=author]').popover({
+	    trigger : 'manual',
+        container: 'body',
+	    html : true,
+        placement: 'auto right',
+	    content : '<div class="popover-user"></div>',
+	}).on('mouseenter', function(){
+	    var _this = this;
+	    $(this).popover('show');
+	    $.ajax({
+	        url: $(this).attr('href'),
+	        success: function(html){
+	            $('.popover-user').html(html);
+                $('.popover .btn-success, .popover .btn-danger').click(function(){
+                    $.ajax({
+                        url: $(this).attr('href'),
+                        success: function(data) {
+                            $('.popover .btn-success').text('关注成功').addClass('disabled');
+                            $('.popover .btn-danger').text('取消成功').addClass('disabled');
+                        },
+                        error: function (XMLHttpRequest, textStatus) {
+                            $(_this).popover('hide');
+                            $('#modal').modal({ remote: '/site/login'});
+                        }
+                    });
+                    return false;
+                });
+	        }
+	    });
+	    $('.popover').on('mouseleave', function () {
+	        $(_this).popover('hide');
+	    });
+	}).on('mouseleave', function () {
+	    var _this = this;
+	    setTimeout(function () {
+	        if(!$('.popover:hover').length) {
+	            $(_this).popover('hide')
+	        }
+	    }, 100);
+	});
 	
 });
 

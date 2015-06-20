@@ -17,7 +17,7 @@ $userData = Yii::$app->userData->getKey(true);
             <a class="col-lg-3 col-sm-6 col-xs-12" href="<?= Url::toRoute(['/home/post']) ?>">
                 <div class="main-box infographic-box">
                     <i class="glyphicon glyphicon-list-alt text-warning"></i>
-                    <span class="headline"><?= Yii::t('app', 'Posts') ?></span>
+                    <span class="headline"><?= Yii::t('app', 'Blog') ?></span>
                     <span class="value"><?= $userData['post_count'] ?></span>
                 </div>
             </a>

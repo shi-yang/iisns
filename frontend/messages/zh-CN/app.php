@@ -67,6 +67,7 @@ return [
 	'Compose' => '写信',
 	'Message' => '发消息',
 	'Sent' => '已发送',
+	'Sent successfully' => '发送成功',
 	'Comment' => '评论',
 
 	'Setting' => '设置',
@@ -88,6 +89,7 @@ return [
 	'Follower' => '粉丝',
 	'Follow' => '关注',
 	'Following' => '关注',
+	'Unfollow' => '取消关注', 
 
 	'Forum' => '论坛',
 	'Forums' => '论坛',
@@ -126,13 +128,16 @@ return [
 	'Just now' => '刚刚',
     'More' => '更多',
 	'Create successfully.' => '创建成功',
-	'Save successfully.' => '保存成功',
-	'Delete successfully.' => '已删除',
+	'Saved successfully' => '保存成功',
+	'Deleted successfully.' => '已删除',
     'Recommendation' => '推荐',
 
 	'Are you sure you want to Log out?' => '你确定要注销？',
+	'If you forgot your password you can ' => '如果您忘记密码，请',
+	'reset it' => '点此重置',
 	'No data to display.' => '没有数据展示',
 	'Unfinished,continue reading' => '未完，继续阅读',
+	'View Details' => '查看详情',
  	'Note: This section is under development.' => '提示：这部分内容正在开发中。',
 	'I am very sorry to let you see this page. I will try to go to this page and complete, stay tuned!' => '我很抱歉让你看到这个页面，我会尽快完成它，保持关注！',
 	'You are welcome to develop together.' => '欢迎你也一起来开发。'

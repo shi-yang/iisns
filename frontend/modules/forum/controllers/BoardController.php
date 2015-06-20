@@ -87,7 +87,7 @@ class BoardController extends FrontController
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->getSession()->setFlash('success', 'Save successfully.');
+            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Saved successfully'));
         }
 
         return $this->render('update', [
@@ -104,15 +104,17 @@ class BoardController extends FrontController
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
-        $forum_url = $model->forum['forum_url'];
+        
         if ($model->user_id === Yii::$app->user->id) {
+            $forum_url = $model->forum['forum_url'];
             Thread::deleteAll(['board_id' => $model->id]);
             $model->delete();
-            Yii::$app->getSession()->setFlash('success', 'Delete successfully.');
+            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Deleted successfully.'));
+
+            return $this->redirect(['/forum/forum/update', 'id' => $forum_url, 'action' => 'board']);
         } else {
             throw new ForbiddenHttpException('You are not allowed to perform this action.');
         }
-        return $this->redirect(['/forum/forum/update', 'id' => $forum_url, 'action' => 'board']);
     }
 
     /**

@@ -243,7 +243,7 @@ AppAsset::register($this);
             <div class="row">
                 <div class="col-sm-6">
                     <p class="no-margin">
-                        &copy; <?= date('Y') ?> <strong><?= Html::a(Yii::$app->setting->get('siteName'), ['/site/about']) ?></strong>. ALL Rights Reserved.
+                        &copy; <?= date('Y') ?> <strong><?= Html::a(Yii::$app->setting->get('siteName'), ['/site/index']) ?></strong>. ALL Rights Reserved.
                     </p>
                 </div><!-- /.col -->
             </div><!-- /.row-->

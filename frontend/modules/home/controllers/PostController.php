@@ -94,19 +94,18 @@ class PostController extends FrontController
         $this->layout = '@app/modules/user/views/layouts/user';
         $model = new Post();
 
-        if ($model->load(Yii::$app->request->post())) {
-            //标签分割
-            $tags = trim($_POST['Post']['tags']);
-            $explodeTags = array_unique(explode(',', str_replace(array (' ' , '，' ), array('',','), $tags)));
-            $explodeTags = array_slice($explodeTags, 0, 10);
-            $model->tags = implode(',',$explodeTags);
-            if ($model->save()) {
-                Yii::$app->userData->updateKey('post_count', Yii::$app->user->id);
-                Yii::$app->userData->updateKey('feed_count', Yii::$app->user->id);
-                $postData = ['title' => Html::a($model->title, ['/home/post/view', 'id' => $model->id]), 'summary' => mb_substr(strip_tags($model->content) . '...', 0, 140, 'utf-8')];
-                Feed::addFeed('post', serialize($postData));
-                return $this->redirect(['/home/post']);
-            }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->userData->updateKey('post_count', Yii::$app->user->id);
+            Yii::$app->userData->updateKey('feed_count', Yii::$app->user->id);
+
+            //插入记录(Feed)
+            $title = Html::a(Html::encode($model->title), $model->url);
+            preg_match_all("/<[img|IMG].*?src=\"([^^]*?)\".*?>/", $model->content, $images);
+            $summary = mb_substr(strip_tags($model->content), 0, 140, 'utf-8') . '... ' . Html::a(Yii::t('app', 'View Details'), $model->url) . '<br>' . $images[0][0];
+            $postData = ['{title}' => $title, '{summary}' => $summary];
+            Feed::addFeed('blog', serialize($postData));
+
+            return $this->redirect(['/home/post']);
         }
         return $this->render('create', [
             'model' => $model,
@@ -148,7 +147,7 @@ class PostController extends FrontController
         if ($model->user_id === Yii::$app->user->id) {
             $model->delete();
             Yii::$app->userData->updateKey('post_count', Yii::$app->user->id, -1);
-            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Delete successfully.'));
+            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Deleted successfully.'));
         } else {
             throw new ForbiddenHttpException('You are not allowed to perform this action.');
         }

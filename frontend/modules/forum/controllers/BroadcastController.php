@@ -36,21 +36,22 @@ class BroadcastController extends FrontController
     }
     
     /**
-     * 
+     * 删除广播
      */
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
-        $forum_url = Yii::$app->db
-            ->createCommand('SELECT forum_url FROM {{%forum}} WHERE id=' . $model->forum_id)
-            ->queryScalar();
+
         if ($model->user_id === Yii::$app->user->id) {
+            $forum_url = Yii::$app->db
+                ->createCommand('SELECT forum_url FROM {{%forum}} WHERE id=' . $model->forum_id)
+                ->queryScalar();
             $model->delete();
-            Yii::$app->getSession()->setFlash('success', 'Delete successfully.');
+            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Deleted successfully.'));
+            return $this->redirect(['/forum/forum/broadcast', 'id' => $forum_url]);
         } else {
             throw new ForbiddenHttpException('You are not allowed to perform this action.');
         }
-        return $this->redirect(['/forum/forum/broadcast', 'id' => $forum_url]);
     }
 
     /**
