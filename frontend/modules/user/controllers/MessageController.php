@@ -33,12 +33,21 @@ class MessageController extends FrontController
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['inbox', 'outbox', 'create', 'view', 'update', 'comment'],
+                        'actions' => ['inbox', 'outbox', 'create', 'view', 'update', 'comment', 'upload'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
                 ],
             ],
+        ];
+    }
+
+    public function actions()
+    {
+        return [
+            'upload' => [
+                'class' => 'kucha\ueditor\UEditorAction',
+            ]
         ];
     }
 

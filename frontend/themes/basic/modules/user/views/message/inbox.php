@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\HtmlPurifier;
+use app\components\Tools;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -18,14 +19,11 @@ $this->params['count'] = $count;
                 <div class="header">
                     <span class="action"><i class="fa fa-square-o"></i></span>
                     <span class="from"><i class="glyphicon glyphicon-user"></i> <?= Html::encode(\app\modules\user\models\User::getInfo($message['sendfrom'])['username']) ?></span>
-                    <span class="date"><span class="glyphicon glyphicon-time"></span> <?= \app\components\Tools::formatTime($message['created_at']) ?></span>
+                    <span class="date"><span class="glyphicon glyphicon-time"></span> <?= Tools::formatTime($message['created_at']) ?></span>
                 </div>
                 <div class="title">
                     <span class="action"><i class="fa fa-star-o"></i><i class="fa fa-star bg"></i></span>
                     <?= Html::encode($message['subject']) ?>
-                </div>
-                <div class="description">
-                    <?= HtmlPurifier::process($message['content']) ?>
                 </div>
             </a>
         </li>
