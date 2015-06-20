@@ -16,12 +16,12 @@ backend\web\index.php 可配置站点信息
 如何参与
 --------
 
-###你参与的iisns的发展是非常欢迎！
+###您参与的iisns的发展是非常欢迎！
 
 您可以以下几种方式参与：
 
 - [报告问题](docs/internals/report-an-issue.md)
-- [提供反馈意见或设计讨论](http://iisns.com/index.php/forum/iisns)
+- [提供反馈意见或设计讨论](http://www.iisns.com/index.php/forum/iisns)
 - 贡献核心代码或修复的bug
 
 
