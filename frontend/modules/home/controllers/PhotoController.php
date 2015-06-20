@@ -58,12 +58,13 @@ class PhotoController extends FrontController
         $model = $this->findModel($id);
         if ($model->created_by !== Yii::$app->user->id) {
             throw new ForbiddenHttpException('You are not allowed to perform this action.');
+        } else {
+            $albumId = $model->album_id;
+            $model->delete();
+            Yii::setAlias('@photo_path', '@webroot/uploads/home/photo/');
+            @unlink(Yii::getAlias('@photo_path').$model->path); 
+            return $this->redirect(['/home/album/view', 'id' => $albumId]);
         }
-        $albumId = $model->album_id;
-        $model->delete();
-        Yii::setAlias('@photo_path', '@webroot/uploads/home/photo/');
-        @unlink(Yii::getAlias('@photo_path').$model->path); 
-        return $this->redirect(['/home/album/view', 'id' => $albumId]);
     }
 
     /**

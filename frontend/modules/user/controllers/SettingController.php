@@ -56,7 +56,7 @@ class SettingController extends FrontController
         }
 
         if ($profile->load(Yii::$app->request->post()) && $profile->save()) {
-            Yii::$app->getSession()->setFlash('success', 'Save successfully.');
+            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Saved successfully'));
         }
         return $this->render('profile', [
             'profile' => $profile,
@@ -68,7 +68,7 @@ class SettingController extends FrontController
     {
         $model = $this->findModel();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->getSession()->setFlash('success', 'Save successfully.');
+            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Saved successfully'));
         }
 
         return $this->render('account', [
@@ -84,7 +84,7 @@ class SettingController extends FrontController
             if ($model->validate()) {
                 $model->setPassword($model->newPassword);
                 if ($model->save()) {
-                    Yii::$app->getSession()->setFlash('success', 'Save successfully.');
+                    Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Saved successfully'));
                 }
             }
         }

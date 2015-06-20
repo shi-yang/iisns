@@ -72,8 +72,17 @@ class Message extends \yii\db\ActiveRecord
     {
         if (parent::beforeSave($insert)) {
             if ($this->isNewRecord) {
-                $this->sendfrom = Yii::$app->user->identity->id;
+                if (!empty($this->userid)) {
+                    $this->sendto = $this->userid;
+                } else {
+                    $this->addError('sendto', Yii::t('app','User not found'));
+                    return false;
+                }
+                $this->sendfrom = Yii::$app->user->id;
                 $this->created_at = time();
+
+                //提示用户未读消息
+                Yii::$app->userData->updateKey('unread_message_count', $this->sendto, 1);
             }
             return true;
         } else {

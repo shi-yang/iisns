@@ -101,16 +101,16 @@ class FeedController extends FrontController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        if ($model->user_id !== Yii::$app->user->id) {
-            throw new ForbiddenHttpException('You are not allowed to perform this action.');
-        }
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->user_id === Yii::$app->user->id) {
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                return $this->render('update', [
+                    'model' => $model,
+                ]);
+            }
         } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+            throw new ForbiddenHttpException('You are not allowed to perform this action.');
         }
     }
 
@@ -123,15 +123,14 @@ class FeedController extends FrontController
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
-        if ($model->user_id !== Yii::$app->user->id) {
-            throw new ForbiddenHttpException('You are not allowed to perform this action.');
-        } else {
+        if ($model->user_id === Yii::$app->user->id) {
             $model->delete();
             Yii::$app->userData->updateKey('feed_count', Yii::$app->user->id, -1);
-            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Delete successfully.'));
+            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Deleted successfully.'));
+            return $this->redirect(['index']);
+        } else {
+            throw new ForbiddenHttpException('You are not allowed to perform this action.');
         }
-
-        return $this->redirect(['index']);
     }
 
     /**

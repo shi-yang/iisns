@@ -184,7 +184,7 @@ class ForumController extends FrontController
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate() && $model->save()) {
-                Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Save successfully.'));
+                Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Saved successfully'));
             }
         }
         

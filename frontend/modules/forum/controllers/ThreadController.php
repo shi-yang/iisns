@@ -113,7 +113,7 @@ class ThreadController extends FrontController
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->getSession()->setFlash('success', 'Save successfully.');
+            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Saved successfully'));
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -131,15 +131,15 @@ class ThreadController extends FrontController
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
-        $board_id = $model->board_id;
-        if ($model->user_id === Yii::$app->user->id || $model->board['user_id']) {
+        if ($model->user_id === Yii::$app->user->id || $model->board['user_id'] === Yii::$app->user->id) {
+            $board_id = $model->board_id;
             Post::deleteAll(['thread_id' => $model->id]);
             $model->delete();
-            Yii::$app->getSession()->setFlash('success', 'Delete successfully.');
+            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Deleted successfully.'));
+            return $this->redirect(['/forum/board/view', 'id' => $board_id]);
         } else {
             throw new ForbiddenHttpException('You are not allowed to perform this action.');
         }
-        return $this->redirect(['/forum/board/view', 'id' => $board_id]);
     }
 
     /**

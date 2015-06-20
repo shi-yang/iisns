@@ -115,22 +115,15 @@ class MessageController extends FrontController
     {
         $model = new Message();
 
-        if ($model->load(Yii::$app->request->post())) {
-            if (!empty($model->userid)) {
-                $model->sendto = $model->userid;
-                if ($model->save()) {
-                    Yii::$app->userData->updateKey('unread_message_count', $model->sendto, 1);
-                    Yii::$app->getSession()->setFlash('success', 'Sent successfully');
-                }
-            } else {
-                $model->addError('sendto', Yii::t('app','User not found'));
-            }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Sent successfully'));
+            return $this->refresh();
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+                'count' => $this->getMessageCount()
+            ]);
         }
-
-        return $this->render('create', [
-            'model' => $model,
-            'count' => $this->getMessageCount()
-        ]);
     }
 
     /**
