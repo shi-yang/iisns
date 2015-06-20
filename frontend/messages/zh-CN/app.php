@@ -89,6 +89,7 @@ return [
 	'Follower' => '粉丝',
 	'Follow' => '关注',
 	'Following' => '关注',
+	'Unfollow' => '取消关注', 
 
 	'Forum' => '论坛',
 	'Forums' => '论坛',
@@ -132,6 +133,8 @@ return [
     'Recommendation' => '推荐',
 
 	'Are you sure you want to Log out?' => '你确定要注销？',
+	'If you forgot your password you can ' => '如果您忘记密码，请',
+	'reset it' => '点此重置',
 	'No data to display.' => '没有数据展示',
 	'Unfinished,continue reading' => '未完，继续阅读',
 	'View Details' => '查看详情',

@@ -1,5 +1,7 @@
 <?php
+
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
@@ -10,6 +12,16 @@ use frontend\widgets\Alert;
 /* @var $content string */
 
 ProfileAsset::register($this);
+
+//关注按钮
+$done = Yii::$app->db
+    ->createCommand("SELECT 1 FROM {{%user_follow}} WHERE user_id=:user_id AND people_id=:id LIMIT 1")
+    ->bindValues([':user_id' => Yii::$app->user->id, ':id' => $this->params['user']['id']])->queryScalar();
+if ($done) {
+    $followBtn = '<span class="glyphicon glyphicon glyphicon-eye-close"></span> ' . Yii::t('app', 'Unfollow');
+} else {
+    $followBtn = '<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'Follow');
+}
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -65,8 +77,8 @@ ProfileAsset::register($this);
               <div class="profile-location"><i class="glyphicon glyphicon-map-marker"></i> <?= Html::encode($this->params['profile']['address']) ?></div>
               <div class="profile-signature"><i class="glyphicon glyphicon-pushpin"></i> <?= Html::encode($this->params['profile']['signature']) ?></div>
               <div class="mb20"></div>
-              <button class="btn btn-success mr5"><i class="glyphicon glyphicon-plus"></i> <?= Yii::t('app', 'Follow') ?></button>
-              <button class="btn btn-white"><i class="glyphicon glyphicon-envelope"></i> <?= Yii::t('app', 'Message') ?></button>
+              <a class="btn btn-success follow" href="<?= Url::toRoute(['/user/user/follow', 'id' => $this->params['user']['id']]) ?>"><?= $followBtn ?></a>
+              <a class="btn btn-default"><i class="glyphicon glyphicon-envelope"></i> <?= Yii::t('app', 'Message') ?></a>
             </div>
             <ul class="nav nav-tabs nav-justified nav-profile">
               <li class="active"><a href="#timeline" data-toggle="tab"><strong><i class="glyphicon glyphicon-time"></i> <?= Yii::t('app', 'Timeline') ?></strong></a></li>
@@ -91,6 +103,25 @@ ProfileAsset::register($this);
         </div>
     </footer>
     <?php $this->endBody() ?>
+    <script>
+      $('.follow').on('click', function() {
+          var a = $(this);
+          $.ajax({
+              url: a.attr('href'),
+              success: function(data) {
+                  if(data.action == 'create') {
+                      a.html('取消关注');
+                  } else {
+                      a.html('点击关注');
+                  }
+              },
+              error: function (XMLHttpRequest, textStatus) {
+                  location.href="<?= Url::toRoute(['/site/login']) ?>";
+              }
+          });
+          return false;
+      });
+    </script>
 </body>
 </html>
 <?php $this->endPage() ?>
