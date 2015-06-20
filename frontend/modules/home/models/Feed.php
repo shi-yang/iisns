@@ -63,8 +63,9 @@ class Feed extends \yii\db\ActiveRecord
     {
        if (parent::beforeSave($insert)) {
             if ($this->isNewRecord) {
-              $this->user_id = Yii::$app->user->id;
-              $this->created_at = time();
+                $this->type = 'post';
+                $this->user_id = Yii::$app->user->id;
+                $this->created_at = time();
             }
            return true;
        } else {
@@ -81,7 +82,8 @@ class Feed extends \yii\db\ActiveRecord
         $setarr = [];
         switch ($type) {
             //发表日志
-            case 'post':
+            case 'blog':
+                $setarr['type'] = 'postblog';
                 $setarr['template'] = '<b>{title}</b><br>{summary}';
                 $setarr['feed_data'] = $data;
                 $setarr['user_id'] = Yii::$app->user->id;
@@ -90,6 +92,7 @@ class Feed extends \yii\db\ActiveRecord
                 break;
             case 'album':
                 ;
+            case 'video':
                 break;
         }
     }

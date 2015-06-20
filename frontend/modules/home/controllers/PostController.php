@@ -103,7 +103,7 @@ class PostController extends FrontController
             preg_match_all("/<[img|IMG].*?src=\"([^^]*?)\".*?>/", $model->content, $images);
             $summary = mb_substr(strip_tags($model->content), 0, 140, 'utf-8') . '... ' . Html::a(Yii::t('app', 'View Details'), $model->url) . '<br>' . $images[0][0];
             $postData = ['{title}' => $title, '{summary}' => $summary];
-            Feed::addFeed('post', serialize($postData));
+            Feed::addFeed('blog', serialize($postData));
 
             return $this->redirect(['/home/post']);
         }
