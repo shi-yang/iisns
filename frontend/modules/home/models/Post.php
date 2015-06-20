@@ -89,7 +89,7 @@ class Post extends \yii\db\ActiveRecord
 
     public function getUser()
     {
-        return Yii::$app->db->createCommand("SELECT avatar, email, username FROM {{%user}} WHERE id={$this->user_id}")->queryOne();
+        return Yii::$app->db->createCommand("SELECT id, avatar, email, username FROM {{%user}} WHERE id={$this->user_id}")->queryOne();
     }
 
     public function getUserProfile()
