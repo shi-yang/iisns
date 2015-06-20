@@ -112,8 +112,10 @@ class ExploreController extends FrontController
 
         Yii::$app->db->createCommand("UPDATE {{%explore_recommend}} SET view_count=view_count+1 WHERE id=:id")->bindValue(':id', $id)->execute();
 
-        if (!empty($model['author'])) {
+        if ($model['table_name'] == 'home_post') {
             return $this->redirect(['/home/post/view', 'id' => $model['table_id']]);
+        } elseif ($model['table_name'] == 'forum_thread') {
+            return $this->redirect(['/forum/thread/view', 'id' => $model['table_id']]);
         }
 
         return $this->render('viewPost', [
