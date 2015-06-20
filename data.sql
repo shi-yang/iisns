@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS `pre_explore_recommend` (
   `content` text NOT NULL,
   `view_count` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
+  `origin` varchar(50) NOT NULL COMMENT '来源',
   `username` varchar(60) NOT NULL,
   `category` char(50) NOT NULL,
   `table_id` int(11) DEFAULT NULL,

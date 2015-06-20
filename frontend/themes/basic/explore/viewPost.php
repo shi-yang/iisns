@@ -21,6 +21,11 @@ $this->registerMetaTag(['name' => 'description', 'content' => $model['summary']]
     </a>
     <address class="meccaddress">
       <time><span class="glyphicon glyphicon-time"></span> <?= Tools::formatTime($model['created_at']) ?></time>
+      <?php
+        if (!empty($model['origin'])) {
+          echo " - 来源：" . Html::encode($model['origin']);
+        }
+      ?>
       - 
       <?php
         if (!empty($post['author'])) {

@@ -12,6 +12,7 @@ use Yii;
  * @property string $summary
  * @property string $content
  * @property integer $user_id
+ * @property string $origin
  * @property string $username
  * @property string $category
  * @property integer $table_id
@@ -35,7 +36,7 @@ class ExploreRecommend extends \yii\db\ActiveRecord
     {
         return [
             //[['title', 'summary', 'content', 'user_id', 'username', 'category', 'table_id', 'table_name', 'created_at'], 'required'],
-            [['summary', 'content'], 'string'],
+            [['summary', 'content', 'origin'], 'string'],
             [['user_id', 'created_at'], 'integer'],
             [['title', 'username'], 'string', 'max' => 128],
             [['category'], 'string', 'max' => 50],
