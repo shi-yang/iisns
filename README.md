@@ -38,17 +38,19 @@ backend\web\index.php 可配置站点信息
 预览
 -------
 
-![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns2_0228/item-01.png)
+![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns_v2.1.2/Screen-shot 2015-06-20 11.50.17.png)
 
-![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns2_0228/item-02.png)
+![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns_v2.1.2/Screen-shot 2015-06-20 11.17.52.png)
 
-![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns2_0228/item-03.png)
+![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns_v2.1.2/Screen-shot 2015-06-20 11.26.56.png)
 
-![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns2_0228/item-04.png)
+![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns_v2.1.2/Screen-shot 2015-06-20 11.30.19.png)
 
-![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns2_0228/item-05.png)
+![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns_v2.1.2/Screen-shot 2015-06-20 11.36.42.png)
 
-![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns2_0228/item-06.png)
+![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns_v2.1.2/Screen-shot 2015-06-20 11.41.22.png)
+
+![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns_v2.1.2/Screen-shot 2015-06-20 11.41.43)
 
 演示
 ----
