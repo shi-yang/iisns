@@ -13,11 +13,13 @@ $this->registerCss('
       padding-top: 40px;
       background-color: #eef0f3;
     }
-
     .form-signin {
       max-width: 330px;
       padding: 15px;
       margin: 0 auto;
+    }
+    .logo img {
+      max-width: 100%;
     }
     .form-signin .form-signin-heading,
     .form-signin .checkbox {
@@ -55,6 +57,9 @@ $this->registerCss('
         'class' => 'form-signin' 
     ]
 ]); ?>
+  <div class="logo">
+    <img src="<?= Yii::getAlias('@web') ?>/images/logo.png">
+  </div>
 
   <h1><?= Html::encode($this->title) ?></h1>
 

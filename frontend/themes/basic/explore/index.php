@@ -91,7 +91,10 @@ $this->params['title'] = Yii::t('app', 'Explore');
             </div>
         </div>
         <div class="col-md-4">
-            <?= \shiyang\login\Login::widget(['visible' => Yii::$app->user->isGuest]); ?>
+            <?= \shiyang\login\Login::widget([
+              'title' => Yii::t('app', 'Log in'),
+              'visible' => Yii::$app->user->isGuest,
+            ]); ?>
             <p class="bg-success" style="padding:15px;">
                 <b><?= Yii::t('app', 'Recommendation') ?></b>
                 <?= Html::a(Yii::t('app', 'More'), ['/explore/forums'], ['class' => 'pull-right']) ?>

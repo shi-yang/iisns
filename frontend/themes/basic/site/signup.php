@@ -12,7 +12,9 @@ $this->registerCss('
       padding-top: 40px;
       background-color: #eef0f3;
     }
-
+    .logo img {
+      max-width: 100%;
+    }
     .form-signin {
       max-width: 330px;
       padding: 15px;
@@ -50,6 +52,9 @@ $this->registerCss('
 ');
 ?>
 <div class="form-signin">
+    <div class="logo">
+      <img src="<?= Yii::getAlias('@web') ?>/images/logo.png">
+    </div>
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
