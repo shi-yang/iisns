@@ -39,18 +39,12 @@ backend\web\index.php 可配置站点信息
 -------
 
 ![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns_v2.1.2/Screen-shot 2015-06-20 11.50.17.png)
-
 ![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns_v2.1.2/Screen-shot 2015-06-20 11.17.52.png)
-
 ![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns_v2.1.2/Screen-shot 2015-06-20 11.26.56.png)
-
 ![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns_v2.1.2/Screen-shot 2015-06-20 11.30.19.png)
-
 ![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns_v2.1.2/Screen-shot 2015-06-20 11.36.42.png)
-
 ![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns_v2.1.2/Screen-shot 2015-06-20 11.41.22.png)
-
-![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns_v2.1.2/Screen-shot 2015-06-20 11.41.43)
+![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns_v2.1.2/Screen-shot 2015-06-20 11.41.43.png)
 
 演示
 ----
