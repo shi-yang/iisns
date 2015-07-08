@@ -127,7 +127,7 @@ AppAsset::register($this);
                         </a>
                     </li>
                     <li class="active">
-                        <a href="<?= Url::toRoute('/setting/default') ?>">
+                        <a href="<?= Url::toRoute('/settings/default') ?>">
                             <i class="glyphicon glyphicon-cog"></i> <span><?= Yii::t('app', 'Setting') ?></span>
                         </a>
                     </li>

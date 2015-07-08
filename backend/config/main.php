@@ -13,9 +13,8 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [
-        'setting' => [
-            'class' => 'shiyang\setting\Module',
-            'controllerNamespace' => 'shiyang\setting\controllers'
+        'settings' => [
+            'class' => 'backend\modules\settings\SettingModule',
         ],
         'forum' => [
             'class' => 'backend\modules\forum\ForumModule',

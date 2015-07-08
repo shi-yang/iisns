@@ -20,7 +20,6 @@
         "yiisoft/yii2-swiftmailer": "*",
         "yiisoft/yii2-imagine": "*",
         "shiyang/yii2-login-widget": "*",
-        "shiyang/yii2-setting": "*",
         "shiyang/yii2-infinite-scroll": "*",
         "shiyang/yii2-masonry": "*",
         "kucha/ueditor": "*",

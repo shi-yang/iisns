@@ -7,7 +7,7 @@ return [
             'cachePath' => '@app/../common/cache'
         ],
         'setting' => [
-            'class' => 'shiyang\setting\components\Setting',
+            'class' => 'common\components\Settings',
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,

@@ -215,40 +215,24 @@ CREATE TABLE IF NOT EXISTS `pre_home_post` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;
 
 --
--- 表的结构 `pre_setting`
+-- 表的结构 `pre_settings`
 --
 
-CREATE TABLE IF NOT EXISTS `pre_setting` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `parent_id` int(11) NOT NULL DEFAULT '0',
-  `code` varchar(32) NOT NULL,
-  `type` varchar(32) NOT NULL,
-  `store_range` varchar(255) NOT NULL,
-  `store_dir` varchar(255) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pre_settings` (
+  `key` varchar(255) NOT NULL,
   `value` text NOT NULL,
-  `sort_order` int(11) DEFAULT '50',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3116 ;
+  PRIMARY KEY (`key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 转存表中的数据 `pre_setting`
+-- 转存表中的数据 `pre_settings`
 --
 
-INSERT INTO `pre_setting` (`id`, `parent_id`, `code`, `type`, `store_range`, `store_dir`, `value`, `sort_order`) VALUES
-(11, 0, 'Info', 'group', '', '', '', 50),
-(21, 0, 'Basic', 'group', '', '', '', 50),
-(31, 0, 'Smtp', 'group', '', '', '', 50),
-(1111, 11, 'siteName', 'text', '', '', 'iiSNS', 50),
-(1112, 11, 'siteTitle', 'text', '', '', 'iiSNS - Global village entrance', 50),
-(1113, 11, 'siteKeyword', 'text', '', '', 'iiSNS - Global village entrance', 50),
-(1114, 11, 'siteDescription', 'text', '', '', 'A forum, a blog, and a user center.', 50),
-(2111, 21, 'timezone', 'select', '-12,-11,-10,-9,-8,-7,-6,-5,-4,-3.5,-3,-2,-1,0,1,2,3,3.5,4,4.5,5,5.5,5.75,6,6.5,7,8,9,9.5,10,11,12', '', '8', 50),
-(2112, 21, 'commentCheck', 'select', '0,1', '', '0', 50),
-(3111, 31, 'smtpHost', 'text', '', '', 'localhost', 50),
-(3112, 31, 'smtpPort', 'text', '', '', '4', 50),
-(3113, 31, 'smtpUser', 'text', '', '', 'root', 50),
-(3114, 31, 'smtpPassword', 'password', '', '', 'adminadmin', 50),
-(3115, 31, 'smtpMail', 'text', '', '', '', 50);
+INSERT INTO `pre_settings` (`key`, `value`) VALUES
+('siteDescription', 'A forum, a blog, and a user center.'),
+('siteKeyword', 'iiSNS - Global village entrance'),
+('siteName', 'iiSNS'),
+('siteTitle', 'iiSNS - Global village entrance');
 
 -- --------------------------------------------------------
 

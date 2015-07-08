@@ -1,22 +1,11 @@
 <?php
-
-/**
- * @copyright Copyright (c) 2015 Shiyang
- * @author Shiyang <dr@shiyang.me>
- * @link http://shiyang.me
- * @license http://opensource.org/licenses/MIT
- */
-
-namespace shiyang\setting\components;
+namespace common\components;
 
 use yii\base\Component;
 use yii\caching\Cache;
 use Yii;
 
-/**
- * @author Aris Karageorgos <aris@phe.me>
- */
-class Setting extends Component
+class Settings extends Component
 {
     /**
      * @var Cache|string the cache object or the application component ID of the cache object.
@@ -33,7 +22,7 @@ class Setting extends Component
      *
      * @var string cache key
      */
-    public $cacheKey = 'shiyang/settings';
+    public $cacheKey = 'settings';
 
     /**
      * Holds a cached copy of the data for the current request
@@ -57,14 +46,14 @@ class Setting extends Component
     }
 
     /**
-     * Get's the value for the given code.
-     * You can use dot notation to separate the section from the code:
-     * $value = $settings->get('code');
+     * Get's the value for the given key.
+     * You can use dot notation to separate the section from the key:
+     * $value = $settings->get('key');
      * are equivalent
      *
-     * @param string $code
+     * @param string $key
      */
-    public function get($code)
+    public function get($key)
     {
         if ($this->_data === null) {
             if ($this->cache instanceof Cache) {
@@ -79,7 +68,7 @@ class Setting extends Component
             }
             $this->_data = $data;
         }
-        return $this->_data[$code];
+        return $this->_data[$key];
     }
 
     /**
@@ -92,7 +81,7 @@ class Setting extends Component
     {
         $this->_data = null;
         if ($this->cache instanceof Cache) {
-            $this->cache->cachePath = Yii::getAlias('@app').'\..\common\cache';
+            $this->cache->cachePath = Yii::getAlias('@app/../common/cache');
             return $this->cache->delete($this->cacheKey);
         }
         return true;
@@ -105,7 +94,7 @@ class Setting extends Component
      */
     public function getData()
     {
-        $settings = Yii::$app->db->createCommand("SELECT * FROM {{%setting}}")->queryAll();
-        return \yii\helpers\ArrayHelper::map($settings, 'code', 'value');
+        $settings = Yii::$app->db->createCommand("SELECT * FROM {{%settings}}")->queryAll();
+        return \yii\helpers\ArrayHelper::map($settings, 'key', 'value');
     }
 }

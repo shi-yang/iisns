@@ -12,15 +12,6 @@ return array (
       '@shiyang/login' => $vendorDir . '/shiyang/yii2-login-widget',
     ),
   ),
-  'shiyang/yii2-setting' => 
-  array (
-    'name' => 'shiyang/yii2-setting',
-    'version' => '1.0.0.0',
-    'alias' => 
-    array (
-      '@shiyang/setting' => $vendorDir . '/shiyang/yii2-setting',
-    ),
-  ),
   'shiyang/yii2-webuploader' => 
   array (
     'name' => 'shiyang/yii2-webuploader',
