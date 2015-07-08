@@ -12,12 +12,12 @@ use yii\helpers\Html;
 use app\modules\home\models\Post;
 use app\modules\home\models\Feed;
 use app\components\Tools;
-use app\components\FrontController;
+use common\components\BaseController;
 
 /**
  * PostController implements the CRUD actions for Post model.
  */
-class PostController extends FrontController
+class PostController extends BaseController
 {
     public $layout = '@app/modules/user/views/layouts/profile';
     public function behaviors()

@@ -134,7 +134,7 @@ AppAsset::register($this);
                     <li class="treeview">
                         <a href="#">
                             <i class="glyphicon glyphicon-hdd"></i>
-                            <span>Content</span>
+                            <span><?= Yii::t('app', 'Content') ?></span>
                             <i class="glyphicon glyphicon-menu-down pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
@@ -145,7 +145,7 @@ AppAsset::register($this);
                     </li>
                     <li>
                         <a href="<?= Url::toRoute(['/site/cache']) ?>">
-                            <i class="glyphicon glyphicon-road"></i> <span>Cache</span>
+                            <i class="glyphicon glyphicon-road"></i> <span><?= Yii::t('app', 'Cache') ?></span>
                         </a>
                     </li>
                     <li>

@@ -6,7 +6,7 @@ use Yii;
 use app\modules\forum\models\Thread;
 use app\modules\forum\models\ThreadSearch;
 use app\modules\forum\models\Post;
-use app\components\FrontController;
+use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
@@ -15,7 +15,7 @@ use yii\data\Pagination;
 /**
  * ThreadController implements the CRUD actions for Thread model.
  */
-class ThreadController extends FrontController
+class ThreadController extends BaseController
 {
     public $layout = 'forum';
     

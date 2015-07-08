@@ -4,7 +4,7 @@ namespace app\modules\forum\controllers;
 
 use Yii;
 use app\modules\forum\models\Broadcast;
-use app\components\FrontController;
+use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * BroadcastController implements the CRUD actions for Broadcast model.
  */
-class BroadcastController extends FrontController
+class BroadcastController extends BaseController
 {
     public function behaviors()
     {

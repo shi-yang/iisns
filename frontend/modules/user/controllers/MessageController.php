@@ -5,7 +5,7 @@ namespace app\modules\user\controllers;
 use Yii;
 use yii\db\Query;
 use yii\data\SqlDataProvider;
-use app\components\FrontController;
+use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -16,7 +16,7 @@ use app\modules\user\models\Message;
 /**
  * MessageController implements the CRUD actions for Message model.
  */
-class MessageController extends FrontController
+class MessageController extends BaseController
 {
     public $defaultAction = 'inbox';
     public $layout = 'message';

@@ -5,7 +5,7 @@ namespace app\modules\home\controllers;
 use Yii;
 use app\modules\home\models\Album;
 use yii\data\SqlDataProvider;
-use app\components\FrontController;
+use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
@@ -14,7 +14,7 @@ use yii\filters\AccessControl;
 /**
  * AlbumController implements the CRUD actions for Album model.
  */
-class AlbumController extends FrontController
+class AlbumController extends BaseController
 {
     public $layout = '@app/modules/user/views/layouts/user';
     public $enableCsrfValidation = false;

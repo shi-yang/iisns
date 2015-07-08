@@ -6,7 +6,7 @@ use yii\db\Query;
 use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\data\SqlDataProvider;
-use app\components\FrontController;
+use common\components\BaseController;
 use app\components\Tools;
 use app\modules\home\models\Album;
 
@@ -17,7 +17,7 @@ Yii::setAlias('photo', '@web/uploads/home/photo/');
 /**
  * Explore controller
  */
-class ExploreController extends FrontController
+class ExploreController extends BaseController
 {
     public $layout = 'explore';
 

@@ -6,7 +6,7 @@ use Yii;
 use backend\models\ExploreRecommend;
 use yii\data\SqlDataProvider;
 use yii\db\Query;
-use yii\web\Controller;
+use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -14,7 +14,7 @@ use yii\filters\AccessControl;
 /**
  * ExploreController implements the CRUD actions for ExploreRecommend model.
  */
-class ExploreController extends Controller
+class ExploreController extends BaseController
 {
     /**
      * @inheritdoc

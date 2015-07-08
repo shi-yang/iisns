@@ -3,14 +3,14 @@
 namespace app\modules\home\controllers;
 
 use Yii;
-use app\components\FrontController;
+use common\components\BaseController;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use app\modules\home\models\Photo;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 
-class PhotoController extends FrontController
+class PhotoController extends BaseController
 {
     public function behaviors()
     {

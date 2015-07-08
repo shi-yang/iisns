@@ -10,9 +10,9 @@ use app\modules\user\models\User;
 use app\modules\home\models\Post;
 use app\modules\home\models\Feed;
 use app\components\Tools;
-use app\components\FrontController;
+use common\components\BaseController;
 
-class DashboardController extends FrontController
+class DashboardController extends BaseController
 {
     public $layout='dashboard';
     

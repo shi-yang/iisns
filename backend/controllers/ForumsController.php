@@ -5,7 +5,7 @@ namespace backend\controllers;
 use Yii;
 use backend\models\Forum;
 use backend\models\ForumSearch;
-use yii\web\Controller;
+use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -13,7 +13,7 @@ use yii\filters\VerbFilter;
 /**
  * ForumController implements the CRUD actions for Forum model.
  */
-class ForumController extends Controller
+class ForumController extends BaseController
 {
     /**
      * @inheritdoc

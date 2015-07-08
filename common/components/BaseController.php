@@ -1,17 +1,21 @@
 <?php
-
-namespace app\components;
+namespace common\components;
 
 use Yii;
 use yii\web\Controller;
 
-class FrontController extends Controller
+class BaseController extends Controller
 {
 	public function init()
     {
-        /** 
-         * Set the language displayed on the current site
-         */
+        $this->setLanguage();
+    }
+
+    /** 
+     * Set the language displayed on the current site
+     */
+    public function setLanguage()
+    {
         if(isset($_GET['lang']) && $_GET['lang'] != "") {
             // By passing a parameter to change the language
             Yii::$app->language = htmlspecialchars($_GET['lang']);

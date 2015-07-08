@@ -3,7 +3,7 @@
 namespace app\modules\forum\controllers;
 
 use Yii;
-use app\components\FrontController;
+use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\filters\AccessControl;
@@ -20,7 +20,7 @@ use app\modules\forum\models\Broadcast;
 /**
  * ForumController implements the CRUD actions for Forum model.
  */
-class ForumController extends FrontController
+class ForumController extends BaseController
 {
     const BOARD = 1;
 

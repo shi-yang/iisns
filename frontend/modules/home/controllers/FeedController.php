@@ -11,12 +11,12 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use app\modules\home\models\Feed;
 use app\components\Tools;
-use app\components\FrontController;
+use common\components\BaseController;
 
 /**
  * FeedController implements the CRUD actions for Feed model.
  */
-class FeedController extends FrontController
+class FeedController extends BaseController
 {
     public $layout = '@app/modules/user/views/layouts/user';
 
