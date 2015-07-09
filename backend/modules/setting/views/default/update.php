@@ -3,16 +3,16 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model backend\modules\settings\models\Settings */
+/* @var $model backend\modules\setting\models\Setting */
 
 $this->title = Yii::t('app', 'Update {modelClass}: ', [
-    'modelClass' => 'Settings',
+    'modelClass' => 'Setting',
 ]) . ' ' . $model->key;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Settings'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Setting'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->key, 'url' => ['view', 'id' => $model->key]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
-<div class="settings-update">
+<div class="setting-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

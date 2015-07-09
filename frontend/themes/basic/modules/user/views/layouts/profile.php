@@ -123,6 +123,7 @@ if ($done) {
           return false;
       });
     </script>
+    <?= Yii::$app->setting->get('thirdPartyStatisticalCode') ?>
 </body>
 </html>
 <?php $this->endPage() ?>

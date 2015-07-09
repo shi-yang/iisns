@@ -6,10 +6,10 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Settings');
+$this->title = Yii::t('app', 'Setting');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="settings-index">
+<div class="setting-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

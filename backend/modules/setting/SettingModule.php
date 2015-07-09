@@ -1,10 +1,10 @@
 <?php
 
-namespace backend\modules\settings;
+namespace backend\modules\setting;
 
 class SettingModule extends \yii\base\Module
 {
-    public $controllerNamespace = 'backend\modules\settings\controllers';
+    public $controllerNamespace = 'backend\modules\setting\controllers';
 
     public function init()
     {

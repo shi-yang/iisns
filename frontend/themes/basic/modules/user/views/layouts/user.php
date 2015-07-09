@@ -263,6 +263,7 @@ AppAsset::register($this);
       Modal::end();
     ?>
     <?php $this->endBody() ?>
+    <?= Yii::$app->setting->get('thirdPartyStatisticalCode') ?>
 </body>
 </html>
 <?php $this->endPage() ?>

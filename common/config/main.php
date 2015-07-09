@@ -7,7 +7,7 @@ return [
             'cachePath' => '@app/../common/cache'
         ],
         'setting' => [
-            'class' => 'common\components\Settings',
+            'class' => 'common\components\Setting',
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,

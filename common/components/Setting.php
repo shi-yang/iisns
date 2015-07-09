@@ -5,7 +5,7 @@ use yii\base\Component;
 use yii\caching\Cache;
 use Yii;
 
-class Settings extends Component
+class Setting extends Component
 {
     /**
      * @var Cache|string the cache object or the application component ID of the cache object.
@@ -94,7 +94,7 @@ class Settings extends Component
      */
     public function getData()
     {
-        $settings = Yii::$app->db->createCommand("SELECT * FROM {{%settings}}")->queryAll();
+        $settings = Yii::$app->db->createCommand("SELECT * FROM {{%setting}}")->queryAll();
         return \yii\helpers\ArrayHelper::map($settings, 'key', 'value');
     }
 }

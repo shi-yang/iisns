@@ -136,6 +136,7 @@ AppAsset::register($this);
           return $('body, html').toggleClass("nav-open");
         });
     </script>
+    <?= Yii::$app->setting->get('thirdPartyStatisticalCode') ?>
 </body>
 </html>
 <?php $this->endPage() ?>

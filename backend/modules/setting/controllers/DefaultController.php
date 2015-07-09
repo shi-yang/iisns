@@ -1,22 +1,33 @@
 <?php
 
-namespace backend\modules\settings\controllers;
+namespace backend\modules\setting\controllers;
 
 use Yii;
-use backend\modules\settings\models\Settings;
+use backend\modules\setting\models\Setting;
 use yii\data\ActiveDataProvider;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
- * IndexController implements the CRUD actions for Settings model.
+ * IndexController implements the CRUD actions for Setting model.
  */
 class DefaultController extends BaseController
 {
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['index', 'view', 'create', 'delete', 'update'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -27,13 +38,13 @@ class DefaultController extends BaseController
     }
 
     /**
-     * Lists all Settings models.
+     * Lists all Setting models.
      * @return mixed
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Settings::find(),
+            'query' => Setting::find(),
         ]);
 
         return $this->render('index', [
@@ -42,7 +53,7 @@ class DefaultController extends BaseController
     }
 
     /**
-     * Displays a single Settings model.
+     * Displays a single Setting model.
      * @param string $id
      * @return mixed
      */
@@ -54,13 +65,13 @@ class DefaultController extends BaseController
     }
 
     /**
-     * Creates a new Settings model.
+     * Creates a new Setting model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Settings();
+        $model = new Setting();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->key]);
@@ -72,7 +83,7 @@ class DefaultController extends BaseController
     }
 
     /**
-     * Updates an existing Settings model.
+     * Updates an existing Setting model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $id
      * @return mixed
@@ -91,7 +102,7 @@ class DefaultController extends BaseController
     }
 
     /**
-     * Deletes an existing Settings model.
+     * Deletes an existing Setting model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string $id
      * @return mixed
@@ -104,15 +115,15 @@ class DefaultController extends BaseController
     }
 
     /**
-     * Finds the Settings model based on its primary key value.
+     * Finds the Setting model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $id
-     * @return Settings the loaded model
+     * @return Setting the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Settings::findOne($id)) !== null) {
+        if (($model = Setting::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

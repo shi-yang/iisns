@@ -218,7 +218,7 @@ CREATE TABLE IF NOT EXISTS `pre_home_post` (
 -- 表的结构 `pre_settings`
 --
 
-CREATE TABLE IF NOT EXISTS `pre_settings` (
+CREATE TABLE IF NOT EXISTS `pre_setting` (
   `key` varchar(255) NOT NULL,
   `value` text NOT NULL,
   PRIMARY KEY (`key`)
@@ -232,7 +232,8 @@ INSERT INTO `pre_settings` (`key`, `value`) VALUES
 ('siteDescription', 'A forum, a blog, and a user center.'),
 ('siteKeyword', 'iiSNS - Global village entrance'),
 ('siteName', 'iiSNS'),
-('siteTitle', 'iiSNS - Global village entrance');
+('siteTitle', 'iiSNS - Global village entrance'),
+('thirdPartyStatisticalCode', '');
 
 -- --------------------------------------------------------
 

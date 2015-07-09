@@ -13,8 +13,8 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [
-        'settings' => [
-            'class' => 'backend\modules\settings\SettingModule',
+        'setting' => [
+            'class' => 'backend\modules\setting\SettingModule',
         ],
         'forum' => [
             'class' => 'backend\modules\forum\ForumModule',

@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model backend\modules\settings\models\Settings */
+/* @var $model backend\modules\setting\models\Setting */
 
 $this->title = $model->key;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Settings'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Setting'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="settings-view">
+<div class="setting-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

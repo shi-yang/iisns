@@ -1,23 +1,23 @@
 <?php
 
-namespace backend\modules\settings\models;
+namespace backend\modules\setting\models;
 
 use Yii;
 
 /**
- * This is the model class for table "{{%settings}}".
+ * This is the model class for table "{{%setting}}".
  *
  * @property string $key
  * @property string $value
  */
-class Settings extends \yii\db\ActiveRecord
+class Setting extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return '{{%settings}}';
+        return '{{%setting}}';
     }
 
     /**
@@ -26,7 +26,7 @@ class Settings extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['key', 'value'], 'required'],
+            [['key'], 'required'],
             [['value'], 'string'],
             [['key'], 'string', 'max' => 255]
         ];
@@ -41,5 +41,10 @@ class Settings extends \yii\db\ActiveRecord
             'key' => Yii::t('app', 'Key'),
             'value' => Yii::t('app', 'Value'),
         ];
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        Yii::$app->cache->flush();
     }
 }
