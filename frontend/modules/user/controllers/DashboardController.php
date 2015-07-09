@@ -48,6 +48,7 @@ class DashboardController extends BaseController
         }
         $model = $this->findModel();
         $newFeed = new Feed;
+        $newFeed->setScenario('create');
         if ($newFeed->load(Yii::$app->request->post()) && $newFeed->save()) {
             Yii::$app->userData->updateKey('feed_count', Yii::$app->user->id);
             return $this->refresh();

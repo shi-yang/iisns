@@ -3,6 +3,7 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use app\components\Tools;
 use yii\bootstrap\ActiveForm;
+use yii\bootstrap\Modal;
 use shiyang\infinitescroll\InfiniteScrollPager;
 
 /* @var $this yii\web\View */
@@ -13,7 +14,7 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
 <div class="item widget-container share-widget fluid-height clearfix">
 
     <div class="widget-content padded">
-        <?php $form = ActiveForm::begin(); ?>
+        <?php $form = ActiveForm::begin(['options' => ['id' => 'create-feed']]); ?>
         <?= $form->field($newFeed, 'content', ['inputOptions' => ['placeholder' => Yii::t('app', 'Record people around, things around.')]])->textarea(['rows' => 3])->label(false) ?>
         <div class="form-group">
             <?= Html::submitButton(Yii::t('app', 'Create'), ['class' => 'btn btn-success']) ?>
@@ -49,11 +50,21 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
                             }
                         ?>
                     </p>
-                    <?php if(Yii::$app->user->id == $feed['user_id']): ?>
-                        <a href="<?= Url::toRoute(['/home/feed/delete', 'id' => $feed['id']]) ?>" data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="post">
-                            <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
+                </div>
+                <div class="widget-footer">
+                    <div class="footer-detail">
+                        <?php if(Yii::$app->user->id == $feed['user_id']): ?>
+                            &nbsp;
+                            <a href="<?= Url::toRoute(['/home/feed/delete', 'id' => $feed['id']]) ?>" data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="post">
+                                <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
+                            </a>
+                            &nbsp;
+                            <span class="item-line"></span>
+                        <?php endif ?>
+                        <a href="javascript:;" onclick="setRepostFormAction(<?= $feed['id'] ?>)" data-toggle="modal" data-target="#repost-modal">
+                            <span class="glyphicon glyphicon-share-alt"></span> <?= Yii::t('app', 'Repost') ?>
                         </a>
-                    <?php endif ?>
+                    </div>
                 </div>
             </div>
         <?php endforeach; ?>
@@ -68,3 +79,27 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
         No feed to display.
     </div>
 <?php endif; ?>
+<?php
+Modal::begin([
+    'header' => '<h4>' . Yii::t('app', 'Repost') . '</h4>',
+    'options' => ['id' => 'repost-modal']
+]);
+$newFeed->setScenario('repost');
+?>
+    <?php $form = ActiveForm::begin([
+        'options' => ['id' => 'repost-feed'],
+        'action' => ['/home/feed/create?id=']
+    ]); ?>
+    <?= $form->field($newFeed, 'content')->textarea(['rows' => 3])->label(false) ?>
+    <div class="form-group">
+        <?= Html::submitButton(Yii::t('app', 'Repost'), ['class' => 'btn btn-success']) ?>
+    </div>
+    <?php ActiveForm::end(); ?>
+<?php Modal::end() ?>
+
+<script type="text/javascript">
+    function setRepostFormAction (id) {
+        var action = document.getElementById("repost-feed").action;
+        document.getElementById("repost-feed").action = action + id;
+    }
+</script>

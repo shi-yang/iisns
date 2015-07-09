@@ -9,6 +9,7 @@ use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\helpers\Html;
 use app\modules\home\models\Feed;
 use app\components\Tools;
 use common\components\BaseController;
@@ -78,10 +79,33 @@ class FeedController extends BaseController
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id = null)
     {
         $model = new Feed();
 
+        $model->setScenario('repost');
+        if ($id != null && $model->load(Yii::$app->request->post())) {
+            $id = intval($id);
+            $query = new Query;
+            $feed = $query->select('f.content, f.feed_data, u.username')
+                ->from('{{%home_feed}} as f')
+                ->join('LEFT JOIN','{{%user}} as u', 'u.id=f.user_id')
+                ->where('f.id=:id', [':id' => $id])
+                ->one();
+            $feed_data = unserialize($feed['feed_data']);
+            $content = (empty($feed['content'])) ? $feed_data['content'] : $feed['content'] ;
+            print_r($model);exit();
+            $postData = [
+                '{comment}' => $model->content,
+                '{username}' => Html::a($feed['username'], ['/user/view', 'id' => $feed['username']]),
+                '{content}' => $content
+            ];
+            Feed::addFeed('repost', $postData);
+            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Create successfully.'));
+            return $this->redirect(['/user/dashboard']);
+        }
+
+        $model->setScenario('create');
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->userData->updateKey('feed_count', Yii::$app->user->id);
             return $this->redirect(['view', 'id' => $model->id]);

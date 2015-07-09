@@ -69,6 +69,7 @@ return [
 	'Sent' => '已发送',
 	'Sent successfully' => '发送成功',
 	'Comment' => '评论',
+	'Repost' => '转发',
 
 	'Setting' => '设置',
 	'Security' => '安全',
