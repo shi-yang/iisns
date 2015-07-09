@@ -182,14 +182,14 @@ class Modal extends Widget
      */
     protected function renderToggleButton()
     {
-        if ($this->toggleButton !== false) {
-            $tag = ArrayHelper::remove($this->toggleButton, 'tag', 'button');
-            $label = ArrayHelper::remove($this->toggleButton, 'label', 'Show');
-            if ($tag === 'button' && !isset($this->toggleButton['type'])) {
-                $this->toggleButton['type'] = 'button';
+        if (($toggleButton = $this->toggleButton) !== false) {
+            $tag = ArrayHelper::remove($toggleButton, 'tag', 'button');
+            $label = ArrayHelper::remove($toggleButton, 'label', 'Show');
+            if ($tag === 'button' && !isset($toggleButton['type'])) {
+                $toggleButton['type'] = 'button';
             }
 
-            return Html::tag($tag, $label, $this->toggleButton);
+            return Html::tag($tag, $label, $toggleButton);
         } else {
             return null;
         }
@@ -201,14 +201,14 @@ class Modal extends Widget
      */
     protected function renderCloseButton()
     {
-        if ($this->closeButton !== false) {
-            $tag = ArrayHelper::remove($this->closeButton, 'tag', 'button');
-            $label = ArrayHelper::remove($this->closeButton, 'label', '&times;');
-            if ($tag === 'button' && !isset($this->closeButton['type'])) {
-                $this->closeButton['type'] = 'button';
+        if (($closeButton = $this->closeButton) !== false) {
+            $tag = ArrayHelper::remove($closeButton, 'tag', 'button');
+            $label = ArrayHelper::remove($closeButton, 'label', '&times;');
+            if ($tag === 'button' && !isset($closeButton['type'])) {
+                $closeButton['type'] = 'button';
             }
 
-            return Html::tag($tag, $label, $this->closeButton);
+            return Html::tag($tag, $label, $closeButton);
         } else {
             return null;
         }

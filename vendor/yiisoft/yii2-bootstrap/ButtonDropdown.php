@@ -81,7 +81,7 @@ class ButtonDropdown extends Widget
 
         $this->registerPlugin('button');
         return implode("\n", [
-            Html::beginTag($tag, $this->containerOptions),
+            Html::beginTag($tag, $options),
             $this->renderButton(),
             $this->renderDropdown(),
             Html::endTag($tag)

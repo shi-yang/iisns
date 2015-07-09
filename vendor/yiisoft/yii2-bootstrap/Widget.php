@@ -66,7 +66,7 @@ class Widget extends \yii\base\Widget
         $id = $this->options['id'];
 
         if ($this->clientOptions !== false) {
-            $options = empty($this->clientOptions) ? '' : Json::encode($this->clientOptions);
+            $options = empty($this->clientOptions) ? '' : Json::htmlEncode($this->clientOptions);
             $js = "jQuery('#$id').$name($options);";
             $view->registerJs($js);
         }

@@ -94,7 +94,6 @@ class FeedController extends BaseController
                 ->one();
             $feed_data = unserialize($feed['feed_data']);
             $content = (empty($feed['content'])) ? $feed_data['content'] : $feed['content'] ;
-            print_r($model);exit();
             $postData = [
                 '{comment}' => $model->content,
                 '{username}' => Html::a($feed['username'], ['/user/view', 'id' => $feed['username']]),

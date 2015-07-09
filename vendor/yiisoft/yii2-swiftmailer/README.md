@@ -1,11 +1,13 @@
 SwiftMailer Extension for Yii 2
 ===============================
 
-This extension provides a [SwiftMailer](http://swiftmailer.org/) mail solution for Yii 2.
+This extension provides a [SwiftMailer](http://swiftmailer.org/) mail solution for [Yii framework 2.0](http://www.yiiframework.com).
 
-This repository is a git submodule of <https://github.com/yiisoft/yii2>.
-Please submit issue reports and pull requests to the main repository.
 For license information check the [LICENSE](LICENSE.md)-file.
+
+[![Latest Stable Version](https://poser.pugx.org/yiisoft/yii2-swiftmailer/v/stable.png)](https://packagist.org/packages/yiisoft/yii2-swiftmailer)
+[![Total Downloads](https://poser.pugx.org/yiisoft/yii2-swiftmailer/downloads.png)](https://packagist.org/packages/yiisoft/yii2-swiftmailer)
+[![Build Status](https://travis-ci.org/yiisoft/yii2-swiftmailer.svg?branch=master)](https://travis-ci.org/yiisoft/yii2-swiftmailer)
 
 Installation
 ------------
@@ -52,5 +54,5 @@ Yii::$app->mailer->compose('contact/html')
      ->send();
 ```
 
-For further instructions refer to the related section in the Yii Definitive Guide.
+For further instructions refer to the [related section in the Yii Definitive Guide](http://www.yiiframework.com/doc-2.0/guide-tutorial-mailing.html).
 

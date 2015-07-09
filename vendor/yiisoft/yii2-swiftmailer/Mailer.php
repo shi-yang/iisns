@@ -79,6 +79,12 @@ class Mailer extends BaseMailer
      * @var string message default class name.
      */
     public $messageClass = 'yii\swiftmailer\Message';
+    /**
+     * @var boolean whether to enable writing of the SwiftMailer internal logs using Yii log mechanism.
+     * If enabled [[Logger]] plugin will be attached to the [[transport]] for this purpose.
+     * @see Logger
+     */
+    public $enableSwiftMailerLogging = false;
 
     /**
      * @var \Swift_Mailer Swift mailer instance.
@@ -163,10 +169,24 @@ class Mailer extends BaseMailer
         if (isset($config['plugins'])) {
             $plugins = $config['plugins'];
             unset($config['plugins']);
+        } else {
+            $plugins = [];
         }
+
+        if ($this->enableSwiftMailerLogging) {
+            $plugins[] = [
+                'class' => 'Swift_Plugins_LoggerPlugin',
+                'constructArgs' => [
+                    [
+                        'class' => 'yii\swiftmailer\Logger'
+                    ]
+                ],
+            ];
+        }
+
         /* @var $transport \Swift_MailTransport */
         $transport = $this->createSwiftObject($config);
-        if (isset($plugins)) {
+        if (!empty($plugins)) {
             foreach ($plugins as $plugin) {
                 if (is_array($plugin) && isset($plugin['class'])) {
                     $plugin = $this->createSwiftObject($plugin);

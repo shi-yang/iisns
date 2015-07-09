@@ -15,11 +15,11 @@ return array(
     'yii\\codeception\\' => array($vendorDir . '/yiisoft/yii2-codeception'),
     'yii\\bootstrap\\' => array($vendorDir . '/yiisoft/yii2-bootstrap'),
     'yii\\' => array($vendorDir . '/yiisoft/yii2'),
-    'shiyang\\setting\\' => array($vendorDir . '/shiyang/yii2-setting'),
     'shiyang\\masonry\\' => array($vendorDir . '/shiyang/yii2-masonry'),
     'shiyang\\login\\' => array($vendorDir . '/shiyang/yii2-login-widget'),
     'shiyang\\infinitescroll\\' => array($vendorDir . '/shiyang/yii2-infinite-scroll'),
     'kucha\\ueditor\\' => array($vendorDir . '/kucha/ueditor'),
     'justinvoelker\\tagging\\' => array($vendorDir . '/justinvoelker/yii2-tagging'),
     'cebe\\markdown\\' => array($vendorDir . '/cebe/markdown'),
+    'Faker\\' => array($vendorDir . '/fzaninotto/faker/src/Faker'),
 );

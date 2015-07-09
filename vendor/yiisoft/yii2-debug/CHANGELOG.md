@@ -1,6 +1,14 @@
 Yii Framework 2 debug extension Change Log
 ==========================================
 
+2.0.4 under development
+-----------------------
+
+- Bug #7222: Improved debug toolbar display in rtl pages (mohammadhosain, cebe, samdark)
+- Enh #7655: Added ability to filter access by hostname (thiagotalma)
+- Enh #7746: Background color of request selector is now choosen based on the current requests status (githubjeka, cebe)
+
+
 2.0.3 March 01, 2015
 --------------------
 
