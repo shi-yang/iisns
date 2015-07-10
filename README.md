@@ -24,7 +24,7 @@
 ###方法一：
 下载解压后，访问目录下的requirements.php文件查看环境需求
 
-在 common\config\db.php 文件中配置数据库信息
+把 common\config 目录下的 db.new.php 文件重命名为 db.php，并在该文件中配置数据库信息
 
 将 install 目录下的“data.sql”文件导入数据库
 
