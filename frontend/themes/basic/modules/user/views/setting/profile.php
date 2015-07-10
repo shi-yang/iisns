@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\date\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $profile app\modules\user\models\Profile */
@@ -15,7 +16,13 @@ use yii\widgets\ActiveForm;
 
         <?= $form->field($profile, 'gender')->radioList([Yii::t('app', 'Male'), Yii::t('app', 'Female')]) ?>
 
-        <?= $form->field($profile, 'birthdate')->textInput() ?>
+        <?= $form->field($profile, 'birthdate')->widget(DatePicker::classname(), [
+            'options' => ['placeholder' => Yii::t('app', 'Enter birthdate ...')],
+            'pluginOptions' => [
+                'autoclose'=>true,
+                'format' => 'yyyy-mm-dd'
+            ]
+        ]);?>
 
         <?= $form->field($profile, 'signature')->textarea() ?>
 
