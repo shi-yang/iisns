@@ -312,7 +312,7 @@ CREATE TABLE IF NOT EXISTS `pre_user_message` (
 CREATE TABLE IF NOT EXISTS `pre_user_profile` (
   `user_id` int(11) NOT NULL,
   `gender` tinyint(1) NOT NULL,
-  `birthdate` date NOT NULL,
+  `birthdate` date DEFAULT NULL,
   `signature` varchar(120) NOT NULL,
   `address` text NOT NULL,
   `description` text NOT NULL,

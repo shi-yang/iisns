@@ -23,7 +23,8 @@
         "shiyang/yii2-infinite-scroll": "*",
         "shiyang/yii2-masonry": "*",
         "kucha/ueditor": "*",
-        "justinvoelker/yii2-tagging": "*"
+        "justinvoelker/yii2-tagging": "*",
+        "kartik-v/yii2-widget-datepicker": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
