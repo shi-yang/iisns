@@ -12,16 +12,28 @@
 
 安装方法
 --------
+需保证以下目录可读写
 
+- common/cache
+- frontend/runtime
+- frontend/web/assets
+- frontend/web/uploads
+- backend/runtime
+- backend/web/assets
+
+###方法一：
 下载解压后，访问目录下的requirements.php文件查看环境需求
 
 在 common\config\db.php 文件中配置数据库信息
 
-将iisns目录下的“data.sql”文件导入数据库
+将 install 目录下的“data.sql”文件导入数据库
 
 配置好后，backend\web\为后台根目录，frontend\web\为前台根目录
 
 backend\web\index.php 可配置站点信息
+
+###方法二：
+用浏览器访问 install ，按照提示安装。
 
 如何参与
 --------

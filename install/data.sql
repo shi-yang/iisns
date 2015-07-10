@@ -215,7 +215,7 @@ CREATE TABLE IF NOT EXISTS `pre_home_post` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;
 
 --
--- 表的结构 `pre_settings`
+-- 表的结构 `pre_setting`
 --
 
 CREATE TABLE IF NOT EXISTS `pre_setting` (
@@ -225,10 +225,10 @@ CREATE TABLE IF NOT EXISTS `pre_setting` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 转存表中的数据 `pre_settings`
+-- 转存表中的数据 `pre_setting`
 --
 
-INSERT INTO `pre_settings` (`key`, `value`) VALUES
+INSERT INTO `pre_setting` (`key`, `value`) VALUES
 ('siteDescription', 'A forum, a blog, and a user center.'),
 ('siteKeyword', 'iiSNS - Global village entrance'),
 ('siteName', 'iiSNS'),
