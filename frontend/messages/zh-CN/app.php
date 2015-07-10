@@ -24,6 +24,7 @@ return [
 	'Delete' => '删除',
 	'Favor' => '收藏',
 	'Timeline' => '时光轴',
+	'Dashboard' => '仪表盘',
 
 	'Username or Email' => '用户名/邮箱',
 	'Remember Me' => '保持登录状态',
@@ -82,6 +83,7 @@ return [
 	'Male' => '男',
 	'Female' => '女',
 	'Birthdate' => '出生日期',
+	'Enter birthdate ...' => '设置出生日期...',
 	'Signature' => '个性签名',
 	'Position' => '地址',
 	'Description' => '描述',
@@ -141,5 +143,7 @@ return [
 	'View Details' => '查看详情',
  	'Note: This section is under development.' => '提示：这部分内容正在开发中。',
 	'I am very sorry to let you see this page. I will try to go to this page and complete, stay tuned!' => '我很抱歉让你看到这个页面，我会尽快完成它，保持关注！',
-	'You are welcome to develop together.' => '欢迎你也一起来开发。'
+	'You are welcome to develop together.' => '欢迎你也一起来开发。',
+	'Everyone is an artist' => '每个人都是艺术家',
+	'Download Source' => '下载源码'
 ];

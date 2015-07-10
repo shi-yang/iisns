@@ -5,7 +5,7 @@ use yii\bootstrap\NavBar;
 use yii\helpers\Url;
 
 /* @var $this yii\web\View */
-$this->title = Yii::$app->setting->get('siteName');
+$this->title = Yii::$app->setting->get('siteTitle');
 ?>
 <style type="text/css">
 #version {
@@ -26,6 +26,9 @@ body {
 }
 
 
+.wrap {
+  background-color: #ffffff;
+}
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
 
@@ -58,7 +61,6 @@ body {
 /* Carousel base class */
 .carousel {
   height: 500px;
-  margin-bottom: 60px;
 }
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
@@ -78,6 +80,15 @@ body {
   height: 500px;
 }
 
+.site-index {
+  background-color: #fbfbfb;
+  color: #999999;
+  border-bottom: solid 2px #eeeeee;
+}
+
+.features-icon {
+  font-size: 9em;
+}
 
 /* MARKETING CONTENT
 -------------------------------------------------- */
@@ -108,6 +119,10 @@ body {
   font-weight: 300;
   line-height: 1;
   letter-spacing: -1px;
+}
+
+.featurette-image {
+  box-shadow: 0 0 0 4px #ffffff, 0 0 0 5px #e6e6e6;
 }
 
 
@@ -147,7 +162,7 @@ body {
 
 @media (min-width: 992px) {
   .featurette-heading {
-    margin-top: 120px;
+    margin-bottom: 21px;
   }
 }
 </style>
@@ -170,7 +185,7 @@ body {
         } else {
             $menuItems[] = ['label' => Yii::t('app', 'Dashboard'), 'url' => ['/user/dashboard']];
             $menuItems[] = [
-                'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+                'label' => Yii::t('app', 'Log out') . ' (' . Yii::$app->user->identity->username . ')',
                 'url' => ['/site/logout'],
                 'linkOptions' => ['data-method' => 'post']
             ];
@@ -183,64 +198,29 @@ body {
     ?>
 
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class=""></li>
-            <li data-target="#myCarousel" data-slide-to="1" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="2" class=""></li>
-        </ol>
         <div class="carousel-inner" role="listbox">
-            <div class="item">
-                <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
-                <div class="container">
-                    <div class="carousel-caption">
-                        <h1>Awesome design</h1>
-                        <p>Responsive web design is actually customize the content of a website to the size of a mobile device.And it was designed to be easy to use</p>
-                        <p><a class="btn btn-lg btn-primary" href="<?= Url::toRoute(['/site/signup']) ?>" role="button">Sign up now</a></p>
-                    </div>
-                </div>
-            </div>
             <div class="item active">
                 <img class="second-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
                 <div class="container">
                     <div class="carousel-caption">
-                        <h1>A voice of the artist</h1>
-                        <p>Text, pictures, music, videos, are part of our lives, but also the artistic part.This is an artistic treasure house.</p>
-                        <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <img class="third-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
-                <div class="container">
-                    <div class="carousel-caption">
-                        <h1>Licensed under the MIT license.</h1>
-                        <p>We opened the source code, so that people who like this product also can modify it personally. Add new features, through us.</p>
-                        <p><a class="btn btn-lg btn-primary" href="https://github.com/shi-yang/iisns" role="button" target="_blank">Source Code</a></p>
+                        <h1>iiSNS - 地球村入口</h1>
+                        <p>iiSNS 是基于 yii2 的 SNS 社区系统，一站式解决社区建站。可以写文章，做记录，上传图片，论坛聊天等。还可以用来做内容管理系统（CMS）。iiSNS 是一个免费的开源项目，在 MIT 许可证下授权发布。</p>
                     </div>
                 </div>
             </div>
         </div>
-        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
     </div>
 
     <div class="site-index">
         <div class="jumbotron">
-            <h1>Everyone is an artist</h1>
+            <h1><?= Yii::t('app', 'Everyone is an artist') ?></h1>
             <p class="lead">I hope you like it.</p>
-            <p><a class="btn btn-lg btn-success" href="https://github.com/shi-yang/iisns/archive/v2.1.2.zip">Download Source</a></p>
+            <p><a class="btn btn-lg btn-success" href="https://github.com/shi-yang/iisns/archive/v2.1.2.zip"><span class="glyphicon glyphicon-download-alt"></span> <?= Yii::t('app', 'Download Source') ?></a></p>
             <p id="version">
               Version 2.1.2 Alpha &nbsp;&nbsp;·&nbsp;&nbsp;
               <a href="https://github.com/shi-yang/iisns" target="_blank">
                 GitHub Project</a> &nbsp;&nbsp;·&nbsp;&nbsp;
-              Created by <a href="http://www.shiyang.me" target="_blank">Shiyang</a>
+              Created by <a href="http://www.iisns.com/u/shiyang" target="_blank">Shiyang</a>
             </p>
         </div>
     </div>
@@ -254,19 +234,16 @@ body {
         <!-- Three columns of text below the carousel -->
         <div class="row">
             <div class="col-lg-4">
-                <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+                <span class="glyphicon glyphicon-comment features-icon"></span>
                 <h2>粉丝营销社区</h2>
-                <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
             </div><!-- /.col-lg-4 -->
             <div class="col-lg-4">
-                <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+                <span class="glyphicon glyphicon-bullhorn features-icon"></span>
                 <h2>新媒体行业</h2>
-                <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
             </div><!-- /.col-lg-4 -->
             <div class="col-lg-4">
-                <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+                <span class="glyphicon glyphicon-user features-icon"></span>
                 <h2>企业文化建设</h2>
-                <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
             </div><!-- /.col-lg-4 -->
         </div><!-- /.row -->
 
@@ -277,11 +254,11 @@ body {
 
         <div class="row featurette">
             <div class="col-md-7">
-                <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
-                <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+                <h3 class="featurette-heading">易于使用 <span class="text-muted">无论是安装，还是开发</span></h3>
+                <p class="lead">丰富的扩展插件，强大的开发社区支持。模块化，丰富的特性。</p>
             </div>
             <div class="col-md-5">
-                <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+                <img class="featurette-image img-responsive img-circle center-block" src="<?= Yii::getAlias('@web/images/pic01.jpg') ?>" alt="Generic placeholder image">
             </div>
         </div>
 
@@ -289,11 +266,11 @@ body {
 
         <div class="row featurette">
             <div class="col-md-7 col-md-push-5">
-                <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
-                <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+                <h3 class="featurette-heading">功能丰富 <span class="text-muted">简而不繁</span></h3>
+                <p class="lead">做记录，写文章，传图片，听音乐，看视频。还可以用来做论坛，内容管理系统。每一个功能，每一个页面，都尽己所能，使其臻于完美。</p>
             </div>
             <div class="col-md-5 col-md-pull-7">
-                <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+                <img class="featurette-image img-responsive img-circle center-block" src="<?= Yii::getAlias('@web/images/pic02.jpg') ?>" alt="Generic placeholder image">
             </div>
         </div>
 
@@ -301,16 +278,27 @@ body {
 
         <div class="row featurette">
             <div class="col-md-7">
-                <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-                <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+                <h3 class="featurette-heading">参与开发 <span class="text-muted">您参与iisns的发展是非常欢迎的！</span></h3>
+                <p class="lead">目前还在不断完善中，如果您喜欢它，可以来
+                  <a href="https://github.com/shi-yang/iisns/issues" target="_blank">帮助报告问题</a> ，
+                  <a href="http://www.iisns.com/forum/iisns" target="_blank">提供反馈意见或设计讨论</a>，
+                  <a href="https://github.com/shi-yang/iisns" target="_blank">贡献核心代码或修复的bug</a>。让它越来越棒。
+                </p>
             </div>
             <div class="col-md-5">
-                <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+                <img class="featurette-image img-responsive img-circle center-block" src="<?= Yii::getAlias('@web/images/pic03.jpg') ?>" alt="Generic placeholder image">
             </div>
         </div>
 
         <hr class="featurette-divider">
 
+        <div class="row featurette">
+            <div class="col-md-7">
+                <p class="lead">本程序在<a href="https://github.com/shi-yang/iisns/blob/master/LICENSE.md" target="_blank">MIT开源软件许可协议</a>下发布。</p>
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
     <!-- /END THE FEATURETTES -->
     </div><!-- /.container -->
 
