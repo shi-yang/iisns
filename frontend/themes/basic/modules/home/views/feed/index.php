@@ -37,12 +37,19 @@ $this->params['breadcrumbs'][] = $this->title;
                                             }
                                         ?>
                                     </p>
-                                    <a href="<?= Url::toRoute(['/home/feed/delete', 'id' => $feed['id']]) ?>" data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="post">
-                                        <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
-                                    </a>
-                                    &nbsp;&nbsp;<a href="<?= Url::toRoute(['/home/feed/update', 'id' => $feed['id']]) ?>">
-                                        <span class="glyphicon glyphicon-edit"></span> <?= Yii::t('app', 'Update') ?>
-                                    </a>
+                                </div>
+                                <div class="widget-footer">
+                                    <div class="footer-detail">
+                                        &nbsp;
+                                        <a href="<?= Url::toRoute(['/home/feed/delete', 'id' => $feed['id']]) ?>" data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="post">
+                                            <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
+                                        </a>
+                                        &nbsp;
+                                        <span class="item-line"></span>
+                                        <a href="javascript:;" onclick="setRepostFormAction(<?= $feed['id'] ?>)" data-toggle="modal" data-target="#repost-modal">
+                                            <span class="glyphicon glyphicon-share-alt"></span> <?= Yii::t('app', 'Repost') ?>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         <?php endforeach; ?>
