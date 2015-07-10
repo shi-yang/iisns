@@ -507,55 +507,6 @@
         ]
     },
     {
-        "name": "yiisoft/yii2-composer",
-        "version": "2.0.3",
-        "version_normalized": "2.0.3.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/yiisoft/yii2-composer.git",
-            "reference": "ca8d23707ae47d20b0454e4b135c156f6da6d7be"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/ca8d23707ae47d20b0454e4b135c156f6da6d7be",
-            "reference": "ca8d23707ae47d20b0454e4b135c156f6da6d7be",
-            "shasum": ""
-        },
-        "require": {
-            "composer-plugin-api": "1.0.0"
-        },
-        "time": "2015-03-01 06:22:44",
-        "type": "composer-plugin",
-        "extra": {
-            "class": "yii\\composer\\Plugin",
-            "branch-alias": {
-                "dev-master": "2.0.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "yii\\composer\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Qiang Xue",
-                "email": "qiang.xue@gmail.com"
-            }
-        ],
-        "description": "The composer plugin for Yii extension installer",
-        "keywords": [
-            "composer",
-            "extension installer",
-            "yii2"
-        ]
-    },
-    {
         "name": "bower-asset/yii2-pjax",
         "version": "v2.0.4",
         "version_normalized": "2.0.4.0",
@@ -1825,6 +1776,55 @@
             "plugin",
             "select2",
             "widget",
+            "yii2"
+        ]
+    },
+    {
+        "name": "yiisoft/yii2-composer",
+        "version": "2.0.3",
+        "version_normalized": "2.0.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yiisoft/yii2-composer.git",
+            "reference": "ca8d23707ae47d20b0454e4b135c156f6da6d7be"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/ca8d23707ae47d20b0454e4b135c156f6da6d7be",
+            "reference": "ca8d23707ae47d20b0454e4b135c156f6da6d7be",
+            "shasum": ""
+        },
+        "require": {
+            "composer-plugin-api": "1.0.0"
+        },
+        "time": "2015-03-01 06:22:44",
+        "type": "composer-plugin",
+        "extra": {
+            "class": "yii\\composer\\Plugin",
+            "branch-alias": {
+                "dev-master": "2.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "yii\\composer\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Qiang Xue",
+                "email": "qiang.xue@gmail.com"
+            }
+        ],
+        "description": "The composer plugin for Yii extension installer",
+        "keywords": [
+            "composer",
+            "extension installer",
             "yii2"
         ]
     }
