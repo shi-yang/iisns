@@ -57,7 +57,7 @@ class DashboardController extends BaseController
         $query = new Query;
         $query = $query->select('p.id, p.user_id, p.content, p.feed_data, p.template, p.created_at, u.username, u.avatar')
             ->from('{{%home_feed}} as p')
-            ->join('LEFT JOIN','{{%user_follow}} as f', 'p.user_id=f.people_id')
+            ->join('LEFT JOIN','{{%user_follow}} as f', 'p.user_id=f.people_id AND f.user_id=:user_id')
             ->join('LEFT JOIN','{{%user}} as u', 'u.id=p.user_id')
             ->where('p.user_id=:user_id OR f.user_id=:user_id', [':user_id' => $model->id])
             ->orderBy('p.created_at DESC');
