@@ -25,7 +25,7 @@ $user = Yii::$app->user->identity;
             </div>
             <?php if (!empty($posts)): ?>
                 <?php foreach($posts as $post): ?>
-                    <div class="item widget-container fluid-height social-entry">
+                    <div class="item widget-container fluid-height social-entry" id="<?= $post['id'] ?>">
                         <div class="widget-content padded">
                             <p class="content">
                                 <h3><?= Html::a(Html::encode($post['title']), ['/home/post/view', 'id' => $post['id']]) ?></h3>
