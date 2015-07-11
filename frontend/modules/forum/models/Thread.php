@@ -97,7 +97,7 @@ class Thread extends \yii\db\ActiveRecord
     public function getBoard()
     {
         return Yii::$app->db
-            ->createCommand("SELECT id, name FROM {{%forum_board}} WHERE id={$this->board_id}")
+            ->createCommand("SELECT id, name, user_id FROM {{%forum_board}} WHERE id={$this->board_id}")
             ->queryOne();
     }
     

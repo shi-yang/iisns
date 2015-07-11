@@ -131,7 +131,7 @@ class ThreadController extends BaseController
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
-        if ($model->user_id === Yii::$app->user->id || $model->board['user_id'] === Yii::$app->user->id) {
+        if ($model->user_id === Yii::$app->user->id || $model->board['user_id'] == Yii::$app->user->id) {
             $board_id = $model->board_id;
             Post::deleteAll(['thread_id' => $model->id]);
             $model->delete();
