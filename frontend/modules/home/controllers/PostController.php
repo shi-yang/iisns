@@ -100,7 +100,8 @@ class PostController extends BaseController
             //插入记录(Feed)
             $title = Html::a(Html::encode($model->title), $model->url);
             preg_match_all("/<[img|IMG].*?src=\"([^^]*?)\".*?>/", $model->content, $images);
-            $content = mb_substr(strip_tags($model->content), 0, 140, 'utf-8') . '... ' . Html::a(Yii::t('app', 'View Details'), $model->url) . '<br>' . $images[0][0];
+            $images = (isset($images[0][0])) ? $images[0][0] : '' ;
+            $content = mb_substr(strip_tags($model->content), 0, 140, 'utf-8') . '... ' . Html::a(Yii::t('app', 'View Details'), $model->url) . '<br>' . $images;
             $postData = ['{title}' => $title, '{content}' => $content];
             Feed::addFeed('blog', $postData);
 
