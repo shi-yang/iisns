@@ -10,10 +10,8 @@ use shiyang\masonry\Masonry;
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'My Albums'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-
-
-//$view = new \yii\web\View;
-
+$this->registerCssFile('@web/js/lightbox/css/lightbox.css');
+$this->registerJsFile('@web/js/lightbox/js/lightbox.min.js', ['depends' => ['yii\web\JqueryAsset'], 'position' => \yii\web\View::POS_END]);
 $this->registerCss('
 .no-photo {
     padding: 50px 50px 150px;
@@ -60,6 +58,8 @@ margin-bottom: 20px;
 }
 ');
 ?>
+
+
 <div class="album-view">
     <h1><?= Html::encode($this->title) ?></h1>
     <?= Html::a('<i class="glyphicon glyphicon-edit"></i> ' . Yii::t('app', 'Edit Album'), ['/home/album/update', 'id' => $model->id], ['class' => 'btn btn-default']) ?>

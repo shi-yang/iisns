@@ -9,6 +9,8 @@ use shiyang\masonry\Masonry;
 
 $this->params['title'] = Yii::t('app', 'Explore') . ' - ' . Yii::t('app', 'Photos');
 $this->params['breadcrumb'][] = Yii::t('app', 'Photos');
+$this->registerCssFile('@web/js/lightbox/css/lightbox.css');
+$this->registerJsFile('@web/js/lightbox/js/lightbox.min.js', ['depends' => ['yii\web\JqueryAsset'], 'position' => \yii\web\View::POS_END]);
 $this->registerCss('
 .photo-index {
   padding:0
