@@ -26,11 +26,11 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
 <?php if (!empty($feeds)): ?>
     <div id="content">
         <?php foreach($feeds as $feed): ?>
-            <div class="item widget-container fluid-height social-entry">
+            <div class="item widget-container fluid-height social-entry" id="<?= $feed['id'] ?>">
                 <div class="widget-content padded">
                     <div class="profile-info clearfix">
-                        <a href="<?= Url::toRoute(['/user/view', 'id'=>$feed['username']]) ?>" rel="author">
-                            <img width="50" height="50" class="social-avatar pull-left" src="<?= Yii::getAlias('@avatar') . $feed['avatar'] ?>" />
+                        <a class="pull-left" href="<?= Url::toRoute(['/user/view', 'id'=>$feed['username']]) ?>" rel="author">
+                            <img width="50" height="50" class="social-avatar" src="<?= Yii::getAlias('@avatar') . $feed['avatar'] ?>" />
                         </a>
                         <div class="profile-details">
                             <a class="user-name" href="<?= Url::toRoute(['/user/view', 'id'=>$feed['username']]) ?>" rel="author">
@@ -55,7 +55,7 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
                     <div class="footer-detail">
                         <?php if(Yii::$app->user->id == $feed['user_id']): ?>
                             &nbsp;
-                            <a href="<?= Url::toRoute(['/home/feed/delete', 'id' => $feed['id']]) ?>" data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="post">
+                            <a href="<?= Url::toRoute(['/home/feed/delete', 'id' => $feed['id']]) ?>" onclick="return false;" rel="delete">
                                 <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
                             </a>
                             &nbsp;

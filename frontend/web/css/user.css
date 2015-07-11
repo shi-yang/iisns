@@ -1098,6 +1098,10 @@ a:focus {
   background: #b2d5dc;
   border: 1px solid #6bafbd;
 }
+.popover-user {
+  width: 244px;
+  height: 86px;
+}
 #scroll-to-top {
   position: fixed;
   cursor: pointer;

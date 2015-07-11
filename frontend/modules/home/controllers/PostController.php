@@ -19,7 +19,7 @@ use common\components\BaseController;
  */
 class PostController extends BaseController
 {
-    public $layout = '@app/modules/user/views/layouts/profile';
+    public $layout = '@app/modules/user/views/layouts/user';
     public function behaviors()
     {
         return [
@@ -58,7 +58,6 @@ class PostController extends BaseController
 
     public function actionIndex()
     {
-        $this->layout = '@app/modules/user/views/layouts/user';
         $query = new Query;
         $query = $query->select('*')
             ->from('{{%home_post}}')
@@ -79,6 +78,7 @@ class PostController extends BaseController
      */
     public function actionView($id)
     {
+        $this->layout = '@app/modules/user/views/layouts/profile';
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -91,7 +91,6 @@ class PostController extends BaseController
      */
     public function actionCreate()
     {
-        $this->layout = '@app/modules/user/views/layouts/user';
         $model = new Post();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -120,7 +119,6 @@ class PostController extends BaseController
      */
     public function actionUpdate($id)
     {
-        $this->layout = '@app/modules/user/views/layouts/user';
         $model = $this->findModel($id);
         if ($model->user_id !== Yii::$app->user->id) {
             throw new ForbiddenHttpException('You are not allowed to perform this action.');
@@ -144,15 +142,13 @@ class PostController extends BaseController
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
-        if ($model->user_id === Yii::$app->user->id) {
+        if (Yii::$app->Request->isAjax && $model->user_id === Yii::$app->user->id) {
             $model->delete();
             Yii::$app->userData->updateKey('post_count', Yii::$app->user->id, -1);
-            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Deleted successfully.'));
+            return true;
         } else {
             throw new ForbiddenHttpException('You are not allowed to perform this action.');
         }
-
-        return $this->redirect(['index']);
     }
 
     /**

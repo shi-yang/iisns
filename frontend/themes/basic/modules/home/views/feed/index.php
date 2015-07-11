@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php if (!empty($feeds)): ?>
                     <div id="content">
                         <?php foreach($feeds as $feed): ?>
-                            <div class="item widget-container fluid-height social-entry">
+                            <div class="item widget-container fluid-height social-entry" id="<?= $feed['id'] ?>">
                                 <div class="widget-content padded">
                                     <p class="content">
                                         <?php
@@ -41,13 +41,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <div class="widget-footer">
                                     <div class="footer-detail">
                                         &nbsp;
-                                        <a href="<?= Url::toRoute(['/home/feed/delete', 'id' => $feed['id']]) ?>" data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="post">
+                                        <a href="<?= Url::toRoute(['/home/feed/delete', 'id' => $feed['id']]) ?>" onclick="return false;" rel="delete">
                                             <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
-                                        </a>
-                                        &nbsp;
-                                        <span class="item-line"></span>
-                                        <a href="javascript:;" onclick="setRepostFormAction(<?= $feed['id'] ?>)" data-toggle="modal" data-target="#repost-modal">
-                                            <span class="glyphicon glyphicon-share-alt"></span> <?= Yii::t('app', 'Repost') ?>
                                         </a>
                                     </div>
                                 </div>

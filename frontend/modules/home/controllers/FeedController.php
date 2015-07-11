@@ -146,11 +146,10 @@ class FeedController extends BaseController
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
-        if ($model->user_id === Yii::$app->user->id) {
+        if (Yii::$app->Request->isAjax && $model->user_id === Yii::$app->user->id) {
             $model->delete();
             Yii::$app->userData->updateKey('feed_count', Yii::$app->user->id, -1);
-            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Deleted successfully.'));
-            return $this->redirect(['index']);
+            return true;
         } else {
             throw new ForbiddenHttpException('You are not allowed to perform this action.');
         }

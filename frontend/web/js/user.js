@@ -181,6 +181,41 @@ $(function	()	{
 	    }, 100);
 	});
 	
+	//删除
+	$('[rel=delete]').popover({
+	    trigger : 'click',
+        container: 'body',
+        placement: 'top',
+        title: '你确定要把它删除吗?',
+	    content : '<div class="delete"><a class="btn-ok" href="javascript:void(0)"><i class="glyphicon glyphicon-ok"></i> 确定</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="$(\'.popover\').popover(\'hide\')"><i class="glyphicon glyphicon-remove"></i> 取消</a></div>',
+	    html: true
+	}).on('click', function(){
+	    var _this = this;
+	    var url = $(this).attr('href');
+	    var div_id = url.substr(url.indexOf('=') + 1);
+	    $(this).popover('show');
+	    $('.popover').on('mouseleave', function () {
+	        $(_this).popover('hide');
+	    });
+	    $('.btn-ok').on('click', function(){
+		    $.ajax({
+		    	type: 'POST',
+		        url: url,
+		        success: function() {
+		        	$(_this).popover('hide');
+		        	$('#'+div_id).fadeOut(1000);
+		        }
+		    });
+	    	return false;
+	    });
+	}).on('mouseleave', function () {
+	    var _this = this;
+	    setTimeout(function () {
+	        if(!$('.popover:hover').length) {
+	            $(_this).popover('hide')
+	        }
+	    }, 500);
+	});
 });
 
 $(window).scroll(function(){

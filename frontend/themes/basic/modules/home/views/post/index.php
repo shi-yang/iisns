@@ -18,13 +18,10 @@ $user = Yii::$app->user->identity;
     <div id="social-container">
         <div class="col-xs-12 col-sm-8 col-md-8 col-lg-offset-1 col-lg-6" id="content">
             <div class="post-index">
-
                 <h1><?= Html::encode($this->title) ?></h1>
-
                 <p>
                     <?= Html::a(Yii::t('app', 'Create Post'), ['create'], ['class' => 'btn btn-success']) ?>
                 </p>
-
             </div>
             <?php if (!empty($posts)): ?>
                 <?php foreach($posts as $post): ?>
@@ -38,7 +35,7 @@ $user = Yii::$app->user->identity;
                         <div class="widget-footer">
                             <div class="footer-detail">
                                 &nbsp;
-                                <a href="<?= Url::toRoute(['/home/post/delete', 'id' => $post['id']]) ?>" data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="post">
+                                <a href="<?= Url::toRoute(['/home/post/delete', 'id' => $post['id']]) ?>" onclick="return false;" rel="delete">
                                     <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
                                 </a>
                                 &nbsp;
