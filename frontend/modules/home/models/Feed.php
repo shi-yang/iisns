@@ -93,32 +93,34 @@ class Feed extends \yii\db\ActiveRecord
             case 'blog':
                 $setarr['type'] = 'postblog';
                 $setarr['template'] = '<b>{title}</b><br>{content}';
-                $setarr['feed_data'] = serialize($data);
-                $setarr['user_id'] = Yii::$app->user->id;
-                $setarr['created_at'] = time();
-                Yii::$app->userData->updateKey('feed_count', Yii::$app->user->id);
-                return Yii::$app->db->createCommand()->insert('{{%home_feed}}', $setarr)->execute();
                 break;
             case 'repost':
                 $setarr['type'] = 'repost';
-
-                if (empty($data['comment'])) {
+                if (empty($data['{comment}'])) {
                     array_shift($data);
-                    $setarr['template'] = '<b>{username}</b>：{content}';
+                    $comment = '';
                 } else {
-                    $setarr['template'] = '{comment}<br><b>{username}</b>：{content}';
+                    $comment = '{comment}<br>';
                 }
-                
-                $setarr['feed_data'] = serialize($data);
-                $setarr['user_id'] = Yii::$app->user->id;
-                $setarr['created_at'] = time();
-                Yii::$app->userData->updateKey('feed_count', Yii::$app->user->id);
-                return Yii::$app->db->createCommand()->insert('{{%home_feed}}', $setarr)->execute();
+
+                if (empty($data['{content}'])) {
+                    array_shift($data);
+                    $data['{feed_data}'] = array_merge(['{username}' => $data['{username}']], $data['{feed_data}']);
+                    $setarr['template'] = '<b>{username}</b>：' . $data['{template}'];
+                    $data = $data['{feed_data}'];
+                } else {
+                    $setarr['template'] = '<b>{username}</b>：{content}';
+                }
+                $setarr['template'] .= $comment;
                 break;
             case 'album':
-                ;
             case 'video':
                 break;
         }
+        $setarr['feed_data'] = serialize($data);
+        $setarr['user_id'] = Yii::$app->user->id;
+        $setarr['created_at'] = time();
+        Yii::$app->userData->updateKey('feed_count', Yii::$app->user->id);
+        return Yii::$app->db->createCommand()->insert('{{%home_feed}}', $setarr)->execute();
     }
 }

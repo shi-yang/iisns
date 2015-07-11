@@ -46,6 +46,7 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
                             if (!empty($feed['content'])) {
                                 echo Html::encode($feed['content']);
                             } else {
+                                //print_r(unserialize($feed['feed_data']));
                                 echo strtr($feed['template'], unserialize($feed['feed_data']));
                             }
                         ?>

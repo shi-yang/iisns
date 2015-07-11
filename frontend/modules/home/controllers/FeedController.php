@@ -87,17 +87,17 @@ class FeedController extends BaseController
         if ($id != null && $model->load(Yii::$app->request->post())) {
             $id = intval($id);
             $query = new Query;
-            $feed = $query->select('f.content, f.feed_data, u.username')
+            $feed = $query->select('f.content, f.feed_data, f.template, u.username')
                 ->from('{{%home_feed}} as f')
                 ->join('LEFT JOIN','{{%user}} as u', 'u.id=f.user_id')
                 ->where('f.id=:id', [':id' => $id])
                 ->one();
-            $feed_data = unserialize($feed['feed_data']);
-            $content = (empty($feed['content'])) ? $feed_data['content'] : $feed['content'] ;
             $postData = [
                 '{comment}' => $model->content,
+                '{content}' => $feed['content'],
                 '{username}' => Html::a($feed['username'], ['/user/view', 'id' => $feed['username']]),
-                '{content}' => $content
+                '{feed_data}' => unserialize($feed['feed_data']),
+                '{template}' => $feed['template']
             ];
             Feed::addFeed('repost', $postData);
             Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Create successfully.'));
