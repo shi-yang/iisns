@@ -34,12 +34,19 @@ $user = Yii::$app->user->identity;
                                 <h3><?= Html::a(Html::encode($post['title']), ['/home/post/view', 'id' => $post['id']]) ?></h3>
                                 <?= HtmlPurifier::process(Tools::htmlSubString($post['content'], 300, Url::toRoute(['/home/post/view', 'id' => $post['id']]))) ?>
                             </p>
-                            <a href="<?= Url::toRoute(['/home/post/delete', 'id' => $post['id']]) ?>" data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="post">
-                                <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
-                            </a>
-                            &nbsp;&nbsp;<a href="<?= Url::toRoute(['/home/post/update', 'id' => $post['id']]) ?>">
-                                <span class="glyphicon glyphicon-edit"></span> <?= Yii::t('app', 'Update') ?>
-                            </a>
+                        </div>
+                        <div class="widget-footer">
+                            <div class="footer-detail">
+                                &nbsp;
+                                <a href="<?= Url::toRoute(['/home/post/delete', 'id' => $post['id']]) ?>" data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="post">
+                                    <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
+                                </a>
+                                &nbsp;
+                                <span class="item-line"></span>
+                                <a href="<?= Url::toRoute(['/home/post/update', 'id' => $post['id']]) ?>">
+                                    <span class="glyphicon glyphicon-edit"></span> <?= Yii::t('app', 'Update') ?>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -56,4 +63,3 @@ $user = Yii::$app->user->identity;
         </div>
     </div>
 </div>
-
