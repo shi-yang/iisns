@@ -18,7 +18,7 @@ class PhotoController extends BaseController
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['photo'],
+                    'delete' => ['post'],
                 ],
             ],
             'access' => [
@@ -56,14 +56,14 @@ class PhotoController extends BaseController
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
-        if ($model->created_by !== Yii::$app->user->id) {
-            throw new ForbiddenHttpException('You are not allowed to perform this action.');
-        } else {
+        if (Yii::$app->Request->isAjax && $model->created_by === Yii::$app->user->id) {
             $albumId = $model->album_id;
             $model->delete();
             Yii::setAlias('@photo_path', '@webroot/uploads/home/photo/');
             @unlink(Yii::getAlias('@photo_path').$model->path); 
-            return $this->redirect(['/home/album/view', 'id' => $albumId]);
+            return true;
+        } else {
+            throw new ForbiddenHttpException('You are not allowed to perform this action.');
         }
     }
 
