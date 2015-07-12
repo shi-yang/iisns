@@ -28,7 +28,7 @@ return [
                     ]
                 ],
                 'yii\bootstrap\BootstrapPluginAsset' => [
-                    'css' => [
+                    'js' => [
                         YII_ENV_DEV ? 'js/bootstrap.js' : '//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js',
                     ]
                 ],

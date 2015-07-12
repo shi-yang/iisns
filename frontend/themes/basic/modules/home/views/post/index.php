@@ -54,7 +54,7 @@ $user = Yii::$app->user->identity;
             <?php else: ?>
                 <div class="no-data-found">
                     <i class="glyphicon glyphicon-folder-open"></i>
-                    No post to display.
+                    <?= Yii::t('app', 'No data to display.') ?>
                 </div>
             <?php endif; ?>
         </div>
