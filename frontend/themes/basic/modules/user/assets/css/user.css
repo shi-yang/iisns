@@ -2072,8 +2072,33 @@ input[type="text"]:focus,
     padding-bottom: 12px;
     padding-top: 8px;
 }
-
-
+/*----------------------------------------------------------------------------------- */
+/*  Follow */
+/*----------------------------------------------------------------------------------- */
+.follow-list .follow-list-item {
+  padding: 9px;
+  border-bottom: 1px solid #eee;
+  background: #FFFFFF;
+}
+.follow-list .follow-main {
+  margin: 7px;
+}
+.follow-list .avatar {
+  float: left;
+  display: block;
+  width: 75px;
+  height: 75px;
+}
+.follow-list .follow-list-container {
+  margin-left: 90px;
+}
+.follow-list .follow-list-name {
+  font-weight: normal;
+  margin: 0 0 5px;
+}
+.follow-list .user-following-container {
+  margin-top: 10px;
+}
 
 .bounceIn {
   animation-name: bounceIn;

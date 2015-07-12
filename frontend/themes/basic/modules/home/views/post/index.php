@@ -35,7 +35,7 @@ $user = Yii::$app->user->identity;
                         <div class="widget-footer">
                             <div class="footer-detail">
                                 &nbsp;
-                                <a href="<?= Url::toRoute(['/home/post/delete', 'id' => $post['id']]) ?>" onclick="return false;" rel="delete">
+                                <a href="<?= Url::toRoute(['/home/post/delete', 'id' => $post['id']]) ?>" onclick="return false;" title="<?= Yii::t('app', 'Are you sure to delete it?') ?>" rel="delete">
                                     <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
                                 </a>
                                 &nbsp;

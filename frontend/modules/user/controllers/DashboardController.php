@@ -31,8 +31,7 @@ class DashboardController extends BaseController
                         'roles' => ['?']
                     ],
                     [
-                        'actions' => ['index', 'myposts', 'myfavor', 'followpeople',
-                             'followforum', 'forumpost', 'homepost'],
+                        'actions' => ['index', 'myposts', 'myfavor', 'following', 'follower', 'forumpost', 'homepost'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -70,26 +69,25 @@ class DashboardController extends BaseController
             'pages' => $pages['pages']
         ]);
     }
-    
-    /**
-     * My posts
-     */
-    public function actionBlogpost()
+
+    public function actionFollowing()
     {
-        $model = $this->findModel();
-        $query = new Query;
-        $query = $query->select('*')
-                    ->from('{{%home_post}}')
-                    ->where(['user_id' => $model->id])
-                    ->orderBy('created_at desc');
-        $pages = Tools::Pagination($query);
-        return $this->render('myposts', [
-            'model' => $model,
-            'posts' => $pages['result'],
-            'pages' => $pages['pages'],
+        return $this->render('follow', [
+            'title' => Yii::t('app', 'You\'re Following'),
+            'type' => 'following',
+            'model' => $this->findModel()
         ]);
     }
 
+    public function actionFollower()
+    {
+        return $this->render('follow', [
+            'title' => Yii::t('app', 'Your Followers'),
+            'type' => 'follower',
+            'model' => $this->findModel()
+        ]);
+    }
+    
     public function actionForumpost()
     {
         $model = $this->findModel();

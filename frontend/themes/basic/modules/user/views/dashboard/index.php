@@ -55,7 +55,7 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
                     <div class="footer-detail">
                         <?php if(Yii::$app->user->id == $feed['user_id']): ?>
                             &nbsp;
-                            <a href="<?= Url::toRoute(['/home/feed/delete', 'id' => $feed['id']]) ?>" onclick="return false;" rel="delete">
+                            <a href="<?= Url::toRoute(['/home/feed/delete', 'id' => $feed['id']]) ?>" onclick="return false;" title="<?= Yii::t('app', 'Are you sure to delete it?') ?>" rel="delete">
                                 <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
                             </a>
                             &nbsp;

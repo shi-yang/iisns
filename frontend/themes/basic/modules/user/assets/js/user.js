@@ -186,7 +186,7 @@ $(function	()	{
 	    trigger : 'click',
         container: 'body',
         placement: 'top',
-        title: '你确定要把它删除吗?',
+        title: this.title,
 	    content : '<div class="delete"><a class="btn-ok" href="javascript:void(0)"><i class="glyphicon glyphicon-ok"></i> 确定</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="$(\'.popover\').popover(\'hide\')"><i class="glyphicon glyphicon-remove"></i> 取消</a></div>',
 	    html: true
 	}).on('click', function(){
