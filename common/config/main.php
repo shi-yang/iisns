@@ -9,12 +9,12 @@ return [
         'setting' => [
             'class' => 'common\components\Setting',
         ],
+        'assetManager' => [
+            'forceCopy' => (YII_DEBUG) ? true : false
+        ],
         'urlManager' => [
             'enablePrettyUrl' => true,
-            'showScriptName'=>false,
-            'rules' => [
-
-            ],
+            'showScriptName'=>false
         ],
     ],
    
