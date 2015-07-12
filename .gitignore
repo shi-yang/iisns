@@ -5,10 +5,6 @@ frontend/runtime/*
 
 frontend/uploads/blog/photo/*
 frontend/uploads/blog/photo_tmp/*
-frontend/uploads/forum/icon/*
-frontend/uploads/user/avatar/*
-!frontend/uploads/user/avatar/.gitignore
-frontend/uploads/user/avatar/*
 !frontend/runtime/.gitignore
 
 .idea
