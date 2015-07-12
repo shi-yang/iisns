@@ -76,7 +76,7 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
 <?php else: ?>
     <div class="no-data-found">
         <i class="glyphicon glyphicon-folder-open"></i>
-        No feed to display.
+        <?= Yii::t('app', 'No feed to display. Go to ') ?><?= Html::a(Yii::t('app', 'Explore') . '?', ['/explore/index']) ?>
     </div>
 <?php endif; ?>
 <?php

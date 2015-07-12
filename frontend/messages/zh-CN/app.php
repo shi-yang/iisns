@@ -93,6 +93,8 @@ return [
 	'Follow' => '关注',
 	'Following' => '关注',
 	'Unfollow' => '取消关注', 
+	'You\'re Following' => '我的关注',
+	'Your Followers' => '我的粉丝',
 
 	'Forum' => '论坛',
 	'Forums' => '论坛',
@@ -139,6 +141,7 @@ return [
 	'If you forgot your password you can ' => '如果您忘记密码，请',
 	'reset it' => '点此重置',
 	'No data to display.' => '没有数据展示',
+	'No feed to display. Go to ' => '没有数据展示，去',
 	'Unfinished,continue reading' => '未完，继续阅读',
 	'View Details' => '查看详情',
  	'Note: This section is under development.' => '提示：这部分内容正在开发中。',
