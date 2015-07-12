@@ -14,7 +14,7 @@ $this->params['title'] = Yii::t('app', 'Explore');
 <div class="content">
     <div class="row">
         <div class="col-md-8">
-            <div class="album-all">
+            <div class="e-album-all">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                       <?= Yii::t('app', 'Albums') ?>
@@ -34,7 +34,9 @@ $this->params['title'] = Yii::t('app', 'Explore');
                                                 <img src="<?= $coverSrc ?>" class="album-cover" alt="album-cover">
                                             </a>
                                         </div>
-                                        <?= Html::a(Html::encode($album['name']), ['/explore/view-album', 'id' => $album['id']]) ?>
+                                        <div class="album-info">
+                                          <?= Html::a(Html::encode($album['name']), ['/explore/view-album', 'id' => $album['id']]) ?>
+                                        </div>
                                     </div>
                                 <?php endforeach;
                                 $this->endCache();

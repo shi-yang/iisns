@@ -163,18 +163,24 @@ a:hover {
   transition: all 0.5s ease-out;
   text-decoration: none;
 }
-.album-all {
+.e-album-all {
 list-style-type: none;
 }
-.album-item {
+.e-album-all .album-item {
     float:left;
     padding: 6px;
     border-width: 0;
     border-bottom-width: 1px\9;
     box-shadow: 0 1px 4px rgba(0,0,0,.15);
-    width: 170px;
+    background-color: #fff;
 }
-.album-cover {
+.e-album-all .album-info {
+  white-space: nowrap;
+  word-wrap: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.e-album-all .album-cover {
     width:158px;
     height:158px;
 }
