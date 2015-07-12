@@ -4,14 +4,14 @@ namespace app\modules\forum\controllers;
 
 use Yii;
 use app\modules\forum\models\Post;
-use app\components\FrontController;
+use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * PostController implements the CRUD actions for Post model.
  */
-class PostController extends FrontController
+class PostController extends BaseController
 {
     public function behaviors()
     {

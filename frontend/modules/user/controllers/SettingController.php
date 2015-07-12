@@ -7,9 +7,9 @@ use yii\filters\AccessControl;
 use yii\imagine\Image;
 use app\modules\user\models\User;
 use app\modules\user\models\Profile;
-use app\components\FrontController;
+use common\components\BaseController;
 
-class SettingController extends FrontController
+class SettingController extends BaseController
 {
     public $defaultAction = 'profile';
     public $enableCsrfValidation = false;

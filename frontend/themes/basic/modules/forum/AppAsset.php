@@ -15,10 +15,9 @@ use yii\web\AssetBundle;
  */
 class AppAsset extends AssetBundle
 {
-    public $basePath = '@webroot';
-    public $baseUrl = '@web';
+    public $sourcePath = '@app/themes/basic/modules/forum/assets';
     public $css = [
-        'css/forum/css/forum.css',
+        'css/forum.css',
         'css/style.css',
     ];
     public $js = [

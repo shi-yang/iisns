@@ -24,6 +24,7 @@ return [
 	'Delete' => '删除',
 	'Favor' => '收藏',
 	'Timeline' => '时光轴',
+	'Dashboard' => '仪表盘',
 
 	'Username or Email' => '用户名/邮箱',
 	'Remember Me' => '保持登录状态',
@@ -69,6 +70,7 @@ return [
 	'Sent' => '已发送',
 	'Sent successfully' => '发送成功',
 	'Comment' => '评论',
+	'Repost' => '转发',
 
 	'Setting' => '设置',
 	'Security' => '安全',
@@ -81,6 +83,7 @@ return [
 	'Male' => '男',
 	'Female' => '女',
 	'Birthdate' => '出生日期',
+	'Enter birthdate ...' => '设置出生日期...',
 	'Signature' => '个性签名',
 	'Position' => '地址',
 	'Description' => '描述',
@@ -90,6 +93,8 @@ return [
 	'Follow' => '关注',
 	'Following' => '关注',
 	'Unfollow' => '取消关注', 
+	'You\'re Following' => '我的关注',
+	'Your Followers' => '我的粉丝',
 
 	'Forum' => '论坛',
 	'Forums' => '论坛',
@@ -136,9 +141,12 @@ return [
 	'If you forgot your password you can ' => '如果您忘记密码，请',
 	'reset it' => '点此重置',
 	'No data to display.' => '没有数据展示',
+	'No feed to display. Go to ' => '没有数据展示，去',
 	'Unfinished,continue reading' => '未完，继续阅读',
 	'View Details' => '查看详情',
  	'Note: This section is under development.' => '提示：这部分内容正在开发中。',
 	'I am very sorry to let you see this page. I will try to go to this page and complete, stay tuned!' => '我很抱歉让你看到这个页面，我会尽快完成它，保持关注！',
-	'You are welcome to develop together.' => '欢迎你也一起来开发。'
+	'You are welcome to develop together.' => '欢迎你也一起来开发。',
+	'Everyone is an artist' => '每个人都是艺术家',
+	'Download Source' => '下载源码'
 ];

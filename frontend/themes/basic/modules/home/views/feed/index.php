@@ -26,23 +26,25 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php if (!empty($feeds)): ?>
                     <div id="content">
                         <?php foreach($feeds as $feed): ?>
-                            <div class="item widget-container fluid-height social-entry">
+                            <div class="item widget-container fluid-height social-entry" id="<?= $feed['id'] ?>">
                                 <div class="widget-content padded">
                                     <p class="content">
                                         <?php
                                             if (!empty($feed['content'])) {
                                                 echo Html::encode($feed['content']);
                                             } else {
-                                                print_r(str_replace( ['{title}', '{summary}'], unserialize($feed['feed_data']), $feed['template']));
+                                                echo strtr($feed['template'], unserialize($feed['feed_data']));
                                             }
                                         ?>
                                     </p>
-                                    <a href="<?= Url::toRoute(['/home/feed/delete', 'id' => $feed['id']]) ?>" data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="post">
-                                        <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
-                                    </a>
-                                    &nbsp;&nbsp;<a href="<?= Url::toRoute(['/home/feed/update', 'id' => $feed['id']]) ?>">
-                                        <span class="glyphicon glyphicon-edit"></span> <?= Yii::t('app', 'Update') ?>
-                                    </a>
+                                </div>
+                                <div class="widget-footer">
+                                    <div class="footer-detail">
+                                        &nbsp;
+                                        <a href="<?= Url::toRoute(['/home/feed/delete', 'id' => $feed['id']]) ?>" onclick="return false;" title="<?= Yii::t('app', 'Are you sure to delete it?') ?>"  rel="delete">
+                                            <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         <?php endforeach; ?>

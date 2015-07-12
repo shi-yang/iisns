@@ -33,7 +33,7 @@ class Feed extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['content'], 'required'],
+            [['content'], 'required', 'on' => ['create']],
             [['id', 'comment_count', 'repost_count', 'feed_data', 'created_at', 'user_id'], 'integer'],
             [['content'], 'string', 'max' => 140],
             [['type'], 'string', 'max' => 50]
@@ -73,10 +73,18 @@ class Feed extends \yii\db\ActiveRecord
        }
     }
 
+    public function scenarios()
+    {
+        return [
+            'create' => ['content'],
+            'repost'
+        ];
+    }
+
     /**
      * 增加记录
      * @param string $type 记录的类型，发布日志、相册、音乐、视频等
-     * @param string $data 内容，序列化保存
+     * @param array $data 内容，序列化保存
      */
     public static function addFeed($type, $data){
         $setarr = [];
@@ -84,16 +92,35 @@ class Feed extends \yii\db\ActiveRecord
             //发表日志
             case 'blog':
                 $setarr['type'] = 'postblog';
-                $setarr['template'] = '<b>{title}</b><br>{summary}';
-                $setarr['feed_data'] = $data;
-                $setarr['user_id'] = Yii::$app->user->id;
-                $setarr['created_at'] = time();
-                return Yii::$app->db->createCommand()->insert('{{%home_feed}}', $setarr)->execute();
+                $setarr['template'] = '<b>{title}</b><br>{content}';
+                break;
+            case 'repost':
+                $setarr['type'] = 'repost';
+                if (empty($data['{comment}'])) {
+                    array_shift($data);
+                    $comment = '';
+                } else {
+                    $comment = '{comment}<br>';
+                }
+
+                if (empty($data['{content}'])) {
+                    array_shift($data);
+                    $data['{feed_data}'] = array_merge(['{username}' => $data['{username}']], $data['{feed_data}']);
+                    $setarr['template'] = '<b>{username}</b>：' . $data['{template}'];
+                    $data = $data['{feed_data}'];
+                } else {
+                    $setarr['template'] = '<b>{username}</b>：{content}';
+                }
+                $setarr['template'] .= $comment;
                 break;
             case 'album':
-                ;
             case 'video':
                 break;
         }
+        $setarr['feed_data'] = serialize($data);
+        $setarr['user_id'] = Yii::$app->user->id;
+        $setarr['created_at'] = time();
+        Yii::$app->userData->updateKey('feed_count', Yii::$app->user->id);
+        return Yii::$app->db->createCommand()->insert('{{%home_feed}}', $setarr)->execute();
     }
 }

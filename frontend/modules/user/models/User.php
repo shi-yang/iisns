@@ -145,13 +145,6 @@ class User extends \common\models\User
         return ['feeds' => $feeds, 'pages' => $pages];
     }
 
-    public function getForumPosts()
-    {
-        // $query = new Query;
-        // $posts = $query->select('id,title,content,created_at')
-        //     ->from('{{%forum_post}}');
-    }
-    
     public static function getInfo($id)
     {
         $query = new Query;
@@ -186,5 +179,47 @@ class User extends \common\models\User
             ->orderBy('p.created_at DESC');
 
         return Tools::Pagination($query);
+    }
+
+    /**
+     * 获取所有关注的用户信息
+     * @param string $type 类型，'following':关注用户, 'follower':粉丝
+     */
+    public function getFollow($type)
+    {
+        $query = new Query;
+        switch ($type) {
+            case 'following':
+                $query->select('u.id, u.username, u.avatar')
+                    ->from('{{%user}} as u')
+                    ->join('LEFT JOIN','{{%user_follow}} as f', 'f.people_id = u.id')
+                    ->where('f.user_id = :user_id', [':user_id' => $this->id])
+                    ->orderBy('f.id DESC');
+                break;
+            case 'follower':
+                $query->select('u.id, u.username, u.avatar')
+                    ->from('{{%user}} as u')
+                    ->join('LEFT JOIN','{{%user_follow}} as f', 'f.user_id = u.id')
+                    ->where('f.people_id = :user_id', [':user_id' => $this->id])
+                    ->orderBy('f.id DESC');
+                break;
+            default:
+                return false;
+                break;
+        }
+        return Tools::Pagination($query);
+    }
+
+    /**
+     * 当前登录的用户是否已经关注了 $id 用户
+     * @param integer $type 
+     * @return boolean 是否用户已经关注
+     */
+    public static function getIsFollow($id)
+    {
+        $done = Yii::$app->db
+            ->createCommand("SELECT 1 FROM {{%user_follow}} WHERE user_id=:user_id AND people_id=:id LIMIT 1")
+            ->bindValues([':user_id' => Yii::$app->user->id, ':id' => intval($id)])->queryScalar();
+        return ($done) ? true : false ;
     }
 }

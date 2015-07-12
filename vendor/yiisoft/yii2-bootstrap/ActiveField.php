@@ -201,6 +201,9 @@ class ActiveField extends \yii\widgets\ActiveField
                 $this->template = $options['template'];
                 unset($options['template']);
             }
+            if (isset($options['label'])) {
+                $this->parts['{labelTitle}'] = $options['label'];
+            }
             if ($this->form->layout === 'horizontal') {
                 Html::addCssClass($this->wrapperOptions, $this->horizontalCssClasses['offset']);
             }
@@ -222,6 +225,9 @@ class ActiveField extends \yii\widgets\ActiveField
             } else {
                 $this->template = $options['template'];
                 unset($options['template']);
+            }
+            if (isset($options['label'])) {
+                $this->parts['{labelTitle}'] = $options['label'];
             }
             if ($this->form->layout === 'horizontal') {
                 Html::addCssClass($this->wrapperOptions, $this->horizontalCssClasses['offset']);
@@ -376,8 +382,13 @@ class ActiveField extends \yii\widgets\ActiveField
                 $label = Html::encode($this->model->getAttributeLabel($attribute));
             }
         }
+        if (!isset($options['for'])) {
+            $options['for'] = Html::getInputId($this->model, $this->attribute);
+        }
         $this->parts['{beginLabel}'] = Html::beginTag('label', $options);
         $this->parts['{endLabel}'] = Html::endTag('label');
-        $this->parts['{labelTitle}'] = $label;
+        if (!isset($this->parts['{labelTitle}'])) {
+            $this->parts['{labelTitle}'] = $label;
+        }
     }
 }

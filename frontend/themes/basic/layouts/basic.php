@@ -31,6 +31,7 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
     <?= $content ?>
 <?php $this->endBody() ?>
+<?= Yii::$app->setting->get('thirdPartyStatisticalCode') ?>
 </body>
 </html>
 <?php $this->endPage() ?>

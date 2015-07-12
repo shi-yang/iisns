@@ -20,11 +20,11 @@
         "yiisoft/yii2-swiftmailer": "*",
         "yiisoft/yii2-imagine": "*",
         "shiyang/yii2-login-widget": "*",
-        "shiyang/yii2-setting": "*",
         "shiyang/yii2-infinite-scroll": "*",
         "shiyang/yii2-masonry": "*",
         "kucha/ueditor": "*",
-        "justinvoelker/yii2-tagging": "*"
+        "justinvoelker/yii2-tagging": "*",
+        "kartik-v/yii2-widget-datepicker": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

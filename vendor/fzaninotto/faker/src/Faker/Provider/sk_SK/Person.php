@@ -8,7 +8,7 @@ class Person extends \Faker\Provider\Person
         '{{lastNameMale}}',
         '{{lastNameFemale}}',
     );
-    
+
     protected static $maleNameFormats = array(
         '{{firstNameMale}} {{lastNameMale}}',
         '{{firstNameMale}} {{lastNameMale}}',
@@ -48,7 +48,7 @@ class Person extends \Faker\Provider\Person
 
     protected static $firstNameFemale = array(
         'Alexandra', 'Karina', 'Daniela', 'Andrea', 'Antónia', 'Bohuslava', 'Dáša', 'Malvína', 'Kristína', 'Nataša', 'Bohdana', 'Drahomíra',
-        'Sára',	'Zora', 'Tamara', 'Ema', 'Tatiana', 'Erika', 'Veronika', 'Agáta', 'Dorota', 'Vanda', 'Zoja', 'Gabriela', 'Perla', 'Ida', 'Liana',
+        'Sára', 'Zora', 'Tamara', 'Ema', 'Tatiana', 'Erika', 'Veronika', 'Agáta', 'Dorota', 'Vanda', 'Zoja', 'Gabriela', 'Perla', 'Ida', 'Liana',
         'Miloslava', 'Vlasta', 'Lívia', 'Eleonóra', 'Etela', 'Romana', 'Zlatica', 'Anežka', 'Bohumila', 'Františka', 'Angela', 'Matilda',
         'Svetlana', 'Ľubica', 'Alena', 'Soňa', 'Vieroslava', 'Zita', 'Miroslava', 'Irena', 'Milena', 'Estera', 'Justína', 'Dana', 'Danica',
         'Jela', 'Jaroslava', 'Jarmila', 'Lea', 'Anastázia', 'Galina', 'Lesana', 'Hermína', 'Monika', 'Ingrida', 'Viktória', 'Blažena', 'Žofia',
@@ -134,7 +134,7 @@ class Person extends \Faker\Provider\Person
     }
 
     /**
-     * @param string|null $gender 'male', 'female' or null for any 
+     * @param string|null $gender 'male', 'female' or null for any
      * @example 'Novotný'
      */
     public function lastName($gender = null)
@@ -144,7 +144,7 @@ class Person extends \Faker\Provider\Person
         } elseif ($gender === static::GENDER_FEMALE) {
             return static::lastNameFemale();
         }
-        
+
         return $this->generator->parse(static::randomElement(static::$lastNameFormat));
     }
 

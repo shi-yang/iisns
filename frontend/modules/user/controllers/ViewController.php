@@ -5,7 +5,7 @@ namespace app\modules\user\controllers;
 use Yii;
 use app\modules\user\models\User;
 use app\modules\user\models\UserSearch;
-use app\components\FrontController;
+use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\helpers\Url;
 use app\modules\home\models\Post;
@@ -13,7 +13,7 @@ use app\modules\home\models\Post;
 /**
  * UserController implements the CRUD actions for User model.
  */
-class ViewController extends FrontController
+class ViewController extends BaseController
 {
     /**
      * Displays a single User model.

@@ -153,11 +153,6 @@ class InfiniteScrollPager extends Widget
 
         if (is_null(ArrayHelper::getValue($this->pluginOptions, 'loading', null)))
             $this->pluginOptions['loading'] = [];
-        if (is_null(ArrayHelper::getValue($this->pluginOptions['loading'], 'img', null))) {
-            $assetManager = $this->view->getAssetManager();     // Publish loader img
-            list ($imgPath, $imgUrl) = $assetManager->publish('@vendor/shiyang/yii2-infinite-scroll/assets/images/ajax-loader.gif');
-            $this->pluginOptions['loading']['img'] = $imgUrl;
-        }
     }
 
     /**

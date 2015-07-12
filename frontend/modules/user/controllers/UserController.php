@@ -6,9 +6,9 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\db\Query;
 use app\modules\user\models\User;
-use app\components\FrontController;
+use common\components\BaseController;
 
-class UserController extends FrontController
+class UserController extends BaseController
 {
     /**
      * @inheritdoc
@@ -30,16 +30,13 @@ class UserController extends FrontController
     }
 
     /**
-     * @param string $id User ID
+     * @param integer $id User ID
      */
     public function actionFollow($id)
     {
         $id = intval($id);
     	if (Yii::$app->Request->isAjax && Yii::$app->user->id !== $id) {
-            $done = Yii::$app->db
-                ->createCommand("SELECT 1 FROM {{%user_follow}} WHERE user_id=:user_id AND people_id=:id LIMIT 1")
-                ->bindValues([':user_id' => Yii::$app->user->id, ':id' => $id])->queryScalar();
-            if ($done) {
+            if (User::getIsFollow($id)) {
                 //已经关注，则删除记录，取消关注
                 Yii::$app->db
                     ->createCommand("DELETE FROM {{%user_follow}} WHERE user_id=:user_id AND people_id=:id")
@@ -58,8 +55,8 @@ class UserController extends FrontController
                 Yii::$app->userData->updateKey('following_count', Yii::$app->user->id);
                 Yii::$app->userData->updateKey('follower_count', $id);
             }
-        } else {
-            return false;
+            return true;
         }
+        return false;
     }
 }

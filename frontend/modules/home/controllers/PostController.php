@@ -12,14 +12,14 @@ use yii\helpers\Html;
 use app\modules\home\models\Post;
 use app\modules\home\models\Feed;
 use app\components\Tools;
-use app\components\FrontController;
+use common\components\BaseController;
 
 /**
  * PostController implements the CRUD actions for Post model.
  */
-class PostController extends FrontController
+class PostController extends BaseController
 {
-    public $layout = '@app/modules/user/views/layouts/profile';
+    public $layout = '@app/modules/user/views/layouts/user';
     public function behaviors()
     {
         return [
@@ -58,7 +58,6 @@ class PostController extends FrontController
 
     public function actionIndex()
     {
-        $this->layout = '@app/modules/user/views/layouts/user';
         $query = new Query;
         $query = $query->select('*')
             ->from('{{%home_post}}')
@@ -79,6 +78,7 @@ class PostController extends FrontController
      */
     public function actionView($id)
     {
+        $this->layout = '@app/modules/user/views/layouts/profile';
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -91,19 +91,18 @@ class PostController extends FrontController
      */
     public function actionCreate()
     {
-        $this->layout = '@app/modules/user/views/layouts/user';
         $model = new Post();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->userData->updateKey('post_count', Yii::$app->user->id);
-            Yii::$app->userData->updateKey('feed_count', Yii::$app->user->id);
 
             //插入记录(Feed)
             $title = Html::a(Html::encode($model->title), $model->url);
             preg_match_all("/<[img|IMG].*?src=\"([^^]*?)\".*?>/", $model->content, $images);
-            $summary = mb_substr(strip_tags($model->content), 0, 140, 'utf-8') . '... ' . Html::a(Yii::t('app', 'View Details'), $model->url) . '<br>' . $images[0][0];
-            $postData = ['{title}' => $title, '{summary}' => $summary];
-            Feed::addFeed('blog', serialize($postData));
+            $images = (isset($images[0][0])) ? $images[0][0] : '' ;
+            $content = mb_substr(strip_tags($model->content), 0, 140, 'utf-8') . '... ' . Html::a(Yii::t('app', 'View Details'), $model->url) . '<br>' . $images;
+            $postData = ['{title}' => $title, '{content}' => $content];
+            Feed::addFeed('blog', $postData);
 
             return $this->redirect(['/home/post']);
         }
@@ -120,7 +119,6 @@ class PostController extends FrontController
      */
     public function actionUpdate($id)
     {
-        $this->layout = '@app/modules/user/views/layouts/user';
         $model = $this->findModel($id);
         if ($model->user_id !== Yii::$app->user->id) {
             throw new ForbiddenHttpException('You are not allowed to perform this action.');
@@ -144,15 +142,13 @@ class PostController extends FrontController
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
-        if ($model->user_id === Yii::$app->user->id) {
+        if (Yii::$app->Request->isAjax && $model->user_id === Yii::$app->user->id) {
             $model->delete();
             Yii::$app->userData->updateKey('post_count', Yii::$app->user->id, -1);
-            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Deleted successfully.'));
+            return true;
         } else {
             throw new ForbiddenHttpException('You are not allowed to perform this action.');
         }
-
-        return $this->redirect(['index']);
     }
 
     /**

@@ -13,3 +13,4 @@ frontend/uploads/user/avatar/*
 
 .idea
 
+common/config/db.php

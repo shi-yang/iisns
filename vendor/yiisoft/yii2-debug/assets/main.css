@@ -18,13 +18,26 @@ ul.assets {
     white-space: normal;
 }
 
-.callout-danger {
-    background-color: #fcf2f2;
-    border-color: #dFb5b4;
-}
 .callout {
     margin: 0 0 10px 0;
     padding: 5px;
+    border: solid 1px #eee;
+    border-radius: 3px;
+}
+
+.callout-important {
+    background-color: rgba(185, 74, 72, 0.2);
+    border-color: rgba(185, 74, 72, 0.4);
+}
+
+.callout-success {
+    background-color: rgba(70, 136, 71, 0.2);
+    border-color: rgba(70, 136, 71, 0.4);
+}
+
+.callout-info {
+    background-color: rgba(58, 135, 173, 0.2);
+    border-color: rgba(58, 135, 173, 0.4);
 }
 
 .list-group .glyphicon {

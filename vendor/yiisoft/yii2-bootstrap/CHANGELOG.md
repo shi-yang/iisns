@@ -1,6 +1,21 @@
 Yii Framework 2 bootstrap extension Change Log
 ==============================================
 
+2.0.4 under development
+-----------------------
+
+- Bug #18: `label` option ignored by `yii\bootstrap\Activefield::checkbox()` and `yii\bootstrap\Activefield::radio()` (mikehaertl)
+- Bug #5984: `yii\bootstrap\Activefield::checkbox()` caused browser to link label to the wrong input (cebe)
+- Bug #7894: Fixed incorrect URL config processing at `yii\bootstrap\Nav::items` if route element is not a first one (nkovacs, klimov-paul)
+- Bug #8231: Configuration of Alert, ButtonDropdown, Modal widget where not preserved when used multiple times (cebe, idMolotov)
+- Bug (CVE-2015-3397): Using `Json::htmlEncode()` for safer JSON data encoding in HTML code (samdark, Tomasz Tokarski)
+- Enh #29: Added support to list-groups for Collapse class (pana1990, skullcrasher)
+- Enh #2546: Added `visible` option to `yii\bootstrap\ButtonGroup::$buttons` (samdark, lukBarros)
+- Enh #7633: Added `ActionColumn::$buttonOptions` for defining HTML options to be added to the default buttons (cebe)
+- Enh: Added `Nav::$dropDownCaret` to allow customization of the dropdown caret symbol (cebe)
+- Enh: Added support for using external URLs for `Tabs`. (dynasource, qiangxue)
+
+
 2.0.3 March 01, 2015
 --------------------
 
@@ -31,7 +46,7 @@ Yii Framework 2 bootstrap extension Change Log
 ----------------------
 
 - Bug #5323: Nested dropdown does not work for `yii\bootstrap\DropDown` (aryraditya)
-- Bug #5336: `yii\bootstrap\DropDown` should register bootstrap plugin asset (zelenin) 
+- Bug #5336: `yii\bootstrap\DropDown` should register bootstrap plugin asset (zelenin)
 - Chg #5231: Collapse `items` property uses `label` element instead of array key for headers (nkovacs)
 - Chg #5232: Collapse encodes headers by default (nkovacs)
 - Chg #5217: Tabs no longer requires content since empty tab could be used dynamically (damiandennis)

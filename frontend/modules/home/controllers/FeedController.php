@@ -9,14 +9,15 @@ use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\helpers\Html;
 use app\modules\home\models\Feed;
 use app\components\Tools;
-use app\components\FrontController;
+use common\components\BaseController;
 
 /**
  * FeedController implements the CRUD actions for Feed model.
  */
-class FeedController extends FrontController
+class FeedController extends BaseController
 {
     public $layout = '@app/modules/user/views/layouts/user';
 
@@ -78,10 +79,32 @@ class FeedController extends FrontController
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id = null)
     {
         $model = new Feed();
 
+        $model->setScenario('repost');
+        if ($id != null && $model->load(Yii::$app->request->post())) {
+            $id = intval($id);
+            $query = new Query;
+            $feed = $query->select('f.content, f.feed_data, f.template, u.username')
+                ->from('{{%home_feed}} as f')
+                ->join('LEFT JOIN','{{%user}} as u', 'u.id=f.user_id')
+                ->where('f.id=:id', [':id' => $id])
+                ->one();
+            $postData = [
+                '{comment}' => $model->content,
+                '{content}' => $feed['content'],
+                '{username}' => Html::a($feed['username'], ['/user/view', 'id' => $feed['username']]),
+                '{feed_data}' => unserialize($feed['feed_data']),
+                '{template}' => $feed['template']
+            ];
+            Feed::addFeed('repost', $postData);
+            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Create successfully.'));
+            return $this->redirect(['/user/dashboard']);
+        }
+
+        $model->setScenario('create');
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->userData->updateKey('feed_count', Yii::$app->user->id);
             return $this->redirect(['view', 'id' => $model->id]);
@@ -123,11 +146,10 @@ class FeedController extends FrontController
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
-        if ($model->user_id === Yii::$app->user->id) {
+        if (Yii::$app->Request->isAjax && $model->user_id === Yii::$app->user->id) {
             $model->delete();
             Yii::$app->userData->updateKey('feed_count', Yii::$app->user->id, -1);
-            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Deleted successfully.'));
-            return $this->redirect(['index']);
+            return true;
         } else {
             throw new ForbiddenHttpException('You are not allowed to perform this action.');
         }

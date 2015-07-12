@@ -7,12 +7,12 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use app\components\FrontController;
+use common\components\BaseController;
 
 /**
  * ToduController implements the CRUD actions for Comment model.
  */
-class ToduController extends FrontController
+class ToduController extends BaseController
 {
     public $layout = '@app/modules/user/views/layouts/user';
 

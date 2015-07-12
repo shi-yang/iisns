@@ -5,11 +5,11 @@
     "type": "yii2-extension",
     "license": "BSD-3-Clause",
     "support": {
-        "issues": "https://github.com/yiisoft/yii2/issues?labels=ext%3Aswiftmailer",
+        "issues": "https://github.com/yiisoft/yii2-swiftmailer/issues",
         "forum": "http://www.yiiframework.com/forum/",
         "wiki": "http://www.yiiframework.com/wiki/",
         "irc": "irc://irc.freenode.net/yii",
-        "source": "https://github.com/yiisoft/yii2"
+        "source": "https://github.com/yiisoft/yii2-swiftmailer"
     },
     "authors": [
         {
@@ -18,8 +18,8 @@
         }
     ],
     "require": {
-        "yiisoft/yii2": "*",
-        "swiftmailer/swiftmailer": "*"
+        "yiisoft/yii2": ">=2.0.4",
+        "swiftmailer/swiftmailer": "~5.0"
     },
     "autoload": {
         "psr-4": { "yii\\swiftmailer\\": "" }

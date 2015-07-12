@@ -1,6 +1,16 @@
 Yii Framework 2 gii extension Change Log
 ========================================
 
+2.0.4 under development
+-----------------------
+
+- Bug #5098: Properly detect hasOne relations (nineinchnick)
+- Bug #6667: Gii form generator rendering mistake view (pana1990)
+- Bug (CVE-2015-3397): Using `Json::htmlEncode()` for safer JSON data encoding in HTML code (samdark, Tomasz Tokarski)
+- Enh #2109: Added ability to generate ActiveQuery class for model (klimov-paul)
+- Enh #7830: Added ability to detect relations between multiple schemas (nineinchnick)
+
+
 2.0.3 March 01, 2015
 --------------------
 

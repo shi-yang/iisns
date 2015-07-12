@@ -10,9 +10,9 @@ use app\modules\user\models\User;
 use app\modules\home\models\Post;
 use app\modules\home\models\Feed;
 use app\components\Tools;
-use app\components\FrontController;
+use common\components\BaseController;
 
-class DashboardController extends FrontController
+class DashboardController extends BaseController
 {
     public $layout='dashboard';
     
@@ -31,8 +31,7 @@ class DashboardController extends FrontController
                         'roles' => ['?']
                     ],
                     [
-                        'actions' => ['index', 'myposts', 'myfavor', 'followpeople',
-                             'followforum', 'forumpost', 'homepost'],
+                        'actions' => ['index', 'myposts', 'myfavor', 'following', 'follower', 'forumpost', 'homepost'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -48,6 +47,7 @@ class DashboardController extends FrontController
         }
         $model = $this->findModel();
         $newFeed = new Feed;
+        $newFeed->setScenario('create');
         if ($newFeed->load(Yii::$app->request->post()) && $newFeed->save()) {
             Yii::$app->userData->updateKey('feed_count', Yii::$app->user->id);
             return $this->refresh();
@@ -56,7 +56,7 @@ class DashboardController extends FrontController
         $query = new Query;
         $query = $query->select('p.id, p.user_id, p.content, p.feed_data, p.template, p.created_at, u.username, u.avatar')
             ->from('{{%home_feed}} as p')
-            ->join('LEFT JOIN','{{%user_follow}} as f', 'p.user_id=f.people_id')
+            ->join('LEFT JOIN','{{%user_follow}} as f', 'p.user_id=f.people_id AND f.user_id=:user_id')
             ->join('LEFT JOIN','{{%user}} as u', 'u.id=p.user_id')
             ->where('p.user_id=:user_id OR f.user_id=:user_id', [':user_id' => $model->id])
             ->orderBy('p.created_at DESC');
@@ -69,26 +69,25 @@ class DashboardController extends FrontController
             'pages' => $pages['pages']
         ]);
     }
-    
-    /**
-     * My posts
-     */
-    public function actionBlogpost()
+
+    public function actionFollowing()
     {
-        $model = $this->findModel();
-        $query = new Query;
-        $query = $query->select('*')
-                    ->from('{{%home_post}}')
-                    ->where(['user_id' => $model->id])
-                    ->orderBy('created_at desc');
-        $pages = Tools::Pagination($query);
-        return $this->render('myposts', [
-            'model' => $model,
-            'posts' => $pages['result'],
-            'pages' => $pages['pages'],
+        return $this->render('follow', [
+            'title' => Yii::t('app', 'You\'re Following'),
+            'type' => 'following',
+            'model' => $this->findModel()
         ]);
     }
 
+    public function actionFollower()
+    {
+        return $this->render('follow', [
+            'title' => Yii::t('app', 'Your Followers'),
+            'type' => 'follower',
+            'model' => $this->findModel()
+        ]);
+    }
+    
     public function actionForumpost()
     {
         $model = $this->findModel();

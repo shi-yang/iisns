@@ -3,10 +3,10 @@
 * http://github.com/RobinHerbots/jquery.inputmask
 * Copyright (c) 2010 - 2015 Robin Herbots
 * Licensed under the MIT license (http://www.opensource.org/licenses/mit-license.php)
-* Version: 3.1.62
+* Version: 3.1.63
 */
 !function(factory) {
-    "function" == typeof define && define.amd ? define([ "jquery", "./jquery.inputmask" ], factory) : factory(jQuery);
+    "function" == typeof define && define.amd ? define([ "jquery", "./jquery.inputmask" ], factory) : "object" == typeof exports ? module.exports = factory(require("jquery"), require("./jquery.inputmask")) : factory(jQuery);
 }(function($) {
     return $.extend($.inputmask.defaults.definitions, {
         h: {
@@ -92,7 +92,7 @@
                 }
                 return currentyear;
             },
-            onKeyDown: function(e) {
+            onKeyDown: function(e, buffer, caretPos, opts) {
                 var $input = $(this);
                 if (e.ctrlKey && e.keyCode == $.inputmask.keyCode.RIGHT) {
                     var today = new Date();
@@ -265,7 +265,7 @@
                 val1: new RegExp("0[1-9]|1[012]")
             },
             leapday: "02/29/",
-            onKeyDown: function(e) {
+            onKeyDown: function(e, buffer, caretPos, opts) {
                 var $input = $(this);
                 if (e.ctrlKey && e.keyCode == $.inputmask.keyCode.RIGHT) {
                     var today = new Date();
@@ -279,7 +279,7 @@
             placeholder: "yyyy/mm/dd",
             alias: "mm/dd/yyyy",
             leapday: "/02/29",
-            onKeyDown: function(e) {
+            onKeyDown: function(e, buffer, caretPos, opts) {
                 var $input = $(this);
                 if (e.ctrlKey && e.keyCode == $.inputmask.keyCode.RIGHT) {
                     var today = new Date();

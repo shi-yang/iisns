@@ -13,7 +13,8 @@ $this->params['breadcrumb'][] = ['label' => Yii::t('app', 'Photos'), 'url' => ['
 $this->params['breadcrumb'][] = $model->name;
 $this->registerMetaTag(['name' => 'keywords', 'content' => $model->name . Yii::$app->setting->get('siteKeyword')]);
 $this->registerMetaTag(['name' => 'description', 'content' => $model->description]);
-
+$this->registerCssFile('@web/js/lightbox/css/lightbox.css');
+$this->registerJsFile('@web/js/lightbox/js/lightbox.min.js', ['depends' => ['yii\web\JqueryAsset'], 'position' => \yii\web\View::POS_END]);
 $this->registerCss('
 .no-photo {
     padding: 50px 50px 150px;

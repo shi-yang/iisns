@@ -15,10 +15,9 @@ use yii\web\AssetBundle;
  */
 class ProfileAsset extends AssetBundle
 {
-    public $basePath = '@webroot';
-    public $baseUrl = '@web';
+    public $sourcePath = '@app/themes/basic/modules/user/assets';
     public $css = [
-        'css/user/home.css'
+        'css/home.css'
     ];
     public $js = [
     ];

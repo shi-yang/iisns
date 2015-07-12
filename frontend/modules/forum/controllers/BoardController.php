@@ -5,7 +5,7 @@ namespace app\modules\forum\controllers;
 use Yii;
 use app\modules\forum\models\Board;
 use yii\data\ActiveDataProvider;
-use app\components\FrontController;
+use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
@@ -14,7 +14,7 @@ use app\modules\forum\models\Thread;
 /**
  * BoardController implements the CRUD actions for Board model.
  */
-class BoardController extends FrontController
+class BoardController extends BaseController
 {
     public $layout = 'forum';
 

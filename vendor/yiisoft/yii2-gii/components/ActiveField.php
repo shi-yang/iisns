@@ -68,7 +68,7 @@ class ActiveField extends \yii\widgets\ActiveField
         foreach ($data as &$item) {
             $item = ['word' => $item];
         }
-        $this->form->getView()->registerJs("yii.gii.autocomplete($counter, " . Json::encode($data) . ");");
+        $this->form->getView()->registerJs("yii.gii.autocomplete($counter, " . Json::htmlEncode($data) . ");");
 
         return $this;
     }

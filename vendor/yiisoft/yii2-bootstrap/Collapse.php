@@ -33,6 +33,17 @@ use yii\helpers\Html;
  *             'contentOptions' => [...],
  *             'options' => [...],
  *         ],
+ *         // if you want to swap out .panel-body with .list-group, you may use the following
+ *         [
+ *             'label' => 'Collapsible Group Item #1',
+ *             'content' => [
+ *                 'Anim pariatur cliche...',
+ *                 'Anim pariatur cliche...'
+ *             ],
+ *             'contentOptions' => [...],
+ *             'options' => [...],
+ *             'footer' => 'Footer' // the footer label in list-group
+ *         ],
  *     ]
  * ]);
  * ```
@@ -50,7 +61,7 @@ class Collapse extends Widget
      * - label: string, required, the group header label.
      * - encode: boolean, optional, whether this label should be HTML-encoded. This param will override
      *   global `$this->encodeLabels` param.
-     * - content: string, required, the content (HTML) of the group
+     * - content: array|string, required, the content (HTML) of the group
      * - options: array, optional, the HTML attributes of the group
      * - contentOptions: optional, the HTML attributes of the group's content
      */
@@ -135,7 +146,22 @@ class Collapse extends Widget
 
             $header = Html::tag('h4', $headerToggle, ['class' => 'panel-title']);
 
-            $content = Html::tag('div', $item['content'], ['class' => 'panel-body']) . "\n";
+            if (is_string($item['content'])) {
+                $content = Html::tag('div', $item['content'], ['class' => 'panel-body']) . "\n";
+            } elseif (is_array($item['content'])) {
+                $content = Html::ul($item['content'], [
+                    'class' => 'list-group',
+                    'itemOptions' => [
+                        'class' => 'list-group-item'
+                    ],
+                    'encode' => false,
+                ]) . "\n";
+                if (isset($item['footer'])) {
+                    $content .= Html::tag('div', $item['footer'], ['class' => 'panel-footer']) . "\n";
+                }
+            } else {
+                throw new InvalidConfigException('The "content" option should be a string or array.');
+            }
         } else {
             throw new InvalidConfigException('The "content" option is required.');
         }
