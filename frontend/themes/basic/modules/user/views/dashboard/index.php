@@ -30,7 +30,7 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
                 <div class="widget-content padded">
                     <div class="profile-info clearfix">
                         <a class="pull-left" href="<?= Url::toRoute(['/user/view', 'id'=>$feed['username']]) ?>" rel="author">
-                            <img width="50" height="50" class="social-avatar" src="<?= Yii::getAlias('@avatar') . $feed['avatar'] ?>" />
+                            <img width="50" height="50" class="social-avatar" src="<?= Yii::getAlias('@avatar') . $feed['avatar'] ?>" alt="@<?= $feed['username'] ?>"/>
                         </a>
                         <div class="profile-details">
                             <a class="user-name" href="<?= Url::toRoute(['/user/view', 'id'=>$feed['username']]) ?>" rel="author">
@@ -90,7 +90,7 @@ $newFeed->setScenario('repost');
         'options' => ['id' => 'repost-feed'],
         'action' => ['/home/feed/create?id=']
     ]); ?>
-    <?= $form->field($newFeed, 'content')->textarea(['rows' => 3])->label(false) ?>
+    <?= $form->field($newFeed, 'content')->textarea(['rows' => 3, 'id' => 'repost-feed-content'])->label(false) ?>
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Repost'), ['class' => 'btn btn-success']) ?>
     </div>

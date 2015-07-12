@@ -99,6 +99,7 @@ if ($done) {
           <?= Html::a (' 中文简体 ', '?lang=zh-CN') . '| ' . 
             Html::a (' English ', '?lang=en') ;  
           ?>
+          <?= Yii::$app->setting->get('thirdPartyStatisticalCode') ?>
         </p>
         <p class="pull-right"><?= Yii::powered() ?></p>
         </div>
@@ -123,7 +124,6 @@ if ($done) {
           return false;
       });
     </script>
-    <?= Yii::$app->setting->get('thirdPartyStatisticalCode') ?>
 </body>
 </html>
 <?php $this->endPage() ?>
