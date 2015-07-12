@@ -22,6 +22,16 @@ return [
                         YII_ENV_DEV ? 'css/bootstrap.css' : '//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css',
                     ]
                 ],
+                'yii\bootstrap\BootstrapThemeAsset' => [
+                    'css' => [
+                        YII_ENV_DEV ? 'css/bootstrap-theme.css' : '//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css',
+                    ]
+                ],
+                'yii\bootstrap\BootstrapPluginAsset' => [
+                    'css' => [
+                        YII_ENV_DEV ? 'js/bootstrap.js' : '//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js',
+                    ]
+                ],
             ],
         ],
         'urlManager' => [
