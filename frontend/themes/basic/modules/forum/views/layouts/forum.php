@@ -126,6 +126,7 @@ AppAsset::register($this);
             <?= Html::a (' 中文简体 ', '?lang=zh-CN') . '| ' . 
             Html::a (' English ', '?lang=en') ;  
             ?>
+            <?= Yii::$app->setting->get('thirdPartyStatisticalCode') ?>
         </p>
         <p class="pull-right"><?= Yii::powered() ?></p>
         </div>
@@ -136,7 +137,6 @@ AppAsset::register($this);
           return $('body, html').toggleClass("nav-open");
         });
     </script>
-    <?= Yii::$app->setting->get('thirdPartyStatisticalCode') ?>
 </body>
 </html>
 <?php $this->endPage() ?>
