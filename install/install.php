@@ -404,6 +404,7 @@ return [
     'username' => '{$this->settings['dbUser']}',
     'password' => '{$this->settings['dbPass']}',
     'tablePrefix' => 'pre_',
+    'enableSchemaCache' => true //No need to modify
 ];
 ");
 			fclose($fp);

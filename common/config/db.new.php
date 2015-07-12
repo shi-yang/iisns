@@ -9,4 +9,5 @@ return [
     'username' => 'root',
     'password' => '123456',
     'tablePrefix' => 'pre_',
+    'enableSchemaCache' => true //No need to modify
 ];
