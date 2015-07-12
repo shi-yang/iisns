@@ -1,5 +1,5 @@
 /*!
- * Outlayer v1.4.0
+ * Outlayer v1.4.1
  * the brains and guts of a layout library
  * MIT license
  */
@@ -414,7 +414,7 @@ Outlayer.prototype._setContainerMeasure = function( measure, isWidth ) {
 Outlayer.prototype._emitCompleteOnItems = function( eventName, items ) {
   var _this = this;
   function onComplete() {
-    _this.emitEvent( eventName + 'Complete', [ items ] );
+    _this.dispatchEvent( eventName + 'Complete', null, [ items ] );
   }
 
   var count = items.length;
@@ -435,6 +435,32 @@ Outlayer.prototype._emitCompleteOnItems = function( eventName, items ) {
   for ( var i=0, len = items.length; i < len; i++ ) {
     var item = items[i];
     item.once( eventName, tick );
+  }
+};
+
+/**
+ * emits events via eventEmitter and jQuery events
+ * @param {String} type - name of event
+ * @param {Event} event - original event
+ * @param {Array} args - extra arguments
+ */
+Outlayer.prototype.dispatchEvent = function( type, event, args ) {
+  // add original event to arguments
+  var emitArgs = event ? [ event ].concat( args ) : args;
+  this.emitEvent( type, emitArgs );
+
+  if ( jQuery ) {
+    // set this.$element
+    this.$element = this.$element || jQuery( this.element );
+    if ( event ) {
+      // create jQuery event
+      var $event = jQuery.Event( event );
+      $event.type = type;
+      this.$element.trigger( $event, args );
+    } else {
+      // just trigger with type if no event available
+      this.$element.trigger( type, args );
+    }
   }
 };
 

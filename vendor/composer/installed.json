@@ -542,60 +542,6 @@
         ]
     },
     {
-        "name": "bower-asset/jquery.inputmask",
-        "version": "3.1.62",
-        "version_normalized": "3.1.62.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/RobinHerbots/jquery.inputmask.git",
-            "reference": "da1a274cefa18a52a0519ac7ffe8e8d31e950eae"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/da1a274cefa18a52a0519ac7ffe8e8d31e950eae",
-            "reference": "da1a274cefa18a52a0519ac7ffe8e8d31e950eae",
-            "shasum": ""
-        },
-        "require": {
-            "bower-asset/jquery": ">=1.7"
-        },
-        "type": "bower-asset-library",
-        "extra": {
-            "bower-asset-main": [
-                "./dist/inputmask/jquery.inputmask.js",
-                "./dist/inputmask/jquery.inputmask.extensions.js",
-                "./dist/inputmask/jquery.inputmask.date.extensions.js",
-                "./dist/inputmask/jquery.inputmask.numeric.extensions.js",
-                "./dist/inputmask/jquery.inputmask.phone.extensions.js",
-                "./dist/inputmask/jquery.inputmask.regex.extensions.js"
-            ],
-            "bower-asset-ignore": [
-                "**/.*",
-                "qunit/",
-                "nuget/",
-                "tools/",
-                "js/",
-                "*.md",
-                "build.properties",
-                "build.xml",
-                "jquery.inputmask.jquery.json"
-            ]
-        },
-        "installation-source": "dist",
-        "license": [
-            "http://opensource.org/licenses/mit-license.php"
-        ],
-        "description": "jquery.inputmask is a jquery plugin which create an input mask.",
-        "keywords": [
-            "form",
-            "input",
-            "inputmask",
-            "jquery",
-            "mask",
-            "plugins"
-        ]
-    },
-    {
         "name": "yiisoft/yii2-imagine",
         "version": "2.0.3",
         "version_normalized": "2.0.3.0",
@@ -643,60 +589,6 @@
             "image",
             "imagine",
             "yii2"
-        ]
-    },
-    {
-        "name": "bower-asset/bootstrap",
-        "version": "v3.3.4",
-        "version_normalized": "3.3.4.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/twbs/bootstrap.git",
-            "reference": "a10eb60bc0b07b747fa0c4ebd8821eb7307bd07f"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/twbs/bootstrap/zipball/a10eb60bc0b07b747fa0c4ebd8821eb7307bd07f",
-            "reference": "a10eb60bc0b07b747fa0c4ebd8821eb7307bd07f",
-            "shasum": ""
-        },
-        "require": {
-            "bower-asset/jquery": ">=1.9.1"
-        },
-        "type": "bower-asset-library",
-        "extra": {
-            "bower-asset-main": [
-                "less/bootstrap.less",
-                "dist/css/bootstrap.css",
-                "dist/js/bootstrap.js",
-                "dist/fonts/glyphicons-halflings-regular.eot",
-                "dist/fonts/glyphicons-halflings-regular.svg",
-                "dist/fonts/glyphicons-halflings-regular.ttf",
-                "dist/fonts/glyphicons-halflings-regular.woff",
-                "dist/fonts/glyphicons-halflings-regular.woff2"
-            ],
-            "bower-asset-ignore": [
-                "/.*",
-                "_config.yml",
-                "CNAME",
-                "composer.json",
-                "CONTRIBUTING.md",
-                "docs",
-                "js/tests",
-                "test-infra"
-            ]
-        },
-        "installation-source": "dist",
-        "description": "The most popular front-end framework for developing responsive, mobile first projects on the web.",
-        "keywords": [
-            "css",
-            "framework",
-            "front-end",
-            "js",
-            "less",
-            "mobile-first",
-            "responsive",
-            "web"
         ]
     },
     {
@@ -830,116 +722,6 @@
         "keywords": [
             "ui",
             "utility"
-        ]
-    },
-    {
-        "name": "bower-asset/outlayer",
-        "version": "v1.4.0",
-        "version_normalized": "1.4.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/metafizzy/outlayer.git",
-            "reference": "426e906fb2827d1d79f39ed0b33c6fd24257f34a"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/metafizzy/outlayer/zipball/426e906fb2827d1d79f39ed0b33c6fd24257f34a",
-            "reference": "426e906fb2827d1d79f39ed0b33c6fd24257f34a",
-            "shasum": ""
-        },
-        "require": {
-            "bower-asset/doc-ready": "dev-1.0.x,|1.0.x",
-            "bower-asset/eventemitter": ">=4.2,<5",
-            "bower-asset/eventie": "~1.0.3",
-            "bower-asset/fizzy-ui-utils": "~1.0.1",
-            "bower-asset/get-size": "~1.2.2",
-            "bower-asset/get-style-property": "~1.0.4",
-            "bower-asset/matches-selector": "~1.0.2"
-        },
-        "require-dev": {
-            "bower-asset/jquery": ">=1.4.3,<2",
-            "bower-asset/jquery-bridget": "dev-1.x,|1.x",
-            "bower-asset/qunit": ">=1.12.0,<2.0.0"
-        },
-        "type": "bower-asset-library",
-        "extra": {
-            "bower-asset-main": "outlayer.js",
-            "bower-asset-ignore": [
-                "test/",
-                "docs/",
-                "examples",
-                ".*",
-                "notes.md",
-                "**/.*",
-                "node_modules",
-                "bower_components",
-                "test",
-                "tests",
-                "package.json"
-            ]
-        },
-        "installation-source": "dist",
-        "license": [
-            "MIT"
-        ],
-        "description": "the brains and guts of a layout library",
-        "keywords": [
-            "isotope",
-            "layout",
-            "masonry"
-        ]
-    },
-    {
-        "name": "bower-asset/masonry",
-        "version": "v3.3.0",
-        "version_normalized": "3.3.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/desandro/masonry.git",
-            "reference": "843b498cdb1af3f92020c0d126d4d6730424f971"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/desandro/masonry/zipball/843b498cdb1af3f92020c0d126d4d6730424f971",
-            "reference": "843b498cdb1af3f92020c0d126d4d6730424f971",
-            "shasum": ""
-        },
-        "require": {
-            "bower-asset/fizzy-ui-utils": "~1.0.1",
-            "bower-asset/get-size": "~1.2.2",
-            "bower-asset/outlayer": "~1.4.0"
-        },
-        "require-dev": {
-            "bower-asset/doc-ready": "dev-1.x,|1.x",
-            "bower-asset/jquery": ">=1.4.3,<2",
-            "bower-asset/jquery-bridget": "dev-1.1.x,|1.1.x",
-            "bower-asset/qunit": ">=1.12.0,<2.0.0"
-        },
-        "type": "bower-asset-library",
-        "extra": {
-            "bower-asset-main": "masonry.js",
-            "bower-asset-ignore": [
-                "examples/",
-                "test/",
-                "CONTRIBUTING.mdown",
-                "Gruntfile.js",
-                "package.json",
-                "**/.*",
-                "node_modules",
-                "bower_components",
-                "test",
-                "tests"
-            ]
-        },
-        "installation-source": "dist",
-        "license": [
-            "MIT"
-        ],
-        "description": "Cascading grid layout library",
-        "keywords": [
-            "layout",
-            "masonry",
-            "outlayer"
         ]
     },
     {
@@ -1224,96 +1006,6 @@
             "gfm",
             "markdown",
             "markdown-extra"
-        ]
-    },
-    {
-        "name": "yiisoft/yii2",
-        "version": "2.0.4",
-        "version_normalized": "2.0.4.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/yiisoft/yii2-framework.git",
-            "reference": "726867caee3f23aa7a6975c801e64b6021e14f86"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/726867caee3f23aa7a6975c801e64b6021e14f86",
-            "reference": "726867caee3f23aa7a6975c801e64b6021e14f86",
-            "shasum": ""
-        },
-        "require": {
-            "bower-asset/jquery": "2.1.*@stable | 1.11.*@stable",
-            "bower-asset/jquery.inputmask": "3.1.*",
-            "bower-asset/punycode": "1.3.*",
-            "bower-asset/yii2-pjax": ">=2.0.1",
-            "cebe/markdown": "~1.0.0 | ~1.1.0",
-            "ext-mbstring": "*",
-            "ezyang/htmlpurifier": "4.6.*",
-            "lib-pcre": "*",
-            "php": ">=5.4.0",
-            "yiisoft/yii2-composer": "*"
-        },
-        "time": "2015-05-10 20:09:47",
-        "bin": [
-            "yii"
-        ],
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.0.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "yii\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Qiang Xue",
-                "email": "qiang.xue@gmail.com",
-                "homepage": "http://www.yiiframework.com/",
-                "role": "Founder and project lead"
-            },
-            {
-                "name": "Alexander Makarov",
-                "email": "sam@rmcreative.ru",
-                "homepage": "http://rmcreative.ru/",
-                "role": "Core framework development"
-            },
-            {
-                "name": "Maurizio Domba",
-                "homepage": "http://mdomba.info/",
-                "role": "Core framework development"
-            },
-            {
-                "name": "Carsten Brandt",
-                "email": "mail@cebe.cc",
-                "homepage": "http://cebe.cc/",
-                "role": "Core framework development"
-            },
-            {
-                "name": "Timur Ruziev",
-                "email": "resurtm@gmail.com",
-                "homepage": "http://resurtm.com/",
-                "role": "Core framework development"
-            },
-            {
-                "name": "Paul Klimov",
-                "email": "klimov.paul@gmail.com",
-                "role": "Core framework development"
-            }
-        ],
-        "description": "Yii PHP Framework Version 2",
-        "homepage": "http://www.yiiframework.com/",
-        "keywords": [
-            "framework",
-            "yii2"
         ]
     },
     {
@@ -1826,6 +1518,311 @@
             "composer",
             "extension installer",
             "yii2"
+        ]
+    },
+    {
+        "name": "bower-asset/jquery.inputmask",
+        "version": "3.1.63",
+        "version_normalized": "3.1.63.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/RobinHerbots/jquery.inputmask.git",
+            "reference": "c40c7287eadc31e341ebbf0c02352eb55b9cbc48"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/c40c7287eadc31e341ebbf0c02352eb55b9cbc48",
+            "reference": "c40c7287eadc31e341ebbf0c02352eb55b9cbc48",
+            "shasum": ""
+        },
+        "require": {
+            "bower-asset/jquery": ">=1.7"
+        },
+        "type": "bower-asset-library",
+        "extra": {
+            "bower-asset-main": [
+                "./dist/inputmask/jquery.inputmask.js",
+                "./dist/inputmask/jquery.inputmask.extensions.js",
+                "./dist/inputmask/jquery.inputmask.date.extensions.js",
+                "./dist/inputmask/jquery.inputmask.numeric.extensions.js",
+                "./dist/inputmask/jquery.inputmask.phone.extensions.js",
+                "./dist/inputmask/jquery.inputmask.regex.extensions.js"
+            ],
+            "bower-asset-ignore": [
+                "**/.*",
+                "qunit/",
+                "nuget/",
+                "tools/",
+                "js/",
+                "*.md",
+                "build.properties",
+                "build.xml",
+                "jquery.inputmask.jquery.json"
+            ]
+        },
+        "installation-source": "dist",
+        "license": [
+            "http://opensource.org/licenses/mit-license.php"
+        ],
+        "description": "jquery.inputmask is a jquery plugin which create an input mask.",
+        "keywords": [
+            "form",
+            "input",
+            "inputmask",
+            "jquery",
+            "mask",
+            "plugins"
+        ]
+    },
+    {
+        "name": "yiisoft/yii2",
+        "version": "2.0.5",
+        "version_normalized": "2.0.5.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yiisoft/yii2-framework.git",
+            "reference": "ea8c13b9f5cd437bd7bf73cad8a3457a155f3727"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/ea8c13b9f5cd437bd7bf73cad8a3457a155f3727",
+            "reference": "ea8c13b9f5cd437bd7bf73cad8a3457a155f3727",
+            "shasum": ""
+        },
+        "require": {
+            "bower-asset/jquery": "2.1.*@stable | 1.11.*@stable",
+            "bower-asset/jquery.inputmask": "3.1.*",
+            "bower-asset/punycode": "1.3.*",
+            "bower-asset/yii2-pjax": ">=2.0.1",
+            "cebe/markdown": "~1.0.0 | ~1.1.0",
+            "ext-mbstring": "*",
+            "ezyang/htmlpurifier": "4.6.*",
+            "lib-pcre": "*",
+            "php": ">=5.4.0",
+            "yiisoft/yii2-composer": "*"
+        },
+        "time": "2015-07-11 02:37:59",
+        "bin": [
+            "yii"
+        ],
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "yii\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Qiang Xue",
+                "email": "qiang.xue@gmail.com",
+                "homepage": "http://www.yiiframework.com/",
+                "role": "Founder and project lead"
+            },
+            {
+                "name": "Alexander Makarov",
+                "email": "sam@rmcreative.ru",
+                "homepage": "http://rmcreative.ru/",
+                "role": "Core framework development"
+            },
+            {
+                "name": "Maurizio Domba",
+                "homepage": "http://mdomba.info/",
+                "role": "Core framework development"
+            },
+            {
+                "name": "Carsten Brandt",
+                "email": "mail@cebe.cc",
+                "homepage": "http://cebe.cc/",
+                "role": "Core framework development"
+            },
+            {
+                "name": "Timur Ruziev",
+                "email": "resurtm@gmail.com",
+                "homepage": "http://resurtm.com/",
+                "role": "Core framework development"
+            },
+            {
+                "name": "Paul Klimov",
+                "email": "klimov.paul@gmail.com",
+                "role": "Core framework development"
+            }
+        ],
+        "description": "Yii PHP Framework Version 2",
+        "homepage": "http://www.yiiframework.com/",
+        "keywords": [
+            "framework",
+            "yii2"
+        ]
+    },
+    {
+        "name": "bower-asset/outlayer",
+        "version": "v1.4.1",
+        "version_normalized": "1.4.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/metafizzy/outlayer.git",
+            "reference": "03e374cbad2239bd83bb81af2ff27b175c2c76d3"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/metafizzy/outlayer/zipball/03e374cbad2239bd83bb81af2ff27b175c2c76d3",
+            "reference": "03e374cbad2239bd83bb81af2ff27b175c2c76d3",
+            "shasum": ""
+        },
+        "require": {
+            "bower-asset/doc-ready": "dev-1.0.x,|1.0.x",
+            "bower-asset/eventemitter": ">=4.2,<5",
+            "bower-asset/eventie": "~1.0.3",
+            "bower-asset/fizzy-ui-utils": "~1.0.1",
+            "bower-asset/get-size": "~1.2.2",
+            "bower-asset/get-style-property": "~1.0.4",
+            "bower-asset/matches-selector": "~1.0.2"
+        },
+        "require-dev": {
+            "bower-asset/jquery": ">=1.4.3,<2",
+            "bower-asset/jquery-bridget": "dev-1.x,|1.x",
+            "bower-asset/qunit": ">=1.12.0,<2.0.0"
+        },
+        "type": "bower-asset-library",
+        "extra": {
+            "bower-asset-main": "outlayer.js",
+            "bower-asset-ignore": [
+                "test/",
+                "docs/",
+                "examples",
+                ".*",
+                "notes.md",
+                "**/.*",
+                "node_modules",
+                "bower_components",
+                "test",
+                "tests",
+                "package.json"
+            ]
+        },
+        "installation-source": "dist",
+        "license": [
+            "MIT"
+        ],
+        "description": "the brains and guts of a layout library",
+        "keywords": [
+            "isotope",
+            "layout",
+            "masonry"
+        ]
+    },
+    {
+        "name": "bower-asset/masonry",
+        "version": "v3.3.1",
+        "version_normalized": "3.3.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/desandro/masonry.git",
+            "reference": "1e9d69774f11d86fb82e93f034804918259bfe94"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/desandro/masonry/zipball/1e9d69774f11d86fb82e93f034804918259bfe94",
+            "reference": "1e9d69774f11d86fb82e93f034804918259bfe94",
+            "shasum": ""
+        },
+        "require": {
+            "bower-asset/fizzy-ui-utils": "~1.0.1",
+            "bower-asset/get-size": "~1.2.2",
+            "bower-asset/outlayer": "~1.4.0"
+        },
+        "require-dev": {
+            "bower-asset/doc-ready": "dev-1.x,|1.x",
+            "bower-asset/jquery": ">=1.4.3,<2",
+            "bower-asset/jquery-bridget": "dev-1.1.x,|1.1.x",
+            "bower-asset/qunit": ">=1.12.0,<2.0.0"
+        },
+        "type": "bower-asset-library",
+        "extra": {
+            "bower-asset-main": "masonry.js",
+            "bower-asset-ignore": [
+                "examples/",
+                "test/",
+                "CONTRIBUTING.mdown",
+                "Gruntfile.js",
+                "package.json",
+                "**/.*",
+                "node_modules",
+                "bower_components",
+                "test",
+                "tests"
+            ]
+        },
+        "installation-source": "dist",
+        "license": [
+            "MIT"
+        ],
+        "description": "Cascading grid layout library",
+        "keywords": [
+            "layout",
+            "masonry",
+            "outlayer"
+        ]
+    },
+    {
+        "name": "bower-asset/bootstrap",
+        "version": "v3.3.5",
+        "version_normalized": "3.3.5.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/twbs/bootstrap.git",
+            "reference": "16b48259a62f576e52c903c476bd42b90ab22482"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/twbs/bootstrap/zipball/16b48259a62f576e52c903c476bd42b90ab22482",
+            "reference": "16b48259a62f576e52c903c476bd42b90ab22482",
+            "shasum": ""
+        },
+        "require": {
+            "bower-asset/jquery": ">=1.9.1"
+        },
+        "type": "bower-asset-library",
+        "extra": {
+            "bower-asset-main": [
+                "less/bootstrap.less",
+                "dist/js/bootstrap.js"
+            ],
+            "bower-asset-ignore": [
+                "/.*",
+                "_config.yml",
+                "CNAME",
+                "composer.json",
+                "CONTRIBUTING.md",
+                "docs",
+                "js/tests",
+                "test-infra"
+            ]
+        },
+        "installation-source": "dist",
+        "license": [
+            "MIT"
+        ],
+        "description": "The most popular front-end framework for developing responsive, mobile first projects on the web.",
+        "keywords": [
+            "css",
+            "framework",
+            "front-end",
+            "js",
+            "less",
+            "mobile-first",
+            "responsive",
+            "web"
         ]
     }
 ]
