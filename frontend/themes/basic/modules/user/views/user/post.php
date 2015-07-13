@@ -19,11 +19,9 @@ $this->params['userData'] = $model->userData;
         <?php if (!empty($posts)): ?>
             <?php foreach($posts as $post): ?>
                 <div class="item widget-container fluid-height social-entry" id="<?= $post['id'] ?>">
-                    <div class="widget-content padded">
-                        <p class="content">
-                            <h3><?= Html::a(Html::encode($post['title']), ['/home/post/view', 'id' => $post['id']]) ?></h3>
-                            <?= HtmlPurifier::process(Tools::htmlSubString($post['content'], 200, Url::toRoute(['/home/post/view', 'id' => $post['id']]))) ?>
-                        </p>
+                    <div class="widget-content">
+                        <h3><?= Html::a(Html::encode($post['title']), ['/home/post/view', 'id' => $post['id']]) ?></h3>
+                        <?= HtmlPurifier::process(Tools::htmlSubString($post['content'], 200, Url::toRoute(['/home/post/view', 'id' => $post['id']]))) ?>
                     </div>
                     <?php if (Yii::$app->user->id === $model->id): ?>
                         <div class="widget-footer">
