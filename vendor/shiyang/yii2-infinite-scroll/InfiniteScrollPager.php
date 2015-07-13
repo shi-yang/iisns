@@ -236,6 +236,8 @@ class InfiniteScrollPager extends Widget
             ArrayHelper::getValue($this->pluginOptions, 'loading', null));  // Removing null entries
         if (empty($pluginOptions['loading']))
             unset($pluginOptions['loading']);
+        if (!isset($pluginOptions['animate']))
+            $pluginOptions['animate'] = true;
         $pluginOptions = Json::encode($pluginOptions);
 
         if (!$this->contentLoadedCallback instanceof JsExpression) {
