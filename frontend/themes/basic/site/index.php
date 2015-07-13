@@ -176,22 +176,23 @@ body {
             ],
         ]);
         $menuItems = [
-            ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index']],
-            ['label' => Yii::t('app', 'Explore'), 'url' => ['/explore/index']],
+            ['label' => '<i class="glyphicon glyphicon-home"></i> ' . Yii::t('app', 'Home'), 'url' => ['/site/index']],
+            ['label' => '<i class="glyphicon glyphicon-globe"></i> ' . Yii::t('app', 'Explore'), 'url' => ['/explore/index']],
         ];
         if (Yii::$app->user->isGuest) {
-            $menuItems[] = ['label' => Yii::t('app', 'Sign up'), 'url' => ['/site/signup']];
-            $menuItems[] = ['label' => Yii::t('app', 'Log in'), 'url' => ['/site/login']];
+            $menuItems[] = ['label' => '<i class="glyphicon glyphicon-plus-sign"></i> ' . Yii::t('app', 'Sign up'), 'url' => ['/site/signup']];
+            $menuItems[] = ['label' => '<i class="glyphicon glyphicon-log-in"></i> ' . Yii::t('app', 'Log in'), 'url' => ['/site/login']];
         } else {
-            $menuItems[] = ['label' => Yii::t('app', 'Dashboard'), 'url' => ['/user/dashboard']];
+            $menuItems[] = ['label' => '<i class="glyphicon glyphicon-dashboard"></i> ' . Yii::t('app', 'Dashboard'), 'url' => ['/user/dashboard']];
             $menuItems[] = [
-                'label' => Yii::t('app', 'Log out') . ' (' . Yii::$app->user->identity->username . ')',
+                'label' => '<i class="glyphicon glyphicon-log-out"></i> ' . Yii::t('app', 'Log out') . '(' . Yii::$app->user->identity->username . ')',
                 'url' => ['/site/logout'],
                 'linkOptions' => ['data-method' => 'post']
             ];
         }
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav navbar-right'],
+            'encodeLabels' => false,
             'items' => $menuItems,
         ]);
         NavBar::end();
