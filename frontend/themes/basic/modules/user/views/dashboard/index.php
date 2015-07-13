@@ -14,7 +14,10 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
 <div class="item widget-container share-widget fluid-height clearfix">
 
     <div class="widget-content padded">
-        <?php $form = ActiveForm::begin(['options' => ['id' => 'create-feed']]); ?>
+        <?php $form = ActiveForm::begin([
+            'enableClientValidation' => false,
+            'options' => ['id' => 'create-feed']
+        ]); ?>
         <?= $form->field($newFeed, 'content', ['inputOptions' => ['placeholder' => Yii::t('app', 'Record people around, things around.')]])->textarea(['rows' => 3])->label(false) ?>
         <div class="form-group">
             <?= Html::submitButton(Yii::t('app', 'Create'), ['class' => 'btn btn-success']) ?>
