@@ -46,7 +46,7 @@ $this->registerJsFile('@web/js/lightbox/js/lightbox.min.js', ['depends' => ['yii
                 <div class="img-item col-md-3" id="<?= $photo['id'] ?>">
                     <div class="img-wrap">
                         <div class="img-edit">
-                            <a href="<?= Url::toRoute(['/home/photo/delete', 'id' => $photo['id']]) ?>" onclick="return false;" title="<?= Yii::t('app', 'Are you sure to delete it?') ?>" rel="delete">
+                            <a href="<?= Url::toRoute(['/home/photo/delete', 'id' => $photo['id']]) ?>" data-clicklog="delete" onclick="return false;" title="<?= Yii::t('app', 'Are you sure to delete it?') ?>">
                                 <span class="img-tip"><i class="glyphicon glyphicon-remove"></i></span>
                             </a>
                         </div>

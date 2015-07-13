@@ -32,7 +32,7 @@ if ($type === 'follower') {
         </h3>
         <div class="user-following-container">
           <a class="btn btn-sm btn-default btn-follow"><span class="glyphicon glyphicon-plus"></span> <?= Yii::t('app', 'Follow') ?></a>
-          <a class="btn btn-sm btn-default btn-unfollow" href="<?= Url::toRoute(['/user/user/follow', 'id' => $user['id']]) ?>" onclick="return false;" title="取消关注" rel="delete">
+          <a class="btn btn-sm btn-default btn-unfollow" href="<?= Url::toRoute(['/user/user/follow', 'id' => $user['id']]) ?>" data-clicklog="delete" onclick="return false;" title="取消关注">
             <span class="glyphicon glyphicon-eye-close"></span> <?= Yii::t('app', 'Unfollow') ?>
           </a>
         </div>

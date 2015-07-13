@@ -58,7 +58,7 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
                     <div class="footer-detail">
                         <?php if(Yii::$app->user->id == $feed['user_id']): ?>
                             &nbsp;
-                            <a href="<?= Url::toRoute(['/home/feed/delete', 'id' => $feed['id']]) ?>" onclick="return false;" title="<?= Yii::t('app', 'Are you sure to delete it?') ?>" rel="delete">
+                            <a href="<?= Url::toRoute(['/home/feed/delete', 'id' => $feed['id']]) ?>" data-clicklog="delete" onclick="return false;" title="<?= Yii::t('app', 'Are you sure to delete it?') ?>">
                                 <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
                             </a>
                             &nbsp;
@@ -67,6 +67,11 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
                         <a href="javascript:;" onclick="setRepostFormAction(<?= $feed['id'] ?>)" data-toggle="modal" data-target="#repost-modal">
                             <span class="glyphicon glyphicon-share-alt"></span> <?= Yii::t('app', 'Repost') ?>
                         </a>
+                    </div>
+                    <div class="comment">
+                        <div class="comment-box">
+                            <div class="comment-input" data-clicklog="comment" placeholder="<?= Yii::t('app', 'Comment') ?>"><a href="javascript:void(0);"><?= Yii::t('app', 'Comment') ?></a></div>
+                        </div>
                     </div>
                 </div>
             </div>

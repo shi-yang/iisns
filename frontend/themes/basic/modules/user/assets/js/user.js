@@ -181,8 +181,8 @@ $(function	()	{
 	    }, 100);
 	});
 	
-	//删除
-	$('[rel=delete]').popover({
+	//删除 
+	$('[data-clicklog=delete]').popover({
 	    trigger : 'click',
         container: 'body',
         placement: 'top',
@@ -215,6 +215,10 @@ $(function	()	{
 	            $(_this).popover('hide')
 	        }
 	    }, 500);
+	});
+
+	$('[data-clicklog=comment').click(function(){
+		alert();
 	});
 });
 
