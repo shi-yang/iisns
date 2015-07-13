@@ -2,7 +2,7 @@
 return [
 	'Home' => '首页',
 	'Log in' => '登录',
-	'Log out' => '注销',
+	'Log out' => '退出',
 	'Sign up' => '注册',
 	'Sign up now!' => '注册',
 	'Explore' => '探索',
