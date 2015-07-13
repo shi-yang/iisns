@@ -3,6 +3,7 @@
 namespace app\modules\user\controllers;
 
 use Yii;
+use yii\db\Query;
 use yii\data\SqlDataProvider;
 use yii\helpers\Url;
 use yii\web\ForbiddenHttpException;
@@ -12,6 +13,7 @@ use app\modules\user\models\User;
 use app\modules\user\models\UserSearch;
 use app\modules\home\models\Post;
 use app\modules\home\models\Album;
+use app\components\Tools;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -95,6 +97,24 @@ HTML;
             'model' => $model,
             'dataProvider' => $dataProvider
         ]);
+    }
+
+    public function actionPost($id)
+    {
+        $model = $this->findModel($id);
+
+        $query = (new Query)->select('*')
+            ->from('{{%home_post}}')
+            ->where('user_id=:user_id', [':user_id' => $model->id])
+            ->orderBy('created_at DESC');
+
+        $posts = Tools::Pagination($query);
+        return $this->render('/user/post', [
+            'model' => $model,
+            'posts' => $posts['result'],
+            'pages' => $posts['pages']
+        ]);
+        
     }
 
     public function actionProfile($id)

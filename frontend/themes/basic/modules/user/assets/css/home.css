@@ -722,3 +722,11 @@ a:hover {
     padding: 5px;
     text-align: center;
 }
+
+.social-wrapper .item {
+  padding: 10px;
+  border-bottom: 2px dashed #f2f1f1;
+}
+.social-wrapper .widget-content img {
+  max-width: 100%;
+}

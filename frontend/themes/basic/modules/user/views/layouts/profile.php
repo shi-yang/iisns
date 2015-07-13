@@ -60,10 +60,10 @@ if ($done) {
                     <span class="block font-14"><?= $this->params['userData']['follower_count'] ?></span><br>
                     <small class="text-muted"><?= Yii::t('app', 'Follower') ?></small>
                   </div><!-- /.col -->
-                  <div class="col-xs-4 text-center">
+                  <a class="col-xs-4 text-center" href="<?= Url::toRoute(['/user/view/post', 'id' => $this->params['user']['id']]) ?>">
                     <span class="block font-14"><?= $this->params['userData']['post_count'] ?></span><br>
                     <small class="text-muted"><?= Yii::t('app', 'Posts') ?></small>
-                  </div><!-- /.col -->
+                  </a><!-- /.col -->
                 </div><!-- /.row -->
               </div>
             </div>
