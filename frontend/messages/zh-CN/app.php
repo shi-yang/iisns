@@ -137,7 +137,7 @@ return [
 	'Deleted successfully.' => '已删除',
     'Recommendation' => '推荐',
 
-	'Are you sure you want to Log out?' => '你确定要注销？',
+	'Are you sure you want to Log out?' => '你确定要退出？',
 	'If you forgot your password you can ' => '如果您忘记密码，请',
 	'reset it' => '点此重置',
 	'No data to display.' => '没有数据展示',
