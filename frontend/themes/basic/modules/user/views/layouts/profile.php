@@ -81,14 +81,29 @@ if ($done) {
               <a class="btn btn-success follow" href="<?= Url::toRoute(['/user/user/follow', 'id' => $this->params['user']['id']]) ?>"><?= $followBtn ?></a>
               <a class="btn btn-default"><i class="glyphicon glyphicon-envelope"></i> <?= Yii::t('app', 'Message') ?></a>
             </div>
-            <ul class="nav nav-tabs nav-justified nav-profile">
-              <li class="active"><a href="#timeline" data-toggle="tab"><strong><i class="glyphicon glyphicon-time"></i> <?= Yii::t('app', 'Timeline') ?></strong></a></li>
-              <li class=""><a href="#photo" data-toggle="tab"><strong><i class="glyphicon glyphicon-picture"></i> <?= Yii::t('app', 'Photo') ?></strong></a></li>
-<!--               <li class=""><a href="#music" data-toggle="tab"><strong><i class="glyphicon glyphicon-music"></i> Music</strong></a></li>
-              <li class=""><a href="#video" data-toggle="tab"><strong><i class="glyphicon glyphicon-facetime-video"></i> Video</strong></a></li> -->
-              <li class=""><a href="#profile" data-toggle="tab"><strong><i class="glyphicon glyphicon-user"></i> <?= Yii::t('app', 'Profile') ?></strong></a></li>
-            </ul>
-            <?= $content ?>
+            <?php
+              echo Nav::widget([
+                  'options' => ['class' => 'nav nav-pills nav-justified'],
+                  'encodeLabels' => false,
+                  'items' => [
+                    [
+                      'label' => '<i class="glyphicon glyphicon-time"></i> ' . Yii::t('app', 'Timeline'),
+                      'url' => ['/user/view/index', 'id' => $this->params['user']['id']]
+                    ],
+                    [
+                      'label' => '<i class="glyphicon glyphicon-picture"></i> ' . Yii::t('app', 'Photo'),
+                      'url' => ['/user/view/album', 'id' => $this->params['user']['id']]
+                    ],
+                    [
+                      'label' => '<i class="glyphicon glyphicon-user"></i> ' . Yii::t('app', 'Profile'),
+                      'url' => ['/user/view/profile', 'id' => $this->params['user']['id']]
+                    ]
+                  ],
+              ]);
+            ?>
+            <div class="main row">
+              <?= $content ?>
+            </div>
           </div>
         </div>
       </div>
