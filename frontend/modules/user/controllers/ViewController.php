@@ -37,11 +37,8 @@ class ViewController extends BaseController
             $userData = Yii::$app->userData->getKey(true, null, $model->id);
             $followUrl = Url::toRoute(['/user/user/follow', 'id' => $model->id]);
 
-            //判断是否已经关注该用户
-            $done = Yii::$app->db
-                ->createCommand("SELECT 1 FROM {{%user_follow}} WHERE user_id=:user_id AND people_id=:id LIMIT 1")
-                ->bindValues([':user_id' => Yii::$app->user->id, ':id' => $model->id])->queryScalar();
-            if ($done) {
+            //关注的文字
+            if (User::getIsFollow($model->id)) {
                 $followBtn = '<span class="glyphicon glyphicon glyphicon-eye-close"></span> ' . Yii::t('app', 'Unfollow');
             } else {
                 $followBtn = '<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'Follow');
