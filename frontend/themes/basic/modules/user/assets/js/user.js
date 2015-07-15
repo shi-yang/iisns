@@ -1,8 +1,8 @@
 
-$(function	()	{
-	
+$(function() {
+	'use strict';
 	//scroll to top of the page
-	$("#scroll-to-top").click(function()	{
+	$("#scroll-to-top").click(function() {
 		$("html, body").animate({ scrollTop: 0 }, 600);
 		 return false;
 	});
@@ -132,13 +132,9 @@ $(function	()	{
        function(){ $(this).addClass('open') },
        function(){ $(this).removeClass('open') }
 	)
-	
-	// Popover
-    $("[data-toggle=popover]").popover();
-	
-	// Tooltip
-    $("[data-toggle=tooltip]").tooltip();
+});
 
+(function() {
     //头像提示用户信息
 	$('[rel=author]').popover({
 	    trigger : 'manual',
@@ -180,52 +176,54 @@ $(function	()	{
 	        }
 	    }, 100);
 	});
-	
-	//删除 
-	$('[data-clicklog=delete]').popover({
-	    trigger : 'click',
-        container: 'body',
-        placement: 'top',
-        title: this.title,
-	    content : '<div class="delete"><a class="btn-ok" href="javascript:void(0)"><i class="glyphicon glyphicon-ok"></i> 确定</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="$(\'.popover\').popover(\'hide\')"><i class="glyphicon glyphicon-remove"></i> 取消</a></div>',
-	    html: true
-	}).on('click', function(){
-	    var _this = this;
-	    var url = $(this).attr('href');
-	    var div_id = url.substr(url.indexOf('=') + 1);
-	    $(this).popover('show');
-	    $('.popover').on('mouseleave', function () {
-	        $(_this).popover('hide');
-	    });
-	    $('.btn-ok').on('click', function(){
-		    $.ajax({
-		    	type: 'POST',
-		        url: url,
-		        success: function() {
-		        	$(_this).popover('hide');
-		        	$('#'+div_id).fadeOut(1000);
-		        }
+
+	//删除
+	$('body').on('mouseenter', '[data-clicklog=delete]', function(event) {
+		$('[data-clicklog=delete]').popover({
+		    trigger : 'click',
+	        container: 'body',
+	        placement: 'top',
+	        title: this.title,
+		    content : '<div class="delete"><a class="btn-ok" href="javascript:void(0)"><i class="glyphicon glyphicon-ok"></i> 确定</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="$(\'.popover\').popover(\'hide\')"><i class="glyphicon glyphicon-remove"></i> 取消</a></div>',
+		    html: true
+		}).on('click', function(){
+		    var _this = this;
+		    var url = $(this).attr('href');
+		    var div_id = url.substr(url.indexOf('=') + 1);
+		    $(this).popover('show');
+		    $('.popover').on('mouseleave', function () {
+		        $(_this).popover('hide');
 		    });
-	    	return false;
-	    });
-	}).on('mouseleave', function () {
-	    var _this = this;
-	    setTimeout(function () {
-	        if(!$('.popover:hover').length) {
-	            $(_this).popover('hide')
-	        }
-	    }, 500);
+		    $('.btn-ok').on('click', function(){
+			    $.ajax({
+			    	type: 'POST',
+			        url: url,
+			        success: function() {
+			        	$(_this).popover('hide');
+			        	$('#'+div_id).fadeOut(1000);
+			        }
+			    });
+		    	return false;
+		    });
+		}).on('mouseleave', function () {
+		    var _this = this;
+		    setTimeout(function () {
+		        if(!$('.popover:hover').length) {
+		            $(_this).popover('hide')
+		        }
+		    }, 500);
+		});
 	});
 
-	$('[data-clicklog=comment').click(function(){
+	//添加评论
+	$('body').on('click', '[data-clicklog=comment]', function(event) {
 		alert();
+		return false;
 	});
-});
+}).call(this);
 
 $(window).scroll(function(){
-		
 	 var position = $(window).scrollTop();
-	
 	 //Display a scroll to top button
 	 if(position >= 200)	{
 		$('#scroll-to-top').attr('style','bottom:16%;');	
@@ -234,3 +232,4 @@ $(window).scroll(function(){
 		$('#scroll-to-top').removeAttr('style');
 	 }
 });
+
