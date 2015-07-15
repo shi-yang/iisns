@@ -132,9 +132,7 @@ $(function() {
        function(){ $(this).addClass('open') },
        function(){ $(this).removeClass('open') }
 	)
-});
 
-(function() {
     //头像提示用户信息
 	$('[rel=author]').popover({
 	    trigger : 'manual',
@@ -176,6 +174,9 @@ $(function() {
 	        }
 	    }, 100);
 	});
+});
+
+(function() {
 
 	//删除
 	$('body').on('mouseenter', '[data-clicklog=delete]', function(event) {
@@ -217,7 +218,13 @@ $(function() {
 
 	//添加评论
 	$('body').on('click', '[data-clicklog=comment]', function(event) {
-		alert();
+		var _this = this;
+		$(this).css('display', 'none');
+		$(this).after('<div class="comment-box-wrap"><textarea class="form-control">aaaa</textarea></div>');
+		return false;
+	}).on('click', function () {
+		$('.comment-input').css('display', 'block');
+		$('.comment-box-wrap').remove();
 		return false;
 	});
 }).call(this);

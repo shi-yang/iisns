@@ -1916,7 +1916,29 @@ input[type="text"]:focus,
     border-style: solid;
     border-color: #e6e6e6;
 }
-
+.social-wrapper #social-container .item .widget-footer .comment {
+    padding: 0 10px 12px;
+}
+.social-wrapper #social-container .item .widget-footer .comment .comment-input {
+  border-style: solid;
+  border-width: 1px;
+  padding: 3px 12px;
+  color: #333;
+  border-color: #e6e6e6;
+  background-color: #fff;
+  outline: none;
+  cursor: text;
+}
+.social-wrapper #social-container .item .widget-footer .comment .comment-input a {
+  text-decoration: none;
+  cursor: text;
+  outline: none;
+  color: #8c8c8c;
+}
+.social-wrapper #social-container .item .widget-footer .comment .comment-box-wrap {
+  position: relative;
+  z-index: 25;
+}
 .social-wrapper #social-container .item .widget-footer .footer-detail .item-line {
   font-size: 0;
   width: 1px;
