@@ -177,7 +177,6 @@ $(function() {
 });
 
 (function() {
-
 	//删除
 	$('body').on('mouseenter', '[data-clicklog=delete]', function(event) {
 		$('[data-clicklog=delete]').popover({
@@ -214,17 +213,31 @@ $(function() {
 		        }
 		    }, 500);
 		});
+		return false;
 	});
 
 	//添加评论
 	$('body').on('click', '[data-clicklog=comment]', function(event) {
 		var _this = this;
 		$(this).css('display', 'none');
-		$(this).after('<div class="comment-box-wrap"><textarea class="form-control">aaaa</textarea></div>');
-		return false;
-	}).on('click', function () {
-		$('.comment-input').css('display', 'block');
-		$('.comment-box-wrap').remove();
+		$(this).after('<div class="comment-box-wrap"><textarea class="form-control" id="comment-textarea"></textarea><a href="" class="btn btn-default btn-comment">Send</a></div>');
+		$('.btn-comment').on('click', function(){
+		    $.ajax({
+		    	type: 'GET',
+		        url: $(_this).children().attr('href'),
+		        data: {content : $('#comment-textarea').val()},
+		        success: function() {
+		        }
+		    });
+		    return false;
+		});
+	 	$(document).click(function (e) {
+	 		var id = $(e.target).attr('class');
+	    	if (id != 'comment-box-wrap' && id != 'form-control' && id != 'btn-comment') {
+	    		$('.comment-box-wrap').remove();
+				$(_this).css('display', 'block');
+	    	};
+	    });
 		return false;
 	});
 }).call(this);
@@ -239,4 +252,3 @@ $(window).scroll(function(){
 		$('#scroll-to-top').removeAttr('style');
 	 }
 });
-

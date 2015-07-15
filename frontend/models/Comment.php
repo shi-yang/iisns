@@ -9,6 +9,7 @@ use Yii;
  *
  * @property string $id
  * @property string $table
+ * @property integer $table_id
  * @property string $content
  * @property string $parent_id
  * @property integer $floor
@@ -32,7 +33,7 @@ class Comment extends \yii\db\ActiveRecord
     {
         return [
             [['id', 'table', 'content', 'parent_id', 'floor', 'user_id', 'created_at'], 'required'],
-            [['id', 'parent_id', 'floor', 'user_id', 'created_at'], 'integer'],
+            [['id', 'table_id', 'parent_id', 'floor', 'user_id', 'created_at'], 'integer'],
             [['content'], 'string'],
             [['table'], 'string', 'max' => 15]
         ];
