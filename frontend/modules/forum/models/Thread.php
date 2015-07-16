@@ -16,6 +16,7 @@ use app\components\Tools;
  * @property integer $created_at
  * @property integer $user_id
  * @property integer $board_id
+ * @property integer $post_count
  * @property integer $is_broadcast
  */
 class Thread extends \yii\db\ActiveRecord
@@ -36,7 +37,7 @@ class Thread extends \yii\db\ActiveRecord
         return [
             [['title', 'content'], 'required'],
             [['content'], 'string'],
-            [['created_at', 'user_id', 'board_id', 'is_broadcast'], 'integer'],
+            [['created_at', 'user_id', 'board_id', 'post_count', 'is_broadcast'], 'integer'],
             [['title'], 'string']
         ];
     }
@@ -53,6 +54,7 @@ class Thread extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app', 'Create Time'),
             'user_id' => Yii::t('app', 'User ID'),
             'board_id' => Yii::t('app', 'Block ID'),
+            'post_count' => Yii::t('app', 'Post Count')
         ];
     }
 
@@ -99,13 +101,6 @@ class Thread extends \yii\db\ActiveRecord
         return Yii::$app->db
             ->createCommand("SELECT id, name, user_id FROM {{%forum_board}} WHERE id={$this->board_id}")
             ->queryOne();
-    }
-    
-    public function getPostCount()
-    {
-        return Yii::$app->db
-            ->createCommand("SELECT count(*) FROM {{%forum_post}}  WHERE thread_id={$this->id}")
-            ->queryScalar();
     }
     
     public function isFavor()

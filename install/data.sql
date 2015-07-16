@@ -139,6 +139,7 @@ CREATE TABLE IF NOT EXISTS `pre_forum_thread` (
   `created_at` int(10) NOT NULL,
   `user_id` int(11) NOT NULL,
   `board_id` int(11) NOT NULL,
+  `post_count` int(11) NOT NULL,
   `is_broadcast` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),

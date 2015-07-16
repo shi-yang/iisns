@@ -74,4 +74,12 @@ class Post extends \yii\db\ActiveRecord
             ->createCommand("SELECT * FROM {{%user}} WHERE id={$this->user_id}")
             ->queryOne();
     }
+
+    /**
+     * 回复时统计数目增加一
+     */
+    public function PostCuntPlus()
+    {
+        return Yii::$app->db->createCommand("UPDATE {{%forum_thread}} SET post_count=post_count+1 WHERE id=".$this->thread_id)->execute();
+    }
 }

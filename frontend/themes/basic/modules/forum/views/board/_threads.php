@@ -31,9 +31,9 @@ use app\components\Tools;
                             <?php if (Yii::$app->user->id == $thread['user_id']) {
                                 echo Html::a('<span class="glyphicon glyphicon-pencil"></span> '.Yii::t('app', 'Update'), ['/forum/thread/update', 'id' => $thread['id']]);
                             }?>
-                            <?= Html::a('<span class="glyphicon glyphicon-comment"></span> '.Yii::t('app', 'Reply'), ['/forum/thread/view', 'id' => $thread['id']]); ?> 
+                            &nbsp;<?= Html::a('<span class="glyphicon glyphicon-comment"></span> '.Yii::t('app', 'Reply') . "({$thread['post_count']})", ['/forum/thread/view', 'id' => $thread['id']]); ?> 
                             <?php if (Yii::$app->user->id == $thread['user_id'] || Yii::$app->user->id == $model->user_id): ?>
-                                <a href="<?= Url::toRoute(['/forum/thread/delete', 'id' => $thread['id']]) ?>"  data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="thread">
+                                &nbsp;<a href="<?= Url::toRoute(['/forum/thread/delete', 'id' => $thread['id']]) ?>"  data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="thread">
                                   <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
                                 </a>
                             <?php endif; ?>

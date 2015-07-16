@@ -29,7 +29,7 @@ $posts = $model->posts;
     <!-- Post Form End -->
     <div class="row">
         <div class="col-lg-12">
-            <h3 style="margin-left: 20px;"><?= $model->postCount ?> Comments</h3>
+            <h3 style="margin-left: 20px;"><?= $model->post_count ?> Comments</h3>
         </div>
     </div>
 
