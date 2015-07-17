@@ -33,7 +33,7 @@ AppAsset::register($this);
     <div class="modal-shiftfix wrap">
         <!-- Navigation -->
         <div class="navbar navbar-fixed-top scroll-hide">
-            <div class="container-fluid top-bar visible-xs">
+            <div class="container top-bar visible-xs">
                 <button class="navbar-toggle">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -41,7 +41,7 @@ AppAsset::register($this);
                 </button>
                 <a class="logo" href="<?= Url::toRoute(['/forum/forum/view', 'id' => $this->params['forum']['forum_url']]) ?>"><?= Html::encode($this->params['forum']['forum_name']) ?></a>
             </div>
-            <div class="container-fluid main-nav clearfix">
+            <div class="container main-nav clearfix">
                 <div class="nav-collapse ">
                     <div class="pull-left">
                         <div class="page-title">

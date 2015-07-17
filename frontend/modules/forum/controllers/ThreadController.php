@@ -25,7 +25,7 @@ class ThreadController extends BaseController
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['thread'],
+                    'delete' => ['post'],
                 ],
             ],
         ];

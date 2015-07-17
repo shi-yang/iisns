@@ -35,10 +35,10 @@ class Thread extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'content'], 'required'],
+            [['title'], 'required'],
             [['content'], 'string'],
             [['created_at', 'user_id', 'board_id', 'post_count', 'is_broadcast'], 'integer'],
-            [['title'], 'string']
+            [['title'], 'string', 'min' => 2, 'max' => 80],
         ];
     }
 
@@ -85,7 +85,7 @@ class Thread extends \yii\db\ActiveRecord
     public function getUser()
     {
         return Yii::$app->db
-            ->createCommand("SELECT username, avatar FROM {{%user}} WHERE id={$this->user_id}")
+            ->createCommand("SELECT id, username, avatar FROM {{%user}} WHERE id={$this->user_id}")
             ->queryOne();
     }
     

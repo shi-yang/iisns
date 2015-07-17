@@ -7,41 +7,32 @@ use app\components\Tools;
 ?>
 
 <?php if ($model->getThreadCount($model->id) > 0): ?>
-    <div id="content" style="background-color: #fff;">
+    <div class="threads" id="content" style="background-color: #fff;">
         <?php foreach($threads as $thread): ?>
-            <div class="thread-container" id="div<?= $thread['id']; ?>">
-                <div class="thread-feed">
-                    <div class="user-avatar hidden-xs">
-                        <a class="thumbnail" href="<?= Url::toRoute(['/user/view', 'id' => $thread['username']])?>">
-                            <img class="u_image img-circle" src="<?= Yii::getAlias('@avatar') . $thread['avatar'] ?>" alt="User avatar">
-                        </a>
-                    </div>
-                    <div class="thread-detail" style="padding-bottom:5px">
-                        <div class="thread-meta">
-                            <h4 class="media-heading">
-                                <a href="<?= Url::toRoute(['/forum/thread/view', 'id' => $thread['id']]) ?>"><span class="media-title" <?php //if($thread->is_broadcast) echo 'style="color:#ff6f3d"'; ?>><?= Html::encode($thread['title']); ?></span></a>
-                            </h4>
-                            <?= Html::a(Html::encode($thread['username']), ['/user/view', 'id'=>$thread['username']], ['class'=>'thread-nickname']); ?>
-                            <span class="thread-time">| <?= Tools::formatTime($thread['created_at']) ?></span>
-                        </div>
-                        <div class="thread-main">
-                            <?= HtmlPurifier::process(Tools::htmlSubString($thread['content'], 300, Url::toRoute(['/forum/thread/view', 'id' => $thread['id']]))) ?>
-                        </div>
-                        <div class="pull-right thread-right">
-                            <?php if (Yii::$app->user->id == $thread['user_id']) {
-                                echo Html::a('<span class="glyphicon glyphicon-pencil"></span> '.Yii::t('app', 'Update'), ['/forum/thread/update', 'id' => $thread['id']]);
-                            }?>
-                            &nbsp;<?= Html::a('<span class="glyphicon glyphicon-comment"></span> '.Yii::t('app', 'Reply') . "({$thread['post_count']})", ['/forum/thread/view', 'id' => $thread['id']]); ?> 
-                            <?php if (Yii::$app->user->id == $thread['user_id'] || Yii::$app->user->id == $model->user_id): ?>
-                                &nbsp;<a href="<?= Url::toRoute(['/forum/thread/delete', 'id' => $thread['id']]) ?>"  data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="thread">
-                                  <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
+            <article class="thread-item">
+                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                    <tbody>
+                        <tr>
+                            <td width="48" valign="middle" align="center">
+                                <a href="<?= Url::toRoute(['/user/view', 'id' => $thread['username']])?>">
+                                    <img class="media-object img-user-avatar img-circle" src="<?= Yii::getAlias('@avatar') . $thread['avatar'] ?>" alt="User avatar">
                                 </a>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix"></div>
+                            </td>
+                            <td width="10"></td>
+                            <td width="auto" valign="middle">
+                                <h2><?= Html::a(Html::encode($thread['title']), ['/forum/thread/view', 'id' => $thread['id']]) ?></h2>
+                                <small style="color: #aaa">
+                                    <strong><?= Html::a(Html::encode($thread['username']), ['/user/view', 'id'=>$thread['username']], ['class'=>'thread-nickname']); ?></strong>
+                                        &nbsp;•&nbsp; <span class="glyphicon glyphicon-time"></span> <?= Yii::$app->formatter->asRelativeTime($thread['created_at'])?>
+                                </small>
+                            </td>
+                            <td width="50" align="right" valign="middle" title="<?= Yii::t('app', 'Reply') ?>">
+                                <?= Html::a('<span class="glyphicon glyphicon-comment"></span> ' . $thread['post_count'], ['/forum/thread/view', 'id' => $thread['id']], ['class' => 'badge']); ?> 
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </article>
         <?php endforeach; ?>
         <?= InfiniteScrollPager::widget([
             'pagination' => $model->threads['pages'],

@@ -125,6 +125,7 @@ return [
 	'Content' => '内容',
 	'Title' => '标题',
 	'Reply' => '回复',
+    '{postCount} comments' =>  '{postCount} 评论',
 
 	'Optional' => '可不填',
 	'Time error' => '时间出错',
