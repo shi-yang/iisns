@@ -35,7 +35,7 @@ class ThreadController extends BaseController
     {
         return [
             'upload' => [
-                'class' => 'kucha\ueditor\UEditorAction',
+                'class' => 'shiyang\umeditor\UMeditorAction',
             ]
         ];
     }

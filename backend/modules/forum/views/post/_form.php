@@ -32,15 +32,15 @@ use yii\widgets\ActiveForm;
         <?php if (!Yii::$app->user->isGuest) :?>
             <?php $form = ActiveForm::begin(); ?>
 
-            <?= $form->field($model, 'content')->widget('kucha\ueditor\UEditor', [
+            <?= $form->field($model, 'content')->widget('shiyang\umeditor\UMeditor', [
                 'clientOptions' => [
-                    'elementPathEnabled' => false,
-                    'autosave' => false,
                     'initialFrameHeight' => 100,
-                    'wordCount' => false,
-                    'focus' => true,
-                    'toolbars' => [
-                        ['emotion', 'blockquote', 'simpleupload', 'link', '|']
+                    'toolbar' => [
+                        'source | undo redo | bold |',
+                        'link unlink | emotion image video |',
+                        'justifyleft justifycenter justifyright justifyjustify |',
+                        'insertorderedlist insertunorderedlist |' ,
+                        'horizontal preview fullscreen',
                     ],
                 ]
             ])->label(false) ?>

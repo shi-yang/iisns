@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "783c2e6b0e9c9b2cf06968d7712a783a",
+    "hash": "13f5d92e7277570ca7ccf6f52e91a7ab",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -947,39 +947,6 @@
             "time": "2015-07-10 04:22:25"
         },
         {
-            "name": "kucha/ueditor",
-            "version": "1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/BigKuCha/yii2-ueditor-widget.git",
-                "reference": "b41439ee0c69efc800a53087c20d8bfcea0f9507"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/BigKuCha/yii2-ueditor-widget/zipball/b41439ee0c69efc800a53087c20d8bfcea0f9507",
-                "reference": "b41439ee0c69efc800a53087c20d8bfcea0f9507",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "kucha\\ueditor\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "null"
-            ],
-            "authors": [
-                {
-                    "name": "BigKuCha",
-                    "email": "nevermore1989@vip.qq.com"
-                }
-            ],
-            "description": "desc",
-            "time": "2015-02-06 02:01:30"
-        },
-        {
             "name": "shiyang/yii2-infinite-scroll",
             "version": "v1.2",
             "source": {
@@ -1112,6 +1079,47 @@
                 "yii2"
             ],
             "time": "2015-05-02 06:18:32"
+        },
+        {
+            "name": "shiyang/yii2-umeditor",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/shi-yang/yii2-umeditor.git",
+                "reference": "a509856623f7c874323f1a4edfdc196cf1f54301"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/shi-yang/yii2-umeditor/zipball/a509856623f7c874323f1a4edfdc196cf1f54301",
+                "reference": "a509856623f7c874323f1a4edfdc196cf1f54301",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "shiyang\\umeditor\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Shiyang",
+                    "email": "dr@shiyang.me"
+                }
+            ],
+            "description": "UMeditor is a simple version ueditor.",
+            "keywords": [
+                "extension",
+                "umeditor",
+                "yii2"
+            ],
+            "time": "2015-07-17 16:29:31"
         },
         {
             "name": "swiftmailer/swiftmailer",

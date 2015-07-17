@@ -129,4 +129,13 @@ return array (
       '@kartik/date' => $vendorDir . '/kartik-v/yii2-widget-datepicker',
     ),
   ),
+  'shiyang/yii2-umeditor' => 
+  array (
+    'name' => 'shiyang/yii2-umeditor',
+    'version' => '1.0.0.0',
+    'alias' => 
+    array (
+      '@shiyang/umeditor' => $vendorDir . '/shiyang/yii2-umeditor',
+    ),
+  ),
 );

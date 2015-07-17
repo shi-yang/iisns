@@ -23,16 +23,11 @@ use yii\widgets\ActiveForm;
         <div class="post-form col-sm-10">
             <?php if (!Yii::$app->user->isGuest) :?>
                 <?php $form = ActiveForm::begin(); ?>
-                <?= $form->field($model, 'content')->widget('kucha\ueditor\UEditor', [
+                <?= $form->field($model, 'content')->widget('shiyang\umeditor\UMeditor', [
                     'clientOptions' => [
-                        'elementPathEnabled' => false,
-                        'autosave' => false,
                         'initialFrameHeight' => 100,
-                        'initialFrameWidth' => '100%',
-                        'wordCount' => false,
-                        'focus' => true,
-                        'toolbars' => [
-                            ['emotion', 'blockquote', 'simpleupload', 'link', '|']
+                        'toolbar' => [
+                            'link unlink | emotion image video',
                         ],
                     ]
                 ])->label(false) ?>

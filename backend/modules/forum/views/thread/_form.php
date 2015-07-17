@@ -19,21 +19,15 @@ use yii\bootstrap\ActiveForm;
         ])->textInput(['maxlength' => 128, 'autocomplete'=>'off'])
     ?>
 
-    <?= $form->field($model, 'content')->widget('kucha\ueditor\UEditor', [
+    <?= $form->field($model, 'content')->widget('shiyang\umeditor\UMeditor', [
         'clientOptions' => [
-            'elementPathEnabled' => false,
             'initialFrameHeight' => 100,
-            'autosave' => false,
-            'wordCount' => false,
-            'toolbars' => [
-                [
-                    'fullscreen', 'preview', 'source', 'undo', 'redo', 'insertcode',
-                    'justifyleft', 'justifyright', 'justifycenter', 'justifyjustify'
-                ],
-                [
-                    'emotion', 'simpleupload', 'insertimage', 'link', 'insertvideo', 'music', '|',
-                    'autotypeset', 'bold', 'italic', 'underline','blockquote', '|',
-                ],
+            'toolbar' => [
+                'source | undo redo | bold |',
+                'link unlink | emotion image video |',
+                'justifyleft justifycenter justifyright justifyjustify |',
+                'insertorderedlist insertunorderedlist |' ,
+                'horizontal preview fullscreen',
             ],
         ]
     ])->label(false) ?>
