@@ -29,7 +29,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => Yii::$app->setting
 ]) ?>
 <?= $content; ?>
 <?php
-	if (!Yii::$app->user->isGuest && !Yii::$app->requestedRoute != 'explore/photos') {
+	if (!Yii::$app->user->isGuest && Yii::$app->requestedRoute != 'explore/photos') {
 		echo '</div>';
 	}
 ?>
