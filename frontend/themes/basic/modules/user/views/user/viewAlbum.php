@@ -43,8 +43,8 @@ $this->registerJsFile('@web/js/lightbox/js/lightbox.min.js', ['depends' => ['yii
                 <div class="img-item col-md-6" id="<?= $photo['id'] ?>">
                     <div class="img-wrap">
                         <div class="img-main">
-                            <a title="<?= Html::encode($photo['name']) ?>" href="<?= Yii::getAlias('@photo').$photo['path']?>" data-lightbox="image-1" data-title="<?= Html::encode($photo['name']) ?>">
-                                <img src="<?= Yii::getAlias('@photo').$photo['path'] ?>"> 
+                            <a title="<?= Html::encode($photo['name']) ?>" href="<?= $photo['path']?>" data-lightbox="image-1" data-title="<?= Html::encode($photo['name']) ?>">
+                                <img src="<?= $photo['path'] ?>"> 
                             </a>
                             <div class="img-name"><?= Html::encode($photo['name']) ?></div> 
                         </div>

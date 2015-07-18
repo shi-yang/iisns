@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <div class="row">
     <div class="col-md-9">
-        <img src="<?= Yii::getAlias('@photo'). $model->path ?>">
+        <img src="<?= $model->path ?>">
     </div>
     <div class="col-md-3"></div>
 </div>

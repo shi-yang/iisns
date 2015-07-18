@@ -217,9 +217,10 @@ class Install {
                 CREATE TABLE IF NOT EXISTS `pre_home_photo` (
                   `id` bigint(20) NOT NULL AUTO_INCREMENT,
                   `album_id` bigint(20) NOT NULL,
-                  `name` varchar(100) NOT NULL,
+                  `name` varchar(100) NOT NULL COMMENT '图片名称',
                   `thumb` varchar(255) NOT NULL,
-                  `path` varchar(255) NOT NULL,
+                  `path` varchar(255) NOT NULL COMMENT '文件保存路径',
+                  `store_name` varchar(255) NOT NULL COMMENT '文件保存的名称',
                   `created_at` int(11) NOT NULL,
                   `created_by` int(11) NOT NULL,
                   `is_cover` tinyint(4) NOT NULL DEFAULT '0',

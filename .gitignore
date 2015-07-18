@@ -6,7 +6,7 @@ frontend/runtime/*
 frontend/web/uploads/blog/photo/*
 frontend/web/uploads/blog/photo_tmp/*
 frontend/web/uploads/forum/icon/*
-frontend/web/uploads/user/avatar/*
+frontend/web/uploads/user/*
 frontend/web/uploads/umeditor/*
 !frontend/runtime/.gitignore
 
