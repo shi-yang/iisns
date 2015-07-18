@@ -66,6 +66,7 @@ class MessageController extends BaseController
         return $this->render('inbox', [
             'messages' => $pages['result'],
             'pages' => $pages['pages'],
+            'type' => 'inbox',
             'count' => $this->getMessageCount()
         ]);
     }
@@ -95,6 +96,7 @@ class MessageController extends BaseController
         return $this->render('inbox', [
             'messages' => $pages['result'],
             'pages' => $pages['pages'],
+            'type' => 'outbox',
             'count' => $this->getMessageCount()
         ]);
     }

@@ -47,7 +47,7 @@ $this->params['count'] = $count;
     <?php foreach ($messages as $message): ?>
     <li class="list-group-item clearfix inbox-item" onclick="window.location.href='<?= Url::toRoute(['/user/message/view', 'id' => $message['id']]) ?>';return false">
         <span class="from"><?= Html::encode($message['username']) ?></span>
-        <span class="detail">
+        <span class="detail" <?php if ($type == 'inbox' && $message['read_indicator'] == 0) echo 'style="font-weight:bold"';?>>
             <?= Html::encode($message['subject']) ?>
         </span>
         <span class="inline-block pull-right">
