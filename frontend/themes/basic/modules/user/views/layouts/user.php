@@ -54,7 +54,7 @@ AppAsset::register($this);
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="glyphicon glyphicon-envelope"></i>
-                        <span class="notification-label bounceIn animation-delay4"><?= $unReadMessageCount  ?></span>
+                        <span class="badge badge-danger notification-label bounceIn animation-delay4"><?= $unReadMessageCount  ?></span>
                     </a>
                     <ul class="dropdown-menu message dropdown-1">
                         <li><a>You have <?= $unReadMessageCount ?> new unread messages</a></li>

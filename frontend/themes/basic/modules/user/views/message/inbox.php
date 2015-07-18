@@ -1,8 +1,8 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
-use yii\helpers\HtmlPurifier;
+use yii\helpers\Url;
+use yii\widgets\LinkPager;
 use app\components\Tools;
 
 /* @var $this yii\web\View */
@@ -12,20 +12,50 @@ $this->title = Yii::t('app', 'Messages');
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['count'] = $count;
 ?>
-<ul class="messages-list">
-    <?php foreach ($messages as $message ): ?>
-        <li <?= ($message['read_indicator'] == false) ? 'class="unread"' : '' ;?>>
-            <a href="<?= \yii\helpers\Url::toRoute(['/user/message/view', 'id' => $message['id']]) ?>">
-                <div class="header">
-                    <span class="action"><i class="fa fa-square-o"></i></span>
-                    <span class="from"><i class="glyphicon glyphicon-user"></i> <?= Html::encode(\app\modules\user\models\User::getInfo($message['sendfrom'])['username']) ?></span>
-                    <span class="date"><span class="glyphicon glyphicon-time"></span> <?= Tools::formatTime($message['created_at']) ?></span>
-                </div>
-                <div class="title">
-                    <span class="action"><i class="fa fa-star-o"></i><i class="fa fa-star bg"></i></span>
-                    <?= Html::encode($message['subject']) ?>
-                </div>
-            </a>
-        </li>
+<div class="panel-heading">
+    <div class="input-group">
+        <input type="text" class="form-control input-sm" placeholder="Search here...">
+            <span class="input-group-btn">
+            <button class="btn btn-default btn-sm" type="button"><i class="glyphicon glyphicon-search"></i></button>
+        </span>
+    </div><!-- /input-group -->
+</div>
+<div class="panel-body">
+    <label class="label-checkbox inline">
+        <input type="checkbox" id="chk-all">
+         <span class="custom-checkbox"></span>
+    </label>
+    <a class="btn btn-sm btn-default"><i class="fa fa-trash-o"></i> Delete</a>
+
+    <div class="pull-right">
+        <a class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-refresh"></i></a>          
+        <div class="btn-group" id="inboxFilter">
+            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                All
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu pull-right">
+                <li><a href="#">Read</a></li>
+                <li><a href="#">Unread</a></li>
+                <li><a href="#">Starred</a></li>
+                <li><a href="#">Unstarred</a></li>
+            </ul>
+        </div><!-- /btn-group -->
+    </div>
+</div>
+<ul class="list-group">
+    <?php foreach ($messages as $message): ?>
+    <li class="list-group-item clearfix inbox-item" onclick="window.location.href='<?= Url::toRoute(['/user/message/view', 'id' => $message['id']]) ?>';return false">
+        <span class="from"><?= Html::encode($message['username']) ?></span>
+        <span class="detail">
+            <?= Html::encode($message['subject']) ?>
+        </span>
+        <span class="inline-block pull-right">
+            <span class="time"><?= Tools::formatTime($message['created_at']) ?></span>       
+        </span>
+    </li>
     <?php endforeach ?>
 </ul>
+<?= LinkPager::widget([
+    'pagination' => $pages,
+]);?>

@@ -14,11 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 $this->params['count'] = $count;
 ?>
 <div class="message-create">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
-
 </div>

@@ -56,10 +56,11 @@ class MessageController extends BaseController
         $user = $this->findUserModel();
 
         $query = new Query;
-        $query->select('*')
-            ->from('{{%user_message}}')
+        $query->select('u.username, u.avatar, m.id, m.subject, m.read_indicator, m.created_at')
+            ->from('{{%user_message}} as m')
+            ->join('LEFT JOIN','{{%user}} as u', 'u.id=m.sendfrom')
             ->where('sendto=:sendto', [':sendto' => $user->id])
-            ->orderBy('created_at DESC');
+            ->orderBy('m.created_at DESC');
         $pages = Tools::Pagination($query);
 
         return $this->render('inbox', [
@@ -82,15 +83,18 @@ class MessageController extends BaseController
     public function actionOutbox()
     {
         $user = $this->findUserModel();
-        $dataProvider = new SqlDataProvider([
-            'sql' => 'SELECT * FROM {{%user_message}} WHERE sendfrom=:sendfrom',
-            'params' => [':sendfrom' => $user->id],
-            'pagination' => [
-                'pageSize' => 20,
-            ],
-        ]);
-        return $this->render('outbox', [
-            'dataProvider' => $dataProvider,
+
+        $query = new Query;
+        $query->select('u.username, u.avatar, m.id, m.subject, m.read_indicator, m.created_at')
+            ->from('{{%user_message}} as m')
+            ->join('LEFT JOIN','{{%user}} as u', 'u.id=m.sendto')
+            ->where('sendfrom=:sendfrom', [':sendfrom' => $user->id])
+            ->orderBy('m.created_at DESC');
+        $pages = Tools::Pagination($query);
+
+        return $this->render('inbox', [
+            'messages' => $pages['result'],
+            'pages' => $pages['pages'],
             'count' => $this->getMessageCount()
         ]);
     }
