@@ -19,8 +19,6 @@ return array(
     'shiyang\\masonry\\' => array($vendorDir . '/shiyang/yii2-masonry'),
     'shiyang\\login\\' => array($vendorDir . '/shiyang/yii2-login-widget'),
     'shiyang\\infinitescroll\\' => array($vendorDir . '/shiyang/yii2-infinite-scroll'),
-    'kartik\\date\\' => array($vendorDir . '/kartik-v/yii2-widget-datepicker'),
-    'kartik\\base\\' => array($vendorDir . '/kartik-v/yii2-krajee-base'),
     'justinvoelker\\tagging\\' => array($vendorDir . '/justinvoelker/yii2-tagging'),
     'cebe\\markdown\\' => array($vendorDir . '/cebe/markdown'),
     'Faker\\' => array($vendorDir . '/fzaninotto/faker/src/Faker'),
