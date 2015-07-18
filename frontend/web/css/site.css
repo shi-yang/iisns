@@ -239,6 +239,7 @@ article .content-text {
 article .content-text p {
   margin-bottom: 20px;
   text-indent: 2em;
+  color: #353535;
 }
 .recommend-forum {
   cursor: pointer;
