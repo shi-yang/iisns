@@ -152,7 +152,7 @@ class Album extends \yii\db\ActiveRecord
                     ->createCommand('SELECT path FROM {{%home_photo}} WHERE album_id='.$id)
                     ->queryScalar();
                 if (empty($path)) {
-                    return '/images/pic-none.png';
+                    return Yii::getAlias('@web') . '/images/pic-none.png';
                 }
             } else {
                 $path = Yii::$app->db
