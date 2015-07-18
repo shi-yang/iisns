@@ -1,16 +1,3 @@
-(function( factory ) {
-    if ( !window.jQuery ) {
-        alert('jQuery is required.')
-    }
-
-    jQuery(function() {
-        factory.call( null, jQuery );
-    });
-})(function( $ ) {
-// -----------------------------------------------------
-// ------------ START ----------------------------------
-// -----------------------------------------------------
-
 // ---------------------------------
 // ---------  Uploader -------------
 // ---------------------------------
@@ -134,6 +121,8 @@ var Uploader = (function() {
                     selectCb( src );
 
                 }, FRAME_WIDTH, 1 );   // 注意这里的 height 值是 1，被当成了 100% 使用。
+            }).on('uploadSuccess', function() {
+                alert('上传成功');
             });
         },
 
@@ -153,7 +142,7 @@ var Uploader = (function() {
 
         upload: function() {
             uploader.upload();
-        }
+        },
     }
 })();
 
@@ -254,31 +243,3 @@ var Croper = (function() {
     }
 
 })();
-
-
-// ------------------------------
-// -----------logic--------------
-// ------------------------------
-var container = $('.uploader-container');
-
-Uploader.init(function( src ) {
-
-    Croper.setSource( src );
-
-    // 隐藏选择按钮。
-    container.addClass('webuploader-element-invisible');
-
-    // 当用户选择上传的时候，开始上传。
-    Croper.setCallback(function( data ) {
-        Uploader.crop(data);
-        Uploader.upload();
-        alert('上传成功');
-    });
-});
-
-
-
-// -----------------------------------------------------
-// ------------ END ------------------------------------
-// -----------------------------------------------------
-});

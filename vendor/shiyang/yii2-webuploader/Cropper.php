@@ -1,19 +1,21 @@
 <?php
 /**
- * @copyright Copyright (c) 2015 Shiyang! Consulting Group LLC
+ * @copyright Copyright (c) 2015 Shiyang
  * @link http://shiyang.me
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  */
 namespace shiyang\webuploader;
 
-use yii\base\Widget;
 use Yii;
+use yii\base\Widget;
 
 /**
- * Umeditor renders a editor js plugin for classic editing.
- * @see http://ueditor.baidu.com/
- * @author Baidu FLX
- * @link https://github.com/fex-team/umeditor
+ * 图片裁剪上传
+ *  为了能够预览它，需要在你想要预览的地方放下如下代码：
+ *  <div class="fileupload fileupload-new">
+ *      <div class="img-preview"></div>
+ *  </div>
+ * 在你想要出现“选择文件”的地方，放下如下代码：
+ * <?= Cropper::widget() ?>
  */
 class Cropper extends Widget
 {
@@ -30,25 +32,30 @@ class Cropper extends Widget
 	 */
 	public function run()
 	{
-		echo '<div class="uploader-container">';
-        echo    '<div id="filePicker">选择文件</div>';
-        echo '</div>';
-		echo '<div class="cropper-wraper webuploader-element-invisible">';
-        echo    '<div class="img-container">';
-        echo       '<img src="" alt="" />';
-        echo    '</div>';
-        echo    '<div class="upload-btn">上传所选区域</div>';
-        echo '</div>';
-		$this->registerPlugin();
+		$this->registerClientScript();
+		return $this->render('cropper');
 	}
 
 	/**
-	 * Registers Umeditor plugin
+	 * Registers Webuploader assets
 	 */
-	protected function registerPlugin()
+	protected function registerClientScript()
 	{
 		$view = $this->getView();
-
 		CropperAsset::register($view);
+		$js = "
+var container = $('.uploader-container');
+Uploader.init(function( src ) {
+    Croper.setSource( src );
+    // 隐藏选择按钮。
+    container.addClass('webuploader-element-invisible');
+    // 当用户选择上传的时候，开始上传。
+    Croper.setCallback(function( data ) {
+        Uploader.crop(data);
+        Uploader.upload();
+    });
+});
+";
+		$view->registerJs($js, $view::POS_READY);
 	}
-} 
+}
