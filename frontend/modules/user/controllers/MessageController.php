@@ -63,7 +63,7 @@ class MessageController extends BaseController
             ->orderBy('m.created_at DESC');
         $pages = Tools::Pagination($query);
 
-        return $this->render('inbox', [
+        return $this->render('messageList', [
             'messages' => $pages['result'],
             'pages' => $pages['pages'],
             'type' => 'inbox',
@@ -93,7 +93,7 @@ class MessageController extends BaseController
             ->orderBy('m.created_at DESC');
         $pages = Tools::Pagination($query);
 
-        return $this->render('inbox', [
+        return $this->render('messageList', [
             'messages' => $pages['result'],
             'pages' => $pages['pages'],
             'type' => 'outbox',
