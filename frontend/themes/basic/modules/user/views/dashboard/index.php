@@ -68,13 +68,6 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
                             <span class="glyphicon glyphicon-share-alt"></span> <?= Yii::t('app', 'Repost') ?>
                         </a>
                     </div>
-                    <div class="comment">
-                        <div class="comment-box">
-                            <div class="comment-input" data-clicklog="comment" placeholder="<?= Yii::t('app', 'Comment') ?>">
-                                <a href="<?= Url::toRoute(['/comment/create', 'table' => 'home_feed', 'id' => $feed['id']]) ?>" onclick="return false;"><?= Yii::t('app', 'Comment') ?></a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         <?php endforeach; ?>
