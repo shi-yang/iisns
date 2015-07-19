@@ -2,7 +2,7 @@
 /**
  * @link https://github.com/nirvana-msu/yii2-infinite-scroll
  * @copyright Copyright (c) 2014 Alexander Stepanov
- * @license GPL-2.0
+ * @license MIT
  */
 
 namespace shiyang\infinitescroll;
