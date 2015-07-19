@@ -1,6 +1,11 @@
 
 $(function() {
 	'use strict';
+
+	//顶部导航宽度
+	var topNavWidth = parseInt($('#main-container').css('width')) + parseInt($('aside.skin-1').css('width'));
+	$('#top-nav').css('width', topNavWidth + 'px');
+
 	//scroll to top of the page
 	$("#scroll-to-top").click(function() {
 		$("html, body").animate({ scrollTop: 0 }, 600);

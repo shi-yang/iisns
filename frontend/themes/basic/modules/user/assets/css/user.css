@@ -1,5 +1,57 @@
+html, body {
+  padding-top: 0;
+  color: #777777;
+  background: #f9f9f9;
+  height: auto;
+  font: 14px/1.5 arial,"Microsoft Yahei","Hiragino Sans GB",sans-serif;
+}
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(50, 50, 50, 0.3);
+}
+::-webkit-scrollbar-track {
+  background-color: rgba(50, 50, 50, 0.2);
+}
+img {
+  max-width: 100%;
+}
+ul {
+  padding: 0;
+}
+hr {
+  border-top-color: #eee;
+  border-bottom-color: #fff;
+}
+a {
+  color: #FF7B4C;
+  transition: all 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+}
+p {
+  line-height: 28px;
+}
+a:hover,
+a:focus {
+  color: #ff4a00;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+}
+.layout-boxed {
+  background: url('../img/boxed-bg.jpg') repeat fixed;
+}
 #top-nav {
   height: 45px;
+  width: 1250px;
   padding-right: 10px;
   background-color: #ffffff;
   white-space: nowrap;
@@ -8,8 +60,6 @@
 }
 #top-nav.fixed {
   position: fixed;
-  left: 0;
-  right: 0;
   z-index: 1000;
 }
 @media (max-width: 767px) {
@@ -272,7 +322,7 @@
   border-radius: 0px;
   -moz-border-radius: 0px;
   -webkit-border-radius: 0px;
-  background: transparent;
+  background: #fff;
   padding: 5px 10px;
   border-bottom: 1px solid #eee;
   margin-bottom: 0;
@@ -299,7 +349,6 @@ aside {
   z-index: 100;
   padding-top: 45px;
   bottom: 0;
-  left: 0;
   background-color: #323447;
   height: 100%;
 }
@@ -705,10 +754,12 @@ aside .main-menu .alert {
   }
 }
 #wrapper {
+  max-width: 1250px;
+  margin: 0 auto;
+  min-height: 100%;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
   position: relative;
-  overflow: hidden;
-  min-height: 800px;
-  background-color: #f9f9f9;
+  background-color: #fff;
 }
 @media (min-width: 768px) {
   #wrapper.sidebar-mini #top-nav .brand {
@@ -1003,56 +1054,6 @@ aside.skin-1 .main-menu > ul > li > .submenu  li.active a .submenu-label{
 #top-nav.skin-1 .nav-notification > li > a:focus {
   color: #fff;
 }
-
-body {
-  padding-top: 0;
-  color: #777777;
-  background: #f9f9f9;
-}
-body.dark {
-  background: #3a3a3a;
-}
-::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
-}
-::-webkit-scrollbar-thumb {
-  background-color: rgba(50, 50, 50, 0.3);
-}
-::-webkit-scrollbar-track {
-  background-color: rgba(50, 50, 50, 0.2);
-}
-img {
-  max-width: 100%;
-}
-ul {
-  padding: 0;
-}
-hr {
-  border-top-color: #eee;
-  border-bottom-color: #fff;
-}
-a {
-  color: #FF7B4C;
-  transition: all 0.2s ease;
-  -webkit-transition: all 0.2s ease;
-  -moz-transition: all 0.2s ease;
-  -ms-transition: all 0.2s ease;
-  -o-transition: all 0.2s ease;
-}
-p {
-  line-height: 28px;
-}
-a:hover,
-a:focus {
-  color: #ff4a00;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  -webkit-transition: all 0.2s ease;
-  -moz-transition: all 0.2s ease;
-  -ms-transition: all 0.2s ease;
-  -o-transition: all 0.2s ease;
-}
 .progress {
   border-radius: 10px;
   -moz-border-radius: 10px;
@@ -1151,9 +1152,10 @@ a:focus {
 }
 #main-container {
   position: relative;
-  min-height: 800px;
+  min-height: 907px;
   padding-top: 45px;
   margin-left: 194px;
+  background-color: #eee;
 }
 @media (max-width: 480px) {
   #main-container {

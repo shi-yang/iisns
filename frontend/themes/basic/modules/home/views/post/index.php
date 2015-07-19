@@ -16,7 +16,7 @@ $user = Yii::$app->user->identity;
 ?>
 <div class="social-wrapper row">
     <div id="social-container">
-        <div class="col-xs-12 col-sm-8 col-md-8 col-lg-offset-1 col-lg-6" id="content">
+        <div class="col-xs-12 col-sm-8 col-md-8" id="content">
             <div class="post-index">
                 <h1><?= Html::encode($this->title) ?></h1>
                 <p>

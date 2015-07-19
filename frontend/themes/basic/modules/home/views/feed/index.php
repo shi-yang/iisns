@@ -11,7 +11,7 @@ use app\components\Tools;
 $this->title = Yii::t('app', 'Feeds');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="col-xs-12 col-sm-8 col-md-8 col-lg-offset-1 col-lg-6" >
+<div class="col-xs-12 col-sm-8 col-md-8" >
     <div class="feed-index">
 
         <h1><?= Html::encode($this->title) ?></h1>

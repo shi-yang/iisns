@@ -36,7 +36,7 @@ $userData = Yii::$app->userData->getKey(true);
                 </div>
             </a>
         </div>
-        <div class="col-xs-12 col-sm-8 col-md-8 col-lg-offset-1 col-lg-6">
+        <div class="col-xs-12 col-sm-8 col-md-8">
             <?= $content ?>
         </div>
     </div>

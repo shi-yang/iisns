@@ -33,10 +33,10 @@ AppAsset::register($this);
     <![endif]-->
     <link rel="shortcut icon" href="<?= Yii::getAlias('@web') ?>/favicon.ico">
 </head>
-<body class="overflow-hidden">
+<body class="overflow-hidden layout-boxed">
     <?php $this->beginBody() ?>
     <div id="wrapper">
-        <div id="top-nav" class="fixed skin-1">
+        <header id="top-nav" class="fixed skin-1">
             <a href="#" class="brand">
                 <span><?= Yii::$app->setting->get('siteName') ?></span>
             </a><!-- /brand -->
@@ -95,7 +95,7 @@ AppAsset::register($this);
                     </ul>
                 </li>
             </ul>
-        </div><!-- /top-nav-->
+        </header><!-- /top-nav-->
 
         <aside class="fixed skin-1">
             <div class="sidebar-inner scrollable-sidebar" style="overflow: hidden; width: auto; height: 100%;">
