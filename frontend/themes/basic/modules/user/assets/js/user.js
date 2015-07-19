@@ -133,6 +133,19 @@ $(function() {
        function(){ $(this).removeClass('open') }
 	)
 
+	//选择系统头像
+	$('#set-avatar').click(function() {
+	    $.ajax({
+	        url: $(this).attr('href'),
+	        type:'post',
+	        error: function(){alert('error');},
+	        success:function(html){
+	            $('#avatar-container').html(html);
+	            $('#avatarModal').modal('show');
+	        }
+	    });
+	});
+
     //头像提示用户信息
 	$('[rel=author]').popover({
 	    trigger : 'manual',

@@ -88,6 +88,8 @@ return [
 	'Position' => '地址',
 	'Description' => '描述',
 	'User Avatar' => '用户头像',
+	'System avatar' => '系统头像',
+
 	'Personal Center' => '个人中心',
 	'Follower' => '粉丝',
 	'Follow' => '关注',
@@ -128,6 +130,7 @@ return [
     '{postCount} comments' =>  '{postCount} 评论',
 
 	'Optional' => '可不填',
+	'Cancel' => '取消',
 	'Time error' => '时间出错',
 	'Today {time}' => '今天 {time}',
 	'{min} minutes ago' => '{min} 分钟前',
