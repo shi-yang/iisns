@@ -9,10 +9,13 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="form-box" id="login-box">
-    <div class="header">Sign In</div>
-    <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
-        <div class="body bg-gray">
+<div class="login-box">
+    <div class="login-logo">
+        <a href="#"><b>iiSNS</b>Admin LTE</a>
+    </div><!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg">Sign in to start your session</p>
+        <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
             <?= $form->field($model, 'username', [
                 'inputOptions' => [
                     'placeholder' => $model->getAttributeLabel('username'),
@@ -24,11 +27,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     'placeholder' => $model->getAttributeLabel('password'),
                 ]
             ])->passwordInput()->label(false); ?>
-
-            <?= $form->field($model, 'rememberMe')->checkbox() ?>
-        </div>
-        <div class="footer">
-            <?= Html::submitButton('Sign me in', ['class' => 'btn bg-olive btn-block', 'name' => 'login-button']) ?>
-        </div>
-    <?php ActiveForm::end(); ?>
+            <div class="row">
+                <div class="col-xs-4">
+                    <?= Html::submitButton('Sign me in', ['class' => 'btn btn-primary btn-block btn-flat', 'name' => 'login-button']) ?>
+                </div><!-- /.col -->
+            </div>
+        <?php ActiveForm::end(); ?>
+        <a href="#">I forgot my password</a><br>
+    </div><!-- /.login-box-body -->
 </div>

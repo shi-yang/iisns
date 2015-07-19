@@ -18,10 +18,11 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/AdminLTE.css'
+        'adminlte/css/AdminLTE.min.css',
+        'adminlte/css/skins/skin-blue-light.min.css',
     ];
     public $js = [
-        'js/AdminLTE/app.js',
+        'adminlte/js/app.min.js',
         '//cdn.bootcss.com/bootstrap/3.3.2/js/bootstrap.min.js'
     ];
     public $depends = [
