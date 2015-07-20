@@ -35,7 +35,7 @@ $this->params['forum'] = $model->toArray;
                     </h4>
                     <a><h3 class="media-title"><?= Html::encode($broadcast['title']) ?></h3></a>
                     <span class="thread-time">
-                      <span class="glyphicon glyphicon-time"></span> <?= \app\components\Tools::formatTime($broadcast['created_at']) ?>
+                      <span class="glyphicon glyphicon-time"></span> <?= Yii::$app->tools->formatTime($broadcast['created_at']) ?>
                     </span>
                     <div class="media-content">
                         <?php echo $broadcast['content']; ?>

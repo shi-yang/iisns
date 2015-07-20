@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $user['username'];
                 <div class="thread-info">
                     <span class="glyphicon glyphicon-user"></span> <?= Html::a(Html::encode($user['username']), ['/user/view', 'id' => $user['id']]) ?>
                     &nbsp;•&nbsp;
-                    <span class="glyphicon glyphicon-time"></span> <?= \app\components\Tools::formatTime($model->created_at) ?>
+                    <span class="glyphicon glyphicon-time"></span> <?= Yii::$app->tools->formatTime($model->created_at) ?>
                     <div class="pull-right">
                         <span class="glyphicon glyphicon-comment"></span> <?= $model->post_count ?>
                         <?php if ($user['id'] == Yii::$app->user->id || $board['user_id'] == Yii::$app->user->id): ?>

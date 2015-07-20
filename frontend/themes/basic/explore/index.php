@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use app\modules\home\models\Album;
-use app\components\Tools;
 use shiyang\infinitescroll\InfiniteScrollPager;
 
 /* @var $this yii\web\View */
@@ -68,7 +67,7 @@ $this->params['title'] = Yii::t('app', 'Explore');
                           </h2>
                         </a>
                         <address class="meccaddress">
-                          <time><span class="glyphicon glyphicon-time"></span> <?= Tools::formatTime($post['created_at']) ?></time>
+                          <time><span class="glyphicon glyphicon-time"></span> <?= Yii::$app->tools->formatTime($post['created_at']) ?></time>
                           - 
                           <?php
                             if (!empty($post['author'])) {

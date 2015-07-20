@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\helpers\HtmlPurifier;
-use app\components\Tools;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\home\models\Album */
@@ -20,7 +19,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => $model['summary']]
       <h1><?= Html::encode($model['title']) ?></h1>
     </a>
     <address class="meccaddress">
-      <time><span class="glyphicon glyphicon-time"></span> <?= Tools::formatTime($model['created_at']) ?></time>
+      <time><span class="glyphicon glyphicon-time"></span> <?= Yii::$app->tools->formatTime($model['created_at']) ?></time>
       <?php
         if (!empty($model['origin'])) {
           echo " - 来源：" . Html::encode($model['origin']);

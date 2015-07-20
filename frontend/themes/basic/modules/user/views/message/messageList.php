@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\LinkPager;
-use app\components\Tools;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -51,7 +50,7 @@ $this->params['count'] = $count;
             <?= Html::encode($message['subject']) ?>
         </span>
         <span class="inline-block pull-right">
-            <span class="time"><?= Tools::formatTime($message['created_at']) ?></span>       
+            <span class="time"><?= Yii::$app->tools->formatTime($message['created_at']) ?></span>       
         </span>
     </li>
     <?php endforeach ?>

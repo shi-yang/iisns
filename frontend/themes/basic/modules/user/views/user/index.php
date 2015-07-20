@@ -1,7 +1,7 @@
 <?php
+
 use yii\helpers\Html;
 use shiyang\infinitescroll\InfiniteScrollPager;
-use app\components\Tools;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\User */
@@ -26,7 +26,7 @@ $this->params['userData'] = $model->userData;
                 </div>
                 <div class="clearfix"></div>
                 <div class="post-info">
-                    <i class="glyphicon glyphicon-time icon-muted"></i> <?= Tools::formatTime($feed->created_at) ?>
+                    <i class="glyphicon glyphicon-time icon-muted"></i> <?= Yii::$app->tools->formatTime($feed->created_at) ?>
                 </div>
             </li>
         <?php endforeach; ?>

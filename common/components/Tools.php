@@ -1,5 +1,5 @@
 <?php 
-namespace app\components;
+namespace common\components;
 
 use Yii;
 use yii\helpers\Html;
@@ -19,35 +19,35 @@ class Tools extends \yii\base\Object
     	}
     	
         //获取当前时间戳
-        $current_time = time();
+        $currentTime = time();
 
         //获取当天0点时间戳
-        $today_zero = strtotime('today');
+        $todayZero = strtotime('today');
 
         //当日时间差
-        $today_diff = $current_time -  $today_zero;
+        $todayDiff = $currentTime -  $todayZero;
 
         //当年时间戳
-        $year_diff = $current_time - strtotime("-1 year");
+        $yearDiff = $currentTime - strtotime("-1 year");
 
         //时间差
-        $time_diff = $current_time - $timestamp;
+        $timeDiff = $currentTime - $timestamp;
 
-        if($time_diff < 0)
+        if($timeDiff < 0)
             return Yii::t('app','Time error');
 
-        if($time_diff > $today_diff) {
-            if ($time_diff > $year_diff) {
+        if($timeDiff > $todayDiff) {
+            if ($timeDiff > $yearDiff) {
                 return date('Y-m-d H:i', $timestamp);
     				
             } else {
                 return date('m-d H:i', $timestamp);
             }
         } else {
-            if($time_diff > 3600) {
+            if($timeDiff > 3600) {
                 return Yii::t('app', 'Today {time}', ['time' => date('H:i', $timestamp)]);
-            } elseif($time_diff > 60) {
-                $min = floor($time_diff / 60);
+            } elseif($timeDiff > 60) {
+                $min = floor($timeDiff / 60);
                 return Yii::t('app', '{min} minutes ago', ['min' => $min]);
             } else {
     			return Yii::t('app', 'Just now');

@@ -5,7 +5,6 @@ use yii\helpers\HtmlPurifier;
 use yii\helpers\Url;
 use shiyang\infinitescroll\InfiniteScrollPager;
 use app\modules\user\models\User;
-use app\components\Tools;
 
 
 /* @var $this yii\web\View */
@@ -28,7 +27,7 @@ $this->params['count'] = $count;
                                     <?= Html::encode($comment['username']) ?>
                                 </a>
                                 <p>
-                                    <em><?= Tools::formatTime($comment['created_at']) ?></em>
+                                    <em><?= Yii::$app->tools->formatTime($comment['created_at']) ?></em>
                                 </p>
                             </div>
                         </div>
@@ -42,7 +41,7 @@ $this->params['count'] = $count;
                                                 <?= Html::encode($user->username) ?>
                                             </a>
                                             <p>
-                                                <em><?= Tools::formatTime($comment['created_at']) ?></em>
+                                                <em><?= Yii::$app->tools->formatTime($comment['created_at']) ?></em>
                                             </p>
                                         </div>
                                     </div>

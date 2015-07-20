@@ -1,7 +1,6 @@
 <?php
 use yii\helpers\Html;
 use yii\helpers\Url;
-use app\components\Tools;
 use app\modules\forum\models\Board;
 
 $this->params['forum'] = $forum->toArray;
@@ -40,7 +39,7 @@ $columnsCount = $model->columns;
                                         <dd class="hidden-xs" data-toggle="tooltip" data-placement="top" title="Thread Count">
                                             <i class="glyphicon glyphicon-comment"></i> <?= Board::getThreadCount($subBoard['id']) ?> 
                                         </dd>
-                                        <dd class="hidden-xs"><i class="glyphicon glyphicon-time"></i> <?= Tools::formatTime(Board::getLastThread($subBoard['id'])['created_at']) ?></dd>
+                                        <dd class="hidden-xs"><i class="glyphicon glyphicon-time"></i> <?= Yii::$app->tools->formatTime(Board::getLastThread($subBoard['id'])['created_at']) ?></dd>
                                     </dl>
                                 </td>
                             <?php endif ?>

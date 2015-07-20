@@ -1,7 +1,6 @@
 <?php
 use yii\helpers\Url;
 use yii\helpers\Html;
-use app\components\Tools;
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Modal;
 use shiyang\infinitescroll\InfiniteScrollPager;
@@ -40,7 +39,7 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
                                 <?= Html::encode($feed['username']) ?>
                             </a>
                             <p>
-                                <em><?= Tools::formatTime($feed['created_at']) ?></em>
+                                <em><?= Yii::$app->tools->formatTime($feed['created_at']) ?></em>
                             </p>
                         </div>
                     </div>
