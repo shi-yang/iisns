@@ -1,8 +1,7 @@
 <?php
 /**
- * @copyright Copyright (c) 2015 Shiyang! Consulting Group LLC
+ * @copyright Copyright (c) 2015 Shiyang
  * @link http://shiyang.me
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  */
 namespace shiyang\webuploader;
 
@@ -18,7 +17,7 @@ class CropperAsset extends AssetBundle
 	];
 
 	public $js = [
-		'dist/webuploader.js',
+		'dist/webuploader.min.js',
 		'cropper.js',
 		'cropper.uploader.js',
 	];
@@ -26,4 +25,4 @@ class CropperAsset extends AssetBundle
 	public $depends = [
 		'yii\web\JqueryAsset'
 	];
-} 
+}

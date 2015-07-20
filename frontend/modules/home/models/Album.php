@@ -5,6 +5,7 @@ namespace app\modules\home\models;
 use Yii;
 use yii\db\Query;
 use app\components\Tools;
+use app\components\Uploader;
 
 /**
  * This is the model class for table "{{%home_album}}".
@@ -151,7 +152,7 @@ class Album extends \yii\db\ActiveRecord
                     ->createCommand('SELECT path FROM {{%home_photo}} WHERE album_id='.$id)
                     ->queryScalar();
                 if (empty($path)) {
-                    return '/images/pic-none.png';
+                    return Yii::getAlias('@web') . '/images/pic-none.png';
                 }
             } else {
                 $path = Yii::$app->db
@@ -159,6 +160,30 @@ class Album extends \yii\db\ActiveRecord
                     ->queryScalar();
             }
         }
-        return Yii::getAlias('@photo').$path;
+        return $path;
+    }
+
+    /**
+     * 处理图片的上传
+     */
+    public function upload()
+    {
+        $config = [
+            'savePath' => Yii::getAlias('@webroot/uploads/user/'), //存储文件夹
+            'maxSize' => 2048 ,//允许的文件最大尺寸，单位KB
+            'allowFiles' => ['.gif' , '.png' , '.jpg' , '.jpeg' , '.bmp'],  //允许的文件格式
+        ];
+        $up = new Uploader("file", $config, 'album'.$this->id);
+        $info = $up->getFileInfo();
+
+        //存入数据库
+        Yii::$app->db->createCommand()->insert('{{%home_photo}}', [
+            'name' => $this->name,
+            'path' => Yii::getAlias('@web/uploads/user/') . $this->created_by . '/' . $info['name'], //存储路径
+            'store_name' => $info['name'], //保存的名称
+            'album_id' => $this->id,
+            'created_at' => time(),
+            'created_by' => Yii::$app->user->id, 
+        ])->execute();
     }
 }

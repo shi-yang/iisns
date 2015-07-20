@@ -115,7 +115,7 @@ class Board extends \yii\db\ActiveRecord
     public function getThreads()
     {
         $query = new Query;
-        $query->select('t.id, t.title, t.content, t.created_at, t.user_id, u.username, u.avatar')
+        $query->select('t.id, t.title, t.content, t.created_at, t.user_id, t.post_count, u.username, u.avatar')
             ->from('{{%forum_thread}} as t')
             ->join('LEFT JOIN','{{%user}} as u', 'u.id=t.user_id')
             ->where('t.board_id=:id', [':id' => $this->id])
@@ -136,7 +136,7 @@ class Board extends \yii\db\ActiveRecord
     
     /**
      * 取得当前版块下最新的一条消息的发布作者，发布时间
-     * @
+     * @param integer $id 板块id
      */
     public static function getLastThread($id)
     {

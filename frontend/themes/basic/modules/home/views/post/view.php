@@ -14,7 +14,7 @@ $this->params['userData'] = $model->userData;
 <div class="post-view">
 
     <h1 class="post-title"><?= Html::encode($model->title) ?></h1>
-    <div class="post-meta"><i class="glyphicon glyphicon-time icon-muted"></i> <?= \app\components\Tools::formatTime($model->created_at) ?></div>
+    <div class="post-meta"><i class="glyphicon glyphicon-time icon-muted"></i> <?= Yii::$app->tools->formatTime($model->created_at) ?></div>
     <div class="post-content">
        <?= HtmlPurifier::process($model->content) ?>
     </div>

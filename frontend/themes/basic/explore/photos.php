@@ -82,11 +82,11 @@ $this->registerCss('
     <?php foreach ($photos as $model): ?>
         <?php
             $albumUrl = Url::toRoute(['/explore/view-album', 'id' => $model['id']]);
-            $src = (empty($model['path'])) ? Yii::getAlias('@web/images/pic-none.png') : Yii::getAlias('@photo') . $model['path'] ;
+            $src = (empty($model['path'])) ? Yii::getAlias('@web/images/pic-none.png') : $model['path'] ;
         ?>
         <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
             <div class="photo-item">
-                <a title="<?= Html::encode($model['name']) ?>" href="<?= Yii::getAlias('@photo').$model['path']?>" data-lightbox="image-1" data-title="<?= Html::encode($model['name']) ?>">
+                <a title="<?= Html::encode($model['name']) ?>" href="<?= $src ?>" data-lightbox="image-1" data-title="<?= Html::encode($model['name']) ?>">
                     <img src="<?= $src ?>" class="img-responsive" alt="photo-cover">
                 </a>
                 <div class="photo-details">                         

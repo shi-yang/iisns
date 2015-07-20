@@ -10,11 +10,11 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Messages'), 'url' =>
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['count'] = $count;
 ?>
-<div class="inbox-read">
+<article class="inbox-read">
   <!-- Start .inbox-read -->
-  <div class="inbox-header">
+  <header class="inbox-header">
     <h3><?= Html::encode($model->subject) ?></h3>
-  </div>
+  </header>
   <div class="inbox-info-bar">
     <p>
         <?= Html::a(Yii::t('app', 'Reply'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -28,9 +28,6 @@ $this->params['count'] = $count;
     </p>
   </div>
   <div class="inbox-content">
-  <!-- Start .inbox-content -->
       <?= $model->content ?>
   </div>
-  <!--End .inbox-content -->
-</div>
-<!-- End .inbox-read -->
+</article>

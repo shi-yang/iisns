@@ -2,7 +2,7 @@
 return [
 	'Home' => '首页',
 	'Log in' => '登录',
-	'Log out' => '注销',
+	'Log out' => '退出',
 	'Sign up' => '注册',
 	'Sign up now!' => '注册',
 	'Explore' => '探索',
@@ -88,6 +88,8 @@ return [
 	'Position' => '地址',
 	'Description' => '描述',
 	'User Avatar' => '用户头像',
+	'System avatar' => '系统头像',
+
 	'Personal Center' => '个人中心',
 	'Follower' => '粉丝',
 	'Follow' => '关注',
@@ -125,8 +127,11 @@ return [
 	'Content' => '内容',
 	'Title' => '标题',
 	'Reply' => '回复',
+    '{postCount} comments' =>  '{postCount} 评论',
+    'Please login to leave a comment.' => '请先登录再进行评论~',
 
 	'Optional' => '可不填',
+	'Cancel' => '取消',
 	'Time error' => '时间出错',
 	'Today {time}' => '今天 {time}',
 	'{min} minutes ago' => '{min} 分钟前',
@@ -137,7 +142,7 @@ return [
 	'Deleted successfully.' => '已删除',
     'Recommendation' => '推荐',
 
-	'Are you sure you want to Log out?' => '你确定要注销？',
+	'Are you sure you want to Log out?' => '你确定要退出？',
 	'If you forgot your password you can ' => '如果您忘记密码，请',
 	'reset it' => '点此重置',
 	'No data to display.' => '没有数据展示',

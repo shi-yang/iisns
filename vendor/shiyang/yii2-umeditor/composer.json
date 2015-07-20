@@ -1,0 +1,21 @@
+{
+    "name": "shiyang/yii2-umeditor",
+    "description": "UMeditor is a simple version ueditor.",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","umeditor"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Shiyang",
+            "email": "dr@shiyang.me"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "shiyang\\umeditor\\": ""
+        }
+    }
+}

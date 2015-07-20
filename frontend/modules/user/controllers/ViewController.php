@@ -3,18 +3,24 @@
 namespace app\modules\user\controllers;
 
 use Yii;
+use yii\db\Query;
+use yii\data\SqlDataProvider;
+use yii\helpers\Url;
+use yii\web\ForbiddenHttpException;
+use yii\web\NotFoundHttpException;
+use common\components\BaseController;
 use app\modules\user\models\User;
 use app\modules\user\models\UserSearch;
-use common\components\BaseController;
-use yii\web\NotFoundHttpException;
-use yii\helpers\Url;
 use app\modules\home\models\Post;
+use app\modules\home\models\Album;
+use app\components\Tools;
 
 /**
  * UserController implements the CRUD actions for User model.
  */
 class ViewController extends BaseController
 {
+    public $layout = 'profile';
     /**
      * Displays a single User model.
      * @param integer $id
@@ -22,7 +28,6 @@ class ViewController extends BaseController
      */
     public function actionIndex($id)
     {
-        $this->layout = 'profile';
         $model = $this->findModel($id);
 
         if (Yii::$app->Request->isAjax) {
@@ -32,11 +37,8 @@ class ViewController extends BaseController
             $userData = Yii::$app->userData->getKey(true, null, $model->id);
             $followUrl = Url::toRoute(['/user/user/follow', 'id' => $model->id]);
 
-            //判断是否已经关注该用户
-            $done = Yii::$app->db
-                ->createCommand("SELECT 1 FROM {{%user_follow}} WHERE user_id=:user_id AND people_id=:id LIMIT 1")
-                ->bindValues([':user_id' => Yii::$app->user->id, ':id' => $model->id])->queryScalar();
-            if ($done) {
+            //关注的文字
+            if (User::getIsFollow($model->id)) {
                 $followBtn = '<span class="glyphicon glyphicon glyphicon-eye-close"></span> ' . Yii::t('app', 'Unfollow');
             } else {
                 $followBtn = '<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'Follow');
@@ -75,7 +77,75 @@ HTML;
             return $html;
         }
 
-        return $this->render('/user/view', [
+        return $this->render('/user/index', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionAlbum($id)
+    {
+        $model = $this->findModel($id);
+        $dataProvider = new SqlDataProvider([
+            'sql' => 'SELECT id, cover_id, status, name FROM {{%home_album}} WHERE created_by = :user_id AND status=:status',
+            'params' => [':user_id' => $model->id, ':status' => Album::TYPE_PUBLIC],
+        ]);
+
+        return $this->render('/user/album', [
+            'model' => $model,
+            'dataProvider' => $dataProvider
+        ]);
+    }
+
+    public function actionPost($id)
+    {
+        $model = $this->findModel($id);
+
+        $query = (new Query)->select('*')
+            ->from('{{%home_post}}')
+            ->where('user_id=:user_id', [':user_id' => $model->id])
+            ->orderBy('created_at DESC');
+
+        $posts = Tools::Pagination($query);
+        return $this->render('/user/post', [
+            'model' => $model,
+            'posts' => $posts['result'],
+            'pages' => $posts['pages']
+        ]);
+        
+    }
+
+    public function actionProfile($id)
+    {
+        $model = $this->findModel($id);
+
+        return $this->render('/user/profile', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionViewAlbum($id)
+    {
+        if (($model = Album::findOne($id)) === null) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+        if ($model->status !== Album::TYPE_PUBLIC || ($model->status !== Album::TYPE_PUBLIC && $model->created_by !== Yii::$app->user->id)) {
+            throw new ForbiddenHttpException('You are not allowed to perform this action.');
+        }
+
+        $user = $this->findModel($model->created_by);
+        return $this->render('/user/viewAlbum', [
+            'model' => $model,
+            'user' => $user
+        ]);
+    }
+
+    public function actionViewPost($id)
+    {
+        if (($model = Post::findOne($id)) === null) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+
+        return $this->render('/user/viewPost', [
             'model' => $model,
         ]);
     }

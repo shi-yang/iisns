@@ -21,23 +21,15 @@ use yii\widgets\ActiveForm;
         'template' => "<div class=\"input-group\"><span class=\"input-group-addon\">" . Yii::t('app', 'Subject') . "</span>{input}</div>{error}",
     ])->textInput(['maxlength' => 32, 'autocomplete'=>'off']) ?>
 
-    <?= $form->field($model, 'content')->widget('kucha\ueditor\UEditor', [
+    <?= $form->field($model, 'content')->widget('shiyang\umeditor\UMeditor', [
         'clientOptions' => [
-            'elementPathEnabled' => false,
-            'focus' => true,
-            'autosave' => false,
-            'toolbars' => [
-                [
-                    'fullscreen', 'preview', 'source', 'undo', 'redo', 'insertcode',
-                    'justifyleft', 'justifyright', 'justifycenter', 'justifyjustify'
-                ],
-                [
-                    'emotion', 'simpleupload', 'insertimage', 'link', 'insertvideo', 'music', '|',
-                    'autotypeset', 'customstyle', 'fontfamily', 'fontsize',
-                    'bold', 'italic', 'underline', 'strikethrough', 'removeformat',
-                    'formatmatch', 'blockquote', 'pasteplain', '|',
-                    'forecolor', 'backcolor', '|',
-                ],
+            'initialFrameHeight' => 230,
+            'toolbar' => [
+                'source | undo redo | bold |',
+                'link unlink | emotion image video |',
+                'justifyleft justifycenter justifyright justifyjustify |',
+                'insertorderedlist insertunorderedlist |' ,
+                'horizontal preview fullscreen',
             ],
         ]
     ])->label(false) ?>

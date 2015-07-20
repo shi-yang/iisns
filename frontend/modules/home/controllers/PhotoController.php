@@ -9,9 +9,11 @@ use yii\filters\VerbFilter;
 use app\modules\home\models\Photo;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
+use yii\web\ServerErrorHttpException;
 
 class PhotoController extends BaseController
 {
+    public $layout = '@app/modules/user/views/layouts/user';
     public function behaviors()
     {
         return [
@@ -36,13 +38,11 @@ class PhotoController extends BaseController
 
     public function actionIndex()
     {
-    	$this->layout = '@app/modules/user/views/layouts/user';
         return $this->render('index');
     }
 
     public function actionView($id)
     {
-        $this->layout = '@app/modules/user/views/layouts/user';
         $model = $this->findModel($id);
         if ($model->created_by !== Yii::$app->user->id) {
             throw new ForbiddenHttpException('You are not allowed to perform this action.');
@@ -57,11 +57,12 @@ class PhotoController extends BaseController
     {
         $model = $this->findModel($id);
         if (Yii::$app->Request->isAjax && $model->created_by === Yii::$app->user->id) {
-            $albumId = $model->album_id;
-            $model->delete();
-            Yii::setAlias('@photo_path', '@webroot/uploads/home/photo/');
-            @unlink(Yii::getAlias('@photo_path').$model->path); 
-            return true;
+            try {
+                unlink(Yii::getAlias('@webroot/uploads/user/') . $model->created_by . '/' . $model->store_name);
+            } catch (Exception $e) {
+                throw new ServerErrorHttpException('Internal Server Error');
+            }
+            return $model->delete();
         } else {
             throw new ForbiddenHttpException('You are not allowed to perform this action.');
         }

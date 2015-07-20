@@ -1,7 +1,6 @@
 <?php
 use yii\helpers\Html;
 use yii\helpers\Url;
-use app\components\Tools;
 use app\modules\forum\models\Board;
 ?>
 <?php foreach($boards as $board): ?>
@@ -26,7 +25,7 @@ use app\modules\forum\models\Board;
                 </div>
                 <div class="hidden-xs pull-right" style="width:130px">
                     <i class="glyphicon glyphicon-user"></i> <?= Board::getLastThread($board['id'])['username'] ?> <br>
-                    <i class="glyphicon glyphicon-time"></i> <?= Tools::formatTime(Board::getLastThread($board['id'])['created_at']) ?>
+                    <i class="glyphicon glyphicon-time"></i> <?= Yii::$app->tools->formatTime(Board::getLastThread($board['id'])['created_at']) ?>
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -57,7 +56,7 @@ use app\modules\forum\models\Board;
                                             <dd class="hidden-xs" data-toggle="tooltip" data-placement="top" title="Thread Count">
                                                 <i class="glyphicon glyphicon-comment"></i> <?= Board::getThreadCount($subBoard['id']) ?> 
                                             </dd>
-                                            <dd class="hidden-xs"><i class="glyphicon glyphicon-time"></i> <?= Tools::formatTime(Board::getLastThread($subBoard['id'])['created_at']) ?></dd>
+                                            <dd class="hidden-xs"><i class="glyphicon glyphicon-time"></i> <?= Yii::$app->tools->formatTime(Board::getLastThread($subBoard['id'])['created_at']) ?></dd>
                                         </dl>
                                     </td>
                                 <?php endif ?>
@@ -86,7 +85,7 @@ use app\modules\forum\models\Board;
                             </td>
                             <td class="hidden-xs" style="width:150px;">
                                 <i class="glyphicon glyphicon-user"></i> <?= $lastThread['username'] ?> <br>
-                                <i class="glyphicon glyphicon-time"></i> <?= Tools::formatTime($lastThread['created_at']) ?>
+                                <i class="glyphicon glyphicon-time"></i> <?= Yii::$app->tools->formatTime($lastThread['created_at']) ?>
                             </td>
                         </tr>
                     <?php endforeach ?>

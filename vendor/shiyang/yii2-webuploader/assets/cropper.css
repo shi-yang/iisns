@@ -234,6 +234,9 @@
     margin-top: 1em;
    /* border: 1px solid #ccc;*/
 }
+.img-preview img {
+    max-width: inherit !important;
+}
 
 .cropper-wraper {
     position: relative;
@@ -256,4 +259,7 @@
 }
 .upload-btn:hover {
     background: #f0f0f0;
+}
+.cropper-wraper img {
+    max-width: inherit !important;
 }

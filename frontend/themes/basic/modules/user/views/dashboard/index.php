@@ -1,7 +1,6 @@
 <?php
 use yii\helpers\Url;
 use yii\helpers\Html;
-use app\components\Tools;
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Modal;
 use shiyang\infinitescroll\InfiniteScrollPager;
@@ -14,7 +13,10 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
 <div class="item widget-container share-widget fluid-height clearfix">
 
     <div class="widget-content padded">
-        <?php $form = ActiveForm::begin(['options' => ['id' => 'create-feed']]); ?>
+        <?php $form = ActiveForm::begin([
+            'enableClientValidation' => false,
+            'options' => ['id' => 'create-feed']
+        ]); ?>
         <?= $form->field($newFeed, 'content', ['inputOptions' => ['placeholder' => Yii::t('app', 'Record people around, things around.')]])->textarea(['rows' => 3])->label(false) ?>
         <div class="form-group">
             <?= Html::submitButton(Yii::t('app', 'Create'), ['class' => 'btn btn-success']) ?>
@@ -37,7 +39,7 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
                                 <?= Html::encode($feed['username']) ?>
                             </a>
                             <p>
-                                <em><?= Tools::formatTime($feed['created_at']) ?></em>
+                                <em><?= Yii::$app->tools->formatTime($feed['created_at']) ?></em>
                             </p>
                         </div>
                     </div>
@@ -55,7 +57,7 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
                     <div class="footer-detail">
                         <?php if(Yii::$app->user->id == $feed['user_id']): ?>
                             &nbsp;
-                            <a href="<?= Url::toRoute(['/home/feed/delete', 'id' => $feed['id']]) ?>" onclick="return false;" title="<?= Yii::t('app', 'Are you sure to delete it?') ?>" rel="delete">
+                            <a href="<?= Url::toRoute(['/home/feed/delete', 'id' => $feed['id']]) ?>" data-clicklog="delete" onclick="return false;" title="<?= Yii::t('app', 'Are you sure to delete it?') ?>">
                                 <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
                             </a>
                             &nbsp;

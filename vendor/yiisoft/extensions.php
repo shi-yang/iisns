@@ -111,22 +111,13 @@ return array (
       '@yii/gii' => $vendorDir . '/yiisoft/yii2-gii',
     ),
   ),
-  'kartik-v/yii2-krajee-base' => 
+  'shiyang/yii2-umeditor' => 
   array (
-    'name' => 'kartik-v/yii2-krajee-base',
-    'version' => '1.7.7.0',
+    'name' => 'shiyang/yii2-umeditor',
+    'version' => '1.0.0.0',
     'alias' => 
     array (
-      '@kartik/base' => $vendorDir . '/kartik-v/yii2-krajee-base',
-    ),
-  ),
-  'kartik-v/yii2-widget-datepicker' => 
-  array (
-    'name' => 'kartik-v/yii2-widget-datepicker',
-    'version' => '9999999-dev',
-    'alias' => 
-    array (
-      '@kartik/date' => $vendorDir . '/kartik-v/yii2-widget-datepicker',
+      '@shiyang/umeditor' => $vendorDir . '/shiyang/yii2-umeditor',
     ),
   ),
 );

@@ -29,7 +29,7 @@ class PostController extends Controller
     {
         return [
             'upload' => [
-                'class' => 'kucha\ueditor\UEditorAction',
+                'class' => 'shiyang\umeditor\UMeditorAction',
             ]
         ];
     }

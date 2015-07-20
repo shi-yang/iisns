@@ -2,7 +2,7 @@
 /**
  * @link https://github.com/nirvana-msu/yii2-infinite-scroll
  * @copyright Copyright (c) 2014 Alexander Stepanov
- * @license GPL-2.0
+ * @license MIT
  */
 
 namespace shiyang\infinitescroll;
@@ -236,6 +236,8 @@ class InfiniteScrollPager extends Widget
             ArrayHelper::getValue($this->pluginOptions, 'loading', null));  // Removing null entries
         if (empty($pluginOptions['loading']))
             unset($pluginOptions['loading']);
+        if (!isset($pluginOptions['animate']))
+            $pluginOptions['animate'] = true;
         $pluginOptions = Json::encode($pluginOptions);
 
         if (!$this->contentLoadedCallback instanceof JsExpression) {

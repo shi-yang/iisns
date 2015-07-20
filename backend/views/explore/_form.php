@@ -18,25 +18,18 @@ use yii\bootstrap\ActiveForm;
 
     <?= $form->field($model, 'content', [
         'template' => '{input}{error}{hint}'
-    ])->widget('kucha\ueditor\UEditor', [
+    ])->widget('shiyang\umeditor\UMeditor', [
         'clientOptions' => [
-            'elementPathEnabled' => false,
             'initialFrameHeight' => 100,
-            'autosave' => false,
-            'wordCount' => false,
-            'toolbars' => [
-                [
-                    'fullscreen', 'preview', 'source', 'undo', 'redo', 'insertcode',
-                    'justifyleft', 'justifyright', 'justifycenter', 'justifyjustify'
-                ],
-                [
-                    'emotion', 'simpleupload', 'insertimage', 'link', 'insertvideo', 'music', '|',
-                    'autotypeset', 'bold', 'italic', 'underline', 'removeformat',
-                    'formatmatch', 'blockquote', 'pasteplain', '|',
-                ],
+            'toolbar' => [
+                'source | undo redo | bold |',
+                'link unlink | emotion image video |',
+                'justifyleft justifycenter justifyright justifyjustify |',
+                'insertorderedlist insertunorderedlist |' ,
+                'horizontal preview fullscreen',
             ],
         ]
-    ]) ?>
+    ])->label(false) ?>
 
     <?= $form->field($model, 'origin')->textInput() ?>
     

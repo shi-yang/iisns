@@ -10,50 +10,6 @@ $this->title = $model->forum_name;
 $this->params['forum'] = $model->toArray;
 ?>
 <div id="layout"></div>
-<!-- Statistics -->
-<div class="row">
-    <div class="col-lg-12">
-        <div class="widget-container stats-container">
-            <div class="col-md-3">
-                <div class="number">
-                    <div class="icon glyphicon glyphicon-search"></div>
-                    99<small>%</small>
-                </div>
-                <div class="text">
-                    Overall growth
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="number">
-                    <div class="icon glyphicon glyphicon-search"></div>
-                    <?= $model->followerCount ?>
-                </div>
-                <div class="text">
-                    Followers
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="number">
-                    <div class="icon glyphicon glyphicon-search"></div>
-                    999
-                </div>
-                <div class="text">
-                    Views
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="number">
-                    <div class="icon glyphicon glyphicon-search"></div>
-                    <?= $model->threadCount ?>
-                </div>
-                <div class="text">
-                    Threads
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End Statistics -->
 <div class="row">
     <div class="col-md-3">
         <div class="list-group">

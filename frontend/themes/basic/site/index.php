@@ -176,22 +176,23 @@ body {
             ],
         ]);
         $menuItems = [
-            ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index']],
-            ['label' => Yii::t('app', 'Explore'), 'url' => ['/explore/index']],
+            ['label' => '<i class="glyphicon glyphicon-home"></i> ' . Yii::t('app', 'Home'), 'url' => ['/site/index']],
+            ['label' => '<i class="glyphicon glyphicon-globe"></i> ' . Yii::t('app', 'Explore'), 'url' => ['/explore/index']],
         ];
         if (Yii::$app->user->isGuest) {
-            $menuItems[] = ['label' => Yii::t('app', 'Sign up'), 'url' => ['/site/signup']];
-            $menuItems[] = ['label' => Yii::t('app', 'Log in'), 'url' => ['/site/login']];
+            $menuItems[] = ['label' => '<i class="glyphicon glyphicon-plus-sign"></i> ' . Yii::t('app', 'Sign up'), 'url' => ['/site/signup']];
+            $menuItems[] = ['label' => '<i class="glyphicon glyphicon-log-in"></i> ' . Yii::t('app', 'Log in'), 'url' => ['/site/login']];
         } else {
-            $menuItems[] = ['label' => Yii::t('app', 'Dashboard'), 'url' => ['/user/dashboard']];
+            $menuItems[] = ['label' => '<i class="glyphicon glyphicon-dashboard"></i> ' . Yii::t('app', 'Dashboard'), 'url' => ['/user/dashboard']];
             $menuItems[] = [
-                'label' => Yii::t('app', 'Log out') . ' (' . Yii::$app->user->identity->username . ')',
+                'label' => '<i class="glyphicon glyphicon-log-out"></i> ' . Yii::t('app', 'Log out') . '(' . Yii::$app->user->identity->username . ')',
                 'url' => ['/site/logout'],
                 'linkOptions' => ['data-method' => 'post']
             ];
         }
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav navbar-right'],
+            'encodeLabels' => false,
             'items' => $menuItems,
         ]);
         NavBar::end();
@@ -215,9 +216,9 @@ body {
         <div class="jumbotron">
             <h1><?= Yii::t('app', 'Everyone is an artist') ?></h1>
             <p class="lead">I hope you like it.</p>
-            <p><a class="btn btn-lg btn-success" href="https://github.com/shi-yang/iisns/archive/v2.1.2.zip"><span class="glyphicon glyphicon-download-alt"></span> <?= Yii::t('app', 'Download Source') ?></a></p>
+            <p><a class="btn btn-lg btn-success" href="https://github.com/shi-yang/iisns/archive/v2.1.3.zip"><span class="glyphicon glyphicon-download-alt"></span> <?= Yii::t('app', 'Download Source') ?></a></p>
             <p id="version">
-              Version 2.1.2 Alpha &nbsp;&nbsp;·&nbsp;&nbsp;
+              Version 2.1.3 Alpha &nbsp;&nbsp;·&nbsp;&nbsp;
               <a href="https://github.com/shi-yang/iisns" target="_blank">
                 GitHub Project</a> &nbsp;&nbsp;·&nbsp;&nbsp;
               Created by <a href="http://www.iisns.com/u/shiyang" target="_blank">Shiyang</a>

@@ -9,13 +9,6 @@ use shiyang\infinitescroll\InfiniteScrollPager;
 
 $this->title = Yii::t('app', 'Explore');
 $this->registerCss('
-.content {
-  margin: 0 auto;
-  margin-bottom: 20px;
-  padding: 20px;
-  background: #fff;
-  box-shadow: 0 0 3px 1px rgba(0,0,0,0.05),0 1px 2px 0 rgba(0,0,0,0.1);
-}
 .album-all {
 list-style-type: none;
 }
@@ -70,48 +63,54 @@ list-style-type: none;
                     </div>
                 </div>
             </div>
-            <div class="post-all">
-                <?= Html::a(Yii::t('app', 'Create a post'), ['/explore/create', 'category' => 'post'], ['class' => 'btn btn-success']) ?>
+            <ul class="timeline">
+                <li class="time-label">
+                    <?= Html::a(Yii::t('app', 'Create a post'), ['/explore/create', 'category' => 'post'], ['class' => 'btn btn-success']) ?>
+                </li>
                 <?php foreach($posts as $post): ?>
-                    <div class="post-list">
-                        <h2 class="heading"><span class="new-icon"></span>
-                            <a href="<?= Url::toRoute(['/explore/view', 'id' => $post['id']]) ?>" title="?" target="_blank"><?= Html::encode($post['title']) ?></a>
-                        </h2>
-                        <div class="info"> <span>2015-06-05</span> <span><i class="icons th-list-icon"></i><span class="hidden"> </div>
-                        <div class="main row-fluid">
-                            <div class="desc pull-left">
+                    <li>
+                        <i class="glyphicon glyphicon-list-alt bg-blue"></i>
+                        <div class="timeline-item">
+                            <span class="time">2015-06-05</span>
+                            <h3 class="timeline-header"><span class="new-icon"></span>
+                                <a href="<?= Url::toRoute(['/explore/view', 'id' => $post['id']]) ?>" title="?" target="_blank"><?= Html::encode($post['title']) ?></a>
+                            </h3>
+                            <div class="timeline-body">
                                 <p><?= Html::encode($post['summary']) ?> ... </p>
-                                <a class="pull-right" href="<?= Url::toRoute(['/explore/delete', 'id' => $post['id']]) ?>" data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="post">
+                            </div>
+                            <div class="timeline-footer">
+                                <a class="btn btn-primary btn-xs" href="<?= Url::toRoute(['/explore/view', 'id' => $post['id']]) ?>" target="_blank"><?= Yii::t('app', 'Read more') ?></a>
+                                <a class="btn btn-danger btn-xs"  href="<?= Url::toRoute(['/explore/delete', 'id' => $post['id']]) ?>" data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="post">
                                     <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
                                 </a>
-                                <span class="more pull-right"><a href="<?= Url::toRoute(['/explore/view', 'id' => $post['id']]) ?>" target="_blank">查看详情</a></span>
                             </div>
                         </div>
-                    </div>
-                    <div class="clearfix"></div>
+                    </li>
                 <?php endforeach ?>
                 <?= InfiniteScrollPager::widget([
                     'pagination' => $pages,
                     'widgetId' => '.post-all',
                 ]);?>
-            </div>
+            </ul>
         </div>
         <div class="col-md-4">
-            <p class="bg-success" style="padding:15px;">
-                <b><?= Yii::t('app', 'Recommendation') ?></b>
-            </p>
-            <a href="<?= Url::toRoute(['/explore/create', 'category' => 'forum']) ?>" style=" border-bottom: 1px dotted #ccc;">
-                <?= Yii::t('app', 'Add Recommendation') ?>
-            </a>
-            <?php foreach($forums as $forum): ?>
-                <a href="<?= Url::toRoute(['/explore/view', 'id' => $forum['id']]) ?>" style=" border-bottom: 1px dotted #ccc;">
-                    <div class="media">
-                        <div class="media-body">
-                            <h4 class="media-heading"><?= Html::encode($forum['forum_name']) ?></h4>
-                        </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><?= Yii::t('app', 'Recommendation') ?></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="list-group">
+                        <?php foreach($forums as $forum): ?>
+                            <a class="list-group-item" href="<?= Url::toRoute(['/explore/view', 'id' => $forum['id']]) ?>">
+                                <h4 class="media-heading"><?= Html::encode($forum['forum_name']) ?></h4>
+                            </a>
+                        <?php endforeach ?>
+                        <a class="list-group-item" href="<?= Url::toRoute(['/explore/create', 'category' => 'forum']) ?>">
+                            <span class="glyphicon glyphicon-plus"></span> <?= Yii::t('app', 'Add Recommendation') ?>
+                        </a>
                     </div>
-                </a>
-            <?php endforeach ?>
+                </div>
+            </div>
         </div>
     </div>
 </div>

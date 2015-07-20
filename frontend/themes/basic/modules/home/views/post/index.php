@@ -16,7 +16,7 @@ $user = Yii::$app->user->identity;
 ?>
 <div class="social-wrapper row">
     <div id="social-container">
-        <div class="col-xs-12 col-sm-8 col-md-8 col-lg-offset-1 col-lg-6" id="content">
+        <div class="col-xs-12 col-sm-8 col-md-8" id="content">
             <div class="post-index">
                 <h1><?= Html::encode($this->title) ?></h1>
                 <p>
@@ -35,7 +35,7 @@ $user = Yii::$app->user->identity;
                         <div class="widget-footer">
                             <div class="footer-detail">
                                 &nbsp;
-                                <a href="<?= Url::toRoute(['/home/post/delete', 'id' => $post['id']]) ?>" onclick="return false;" title="<?= Yii::t('app', 'Are you sure to delete it?') ?>" rel="delete">
+                                <a href="<?= Url::toRoute(['/home/post/delete', 'id' => $post['id']]) ?>" data-clicklog="delete" onclick="return false;" title="<?= Yii::t('app', 'Are you sure to delete it?') ?>">
                                     <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
                                 </a>
                                 &nbsp;

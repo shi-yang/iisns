@@ -1,8 +1,13 @@
 
-$(function	()	{
-	
+$(function() {
+	'use strict';
+
+	//顶部导航宽度
+	var topNavWidth = parseInt($('#main-container').css('width')) + parseInt($('aside.skin-1').css('width'));
+	$('#top-nav').css('width', topNavWidth + 'px');
+
 	//scroll to top of the page
-	$("#scroll-to-top").click(function()	{
+	$("#scroll-to-top").click(function() {
 		$("html, body").animate({ scrollTop: 0 }, 600);
 		 return false;
 	});
@@ -132,12 +137,19 @@ $(function	()	{
        function(){ $(this).addClass('open') },
        function(){ $(this).removeClass('open') }
 	)
-	
-	// Popover
-    $("[data-toggle=popover]").popover();
-	
-	// Tooltip
-    $("[data-toggle=tooltip]").tooltip();
+
+	//选择系统头像
+	$('#set-avatar').click(function() {
+	    $.ajax({
+	        url: $(this).attr('href'),
+	        type:'post',
+	        error: function(){alert('error');},
+	        success:function(html){
+	            $('#avatar-container').html(html);
+	            $('#avatarModal').modal('show');
+	        }
+	    });
+	});
 
     //头像提示用户信息
 	$('[rel=author]').popover({
@@ -180,48 +192,76 @@ $(function	()	{
 	        }
 	    }, 100);
 	});
-	
-	//删除
-	$('[rel=delete]').popover({
-	    trigger : 'click',
-        container: 'body',
-        placement: 'top',
-        title: this.title,
-	    content : '<div class="delete"><a class="btn-ok" href="javascript:void(0)"><i class="glyphicon glyphicon-ok"></i> 确定</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="$(\'.popover\').popover(\'hide\')"><i class="glyphicon glyphicon-remove"></i> 取消</a></div>',
-	    html: true
-	}).on('click', function(){
-	    var _this = this;
-	    var url = $(this).attr('href');
-	    var div_id = url.substr(url.indexOf('=') + 1);
-	    $(this).popover('show');
-	    $('.popover').on('mouseleave', function () {
-	        $(_this).popover('hide');
-	    });
-	    $('.btn-ok').on('click', function(){
-		    $.ajax({
-		    	type: 'POST',
-		        url: url,
-		        success: function() {
-		        	$(_this).popover('hide');
-		        	$('#'+div_id).fadeOut(1000);
-		        }
-		    });
-	    	return false;
-	    });
-	}).on('mouseleave', function () {
-	    var _this = this;
-	    setTimeout(function () {
-	        if(!$('.popover:hover').length) {
-	            $(_this).popover('hide')
-	        }
-	    }, 500);
-	});
 });
 
+(function() {
+	//删除
+	$('body').on('mouseenter', '[data-clicklog=delete]', function(event) {
+		$('[data-clicklog=delete]').popover({
+		    trigger : 'click',
+	        container: 'body',
+	        placement: 'top',
+	        title: this.title,
+		    content : '<div class="delete"><a class="btn-ok" href="javascript:void(0)"><i class="glyphicon glyphicon-ok"></i> 确定</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="$(\'.popover\').popover(\'hide\')"><i class="glyphicon glyphicon-remove"></i> 取消</a></div>',
+		    html: true
+		}).on('click', function(){
+		    var _this = this;
+		    var url = $(this).attr('href');
+		    var div_id = url.substr(url.indexOf('=') + 1);
+		    $(this).popover('show');
+		    $('.popover').on('mouseleave', function () {
+		        $(_this).popover('hide');
+		    });
+		    $('.btn-ok').on('click', function(){
+			    $.ajax({
+			    	type: 'POST',
+			        url: url,
+			        success: function() {
+			        	$(_this).popover('hide');
+			        	$('#'+div_id).fadeOut(1000);
+			        }
+			    });
+		    	return false;
+		    });
+		}).on('mouseleave', function () {
+		    var _this = this;
+		    setTimeout(function () {
+		        if(!$('.popover:hover').length) {
+		            $(_this).popover('hide')
+		        }
+		    }, 500);
+		});
+		return false;
+	});
+
+	//添加评论
+	$('body').on('click', '[data-clicklog=comment]', function(event) {
+		var _this = this;
+		$(this).css('display', 'none');
+		$(this).after('<div class="comment-box-wrap"><textarea class="form-control" id="comment-textarea"></textarea><a href="" class="btn btn-default btn-comment">Send</a></div>');
+		$('.btn-comment').on('click', function(){
+		    $.ajax({
+		    	type: 'GET',
+		        url: $(_this).children().attr('href'),
+		        data: {content : $('#comment-textarea').val()},
+		        success: function() {
+		        }
+		    });
+		    return false;
+		});
+	 	$(document).click(function (e) {
+	 		var id = $(e.target).attr('class');
+	    	if (id != 'comment-box-wrap' && id != 'form-control' && id != 'btn-comment') {
+	    		$('.comment-box-wrap').remove();
+				$(_this).css('display', 'block');
+	    	};
+	    });
+		return false;
+	});
+}).call(this);
+
 $(window).scroll(function(){
-		
 	 var position = $(window).scrollTop();
-	
 	 //Display a scroll to top button
 	 if(position >= 200)	{
 		$('#scroll-to-top').attr('style','bottom:16%;');	

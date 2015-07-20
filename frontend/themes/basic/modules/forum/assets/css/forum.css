@@ -5,7 +5,6 @@
 	padding: 10px 40px;
 	border-bottom: 1px solid #D3D3D3;
 }
-
 .new-category {
 	padding: 10px 40px;
 	border-bottom: 1px solid #D3D3D3;
@@ -14,7 +13,10 @@
 .new-category button {
 	margin-top: 40px;
 }
-
+.img-user-avatar {
+	width: 50px;
+	height: 50px;
+}
 .thread-form { padding: 21px;box-shadow: 0 0px 2px rgba(0,0,0,0.46);margin-bottom: 20px;}
 .thread-content { 
 	margin: 0px;
@@ -22,149 +24,146 @@
 	height: 66px;
 	float: left;
 }
-.thread-list{padding: 0;}
-.thread-item { 
-	position: relative;
-	padding: 15px 15px 15px 20px;
-	border-bottom: #d1d1d1 1px dotted;
-}
-.hg-bg {display: board;height: 20px;position: relative;}
-.thread-item:hover {
-background-color: #f3f8f9;
-}
+/* Begin thread 列表 */
 .thread-item {
--moz-transition: background-color .2s;
--webkit-transition: background-color .2s;
-transition: background-color .2s;
+	padding: 15px;
+	word-wrap: break-word;
+	border-bottom: 1px solid #eee;
+    -moz-transition: background-color .2s;
+    -webkit-transition: background-color .2s;
+    transition: background-color .2s;
 }
-.thread-time {color: #aaa;font-size: 13px;}
+.thread-item:hover {
+    background-color: #f3f8f9;
+}
+.thread-item h2 {
+  font-size: 16px;
+  line-height: 130%;
+  text-shadow: 0px 1px 0px #fff;
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+.thread-item h2 a {
+}
+.thread-item .badge {
+	background-color: #ccc;
+}
+/* End thread 列表 */
 
-.about-view {padding: 6px;white-space: normal;word-wrap: break-word;}
-.thread-right a {font-size: 15px}
-.thread-right a:hover {
-    color: #ff7e51;
-}
-
-.thread-container {
-	padding: 20px 20px 5px 20px;
-	background-color: #fff;
-	border-top: 1px dashed #d7d7d7;
-	margin-bottom: 35px;
-}
-.thread-container .thread-feed .user-avatar {
-	width: 64px;
-	height: 64px;
-	float: left;
-}
-.thread-container .thread-feed .thread-detail {
-	margin-left: 70px;
-}
-@media (max-width: 768px) {
-	.thread-container .thread-feed .thread-detail {
-		margin-left: 0;
-	}
-}
-.thread-container .thread-feed .thread-detail .thread-main {
-	word-break: break-all;
-}
-.thread-container .thread-feed .thread-detail .thread-main img{
-	max-width: 100%
-}
-.thread-container .thread-feed .thread-detail .media-title {
-	word-break: break-all;
-}
-.leave-post {
-padding:15px 20px 20px 20px;
-background: #f7f8f9;
-border-top: 1px solid #D9E0E6;
-border-bottom: 1px solid #D9E0E6;
-color: #646668;
-}
-
+/* Begin thread 详细页面 */
 .thread-view {
-	border-bottom: 1px solid #D9E0E6;
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    margin: 0 0 10px 0;
+    padding: 26px;
 }
-#thread-wrap .thread-main {
-	padding: 0 20px 20px 20px;
-	word-break: break-all;
+.thread-view header h1 {
+    height: auto;
+    font-size: 22px;
+    font-weight: 400;
+    text-align: left;
+    word-wrap: break-word;
+    word-break: normal;
+    line-height: 32px;
+    overflow: hidden;
+    padding-top: 10px;
+    margin-bottom: 30px;
 }
-.thread-view .thread-meta {
-	color: #656B6E;
-	border-bottom: 1px solid #D9E0E6;
-	margin: 0;
-	padding: 13px;
+.thread-view .thread-info {
+    border-bottom: 1px solid #e6e6e6;
+    padding-bottom: 7px;
+    font-size: 12px;
+    color: #8c8c8c;
+    line-height: 14px;
 }
-
-.thread-view .col-sm-10 {
-	border-left: 1px solid #ccc;
+.thread-view article p {
+    line-height: 28px;
+    margin-top: 5px;
 }
-
-.thread-view .author img {
-	width: 120px;
-	height: 120px;
+.thread-view .thread-main {
+    margin-top: 29px;
+    font-size: 16px;
+    color: #353535;
 }
-
-#thread-wrap .thread-head {
-	border-top: 1px solid #D9E0E6;
-	padding: 10px 10px 0 10px;
-	color: #aaa;
+.user-info {
+    background-color: #fff;
+    border: 1px solid #e6e6e6;
+    padding: 26px;
 }
-#thread-wrap .thread-main .content {
-	line-height: 24px;
-	white-space:normal;
-	word-break:break-all;
-	overflow:hidden;
-	min-height: 77px;
+.user-info .img-user {
+    width:120px;
+    height:120px;
+    margin: 0 auto;
+    display: block;
 }
-#thread-wrap .thread-main .content img{
-	max-width: 100%;
+.user-info .user-msg {
+    padding-top: 8px;
+    text-align: center;
+    line-height: 20px;
 }
-#post-form, #post-view {
-	border-top: 1px solid #D9E0E6;
+.post-area {
+    position: relative;
+    margin-top: 10px;
+    padding: 20px 30px 0;
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    overflow: hidden;
 }
-#post-form form {
-	margin-top: 14px;
-	margin-right: 11px;
+.post-area .post-user, .post-area .post-form {
+    float:left;
 }
-#post-view .post-main {
-padding: 20px;
-line-height: 24px;
-white-space: normal;
-word-break: break-all;
-overflow: hidden;
-min-height: 77px;
+.post-area img {
+    width:64px;
+    height:64px;
+    margin: 0 auto 28px;
+    display: block;
 }
-
-.floor-number {
-	position: absolute;
-	right: 5%;
-	font-size: 22px;
-	color: #999;
+.post-area form {
+    min-width: 100%
 }
-.post-time {color: #bebdbd;font-size: 12px;}
-
-.thread-nickname {color: #a7a7a7;word-wrap: normal;font-weight: bold;font-size: 14px;}
-.no-threads-found {
-color: #829bb3;
-text-align: center;
-padding: 61px 20px;
-background: #fff;
-font-size: 34px;
-font-weight: bold;
-box-shadow: 0 2px 5px rgba(0,0,0,0.46);
-word-wrap: break-word;
-border-radius: 4px;
--moz-border-radius: 4px;
--webkit-border-radius: 4px;
+.posts {
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    padding: 26px;
 }
-.landlord-name {
-overflow: hidden;
-white-space: nowrap;
-text-overflow: ellipsis;
+.posts .post-title h3 {
+    font-size: 16px;
+    line-height: 20px;
 }
-.widget-containera {
-background-color: #fff
+.posts .post-item {
+    position: relative;
+    margin-top: 30px !important;
+    border-bottom: 1px solid #e6e6e6;
 }
+.posts .post-user-info img {
+    width:64px;
+    height:64px;
+    margin: 0 auto 28px;
+    display: block;
+}
+.posts .post-meta {
+    font-size: 12px;
+    color: #aaa;
+}
+.posts .post-meta .floor-number {
+    font-size: 14px;
+    float: right;
+    padding: 0 5px;
+    margin-right: 0;
+    text-align: center;
+}
+.posts .post-meta .floor-number .badge {
+    background-color: #dfdfdf;
+}
+.posts .post-content {
+    margin-top: 5px;
+    word-wrap: break-word;
+    overflow: hidden;
+    font-size: 16px;
+    line-height: 25px;
+    color: #333;
+}
+/* End thread 详细页面 */
 
 .tbox{
 margin-bottom: 10px;  background: white;  overflow: hidden; 
@@ -233,9 +232,6 @@ margin-left: 0px; line-height: 24px;
 float:right;
 }
 .tbox .ft { padding: 0px 15px;height: 1px;overflow: hidden; }
-
-
-
 .tbox .txt li {
 margin-left: 10px; line-height: 24px;
 }

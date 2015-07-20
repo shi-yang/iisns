@@ -216,12 +216,12 @@ list-style-type: none;
   margin: 0;
   font-size: 18px;
   font-weight: bold;
+  line-height: 29px;
   padding-right: 25px;
   background-position: center right;
   right: 0px;
   transition: all 0.5s ease-out;
 }
-
 .meccaddress {
   color: #a2a2a2;
   margin-top: 12px;
@@ -229,7 +229,19 @@ list-style-type: none;
   font-style: normal;
   display: block;
 }
-
+article {
+  font-family: 'Microsoft YaHei';
+}
+article .content-text {
+  margin-top: 20px;
+  font-size: 16px;
+  line-height: 28px;
+}
+article .content-text p {
+  margin-bottom: 20px;
+  text-indent: 2em;
+  color: #353535;
+}
 .recommend-forum {
   cursor: pointer;
   padding: 7px;
@@ -238,11 +250,9 @@ list-style-type: none;
   -webkit-transition: background-color .2s;
   transition: background-color .2s;
 }
-
 .recommend-forum:hover {
   background-color: #f3f8f9;
 }
-
 center img {
   max-width: 100%
 }

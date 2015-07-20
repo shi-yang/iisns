@@ -25,7 +25,7 @@ class ThreadController extends BaseController
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['thread'],
+                    'delete' => ['post'],
                 ],
             ],
         ];
@@ -35,7 +35,7 @@ class ThreadController extends BaseController
     {
         return [
             'upload' => [
-                'class' => 'kucha\ueditor\UEditorAction',
+                'class' => 'shiyang\umeditor\UMeditorAction',
             ]
         ];
     }
@@ -68,6 +68,7 @@ class ThreadController extends BaseController
         if ($newPost->load(Yii::$app->request->post())) {
             $newPost->thread_id = $model->id;
             if ($newPost->save()){
+                $newPost->PostCuntPlus();
                 if ($model->user_id !== Yii::$app->user->id) {
                     Yii::$app->userData->updateKey('unread_comment_count', $model->user_id);
                 }

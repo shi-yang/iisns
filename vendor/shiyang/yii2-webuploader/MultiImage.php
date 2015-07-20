@@ -1,19 +1,15 @@
 <?php
 /**
- * @copyright Copyright (c) 2015 Shiyang! Consulting Group LLC
+ * @copyright Copyright (c) 2015 Shiyang
  * @link http://shiyang.me
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  */
 namespace shiyang\webuploader;
 
-use yii\base\Widget;
 use Yii;
+use yii\base\Widget;
 
 /**
- * Umeditor renders a editor js plugin for classic editing.
- * @see http://ueditor.baidu.com/
- * @author Baidu FLX
- * @link https://github.com/fex-team/umeditor
+ * 多图上传
  */
 class MultiImage extends Widget
 {
@@ -30,17 +26,17 @@ class MultiImage extends Widget
 	 */
 	public function run()
 	{
-		$this->registerPlugin();
+		$this->registerClientScript();
 		return $this->render('multi');
 	}
 
 	/**
 	 * Registers Umeditor plugin
 	 */
-	protected function registerPlugin()
+	protected function registerClientScript()
 	{
 		$view = $this->getView();
 
 		MultiImageAsset::register($view);
 	}
-} 
+}
