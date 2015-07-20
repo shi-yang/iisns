@@ -107,12 +107,11 @@
     padding: 20px 30px 0;
     background: #fff;
     border: 1px solid #e6e6e6;
-    overflow: hidden;
 }
 .post-area .post-user, .post-area .post-form {
     float:left;
 }
-.post-area img {
+.post-area .post-user img {
     width:64px;
     height:64px;
     margin: 0 auto 28px;
