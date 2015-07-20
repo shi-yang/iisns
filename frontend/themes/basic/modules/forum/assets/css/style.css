@@ -198,6 +198,7 @@ blockquote.pull-right {
     max-height: 66px;
     width: 100%;
     border: 0;
+    z-index: 1000;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     transition: all 0.3s;
