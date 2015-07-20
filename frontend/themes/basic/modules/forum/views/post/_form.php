@@ -36,7 +36,8 @@ use yii\widgets\ActiveForm;
                 </div>
                 <?php ActiveForm::end(); ?>
             <?php else: ?>
-                <h3>Please <?= Html::a('login', ['/site/login']) ?> to leave a comment.</h3>
+                <h3><?= Yii::t('app', 'Please login to leave a comment.') ?></h3>
+                <?= Html::a(Yii::t('app', 'Log in'), ['/site/login'], ['class' => 'btn btn-success']) ?>
             <?php endif; ?>
         </div>
     </div>
