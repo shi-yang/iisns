@@ -66,7 +66,7 @@ class Thread extends \yii\db\ActiveRecord
     {
        if (parent::beforeSave($insert)) {
         	if ($this->isNewRecord) {
-        	  $this->user_id = Yii::$app->user->identity->id;
+        	  $this->user_id = Yii::$app->user->id;
         	  $this->created_at = time();
         	}
             return true;
@@ -131,8 +131,7 @@ class Thread extends \yii\db\ActiveRecord
         $query->select('p.id,  p.content, p.created_at, p.user_id, u.username, u.avatar')
             ->from('{{%forum_post}} as p')
             ->join('LEFT JOIN','{{%user}} as u', 'u.id=p.user_id')
-            ->where('p.thread_id=:id', [':id' => $this->id])
-            ->orderBy('p.created_at DESC');
+            ->where('p.thread_id=:id', [':id' => $this->id]);
         $result = Tools::Pagination($query);
         return ['posts' => $result['result'], 'pages' => $result['pages']];
     }
