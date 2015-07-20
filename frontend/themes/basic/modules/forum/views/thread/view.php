@@ -55,7 +55,6 @@ $this->params['breadcrumbs'][] = $user['username'];
         <!-- Post Form End -->
         <?= $this->render('_posts', [
                 'posts'=>$posts['posts'],
-                'floor'=> $model->post_count, //楼层数
                 'pageSize'=>$posts['pages']->pageSize, //分页
                 'pages' => $posts['pages'], //分页
                 'postCount' => $model->post_count //评论数
