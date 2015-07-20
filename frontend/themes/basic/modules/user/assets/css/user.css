@@ -1787,6 +1787,9 @@ input[type="text"]:focus,
 .social-wrapper #social-container .profile-widget .profile-stats > div p {
     font-weight: 300;
 }
+.social-wrapper #social-container .social-entry img {
+    max-width: 100% !important;
+}
 .social-wrapper #social-container .social-entry p.content {
     font-size: 14px;
     font-weight: 300;
