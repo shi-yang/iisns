@@ -72,6 +72,7 @@ class ThreadController extends BaseController
                 if ($model->user_id !== Yii::$app->user->id) {
                     Yii::$app->userData->updateKey('unread_comment_count', $model->user_id);
                 }
+                Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Create successfully.'));
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } 
