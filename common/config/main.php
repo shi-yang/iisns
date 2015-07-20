@@ -17,22 +17,22 @@ return [
             'bundles' => [
                 'yii\web\JqueryAsset' => [
                     'js' => [
-                        YII_ENV_DEV ? 'jquery.js' : '//cdn.bootcss.com/jquery/2.1.4/jquery.min.js',
+                        YII_DEBUG ? 'jquery.js' : '//cdn.bootcss.com/jquery/2.1.4/jquery.min.js',
                     ]
                 ],
                 'yii\bootstrap\BootstrapAsset' => [
                     'css' => [
-                        YII_ENV_DEV ? 'css/bootstrap.css' : '//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css',
+                        YII_DEBUG ? 'css/bootstrap.css' : '//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css',
                     ]
                 ],
                 'yii\bootstrap\BootstrapThemeAsset' => [
                     'css' => [
-                        YII_ENV_DEV ? 'css/bootstrap-theme.css' : '//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css',
+                        YII_DEBUG ? 'css/bootstrap-theme.css' : '//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css',
                     ]
                 ],
                 'yii\bootstrap\BootstrapPluginAsset' => [
                     'js' => [
-                        YII_ENV_DEV ? 'js/bootstrap.js' : '//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js',
+                        YII_DEBUG ? 'js/bootstrap.js' : '//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js',
                     ]
                 ],
             ],
