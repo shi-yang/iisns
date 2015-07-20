@@ -17,7 +17,7 @@ use yii\bootstrap\Modal;
 
         <?= $form->field($profile, 'gender')->radioList([Yii::t('app', 'Male'), Yii::t('app', 'Female')]) ?>
 
-        <?= $form->field($profile, 'birthdate')->widget('common\widgets\layDate\LayDate', [
+        <?= $form->field($profile, 'birthdate')->widget('common\widgets\laydate\LayDate', [
             'clientOptions' => [
                 'istoday' => false,
             ]

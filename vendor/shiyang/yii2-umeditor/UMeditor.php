@@ -64,7 +64,7 @@ class UMeditor extends InputWidget
 	protected function registerClientScript()
 	{
 		$view = $this->getView();
-		UmeditorAsset::register($view);
+		UMeditorAsset::register($view);
 		$id = $this->options['id'];
 		$options = Json::encode($this->clientOptions);
 		$js = "window.um = UM.getEditor('$id', $options);";

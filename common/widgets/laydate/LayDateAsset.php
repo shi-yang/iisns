@@ -12,7 +12,7 @@ use yii\web\AssetBundle;
  */
 class LayDateAsset extends AssetBundle
 {
-    public $sourcePath = '@common/widgets/Laydate/assets';
+    public $sourcePath = '@common/widgets/laydate/assets';
 
     public $js = [
         'laydate.js',
