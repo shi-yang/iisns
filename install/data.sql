@@ -12,6 +12,77 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
+--
+-- 表的结构 `pre_auth_assignment`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_auth_assignment` (
+  `item_name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `user_id` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` int(11) DEFAULT NULL,
+  PRIMARY KEY (`item_name`,`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- 转存表中的数据 `pre_auth_assignment`
+--
+
+INSERT INTO `pre_auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
+('超级管理员', '10000', 1437549324);
+
+--
+-- 表的结构 `pre_auth_item`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_auth_item` (
+  `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `type` int(11) NOT NULL,
+  `description` text COLLATE utf8_unicode_ci,
+  `rule_name` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `data` text COLLATE utf8_unicode_ci,
+  `created_at` int(11) DEFAULT NULL,
+  `updated_at` int(11) DEFAULT NULL,
+  PRIMARY KEY (`name`),
+  KEY `rule_name` (`rule_name`),
+  KEY `idx-auth_item-type` (`type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- 转存表中的数据 `pre_auth_item`
+--
+
+INSERT INTO `pre_auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
+('/*', 2, NULL, NULL, NULL, 1437549400, 1437549400),
+('超级管理员', 1, '拥有最高权限', NULL, NULL, 1437549293, 1437549293);
+
+--
+-- 表的结构 `pre_auth_item_child`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_auth_item_child` (
+  `parent` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `child` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`parent`,`child`),
+  KEY `child` (`child`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- 转存表中的数据 `pre_auth_item_child`
+--
+
+INSERT INTO `pre_auth_item_child` (`parent`, `child`) VALUES
+('超级管理员', '/*');
+
+--
+-- 表的结构 `pre_auth_rule`
+--
+CREATE TABLE IF NOT EXISTS `pre_auth_rule` (
+  `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `data` text COLLATE utf8_unicode_ci,
+  `created_at` int(11) DEFAULT NULL,
+  `updated_at` int(11) DEFAULT NULL,
+  PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- 表的结构 `pre_favorite`
@@ -325,6 +396,25 @@ CREATE TABLE IF NOT EXISTS `pre_user_profile` (
 --
 -- 限制导出的表
 --
+
+--
+-- 限制表 `pre_auth_assignment`
+--
+ALTER TABLE `pre_auth_assignment`
+  ADD CONSTRAINT `pre_auth_assignment_ibfk_1` FOREIGN KEY (`item_name`) REFERENCES `pre_auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- 限制表 `pre_auth_item`
+--
+ALTER TABLE `pre_auth_item`
+ADD CONSTRAINT `pre_auth_item_ibfk_1` FOREIGN KEY (`rule_name`) REFERENCES `pre_auth_rule` (`name`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- 限制表 `pre_auth_item_child`
+--
+ALTER TABLE `pre_auth_item_child`
+ADD CONSTRAINT `pre_auth_item_child_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `pre_auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `pre_auth_item_child_ibfk_2` FOREIGN KEY (`child`) REFERENCES `pre_auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- 限制表 `pre_forum`
