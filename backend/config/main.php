@@ -24,12 +24,19 @@ return [
                 '@photo' => '@web/uploads/blog/photo/'
             ],
         ],
+        'rbac' => [
+            'class' => 'backend\modules\rbac\Module',
+            'layout' => 'left-menu',
+        ]
     ],
     'components' => [
         'db' => $db,
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
+        ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -43,6 +50,16 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+    ],
+    'as access' => [
+        'class' => 'backend\modules\rbac\components\AccessControl',
+        'allowActions' => [
+            'site/login',
+            'site/logout',
+            'site/error',
+            //'rbac/*'
+            // The actions listed here will be allowed to everyone including guests.
+        ]
     ],
     'params' => $params,
 ];

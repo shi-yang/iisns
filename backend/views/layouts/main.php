@@ -145,6 +145,11 @@ AppAsset::register($this);
                         </ul>
                     </li>
                     <li>
+                        <a href="<?= Url::toRoute(['/rbac']) ?>">
+                            <i class="glyphicon glyphicon-wrench"></i> <span><?= Yii::t('app', 'RBAC') ?></span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="<?= Url::toRoute(['/site/cache']) ?>">
                             <i class="glyphicon glyphicon-road"></i> <span><?= Yii::t('app', 'Cache') ?></span>
                         </a>
