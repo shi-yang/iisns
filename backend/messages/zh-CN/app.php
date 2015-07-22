@@ -6,5 +6,6 @@ return [
     'Explore' => '探索',
     'Cache' => '缓存设置',
     'Content' => '内容管理',
-    'RBAC' => '权限管理'
+    'RBAC' => '权限管理',
+    'Registered users' => '注册用户'
 ];

@@ -25,7 +25,7 @@ $this->registerCssFile(Yii::getAlias('@web/css/site.css'));
     <div class="wrap">
         <?php
             NavBar::begin([
-                'brandLabel' => 'My Company',
+                'brandLabel' => 'iiSNS Admin',
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
                     'class' => 'navbar-inverse navbar-fixed-top',

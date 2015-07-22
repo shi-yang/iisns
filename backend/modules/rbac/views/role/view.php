@@ -41,8 +41,10 @@ $this->params['breadcrumbs'][] = $this->title;
     ?>
     <div class="row">
         <div class="col-lg-5">
-            <?= Yii::t('rbac-admin', 'Avaliable') ?>:
-            <input id="search-avaliable"><br>
+            <div class="input-group">
+                <span class="input-group-addon"><?= Yii::t('rbac-admin', 'Avaliable') ?>:</span>
+                <input type="text" class="form-control" id="search-avaliable" placeholder="Search">
+            </div>
             <select class="form-control" id="list-avaliable" multiple size="20" style="width: 100%">
             </select>
         </div>
@@ -52,8 +54,10 @@ $this->params['breadcrumbs'][] = $this->title;
             <a href="#" id="btn-remove" class="btn btn-danger">&lt;&lt;</a>
         </div>
         <div class="col-lg-5">
-            <?= Yii::t('rbac-admin', 'Assigned') ?>:
-            <input id="search-assigned"><br>
+            <div class="input-group">
+                <span class="input-group-addon"><?= Yii::t('rbac-admin', 'Assigned') ?>:</span>
+                <input type="text" class="form-control" id="search-assigned" placeholder="Search">
+            </div>
             <select class="form-control" id="list-assigned" multiple size="20" style="width: 100%">
             </select>
         </div>
