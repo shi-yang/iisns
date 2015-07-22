@@ -11,9 +11,8 @@ iisns - 地球村入口
 - 新媒体行业
 - 企业文化建设
 
-演示:[www.iisns.com](http://www.iisns.com)
+更多用途，等你来发掘。演示:[www.iisns.com](http://www.iisns.com)
 
-更多用途，等你来发掘。
 
 文档
 --------
@@ -31,9 +30,7 @@ iisns - 地球村入口
 参与贡献代码
 --------
 
-###您参与的iisns的发展是非常欢迎！
-
-您可以以下几种方式参与：
+您参与的iisns的发展是非常欢迎！您可以以下几种方式参与：
 
 - [报告问题](https://github.com/shi-yang/iisns/issues)
 - [提供反馈意见或设计讨论](http://www.iisns.com/index.php/forum/iisns)
