@@ -67,7 +67,7 @@ $this->params['title'] = Yii::t('app', 'Explore');
                           </h2>
                         </a>
                         <address class="meccaddress">
-                          <time><span class="glyphicon glyphicon-time"></span> <?= Yii::$app->tools->formatTime($post['created_at']) ?></time>
+                          <time><span class="glyphicon glyphicon-time"></span> <?= Yii::$app->formatter->asRelativeTime($post['created_at']) ?></time>
                           - 
                           <?php
                             if (!empty($post['author'])) {

@@ -19,7 +19,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => $model['summary']]
       <h1><?= Html::encode($model['title']) ?></h1>
     </a>
     <address class="meccaddress">
-      <time><span class="glyphicon glyphicon-time"></span> <?= Yii::$app->tools->formatTime($model['created_at']) ?></time>
+      <time><span class="glyphicon glyphicon-time"></span> <?= Yii::$app->formatter->asRelativeTime($model['created_at']) ?></time>
       <?php
         if (!empty($model['origin'])) {
           echo " - 来源：" . Html::encode($model['origin']);

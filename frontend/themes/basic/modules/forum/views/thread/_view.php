@@ -11,7 +11,7 @@ $user = $data->user;
         <div class="thread-info">
             <span class="glyphicon glyphicon-user"></span> <?= Html::a(Html::encode($user['username']), ['/user/view', 'id' => $user['id']]) ?>
             &nbsp;•&nbsp;
-            <span class="glyphicon glyphicon-time"></span> <?= Yii::$app->tools->formatTime($data->created_at) ?>
+            <span class="glyphicon glyphicon-time"></span> <?= Yii::$app->formatter->asRelativeTime($data->created_at) ?>
             <div class="pull-right">
                 <?php if ($user['id'] == Yii::$app->user->id): ?>
                     <?= Html::a('<span class="glyphicon glyphicon-trash"></span> ' . Yii::t('app', 'Delete'), ['/user/view', 'id' => $user['id']]) ?>

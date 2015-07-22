@@ -27,7 +27,7 @@ $this->params['count'] = $count;
                                     <?= Html::encode($comment['username']) ?>
                                 </a>
                                 <p>
-                                    <em><?= Yii::$app->tools->formatTime($comment['created_at']) ?></em>
+                                    <em><?= Yii::$app->formatter->asRelativeTime($comment['created_at']) ?></em>
                                 </p>
                             </div>
                         </div>
@@ -41,7 +41,7 @@ $this->params['count'] = $count;
                                                 <?= Html::encode($user->username) ?>
                                             </a>
                                             <p>
-                                                <em><?= Yii::$app->tools->formatTime($comment['created_at']) ?></em>
+                                                <em><?= Yii::$app->formatter->asRelativeTime($comment['created_at']) ?></em>
                                             </p>
                                         </div>
                                     </div>
