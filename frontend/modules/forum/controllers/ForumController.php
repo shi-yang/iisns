@@ -43,7 +43,7 @@ class ForumController extends BaseController
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['create', 'update', 'index', 'view', 'broadcast'],
+                        'actions' => ['create', 'update', 'index', 'view', 'broadcast', 'upload'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
