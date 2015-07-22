@@ -82,8 +82,49 @@ class Install {
     private function insertSQL() {
         if (empty($this->error)) {
             $now = time();
+            $username = $this->settings['adminUser'];
+            $password_hash = $this->settings['adminPass'];
+            $auth_key = (new Security)->generateRandomString();
+            $email = $this->settings['email'];
 
             $this->query("SET NAMES utf8;");
+
+            $this->query("
+      CREATE TABLE IF NOT EXISTS `pre_user` (
+        `id` int(11) NOT NULL AUTO_INCREMENT,
+        `username` char(32) NOT NULL,
+        `password_hash` char(60) NOT NULL,
+        `password_reset_token` char(43) NOT NULL,
+        `auth_key` char(32) NOT NULL,
+        `role` tinyint(2) NOT NULL,
+        `email` char(64) NOT NULL,
+        `status` tinyint(2) NOT NULL,
+        `created_at` int(10) NOT NULL,
+        `updated_at` int(10) NOT NULL,
+        `avatar` char(24) NOT NULL,
+        PRIMARY KEY (`id`),
+        UNIQUE KEY `id` (`id`)
+        ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10000 ;
+    ");
+            $this->query("
+      INSERT INTO `pre_user` (`id`, `username`, `password_hash`, `auth_key`, `role`, `email`, `status`, `created_at`, `updated_at`, `avatar`) VALUES
+      (10000, '{$username}', '{$password_hash}', '{$auth_key}', 10, '{$email}', 10, {$now}, {$now}, 'default/10.jpg');
+      ");
+            $this->query("
+      CREATE TABLE IF NOT EXISTS `pre_setting` (
+        `key` varchar(255) NOT NULL,
+        `value` text NOT NULL,
+        PRIMARY KEY (`key`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    ");
+            $this->query("
+      INSERT INTO `pre_setting` (`key`, `value`) VALUES
+      ('siteName', '" . $this->settings['siteName'] . "'),
+      ('siteTitle', '" . $this->settings['siteTitle'] . "'),
+      ('siteDescription', '" . $this->settings['siteDescription'] . "'),
+      ('siteKeyword', ''),
+      ('thirdPartyStatisticalCode', '');
+      ");
             $this->query("
       CREATE TABLE IF NOT EXISTS `pre_auth_assignment` (
         `item_name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
@@ -304,23 +345,6 @@ class Install {
         ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;
     ");
             $this->query("
-      CREATE TABLE IF NOT EXISTS `pre_user` (
-        `id` int(11) NOT NULL AUTO_INCREMENT,
-        `username` char(32) NOT NULL,
-        `password_hash` char(60) NOT NULL,
-        `password_reset_token` char(43) NOT NULL,
-        `auth_key` char(32) NOT NULL,
-        `role` tinyint(2) NOT NULL,
-        `email` char(64) NOT NULL,
-        `status` tinyint(2) NOT NULL,
-        `created_at` int(10) NOT NULL,
-        `updated_at` int(10) NOT NULL,
-        `avatar` char(24) NOT NULL,
-        PRIMARY KEY (`id`),
-        UNIQUE KEY `id` (`id`)
-        ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10000 ;
-    ");
-            $this->query("
       CREATE TABLE IF NOT EXISTS `pre_user_data` (
         `user_id` int(11) NOT NULL AUTO_INCREMENT,
         `post_count` int(11) NOT NULL,
@@ -331,6 +355,10 @@ class Install {
         `unread_message_count` int(11) NOT NULL,
         PRIMARY KEY (`user_id`)
         ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10000 ;
+    ");
+            $this->query("
+      INSERT INTO `pre_user_data` (`user_id`) VALUES
+      (10000);
     ");
             $this->query("
       CREATE TABLE IF NOT EXISTS `pre_user_follow` (
@@ -370,6 +398,10 @@ class Install {
         PRIMARY KEY (`user_id`),
         KEY `user_id` (`user_id`)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    ");
+            $this->query("
+      INSERT INTO `pre_user_profile` (`user_id`) VALUES
+      (10000);
     ");
             $this->query("
       ALTER TABLE `pre_auth_assignment`
@@ -430,29 +462,6 @@ class Install {
             $this->query("
       ALTER TABLE `pre_user_profile`
       ADD CONSTRAINT `pre_user_profile_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `pre_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-      ");
-            $this->query("
-      CREATE TABLE IF NOT EXISTS `pre_setting` (
-        `key` varchar(255) NOT NULL,
-        `value` text NOT NULL,
-        PRIMARY KEY (`key`)
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-    ");
-            $this->query("
-      INSERT INTO `pre_setting` (`key`, `value`) VALUES
-      ('siteName', '" . $this->settings['siteName'] . "'),
-      ('siteTitle', '" . $this->settings['siteTitle'] . "'),
-      ('siteDescription', '" . $this->settings['siteDescription'] . "'),
-      ('siteKeyword', ''),
-      ('thirdPartyStatisticalCode', '');
-      ");
-            $username = $this->settings['adminUser'];
-            $password_hash = $this->settings['adminPass'];
-            $auth_key = (new Security)->generateRandomString();
-            $email = $this->settings['email'];
-            $this->query("
-      INSERT INTO `pre_user` (`id`, `username`, `password_hash`, `auth_key`, `role`, `email`, `status`, `created_at`, `updated_at`, `avatar`) VALUES
-      (10000, '{$username}', '{$password_hash}', '{$auth_key}', 10, '{$email}', 10, {$now}, {$now}, 'default/10.jpg');
       ");
         } else $this->error = 'Your tables already exist! I won\'t insert anything.';
     }

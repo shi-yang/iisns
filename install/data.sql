@@ -13,6 +13,33 @@ SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
 --
+-- 表的结构 `pre_user`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` char(32) NOT NULL,
+  `password_hash` char(60) NOT NULL,
+  `password_reset_token` char(43) NOT NULL,
+  `auth_key` char(32) NOT NULL,
+  `role` tinyint(2) NOT NULL,
+  `email` char(64) NOT NULL,
+  `status` tinyint(2) NOT NULL,
+  `created_at` int(10) NOT NULL,
+  `updated_at` int(10) NOT NULL,
+  `avatar` char(24) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10000 ;
+
+--
+-- 转存表中的数据 `pre_user`
+--
+
+INSERT INTO `pre_user` (`id`, `username`, `password_hash`, `password_reset_token`, `auth_key`, `role`, `email`, `status`, `created_at`, `updated_at`, `avatar`) VALUES
+(10000, 'admin', '$2y$13$sjzwQPuDzlY46uxLE6XK4O.WveOn80JFRk7DLGEIfgu1hf7Z1Rbb6', '', 'jCXCwnzJgOS2G-AwiAQ5BbYemejc8nHX', 10, 'admin@admin.com', 10, 1437550265, 1437550265, 'default/10.jpg');
+
+--
 -- 表的结构 `pre_auth_assignment`
 --
 
@@ -308,28 +335,6 @@ INSERT INTO `pre_setting` (`key`, `value`) VALUES
 ('siteTitle', 'iiSNS - Global village entrance'),
 ('thirdPartyStatisticalCode', '');
 
--- --------------------------------------------------------
-
---
--- 表的结构 `pre_user`
---
-
-CREATE TABLE IF NOT EXISTS `pre_user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` char(32) NOT NULL,
-  `password_hash` char(60) NOT NULL,
-  `password_reset_token` char(43) NOT NULL,
-  `auth_key` char(32) NOT NULL,
-  `role` tinyint(2) NOT NULL,
-  `email` char(64) NOT NULL,
-  `status` tinyint(2) NOT NULL,
-  `created_at` int(10) NOT NULL,
-  `updated_at` int(10) NOT NULL,
-  `avatar` char(24) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10000 ;
-
 --
 -- 表的结构 `pre_user_data`
 --
@@ -345,6 +350,11 @@ CREATE TABLE IF NOT EXISTS `pre_user_data` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10000 ;
 
+--
+-- 转存表中的数据 `pre_user_data`
+--
+INSERT INTO `pre_user_data` (`user_id`) VALUES
+(10000);
 --
 -- 表的结构 `pre_user_follow`
 --
@@ -392,6 +402,12 @@ CREATE TABLE IF NOT EXISTS `pre_user_profile` (
   PRIMARY KEY (`user_id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `pre_user_profile`
+--
+INSERT INTO `pre_user_profile` (`user_id`) VALUES
+(10000);
 
 --
 -- 限制导出的表
