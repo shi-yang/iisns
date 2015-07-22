@@ -7,6 +7,7 @@ use yii\helpers\Html;
 /* @var $message string */
 /* @var $exception Exception */
 
+$this->context->layout = 'basic';
 $this->title = $name;
 ?>
 <div class="site-error">
