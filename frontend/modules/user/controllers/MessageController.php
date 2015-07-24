@@ -58,11 +58,12 @@ class MessageController extends BaseController
     public function actionMention()
     {
         $notices = Notice::getAllNotice();
-
+        $user = $this->findUserModel();
+        Yii::$app->userData->updateKey('unread_comment_count', $user->id, 0, false);
         return $this->render('mention', [
             'notices' => $notices,
             'count' => $this->getMessageCount(),
-            'user' => $this->findUserModel()
+            'user' => $user
         ]);
     }
 
