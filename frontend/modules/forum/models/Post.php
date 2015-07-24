@@ -4,6 +4,7 @@ namespace app\modules\forum\models;
 
 use Yii;
 use app\modules\user\models\User;
+use app\modules\user\models\Notice;
 use app\modules\forum\models\Thread;
 /**
  * This is the model class for table "forum_post".
@@ -51,10 +52,10 @@ class Post extends \yii\db\ActiveRecord
         ];
     }
     
-	   /**
-	    * This is invoked before the record is saved.
-	    * @return boolean whether the record should be saved.
-	    */
+    /**
+     * This is invoked before the record is saved.
+     * @return boolean whether the record should be saved.
+     */
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)) {
@@ -64,10 +65,43 @@ class Post extends \yii\db\ActiveRecord
             }
             return true;
         } else {
-             return false;
+            return false;
         }
     }
-    
+
+    /**
+     * @param boolean $insert
+     * @param array $changedAttributes
+     * @return bool
+     */
+    public function afterSave($insert, $changedAttributes)
+    {
+        $connection = Yii::$app->db;
+        $thread = $connection->createCommand('SELECT * FROM {{%forum_thread}} WHERE id=' . $this->thread_id)->queryOne();
+
+        //给用户发回复或者@通知,回复自己的不通知
+        if(Yii::$app->user->id != $thread['user_id']) {
+            Notice::sendNotice('COMMENT', ['title' => $thread['title']], $this->content, ['/forum/thread/view', 'id' => $thread['id']], $thread['user_id'], $this->user_id);
+        }
+
+        //回复中提到其他人，通知其他人
+        if (strstr($this->content, '@')) {
+            preg_match_all('/@(.*?)\s/', $this->content, $match);
+            if(isset($match[1]) && count($match[1]) > 0) {
+                $notice_user = array_unique($match[1]);
+                foreach ($notice_user as $v) {
+                    $toUserId = $connection->createCommand('SELECT id FROM {{%user}} WHERE username=:name')->bindValue(':name', $v)->queryScalar();
+                    if ($toUserId == $thread['user_id'] || $toUserId == Yii::$app->user->id || empty($toUserId)) {
+                        continue;
+                    }
+                    Notice::sendNotice('MENTION_ME', ['title' => $thread['title']], $this->content, ['/forum/thread/view', 'id' => $thread['id']], $toUserId, $this->user_id);
+                }
+            }
+        }
+
+        return parent::afterSave($insert, $changedAttributes);
+    }
+
     public function getUser()
     {
         return Yii::$app->db

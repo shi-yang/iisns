@@ -12,13 +12,14 @@ use yii\filters\AccessControl;
 use app\components\Tools;
 use app\modules\user\models\User;
 use app\modules\user\models\Message;
+use app\modules\user\models\Notice;
 
 /**
  * MessageController implements the CRUD actions for Message model.
  */
 class MessageController extends BaseController
 {
-    public $defaultAction = 'inbox';
+    public $defaultAction = 'mention';
     public $layout = 'message';
     public function behaviors()
     {
@@ -33,7 +34,7 @@ class MessageController extends BaseController
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['inbox', 'outbox', 'create', 'view', 'update', 'comment', 'upload'],
+                        'actions' => ['mention', 'inbox', 'outbox', 'create', 'view', 'update', 'upload'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -51,15 +52,27 @@ class MessageController extends BaseController
         ];
     }
 
+    /**
+     * 与我相关
+     */
+    public function actionMention()
+    {
+        $notices = Notice::getAllNotice();
+
+        return $this->render('mention', [
+            'notices' => $notices,
+            'count' => $this->getMessageCount(),
+            'user' => $this->findUserModel()
+        ]);
+    }
+
     public function actionInbox()
     {
-        $user = $this->findUserModel();
-
         $query = new Query;
         $query->select('u.username, u.avatar, m.id, m.subject, m.read_indicator, m.created_at')
             ->from('{{%user_message}} as m')
             ->join('LEFT JOIN','{{%user}} as u', 'u.id=m.sendfrom')
-            ->where('sendto=:sendto', [':sendto' => $user->id])
+            ->where('sendto=:sendto', [':sendto' => Yii::$app->user->id])
             ->orderBy('m.created_at DESC');
         $pages = Tools::Pagination($query);
 
@@ -67,16 +80,6 @@ class MessageController extends BaseController
             'messages' => $pages['result'],
             'pages' => $pages['pages'],
             'type' => 'inbox',
-            'count' => $this->getMessageCount()
-        ]);
-    }
-
-    public function actionComment()
-    {
-        $user = $this->findUserModel();
-        Yii::$app->userData->updateKey('unread_comment_count', $user->id, 0, false);
-        return $this->render('comment', [
-            'user' => $user,
             'count' => $this->getMessageCount()
         ]);
     }

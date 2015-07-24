@@ -68,6 +68,7 @@ return [
 	'Compose' => '写信',
 	'Message' => '发消息',
 	'Sent' => '已发送',
+	'Mention me' => '与我相关',
 	'Sent successfully' => '发送成功',
 	'Comment' => '评论',
 	'Repost' => '转发',

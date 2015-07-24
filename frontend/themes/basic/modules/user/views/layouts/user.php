@@ -53,7 +53,7 @@ AppAsset::register($this);
             <ul class="nav-notification clearfix">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="glyphicon glyphicon-envelope"></i>
+                        <i class="glyphicon glyphicon-bell"></i>
                         <span class="badge badge-danger notification-label bounceIn animation-delay4"><?= $unReadMessageCount  ?></span>
                     </a>
                     <ul class="dropdown-menu message dropdown-1">
