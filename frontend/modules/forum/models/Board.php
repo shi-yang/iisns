@@ -124,9 +124,9 @@ class Board extends \yii\db\ActiveRecord
         return ['threads' => $result['result'], 'pages' => $result['pages']];
     }
     
-    public static function getThreadCount($id)
+    public static function getThreadCount($id = null)
     {
-        if (isset($id)) {
+        if ($id != null) {
             return Yii::$app->db
                 ->createCommand("SELECT count(*) FROM {{%forum_thread}}  WHERE board_id={$id}")
                 ->queryScalar();

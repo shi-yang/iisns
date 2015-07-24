@@ -32,7 +32,7 @@ if (isset($_GET['page']) >= 2) //分页标识大于2才开始计算
                         <span class="post-time">
                             <span class="glyphicon glyphicon-time"></span> <?= Yii::$app->formatter->asRelativeTime($post['created_at']) ?>
                         </span>
-                        <a class="floor-number" id="<?= $post['id'] ;?>" href="#<?= $floor_number ?>">
+                        <a class="floor-number" id="<?= $floor_number ?>" href="#<?= $floor_number ?>">
                            <span class="badge"><?= $floor_number ?>#</span>
                         </a>
                     </div>

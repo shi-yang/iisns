@@ -12,7 +12,7 @@ use Yii;
  * @property integer $feed_count
  * @property integer $following_count
  * @property integer $follower_count
- * @property integer $unread_comment_count
+ * @property integer $unread_notice_count
  * @property integer $unread_message_count
  */
 class UserData extends \yii\db\ActiveRecord
@@ -31,8 +31,8 @@ class UserData extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['post_count', 'following_count', 'follower_count', 'unread_comment_count', 'unread_message_count'], 'required'],
-            [['post_count', 'following_count', 'follower_count', 'unread_comment_count', 'unread_message_count'], 'integer']
+            [['post_count', 'following_count', 'follower_count', 'unread_notice_count', 'unread_message_count'], 'required'],
+            [['post_count', 'following_count', 'follower_count', 'unread_notice_count', 'unread_message_count'], 'integer']
         ];
     }
 
@@ -47,7 +47,7 @@ class UserData extends \yii\db\ActiveRecord
             'feed_count' => Yii::t('app', 'Feed Count'),
             'following_count' => Yii::t('app', 'Following Count'),
             'follower_count' => Yii::t('app', 'Follower Count'),
-            'unread_comment_count' => Yii::t('app', 'Unread Comment Count'),
+            'unread_notice_count' => Yii::t('app', 'Unread Comment Count'),
             'unread_message_count' => Yii::t('app', 'Unread Message Count'),
         ];
     }
@@ -59,7 +59,7 @@ class UserData extends \yii\db\ActiveRecord
      * feed_count：记录总数
      * following_count：关注数
      * follower_count：粉丝数
-     * unread_comment_count：评论未读数
+     * unread_notice_count：评论未读数
      * unread_message_count：未读消息
      * @param boolean $all 取得所有的数据
      * @param string $key Key值
@@ -82,7 +82,7 @@ class UserData extends \yii\db\ActiveRecord
      * feed_count：记录总数
      * following_count：关注数
      * follower_count：粉丝数
-     * unread_comment_count：评论未读数
+     * unread_notice_count：评论未读数
      * unread_message_count：未读消息
      * @param string $key Key值
      * @param integer $userId 用户id
@@ -97,7 +97,7 @@ class UserData extends \yii\db\ActiveRecord
             case 'feed_count':
             case 'following_count':
             case 'follower_count':
-            case 'unread_comment_count':
+            case 'unread_notice_count':
             case 'unread_message_count':
                 break;
             default:

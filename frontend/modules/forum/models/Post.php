@@ -76,12 +76,16 @@ class Post extends \yii\db\ActiveRecord
      */
     public function afterSave($insert, $changedAttributes)
     {
+        $this->PostCuntPlus();
+        
         $connection = Yii::$app->db;
-        $thread = $connection->createCommand('SELECT * FROM {{%forum_thread}} WHERE id=' . $this->thread_id)->queryOne();
+        $thread = $connection->createCommand('SELECT id, user_id, title FROM {{%forum_thread}} WHERE id=' . $this->thread_id)->queryOne();
 
         //给用户发回复或者@通知,回复自己的不通知
         if(Yii::$app->user->id != $thread['user_id']) {
             Notice::sendNotice('COMMENT', ['title' => $thread['title']], $this->content, ['/forum/thread/view', 'id' => $thread['id']], $thread['user_id'], $this->user_id);
+            //添加未读消息数
+            Yii::$app->userData->updateKey('unread_notice_count', $model->user_id);
         }
 
         //回复中提到其他人，通知其他人

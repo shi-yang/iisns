@@ -59,7 +59,7 @@ class MessageController extends BaseController
     {
         $notices = Notice::getAllNotice();
         $user = $this->findUserModel();
-        Yii::$app->userData->updateKey('unread_comment_count', $user->id, 0, false);
+        Yii::$app->userData->updateKey('unread_notice_count', $user->id, 0, false);
         return $this->render('mention', [
             'notices' => $notices,
             'count' => $this->getMessageCount(),
@@ -202,7 +202,7 @@ class MessageController extends BaseController
     {
         $userId = Yii::$app->user->id;
         $count = Yii::$app->db
-            ->createCommand("SELECT unread_comment_count, unread_message_count FROM {{%user_data}} WHERE user_id = " . $userId)
+            ->createCommand("SELECT unread_notice_count, unread_message_count FROM {{%user_data}} WHERE user_id = " . $userId)
             ->queryOne();
         $count['outbox'] = Yii::$app->db
             ->createCommand("SELECT count(*) FROM {{%user_message}} WHERE outbox=1 and sendfrom=" . $userId)
