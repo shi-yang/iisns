@@ -410,6 +410,47 @@ INSERT INTO `pre_user_profile` (`user_id`) VALUES
 (10000);
 
 --
+-- 表的结构 `pre_user_notice`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_user_notice` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(50) NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `content` text NOT NULL,
+  `from_user_id` int(11) NOT NULL,
+  `to_user_id` int(11) NOT NULL,
+  `source_url` varchar(255) NOT NULL COMMENT '来源链接，序列化数组',
+  `created_at` int(10) NOT NULL,
+  `is_read` tinyint(2) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `type` (`type`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='消息提示通知';
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `pre_user_notice_type`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_user_notice_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(50) NOT NULL,
+  `type_title` varchar(255) NOT NULL,
+  `type_content` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- 转存表中的数据 `pre_user_notice_type`
+--
+
+INSERT INTO `pre_user_notice_type` (`id`, `type`, `type_title`, `type_content`) VALUES
+(1, 'MENTION_ME', 'mentioned you', 'Your colleagues {name} just mentioned you in the following content: {content}.<a href="{url}" target="_blank">Go to the website>></a>'),
+(2, 'NEW_COMMENT', 'comment you {title}', 'You received a new comment {content}. <a href="{url}" target="_blank">Go to the website>></a>.'),
+(3, 'NEW_MESSAGE', 'You received a new message', 'You received a new private message.{content}.<a href="{url}" target="_blank">Go to the website>></a>');
+
+--
 -- 限制导出的表
 --
 
