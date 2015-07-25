@@ -133,7 +133,6 @@ return [
 
 	'Optional' => '可不填',
 	'Cancel' => '取消',
-	'Time error' => '时间出错',
 	'Today {time}' => '今天 {time}',
 	'{min} minutes ago' => '{min} 分钟前',
 	'Just now' => '刚刚',
@@ -141,6 +140,7 @@ return [
 	'Create successfully.' => '创建成功',
 	'Saved successfully' => '保存成功',
 	'Deleted successfully.' => '已删除',
+	'Error. Delete failed.' => '删除失败',
     'Recommendation' => '推荐',
 
 	'Are you sure you want to Log out?' => '你确定要退出？',

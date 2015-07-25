@@ -1,9 +1,7 @@
-<?php 
+<?php
 use yii\helpers\Html;
-use yii\helpers\HtmlPurifier;
 use yii\helpers\Url;
 use shiyang\infinitescroll\InfiniteScrollPager;
-use app\components\Tools;
 ?>
 
 <?php if ($model->getThreadCount($model->id) > 0): ?>

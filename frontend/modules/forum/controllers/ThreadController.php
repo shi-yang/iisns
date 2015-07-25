@@ -41,21 +41,6 @@ class ThreadController extends BaseController
     }
     
     /**
-     * Lists all Thread models.
-     * @return mixed
-     */
-    public function actionIndex()
-    {
-        $searchModel = new ThreadSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    /**
      * Displays a single Thread model.
      * @param integer $id
      * @return mixed

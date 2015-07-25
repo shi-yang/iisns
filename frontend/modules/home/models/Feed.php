@@ -94,6 +94,7 @@ class Feed extends \yii\db\ActiveRecord
                 $setarr['type'] = 'postblog';
                 $setarr['template'] = '<b>{title}</b><br>{content}';
                 break;
+            //转发
             case 'repost':
                 $setarr['type'] = 'repost';
                 if (empty($data['{comment}'])) {

@@ -1,9 +1,8 @@
 <?php
 
 use yii\helpers\Html;
+use app\modules\forum\models\Board;
 
-const CATEGORY = 0;
-const BOARD = 1;
 /* @var $this yii\web\View */
 /* @var $model app\modules\forum\models\Forum */
 
@@ -18,7 +17,7 @@ $this->params['forum'] = $model->toArray;
         <?= $this->render('_boards',[
             'boards'=>$model->boards,
         ]); ?>
-    <?php elseif ($model->boardCount == 1 && $model->boards[0]->parent_id != CATEGORY): ?>
+    <?php elseif ($model->boardCount == 1 && $model->boards[0]->parent_id != Board::AS_CATEGORY): ?>
         <?= $this->render('/board/view', [
                     'model'=>$model->boards[0], 
                     'newThread'=>$newThread,
