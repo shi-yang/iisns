@@ -43,16 +43,17 @@ class ViewController extends BaseController
             } else {
                 $followBtn = '<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'Follow');
             }
-            
+
             $html =<<<HTML
               <div class="media">
                 <div class="media-left">
                   <a href="{$userUrl}">
-                    <img class="media-object" src="{$avatar}" alt="{$username}">
+                    <img width="50" height="50" class="media-object" src="{$avatar}" alt="{$username}">
                   </a>
                 </div>
                 <div class="media-body">
                   <h4 class="media-heading">$model->username</h4>
+                    <a class="btn btn-xs btn-success btn-follow" href="{$followUrl}">{$followBtn}</a>
                 </div>
                 <div class="media-footer">
                 <div class="row">
@@ -69,9 +70,6 @@ class ViewController extends BaseController
                     <small class="text-muted">文章</small>
                   </div><!-- /.col -->
                 </div>
-                <a class="btn btn-xs btn-success btn-follow" href="{$followUrl}">
-                    {$followBtn}
-                </a>
               </div>
 HTML;
             return $html;
