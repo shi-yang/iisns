@@ -48,7 +48,7 @@ if ($done) {
         <?= Alert::widget() ?>
         <div class="row">
           <div class="col-sm-3">
-            <img src="<?= Yii::getAlias('@avatar') . $this->params['user']['avatar'] ?>" class="thumbnail img-responsive" alt="user-avatar">
+            <img style="min-width: 100%" src="<?= Yii::getAlias('@avatar') . $this->params['user']['avatar'] ?>" class="thumbnail img-responsive" alt="user-avatar">
             <div class="panel m-top-md">
               <div class="panel-body">
                 <div class="row">
@@ -81,27 +81,40 @@ if ($done) {
               <a class="btn btn-success follow" href="<?= Url::toRoute(['/user/user/follow', 'id' => $this->params['user']['id']]) ?>"><?= $followBtn ?></a>
               <a class="btn btn-default"><i class="glyphicon glyphicon-envelope"></i> <?= Yii::t('app', 'Message') ?></a>
             </div>
-            <?php
-              echo Nav::widget([
-                  'options' => ['class' => 'nav nav-pills nav-justified'],
-                  'encodeLabels' => false,
-                  'items' => [
-                    [
-                      'label' => '<i class="glyphicon glyphicon-time"></i> ' . Yii::t('app', 'Timeline'),
-                      'url' => ['/user/view/index', 'id' => $this->params['user']['id']]
-                    ],
-                    [
-                      'label' => '<i class="glyphicon glyphicon-picture"></i> ' . Yii::t('app', 'Photo'),
-                      'url' => ['/user/view/album', 'id' => $this->params['user']['id']]
-                    ],
-                    [
-                      'label' => '<i class="glyphicon glyphicon-user"></i> ' . Yii::t('app', 'Profile'),
-                      'url' => ['/user/view/profile', 'id' => $this->params['user']['id']]
-                    ]
-                  ],
-              ]);
-            ?>
-            <div class="main row">
+            <nav class="navbar navbar-default">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <?= Nav::widget([
+                        'options' => ['class' => 'nav navbar-nav'],
+                        'encodeLabels' => false,
+                        'items' => [
+                          [
+                            'label' => '<i class="glyphicon glyphicon-time"></i> ' . Yii::t('app', 'Timeline'),
+                            'url' => ['/user/view/index', 'id' => $this->params['user']['id']]
+                          ],
+                          [
+                            'label' => '<i class="glyphicon glyphicon-picture"></i> ' . Yii::t('app', 'Photo'),
+                            'url' => ['/user/view/album', 'id' => $this->params['user']['id']]
+                          ],
+                          [
+                            'label' => '<i class="glyphicon glyphicon-user"></i> ' . Yii::t('app', 'Profile'),
+                            'url' => ['/user/view/profile', 'id' => $this->params['user']['id']]
+                          ]
+                        ],
+                    ]);
+                  ?>
+                </div>
+              </div>
+            </nav>
+            <div class="main">
               <?= $content ?>
             </div>
           </div>

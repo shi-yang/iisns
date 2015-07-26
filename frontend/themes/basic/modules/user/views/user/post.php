@@ -18,7 +18,7 @@ $this->params['userData'] = $model->userData;
     <div id="social-container">
         <?php if (!empty($posts)): ?>
             <?php foreach($posts as $post): ?>
-                <div class="item widget-container fluid-height social-entry" id="<?= $post['id'] ?>">
+                <article class="item widget-container fluid-height social-entry" id="<?= $post['id'] ?>">
                     <div class="widget-content">
                         <h3><?= Html::a(Html::encode($post['title']), ['/home/post/view', 'id' => $post['id']]) ?></h3>
                         <?= HtmlPurifier::process(Tools::htmlSubString($post['content'], 200, Url::toRoute(['/home/post/view', 'id' => $post['id']]))) ?>
@@ -38,7 +38,7 @@ $this->params['userData'] = $model->userData;
                             </div>
                         </div>
                     <?php endif ?>
-                </div>
+                </article>
             <?php endforeach; ?>
             <?= InfiniteScrollPager::widget([
                    'pagination' => $pages,
