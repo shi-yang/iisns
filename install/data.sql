@@ -333,7 +333,8 @@ INSERT INTO `pre_setting` (`key`, `value`) VALUES
 ('siteKeyword', 'iiSNS - Global village entrance'),
 ('siteName', 'iiSNS'),
 ('siteTitle', 'iiSNS - Global village entrance'),
-('thirdPartyStatisticalCode', '');
+('thirdPartyStatisticalCode', ''),
+('version', 'v2.1.3');
 
 --
 -- 表的结构 `pre_user_data`

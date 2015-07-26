@@ -123,7 +123,8 @@ class Install {
       ('siteTitle', '" . $this->settings['siteTitle'] . "'),
       ('siteDescription', '" . $this->settings['siteDescription'] . "'),
       ('siteKeyword', ''),
-      ('thirdPartyStatisticalCode', '');
+      ('thirdPartyStatisticalCode', ''),
+      ('version', 'v2.1.3');
       ");
             $this->query("
       CREATE TABLE IF NOT EXISTS `pre_auth_assignment` (
