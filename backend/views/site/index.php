@@ -64,6 +64,10 @@ $this->title = Yii::$app->setting->get('siteName');
                     </thead>
                     <tbody>
                         <tr>
+                            <td>iiSNS version</td>
+                            <td><?= Yii::$app->setting->get('version') ?></td>
+                        </tr>
+                        <tr>
                             <td>The operating system</td>
                             <td><?= php_uname() ?></td>
                         </tr>

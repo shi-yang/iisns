@@ -72,6 +72,21 @@ class Setting extends Component
     }
 
     /**
+     * Set value
+     * @param array $date
+     */
+    public function set($date)
+    {
+        foreach ($date as $key => $value) {
+            Yii::$app->db->createCommand()->update('{{%setting}}', [
+                'value' => $value
+            ], '`key`=:key', [':key' => $key])->execute();
+        }
+
+        return $this->clearCache();
+    }
+
+    /**
      * Clears the settings cache on demand.
      * If you haven't configured cache this does nothing.
      *

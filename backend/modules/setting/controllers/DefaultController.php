@@ -9,6 +9,7 @@ use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 
 /**
  * IndexController implements the CRUD actions for Setting model.
@@ -43,12 +44,18 @@ class DefaultController extends BaseController
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Setting::find(),
-        ]);
+        $settingDate = Yii::$app->db->createCommand('SELECT * FROM {{%setting}}')->queryAll();
+        $settings = ArrayHelper::map($settingDate, 'key', 'value');
+
+        if (($post = Yii::$app->request->post())) {
+            unset($post['_csrf']);
+            Yii::$app->setting->set($post);
+            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Saved successfully'));
+            return $this->refresh();
+        }
 
         return $this->render('index', [
-            'dataProvider' => $dataProvider,
+            'settings' => $settings,
         ]);
     }
 
