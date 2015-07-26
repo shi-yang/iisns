@@ -8,7 +8,7 @@ $params = array_merge(
 $db = require(__DIR__ . '/../../common/config/db.php');
 
 return [
-    'id' => 'app-backend',
+    'id' => 'iiSNS-backend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],

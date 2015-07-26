@@ -49,8 +49,11 @@ class DefaultController extends BaseController
 
         if (($post = Yii::$app->request->post())) {
             unset($post['_csrf']);
-            Yii::$app->setting->set($post);
-            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Saved successfully'));
+            if (Yii::$app->setting->set($post)) {
+                Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Saved successfully'));
+            } else {
+                Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Error'));
+            }
             return $this->refresh();
         }
 
