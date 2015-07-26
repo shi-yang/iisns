@@ -14,10 +14,10 @@ use app\components\Tools;
  * @property string $title
  * @property string $content
  * @property integer $created_at
+ * @property integer $updated_at
  * @property integer $user_id
  * @property integer $board_id
  * @property integer $post_count
- * @property integer $is_broadcast
  */
 class Thread extends \yii\db\ActiveRecord
 {
@@ -37,7 +37,7 @@ class Thread extends \yii\db\ActiveRecord
         return [
             [['title'], 'required'],
             [['content'], 'string'],
-            [['created_at', 'user_id', 'board_id', 'post_count', 'is_broadcast'], 'integer'],
+            [['created_at', 'user_id', 'board_id', 'post_count', 'updated_at'], 'integer'],
             [['title'], 'string', 'min' => 2, 'max' => 80],
         ];
     }
@@ -64,22 +64,24 @@ class Thread extends \yii\db\ActiveRecord
      */
     public function beforeSave($insert)
     {
-       if (parent::beforeSave($insert)) {
-        	if ($this->isNewRecord) {
-        	  $this->user_id = Yii::$app->user->id;
-        	  $this->created_at = time();
-        	}
+        if (parent::beforeSave($insert)) {
+            if ($this->isNewRecord) {
+                $this->user_id = Yii::$app->user->id;
+                $this->created_at = time();
+                $this->updated_at = time();
+            }
             return true;
-       } else {
+        } else {
             return false;
-       }
+        }
     }
     
     /**
      *string the URL that shows the detail of the thread
      */
     public function getUrl()
-    {	            return Url::toRoute(['/forum/thread/view', 'id' => $this->id]);
+    {
+    	 return Url::toRoute(['/forum/thread/view', 'id' => $this->id]);
     }
 
     public function getUser()
@@ -92,7 +94,7 @@ class Thread extends \yii\db\ActiveRecord
     public function getForum()
     {
         return Yii::$app->db
-            ->createCommand("SELECT * FROM {{%forum}} `f` JOIN {{%forum_board}} `b` ON f.id=b.forum_id WHERE b.id={$this->board_id}")
+            ->createCommand("SELECT * FROM {{%forum}} as f JOIN {{%forum_board}} as b ON f.id=b.forum_id WHERE b.id={$this->board_id}")
             ->queryOne();
     }
     

@@ -75,14 +75,14 @@ class Board extends \yii\db\ActiveRecord
     */
     public function beforeSave($insert)
     {
-       if (parent::beforeSave($insert)) {
-           if ($this->isNewRecord) {
-                 $this->user_id = Yii::$app->user->identity->id;
+        if (parent::beforeSave($insert)) {
+            if ($this->isNewRecord) {
+                $this->user_id = Yii::$app->user->id;
             }
-           return true;
-       } else {
-              return false;
-       }
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -115,11 +115,11 @@ class Board extends \yii\db\ActiveRecord
     public function getThreads()
     {
         $query = new Query;
-        $query->select('t.id, t.title, t.content, t.created_at, t.user_id, t.post_count, u.username, u.avatar')
+        $query->select('t.id, t.title, t.content, t.updated_at, t.user_id, t.post_count, u.username, u.avatar')
             ->from('{{%forum_thread}} as t')
             ->join('LEFT JOIN','{{%user}} as u', 'u.id=t.user_id')
             ->where('t.board_id=:id', [':id' => $this->id])
-            ->orderBy('t.created_at DESC');
+            ->orderBy('t.updated_at DESC');
         $result = Tools::Pagination($query);
         return ['threads' => $result['result'], 'pages' => $result['pages']];
     }

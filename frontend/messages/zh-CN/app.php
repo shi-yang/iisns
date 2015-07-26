@@ -129,6 +129,7 @@ return [
 	'Title' => '标题',
 	'Reply' => '回复',
     '{postCount} comments' =>  '{postCount} 评论',
+    'Last Reply Time' => '最后回复时间',
     'Please login to leave a comment.' => '请先登录再进行评论~',
 
 	'Optional' => '可不填',

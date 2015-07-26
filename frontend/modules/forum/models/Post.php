@@ -79,7 +79,12 @@ class Post extends \yii\db\ActiveRecord
         $this->PostCuntPlus();
         
         $connection = Yii::$app->db;
+
+        //查询帖子信息
         $thread = $connection->createCommand('SELECT id, user_id, title FROM {{%forum_thread}} WHERE id=' . $this->thread_id)->queryOne();
+
+        //更新帖子最后回复时间
+        $connection->createCommand('UPDATE {{%forum_thread}} SET updated_at=:time WHERE id=:id')->bindValues([':time' => time(), ':id' => $thread['id']])->execute();
 
         //给用户发回复或者@通知,回复自己的不通知
         if(Yii::$app->user->id != $thread['user_id']) {
