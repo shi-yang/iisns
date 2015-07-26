@@ -1977,7 +1977,8 @@ input[type="text"]:focus,
     background-color: #fff;
 }
 .img-all .img-main img {
-    min-width:100%
+  min-width: 100%;
+  max-width: 100%;
 }
 .img-all .img-name {
     display:block;
