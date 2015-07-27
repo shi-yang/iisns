@@ -1492,6 +1492,11 @@ input[type="text"]:focus,
   background-color: #fc8675 !important;
   color: #fff !important;
 }
+
+.media-list .media {
+    border-bottom: #eee solid 1px;
+    padding-bottom: 15px;
+}
 /* -----------------------------------------
    no data found styles
 ----------------------------------------- */

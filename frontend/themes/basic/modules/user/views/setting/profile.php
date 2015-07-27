@@ -66,4 +66,3 @@ use yii\bootstrap\Modal;
         </div>
     </div>
 </div>
-

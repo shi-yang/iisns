@@ -75,7 +75,7 @@ HTML;
             return $html;
         }
 
-        return $this->render('/user/index', [
+        return $this->render('/user/view', [
             'model' => $model,
         ]);
     }

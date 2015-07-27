@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 $this->params['count'] = $count;
 ?>
 
-<ul id="notice-content" style="padding:20px">
+<ul class="media-list" id="notice-content" style="padding:20px">
     <?php foreach ($notices['result'] as $notice): ?>
     <li class="media">
         <div class="media-left">
