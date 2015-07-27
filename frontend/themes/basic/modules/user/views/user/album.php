@@ -1,7 +1,6 @@
 <?php
 use yii\helpers\Html;
 use shiyang\infinitescroll\InfiniteScrollPager;
-use app\components\Tools;
 use yii\widgets\ListView;
 
 /* @var $this yii\web\View */

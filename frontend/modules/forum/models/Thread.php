@@ -5,7 +5,6 @@ namespace app\modules\forum\models;
 use Yii;
 use yii\helpers\Url;
 use yii\db\Query;
-use app\components\Tools;
 
 /**
  * This is the model class for table "{{%forum_thread}}".
@@ -134,7 +133,7 @@ class Thread extends \yii\db\ActiveRecord
             ->from('{{%forum_post}} as p')
             ->join('LEFT JOIN','{{%user}} as u', 'u.id=p.user_id')
             ->where('p.thread_id=:id', [':id' => $this->id]);
-        $result = Tools::Pagination($query);
+        $result = Yii::$app->tools->Pagination($query);
         return ['posts' => $result['result'], 'pages' => $result['pages']];
     }
 

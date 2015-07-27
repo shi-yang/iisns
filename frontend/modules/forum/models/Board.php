@@ -4,7 +4,6 @@ namespace app\modules\forum\models;
 
 use Yii;
 use app\modules\forum\models\Thread;
-use app\components\Tools;
 use yii\helpers\Url;
 use yii\db\Query;
 
@@ -120,7 +119,7 @@ class Board extends \yii\db\ActiveRecord
             ->join('LEFT JOIN','{{%user}} as u', 'u.id=t.user_id')
             ->where('t.board_id=:id', [':id' => $this->id])
             ->orderBy('t.updated_at DESC');
-        $result = Tools::Pagination($query);
+        $result = Yii::$app->tools->Pagination($query);
         return ['threads' => $result['result'], 'pages' => $result['pages']];
     }
     

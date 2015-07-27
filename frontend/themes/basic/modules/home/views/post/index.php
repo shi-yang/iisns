@@ -4,7 +4,6 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\helpers\HtmlPurifier;
 use shiyang\infinitescroll\InfiniteScrollPager;
-use app\components\Tools;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -29,7 +28,7 @@ $user = Yii::$app->user->identity;
                         <div class="widget-content padded">
                             <p class="content">
                                 <h3><?= Html::a(Html::encode($post['title']), ['/home/post/view', 'id' => $post['id']]) ?></h3>
-                                <?= HtmlPurifier::process(Tools::htmlSubString($post['content'], 300, Url::toRoute(['/home/post/view', 'id' => $post['id']]))) ?>
+                                <?= HtmlPurifier::process(Yii::$app->tools->htmlSubString($post['content'], 300, Url::toRoute(['/home/post/view', 'id' => $post['id']]))) ?>
                             </p>
                         </div>
                         <div class="widget-footer">

@@ -9,7 +9,6 @@ use yii\db\Query;
 use app\modules\user\models\User;
 use app\modules\home\models\Post;
 use app\modules\home\models\Feed;
-use app\components\Tools;
 use common\components\BaseController;
 
 class DashboardController extends BaseController
@@ -61,7 +60,7 @@ class DashboardController extends BaseController
             ->where('p.user_id=:user_id OR f.user_id=:user_id', [':user_id' => $model->id])
             ->orderBy('p.created_at DESC');
 
-        $pages = Tools::Pagination($query);
+        $pages = Yii::$app->tools->Pagination($query);
         return $this->render('index', [
             'model' => $model,
             'newFeed' => $newFeed,
@@ -96,7 +95,7 @@ class DashboardController extends BaseController
                     ->from('{{%forum_post}}')
                     ->where(['user_id' => $model->id])
                     ->orderBy('created_at desc');
-        $pages = Tools::Pagination($query);
+        $pages = Yii::$app->tools->Pagination($query);
         return $this->render('myposts', [
             'model' => $model,
             'posts' => $pages['result'],

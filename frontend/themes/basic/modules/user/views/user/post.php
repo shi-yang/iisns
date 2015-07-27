@@ -4,7 +4,6 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\helpers\HtmlPurifier;
 use shiyang\infinitescroll\InfiniteScrollPager;
-use app\components\Tools;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -21,7 +20,7 @@ $this->params['userData'] = $model->userData;
                 <article class="item widget-container fluid-height social-entry" id="<?= $post['id'] ?>">
                     <div class="widget-content">
                         <h3><?= Html::a(Html::encode($post['title']), ['/home/post/view', 'id' => $post['id']]) ?></h3>
-                        <?= HtmlPurifier::process(Tools::htmlSubString($post['content'], 200, Url::toRoute(['/home/post/view', 'id' => $post['id']]))) ?>
+                        <?= HtmlPurifier::process(Yii::$app->tools->htmlSubString($post['content'], 200, Url::toRoute(['/home/post/view', 'id' => $post['id']]))) ?>
                     </div>
                     <?php if (Yii::$app->user->id === $model->id): ?>
                         <div class="widget-footer">

@@ -7,7 +7,6 @@ use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\data\SqlDataProvider;
 use common\components\BaseController;
-use app\components\Tools;
 use app\modules\home\models\Album;
 
 Yii::setAlias('forum_icon', '@web/uploads/forum/icon/');
@@ -35,7 +34,7 @@ class ExploreController extends BaseController
             ->from('{{%forum}} as f')
             ->join('LEFT JOIN','{{%explore_recommend}} as e', 'e.table_id=f.id')
             ->where(['e.category' => 'forum']);
-        $forums = Tools::Pagination($forums);
+        $forums = Yii::$app->tools->Pagination($forums);
 
         $posts = new Query;
         $posts->select('e.id, title, summary, content, view_count, e.created_at, e.username, u.username as author, table_id, table_name')
@@ -43,7 +42,7 @@ class ExploreController extends BaseController
             ->join('LEFT JOIN','{{%user}} as u', 'u.id=e.user_id')
             ->where(['category' => 'post'])
             ->orderBy('e.id DESC');
-        $posts = Tools::Pagination($posts, 15);
+        $posts = Yii::$app->tools->Pagination($posts, 15);
 
         return $this->render('index', [
             'forums' => $forums,
@@ -58,7 +57,7 @@ class ExploreController extends BaseController
         $query->select('forum_url,forum_name,forum_desc,forum_icon')
             ->from('{{%forum}}')
             ->orderBy('id DESC');
-        $forumResult = Tools::Pagination($query);
+        $forumResult = Yii::$app->tools->Pagination($query);
 
         return $this->render('forums', [
             'forums' => $forumResult['result'],
@@ -75,7 +74,7 @@ class ExploreController extends BaseController
             ->join('LEFT JOIN','{{%user}} as u', 'a.created_by=u.id')
             ->where('a.status=:type', [':type' => Album::TYPE_PUBLIC])
             ->orderBy('a.id DESC');
-        $photosResult = Tools::Pagination($query, 25);
+        $photosResult = Yii::$app->tools->Pagination($query, 25);
 
         return $this->render('photos', [
             'photos' => $photosResult['result'],

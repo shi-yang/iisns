@@ -1,7 +1,6 @@
 <?php
 use yii\helpers\Html;
 use shiyang\infinitescroll\InfiniteScrollPager;
-use app\components\Tools;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\User */

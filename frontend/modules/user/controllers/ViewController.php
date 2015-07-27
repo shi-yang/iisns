@@ -13,7 +13,6 @@ use app\modules\user\models\User;
 use app\modules\user\models\UserSearch;
 use app\modules\home\models\Post;
 use app\modules\home\models\Album;
-use app\components\Tools;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -103,7 +102,7 @@ HTML;
             ->where('user_id=:user_id', [':user_id' => $model->id])
             ->orderBy('created_at DESC');
 
-        $posts = Tools::Pagination($query);
+        $posts = Yii::$app->tools->Pagination($query);
         return $this->render('/user/post', [
             'model' => $model,
             'posts' => $posts['result'],

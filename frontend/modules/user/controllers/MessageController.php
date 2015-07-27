@@ -9,7 +9,6 @@ use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use app\components\Tools;
 use app\modules\user\models\User;
 use app\modules\user\models\Message;
 use app\modules\user\models\Notice;
@@ -75,7 +74,7 @@ class MessageController extends BaseController
             ->join('LEFT JOIN','{{%user}} as u', 'u.id=m.sendfrom')
             ->where('sendto=:sendto', [':sendto' => Yii::$app->user->id])
             ->orderBy('m.created_at DESC');
-        $pages = Tools::Pagination($query);
+        $pages = Yii::$app->tools->Pagination($query);
 
         return $this->render('messageList', [
             'messages' => $pages['result'],
@@ -95,7 +94,7 @@ class MessageController extends BaseController
             ->join('LEFT JOIN','{{%user}} as u', 'u.id=m.sendto')
             ->where('sendfrom=:sendfrom', [':sendfrom' => $user->id])
             ->orderBy('m.created_at DESC');
-        $pages = Tools::Pagination($query);
+        $pages = Yii::$app->tools->Pagination($query);
 
         return $this->render('messageList', [
             'messages' => $pages['result'],
