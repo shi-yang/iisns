@@ -13,6 +13,8 @@ return [
     'Registered users' => '注册用户',
 	'Save' => '保存',
 	'Saved successfully' => '保存成功',
+    'Username does not exist.' => '用户名不存在',
+    'Incorrect password.' => '密码不正确',
 
 	'Site Name' => '站点名称',
 	'Site Title' => '站点标题',

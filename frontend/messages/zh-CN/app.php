@@ -29,6 +29,8 @@ return [
 	'Username or Email' => '用户名/邮箱',
 	'Remember Me' => '保持登录状态',
 	'Please choose your new password:' => '请填写您的新密码：',
+    'Username does not exist.' => '用户名不存在',
+    'Incorrect password.' => '密码不正确',
 	'Reset password' => '重置密码',
 	'Request password reset' => '找回密码',
 	'New password was saved.' => '修改成功，赶紧登录吧',
