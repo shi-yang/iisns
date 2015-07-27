@@ -1,0 +1,303 @@
+.view { padding: 10px; }
+
+.add-board {
+	cursor: auto;
+	padding: 10px 40px;
+	border-bottom: 1px solid #D3D3D3;
+}
+.new-category {
+	padding: 10px 40px;
+	border-bottom: 1px solid #D3D3D3;
+	min-height: 150px;
+}
+.new-category button {
+	margin-top: 40px;
+}
+.img-user-avatar {
+	width: 50px;
+	height: 50px;
+}
+.thread-form { 
+    padding: 21px;
+    box-shadow: 0 0px 2px rgba(0,0,0,0.46);
+    margin-bottom: 20px;
+    background-color: #fff;
+}
+.thread-content { 
+	margin: 0px;
+	width: 503px;
+	height: 66px;
+	float: left;
+}
+/* Begin thread 列表 */
+.thread-item {
+	padding: 15px;
+	word-wrap: break-word;
+	border-bottom: 1px solid #eee;
+    -moz-transition: background-color .2s;
+    -webkit-transition: background-color .2s;
+    transition: background-color .2s;
+}
+.thread-item:hover {
+    background-color: #f3f8f9;
+}
+.thread-item h2 {
+  font-size: 16px;
+  line-height: 130%;
+  text-shadow: 0px 1px 0px #fff;
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+.thread-item h2 a {
+}
+.thread-item .badge {
+	background-color: #ccc;
+}
+/* End thread 列表 */
+
+/* Begin thread 详细页面 */
+.thread-view {
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    margin: 0 0 10px 0;
+    padding: 26px;
+}
+.thread-view header h1 {
+    height: auto;
+    font-size: 22px;
+    font-weight: 400;
+    text-align: left;
+    word-wrap: break-word;
+    word-break: normal;
+    line-height: 32px;
+    overflow: hidden;
+    padding-top: 10px;
+    margin-bottom: 30px;
+}
+.thread-view .thread-info {
+    border-bottom: 1px solid #e6e6e6;
+    padding-bottom: 7px;
+    font-size: 12px;
+    color: #8c8c8c;
+    line-height: 14px;
+}
+.thread-view article p {
+    line-height: 28px;
+    margin-top: 5px;
+}
+.thread-view .thread-main {
+    margin-top: 29px;
+    font-size: 16px;
+    color: #353535;
+}
+.thread-view .thread-main img {
+    max-width: 100% !important;
+}
+.user-info {
+    background-color: #fff;
+    border: 1px solid #e6e6e6;
+    padding: 26px;
+}
+.user-info .img-user {
+    width:120px;
+    height:120px;
+    margin: 0 auto;
+    display: block;
+}
+.user-info .user-msg {
+    padding-top: 8px;
+    text-align: center;
+    line-height: 20px;
+}
+.post-area {
+    position: relative;
+    margin-top: 10px;
+    padding: 20px 30px 0;
+    background: #fff;
+    border: 1px solid #e6e6e6;
+}
+.post-area .post-user, .post-area .post-form {
+    float:left;
+}
+.post-area .post-user img {
+    width:64px;
+    height:64px;
+    margin: 0 auto 28px;
+    display: block;
+}
+.post-area form {
+    min-width: 100%
+}
+.posts {
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    padding: 26px;
+}
+.posts .post-title h3 {
+    font-size: 16px;
+    line-height: 20px;
+}
+.posts .post-item {
+    position: relative;
+    margin-top: 30px !important;
+    border-bottom: 1px solid #e6e6e6;
+}
+.posts .post-user-info img {
+    width:64px;
+    height:64px;
+    margin: 0 auto 28px;
+    display: block;
+}
+.posts .post-meta {
+    font-size: 12px;
+    color: #aaa;
+}
+.posts .post-meta .floor-number {
+    font-size: 14px;
+    float: right;
+    padding: 0 5px;
+    margin-right: 0;
+    text-align: center;
+}
+.posts .post-meta .floor-number .badge {
+    background-color: #dfdfdf;
+}
+.posts .post-content {
+    margin-top: 5px;
+    word-wrap: break-word;
+    overflow: hidden;
+    font-size: 16px;
+    line-height: 25px;
+    color: #333;
+}
+/* End thread 详细页面 */
+
+.tbox{
+margin-bottom: 10px;  background: white;  overflow: hidden; 
+}
+.tbox .category,.tbox .category h2{height:48px;line-height:45px;}
+.tbox .category {
+border-bottom: 1px solid #DDD;
+margin: 0 10px;
+padding: 0 10px;
+}
+
+.tbox .category h2 {
+font-size: 16px;
+text-indent: 3px;
+font-family: "Microsoft Yahei";	
+color: #333;
+margin: 0px;padding: 0px;
+}
+.tbox .category h2 a{
+	color: #316301;
+}
+.tbox .category h2 a:hover{
+	color: #596F37; text-decoration: none;
+}
+.tbox .category span.more{
+float: right; position: relative; line-height: 45px;color: #596F37;
+}
+.tbox .category span.more a{
+	color: #596F37; text-decoration: none;
+}
+.tbox .category span.more a:hover{
+	color: #ff3333; text-decoration: underline;
+}
+.boardinfo:hover {
+	background-color: #f3f8f9;
+}
+.boardinfo {
+	cursor:pointer;
+	-moz-transition: background-color .2s;
+	-webkit-transition: background-color .2s;
+	transition: background-color .2s;
+}
+.tbox .board {
+	cursor:pointer;
+	margin: 10px;
+	padding-bottom: 3px;
+}
+.tbox .board a {
+	font-weight: bold;
+}
+.tbox .board h2 {
+	margin-top: 15px;
+}
+.tbox .board h2 div {
+	width:220px;
+	font-size: 14px;
+}
+.tbox .bd{	
+    padding: 10px 15px; _height:1%;overflow: hidden;
+}
+.tbox .bd li {
+margin-left: 0px; line-height: 24px;
+}
+
+.tbox .bd li .time{
+float:right;
+}
+.tbox .ft { padding: 0px 15px;height: 1px;overflow: hidden; }
+.tbox .txt li {
+margin-left: 10px; line-height: 24px;
+}
+.tbox .pic li {
+display: inline;
+float: left;
+margin:5px 0px 8px 10px;
+text-align:center;
+}
+
+.tbox .pic li a {
+display: block;
+}
+.tbox .pic li img {
+padding-bottom: 3px;
+}
+
+.tbox .txtpic li {
+display: inline;
+float: left;
+margin:5px 0px 8px 14px;
+text-align:center;
+}
+
+.tbox .txtpic li a {
+display: block;
+}
+.tbox .txtpic li img {
+width:150px;
+height:120px;
+padding-bottom: 3px;
+}
+
+.tbox .pictxt li {
+overflow: hidden;
+white-space: nowrap;
+line-height: 24px;
+margin-left:10px;
+margin-bottom:8px;
+}
+.tbox .pictxt h4 {
+overflow: hidden;
+font-family: "normal";
+white-space: nowrap;
+overflow: hidden;
+}
+.tbox .pictxt a {
+}
+.tbox .pictxt img {
+float: left;
+border: #CCC 1px solid;
+}
+.tbox .pictxt p {
+width: 135px;
+float: left;
+margin-left:5px;
+overflow: hidden;
+line-height: 20px;
+font-weight: normal;
+white-space: normal;
+}
+.boardinfo dl{margin-left: 31px;padding-left: 10px;word-break: break-all;}

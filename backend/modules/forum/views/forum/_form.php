@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\forum\models\Forum */
+/* @var $model backend\modules\forum\models\Forum */
 /* @var $form yii\widgets\ActiveForm */
 $domain = Yii::$app->request->hostInfo;
 ?>

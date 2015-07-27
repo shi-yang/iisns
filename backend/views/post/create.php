@@ -1,14 +1,16 @@
 <?php
+
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-/* @var $model backend\modules\forum\models\Forum */
 
-$this->title = Yii::t('app', 'Create Forum');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Forums'), 'url' => ['index']];
+/* @var $this yii\web\View */
+/* @var $model backend\models\Post */
+
+$this->title = Yii::t('app', 'Create Post');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Posts'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="forum-create">
+<div class="post-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

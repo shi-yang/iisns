@@ -3,34 +3,20 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Forum;
-use backend\models\ForumSearch;
+use backend\models\Post;
+use yii\data\Pagination;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
-use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 
 /**
- * ForumController implements the CRUD actions for Forum model.
+ * PostController implements the CRUD actions for Post model.
  */
-class ForumController extends BaseController
+class PostController extends BaseController
 {
-    /**
-     * @inheritdoc
-     */
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions' => ['index', 'view', 'create', 'delete', 'update'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -41,22 +27,26 @@ class ForumController extends BaseController
     }
 
     /**
-     * Lists all Forum models.
+     * Lists all Post models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ForumSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $query = Post::find();
+        $countQuery = clone $query;
+        $pages = new Pagination(['totalCount' => $countQuery->count()]);
+        $models = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'models' => $models,
+            'pages' => $pages
         ]);
     }
 
     /**
-     * Displays a single Forum model.
+     * Displays a single Post model.
      * @param integer $id
      * @return mixed
      */
@@ -68,13 +58,13 @@ class ForumController extends BaseController
     }
 
     /**
-     * Creates a new Forum model.
+     * Creates a new Post model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Forum();
+        $model = new Post();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -86,7 +76,7 @@ class ForumController extends BaseController
     }
 
     /**
-     * Updates an existing Forum model.
+     * Updates an existing Post model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -105,7 +95,7 @@ class ForumController extends BaseController
     }
 
     /**
-     * Deletes an existing Forum model.
+     * Deletes an existing Post model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -113,20 +103,20 @@ class ForumController extends BaseController
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-        Yii::$app->cache->flush();
+
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Forum model based on its primary key value.
+     * Finds the Post model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Forum the loaded model
+     * @return Post the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Forum::findOne($id)) !== null) {
+        if (($model = Post::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

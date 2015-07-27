@@ -1,11 +1,13 @@
 <?php
 
 use yii\helpers\Html;
+use backend\modules\forum\models\Board;
+use backend\modules\forum\AppAsset;
 
-const CATEGORY = 0;
-const BOARD = 1;
+AppAsset::register($this);
+
 /* @var $this yii\web\View */
-/* @var $model app\modules\forum\models\Forum */
+/* @var $model backend\modules\forum\models\Forum */
 
 $this->title = $model->forum_name;
 $this->registerMetaTag(['name' => 'keywords', 'content' => $model->forum_name]);
@@ -18,7 +20,7 @@ $this->params['forum'] = $model->toArray;
         <?= $this->render('_boards',[
             'boards'=>$model->boards,
         ]); ?>
-    <?php elseif ($model->boardCount == 1 && $model->boards[0]->parent_id != CATEGORY): ?>
+    <?php elseif ($model->boardCount == 1 && $model->boards[0]->parent_id != Board::AS_CATEGORY): ?>
         <?= $this->render('/board/view', [
                     'model'=>$model->boards[0], 
                     'newThread'=>$newThread,
@@ -28,11 +30,17 @@ $this->params['forum'] = $model->toArray;
     <?php else: ?>
         <div class="jumbotron">
             <h2><?= Yii::t('app', 'No board!'); ?></h2>
+            <?php if (Yii::$app->user->id == $model->user_id) : ?>
+                <?= Html::a(Yii::t('app', 'Add a board'), ['/forum/forum/update', 'id' => $model->forum_url, 'action' => 'board'], ['class' => 'btn btn-success']) ?>
+            <?php endif; ?>
         </div>
     <?php endif; ?>
 </div>
 <div class="col-xs-12 col-sm-4 col-md-4">
-    <?= \shiyang\login\Login::widget(['visible' => Yii::$app->user->isGuest]); ?>
+    <?= \shiyang\login\Login::widget([
+        'title' => Yii::t('app', 'Log in'),
+        'visible' => Yii::$app->user->isGuest
+    ]); ?>
     <div class="panel panel-default">
       <div class="panel-heading">About</div>
       <div class="panel-body">

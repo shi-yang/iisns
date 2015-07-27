@@ -5,7 +5,6 @@ namespace backend\modules\forum\models;
 use Yii;
 use yii\helpers\Url;
 use yii\db\Query;
-use app\components\Tools;
 
 /**
  * This is the model class for table "{{%forum_thread}}".
@@ -14,9 +13,10 @@ use app\components\Tools;
  * @property string $title
  * @property string $content
  * @property integer $created_at
+ * @property integer $updated_at
  * @property integer $user_id
  * @property integer $board_id
- * @property integer $is_broadcast
+ * @property integer $post_count
  */
 class Thread extends \yii\db\ActiveRecord
 {
@@ -34,10 +34,10 @@ class Thread extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['content'], 'required'],
+            [['title'], 'required'],
             [['content'], 'string'],
-            [['created_at', 'user_id', 'board_id', 'is_broadcast'], 'integer'],
-            [['title'], 'string']
+            [['created_at', 'user_id', 'board_id', 'post_count', 'updated_at'], 'integer'],
+            [['title'], 'string', 'min' => 2, 'max' => 80],
         ];
     }
 
@@ -53,6 +53,7 @@ class Thread extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app', 'Create Time'),
             'user_id' => Yii::t('app', 'User ID'),
             'board_id' => Yii::t('app', 'Block ID'),
+            'post_count' => Yii::t('app', 'Post Count')
         ];
     }
 
@@ -62,50 +63,45 @@ class Thread extends \yii\db\ActiveRecord
      */
     public function beforeSave($insert)
     {
-       if (parent::beforeSave($insert)) {
-        	if ($this->isNewRecord) {
-        	  $this->user_id = Yii::$app->user->identity->id;
-        	  $this->created_at = time();
-        	}
+        if (parent::beforeSave($insert)) {
+            if ($this->isNewRecord) {
+                $this->user_id = Yii::$app->user->id;
+                $this->created_at = time();
+                $this->updated_at = time();
+            }
             return true;
-       } else {
+        } else {
             return false;
-       }
+        }
     }
     
     /**
      *string the URL that shows the detail of the thread
      */
     public function getUrl()
-    {	            return Url::toRoute(['/forum/thread/view', 'id' => $this->id]);
+    {
+    	 return Url::toRoute(['/forum/thread/view', 'id' => $this->id]);
     }
 
     public function getUser()
     {
         return Yii::$app->db
-            ->createCommand("SELECT username, avatar FROM {{%user}} WHERE id={$this->user_id}")
+            ->createCommand("SELECT id, username, avatar FROM {{%user}} WHERE id={$this->user_id}")
             ->queryOne();
     }
     
     public function getForum()
     {
         return Yii::$app->db
-            ->createCommand("SELECT * FROM {{%forum}} `f` JOIN {{%forum_board}} `b` ON f.id=b.forum_id WHERE b.id={$this->board_id}")
+            ->createCommand("SELECT * FROM {{%forum}} as f JOIN {{%forum_board}} as b ON f.id=b.forum_id WHERE b.id={$this->board_id}")
             ->queryOne();
     }
     
     public function getBoard()
     {
         return Yii::$app->db
-            ->createCommand("SELECT id, name FROM {{%forum_board}} WHERE id={$this->board_id}")
+            ->createCommand("SELECT id, name, user_id FROM {{%forum_board}} WHERE id={$this->board_id}")
             ->queryOne();
-    }
-    
-    public function getPostCount()
-    {
-        return Yii::$app->db
-            ->createCommand("SELECT count(*) FROM {{%forum_post}}  WHERE thread_id={$this->id}")
-            ->queryScalar();
     }
     
     public function isFavor()
@@ -136,9 +132,8 @@ class Thread extends \yii\db\ActiveRecord
         $query->select('p.id,  p.content, p.created_at, p.user_id, u.username, u.avatar')
             ->from('{{%forum_post}} as p')
             ->join('LEFT JOIN','{{%user}} as u', 'u.id=p.user_id')
-            ->where('p.thread_id=:id', [':id' => $this->id])
-            ->orderBy('p.created_at DESC');
-        $result = Tools::Pagination($query);
+            ->where('p.thread_id=:id', [':id' => $this->id]);
+        $result = Yii::$app->tools->Pagination($query);
         return ['posts' => $result['result'], 'pages' => $result['pages']];
     }
 

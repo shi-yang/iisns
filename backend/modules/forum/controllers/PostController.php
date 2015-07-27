@@ -3,23 +3,25 @@
 namespace backend\modules\forum\controllers;
 
 use Yii;
+use yii\data\Pagination;
 use backend\modules\forum\models\Post;
-use yii\web\Controller;
+use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * PostController implements the CRUD actions for Post model.
  */
-class PostController extends Controller
+class PostController extends BaseController
 {
+    public $layout = 'forum';
     public function behaviors()
     {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['thread'],
+                    'delete' => ['post'],
                 ],
             ],
         ];
@@ -33,7 +35,26 @@ class PostController extends Controller
             ]
         ];
     }
-    
+
+    /**
+     * Lists all Forum models.
+     * @return mixed
+     */
+    public function actionIndex()
+    {
+        $query = Post::find();
+        $countQuery = clone $query;
+        $pages = new Pagination(['totalCount' => $countQuery->count()]);
+        $models = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+
+        return $this->render('index', [
+            'models' => $models,
+            'pages' => $pages
+        ]);
+    }
+
     /**
      * Updates an existing Post model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -62,8 +83,7 @@ class PostController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+        return $this->redirect(['/forum/post/index']);
     }
 
     /**

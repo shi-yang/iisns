@@ -62,8 +62,4 @@ class ExploreRecommend extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app', 'Created At'),
         ];
     }
-
-    public function getPost(){
-        ;
-    }
 }

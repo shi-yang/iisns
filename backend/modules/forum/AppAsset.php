@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace backend\modules\forum\views;
+namespace backend\modules\forum;
 
 use yii\web\AssetBundle;
 
@@ -15,10 +15,9 @@ use yii\web\AssetBundle;
  */
 class AppAsset extends AssetBundle
 {
-    public $basePath = '@webroot';
-    public $baseUrl = '@web';
+    public $sourcePath = '@backend/modules/forum/assets';
     public $css = [
-        'css/forum/css/forum.css',
+        'css/forum.css',
         'css/style.css',
     ];
     public $js = [

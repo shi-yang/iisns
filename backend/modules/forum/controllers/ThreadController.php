@@ -6,7 +6,7 @@ use Yii;
 use backend\modules\forum\models\Thread;
 use backend\modules\forum\models\ThreadSearch;
 use backend\modules\forum\models\Post;
-use yii\web\Controller;
+use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
@@ -15,17 +15,16 @@ use yii\data\Pagination;
 /**
  * ThreadController implements the CRUD actions for Thread model.
  */
-class ThreadController extends Controller
+class ThreadController extends BaseController
 {
     public $layout = 'forum';
-    
     public function behaviors()
     {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['thread'],
+                    'delete' => ['post'],
                 ],
             ],
         ];
@@ -39,22 +38,26 @@ class ThreadController extends Controller
             ]
         ];
     }
-    
+
     /**
-     * Lists all Thread models.
+     * Lists all Forum models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ThreadSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $query = Thread::find();
+        $countQuery = clone $query;
+        $pages = new Pagination(['totalCount' => $countQuery->count()]);
+        $models = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'models' => $models,
+            'pages' => $pages
         ]);
     }
-
+    
     /**
      * Displays a single Thread model.
      * @param integer $id
@@ -68,9 +71,7 @@ class ThreadController extends Controller
         if ($newPost->load(Yii::$app->request->post())) {
             $newPost->thread_id = $model->id;
             if ($newPost->save()){
-                if ($model->user_id !== Yii::$app->user->id) {
-                    Yii::$app->userData->updateKey('unread_comment_count', $model->user_id);
-                }
+                Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Create successfully.'));
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } 
@@ -110,6 +111,7 @@ class ThreadController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Saved successfully'));
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -128,13 +130,9 @@ class ThreadController extends Controller
     {
         $model = $this->findModel($id);
         $board_id = $model->board_id;
-        if ($model->user_id === Yii::$app->user->id || $model->board['user_id']) {
-            Post::deleteAll(['thread_id' => $model->id]);
-            $model->delete();
-            Yii::$app->getSession()->setFlash('success', 'Delete successfully.');
-        } else {
-            throw new ForbiddenHttpException('You are not allowed to perform this action.');
-        }
+        Post::deleteAll(['thread_id' => $model->id]);
+        $model->delete();
+        Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Deleted successfully.'));
         return $this->redirect(['/forum/board/view', 'id' => $board_id]);
     }
 

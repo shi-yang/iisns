@@ -18,14 +18,14 @@ use backend\modules\forum\models\Board;
             </div>
         <?php elseif ($board->parent_id === Board::AS_BOARD): ?>
             <div class="board" onclick="window.location.href= '<?= $board->url ?>';return false">
-                <img src="<?= Yii::getAlias('@forum_icon') . '../forum.gif' ?>" class="pull-left">
+                <img src="<?= Yii::getAlias('@web') . '/images/forum.gif' ?>" class="pull-left">
                 <div class="pull-left">
                     <?= Html::a(Html::encode($board->name), $board->url) ?> <br>
                     <?= Html::encode($board->description) ?>
                 </div>
                 <div class="hidden-xs pull-right" style="width:130px">
                     <i class="glyphicon glyphicon-user"></i> <?= Board::getLastThread($board['id'])['username'] ?> <br>
-                    <i class="glyphicon glyphicon-time"></i> <?= Board::getLastThread($board['id'])['created_at'] ?>
+                    <i class="glyphicon glyphicon-time"></i> <?= Yii::$app->formatter->asRelativeTime(Board::getLastThread($board['id'])['created_at']) ?>
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -39,14 +39,14 @@ use backend\modules\forum\models\Board;
                         $counter = 0; 
                     ?>
                     <?php for ($i=0; $i < $rowsCount; $i++): ?>
-                        <tr class="boardinfo">
+                        <tr>
                             <?php for ($j=0; $j < $board->columns; $j++): ?>
                                 <?php if ($counter < $totalRecords): ?>
                                     <?php $subBoard = $board->subBoards[$counter]; ?>
-                                    <td width="<?= (100.0 / $board->columns) ?>%" onclick="window.location.href= '<?= Url::toRoute(['/forum/board/view', 'id' => $subBoard['id']]) ?>';return false">
+                                    <td class="boardinfo" width="<?= (100.0 / $board->columns) ?>%" onclick="window.location.href= '<?= Url::toRoute(['/forum/board/view', 'id' => $subBoard['id']]) ?>';return false">
                                         <div class="pull-left">
                                             <a href="<?= Url::toRoute(['/forum/board/view', 'id' => $subBoard['id']]) ?>">
-                                                <img src="<?= Yii::getAlias('@forum_icon') . '../forum.gif' ?>">
+                                                <img src="<?= Yii::getAlias('@web') . '/images/forum.gif' ?>">
                                             </a>
                                         </div>
                                         <dl style="margin-bottom:0">
@@ -56,7 +56,7 @@ use backend\modules\forum\models\Board;
                                             <dd class="hidden-xs" data-toggle="tooltip" data-placement="top" title="Thread Count">
                                                 <i class="glyphicon glyphicon-comment"></i> <?= Board::getThreadCount($subBoard['id']) ?> 
                                             </dd>
-                                            <dd class="hidden-xs"><i class="glyphicon glyphicon-time"></i> <?= Board::getLastThread($subBoard['id'])['created_at'] ?></dd>
+                                            <dd class="hidden-xs"><i class="glyphicon glyphicon-time"></i> <?= Yii::$app->formatter->asRelativeTime(Board::getLastThread($subBoard['id'])['created_at']) ?></dd>
                                         </dl>
                                     </td>
                                 <?php endif ?>
@@ -72,7 +72,7 @@ use backend\modules\forum\models\Board;
                             <td style="vertical-align:middle;">
                                 <div class="pull-left">
                                     <a href="<?= Url::toRoute(['/forum/board/view', 'id' => $subBoard['id']]) ?>">
-                                        <img src="<?= Yii::getAlias('@forum_icon') . '../forum.gif' ?>">
+                                        <img src="<?= Yii::getAlias('@web') . '/images/forum.gif' ?>">
                                     </a>
                                 </div>
                                 <dl style="margin-bottom:0">
@@ -85,7 +85,7 @@ use backend\modules\forum\models\Board;
                             </td>
                             <td class="hidden-xs" style="width:150px;">
                                 <i class="glyphicon glyphicon-user"></i> <?= $lastThread['username'] ?> <br>
-                                <i class="glyphicon glyphicon-time"></i> <?= $lastThread['created_at'] ?>
+                                <i class="glyphicon glyphicon-time"></i> <?= Yii::$app->formatter->asRelativeTime($lastThread['created_at']) ?>
                             </td>
                         </tr>
                     <?php endforeach ?>

@@ -14,7 +14,7 @@ use backend\modules\forum\models\Board;
         <div class="<?= ($board->parent_id == Board::AS_CATEGORY) ? 'category' : 'board' ; ?>" style="boarder-bottom:none;">
             <h2>
                 <?php if ($board->parent_id == Board::AS_BOARD): ?>
-                    <img src="<?= Yii::getAlias('@forum_icon') . '../forum.gif' ?>">
+                    <img src="<?= Yii::getAlias('@web') . '/images/forum.gif' ?>">
                 <?php endif ?>
                 <?= Html::a(Html::encode($board->name), $board->url) ?>
                 <div class="pull-right">
@@ -36,14 +36,14 @@ use backend\modules\forum\models\Board;
                         $counter = 0; 
                     ?>
                     <?php for ($i=0; $i < $rowsCount; $i++): ?>
-                        <tr class="boardinfo">
+                        <tr>
                             <?php for ($j=0; $j < $board->columns; $j++): ?>
                                 <?php if ($counter < $totalRecords): ?>
                                     <?php $subBoard = $board->subBoards[$counter]; ?>
-                                <td width="<?= (100.0 / $board->columns) ?>%">
+                                <td class="boardinfo" width="<?= (100.0 / $board->columns) ?>%">
                                     <div class="pull-left">
                                         <a href="<?= Url::toRoute(['/forum/board/view', 'id' => $subBoard['id']]) ?>">
-                                            <img src="<?= Yii::getAlias('@forum_icon') . '../forum.gif' ?>">
+                                            <img src="<?= Yii::getAlias('@web') . '/images/forum.gif' ?>">
                                         </a>
                                     </div>
                                     <dl style="margin-bottom:0">
@@ -68,7 +68,7 @@ use backend\modules\forum\models\Board;
                             <td style="vertical-align:middle;">
                                 <div class="pull-left">
                                     <a href="<?= Url::toRoute(['/forum/board/view', 'id' => $subBoard['id']]) ?>">
-                                        <img src="<?= Yii::getAlias('@forum_icon') . '../forum.gif' ?>">
+                                        <img src="<?= Yii::getAlias('@web') . '/images/forum.gif' ?>">
                                     </a>
                                 </div>
                                 <dl style="margin-bottom:0">

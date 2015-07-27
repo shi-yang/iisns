@@ -4,7 +4,7 @@ namespace backend\modules\forum\controllers;
 
 use Yii;
 use backend\modules\forum\models\Broadcast;
-use yii\web\Controller;
+use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * BroadcastController implements the CRUD actions for Broadcast model.
  */
-class BroadcastController extends Controller
+class BroadcastController extends BaseController
 {
     public function behaviors()
     {
@@ -36,20 +36,17 @@ class BroadcastController extends Controller
     }
     
     /**
-     * 
+     * 删除广播
      */
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
+
         $forum_url = Yii::$app->db
             ->createCommand('SELECT forum_url FROM {{%forum}} WHERE id=' . $model->forum_id)
             ->queryScalar();
-        if ($model->user_id === Yii::$app->user->id) {
-            $model->delete();
-            Yii::$app->getSession()->setFlash('success', 'Delete successfully.');
-        } else {
-            throw new ForbiddenHttpException('You are not allowed to perform this action.');
-        }
+        $model->delete();
+        Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Deleted successfully.'));
         return $this->redirect(['/forum/forum/broadcast', 'id' => $forum_url]);
     }
 
