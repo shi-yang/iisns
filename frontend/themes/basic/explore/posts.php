@@ -16,7 +16,7 @@ $this->params['title'] = Yii::t('app', 'Explore') . ' - ' . Yii::t('app', 'Posts
                 <div class="row">
                     <div class="post-content col-md-9">
                         <article>
-                            <a class="mecctitle" href="<?= Url::toRoute(['/explore/view-post', 'id' => $post['id']]) ?>" target="_blank">
+                            <a class="mecctitle" href="<?= Url::toRoute(['/user/view/view-post', 'id' => $post['id']]) ?>" target="_blank">
                                 <h2><?= Html::encode($post['title']) ?></h2>
                             </a>
                             <address class="meccaddress">
