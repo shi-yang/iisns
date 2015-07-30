@@ -22,8 +22,6 @@ use app\modules\forum\models\Broadcast;
  */
 class ForumController extends BaseController
 {
-    const BOARD = 1;
-
     public $layout = 'forum';
     public $enableCsrfValidation = false;
 
@@ -43,12 +41,12 @@ class ForumController extends BaseController
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['create', 'update', 'index', 'view', 'broadcast'],
+                        'actions' => ['create', 'update', 'view', 'broadcast', 'upload'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
                     [
-                        'actions' => ['index', 'view', 'broadcast'],
+                        'actions' => ['view', 'broadcast'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
@@ -76,25 +74,6 @@ class ForumController extends BaseController
     }
 
     /**
-     * Lists all Forum models.
-     * @return mixed
-     */
-    public function actionIndex()
-    {
-        if (Yii::$app->user->isGuest) {
-            $this->layout = '/main';
-        } else {
-            $this->layout = '@app/modules/user/views/layouts/user';
-        }
-        
-        $forums = Yii::$app->db->createCommand("SELECT forum_name, forum_url, forum_icon, forum_desc FROM {{%forum}}")->queryAll();
-
-        return $this->render('index', [
-            'forums' => $forums,
-        ]);
-    }
-
-    /**
      * Displays a single Forum model.
      * @param integer $id
      * @return mixed
@@ -102,7 +81,8 @@ class ForumController extends BaseController
     public function actionView($id)
     {
         $model = $this->findModel($id);
-        if ($model->boardCount == 1 && $model->boards[0]->parent_id == self::BOARD ) {
+        //该论坛下只有一个版块，且该版块不是分类，则可以直接发帖
+        if ($model->boardCount == 1 && $model->boards[0]->parent_id == Board::AS_BOARD ) {
             $newThread = $this->newThread($model->boards[0]->id);
         } else {
             $newThread = null;
@@ -166,6 +146,7 @@ class ForumController extends BaseController
             }
         }
         
+        //上传上传图标
         Yii::setAlias('@upload', '@webroot/uploads/forum/icon/');
         if (Yii::$app->request->isPost && !empty($_FILES)) {
             $extension =  strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
@@ -173,19 +154,16 @@ class ForumController extends BaseController
 
             Image::thumbnail($_FILES['file']['tmp_name'], 160, 160)->save(Yii::getAlias('@upload') . $fileName, ['quality' => 80]);
             
-            //delete old icon
-            $file_exists = file_exists(Yii::getAlias('@upload').$model->forum_icon);
-            if ($file_exists && (strpos($model->forum_icon, 'default') === false))
+            //删除旧图标
+            if (file_exists(Yii::getAlias('@upload').$model->forum_icon) && (strpos($model->forum_icon, 'default') === false))
                 @unlink(Yii::getAlias('@upload').$model->forum_icon); 
 
             $model->forum_icon = $fileName;
             $model->update();
         }
 
-        if ($model->load(Yii::$app->request->post())) {
-            if ($model->validate() && $model->save()) {
-                Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Saved successfully'));
-            }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Saved successfully'));
         }
         
         return $this->render('update', [

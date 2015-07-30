@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
                 </div>
             <?php else: ?>
                 <div class="hidden-xs">
-                    <img src="<?= Yii::getAlias('@avatar') . Yii::$app->user->identity->avatar ?>" alt="User avatar">
+                    <img class="img-circle" src="<?= Yii::getAlias('@avatar') . Yii::$app->user->identity->avatar ?>" alt="User avatar">
                 </div>
             <?php endif; ?>
         </div>

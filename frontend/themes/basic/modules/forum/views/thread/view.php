@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $user['username'];
                 <div class="thread-info">
                     <span class="glyphicon glyphicon-user"></span> <?= Html::a(Html::encode($user['username']), ['/user/view', 'id' => $user['id']]) ?>
                     &nbsp;•&nbsp;
-                    <span class="glyphicon glyphicon-time"></span> <?= Yii::$app->tools->formatTime($model->created_at) ?>
+                    <span class="glyphicon glyphicon-time"></span> <?= Yii::$app->formatter->asRelativeTime($model->created_at) ?>
                     <div class="pull-right">
                         <span class="glyphicon glyphicon-comment"></span> <?= $model->post_count ?>
                         <?php if ($user['id'] == Yii::$app->user->id || $board['user_id'] == Yii::$app->user->id): ?>
@@ -55,7 +55,6 @@ $this->params['breadcrumbs'][] = $user['username'];
         <!-- Post Form End -->
         <?= $this->render('_posts', [
                 'posts'=>$posts['posts'],
-                'floor'=> $model->post_count, //楼层数
                 'pageSize'=>$posts['pages']->pageSize, //分页
                 'pages' => $posts['pages'], //分页
                 'postCount' => $model->post_count //评论数

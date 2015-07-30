@@ -50,7 +50,7 @@ a:hover {
     min-height: 100%;
     height: auto;
     margin: 0 auto -60px;
-    padding: 0 0 60px;
+    padding: 60px 0 60px;
 }
 
 .wrap > .container {
@@ -137,11 +137,11 @@ a:hover {
   width: 100%;
   margin-bottom: 10px;
   padding: 20px;
-  box-shadow: 0 2px 1px rgba(0,0,0,0.1), 0 0 1px rgba(0,0,0,0.1);
   border-radius: 2px;
   background-color: #fff;
   white-space: normal;
   word-break: break-all;
+  border-bottom: 1px solid #ddd;
 }
 .post-item .post-title {
   margin: 0;
@@ -165,9 +165,6 @@ a:hover {
   white-space: normal;
   word-break: break-all;
   padding: 30px;
-  box-shadow: 0 2px 1px rgba(0,0,0,0.1), 0 0 1px rgba(0,0,0,0.1);
-  border-radius: 2px;
-  background-color: #fff;
 }
 
 .post-view .post-title {
@@ -189,6 +186,10 @@ a:hover {
 
 .post-content img {
   max-width: 100%
+}
+
+.post-content p {
+  margin: 0 0 30px;
 }
 
 /*
@@ -606,7 +607,7 @@ a:hover {
 }
 
 .main {
-  background: #fcfcfc;
+  background: #fff;
   padding: 15px;
   -moz-box-shadow: 0 3px 0 rgba(12,12,12,0.03);
   -webkit-box-shadow: 0 3px 0 rgba(12,12,12,0.03);
@@ -623,7 +624,8 @@ a:hover {
 /*  Albums and photos */
 /*----------------------------------------------------------------------------------- */
 .album-all {
-    list-style-type: none;
+  list-style-type: none;
+  padding: 20px 20px;
 }
 .album-all .album-item {
   padding: 6px;

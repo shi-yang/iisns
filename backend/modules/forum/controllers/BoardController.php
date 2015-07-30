@@ -5,7 +5,7 @@ namespace backend\modules\forum\controllers;
 use Yii;
 use backend\modules\forum\models\Board;
 use yii\data\ActiveDataProvider;
-use yii\web\Controller;
+use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
@@ -14,7 +14,7 @@ use backend\modules\forum\models\Thread;
 /**
  * BoardController implements the CRUD actions for Board model.
  */
-class BoardController extends Controller
+class BoardController extends BaseController
 {
     public $layout = 'forum';
 
@@ -47,6 +47,7 @@ class BoardController extends Controller
     public function actionView($id)
     {
         $model = $this->findModel($id);
+        //如果是该版块是个分类，则返回该分类下所有版块列表
         if ($model->parent_id == Board::AS_CATEGORY) {
             return $this->render('boards', [
                 'model' => $model,
@@ -60,6 +61,7 @@ class BoardController extends Controller
         if ($newThread->load(Yii::$app->request->post())) {
             $newThread->board_id = $model->id;
             if ($newThread->save()) {
+                //更新该版块最后回复信息
                 Yii::$app->db->createCommand()->update('{{%forum_board}}', [
                     'updated_at' => time(),
                     'updated_by' => Yii::$app->user->id
@@ -82,12 +84,8 @@ class BoardController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        if ($model->user_id !== Yii::$app->user->id) {
-            throw new ForbiddenHttpException('You are not allowed to perform this action.');
-        }
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->getSession()->setFlash('success', 'Save successfully.');
+            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Saved successfully'));
         }
 
         return $this->render('update', [
@@ -105,13 +103,10 @@ class BoardController extends Controller
     {
         $model = $this->findModel($id);
         $forum_url = $model->forum['forum_url'];
-        if ($model->user_id === Yii::$app->user->id) {
-            Thread::deleteAll(['board_id' => $model->id]);
-            $model->delete();
-            Yii::$app->getSession()->setFlash('success', 'Delete successfully.');
-        } else {
-            throw new ForbiddenHttpException('You are not allowed to perform this action.');
-        }
+        Thread::deleteAll(['board_id' => $model->id]);
+        $model->delete();
+        Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Deleted successfully.'));
+
         return $this->redirect(['/forum/forum/update', 'id' => $forum_url, 'action' => 'board']);
     }
 

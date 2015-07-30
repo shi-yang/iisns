@@ -5,7 +5,6 @@ namespace backend\modules\forum\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\modules\forum\models\Thread;
 
 /**
  * ThreadSearch represents the model behind the search form about `backend\modules\forum\models\Thread`.
@@ -18,7 +17,7 @@ class ThreadSearch extends Thread
     public function rules()
     {
         return [
-            [['id', 'created_at', 'user_id', 'block_id'], 'integer'],
+            [['id', 'created_at', 'user_id', 'board_id'], 'integer'],
             [['title', 'content'], 'safe'],
         ];
     }
@@ -55,7 +54,7 @@ class ThreadSearch extends Thread
             'id' => $this->id,
             'created_at' => $this->created_at,
             'user_id' => $this->user_id,
-            'block_id' => $this->block_id,
+            'board_id' => $this->board_id,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])

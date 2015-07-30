@@ -12,6 +12,104 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
+--
+-- 表的结构 `pre_user`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` char(32) NOT NULL,
+  `password_hash` char(60) NOT NULL,
+  `password_reset_token` char(43) NOT NULL,
+  `auth_key` char(32) NOT NULL,
+  `role` tinyint(2) NOT NULL,
+  `email` char(64) NOT NULL,
+  `status` tinyint(2) NOT NULL,
+  `created_at` int(10) NOT NULL,
+  `updated_at` int(10) NOT NULL,
+  `avatar` char(24) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10000 ;
+
+--
+-- 转存表中的数据 `pre_user`
+--
+
+INSERT INTO `pre_user` (`id`, `username`, `password_hash`, `password_reset_token`, `auth_key`, `role`, `email`, `status`, `created_at`, `updated_at`, `avatar`) VALUES
+(10000, 'admin', '$2y$13$sjzwQPuDzlY46uxLE6XK4O.WveOn80JFRk7DLGEIfgu1hf7Z1Rbb6', '', 'jCXCwnzJgOS2G-AwiAQ5BbYemejc8nHX', 10, 'admin@admin.com', 10, 1437550265, 1437550265, 'default/10.jpg');
+
+--
+-- 表的结构 `pre_auth_assignment`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_auth_assignment` (
+  `item_name` varchar(64) NOT NULL,
+  `user_id` varchar(64) NOT NULL,
+  `created_at` int(11) DEFAULT NULL,
+  PRIMARY KEY (`item_name`,`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `pre_auth_assignment`
+--
+
+INSERT INTO `pre_auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
+('超级管理员', '10000', 1437549324);
+
+--
+-- 表的结构 `pre_auth_item`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_auth_item` (
+  `name` varchar(64) NOT NULL,
+  `type` int(11) NOT NULL,
+  `description` text,
+  `rule_name` varchar(64) DEFAULT NULL,
+  `data` text,
+  `created_at` int(11) DEFAULT NULL,
+  `updated_at` int(11) DEFAULT NULL,
+  PRIMARY KEY (`name`),
+  KEY `rule_name` (`rule_name`),
+  KEY `idx-auth_item-type` (`type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `pre_auth_item`
+--
+
+INSERT INTO `pre_auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
+('/*', 2, NULL, NULL, NULL, 1437549400, 1437549400),
+('超级管理员', 1, '拥有最高权限', NULL, NULL, 1437549293, 1437549293);
+
+--
+-- 表的结构 `pre_auth_item_child`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_auth_item_child` (
+  `parent` varchar(64) NOT NULL,
+  `child` varchar(64) NOT NULL,
+  PRIMARY KEY (`parent`,`child`),
+  KEY `child` (`child`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `pre_auth_item_child`
+--
+
+INSERT INTO `pre_auth_item_child` (`parent`, `child`) VALUES
+('超级管理员', '/*');
+
+--
+-- 表的结构 `pre_auth_rule`
+--
+CREATE TABLE IF NOT EXISTS `pre_auth_rule` (
+  `name` varchar(64) NOT NULL,
+  `data` text,
+  `created_at` int(11) DEFAULT NULL,
+  `updated_at` int(11) DEFAULT NULL,
+  PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- 表的结构 `pre_favorite`
@@ -137,10 +235,10 @@ CREATE TABLE IF NOT EXISTS `pre_forum_thread` (
   `title` varchar(255) NOT NULL,
   `content` text NOT NULL,
   `created_at` int(10) NOT NULL,
+  `updated_at` int(10) NOT NULL,
   `user_id` int(11) NOT NULL,
   `board_id` int(11) NOT NULL,
   `post_count` int(11) NOT NULL,
-  `is_broadcast` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `board_id` (`board_id`)
@@ -235,29 +333,8 @@ INSERT INTO `pre_setting` (`key`, `value`) VALUES
 ('siteKeyword', 'iiSNS - Global village entrance'),
 ('siteName', 'iiSNS'),
 ('siteTitle', 'iiSNS - Global village entrance'),
-('thirdPartyStatisticalCode', '');
-
--- --------------------------------------------------------
-
---
--- 表的结构 `pre_user`
---
-
-CREATE TABLE IF NOT EXISTS `pre_user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` char(32) NOT NULL,
-  `password_hash` char(60) NOT NULL,
-  `password_reset_token` char(43) NOT NULL,
-  `auth_key` char(32) NOT NULL,
-  `role` tinyint(2) NOT NULL,
-  `email` char(64) NOT NULL,
-  `status` tinyint(2) NOT NULL,
-  `created_at` int(10) NOT NULL,
-  `updated_at` int(10) NOT NULL,
-  `avatar` char(24) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10000 ;
+('thirdPartyStatisticalCode', ''),
+('version', '2.1.4');
 
 --
 -- 表的结构 `pre_user_data`
@@ -274,6 +351,11 @@ CREATE TABLE IF NOT EXISTS `pre_user_data` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10000 ;
 
+--
+-- 转存表中的数据 `pre_user_data`
+--
+INSERT INTO `pre_user_data` (`user_id`) VALUES
+(10000);
 --
 -- 表的结构 `pre_user_follow`
 --
@@ -323,8 +405,74 @@ CREATE TABLE IF NOT EXISTS `pre_user_profile` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- 转存表中的数据 `pre_user_profile`
+--
+INSERT INTO `pre_user_profile` (`user_id`) VALUES
+(10000);
+
+--
+-- 表的结构 `pre_user_notice`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_user_notice` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(50) NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `content` text NOT NULL,
+  `from_user_id` int(11) NOT NULL,
+  `to_user_id` int(11) NOT NULL,
+  `source_url` varchar(255) NOT NULL COMMENT '来源链接，序列化数组',
+  `created_at` int(10) NOT NULL,
+  `is_read` tinyint(2) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `type` (`type`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='消息提示通知';
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `pre_user_notice_type`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_user_notice_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(50) NOT NULL,
+  `type_title` varchar(255) NOT NULL,
+  `type_content` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- 转存表中的数据 `pre_user_notice_type`
+--
+
+INSERT INTO `pre_user_notice_type` (`id`, `type`, `type_title`, `type_content`) VALUES
+(1, 'MENTION_ME', 'mentioned you', 'Your colleagues {name} just mentioned you in the following content: {content}.<a href="{url}" target="_blank">Go to the website>></a>'),
+(2, 'NEW_COMMENT', 'comment you {title}', 'You received a new comment {content}. <a href="{url}" target="_blank">Go to the website>></a>.'),
+(3, 'NEW_MESSAGE', 'You received a new message', 'You received a new private message.{content}.<a href="{url}" target="_blank">Go to the website>></a>');
+
+--
 -- 限制导出的表
 --
+
+--
+-- 限制表 `pre_auth_assignment`
+--
+ALTER TABLE `pre_auth_assignment`
+  ADD CONSTRAINT `pre_auth_assignment_ibfk_1` FOREIGN KEY (`item_name`) REFERENCES `pre_auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- 限制表 `pre_auth_item`
+--
+ALTER TABLE `pre_auth_item`
+ADD CONSTRAINT `pre_auth_item_ibfk_1` FOREIGN KEY (`rule_name`) REFERENCES `pre_auth_rule` (`name`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- 限制表 `pre_auth_item_child`
+--
+ALTER TABLE `pre_auth_item_child`
+ADD CONSTRAINT `pre_auth_item_child_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `pre_auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `pre_auth_item_child_ibfk_2` FOREIGN KEY (`child`) REFERENCES `pre_auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- 限制表 `pre_forum`

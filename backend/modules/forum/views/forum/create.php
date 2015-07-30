@@ -1,10 +1,8 @@
 <?php
-
 use yii\helpers\Html;
 
-
 /* @var $this yii\web\View */
-/* @var $model app\modules\forum\models\Forum */
+/* @var $model backend\modules\forum\models\Forum */
 
 $this->title = Yii::t('app', 'Create Forum');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Forums'), 'url' => ['index']];

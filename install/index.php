@@ -2,7 +2,7 @@
 /**
  * iiSNS installer
  * @author       Shiyang <dr@shiyang.me>
- * @copyright    Copyright © 2014 iiSNS
+ * @copyright    Copyright © 2015 iiSNS
  * @link         http://www.iisns.com
  */
  include_once("header.php");

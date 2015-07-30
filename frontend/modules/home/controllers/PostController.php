@@ -11,7 +11,6 @@ use yii\filters\AccessControl;
 use yii\helpers\Html;
 use app\modules\home\models\Post;
 use app\modules\home\models\Feed;
-use app\components\Tools;
 use common\components\BaseController;
 
 /**
@@ -64,7 +63,7 @@ class PostController extends BaseController
             ->where('user_id=:user_id', [':user_id' => Yii::$app->user->id])
             ->orderBy('created_at DESC');
 
-        $pages = Tools::Pagination($query);
+        $pages = Yii::$app->tools->Pagination($query);
         return $this->render('index', [
             'posts' => $pages['result'],
             'pages' => $pages['pages']

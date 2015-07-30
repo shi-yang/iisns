@@ -41,21 +41,6 @@ class ThreadController extends BaseController
     }
     
     /**
-     * Lists all Thread models.
-     * @return mixed
-     */
-    public function actionIndex()
-    {
-        $searchModel = new ThreadSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    /**
      * Displays a single Thread model.
      * @param integer $id
      * @return mixed
@@ -68,10 +53,7 @@ class ThreadController extends BaseController
         if ($newPost->load(Yii::$app->request->post())) {
             $newPost->thread_id = $model->id;
             if ($newPost->save()){
-                $newPost->PostCuntPlus();
-                if ($model->user_id !== Yii::$app->user->id) {
-                    Yii::$app->userData->updateKey('unread_comment_count', $model->user_id);
-                }
+                Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Create successfully.'));
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } 

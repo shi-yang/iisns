@@ -1,43 +1,44 @@
 <?php 
+
 use yii\helpers\Html;
 use yii\helpers\HtmlPurifier;
-use yii\helpers\Url;
+use yii\widgets\LinkPager;
 use shiyang\infinitescroll\InfiniteScrollPager;
 
+$floor = 1;
 if (isset($_GET['page']) >= 2) //分页标识大于2才开始计算
-    $floor -= ($pageSize * $_GET['page']) - $pageSize;
+    $floor += ($pageSize * $_GET['page']) - $pageSize;
 ?>
-<div id="post-view">
-    <?php foreach($posts as $post): 
-        $floor_number=$floor--;
-    ?>
-        <div class="row thread-view">
-            <div class="col-sm-2">
-                <div class="thread-meta">
-                    <div class="author hidden-xs">
-                        <img src="<?= Yii::getAlias('@avatar') . $post['avatar'] ?>" alt="User avatar">
-                    </div>
-                    <p style="margin: 0;font-weight: bold;white-space: normal;word-break: break-all;">
-                          <?= Html::a(Html::encode($post['username']), ['/user/view', 'id' => $post['username']]) ?>
-                    </p>
-                </div>
-            </div>
-            <div class="col-sm-10">
-                <div class="post-meta">
-                    <a class="floor-number" id="<?= $post['id'] ;?>" href="#<?= $floor_number ?>">
+<section class="posts">
+    <div class="post-title">
+        <h3><?= Yii::t('app', '{postCount} comments', ['postCount' => $postCount]) ?></h3>
+    </div>
+    <div id="post-list">
+        <?php foreach($posts as $post):
+            $floor_number=$floor++; //楼层数减少
+            ?>
+            <div class="row post-item">
+                <div class="col-sm-12">
+                    <div class="post-meta">
+                        <?= Html::a('<span class="glyphicon glyphicon-user"></span> ' . Html::encode($post['username']), ['/user/view', 'id' => $post['username']]) ?>
+                        &nbsp;•&nbsp;
                         <span class="post-time">
-                            <?= \app\components\Tools::formatTime($post['created_at']) ?>
-                        </span>   <span class="badge">#<?= $floor_number ?></span>
-                    </a>
-                </div>
-                <div class="post-main">
-                    <?= HtmlPurifier::process($post['content']) ?>
+                            <span class="glyphicon glyphicon-time"></span> <?= Yii::$app->formatter->asRelativeTime($post['created_at']) ?>
+                        </span>
+                        <a class="floor-number" id="<?= $floor_number ?>" href="#<?= $floor_number ?>">
+                           <span class="badge"><?= $floor_number ?>#</span>
+                        </a>
+                    </div>
+                    <div class="post-content">
+                        <?= HtmlPurifier::process($post['content']) ?>
+                    </div>
                 </div>
             </div>
-        </div>
-    <?php endforeach; ?>
-    <?= InfiniteScrollPager::widget([
-        'pagination' => $pages,
-        'widgetId' => '#post-view',
-    ]);?>
-</div>
+        <?php endforeach; ?>
+        <?= LinkPager::widget([
+            'pagination' => $pages,
+            'lastPageLabel' => true,
+            'firstPageLabel' => true
+        ]);?>
+    </div>
+</section>

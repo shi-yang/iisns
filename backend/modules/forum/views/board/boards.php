@@ -29,7 +29,7 @@ $columnsCount = $model->columns;
                                 <td width="<?= (100.0 / $columnsCount) ?>%" onclick="window.location.href= '<?= Url::toRoute(['/forum/board/view', 'id' => $subBoard['id']]) ?>';return false">
                                     <div class="pull-left">
                                         <a href="<?= Url::toRoute(['/forum/board/view', 'id' => $subBoard['id']]) ?>">
-                                            <img src="<?= Yii::getAlias('@forum_icon') . '../forum.gif' ?>">
+                                            <img src="<?= Yii::getAlias('@web') . '/images/forum.gif' ?>">
                                         </a>
                                     </div>
                                     <dl style="margin-bottom:0">
@@ -39,7 +39,7 @@ $columnsCount = $model->columns;
                                         <dd class="hidden-xs" data-toggle="tooltip" data-placement="top" title="Thread Count">
                                             <i class="glyphicon glyphicon-comment"></i> <?= Board::getThreadCount($subBoard['id']) ?> 
                                         </dd>
-                                        <dd class="hidden-xs"><i class="glyphicon glyphicon-time"></i> <?= Board::getLastThread($subBoard['id'])['created_at'] ?></dd>
+                                        <dd class="hidden-xs"><i class="glyphicon glyphicon-time"></i> <?= Yii::$app->formatter->asRelativeTime(Board::getLastThread($subBoard['id'])['created_at']) ?></dd>
                                     </dl>
                                 </td>
                             <?php endif ?>
@@ -53,7 +53,7 @@ $columnsCount = $model->columns;
                         <td style="vertical-align:middle;">
                             <div class="pull-left">
                                 <a href="<?= Url::toRoute(['/forum/board/view', 'id' => $subBoard['id']]) ?>">
-                                    <img src="<?= Yii::getAlias('@forum_icon') . '../forum.gif' ?>">
+                                    <img src="<?= Yii::getAlias('@web') . '/images/forum.gif' ?>">
                                 </a>
                             </div>
                             <dl style="margin-bottom:0">

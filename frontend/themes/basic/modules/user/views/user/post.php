@@ -4,7 +4,6 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\helpers\HtmlPurifier;
 use shiyang\infinitescroll\InfiniteScrollPager;
-use app\components\Tools;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -18,14 +17,13 @@ $this->params['userData'] = $model->userData;
     <div id="social-container">
         <?php if (!empty($posts)): ?>
             <?php foreach($posts as $post): ?>
-                <div class="item widget-container fluid-height social-entry" id="<?= $post['id'] ?>">
-                    <div class="widget-content">
+                <article class="item widget-container fluid-height social-entry" id="<?= $post['id'] ?>">
+                    <header class="widget-content">
                         <h3><?= Html::a(Html::encode($post['title']), ['/home/post/view', 'id' => $post['id']]) ?></h3>
-                        <?= HtmlPurifier::process(Tools::htmlSubString($post['content'], 200, Url::toRoute(['/home/post/view', 'id' => $post['id']]))) ?>
-                    </div>
-                    <?php if (Yii::$app->user->id === $model->id): ?>
-                        <div class="widget-footer">
+                    </header>
+                        <footer class="widget-footer">
                             <div class="footer-detail">
+                                <?php if (Yii::$app->user->id === $model->id): ?>
                                 &nbsp;
                                 <a href="<?= Url::toRoute(['/home/post/delete', 'id' => $post['id']]) ?>" data-clicklog="delete" onclick="return false;" title="<?= Yii::t('app', 'Are you sure to delete it?') ?>">
                                     <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
@@ -35,10 +33,13 @@ $this->params['userData'] = $model->userData;
                                 <a href="<?= Url::toRoute(['/home/post/update', 'id' => $post['id']]) ?>">
                                     <span class="glyphicon glyphicon-edit"></span> <?= Yii::t('app', 'Update') ?>
                                 </a>
+                                &nbsp;
+                                <span class="item-line"></span>
+                                <?php endif ?>
+                                <span class="glyphicon glyphicon-time"></span> <?= Yii::$app->formatter->asRelativeTime($post['created_at']) ?>
                             </div>
-                        </div>
-                    <?php endif ?>
-                </div>
+                        </footer>
+                </article>
             <?php endforeach; ?>
             <?= InfiniteScrollPager::widget([
                    'pagination' => $pages,

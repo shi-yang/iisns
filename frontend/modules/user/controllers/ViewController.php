@@ -13,7 +13,6 @@ use app\modules\user\models\User;
 use app\modules\user\models\UserSearch;
 use app\modules\home\models\Post;
 use app\modules\home\models\Album;
-use app\components\Tools;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -43,16 +42,17 @@ class ViewController extends BaseController
             } else {
                 $followBtn = '<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'Follow');
             }
-            
+
             $html =<<<HTML
               <div class="media">
                 <div class="media-left">
                   <a href="{$userUrl}">
-                    <img class="media-object" src="{$avatar}" alt="{$username}">
+                    <img width="50" height="50" class="media-object" src="{$avatar}" alt="{$username}">
                   </a>
                 </div>
                 <div class="media-body">
                   <h4 class="media-heading">$model->username</h4>
+                    <a class="btn btn-xs btn-success btn-follow" href="{$followUrl}">{$followBtn}</a>
                 </div>
                 <div class="media-footer">
                 <div class="row">
@@ -69,15 +69,12 @@ class ViewController extends BaseController
                     <small class="text-muted">文章</small>
                   </div><!-- /.col -->
                 </div>
-                <a class="btn btn-xs btn-success btn-follow" href="{$followUrl}">
-                    {$followBtn}
-                </a>
               </div>
 HTML;
             return $html;
         }
 
-        return $this->render('/user/index', [
+        return $this->render('/user/view', [
             'model' => $model,
         ]);
     }
@@ -105,7 +102,7 @@ HTML;
             ->where('user_id=:user_id', [':user_id' => $model->id])
             ->orderBy('created_at DESC');
 
-        $posts = Tools::Pagination($query);
+        $posts = Yii::$app->tools->Pagination($query);
         return $this->render('/user/post', [
             'model' => $model,
             'posts' => $posts['result'],

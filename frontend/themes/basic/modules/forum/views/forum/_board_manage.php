@@ -3,7 +3,6 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use yii\bootstrap\Modal;
-use app\components\Tools;
 use app\modules\forum\models\Board;
 ?>
 

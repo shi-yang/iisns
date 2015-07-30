@@ -1,6 +1,6 @@
 <?php
 include_once('header.php');
-include_once('install.php');
+include_once('install.class.php');
 if (file_exists('../common/config/db.php')) {
     echo '</div>
 		<div class="alert alert-success" data-dismiss="alert"><strong>Success!</strong> Installation is completed.</div>
@@ -8,13 +8,15 @@ if (file_exists('../common/config/db.php')) {
 		<p>If you want to reinstall, deleted <code>common\config\db.php</code> </p>
 	 ';
     return;
+} else {
+    echo '<div class="progress">
+            <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 66.6%;">
+                Second
+            </div>
+    </div>';
 }
 ?>
-    <div class="progress">
-        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 66.6%;">
-            Second
-        </div>
-    </div>
+
     <?php $install = new Install(); ?>
     <form method="post" action="setup.php">
         <div class="col-md-6">
@@ -55,21 +57,21 @@ if (file_exists('../common/config/db.php')) {
                     <textarea class="form-control" id="siteDescription" name="siteDescription"><?php if(isset($_POST['siteDescription'])) echo $_POST['siteDescription']; else echo 'A forum, a blog, and a user center.'; ?></textarea>
                 </div>
             </fieldset>
-            <!--<fieldset>
+            <fieldset>
                 <legend><small>Admin Account</small></legend>
                 <div class="form-group">
                     <label class="control-label" for="adminUser">Username</label>
-                    <input type="text" class="form-control" id="adminUser" name="adminUser" value="<?php /*if(isset($_POST['adminUser'])) echo $_POST['adminUser']; else echo 'admin'; */?>">
+                    <input type="text" class="form-control" id="adminUser" name="adminUser" value="<?php if(isset($_POST['adminUser'])) echo $_POST['adminUser']; else echo 'admin'; ?>">
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="email">Admin email</label>
-                    <input type="email" class="form-control" id="email" name="email" value="<?php /*if(isset($_POST['email'])) echo $_POST['email']; else echo 'admin@'.$_SERVER['HTTP_HOST']; */?>">
+                    <input type="email" class="form-control" id="email" name="email" value="<?php if(isset($_POST['email'])) echo $_POST['email']; else echo 'admin@'.$_SERVER['HTTP_HOST']; ?>">
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="adminPass">Password</label>
-                    <input type="text" class="form-control" id="adminPass" name="adminPass" value="<?php /*if(isset($_POST['adminPass'])) echo $_POST['adminPass']; else echo 'admin'; */?>">
+                    <input type="text" class="form-control" id="adminPass" name="adminPass" value="<?php if(isset($_POST['adminPass'])) echo $_POST['adminPass']; ?>">
                 </div>
-            </fieldset>-->
+            </fieldset>
             <div class="form-actions">
                 <button type="submit" class="pull-right btn btn-primary">Install</button>
             </div>

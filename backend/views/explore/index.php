@@ -89,7 +89,7 @@ list-style-type: none;
                 <?php endforeach ?>
                 <?= InfiniteScrollPager::widget([
                     'pagination' => $pages,
-                    'widgetId' => '.post-all',
+                    'widgetId' => '.timeline',
                 ]);?>
             </ul>
         </div>

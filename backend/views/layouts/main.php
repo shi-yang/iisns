@@ -139,10 +139,15 @@ AppAsset::register($this);
                             <i class="glyphicon glyphicon-menu-down pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="<?= Url::toRoute('/user') ?>"><i class="glyphicon glyphicon-menu-right"></i> User</a></li>
-                            <li><a href="<?= Url::toRoute('/forum/forum/index') ?>"><i class="glyphicon glyphicon-menu-right"></i> Forum</a></li>
-                            <li><a href="<?= Url::toRoute('/blog-post') ?>"><i class="glyphicon glyphicon-menu-right"></i> Blog</a></li>
+                            <li><a href="<?= Url::toRoute('/user') ?>"><i class="glyphicon glyphicon-menu-right"></i> <?= Yii::t('app', 'User') ?></a></li>
+                            <li><a href="<?= Url::toRoute('/forum/forum/index') ?>"><i class="glyphicon glyphicon-menu-right"></i> <?= Yii::t('app', 'Forum') ?></a></li>
+                            <li><a href="<?= Url::toRoute('/post') ?>"><i class="glyphicon glyphicon-menu-right"></i> <?= Yii::t('app', 'Blog') ?></a></li>
                         </ul>
+                    </li>
+                    <li>
+                        <a href="<?= Url::toRoute(['/rbac']) ?>">
+                            <i class="glyphicon glyphicon-wrench"></i> <span><?= Yii::t('app', 'RBAC') ?></span>
+                        </a>
                     </li>
                     <li>
                         <a href="<?= Url::toRoute(['/site/cache']) ?>">

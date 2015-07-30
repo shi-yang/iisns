@@ -1,53 +1,55 @@
-# iisns - 地球村入口
+iisns - 地球村入口
+------------------
 
 **iiSNS 是基于 yii2 的 SNS 社区系统，一站式解决社区建站。可以写文章，做记录，上传图片，论坛聊天等。还可以用来做内容管理系统（CMS）。iiSNS 是一个免费的开源项目，在 MIT 许可证下授权发布。**
 
-###您可以用于
+特点与功能特性
+-----
+前后台分离，单入口应用程序，可创建主题，遵循 MVC 模式，按需加载功能，输入验证及输出过滤，模块化开发，兼容移动端（响应式布局），丰富的扩展库且易扩展，易使用易二次开发，国际化（I18N，目前支持中文、英文，通过添加语言文件还可支持更多语言）
 
+前台
+- 用户模块(user)——用户中心、用户关注、用户资料、消息通知、头像裁剪、发送私信
+- 社区模块(forum)——可以建立多个社区，发帖评论
+- 家模块(home)——跟用户模块结合在一起，形成用户中心的动态发布、博客日志、相册上传
+
+后台
+- AdminLTE 后台管理模板
+- 内容管理
+- RBAC(基于角色的访问控制)
+
+可用于
 - 粉丝营销社区
-
 - 新媒体行业
-
 - 企业文化建设
 
-更多用途，等你来发掘。
+更多用途，等你来发掘。演示:[www.iisns.com](http://www.iisns.com)
 
-安装方法
+
+文档
 --------
-需保证以下目录可读写
+[安装教程](https://github.com/shi-yang/iisns/wiki/iiSNS-%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B) | 
+[目录结构](https://github.com/shi-yang/iisns/wiki/iiSNS-%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84)
 
-- common/cache
-- frontend/runtime
-- frontend/web/assets
-- frontend/web/uploads
-- backend/runtime
-- backend/web/assets
+更多帮助文档将会在Wiki上放出: [https://github.com/shi-yang/iisns/wiki](https://github.com/shi-yang/iisns/wiki)
 
-###方法一：
-下载解压后，访问目录下的requirements.php文件查看环境需求
+获取支持与帮助
+----------
+提交问题：[Git issues](https://github.com/shi-yang/iisns/issues)
 
-把 common\config 目录下的 db.new.php 文件重命名为 db.php，并在该文件中配置数据库信息
+到 iiSNS 论坛上提出: [http://www.iisns.com/forum/iisns](http://www.iisns.com/forum/iisns)
 
-将 install 目录下的“data.sql”文件导入数据库
-
-配置好后，backend\web\为后台根目录，frontend\web\为前台根目录
-
-backend\web\index.php 可配置站点信息
-
-###方法二：
-用浏览器访问 install ，按照提示安装。
-
-如何参与
+参与贡献代码
 --------
 
-###您参与的iisns的发展是非常欢迎！
+您参与的iisns的发展是非常欢迎！您可以以下几种方式参与：
 
-您可以以下几种方式参与：
-
-- [报告问题](docs/internals/report-an-issue.md)
+- [报告问题](https://github.com/shi-yang/iisns/issues)
 - [提供反馈意见或设计讨论](http://www.iisns.com/index.php/forum/iisns)
 - 贡献核心代码或修复的bug
 
+许可
+-----
+iiSNS 的发布是遵循 [The MIT License](https://github.com/shi-yang/iisns/blob/master/LICENSE.md) 的。这意味着您能免费使用它开发开源或私有的 Web 应用程序。
 
 预览
 -------
@@ -58,9 +60,4 @@ backend\web\index.php 可配置站点信息
 ![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns_v2.1.2/Screen-shot 2015-06-20 11.30.19.png)
 ![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns_v2.1.2/Screen-shot 2015-06-20 11.36.42.png)
 ![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns_v2.1.2/Screen-shot 2015-06-20 11.41.22.png)
-![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns_v2.1.2/Screen-shot 2015-06-20 11.41.43.png)
 
-演示
-----
-
-[www.iisns.com](http://www.iisns.com)

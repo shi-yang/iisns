@@ -1,9 +1,7 @@
-<?php 
+<?php
 use yii\helpers\Html;
-use yii\helpers\HtmlPurifier;
 use yii\helpers\Url;
 use shiyang\infinitescroll\InfiniteScrollPager;
-use app\components\Tools;
 ?>
 
 <?php if ($model->getThreadCount($model->id) > 0): ?>
@@ -23,7 +21,10 @@ use app\components\Tools;
                                 <h2><?= Html::a(Html::encode($thread['title']), ['/forum/thread/view', 'id' => $thread['id']]) ?></h2>
                                 <small style="color: #aaa">
                                     <strong><?= Html::a(Html::encode($thread['username']), ['/user/view', 'id'=>$thread['username']], ['class'=>'thread-nickname']); ?></strong>
-                                        &nbsp;•&nbsp; <span class="glyphicon glyphicon-time"></span> <?= Yii::$app->formatter->asRelativeTime($thread['created_at'])?>
+                                        &nbsp;•&nbsp; 
+                                    <time title="<?= Yii::t('app', 'Last Reply Time') ?>">
+                                        <span class="glyphicon glyphicon-time"></span> <?= Yii::$app->formatter->asRelativeTime($thread['updated_at'])?>
+                                    </time>
                                 </small>
                             </td>
                             <td width="50" align="right" valign="middle" title="<?= Yii::t('app', 'Reply') ?>">

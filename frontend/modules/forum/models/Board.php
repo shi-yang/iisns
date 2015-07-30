@@ -4,7 +4,6 @@ namespace app\modules\forum\models;
 
 use Yii;
 use app\modules\forum\models\Thread;
-use app\components\Tools;
 use yii\helpers\Url;
 use yii\db\Query;
 
@@ -75,14 +74,14 @@ class Board extends \yii\db\ActiveRecord
     */
     public function beforeSave($insert)
     {
-       if (parent::beforeSave($insert)) {
-           if ($this->isNewRecord) {
-                 $this->user_id = Yii::$app->user->identity->id;
+        if (parent::beforeSave($insert)) {
+            if ($this->isNewRecord) {
+                $this->user_id = Yii::$app->user->id;
             }
-           return true;
-       } else {
-              return false;
-       }
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -115,18 +114,18 @@ class Board extends \yii\db\ActiveRecord
     public function getThreads()
     {
         $query = new Query;
-        $query->select('t.id, t.title, t.content, t.created_at, t.user_id, t.post_count, u.username, u.avatar')
+        $query->select('t.id, t.title, t.content, t.updated_at, t.user_id, t.post_count, u.username, u.avatar')
             ->from('{{%forum_thread}} as t')
             ->join('LEFT JOIN','{{%user}} as u', 'u.id=t.user_id')
             ->where('t.board_id=:id', [':id' => $this->id])
-            ->orderBy('t.created_at DESC');
-        $result = Tools::Pagination($query);
+            ->orderBy('t.updated_at DESC');
+        $result = Yii::$app->tools->Pagination($query);
         return ['threads' => $result['result'], 'pages' => $result['pages']];
     }
     
-    public static function getThreadCount($id)
+    public static function getThreadCount($id = null)
     {
-        if (isset($id)) {
+        if ($id != null) {
             return Yii::$app->db
                 ->createCommand("SELECT count(*) FROM {{%forum_thread}}  WHERE board_id={$id}")
                 ->queryScalar();

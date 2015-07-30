@@ -6,9 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="iiSNS install">
         <meta name="author" content="Shiyang">
-
         <title>iiSNS installer</title>
-
         <!-- Bootstrap core CSS -->
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
 

@@ -14,17 +14,17 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Notificati
                 <?= Nav::widget([
                     'items' => [
                         [
+                            'label' => '<i class="glyphicon glyphicon-bell"></i> ' . Yii::t('app', 'Mention me'),
+                            'url' => ['/user/message/mention'],
+                        ],
+                        [
                             'label' => '<i class="glyphicon glyphicon-inbox"></i> ' . Yii::t('app', 'Inbox') . '<span class="label label-danger pull-right">' . $this->params['count']['unread_message_count'] . '</span>',
                             'url' => ['/user/message/inbox'],
                         ],
                         [
-                            'label' => '<i class="glyphicon glyphicon-send"></i> ' . Yii::t('app', 'Sent') . '<span class="label label-success pull-right">' . $this->params['count']['outbox'] . '</span>',
+                            'label' => '<i class="glyphicon glyphicon-send"></i> ' . Yii::t('app', 'Sent'),
                             'url' => ['/user/message/outbox']
-                        ],
-                        [
-                            'label' => '<i class="glyphicon glyphicon-comment"></i> ' . Yii::t('app', 'Comment') . '<span class="label label-success pull-right">' . $this->params['count']['unread_comment_count'] . '</span>',
-                            'url' => ['/user/message/comment']
-                        ],
+                        ]
                     ],
                     'options' => ['id' => 'inbox-nav', 'class' =>'nav nav-pills nav-stacked'],
                     'encodeLabels' => false,

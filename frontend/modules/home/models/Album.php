@@ -4,7 +4,6 @@ namespace app\modules\home\models;
 
 use Yii;
 use yii\db\Query;
-use app\components\Tools;
 use app\components\Uploader;
 
 /**
@@ -112,7 +111,7 @@ class Album extends \yii\db\ActiveRecord
         $query->select('id, name, path')
             ->from('{{%home_photo}}')
             ->where('album_id=:id', [':id' => $this->id]);
-        $photos = Tools::Pagination($query);
+        $photos = Yii::$app->tools->Pagination($query);
         return [
             'photos' => $photos['result'],
             'pages' => $photos['pages']

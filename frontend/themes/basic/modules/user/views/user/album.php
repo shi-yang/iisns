@@ -1,7 +1,6 @@
 <?php
 use yii\helpers\Html;
 use shiyang\infinitescroll\InfiniteScrollPager;
-use app\components\Tools;
 use yii\widgets\ListView;
 
 /* @var $this yii\web\View */
@@ -18,7 +17,7 @@ $this->params['userData'] = $model->userData;
     'itemView' => '_album',
     'options' => [
         'tag' => 'ul',
-        'class' => 'album-all'
+        'class' => 'album-all row'
     ],
     'itemOptions' => [
         'class' => 'album-item col-sm-3 col-xs-6',

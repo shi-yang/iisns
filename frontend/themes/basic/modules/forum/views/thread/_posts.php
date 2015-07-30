@@ -1,10 +1,13 @@
 <?php 
+
 use yii\helpers\Html;
 use yii\helpers\HtmlPurifier;
+use yii\widgets\LinkPager;
 use shiyang\infinitescroll\InfiniteScrollPager;
 
+$floor = 1;
 if (isset($_GET['page']) >= 2) //分页标识大于2才开始计算
-    $floor -= ($pageSize * $_GET['page']) - $pageSize;
+    $floor += ($pageSize * $_GET['page']) - $pageSize;
 ?>
 <section class="posts">
     <div class="post-title">
@@ -12,7 +15,7 @@ if (isset($_GET['page']) >= 2) //分页标识大于2才开始计算
     </div>
     <div id="post-list">
         <?php foreach($posts as $post):
-            $floor_number=$floor--; //楼层数减少
+            $floor_number=$floor++; //楼层数减少
             ?>
             <div class="row post-item">
                 <div class="col-sm-2">
@@ -27,9 +30,9 @@ if (isset($_GET['page']) >= 2) //分页标识大于2才开始计算
                         <?= Html::a('<span class="glyphicon glyphicon-user"></span> ' . Html::encode($post['username']), ['/user/view', 'id' => $post['username']]) ?>
                         &nbsp;•&nbsp;
                         <span class="post-time">
-                            <span class="glyphicon glyphicon-time"></span> <?= Yii::$app->tools->formatTime($post['created_at']) ?>
+                            <span class="glyphicon glyphicon-time"></span> <?= Yii::$app->formatter->asRelativeTime($post['created_at']) ?>
                         </span>
-                        <a class="floor-number" id="<?= $post['id'] ;?>" href="#<?= $floor_number ?>">
+                        <a class="floor-number" id="<?= $floor_number ?>" href="#<?= $floor_number ?>">
                            <span class="badge"><?= $floor_number ?>#</span>
                         </a>
                     </div>
@@ -39,9 +42,10 @@ if (isset($_GET['page']) >= 2) //分页标识大于2才开始计算
                 </div>
             </div>
         <?php endforeach; ?>
-        <?= InfiniteScrollPager::widget([
+        <?= LinkPager::widget([
             'pagination' => $pages,
-            'widgetId' => '#post-view',
+            'lastPageLabel' => true,
+            'firstPageLabel' => true
         ]);?>
     </div>
 </section>

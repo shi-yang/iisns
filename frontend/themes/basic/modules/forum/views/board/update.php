@@ -3,10 +3,8 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/**
- * @var $this yii\web\View 
- * @var $model app\modules\forum\models\Board 
- */
+/* @var $this yii\web\View */
+/* @var $model app\modules\forum\models\Board */
 
 $this->params['forum'] = $model->forum;
 ?>

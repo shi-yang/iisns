@@ -4,7 +4,6 @@ namespace app\modules\user\models;
 
 use Yii;
 use yii\db\Query;
-use app\components\Tools;
 use app\modules\home\models\Post;
 use app\modules\home\models\Feed;
 
@@ -178,7 +177,7 @@ class User extends \common\models\User
             ->where('t.user_id=:user_id and p.user_id !=:user_id', [':user_id' => $this->id])
             ->orderBy('p.created_at DESC');
 
-        return Tools::Pagination($query);
+        return Yii::$app->tools->Pagination($query);
     }
 
     /**
@@ -207,7 +206,7 @@ class User extends \common\models\User
                 return false;
                 break;
         }
-        return Tools::Pagination($query);
+        return Yii::$app->tools->Pagination($query);
     }
 
     /**

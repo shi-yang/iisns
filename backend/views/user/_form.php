@@ -12,6 +12,8 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <?= $form->field($model, 'id')->textInput(['maxlength' => 32]) ?>
+
     <?= $form->field($model, 'username')->textInput(['maxlength' => 32]) ?>
 
     <?= $form->field($model, 'password_hash')->textInput(['maxlength' => 255, 'disabled' => true]) ?>

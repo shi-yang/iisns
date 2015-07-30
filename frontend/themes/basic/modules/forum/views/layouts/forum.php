@@ -32,7 +32,7 @@ AppAsset::register($this);
     <?php $this->beginBody() ?>
     <div class="modal-shiftfix wrap">
         <!-- Navigation -->
-        <div class="navbar navbar-fixed-top scroll-hide">
+        <header class="navbar navbar-fixed-top scroll-hide">
             <div class="container top-bar visible-xs">
                 <button class="navbar-toggle">
                     <span class="icon-bar"></span>
@@ -103,7 +103,7 @@ AppAsset::register($this);
                     </div>
                 </div>
             </div>
-        </div>
+        </header>
         <!-- End Navigation -->
         <div class="container-fluid main-content">
             <div class="row">

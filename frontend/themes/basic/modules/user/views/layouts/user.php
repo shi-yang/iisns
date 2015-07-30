@@ -53,7 +53,7 @@ AppAsset::register($this);
             <ul class="nav-notification clearfix">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="glyphicon glyphicon-envelope"></i>
+                        <i class="glyphicon glyphicon-bell"></i>
                         <span class="badge badge-danger notification-label bounceIn animation-delay4"><?= $unReadMessageCount  ?></span>
                     </a>
                     <ul class="dropdown-menu message dropdown-1">
@@ -210,7 +210,7 @@ AppAsset::register($this);
                             </a>
                         </li>
                         <li>
-                            <a href="<?= Url::toRoute('/site/help') ?>">
+                            <a href="http://www.iisns.com/forum/iisns">
                             <span class="menu-icon">
                                 <i class="glyphicon glyphicon-question-sign"></i>
                             </span>
@@ -258,9 +258,7 @@ AppAsset::register($this);
           'header' => '<h2>' . Yii::t('app', 'Log out') . '</h2>',
           'footer' => Html::a(Yii::t('app', 'Log out'), ['/site/logout'], ['class' => 'btn btn-default'])
       ]);
-     
       echo Yii::t('app', 'Are you sure you want to Log out?');
-     
       Modal::end();
     ?>
     <?php $this->endBody() ?>

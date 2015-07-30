@@ -61,22 +61,20 @@ class Post extends \yii\db\ActiveRecord
      */
     public function beforeSave($insert)
     {
-       if (parent::beforeSave($insert)) {
+        if (parent::beforeSave($insert)) {
             if ($this->isNewRecord) {
-                //标签分割
-                $tags = trim($this->tags);
-                $explodeTags = array_unique(explode(',', str_replace(array (' ' , '，' ), array('',','), $tags)));
-                $explodeTags = array_slice($explodeTags, 0, 10);
-                $this->tags = implode(',',$explodeTags);
-
-                $this->user_id = Yii::$app->user->identity->id;
+                $this->user_id = Yii::$app->user->id;
                 $this->created_at = time();
-
             }
-           return true;
-       } else {
-              return false;
-       }
+            //标签分割
+            $tags = trim($this->tags);
+            $explodeTags = array_unique(explode(',', str_replace('，', ',', $tags)));
+            $explodeTags = array_slice($explodeTags, 0, 10);
+            $this->tags = implode(',', $explodeTags);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

@@ -15,9 +15,6 @@ html, body {
 ::-webkit-scrollbar-track {
   background-color: rgba(50, 50, 50, 0.2);
 }
-img {
-  max-width: 100%;
-}
 ul {
   padding: 0;
 }
@@ -1495,6 +1492,11 @@ input[type="text"]:focus,
   background-color: #fc8675 !important;
   color: #fff !important;
 }
+
+.media-list .media {
+    border-bottom: #eee solid 1px;
+    padding-bottom: 15px;
+}
 /* -----------------------------------------
    no data found styles
 ----------------------------------------- */
@@ -1980,7 +1982,8 @@ input[type="text"]:focus,
     background-color: #fff;
 }
 .img-all .img-main img {
-    min-width:100%
+  min-width: 100%;
+  max-width: 100%;
 }
 .img-all .img-name {
     display:block;

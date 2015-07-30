@@ -19,7 +19,7 @@ class PostController extends BaseController
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['thread'],
+                    'delete' => ['post'],
                 ],
             ],
         ];
@@ -59,12 +59,11 @@ class PostController extends BaseController
      * @param integer $id
      * @return mixed
      */
-    // public function actionDelete($id)
-    // {
-    //     $this->findModel($id)->delete();
-
-    //     return $this->redirect(['index']);
-    // }
+    public function actionDelete($id)
+    {
+        $this->findModel($id)->delete();
+        return $this->refresh();
+    }
 
     /**
      * Finds the Post model based on its primary key value.

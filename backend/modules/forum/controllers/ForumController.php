@@ -3,10 +3,9 @@
 namespace backend\modules\forum\controllers;
 
 use Yii;
-use yii\web\Controller;
+use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
-use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\data\ActiveDataProvider;
 use yii\imagine\Image;
@@ -20,12 +19,10 @@ use backend\modules\forum\models\Broadcast;
 /**
  * ForumController implements the CRUD actions for Forum model.
  */
-class ForumController extends Controller
+class ForumController extends BaseController
 {
-    const BOARD = 1;
-
-    //public $layout = 'forum';
     public $enableCsrfValidation = false;
+    public $layout = 'forum';
 
     public function actions()
     {
@@ -39,16 +36,6 @@ class ForumController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions' => ['create', 'update', 'index', 'view', 'broadcast'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -57,7 +44,7 @@ class ForumController extends Controller
             ],
         ];
     }
-
+    
     /**
      * Lists all Forum models.
      * @return mixed
@@ -81,7 +68,8 @@ class ForumController extends Controller
     public function actionView($id)
     {
         $model = $this->findModel($id);
-        if ($model->boardCount == 1 && $model->boards[0]->parent_id == self::BOARD ) {
+        //该论坛下只有一个版块，且该版块不是分类，则可以直接发帖
+        if ($model->boardCount == 1 && $model->boards[0]->parent_id == Board::AS_BOARD ) {
             $newThread = $this->newThread($model->boards[0]->id);
         } else {
             $newThread = null;
@@ -141,6 +129,7 @@ class ForumController extends Controller
             }
         }
         
+        //上传上传图标
         Yii::setAlias('@upload', '@webroot/uploads/forum/icon/');
         if (Yii::$app->request->isPost && !empty($_FILES)) {
             $extension =  strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
@@ -148,19 +137,16 @@ class ForumController extends Controller
 
             Image::thumbnail($_FILES['file']['tmp_name'], 160, 160)->save(Yii::getAlias('@upload') . $fileName, ['quality' => 80]);
             
-            //delete old icon
-            $file_exists = file_exists(Yii::getAlias('@upload').$model->forum_icon);
-            if ($file_exists && (strpos($model->forum_icon, 'default') === false))
+            //删除旧图标
+            if (file_exists(Yii::getAlias('@upload').$model->forum_icon) && (strpos($model->forum_icon, 'default') === false))
                 @unlink(Yii::getAlias('@upload').$model->forum_icon); 
 
             $model->forum_icon = $fileName;
             $model->update();
         }
 
-        if ($model->load(Yii::$app->request->post())) {
-            if ($model->validate() && $model->save()) {
-                Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Save successfully.'));
-            }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Saved successfully'));
         }
         
         return $this->render('update', [
@@ -179,7 +165,13 @@ class ForumController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Forum::findOne($id) )!== null) {
+        if (is_numeric($id)) {
+            $model = Forum::findOne($id);
+        } else {
+            $model = Forum::find()->where(['forum_url' => $id])->one();
+        }
+        
+        if ($model !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -47,6 +47,7 @@ class BoardController extends BaseController
     public function actionView($id)
     {
         $model = $this->findModel($id);
+        //如果是该版块是个分类，则返回该分类下所有版块列表
         if ($model->parent_id == Board::AS_CATEGORY) {
             return $this->render('boards', [
                 'model' => $model,
@@ -60,6 +61,7 @@ class BoardController extends BaseController
         if ($newThread->load(Yii::$app->request->post())) {
             $newThread->board_id = $model->id;
             if ($newThread->save()) {
+                //更新该版块最后回复信息
                 Yii::$app->db->createCommand()->update('{{%forum_board}}', [
                     'updated_at' => time(),
                     'updated_by' => Yii::$app->user->id
