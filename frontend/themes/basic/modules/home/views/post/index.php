@@ -24,13 +24,10 @@ $user = Yii::$app->user->identity;
             </div>
             <?php if (!empty($posts)): ?>
                 <?php foreach($posts as $post): ?>
-                    <div class="item widget-container fluid-height social-entry" id="<?= $post['id'] ?>">
-                        <div class="widget-content padded">
-                            <p class="content">
-                                <h3><?= Html::a(Html::encode($post['title']), ['/home/post/view', 'id' => $post['id']]) ?></h3>
-                                <?= HtmlPurifier::process(Yii::$app->tools->htmlSubString($post['content'], 300, Url::toRoute(['/home/post/view', 'id' => $post['id']]))) ?>
-                            </p>
-                        </div>
+                    <article class="item widget-container fluid-height social-entry" id="<?= $post['id'] ?>">
+                        <header class="widget-content padded">
+                            <h3 style="margin-top: 0;"><?= Html::a(Html::encode($post['title']), ['/home/post/view', 'id' => $post['id']]) ?></h3>
+                        </header>
                         <div class="widget-footer">
                             <div class="footer-detail">
                                 &nbsp;
@@ -42,9 +39,12 @@ $user = Yii::$app->user->identity;
                                 <a href="<?= Url::toRoute(['/home/post/update', 'id' => $post['id']]) ?>">
                                     <span class="glyphicon glyphicon-edit"></span> <?= Yii::t('app', 'Update') ?>
                                 </a>
+                                &nbsp;
+                                <span class="item-line"></span>
+                                <span class="glyphicon glyphicon-time"></span> <?= Yii::$app->formatter->asRelativeTime($post['created_at']) ?>
                             </div>
                         </div>
-                    </div>
+                    </article>
                 <?php endforeach; ?>
                 <?= InfiniteScrollPager::widget([
                        'pagination' => $pages,
