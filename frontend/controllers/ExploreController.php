@@ -82,8 +82,7 @@ class ExploreController extends BaseController
 
         //标签列表
         $query = new TaggingQuery;
-        $tags = $query
-            ->select('tags')
+        $tags = $query->select('tags')
             ->from('{{%home_post}}')
             ->limit(10)
             ->displaySort(['freq' => SORT_DESC])
