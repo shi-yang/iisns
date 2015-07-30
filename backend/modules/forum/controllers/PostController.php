@@ -3,8 +3,9 @@
 namespace backend\modules\forum\controllers;
 
 use Yii;
-use yii\data\Pagination;
 use backend\modules\forum\models\Post;
+use backend\modules\forum\models\Thread;
+use backend\modules\forum\models\PostSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -37,21 +38,17 @@ class PostController extends BaseController
     }
 
     /**
-     * Lists all Forum models.
+     * Lists all Post models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $query = Post::find();
-        $countQuery = clone $query;
-        $pages = new Pagination(['totalCount' => $countQuery->count()]);
-        $models = $query->offset($pages->offset)
-            ->limit($pages->limit)
-            ->all();
+        $searchModel = new PostSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'models' => $models,
-            'pages' => $pages
+            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
         ]);
     }
 
@@ -75,6 +72,18 @@ class PostController extends BaseController
     }
 
     /**
+     * Displays a single Post model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionView($id)
+    {
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
+    /**
      * Deletes an existing Post model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
@@ -82,7 +91,13 @@ class PostController extends BaseController
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $thread_id = $model->thread_id;
+        $model->delete();
+        $thread = Thread::findOne($thread_id);
+        $thread->post_count = $thread->post_count - 1;
+        $thread->update();
+        Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Deleted successfully.'));
         return $this->redirect(['/forum/post/index']);
     }
 

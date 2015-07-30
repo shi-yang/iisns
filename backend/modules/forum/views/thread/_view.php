@@ -13,15 +13,11 @@ $user = $data->user;
             &nbsp;•&nbsp;
             <span class="glyphicon glyphicon-time"></span> <?= Yii::$app->formatter->asRelativeTime($data->created_at) ?>
             <div class="pull-right">
-                <?php if ($user['id'] == Yii::$app->user->id): ?>
-                    <?= Html::a('<span class="glyphicon glyphicon-trash"></span> ' . Yii::t('app', 'Delete'), ['/user/view', 'id' => $user['id']]) ?>
-                <?php endif ?>
+                <?= Html::a('<span class="glyphicon glyphicon-trash"></span> ' . Yii::t('app', 'Delete'), ['/user/view', 'id' => $user['id']]) ?>
                 <span class="glyphicon glyphicon-comment"></span> <?= $data->post_count ?>
-                <?php if (Yii::$app->user->id == $user['user_id']): ?>
-                    &nbsp;<a href="<?= Url::toRoute(['/forum/thread/delete', 'id' => $thread['id']]) ?>"  data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="thread">
-                        <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
-                    </a>
-                <?php endif; ?>
+                &nbsp;<a href="<?= Url::toRoute(['/forum/thread/delete', 'id' => $thread['id']]) ?>"  data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="post">
+                    <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
+                </a>
             </div>
         </div>
     </header>

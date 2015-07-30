@@ -22,9 +22,6 @@ use frontend\widgets\Alert;
             </div>
         </div>
         <div class="col-md-9">
-            <?= Breadcrumbs::widget([
-                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-            ]) ?>
             <?= $content ?>
         </div>
     </div>

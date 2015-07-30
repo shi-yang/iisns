@@ -7,9 +7,9 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
- * ThreadSearch represents the model behind the search form about `backend\modules\forum\models\Thread`.
+ * PostSearch represents the model behind the search form about `backend\modules\forum\models\Post`.
  */
-class ThreadSearch extends Thread
+class PostSearch extends Post
 {
     /**
      * @inheritdoc
@@ -17,8 +17,8 @@ class ThreadSearch extends Thread
     public function rules()
     {
         return [
-            [['id', 'created_at', 'user_id', 'board_id'], 'integer'],
-            [['title', 'content'], 'safe'],
+            [['id', 'created_at', 'user_id', 'thread_id'], 'integer'],
+            [['content'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class ThreadSearch extends Thread
      */
     public function search($params)
     {
-        $query = Thread::find();
+        $query = Post::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -54,11 +54,10 @@ class ThreadSearch extends Thread
             'id' => $this->id,
             'created_at' => $this->created_at,
             'user_id' => $this->user_id,
-            'board_id' => $this->board_id,
+            'thread_id' => $this->thread_id,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'content', $this->content]);
+        $query->andFilterWhere(['like', 'content', $this->content]);
 
         return $dataProvider;
     }

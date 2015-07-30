@@ -8,7 +8,6 @@ use backend\modules\forum\models\ThreadSearch;
 use backend\modules\forum\models\Post;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
-use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 use yii\data\Pagination;
 
@@ -40,21 +39,17 @@ class ThreadController extends BaseController
     }
 
     /**
-     * Lists all Forum models.
+     * Lists all Thread models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $query = Thread::find();
-        $countQuery = clone $query;
-        $pages = new Pagination(['totalCount' => $countQuery->count()]);
-        $models = $query->offset($pages->offset)
-            ->limit($pages->limit)
-            ->all();
+        $searchModel = new ThreadSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'models' => $models,
-            'pages' => $pages
+            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
         ]);
     }
     

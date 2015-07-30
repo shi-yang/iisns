@@ -47,11 +47,6 @@ $this->params['breadcrumbs'][] = $user['username'];
             </article>
         </article>
 
-        <!-- Post Form Begin -->
-        <?= $this->render('/post/_form',[
-                'model'=>$newPost,
-            ]);
-        ?>
         <!-- Post Form End -->
         <?= $this->render('_posts', [
                 'posts'=>$posts['posts'],
