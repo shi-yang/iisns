@@ -125,8 +125,7 @@ class TaggingWidget extends \yii\base\Widget
     {
         $fontSize = ($this->smallest + (($count - $this->_minCount) * $this->_fontStep));
         if (!empty($this->url)) {
-            $url = $this->url;
-            $url[] = [$this->urlParam => $name];
+            $url = array_merge($this->url, [$this->urlParam => $name]);
         }
         if ($this->format == 'cloud') {
             Html::addCssStyle($this->liOptions, 'font-size:' . $fontSize . $this->unit);

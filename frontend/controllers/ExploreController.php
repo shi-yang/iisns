@@ -5,9 +5,9 @@ use Yii;
 use yii\db\Query;
 use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
-use yii\data\SqlDataProvider;
 use common\components\BaseController;
 use app\modules\home\models\Album;
+use justinvoelker\tagging\TaggingQuery;
 
 Yii::setAlias('forum_icon', '@web/uploads/forum/icon/');
 Yii::setAlias('avatar', '@web/uploads/user/avatar/');
@@ -42,7 +42,7 @@ class ExploreController extends BaseController
             ->join('LEFT JOIN','{{%user}} as u', 'u.id=e.user_id')
             ->where(['category' => 'post'])
             ->orderBy('e.id DESC');
-        $posts = Yii::$app->tools->Pagination($posts, 15);
+        $posts = Yii::$app->tools->Pagination($posts, 10);
 
         return $this->render('index', [
             'forums' => $forums,
@@ -62,6 +62,35 @@ class ExploreController extends BaseController
         return $this->render('forums', [
             'forums' => $forumResult['result'],
             'pages' => $forumResult['pages'],
+        ]);
+    }
+
+    public function actionPosts()
+    {
+
+        $query = new Query;
+        $query->select('e.id, title, content, e.created_at, u.username, u.avatar')
+            ->from('{{%home_post}} as e')
+            ->join('LEFT JOIN','{{%user}} as u', 'u.id=e.user_id')
+            ->orderBy('e.id DESC');
+        //按标签查询出文章
+        if (Yii::$app->request->isGet) {
+            $tag = Yii::$app->request->get('tag');
+            $query->where('tags LIKE :tag', [':tag' => '%' . $tag . '%']);
+        }
+        $posts = Yii::$app->tools->Pagination($query, 10);
+
+        //标签列表
+        $query = new TaggingQuery;
+        $tags = $query
+            ->select('tags')
+            ->from('{{%home_post}}')
+            ->limit(10)
+            ->displaySort(['freq' => SORT_DESC])
+            ->getTags();
+        return $this->render('posts', [
+            'posts' => $posts,
+            'tags' => $tags
         ]);
     }
 
