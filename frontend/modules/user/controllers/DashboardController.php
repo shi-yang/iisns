@@ -86,22 +86,6 @@ class DashboardController extends BaseController
             'model' => $this->findModel()
         ]);
     }
-    
-    public function actionForumpost()
-    {
-        $model = $this->findModel();
-        $query = new Query;
-        $query = $query->select('*')
-                    ->from('{{%forum_post}}')
-                    ->where(['user_id' => $model->id])
-                    ->orderBy('created_at desc');
-        $pages = Yii::$app->tools->Pagination($query);
-        return $this->render('myposts', [
-            'model' => $model,
-            'posts' => $pages['result'],
-            'pages' => $pages['pages'],
-        ]);
-    }
 
     public function actionMyfavor()
     {
