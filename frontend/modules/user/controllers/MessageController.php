@@ -112,7 +112,7 @@ class MessageController extends BaseController
     public function actionView($id)
     {
         $model = $this->findModel($id);
-        if (!$model->read_indicator) {
+        if (!$model->read_indicator && $model->sendto == Yii::$app->user->id) {
             $model->read_indicator = 1;
             $model->update();
             Yii::$app->userData->updateKey('unread_message_count', Yii::$app->user->id, -1);
