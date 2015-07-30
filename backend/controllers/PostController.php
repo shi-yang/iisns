@@ -98,8 +98,10 @@ class PostController extends BaseController
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        $model = $this->findModel($id);
+        $user_id = $model->user_id;
+        $model->delete();
+        Yii::$app->db->createCommand("UPDATE {{%user_data}} SET post_count=post_count-1 WHERE user_id=".$user_id)->execute();
         return $this->redirect(['index']);
     }
 
