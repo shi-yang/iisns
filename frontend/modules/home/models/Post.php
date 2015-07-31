@@ -82,7 +82,7 @@ class Post extends \yii\db\ActiveRecord
      */
     public function getUrl()
     {       
-        return Url::toRoute(['/home/post/view', 'id' => $this->id]);
+        return Url::toRoute(['/user/view/post-view', 'id' => $this->id]);
     }
 
     public function getUser()
