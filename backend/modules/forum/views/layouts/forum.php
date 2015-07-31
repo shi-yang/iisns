@@ -17,6 +17,7 @@ use frontend\widgets\Alert;
         <div class="col-md-3">
             <div class="list-group">
                 <a class="list-group-item" href="<?= Url::toRoute(['/forum/forum/index']) ?>"><i class="glyphicon glyphicon-chevron-right pull-right"></i><span><?= Yii::t('forum', 'Forum') ?></span></a>
+                <a class="list-group-item" href="<?= Url::toRoute(['/forum/board/index']) ?>"><i class="glyphicon glyphicon-chevron-right pull-right"></i><span><?= Yii::t('forum', 'Board') ?></span></a>
                 <a class="list-group-item" href="<?= Url::toRoute(['/forum/thread/index']) ?>"><i class="glyphicon glyphicon-chevron-right pull-right"></i><span><?= Yii::t('forum', 'Thread') ?></span></a>
                 <a class="list-group-item" href="<?= Url::toRoute(['/forum/post/index']) ?>"><i class="glyphicon glyphicon-chevron-right pull-right"></i><span><?= Yii::t('forum', 'Post') ?></span></a>
             </div>
