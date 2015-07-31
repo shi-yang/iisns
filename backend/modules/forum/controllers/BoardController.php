@@ -4,10 +4,9 @@ namespace backend\modules\forum\controllers;
 
 use Yii;
 use backend\modules\forum\models\Board;
-use yii\data\ActiveDataProvider;
+use backend\modules\forum\models\BoardSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
-use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 use backend\modules\forum\models\Thread;
 
@@ -38,7 +37,22 @@ class BoardController extends BaseController
             ]
         ];
     }
-    
+
+    /**
+     * Lists all Board models.
+     * @return mixed
+     */
+    public function actionIndex()
+    {
+        $searchModel = new BoardSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
     /**
      * Displays a single Board model.
      * @param integer $id

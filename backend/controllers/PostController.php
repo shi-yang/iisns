@@ -4,7 +4,7 @@ namespace backend\controllers;
 
 use Yii;
 use backend\models\Post;
-use yii\data\Pagination;
+use backend\models\PostSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -32,16 +32,12 @@ class PostController extends BaseController
      */
     public function actionIndex()
     {
-        $query = Post::find();
-        $countQuery = clone $query;
-        $pages = new Pagination(['totalCount' => $countQuery->count()]);
-        $models = $query->offset($pages->offset)
-            ->limit($pages->limit)
-            ->all();
+        $searchModel = new PostSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'models' => $models,
-            'pages' => $pages
+            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
         ]);
     }
 
@@ -102,8 +98,10 @@ class PostController extends BaseController
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        $model = $this->findModel($id);
+        $user_id = $model->user_id;
+        $model->delete();
+        Yii::$app->db->createCommand("UPDATE {{%user_data}} SET post_count=post_count-1 WHERE user_id=".$user_id)->execute();
         return $this->redirect(['index']);
     }
 
