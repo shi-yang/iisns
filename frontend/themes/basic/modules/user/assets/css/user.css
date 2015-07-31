@@ -57,7 +57,7 @@ a:focus {
 }
 #top-nav.fixed {
   position: fixed;
-  z-index: 1000;
+  z-index: 999;
 }
 @media (max-width: 767px) {
   #top-nav.fixed {
@@ -1992,6 +1992,48 @@ input[type="text"]:focus,
     text-overflow:ellipsis;
     padding: 5px;
     text-align: center;
+}
+
+/*
+ * Post view
+ */
+.post-view {
+    white-space: normal;
+    word-break: break-all;
+    padding: 30px;
+}
+.post-view .post-title {
+    margin: 10px 0;
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+    font-family: "Microsoft YaHei","SimHei ";
+}
+.post-view .post-meta {
+    height: 24px;
+    background: #F9F9F9;
+    color: #999;
+    font-size: 12px;
+    text-align: center;
+    line-height: 24px;
+}
+.post-view .post-content {
+    font-size: 17px;
+    line-height: 28px;
+    color: #333;
+    padding: 14px;
+}
+@media (min-width: 992px) {
+    .post-view .post-content {
+        padding: 14px 140px;
+    }
+}
+.post-content img {
+    max-width: 100%
+}
+.post-content p {
+    margin: 0 0 30px;
+    line-height: 34px;
 }
 
 .bounceIn {

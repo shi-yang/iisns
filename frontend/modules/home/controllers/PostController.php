@@ -77,7 +77,6 @@ class PostController extends BaseController
      */
     public function actionView($id)
     {
-        $this->layout = '@app/modules/user/views/layouts/profile';
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);

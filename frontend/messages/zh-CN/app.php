@@ -18,6 +18,7 @@ return [
 	'Update' => '更新',
 	'Save' => '保存',
 	'Create' => '创建',
+    'Edit' => '编辑',
 	'Send' => '发送',
 	'Name' => '名称',
 	'Upload' => '上传',

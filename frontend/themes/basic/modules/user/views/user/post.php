@@ -19,7 +19,7 @@ $this->params['userData'] = $model->userData;
             <?php foreach($posts as $post): ?>
                 <article class="item widget-container fluid-height social-entry" id="<?= $post['id'] ?>">
                     <header class="widget-content">
-                        <h3><?= Html::a(Html::encode($post['title']), ['/home/post/view', 'id' => $post['id']]) ?></h3>
+                        <h3><?= Html::a(Html::encode($post['title']), ['/user/view/view-post', 'id' => $post['id']]) ?></h3>
                     </header>
                         <footer class="widget-footer">
                             <div class="footer-detail">
