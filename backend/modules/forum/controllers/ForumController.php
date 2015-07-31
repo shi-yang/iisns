@@ -157,6 +157,23 @@ class ForumController extends BaseController
     }
 
     /**
+     * Deletes an existing Forum model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDelete($id)
+    {
+        $model = $this->findModel($id);
+        if ($model->delete()) {
+            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Deleted successfully.'));
+        } else {
+            Yii::$app->getSession()->setFlash('error', Yii::t('app', 'Error.'));
+        }
+        return $this->redirect(['/forum/forum/index']);
+    }
+
+    /**
      * Finds the Forum model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $id
