@@ -3,6 +3,8 @@ backend/runtime/*
 frontend/runtime/*
 !frontend/runtime/.gitignore
 
+backend/web/uploads/*
+
 frontend/web/uploads/blog/photo/*
 frontend/web/uploads/blog/photo_tmp/*
 frontend/web/uploads/forum/icon/*

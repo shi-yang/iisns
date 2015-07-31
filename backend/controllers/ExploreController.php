@@ -116,7 +116,7 @@ class ExploreController extends BaseController
                 case 'post':
                     $category = 'post';
                     if (empty($model->summary)) {
-                        $model->summary = mb_substr(strip_tags($model->content), 0, 140, 'utf-8');
+                        $model->summary = mb_substr(strip_tags($model->content), 0, 100, 'utf-8');
                     }
                     if (!empty($model->table_id) && !empty($model->table_name)) {
                         $post = Yii::$app->db->createCommand("SELECT * FROM {{%{$model->table_name}}} WHERE id=:id")->bindValue(':id', $model->table_id)->queryOne();
@@ -125,7 +125,7 @@ class ExploreController extends BaseController
                             return false;
                         } else {
                             $model->title = $post['title'];
-                            $model->summary = mb_substr(strip_tags($post['content']), 0, 140, 'utf-8');
+                            $model->summary = mb_substr(strip_tags($post['content']), 0, 100, 'utf-8');
                             $model->content = $post['content'];
                             $model->user_id = $post['user_id'];
                             $table_id = $model->table_id;

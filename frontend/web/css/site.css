@@ -195,10 +195,11 @@ list-style-type: none;
 
 }
 .mecc p {
-  line-height: 30px;
-  margin-top: 6px;
-  color: #656565;
-  letter-spacing: 0.5px;
+    line-height: 27px;
+    margin-top: 6px;
+    color: #656565;
+    letter-spacing: 0.5px;
+    font-size: 13px;
 }
 .mecctitle {
   height: 20px;
@@ -254,13 +255,18 @@ center img {
     padding-top: 30px;
     padding-bottom: 30px;
 }
-
 #home-post .post-image {
     padding-top: 10px;
     padding-bottom: 10px;
 }
-
 #home-post .post-image img {
     height: 100px;
     width: 100px;
+}
+
+.post-all .post-item {
+    padding: 20px 0;
+}
+.post-all img {
+    max-width: 100%;
 }

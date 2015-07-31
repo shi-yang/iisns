@@ -13,7 +13,7 @@ use yii\helpers\Html;
                     $pattern = "/<[img|IMG].*?src=\"([^^]*?)\".*?>/";
                     preg_match_all($pattern, $post['content'], $match);
                     if (!empty($match[1][0])) {
-                        $img = Html::img($match[1][0], ['style' => 'max-width:100%;max-height:100%;']);
+                        $img = Html::img($match[1][0]);
                         echo Html::a($img, ['/explore/view-post', 'id' => $post['id']], ['target' => '_blank']);
                     }
                 ?>
