@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\HtmlPurifier;
+use app\widgets\comment\Comment;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\home\models\Post */
@@ -36,3 +37,8 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </articel>
 </div>
+
+<?= Comment::widget([
+    'tableId' => $model->id,
+    'tableName' => $model->tableName(),
+]) ?>

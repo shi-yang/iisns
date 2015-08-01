@@ -1497,6 +1497,10 @@ input[type="text"]:focus,
     border-bottom: #eee solid 1px;
     padding-bottom: 15px;
 }
+.media-list .media-object {
+    width: 64px;
+    height: 64px;
+}
 /* -----------------------------------------
    no data found styles
 ----------------------------------------- */
