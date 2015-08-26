@@ -346,7 +346,7 @@ CREATE TABLE IF NOT EXISTS `pre_user_data` (
   `feed_count` int(11) NOT NULL,
   `following_count` int(11) NOT NULL,
   `follower_count` int(11) NOT NULL,
-  `unread_comment_count` int(11) NOT NULL,
+  `unread_notice_count` int(11) NOT NULL,
   `unread_message_count` int(11) NOT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10000 ;
