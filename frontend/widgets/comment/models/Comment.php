@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace app\widgets\comment\models;
 
 use Yii;
 
@@ -34,7 +34,7 @@ class Comment extends \yii\db\ActiveRecord
             ['content', 'required'],
             [['id', 'table_id', 'parent_id', 'user_id', 'created_at'], 'integer'],
             [['content'], 'string'],
-            [['table_name'], 'string', 'max' => 15]
+            [['table_name'], 'string', 'max' => 26]
         ];
     }
 

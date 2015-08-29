@@ -8,8 +8,15 @@ use yii\db\Query;
 
 class Comment extends Widget
 {
+    /**
+     * @var integer 评论所属表的 ID
+     */
     public $tableId;
+    /**
+     * @var string 评论所属表名，为 [[yii\db\ActiveRecord::tableName()]]
+     */
     public $tableName;
+
     public function run()
     {
         $commentList = $this->getCommentList();
@@ -35,12 +42,12 @@ class Comment extends Widget
     }
 
     /**
-     * 新评论
-     * @return \app\models\Comment|\yii\web\Response
+     * 创建新评论
+     * @return \app\widgets\comment\models\Comment|\yii\web\Response
      */
     public function newComment()
     {
-        $newComment = new \app\models\Comment();
+        $newComment = new \app\widgets\comment\models\Comment();
         if ($newComment->load(Yii::$app->request->post()) && !Yii::$app->user->isGuest) {
             $newComment->table_id = $this->tableId;
             $newComment->table_name = $this->tableName;

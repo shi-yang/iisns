@@ -40,3 +40,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => $model['summary']]
         <?= HtmlPurifier::process($model['content']) ?>
     </div>
 </article>
+<?= \app\widgets\comment\Comment::widget([
+    'tableId' => $model['id'],
+    'tableName' => '{{%explore_recommend}}',
+]) ?>
