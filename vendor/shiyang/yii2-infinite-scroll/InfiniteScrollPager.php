@@ -146,7 +146,7 @@ class InfiniteScrollPager extends Widget
             $this->pluginOptions['itemSelector'] = $this->pluginOptions['contentSelector'] . ' >';
 
         if (is_null(ArrayHelper::getValue($this->pluginOptions, 'navSelector', null)))
-            $this->pluginOptions['navSelector'] = $widgetSelector . " ul." . $this->options['class'];
+            $this->pluginOptions['navSelector'] = "ul." . $this->options['class'];
 
         if (is_null(ArrayHelper::getValue($this->pluginOptions, 'nextSelector', null)))
             $this->pluginOptions['nextSelector'] = $this->pluginOptions['navSelector'] . ' li.' . $this->nextPageCssClass . " a:first";

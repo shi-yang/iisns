@@ -46,10 +46,6 @@ $user = Yii::$app->user->identity;
                         </div>
                     </article>
                 <?php endforeach; ?>
-                <?= InfiniteScrollPager::widget([
-                       'pagination' => $pages,
-                       'widgetId' => '#content',
-                ]);?>
             <?php else: ?>
                 <div class="no-data-found">
                     <i class="glyphicon glyphicon-folder-open"></i>
@@ -57,5 +53,9 @@ $user = Yii::$app->user->identity;
                 </div>
             <?php endif; ?>
         </div>
+        <?= InfiniteScrollPager::widget([
+               'pagination' => $pages,
+               'widgetId' => '#content',
+        ]);?>
     </div>
 </div>

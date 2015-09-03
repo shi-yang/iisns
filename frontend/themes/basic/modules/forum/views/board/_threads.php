@@ -35,11 +35,11 @@ use shiyang\infinitescroll\InfiniteScrollPager;
                 </table>
             </article>
         <?php endforeach; ?>
-        <?= InfiniteScrollPager::widget([
-            'pagination' => $model->threads['pages'],
-            'widgetId' => '#content',
-        ]);?>
     </div>
+    <?= InfiniteScrollPager::widget([
+        'pagination' => $model->threads['pages'],
+        'widgetId' => '#content',
+    ]);?>
 <?php else: ?>
     <div class="jumbotron">
         <h2><?= Yii::t('app', 'No data to display.') ?></h2>

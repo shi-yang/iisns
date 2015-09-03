@@ -47,21 +47,21 @@ class Masonry extends Widget
      */
     public function run()
     {
-        $this->infiniteScrollScript();
         echo Html::endTag('div'); //closes the container, opened on init
+        $this->infiniteScrollScript();
         $this->registerPlugin();
     }
 
     public function infiniteScrollScript()
     {
-        $widgetId = '#' . $this->options['id'];
+        $widgetId = $this->options['id'];
         echo InfiniteScrollPager::widget([
             'pagination' => $this->pagination,
-            'widgetId' => $widgetId,
-            'contentLoadedCallback' => "function( newElements ) {
-    var newElems = $( newElements );
-    $('$widgetId').imagesLoaded( function() {
-        $('$widgetId').masonry('appended', newElems );
+            'widgetId' => '#' . $widgetId,
+            'contentLoadedCallback' => "function(newElements) {
+    $(newElements).appendTo('#$widgetId');
+    $('#$widgetId').imagesLoaded( function() {
+        new Masonry(document.getElementById('$widgetId'));
     });
   }"
         ]);
@@ -85,5 +85,4 @@ class Masonry extends Widget
         
         $view->registerJs(implode("\n", $js),View::POS_END);
     }
-
 }

@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use yii\helpers\HtmlPurifier;
 use yii\widgets\LinkPager;
-use shiyang\infinitescroll\InfiniteScrollPager;
 
 $floor = 1;
 if (isset($_GET['page']) >= 2) //分页标识大于2才开始计算
