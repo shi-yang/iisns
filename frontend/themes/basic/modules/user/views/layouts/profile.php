@@ -73,8 +73,12 @@ if ($done) {
                 <div class="col-sm-9">
                     <div class="profile-header">
                         <h2 class="profile-name"><?= Html::a(Html::encode($this->params['user']['username']), ['/user/view', 'id' => Html::encode($this->params['user']['username'])]) ?></h2>
+                        <?php if (!empty($this->params['profile']['address'])): ?>
                         <div class="profile-location"><i class="glyphicon glyphicon-map-marker"></i> <?= Html::encode($this->params['profile']['address']) ?> </div>
+                        <?php endif ?>
+                        <?php if (!empty($this->params['profile']['signature'])): ?>
                         <div class="profile-signature"><i class="glyphicon glyphicon-pushpin"></i> <?= Html::encode($this->params['profile']['signature']) ?> </div>
+                        <?php endif ?>
                         <div class="mb20"></div>
                         <a class="btn btn-success follow" href="<?= Url::toRoute(['/user/user/follow', 'id' => $this->params['user']['id']]) ?>"><?= $followBtn ?></a>
                         <a class="btn btn-default"><i class="glyphicon glyphicon-envelope"></i> <?= Yii::t('app', 'Message') ?></a>

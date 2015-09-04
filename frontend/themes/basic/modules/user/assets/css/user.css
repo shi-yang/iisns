@@ -1886,6 +1886,10 @@ input[type="text"]:focus,
 .follow-list .follow-list-name {
   font-weight: normal;
   margin: 0 0 5px;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .follow-list .user-following-container {
   margin-top: 10px;
