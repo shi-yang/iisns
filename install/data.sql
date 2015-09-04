@@ -112,6 +112,21 @@ CREATE TABLE IF NOT EXISTS `pre_auth_rule` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- 表的结构 `pre_comment`
+--
+
+CREATE TABLE IF NOT EXISTS `pre_comment` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `table_name` char(26) NOT NULL,
+  `table_id` int(11) NOT NULL,
+  `content` text NOT NULL,
+  `parent_id` bigint(20) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `created_at` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+--
 -- 表的结构 `pre_favorite`
 --
 
@@ -346,7 +361,7 @@ CREATE TABLE IF NOT EXISTS `pre_user_data` (
   `feed_count` int(11) NOT NULL,
   `following_count` int(11) NOT NULL,
   `follower_count` int(11) NOT NULL,
-  `unread_comment_count` int(11) NOT NULL,
+  `unread_notice_count` int(11) NOT NULL,
   `unread_message_count` int(11) NOT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10000 ;

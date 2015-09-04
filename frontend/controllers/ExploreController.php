@@ -67,7 +67,6 @@ class ExploreController extends BaseController
 
     public function actionPosts()
     {
-
         $query = new Query;
         $query->select('e.id, title, content, e.created_at, u.username, u.avatar')
             ->from('{{%home_post}} as e')
@@ -140,7 +139,7 @@ class ExploreController extends BaseController
         Yii::$app->db->createCommand("UPDATE {{%explore_recommend}} SET view_count=view_count+1 WHERE id=:id")->bindValue(':id', $id)->execute();
 
         if ($model['table_name'] == 'home_post') {
-            return $this->redirect(['/home/post/view', 'id' => $model['table_id']]);
+            return $this->redirect(['/user/view/view-post', 'id' => $model['table_id']]);
         } elseif ($model['table_name'] == 'forum_thread') {
             return $this->redirect(['/forum/thread/view', 'id' => $model['table_id']]);
         }

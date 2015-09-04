@@ -19,7 +19,7 @@ $this->params['userData'] = $model->userData;
             <?php foreach($posts as $post): ?>
                 <article class="item widget-container fluid-height social-entry" id="<?= $post['id'] ?>">
                     <header class="widget-content">
-                        <h3><?= Html::a(Html::encode($post['title']), ['/home/post/view', 'id' => $post['id']]) ?></h3>
+                        <h3><?= Html::a(Html::encode($post['title']), ['/user/view/view-post', 'id' => $post['id']]) ?></h3>
                     </header>
                         <footer class="widget-footer">
                             <div class="footer-detail">
@@ -41,10 +41,6 @@ $this->params['userData'] = $model->userData;
                         </footer>
                 </article>
             <?php endforeach; ?>
-            <?= InfiniteScrollPager::widget([
-                   'pagination' => $pages,
-                   'widgetId' => '#content',
-            ]);?>
         <?php else: ?>
             <div class="no-data-found">
                 <i class="glyphicon glyphicon-folder-open"></i>
@@ -52,4 +48,8 @@ $this->params['userData'] = $model->userData;
             </div>
         <?php endif; ?>
     </div>
+    <?= InfiniteScrollPager::widget([
+       'pagination' => $pages,
+       'widgetId' => '#social-container',
+    ]);?>
 </div>

@@ -34,8 +34,8 @@ $this->params['count'] = $count;
         </div>
     </li>
     <?php endforeach ?>
-    <?= InfiniteScrollPager::widget([
-        'pagination' => $notices['pages'],
-        'widgetId' => '#notice-content',
-    ]); ?>
 </ul>
+<?= InfiniteScrollPager::widget([
+    'pagination' => $notices['pages'],
+    'widgetId' => '#notice-content',
+]); ?>

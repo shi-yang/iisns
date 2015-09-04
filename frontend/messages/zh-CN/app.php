@@ -18,6 +18,7 @@ return [
 	'Update' => '更新',
 	'Save' => '保存',
 	'Create' => '创建',
+    'Edit' => '编辑',
 	'Send' => '发送',
 	'Name' => '名称',
 	'Upload' => '上传',
@@ -147,6 +148,7 @@ return [
     'Recommendation' => '推荐',
 
 	'Are you sure you want to Log out?' => '你确定要退出？',
+	'You need to sign in or sign up before continuing.' => '在继续之前，您需要登录或注册',
 	'If you forgot your password you can ' => '如果您忘记密码，请',
 	'reset it' => '点此重置',
 	'No data to display.' => '没有数据展示',

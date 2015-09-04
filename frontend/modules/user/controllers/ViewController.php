@@ -14,9 +14,6 @@ use app\modules\user\models\UserSearch;
 use app\modules\home\models\Post;
 use app\modules\home\models\Album;
 
-/**
- * UserController implements the CRUD actions for User model.
- */
 class ViewController extends BaseController
 {
     public $layout = 'profile';

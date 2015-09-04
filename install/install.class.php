@@ -179,6 +179,18 @@ class Install {
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
     ");
             $this->query("
+      CREATE TABLE IF NOT EXISTS `pre_comment` (
+        `id` bigint(20) NOT NULL AUTO_INCREMENT,
+        `table_name` char(26) NOT NULL,
+        `table_id` int(11) NOT NULL,
+        `content` text NOT NULL,
+        `parent_id` bigint(20) NOT NULL,
+        `user_id` int(11) NOT NULL,
+        `created_at` int(10) NOT NULL,
+        PRIMARY KEY (`id`)
+      ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+    ");
+            $this->query("
       CREATE TABLE IF NOT EXISTS `pre_explore_recommend` (
         `id` int(11) NOT NULL AUTO_INCREMENT,
         `title` varchar(128) NOT NULL,

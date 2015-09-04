@@ -18,45 +18,45 @@ $this->params['forum'] = $model->toArray;
     <?= $this->render('/broadcast/_form', ['newBroadcast' => $newBroadcast]) ?>
   <?php endif; ?>
   <div class="widget-container">
-    <div class="thread-list">
-      <?php if ($model->broadcastCount >= 1): ?>
-          <?php foreach ($model->broadcasts['result'] as $broadcast):?>
-              <div class="thread-item" id="div<?php echo $broadcast['id']; ?>">
-                <div class="media">
-                  <div class="media-body">
-                    <h4 class="media-heading">
-                      <div class="pull-right">
-                        <?php if ($model->user_id == Yii::$app->user->id) :?>
-                        <a href="<?= Url::toRoute(['/forum/broadcast/delete', 'id' => $broadcast['id']]) ?>"  data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="broadcast">
-                          <span class="glyphicon glyphicon-remove-circle"></span>
-                        </a>
-                        <?php endif; ?>
-                      </div>
-                    </h4>
-                    <a><h3 class="media-title"><?= Html::encode($broadcast['title']) ?></h3></a>
-                    <span class="thread-time">
-                      <span class="glyphicon glyphicon-time"></span> <?= Yii::$app->formatter->asRelativeTime($broadcast['created_at']) ?>
-                    </span>
-                    <div class="media-content">
-                        <?php echo $broadcast['content']; ?>
-                    </div>
-                    <div class="thread-time"></div>
+    <?php if ($model->broadcastCount >= 1): ?>
+      <div class="thread-list">
+        <?php foreach ($model->broadcasts['result'] as $broadcast):?>
+          <div class="thread-item" id="div<?php echo $broadcast['id']; ?>">
+            <div class="media">
+              <div class="media-body">
+                <h4 class="media-heading">
+                  <div class="pull-right">
+                    <?php if ($model->user_id == Yii::$app->user->id) :?>
+                    <a href="<?= Url::toRoute(['/forum/broadcast/delete', 'id' => $broadcast['id']]) ?>"  data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="broadcast">
+                      <span class="glyphicon glyphicon-remove-circle"></span>
+                    </a>
+                    <?php endif; ?>
                   </div>
+                </h4>
+                <a><h3 class="media-title"><?= Html::encode($broadcast['title']) ?></h3></a>
+                <span class="thread-time">
+                  <span class="glyphicon glyphicon-time"></span> <?= Yii::$app->formatter->asRelativeTime($broadcast['created_at']) ?>
+                </span>
+                <div class="media-content">
+                    <?php echo $broadcast['content']; ?>
                 </div>
+                <div class="thread-time"></div>
               </div>
-          <?php endforeach; ?>
-          <?= InfiniteScrollPager::widget([
-              'pagination' => $model->broadcasts['pages'],
-              'widgetId' => '.thread-list',
-          ]);?>
-        <?php else: ?>
-            <div class="widget-container">
-                <div style="padding:50px">
-                    <h1><?= Yii::t('app', 'No data to display.') ?></h1>
-                </div>
             </div>
-        <?php endif ?>
-    </div>
+          </div>
+        <?php endforeach; ?>
+      </div>
+      <?= InfiniteScrollPager::widget([
+          'pagination' => $model->broadcasts['pages'],
+          'widgetId' => '.thread-list',
+      ]);?>
+      <?php else: ?>
+          <div class="widget-container">
+              <div style="padding:50px">
+                  <h1><?= Yii::t('app', 'No data to display.') ?></h1>
+              </div>
+          </div>
+      <?php endif ?>
   </div>
 </div>
 <div class="col-xs-12 col-sm-4 col-md-4">
