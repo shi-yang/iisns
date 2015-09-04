@@ -48,7 +48,11 @@ class Comment extends Widget
     public function newComment()
     {
         $newComment = new \app\widgets\comment\models\Comment();
-        if ($newComment->load(Yii::$app->request->post()) && !Yii::$app->user->isGuest) {
+        if ($newComment->load(Yii::$app->request->post())) {
+            if (Yii::$app->user->isGuest) {
+                Yii::$app->getSession()->setFlash('info', Yii::t('app', 'You need to sign in or sign up before continuing.'));
+                return Yii::$app->getResponse()->redirect(['/site/login']);
+            }
             $newComment->table_id = $this->tableId;
             $newComment->table_name = $this->tableName;
             if ($newComment->save()) {
