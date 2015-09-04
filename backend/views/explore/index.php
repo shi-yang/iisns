@@ -87,11 +87,11 @@ list-style-type: none;
                         </div>
                     </li>
                 <?php endforeach ?>
-                <?= InfiniteScrollPager::widget([
-                    'pagination' => $pages,
-                    'widgetId' => '.timeline',
-                ]);?>
             </ul>
+            <?= InfiniteScrollPager::widget([
+                'pagination' => $pages,
+                'widgetId' => '.timeline',
+            ]);?>
         </div>
         <div class="col-md-4">
             <div class="panel panel-default">
