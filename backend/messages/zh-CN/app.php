@@ -12,6 +12,7 @@ return [
     'Delete' => '删除',
 	'Save' => '保存',
     'Edit' => '修改',
+    'Add' => '添加',
 	'Saved successfully' => '保存成功',
     'Username does not exist.' => '用户名不存在',
     'Incorrect password.' => '密码不正确',

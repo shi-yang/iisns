@@ -21,7 +21,7 @@ list-style-type: none;
     width: 170px;
 }
 .add-album {
-    font-size:100px
+    font-size:28px
 }
 .album-cover {
     width:158px;
@@ -41,7 +41,7 @@ list-style-type: none;
                             <div class="album-item col-md-2 col-sm-6">
                                 <div class="album-img">
                                     <a href="<?= Url::toRoute(['/explore/create', 'category' => 'album']) ?>">
-                                        <span class="add-album"><span class="glyphicon glyphicon-plus"></span></span>
+                                        <span class="add-album"><span class="glyphicon glyphicon-plus"></span> <?= Yii::t('app', 'Add') ?></span>
                                     </a>
                                 </div>
                             </div>
