@@ -83,7 +83,8 @@ class Setting extends Component
             ], '`key`=:key', [':key' => $key])->execute();
         }
 
-        return $this->clearCache();
+        $this->clearCache();
+        return true;
     }
 
     /**
