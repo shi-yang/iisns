@@ -1,18 +1,17 @@
 {
-    "name": "yiisoft/yii2-app-advanced",
-    "description": "Yii 2 Advanced Application Template",
-    "keywords": ["yii2", "framework", "advanced", "application template"],
-    "homepage": "http://www.yiiframework.com/",
+    "name": "shiyang/iisns",
+    "description": "A forum and a sns system based on yii2",
+    "keywords": ["yii2", "sns", "blog", "forum"],
+    "homepage": "http://www.iisns.com/",
     "type": "project",
     "license": "BSD-3-Clause",
     "support": {
-        "issues": "https://github.com/yiisoft/yii2/issues?state=open",
-        "forum": "http://www.yiiframework.com/forum/",
-        "wiki": "http://www.yiiframework.com/wiki/",
-        "irc": "irc://irc.freenode.net/yii",
-        "source": "https://github.com/yiisoft/yii2"
+        "issues": "https://github.com/shi-yang/iisns/issues?state=open",
+        "forum": "http://www.iisns.com/forum/iisns",
+        "wiki": "https://github.com/shi-yang/iisns/wiki",
+        "source": "https://github.com/shi-yang/iisns"
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "require": {
         "php": ">=5.4.0",
         "yiisoft/yii2": "*",
