@@ -147,7 +147,7 @@ class Forum extends \yii\db\ActiveRecord
             ->where('forum_id=:forum_id', [':forum_id' => $this->id])
             ->orderBy('created_at DESC');
             
-        return \app\components\Yii::$app->tools->Pagination($query);
+        return Yii::$app->tools->Pagination($query);
     }
 
     public function getBroadcastCount()
