@@ -25,6 +25,9 @@ $this->title = Yii::t('forum', 'Board');
 
                 ['class' => 'yii\grid\ActionColumn'],
             ],
+            'options' => [
+                'class' => 'table-responsive'
+            ]
         ]); ?>
     </div>
 </div>

@@ -20,7 +20,7 @@ class BroadcastController extends BaseController
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['broadcast'],
+                    'delete' => ['post'],
                 ],
             ],
         ];

@@ -128,7 +128,7 @@ class ThreadController extends BaseController
         Post::deleteAll(['thread_id' => $model->id]);
         $model->delete();
         Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Deleted successfully.'));
-        return $this->redirect(['/forum/board/view', 'id' => $board_id]);
+        return $this->redirect(['/forum/thread/index']);
     }
 
     /**

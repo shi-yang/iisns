@@ -29,6 +29,9 @@ $this->title = Yii::$app->setting->get('siteTitle');
                 'created_at:time',
                 ['class' => 'yii\grid\ActionColumn'],
             ],
+            'options' => [
+                'class' => 'table-responsive'
+            ]
         ]); ?>
     </div>
 </div>
