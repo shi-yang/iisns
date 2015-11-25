@@ -1,6 +1,7 @@
 The MIT License (MIT)
 
-Copyright (c) 2015 iiSNS, http://www.iisns.com
+Copyright © 2015 iiSNS, http://www.iisns.com
+All rights reserved.
 
 =============================================================================
 
