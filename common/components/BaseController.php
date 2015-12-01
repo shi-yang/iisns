@@ -1,12 +1,22 @@
 <?php
+/**
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
+ */
+
 namespace common\components;
 
 use Yii;
 use yii\web\Controller;
 
+/**
+ * @author Shiyang <dr@shiyang.me>
+ * @since 2.0
+ */
 class BaseController extends Controller
 {
-	public function init()
+    public function init()
     {
         $this->setLanguage();
     }
