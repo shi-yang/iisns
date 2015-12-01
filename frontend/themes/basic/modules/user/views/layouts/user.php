@@ -97,6 +97,7 @@ AppAsset::register($this);
             </ul>
         </header><!-- /top-nav-->
 
+        <?php \yii\widgets\Pjax::begin() ?>
         <aside class="fixed skin-1">
             <div class="sidebar-inner scrollable-sidebar" style="overflow: hidden; width: auto; height: 100%;">
                 <div class="size-toggle">
@@ -240,6 +241,7 @@ AppAsset::register($this);
                 </div>
             </div><!-- /.padding-md -->
         </div>
+        <?php \yii\widgets\Pjax::end() ?>
         <footer>
             <div class="row">
                 <div class="col-sm-6">
