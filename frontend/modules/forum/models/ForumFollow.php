@@ -1,4 +1,9 @@
 <?php
+/**
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
+ */
 
 namespace app\modules\forum\models;
 
@@ -10,6 +15,9 @@ use Yii;
  * @property integer $id
  * @property integer $forum_id
  * @property integer $user_id
+ *
+ * @author Shiyang <dr@shiyang.me>
+ * @since 2.0
  */
 class ForumFollow extends \yii\db\ActiveRecord
 {

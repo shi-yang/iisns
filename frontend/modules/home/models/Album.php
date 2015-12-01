@@ -1,4 +1,9 @@
 <?php
+/**
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
+ */
 
 namespace app\modules\home\models;
 
@@ -21,6 +26,9 @@ use app\components\Uploader;
  * @property string $status_password
  * @property string $status_question
  * @property string $status_answer
+ *
+ * @author Shiyang <dr@shiyang.me>
+ * @since 2.0
  */
 class Album extends \yii\db\ActiveRecord
 {

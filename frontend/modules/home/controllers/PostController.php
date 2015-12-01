@@ -1,4 +1,9 @@
 <?php
+/**
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
+ */
 
 namespace app\modules\home\controllers;
 
@@ -15,6 +20,9 @@ use common\components\BaseController;
 
 /**
  * PostController implements the CRUD actions for Post model.
+ *
+ * @author Shiyang <dr@shiyang.me>
+ * @since 2.0
  */
 class PostController extends BaseController
 {

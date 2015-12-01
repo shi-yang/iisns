@@ -1,4 +1,9 @@
 <?php
+/**
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
+ */
 
 namespace frontend\controllers;
 
@@ -7,6 +12,10 @@ use yii\filters\AccessControl;
 use yii\web\ForbiddenHttpException;
 use common\components\BaseController;
 
+/**
+ * @author Shiyang <dr@shiyang.me>
+ * @since 2.0
+ */
 class CommentController extends BaseController
 {
     public function behaviors()

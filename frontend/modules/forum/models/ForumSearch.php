@@ -1,4 +1,9 @@
 <?php
+/**
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
+ */
 
 namespace app\modules\forum\models;
 
@@ -9,6 +14,9 @@ use app\modules\forum\models\Forum;
 
 /**
  * ForumSearch represents the model behind the search form about `app\modules\forum\models\Forum`.
+ *
+ * @author Shiyang <dr@shiyang.me>
+ * @since 2.0
  */
 class ForumSearch extends Forum
 {

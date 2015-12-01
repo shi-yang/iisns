@@ -1,4 +1,9 @@
 <?php
+/**
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
+ */
 
 namespace app\modules\user\models;
 
@@ -16,6 +21,9 @@ use yii\db\Query;
  * @property integer $to_user_id
  * @property integer $created_at
  * @property integer $is_read
+ *
+ * @author Shiyang <dr@shiyang.me>
+ * @since 2.0
  */
 class Notice extends \yii\db\ActiveRecord
 {

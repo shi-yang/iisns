@@ -1,4 +1,9 @@
 <?php
+/**
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
+ */
 
 namespace app\modules\home\models;
 
@@ -16,6 +21,9 @@ use Yii;
  * @property integer $feed_data
  * @property integer $user_id
  * @property integer $created_at
+ *
+ * @author Shiyang <dr@shiyang.me>
+ * @since 2.0
  */
 class Feed extends \yii\db\ActiveRecord
 {

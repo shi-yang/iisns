@@ -1,4 +1,9 @@
 <?php
+/**
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
+ */
 
 namespace app\modules\user\models;
 
@@ -13,6 +18,9 @@ use Yii;
  *
  * @property User $user
  * @property User $people
+ *
+ * @author Shiyang <dr@shiyang.me>
+ * @since 2.0
  */
 class UserFollow extends \yii\db\ActiveRecord
 {

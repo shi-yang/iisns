@@ -1,4 +1,9 @@
 <?php
+/**
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
+ */
 
 namespace app\modules\user\controllers;
 
@@ -11,6 +16,10 @@ use app\modules\home\models\Post;
 use app\modules\home\models\Feed;
 use common\components\BaseController;
 
+/** 
+ *@author Shiyang <dr@shiyang.me>
+ * @since 2.0
+ */
 class DashboardController extends BaseController
 {
     public $layout='dashboard';

@@ -1,4 +1,9 @@
 <?php
+/**
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
+ */
 
 namespace app\modules\home\models;
 
@@ -15,6 +20,9 @@ use yii\helpers\Url;
  * @property integer $created_at
  * @property integer $updated_at
  * @property integer $user_id
+ *
+ * @author Shiyang <dr@shiyang.me>
+ * @since 2.0
  */
 class Post extends \yii\db\ActiveRecord
 {

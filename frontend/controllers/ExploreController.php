@@ -1,4 +1,10 @@
 <?php
+/**
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
+ */
+ 
 namespace frontend\controllers;
 
 use Yii;
@@ -15,6 +21,9 @@ Yii::setAlias('photo', '@web/uploads/home/photo/');
 
 /**
  * Explore controller
+ *
+ * @author Shiyang <dr@shiyang.me>
+ * @since 2.0
  */
 class ExploreController extends BaseController
 {
