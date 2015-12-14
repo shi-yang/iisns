@@ -3,16 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use app\backend\models\Post;
-use backend\modules\PostSearch;
-use yii\web\Controller;
+use backend\models\Post;
+use backend\models\PostSearch;
+use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * PostController implements the CRUD actions for Post model.
  */
-class PostController extends Controller
+class PostController extends BaseController
 {
     public function behaviors()
     {
@@ -32,27 +32,36 @@ class PostController extends Controller
      */
     public function actionIndex()
     {
+//        if(!empty($_POST['selection'])){
+//        $result = $_POST['selection'];
+//            foreach($result as $v){
+//                $model = $this->findModel($v);
+//                $model->status = 1;
+//                $model->save();  // ��
+//            }
+//        }
+
+//
+//        $model = $this->findModel($id);
+
+//        $model = Model::find()->where('id' => $_POST['selection'])->all();
+
+
+//        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+//            return $this->redirect(['view', 'id' => $model->id]);
+//        } else {
+//            return $this->render('update', [
+//                'model' => $model,
+//            ]);        $result = Yii::$app->db->createCommand("select * from {{%home_post}}")->queryAll();
+       // var_dump($result); exit;
+//        }
+
         $searchModel = new PostSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        if(!empty($_POST['review'])||!empty($_POST['soldout'])){
-        $result = $_POST['selection'];
-            foreach($result as $v){
-                $model = $this->findModel($v);
-                if(isset($_POST['review']) && $_POST['review']=="审核"){
-                    Yii::$app->getSession()->setFlash('success', '操作审核成功');
-                    $model->explore_status = 1;
-                }else{
-                    Yii::$app->getSession()->setFlash('success', '下架成功');
-                    $model->explore_status = 0;
-                }
-                $model->save();  // 等
-            }
-        }
-
         return $this->render('index', [
-            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
         ]);
     }
 
@@ -113,8 +122,10 @@ class PostController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        $model = $this->findModel($id);
+        $user_id = $model->user_id;
+        $model->delete();
+        Yii::$app->db->createCommand("UPDATE {{%user_data}} SET post_count=post_count-1 WHERE user_id=".$user_id)->execute();
         return $this->redirect(['index']);
     }
 
