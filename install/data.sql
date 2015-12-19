@@ -168,6 +168,7 @@ CREATE TABLE IF NOT EXISTS `pre_forum` (
   `forum_url` char(32) NOT NULL,
   `user_id` int(12) NOT NULL,
   `created_at` int(10) NOT NULL,
+  `status` tinyint(1) NOT NULL,
   `forum_icon` char(26) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
@@ -325,6 +326,7 @@ CREATE TABLE IF NOT EXISTS `pre_home_post` (
   `user_id` int(11) NOT NULL,
   `created_at` int(11) NOT NULL,
   `updated_at` int(11) NOT NULL,
+  `explore_status` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;

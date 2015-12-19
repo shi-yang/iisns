@@ -19,6 +19,8 @@ use Yii;
  */
 class Post extends \yii\db\ActiveRecord
 {
+    const EXPLORE_STATUS_PENDING = 0;
+    const EXPLORE_STATUS_APPROVED = 1;
     /**
      * @inheritdoc
      */
@@ -62,5 +64,10 @@ class Post extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    public function getStatus()
+    {
+        return ($this->explore_status === 0) ? 'PENDING' : 'APPROVED' ;
     }
 }

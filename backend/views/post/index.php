@@ -1,11 +1,12 @@
 <?php
+
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\bootstrap\ActiveForm;
-use backend\models\Post;
+
 /* @var $this yii\web\View */
 /* @var $model backend\models\Post */
-header('Content-Type: text/html; charset=UTF-8');
+
 $this->title = Yii::$app->setting->get('siteTitle');
 ?>
 <div class="post-index">
@@ -26,8 +27,7 @@ $this->title = Yii::$app->setting->get('siteTitle');
                 [
                     'attribute' => 'explore_status',
                     'value' => function ($model) {
-                            return Post::getExplore_status($model->explore_status
-                            );
+                            return $model->status;
                     },
                     'headerOptions' => ['width' => '7%']
                 ],
@@ -45,7 +45,7 @@ $this->title = Yii::$app->setting->get('siteTitle');
             ],
         ]); ?>
     </div>
-    <input class=""  type="submit"  name="review" value="审核">
-    <input class=""  type="submit"  name="soldout" value="下架">
+    <input class="btn btn-success"  type="submit"  name="review" value="APPROVED">
+    <input class="btn btn-default"  type="submit"  name="soldout" value="PENDING">
     <?php ActiveForm::end();?>
 </div>

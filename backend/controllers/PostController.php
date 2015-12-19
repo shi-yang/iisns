@@ -3,16 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use app\backend\models\Post;
-use backend\modules\PostSearch;
-use yii\web\Controller;
+use backend\models\Post;
+use backend\models\PostSearch;
+use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * PostController implements the CRUD actions for Post model.
  */
-class PostController extends Controller
+class PostController extends BaseController
 {
     public function behaviors()
     {
@@ -35,19 +35,20 @@ class PostController extends Controller
         $searchModel = new PostSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        if(!empty($_POST['review'])||!empty($_POST['soldout'])){
-        $result = $_POST['selection'];
-            foreach($result as $v){
+        if (Yii::$app->request->isPost) {
+            $result = Yii::$app->request->post('selection');
+            foreach ($result as $v) {
                 $model = $this->findModel($v);
-                if(isset($_POST['review']) && $_POST['review']=="审核"){
+                if (isset($_POST['review']) && $_POST['review'] == 'APPROVED') {
+                    $model->explore_status = Post::EXPLORE_STATUS_APPROVED;
                     Yii::$app->getSession()->setFlash('success', '操作审核成功');
-                    $model->explore_status = 1;
-                }else{
+                } else {
+                    $model->explore_status = Post::EXPLORE_STATUS_PENDING;
                     Yii::$app->getSession()->setFlash('success', '下架成功');
-                    $model->explore_status = 0;
                 }
-                $model->save();  // 等
+                $model->save(); 
             }
+            return $this->redirect(['index']);
         }
 
         return $this->render('index', [
@@ -113,8 +114,10 @@ class PostController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        $model = $this->findModel($id);
+        $user_id = $model->user_id;
+        $model->delete();
+        Yii::$app->db->createCommand("UPDATE {{%user_data}} SET post_count=post_count-1 WHERE user_id=".$user_id)->execute();
         return $this->redirect(['index']);
     }
 

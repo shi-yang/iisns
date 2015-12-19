@@ -54,6 +54,22 @@ class ForumController extends BaseController
         $searchModel = new ForumSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        if (Yii::$app->request->isPost) {
+            $result = Yii::$app->request->post('selection');
+            foreach ($result as $v) {
+                $model = $this->findModel($v);
+                if (isset($_POST['review']) && $_POST['review'] == 'APPROVED') {
+                    $model->status = Forum::STATUS_APPROVED;
+                    Yii::$app->getSession()->setFlash('success', '操作审核成功');
+                } else {
+                    $model->status = Forum::STATUS_PENDING;
+                    Yii::$app->getSession()->setFlash('success', '下架成功');
+                }
+                $model->save(); 
+            }
+            return $this->redirect(['index']);
+        }
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

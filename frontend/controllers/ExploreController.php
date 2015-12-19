@@ -65,6 +65,7 @@ class ExploreController extends BaseController
         $query = new Query;
         $query->select('forum_url,forum_name,forum_desc,forum_icon')
             ->from('{{%forum}}')
+            ->where('status=1')
             ->orderBy('id DESC');
         $forumResult = Yii::$app->tools->Pagination($query);
 
@@ -80,11 +81,13 @@ class ExploreController extends BaseController
         $query->select('e.id, title, content, e.created_at, u.username, u.avatar')
             ->from('{{%home_post}} as e')
             ->join('LEFT JOIN','{{%user}} as u', 'u.id=e.user_id')
+            ->where('e.explore_status=1')
             ->orderBy('e.id DESC');
+            
         //按标签查询出文章
         if (Yii::$app->request->isGet) {
             $tag = Yii::$app->request->get('tag');
-            $query->where('tags LIKE :tag', [':tag' => '%' . $tag . '%']);
+            $query->where('tags LIKE :tag', [':tag' => '%' . $tag . '%'])->andWhere('explore_status=1');
         }
         $posts = Yii::$app->tools->Pagination($query, 10);
 
@@ -92,6 +95,7 @@ class ExploreController extends BaseController
         $query = new TaggingQuery;
         $tags = $query->select('tags')
             ->from('{{%home_post}}')
+            ->where('explore_status=1')
             ->limit(10)
             ->displaySort(['freq' => SORT_DESC])
             ->getTags();
