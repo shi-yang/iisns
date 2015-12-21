@@ -25,6 +25,12 @@ use shiyang\infinitescroll\InfiniteScrollPager;
                                     <time title="<?= Yii::t('app', 'Last Reply Time') ?>">
                                         <span class="glyphicon glyphicon-time"></span> <?= Yii::$app->formatter->asRelativeTime($thread['updated_at'])?>
                                     </time>
+                                    <?php if ($thread['user_id'] == Yii::$app->user->id || $model['user_id'] == Yii::$app->user->id): ?>
+                                        &nbsp;•&nbsp; 
+                                        <a href="<?= Url::toRoute(['/forum/thread/delete', 'id' => $thread['id']]) ?>"  data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="post">
+                                            <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
+                                        </a>
+                                    <?php endif; ?>
                                 </small>
                             </td>
                             <td width="50" align="right" valign="middle" title="<?= Yii::t('app', 'Reply') ?>">
