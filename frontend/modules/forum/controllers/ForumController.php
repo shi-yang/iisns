@@ -89,8 +89,13 @@ class ForumController extends BaseController
     public function actionView($id)
     {
         $model = $this->findModel($id);
+        if ($model->status === Forum::STATUS_PENDING) {
+            return $this->render('status', [
+                'model' => $model
+            ]);
+        }
         //该论坛下只有一个版块，且该版块不是分类，则可以直接发帖
-        if ($model->boardCount == 1 && $model->boards[0]->parent_id == Board::AS_BOARD ) {
+        if ($model->boardCount == 1 && $model->boards[0]->parent_id == Board::AS_BOARD) {
             $newThread = $this->newThread($model->boards[0]->id);
         } else {
             $newThread = null;
@@ -105,6 +110,11 @@ class ForumController extends BaseController
     public function actionBroadcast($id)
     {
         $model = $this->findModel($id);
+        if ($model->status === Forum::STATUS_PENDING) {
+            return $this->render('status', [
+                'model' => $model
+            ]);
+        }
         $newBroadcast = $this->newBroadcast($model->id);
         return $this->render('broadcast', [
             'model' => $model,
@@ -143,6 +153,11 @@ class ForumController extends BaseController
         if ($model->user_id !== Yii::$app->user->id) {
             throw new ForbiddenHttpException('You are not allowed to perform this action.');
         }
+        if ($model->status === Forum::STATUS_PENDING) {
+            return $this->render('status', [
+                'model' => $model
+            ]);
+        }
 
         $newBoard = new Board();
         if ($newBoard->load(Yii::$app->request->post())) {
@@ -154,7 +169,7 @@ class ForumController extends BaseController
             }
         }
         
-        //上传上传图标
+        //上传图标
         Yii::setAlias('@upload', '@webroot/uploads/forum/icon/');
         if (Yii::$app->request->isPost && !empty($_FILES)) {
             $extension =  strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
