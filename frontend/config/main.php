@@ -42,7 +42,7 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'rules' => [
-                'u/<id:[\x{4e00}-\x{9fa5}a-zA-Z0-9_]*>' => 'user/view',
+                '@<id:[\x{4e00}-\x{9fa5}a-zA-Z0-9_]*>' => 'user/view',
                 'forum/<id:[\x{4e00}-\x{9fa5}a-zA-Z0-9_]*>' => 'forum/forum/view',
                 'thread/<id:\d+>' => 'forum/thread/view',
                 'p/<id:\d+>' => 'user/view/view-post'
