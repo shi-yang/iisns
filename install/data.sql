@@ -127,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `pre_comment` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 --
--- 表的结构 `pre_favorite`
+-- 表的结构 `pre_explore_recommend`
 --
 
 CREATE TABLE IF NOT EXISTS `pre_explore_recommend` (
@@ -145,17 +145,6 @@ CREATE TABLE IF NOT EXISTS `pre_explore_recommend` (
   `created_at` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='探索页面的推荐列表' AUTO_INCREMENT=1 ;
-
-CREATE TABLE IF NOT EXISTS `pre_favorite` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `source_id` bigint(20) NOT NULL,
-  `source_table_name` varchar(255) NOT NULL,
-  `created_at` text NOT NULL,
-  `user_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  KEY `post_id` (`source_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='用户收藏' AUTO_INCREMENT=1 ;
 
 --
 -- 表的结构 `pre_forum`
