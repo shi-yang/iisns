@@ -1,4 +1,5 @@
 <?php
+
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\Modal;
@@ -25,8 +26,6 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
@@ -176,7 +175,7 @@ AppAsset::register($this);
                                 <span class="menu-hover"></span>
                             </a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="<?= Url::toRoute('/home/todu/music') ?>">
                             <span class="menu-icon">
                                 <i class="glyphicon glyphicon-music"></i>
@@ -197,7 +196,7 @@ AppAsset::register($this);
                             </span>
                                 <span class="menu-hover"></span>
                             </a>
-                        </li>
+                        </li> -->
                         <li>
                             <a href="<?= Url::toRoute(['/user/message']) ?>">
                             <span class="menu-icon">
