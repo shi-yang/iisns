@@ -15,7 +15,8 @@ $this->params['forum'] = $model->toArray;
 <div class="col-xs-12 col-sm-8 col-md-8">
     <?php if ($model->boardCount > 1): ?>
         <?= $this->render('_boards',[
-            'boards'=>$model->boards,
+            'forum' => $model,
+            'boards' => $model->boards,
         ]); ?>
     <?php elseif ($model->boardCount == 1 && $model->boards[0]->parent_id != Board::AS_CATEGORY): ?>
         <?= $this->render('/board/view', [
