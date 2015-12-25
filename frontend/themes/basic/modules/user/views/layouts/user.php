@@ -114,7 +114,7 @@ AppAsset::register($this);
                     <div class="detail">
                         <ul class="list-inline">
                             <li>
-                                <a href="<?= Url::toRoute(['/user/view', 'id' => $user->username]) ?>">
+                                <a href="<?= Url::toRoute(['/user/view', 'id' => $user->username]) ?>" data-pjax="0">
                                     <i class="glyphicon glyphicon-new-window"></i> <strong><?= Html::encode($user->username) ?></strong>
                                 </a>
                             </li>
