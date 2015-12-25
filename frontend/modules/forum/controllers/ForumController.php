@@ -205,10 +205,19 @@ class ForumController extends BaseController
      */
     protected function findModel($id)
     {
-        if (($model = Forum::findOne(['forum_url' => $id])) !== null) {
-            return $model;
+        $cache = Yii::$app->cache;
+        $cachePrefix = Yii::$app->getModule('forum')->cachePrefix;
+        $cacheKey = $cachePrefix . $id;
+        $model = $cache->get($cacheKey);
+        if ($model === false) {
+            if (($model = Forum::findOne(['forum_url' => $id])) !== null) {
+                $cache->set($cacheKey, $model);
+                return $model;
+            } else {
+                throw new NotFoundHttpException('The requested page does not exist.');
+            }
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            return $model;
         }
     }
     

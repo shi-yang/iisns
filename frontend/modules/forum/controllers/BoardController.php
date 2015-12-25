@@ -59,7 +59,7 @@ class BoardController extends BaseController
         if ($model->parent_id == Board::AS_CATEGORY) {
             return $this->render('boards', [
                 'model' => $model,
-                'forum' => $model->forumModel,
+                'forum' => $model->forum,
                 'parentId' => $model->id,
             ]);
         }

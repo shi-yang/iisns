@@ -3,7 +3,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use app\modules\forum\models\Board;
 
-$this->params['forum'] = $forum->toArray;
+$this->params['forum'] = $forum;
 
 $subBoards = $model->getSubBoards($parentId);
 $totalRecords = count($subBoards);

@@ -101,11 +101,6 @@ class Board extends \yii\db\ActiveRecord
             ->createCommand("SELECT forum_url,forum_name,user_id FROM {{%forum}} WHERE id={$this->forum_id}")
             ->queryOne();
     }
-
-    public function getForumModel()
-    {
-        return $this->hasOne(Forum::className(), ['id' => 'forum_id']);
-    }
     
     public function isOneBoard()
     {
