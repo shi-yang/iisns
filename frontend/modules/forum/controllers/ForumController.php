@@ -186,6 +186,10 @@ class ForumController extends BaseController
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $cache = Yii::$app->cache;
+            $cachePrefix = Yii::$app->getModule('forum')->cachePrefix;
+            $cacheKey = $cachePrefix . $model->forum_url;
+            $cache->set($cacheKey, $model);
             Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Saved successfully'));
         }
         

@@ -41,7 +41,6 @@ AppAsset::register($this);
                 ],
             ]);
             $menuItems = [
-                ['label' => '<i class="glyphicon glyphicon-home"></i> ' . Yii::t('app', 'Home'), 'url' => ['/site/index']],
                 ['label' => '<i class="glyphicon glyphicon-globe"></i> ' . Yii::t('app', 'Explore'), 'url' => ['/explore/index']],
             ];
             if (Yii::$app->user->isGuest) {
