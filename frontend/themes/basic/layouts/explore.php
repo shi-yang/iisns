@@ -50,7 +50,5 @@ NavBar::end();
 	'homeLink' => ['label' => Yii::t('app', 'Explore'), 'url' => ['/explore/index']],
 	'links' => isset($this->params['breadcrumb']) ? $this->params['breadcrumb'] : [],
 ]) ?>
-<div class="content">
-    <?= $content; ?>
-</div>
+<?= $content; ?>
 <?php $this->endContent(); ?>

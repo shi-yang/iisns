@@ -38,11 +38,18 @@ class ExploreController extends BaseController
             ->where(['e.category' => 'album'])
             ->all();
 
-        $forums = new Query;
+/*        $forums = new Query;
         $forums->select('f.forum_name, f.forum_url, f.forum_desc, f.forum_icon')
             ->from('{{%forum}} as f')
             ->join('LEFT JOIN','{{%explore_recommend}} as e', 'e.table_id=f.id')
             ->where(['e.category' => 'forum']);
+        $forums = Yii::$app->tools->Pagination($forums);*/
+
+        $forums = new Query;
+        $forums->select('forum_url,forum_name,forum_desc,forum_icon')
+            ->from('{{%forum}}')
+            ->where('status=1')
+            ->orderBy('id DESC');
         $forums = Yii::$app->tools->Pagination($forums);
 
         $posts = new Query;
