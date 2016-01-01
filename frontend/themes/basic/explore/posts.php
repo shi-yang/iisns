@@ -9,7 +9,7 @@ use justinvoelker\tagging\TaggingWidget;
 
 $this->params['title'] = Yii::t('app', 'Explore') . ' - ' . Yii::t('app', 'Posts');
 ?>
-<div class="row">
+<div class="row content">
     <div class="col-md-9" id="home-post">
         <?php foreach ($posts['result'] as $post): ?>
             <section class="post-item">

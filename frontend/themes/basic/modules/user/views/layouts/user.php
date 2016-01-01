@@ -96,7 +96,6 @@ AppAsset::register($this);
             </ul>
         </header><!-- /top-nav-->
 
-        <?php \yii\widgets\Pjax::begin() ?>
         <aside class="fixed skin-1">
             <div class="sidebar-inner scrollable-sidebar" style="overflow: hidden; width: auto; height: 100%;">
                 <div class="size-toggle">
@@ -225,6 +224,7 @@ AppAsset::register($this);
             </div>
             <!-- /sidebar-inner -->
         </aside>
+        <?php \yii\widgets\Pjax::begin(['linkSelector' => 'a']) ?>
         <div id="main-container">
             <div id="breadcrumb">
                 <?= Breadcrumbs::widget([

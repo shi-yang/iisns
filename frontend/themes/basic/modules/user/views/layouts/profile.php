@@ -100,7 +100,7 @@ if ($done) {
                                     'items' => [
                                         [
                                             'label' => '<i class="glyphicon glyphicon-time"></i> ' . Yii::t('app', 'Timeline'),
-                                            'url' => ['/user/view/index', 'id' => $this->params['user']['id']]
+                                            'url' => ['/user/view', 'id' => $this->params['user']['username']]
                                         ],
                                         [
                                             'label' => '<i class="glyphicon glyphicon-picture"></i> ' . Yii::t('app', 'Photo'),

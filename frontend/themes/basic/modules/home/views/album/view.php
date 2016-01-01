@@ -24,7 +24,7 @@ $this->registerJsFile('@web/js/lightbox/js/lightbox.min.js', ['depends' => ['yii
                 <div><?= Yii::t('app', 'No photo in this album, click "Upload new photo" to make up your album.') ?></div>
                 <div class="button">
                     <div class="bigbutton">
-                        <a href="<?= Url::toRoute(['/home/album/upload', 'id' => $model->id]) ?>" class="btn btn-default">
+                        <a href="<?= Url::toRoute(['/home/album/upload', 'id' => $model->id]) ?>" class="btn btn-default" data-pjax="0">
                             <span class="glyphicon glyphicon-plus"></span> <?= Yii::t('app', 'Upload a new photo') ?>
                         </a>
                     </div>
