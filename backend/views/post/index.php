@@ -27,7 +27,7 @@ $this->title = Yii::$app->setting->get('siteTitle');
                 [
                     'attribute' => 'explore_status',
                     'value' => function ($model) {
-                            return $model->status;
+                            return $model->getStatus();
                     },
                     'headerOptions' => ['width' => '7%']
                 ],

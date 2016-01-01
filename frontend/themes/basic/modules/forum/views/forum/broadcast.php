@@ -60,7 +60,7 @@ $this->params['forum'] = $model->toArray;
   </div>
 </div>
 <div class="col-xs-12 col-sm-4 col-md-4">
-  <?= \shiyang\login\Login::widget(['visible' => Yii::$app->user->isGuest]); ?>
+  <?= \app\widgets\login\Login::widget(['visible' => Yii::$app->user->isGuest]); ?>
   <div class="panel panel-default">
     <div class="panel-heading">About</div>
     <div class="panel-body">

@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\helpers\HtmlPurifier;
+use justinvoelker\tagging\TaggingWidget;
 use shiyang\infinitescroll\InfiniteScrollPager;
 
 /* @var $this yii\web\View */
@@ -52,6 +52,16 @@ $user = Yii::$app->user->identity;
                     <?= Yii::t('app', 'No data to display.') ?>
                 </div>
             <?php endif; ?>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-4">
+            <?= TaggingWidget::widget([
+                'items' => $tags,
+                'url' => ['/home/post/index'],
+                'format' => 'ul',
+                'urlParam' => 'tag',
+                'listOptions' => ['class' => 'list-group'],
+                'liOptions' => ['class' => 'list-group-item']
+            ]) ?>
         </div>
         <?= InfiniteScrollPager::widget([
                'pagination' => $pages,

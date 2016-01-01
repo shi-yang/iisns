@@ -9,6 +9,7 @@ namespace app\modules\home\models;
 
 use Yii;
 use yii\helpers\Url;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "{{%home_post}}".
@@ -71,8 +72,17 @@ class Post extends \yii\db\ActiveRecord
     {
         if (parent::beforeSave($insert)) {
             if ($this->isNewRecord) {
+                //插入记录(Feed)
+                $title = Html::a(Html::encode($model->title), $model->url);
+                preg_match_all("/<[img|IMG].*?src=\"([^^]*?)\".*?>/", $model->content, $images);
+                $images = (isset($images[0][0])) ? $images[0][0] : '' ;
+                $content = mb_substr(strip_tags($model->content), 0, 140, 'utf-8') . '... ' . Html::a(Yii::t('app', 'View Details'), $model->url) . '<br>' . $images;
+                $postData = ['{title}' => $title, '{content}' => $content];
+                Feed::addFeed('blog', $postData);
+
                 $this->user_id = Yii::$app->user->id;
                 $this->created_at = time();
+                Yii::$app->userData->updateKey('post_count', Yii::$app->user->id);
             }
             //标签分割
             $tags = trim($this->tags);
@@ -90,7 +100,7 @@ class Post extends \yii\db\ActiveRecord
      */
     public function getUrl()
     {       
-        return Url::toRoute(['/user/view/post-view', 'id' => $this->id]);
+        return Url::toRoute(['/user/view/view-post', 'id' => $this->id]);
     }
 
     public function getUser()

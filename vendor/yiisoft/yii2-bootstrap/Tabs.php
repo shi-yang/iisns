@@ -9,7 +9,6 @@ namespace yii\bootstrap;
 
 use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
-use yii\helpers\Html;
 
 /**
  * Tabs renders a Tab bootstrap javascript component.
@@ -70,7 +69,9 @@ class Tabs extends Widget
      * - url: string, optional, an external URL. When this is specified, clicking on this tab will bring
      *   the browser to this URL. This option is available since version 2.0.4.
      * - options: array, optional, the HTML attributes of the tab pane container.
-     * - active: boolean, optional, whether the item tab header and pane should be visible or not.
+     * - active: boolean, optional, whether this item tab header and pane should be active. If no item is marked as
+     *   'active' explicitly - the first one will be activated.
+     * - visible: boolean, optional, whether the item tab header and pane should be visible or not. Defaults to true.
      * - items: array, optional, can be used instead of `content` to specify a dropdown items
      *   configuration array. Each item can hold three extra keys, besides the above ones:
      *     * active: boolean, optional, whether the item tab header and pane should be visible or not.
@@ -121,7 +122,7 @@ class Tabs extends Widget
     public function init()
     {
         parent::init();
-        Html::addCssClass($this->options, 'nav ' . $this->navType);
+        Html::addCssClass($this->options, ['widget' => 'nav', $this->navType]);
     }
 
     /**
@@ -148,6 +149,9 @@ class Tabs extends Widget
         }
 
         foreach ($this->items as $n => $item) {
+            if (!ArrayHelper::remove($item, 'visible', true)) {
+                continue;
+            }
             if (!array_key_exists('label', $item)) {
                 throw new InvalidConfigException("The 'label' option is required.");
             }
@@ -158,13 +162,13 @@ class Tabs extends Widget
 
             if (isset($item['items'])) {
                 $label .= ' <b class="caret"></b>';
-                Html::addCssClass($headerOptions, 'dropdown');
+                Html::addCssClass($headerOptions, ['widget' => 'dropdown']);
 
                 if ($this->renderDropdown($n, $item['items'], $panes)) {
                     Html::addCssClass($headerOptions, 'active');
                 }
 
-                Html::addCssClass($linkOptions, 'dropdown-toggle');
+                Html::addCssClass($linkOptions, ['widget' => 'dropdown-toggle']);
                 $linkOptions['data-toggle'] = 'dropdown';
                 $header = Html::a($label, "#", $linkOptions) . "\n"
                     . Dropdown::widget(['items' => $item['items'], 'clientOptions' => false, 'view' => $this->getView()]);
@@ -172,7 +176,7 @@ class Tabs extends Widget
                 $options = array_merge($this->itemOptions, ArrayHelper::getValue($item, 'options', []));
                 $options['id'] = ArrayHelper::getValue($options, 'id', $this->options['id'] . '-tab' . $n);
 
-                Html::addCssClass($options, 'tab-pane');
+                Html::addCssClass($options, ['widget' => 'tab-pane']);
                 if (ArrayHelper::remove($item, 'active')) {
                     Html::addCssClass($options, 'active');
                     Html::addCssClass($headerOptions, 'active');
@@ -228,13 +232,16 @@ class Tabs extends Widget
             if (is_string($item)) {
                 continue;
             }
+            if (isset($item['visible']) && !$item['visible']) {
+                continue;
+            }
             if (!array_key_exists('content', $item)) {
                 throw new InvalidConfigException("The 'content' option is required.");
             }
 
             $content = ArrayHelper::remove($item, 'content');
             $options = ArrayHelper::remove($item, 'contentOptions', []);
-            Html::addCssClass($options, 'tab-pane');
+            Html::addCssClass($options, ['widget' => 'tab-pane']);
             if (ArrayHelper::remove($item, 'active')) {
                 Html::addCssClass($options, 'active');
                 Html::addCssClass($item['options'], 'active');

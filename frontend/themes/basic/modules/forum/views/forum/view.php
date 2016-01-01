@@ -35,7 +35,7 @@ $this->params['forum'] = $model->toArray;
     <?php endif; ?>
 </div>
 <div class="col-xs-12 col-sm-4 col-md-4">
-    <?= \shiyang\login\Login::widget([
+    <?= \app\widgets\login\Login::widget([
         'title' => Yii::t('app', 'Log in'),
         'visible' => Yii::$app->user->isGuest
     ]); ?>

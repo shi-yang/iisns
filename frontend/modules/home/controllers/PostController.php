@@ -15,8 +15,8 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\helpers\Html;
 use app\modules\home\models\Post;
-use app\modules\home\models\Feed;
 use common\components\BaseController;
+use justinvoelker\tagging\TaggingQuery;
 
 /**
  * PostController implements the CRUD actions for Post model.
@@ -70,11 +70,24 @@ class PostController extends BaseController
             ->from('{{%home_post}}')
             ->where('user_id=:user_id', [':user_id' => Yii::$app->user->id])
             ->orderBy('created_at DESC');
+        //按标签查询出文章
+        if (Yii::$app->request->isGet) {
+            $tag = Yii::$app->request->get('tag');
+            $query->andWhere('tags LIKE :tag', [':tag' => '%' . $tag . '%']);
+        }
+        $posts = Yii::$app->tools->Pagination($query);
 
-        $pages = Yii::$app->tools->Pagination($query);
+        //标签列表
+        $query = new TaggingQuery;
+        $tags = $query->select('tags')
+            ->from('{{%home_post}}')
+            ->where('user_id=:user_id', [':user_id' => Yii::$app->user->id])
+            ->displaySort(['freq' => SORT_DESC])
+            ->getTags();
         return $this->render('index', [
-            'posts' => $pages['result'],
-            'pages' => $pages['pages']
+            'tags' => $tags,
+            'posts' => $posts['result'],
+            'pages' => $posts['pages']
         ]);
     }
     
@@ -100,16 +113,6 @@ class PostController extends BaseController
         $model = new Post();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->userData->updateKey('post_count', Yii::$app->user->id);
-
-            //插入记录(Feed)
-            $title = Html::a(Html::encode($model->title), $model->url);
-            preg_match_all("/<[img|IMG].*?src=\"([^^]*?)\".*?>/", $model->content, $images);
-            $images = (isset($images[0][0])) ? $images[0][0] : '' ;
-            $content = mb_substr(strip_tags($model->content), 0, 140, 'utf-8') . '... ' . Html::a(Yii::t('app', 'View Details'), $model->url) . '<br>' . $images;
-            $postData = ['{title}' => $title, '{content}' => $content];
-            Feed::addFeed('blog', $postData);
-
             return $this->redirect(['/home/post']);
         }
         return $this->render('create', [

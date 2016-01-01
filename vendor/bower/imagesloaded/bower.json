@@ -1,21 +1,36 @@
 {
   "name": "imagesloaded",
-  "version": "3.1.7",
+  "version": "4.0.0",
   "description": "JavaScript is all like _You images done yet or what?_",
   "main": "imagesloaded.js",
   "dependencies": {
-    "eventEmitter": "4.x",
-    "eventie": ">=1.0.4 <2"
+    "eventEmitter": ">=4.2 <5.0"
   },
   "devDependencies": {
     "jquery": ">=1.9 <2.0",
-    "qunit": ">=1.10"
+    "qunit": "~1.20.0"
   },
   "ignore": [
     "**/.*",
     "test",
-    "component.json",
-    "imagesloaded.jquery.json",
-    "package.json"
-  ]
+    "package.json",
+    "node_modules",
+    "bower_components",
+    "tests",
+    "sandbox/",
+    "contributing.md"
+  ],
+  "homepage": "http://imagesloaded.desandro.com",
+  "authors": [
+    "David DeSandro"
+  ],
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "images"
+  ],
+  "license": "MIT"
 }
