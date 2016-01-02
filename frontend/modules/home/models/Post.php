@@ -73,10 +73,10 @@ class Post extends \yii\db\ActiveRecord
         if (parent::beforeSave($insert)) {
             if ($this->isNewRecord) {
                 //插入记录(Feed)
-                $title = Html::a(Html::encode($model->title), $model->url);
-                preg_match_all("/<[img|IMG].*?src=\"([^^]*?)\".*?>/", $model->content, $images);
+                $title = Html::a(Html::encode($this->title), $this->url);
+                preg_match_all("/<[img|IMG].*?src=\"([^^]*?)\".*?>/", $this->content, $images);
                 $images = (isset($images[0][0])) ? $images[0][0] : '' ;
-                $content = mb_substr(strip_tags($model->content), 0, 140, 'utf-8') . '... ' . Html::a(Yii::t('app', 'View Details'), $model->url) . '<br>' . $images;
+                $content = mb_substr(strip_tags($this->content), 0, 140, 'utf-8') . '... ' . Html::a(Yii::t('app', 'View Details'), $this->url) . '<br>' . $images;
                 $postData = ['{title}' => $title, '{content}' => $content];
                 Feed::addFeed('blog', $postData);
 

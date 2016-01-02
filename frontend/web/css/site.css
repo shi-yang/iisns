@@ -4,6 +4,12 @@ body {
     background-color: #eef0f3;
 }
 
+#header {
+    background-color: #EEF0F3;
+    margin-bottom: 0px;
+    border: medium none;
+}
+
 .wrap {
     min-height: 100%;
     height: auto;

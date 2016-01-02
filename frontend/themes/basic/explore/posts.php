@@ -8,15 +8,16 @@ use justinvoelker\tagging\TaggingWidget;
 /* @var $this yii\web\View */
 
 $this->params['title'] = Yii::t('app', 'Explore') . ' - ' . Yii::t('app', 'Posts');
+$this->params['breadcrumb'][] = Yii::t('app', 'Posts');
 ?>
-<div class="row content">
+<div class="row">
     <div class="col-md-9" id="home-post">
         <?php foreach ($posts['result'] as $post): ?>
             <section class="post-item">
                 <div class="row">
                     <div class="post-content col-md-9">
                         <article>
-                            <a class="mecctitle" href="<?= Url::toRoute(['/user/view/view-post', 'id' => $post['id']]) ?>" target="_blank">
+                            <a class="mecctitle" href="<?= Url::toRoute(['/user/view/view-post', 'id' => $post['id']]) ?>" target="_blank" data-pjax="0">
                                 <h2><?= Html::encode($post['title']) ?></h2>
                             </a>
                             <address class="meccaddress">

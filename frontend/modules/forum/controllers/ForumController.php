@@ -133,6 +133,7 @@ class ForumController extends BaseController
         $model = new Forum();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Create successfully.'));
             return $this->redirect(['view', 'id' => $model->forum_url]);
         } else {
             return $this->render('create', [

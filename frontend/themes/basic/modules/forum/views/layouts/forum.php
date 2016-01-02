@@ -126,7 +126,6 @@ AppAsset::register($this);
             <?= Html::a (' 中文简体 ', '?lang=zh-CN') . '| ' . 
             Html::a (' English ', '?lang=en') ;  
             ?>
-            <div style="display: none"><?= Yii::$app->setting->get('statisticsCode') ?></div>
         </p>
         <p class="pull-right"><?= Yii::powered() ?></p>
         </div>
@@ -137,6 +136,7 @@ AppAsset::register($this);
           return $('body, html').toggleClass("nav-open");
         });
     </script>
+    <div style="display: none"><?= Yii::$app->setting->get('statisticsCode') ?></div>
 </body>
 </html>
 <?php $this->endPage() ?>

@@ -50,12 +50,6 @@ word-wrap: break-word;
 ');
 ?>
 <div class="forum-index">
-    <?php if (!Yii::$app->user->isGuest): ?>
-        <p>
-            <?= Html::a(Yii::t('app', 'Create Forum'), ['/forum/forum/create'], ['class' => 'btn btn-success']) ?>
-        </p>
-    <?php endif ?>
-
     <div class="forum-all">
         <?php Masonry::begin([
             'options' => [

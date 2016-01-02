@@ -60,6 +60,7 @@ class ForumController extends BaseController
                 $model = $this->findModel($v);
                 if (isset($_POST['review']) && $_POST['review'] == 'APPROVED') {
                     $model->status = Forum::STATUS_APPROVED;
+                    Yii::$app->cache->delete('forum-cache' . $model->forum_url);
                     Yii::$app->getSession()->setFlash('success', '操作审核成功');
                 } else {
                     $model->status = Forum::STATUS_PENDING;
