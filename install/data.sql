@@ -222,7 +222,7 @@ CREATE TABLE IF NOT EXISTS `pre_setting` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `pre_setting` (`key`, `value`) VALUES
-('thirdPartyStatisticalCode', ''),
+('statisticsCode', ''),
 ('siteKeyword', '');
 
 CREATE TABLE IF NOT EXISTS `pre_user_data` (

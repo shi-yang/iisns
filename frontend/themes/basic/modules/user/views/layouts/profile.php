@@ -131,7 +131,7 @@ if ($done) {
         <div class="container">
             <p class="pull-left">&copy; iiSNS <?= date('Y') ?>
                 <?= Html::a(' 中文简体 ', '?lang=zh-CN') . '| ' . Html::a(' English ', '?lang=en') ?>
-                <?= Yii::$app->setting->get('thirdPartyStatisticalCode') ?>
+                <div style="display: none"><?= Yii::$app->setting->get('statisticsCode') ?></div>
             </p>
             <p class="pull-right"><?= Yii::powered() ?></p>
         </div>

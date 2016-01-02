@@ -78,7 +78,7 @@ AppAsset::register($this);
             Html::a (' English ', '?lang=en') ;  
             ?>
         </p>
-        <p class="pull-right"><?= Yii::$app->setting->get('thirdPartyStatisticalCode') ?><?= Yii::powered() ?></p>
+        <p class="pull-right"><div style="display: none"><?= Yii::$app->setting->get('statisticsCode') ?></div><?= Yii::powered() ?></p>
         </div>
     </footer>
     <?php $this->endBody() ?>

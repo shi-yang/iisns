@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -38,8 +37,8 @@ $this->params['breadcrumbs'][] = $this->title;
 			    	</div>
 
 			    	<div class="form-group">
-			    		<?= Html::label(Yii::t('app', 'Third Party Statistical Code'), 'thirdPartyStatisticalCode') ?>
-			    		<?= Html::textarea('thirdPartyStatisticalCode', $settings['thirdPartyStatisticalCode'], ['class' => 'form-control']) ?>
+			    		<?= Html::label(Yii::t('app', 'Statistics Code'), 'statisticsCode') ?>
+			    		<?= Html::textarea('statisticsCode', $settings['statisticsCode'], ['class' => 'form-control']) ?>
 			    	</div>
 		    	</div>
 		    	<div class="box-footer">

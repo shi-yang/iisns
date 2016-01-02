@@ -46,5 +46,5 @@ return [
 	'Site Title' => '站点标题',
 	'Site Description' => '站点描述',
 	'Site Keyword' => '站点关键字',
-	'Third Party Statistical Code' => '统计代码'
+	'Statistics Code' => '统计代码'
 ];

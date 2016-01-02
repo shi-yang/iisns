@@ -1,8 +1,6 @@
 <?php
 use yii\helpers\Html;
-use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
-use frontend\widgets\Alert;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -31,7 +29,9 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
     <?= $content ?>
 <?php $this->endBody() ?>
-<?= Yii::$app->setting->get('thirdPartyStatisticalCode') ?>
+<div style="display: none">
+    <?= Yii::$app->setting->get('statisticsCode') ?>
+</div>
 </body>
 </html>
 <?php $this->endPage() ?>

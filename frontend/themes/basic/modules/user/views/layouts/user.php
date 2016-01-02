@@ -246,7 +246,7 @@ AppAsset::register($this);
                 <div class="col-sm-6">
                     <p class="no-margin">
                         &copy; <?= date('Y') ?> <strong><?= Html::a(Yii::$app->setting->get('siteName'), ['/site/index']) ?></strong>. ALL Rights Reserved.
-                        <?= Yii::$app->setting->get('thirdPartyStatisticalCode') ?>
+                        <div style="display: none"><?= Yii::$app->setting->get('statisticsCode') ?></div>
                     </p>
                 </div><!-- /.col -->
             </div><!-- /.row-->
