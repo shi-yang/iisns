@@ -6,13 +6,19 @@
  *
  * @author  Shiyang <dr@shiyang.me>
  */
+
 error_reporting(0);
 set_time_limit(600);
 
-include('header.php');
-include('install.class.php');
+define('IISNS_ROOT', str_replace('\\', '/', substr(dirname(__FILE__), 0, -7)));
+
+include_once('header.php');
+require(__DIR__ . '/../vendor/yiisoft/yii2/Yii.php');
+
+use yii\base\Security;
 
 $sqlFile = 'data.sql';
+$iisnsVersion = '2.1.3';
 
 header('Content-Type: text/html; charset=utf-8');
 $PHP_SELF = addslashes(htmlspecialchars($_SERVER['PHP_SELF'] ? $_SERVER['PHP_SELF'] : $_SERVER['SCRIPT_NAME']));
@@ -20,27 +26,10 @@ $PHP_SELF = addslashes(htmlspecialchars($_SERVER['PHP_SELF'] ? $_SERVER['PHP_SEL
 @extract($_POST);
 @extract($_GET);
 
-function result($result = 1, $output = 1) {
-    if ($result) {
-        $text = '<span class="blue">OK</span>';
-        if (!$output) {
-            return $text;
-        }
-        echo $text;
-    } else {
-        $text = '<span class="red">Failed</span>';
-        if (!$output) {
-            return $text;
-        }
-        echo $text;
-    }
-}
 function writable($var)
 {
     $writeable = FALSE;
-//    if(!is_dir($var)) {
-//        @mkdir($var, 0777);
-//    }
+    $var = IISNS_ROOT . $var;
     if (is_dir($var)) {
         $var .= '/temp.txt';
         if (($fp = @fopen($var, 'w')) && (fwrite($fp, 'iisns'))) {
@@ -51,18 +40,31 @@ function writable($var)
     }
     return $writeable;
 }
+function query($query) {
+    $result = mysql_query($query);
+    if (!$result) {
+        echo 'Could not run query:' . mysql_error() . '<br/>';
+        exit;
+    }
+    return $result;
+}
+
 $dirarray = array (
-    'data',
-    '_runtime',
-    'install',
-    'config',
+    'common/config',
+    'common/cache',
+    'frontend/runtime',
+    'frontend/web/assets',
+    'frontend/web/uploads',
+    'backend/runtime',
+    'backend/web/assets',
 );
 $writeable = array();
 foreach ($dirarray as $key => $dir) {
+    $writeable[$key]['name'] = $dir;
     if (writable($dir)) {
-        $writeable[$key] = $dir.result(1, 0);
+        $writeable[$key]['status'] = 'OK';
     } else {
-        $writeable[$key] = $dir.result(0, 0);
+        $writeable[$key]['status'] = 'False';
         $quit = TRUE;
     }
 }
@@ -80,154 +82,64 @@ foreach ($dirarray as $key => $dir) {
         <table class="table table-hover">
             <caption>Environmental requirements</caption>
             <thead>
-            <tr>
-                <th>Name</th>
-                <th>Situation</th>
-                <th>Status</th>
-            </tr>
+                <tr>
+                    <th>Name</th>
+                    <th>Current server</th>
+                    <th>Status</th>
+                </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>PHP OS</td>
-                <td><?php echo PHP_OS; ?></td>
-                <td><?php result(1, 1); ?></td>
-            </tr>
-            <tr>
-                <td>PHP Version</td>
-                <td><?php echo PHP_VERSION; ?></td>
-                <td>@fat</td>
-            </tr>
-            <tr>
-                <td>PHP Memory</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-            </tr>
-            <tr>
-                <td>File Upload</td>
-                <td><?php echo @ini_get('upload_max_filesize'); ?></td>
-                <td><?php echo @ini_get('upload_max_filesize'); ?></td>
-            </tr>
-            <tr class="<?php echo (extension_loaded('mbstring')) ? 'success' : 'danger' ?>">
-                <td><a href="http://php.net/manual/en/book.mbstring.php">Mbstring Extension</a></td>
-                <td><?php //echo extension_loaded('mbstring'); ?></td>
-                <td><?php echo (extension_loaded('mbstring')) ? 'Passed' : 'Warning' ?></td>
-            </tr>
-            <tr>
-                <td>PHP Version</td>
-                <td><?php echo PHP_VERSION; ?></td>
-                <td>@fat</td>
-            </tr>
-            <tr>
-                <td>PHP Version</td>
-                <td><?php echo PHP_VERSION; ?></td>
-                <td>@fat</td>
-            </tr>
+                <tr>
+                    <td>PHP OS</td>
+                    <td><?php echo PHP_OS; ?></td>
+                    <td>OK</td>
+                </tr>
+                <tr>
+                    <td>PHP Version</td>
+                    <td><?php echo PHP_VERSION; ?></td>
+                    <td><?php echo (PHP_VERSION >= '5.4')? 'OK':'False' ?></td>
+                </tr>
+                <tr>
+                    <td>File Upload</td>
+                    <td><?php echo @ini_get('upload_max_filesize'); ?></td>
+                    <td><?php echo (PHP_VERSION >= '0M')? 'OK':'Warning' ?></td>
+                </tr>
+                <tr>
+                    <td><a href="http://php.net/manual/en/book.mbstring.php">Mbstring Extension</a></td>
+                    <td><?php //echo extension_loaded('mbstring'); ?></td>
+                    <td><?php echo (extension_loaded('mbstring')) ? 'OK' : 'False' ?></td>
+                </tr>
             </tbody>
         </table>
-        <div class="shade">
-            <h5>PHP Version&nbsp;&nbsp;<span class="p">
-                <?php
-                echo PHP_VERSION;
-                if (PHP_VERSION < '5.2.0') {
-                    result(0, 1);
-                    $quit = TRUE;
-                } else {
-                    result(1, 1);
-                } ?>
-                </span></h5>
-
-            <h5><?php echo $i_message['php_memory'];?>&nbsp;&nbsp;<span class="p"><?php
-                    echo $i_message['support'],'/',@ini_get('memory_limit');
-                    if ((int)@ini_get('memory_limit') < (int)'32M') {
-                        result(0, 1);
-                        $quit = TRUE;
-                    } else {
-                        result(1, 1);
-                    }
-                    ?></span></h5>
-
-            <h5><?php echo $i_message['file_upload'];?>&nbsp;&nbsp;<spam class="p"><?php
-                    if (@ini_get('file_uploads')) {
-                        echo $i_message['support'],'/',@ini_get('upload_max_filesize');
-                    } else {
-                        echo '<span class="red">'.$i_message['unsupport'].'</span>';
-                    }
-                    result(1, 1);
-                    ?></spam></h5>
-
-            <h5><?php echo $i_message['mysql'];?>&nbsp;&nbsp;<span class="p"><?php
-                    if (function_exists('mysql_connect')) {
-                        echo $i_message['support'];
-                        result(1, 1);
-                    } else {
-                        echo '<span class="red">'.$i_message['mysql_unsupport'].'</span>';
-                        result(0, 1);
-                        $quit = TRUE;
-                    }
-                    ?></span></h5>
-
-            <h5><?php echo $i_message['php_extention'];?></h5>
-            <p>&nbsp;&nbsp;
-                <?php
-                if (extension_loaded('mysql')) {
-                    echo 'mysql:'.$i_message['support'];
-                    result(1, 1);
-                } else {
-                    echo '<span class="red">'.$i_message['php_extention_unload_mysql'].'</span>';
-                    result(0, 1);
-                    $quit = TRUE;
-                }
-                ?></p>
-            <p>&nbsp;&nbsp;
-                <?php
-                if (extension_loaded('gd')) {
-                    echo 'gd:'.$i_message['support'];
-                    result(1, 1);
-                } else {
-                    echo '<span class="red">'.$i_message['php_extention_unload_gd'].'</span>';
-                    result(0, 1);
-                    $quit = TRUE;
-                }
-                ?></p>
-            <p>&nbsp;&nbsp;
-                <?php
-                if (extension_loaded('curl')) {
-                    echo 'curl:'.$i_message['support'];
-                    result(1, 1);
-                } else {
-                    echo '<span class="red">'.$i_message['php_extention_unload_curl'].'</span>';
-                    result(0, 1);
-                    $quit = TRUE;
-                }
-                ?></p>
-            <p>&nbsp;&nbsp;
-                <?php
-                if (extension_loaded('mbstring')) {
-                    echo 'mbstring:'.$i_message['support'];
-                    result(1, 1);
-                } else {
-                    echo '<span class="red">'.$i_message['php_extention_unload_mbstring'].'</span>';
-                    result(0, 1);
-                    $quit = TRUE;
-                }
-                ?></p>
-
-        </div>
-        <h2>Directory</h2>
-        <div class="shade">
-            <?php foreach ($writeable as $value) {
-                echo '<p>'.$value.'</p>';
-            } ?>
-        </div>
-
-        <a href="index.php?step=2" class="btn btn-success">Begin Intallation</a>
+        <table class="table table-hover">
+            <caption>Directory</caption>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($writeable as $item): ?>
+                <tr class="<?php echo ($item['status'] == 'OK') ? 'success' : 'danger' ; ?>">
+                    <td><?php echo $item['name']; ?></td>
+                    <td><?php echo $item['status']; ?></td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        <?php if ($quit): ?>
+            <a href="index.php" class="btn btn-success">Refresh</a>
+        <?php else: ?>
+            <a href="index.php?step=2" class="btn btn-success">Begin Intallation</a>
+        <?php endif; ?>
     <?php elseif ($step == 2): ?>
         <div class="progress">
             <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 66.6%;">
                 Second
             </div>
         </div>
-        <form method="post" action="index.php?step=2">
+        <form method="post" action="index.php?step=3">
             <div class="col-md-6">
                 <fieldset>
                     <legend><small>Enter your Database details</small></legend>
@@ -287,29 +199,106 @@ foreach ($dirarray as $key => $dir) {
             </div>
         </form>
     <?php elseif ($step == 3): ?>
+        <?php if (empty($dbHost) || empty($dbUser) || empty($dbName) || empty($adminUser) || empty($adminPass) || empty($email)
+                || empty($siteName) || empty($siteTitle) || empty($siteDescription)): ?>
+            <div class="alert alert-danger" role="alert"><strong>Error.</strong> Fill out all the details please</div>
+            <a href="index.php?step=2" class="btn btn-default">Previous</a>
+        <?php elseif (strlen($adminPass) < 5): ?>
+            <div class="alert alert-danger" role="alert"><strong>Error.</strong> Password must be at least 5 characters.</div>
+            <a href="index.php?step=2" class="btn btn-default">Previous</a>
+        <?php elseif (!@mysql_connect($dbHost, $dbUser, $dbPass)): ?>
+            <div class="alert alert-danger" role="alert"><strong>Error.</strong> Your Database details are incorrect.</div>
+            <a href="index.php?step=2" class="btn btn-default">Previous</a>
+        <?php elseif (!mysql_select_db($dbName, @mysql_connect($dbHost, $dbUser, $dbPass))): ?>
+            <div class="alert alert-danger" role="alert"><strong>Error.</strong> Your Database details are incorrect.</div>
+            <a href="index.php?step=2" class="btn btn-default">Previous</a>
+        <?php else: ?>
+            <div class="progress">
+                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 66.6%;">
+                    Third
+                </div>
+            </div>
+            <div class="well" style="overflow-y:scroll;height:300px;width:100%;">
+                <?php
+                    $fp = @fopen("../common/config/db.php", "w");
+                    fwrite($fp, "
+<?php
+////////////////////
+// This file contains the database access information.
+// This file is needed to establish a connection to MySQL
+return [
+    'class' => 'yii\db\Connection',
+    'dsn' => 'mysql:host={$dbHost};dbname={$dbName}',
+    'username' => '{$dbUser}',
+    'password' => '{$dbPass}',
+    'tablePrefix' => 'pre_',
+    'enableSchemaCache' => true //No need to modify
+];
+");
+                    fclose($fp);
 
-        <div style="overflow-y:scroll;height:300px;width:100%;padding:5px;border:1px solid #ccc;">
-            <?php
-            $fp = fopen($sqlFile, 'rb');
-            $sql = fread($fp, filesize($sqlFile));
-            fclose($fp);
-            foreach (explode(";\n", trim($sql)) as $query) {
-                $query = trim($query);
-                if ($query) {
-                    if (substr($query, 0, 12) == 'CREATE TABLE') {
-                        $name = preg_replace("/CREATE TABLE ([A-Z ]*)`([a-z0-9_]+)` .*/is", "\\2", $query);
-                        echo '<p>Create table '.$name.' ... <span class="blue">OK</span></p>';
-                        //$this->query($query);
-                    } else {
-                        //$this->query($query);
+                    $fp = fopen($sqlFile, 'rb');
+                    $sql = fread($fp, filesize($sqlFile));
+                    fclose($fp);
+                    foreach (explode(";\n", trim($sql)) as $query) {
+                        $query = trim($query);
+                        if ($query) {
+                            if (substr($query, 0, 12) == 'CREATE TABLE') {
+                                $name = preg_replace("/CREATE TABLE ([A-Z ]*)`([a-z0-9_]+)` .*/is", "\\2", $query);
+                                echo '<p>Create table '.$name.' ... <span class="label label-success">OK</span></p>';
+                                query($query);
+                            } else {
+                                query($query);
+                            }
+                        }
                     }
-                }
-            }
-            ?>
-        </div>
+                    $now = time();
+                    $username = $adminUser;
+                    $password_hash = (new Security)->generatePasswordHash($adminPass);
+                    $auth_key = (new Security)->generateRandomString();
+                    query("
+                        INSERT INTO `pre_user` (`id`, `username`, `password_hash`, `auth_key`, `role`, `email`, `status`, `created_at`, `updated_at`, `avatar`) VALUES
+                        (10000, '{$username}', '{$password_hash}', '{$auth_key}', 10, '{$email}', 10, {$now}, {$now}, 'default/10.jpg');
+                    ");
+                    query("
+                        INSERT INTO `pre_auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
+                        ('/*', 2, NULL, NULL, NULL, {$now}, {$now}),
+                        ('超级管理员', 1, '拥有最高权限', NULL, NULL, {$now}, {$now});
+                        ");
+                    query("
+                        INSERT INTO `pre_auth_item_child` (`parent`, `child`) VALUES
+                        ('超级管理员', '/*');
+                        ");
+                    query("
+                        INSERT INTO `pre_auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
+                        ('超级管理员', '10000', {$now});
+                        ");
+                    query("
+                        INSERT INTO `pre_setting` (`key`, `value`) VALUES
+                        ('siteName', '{$siteName}'),
+                        ('siteTitle', '{$siteTitle}'),
+                        ('siteDescription', '{$siteDescription}'),
+                        ('version', '" . $iisnsVersion . "');
+                    ");
+                    query("
+                        INSERT INTO `pre_user_data` (`user_id`) VALUES
+                        (10000);
+                    ");
+                    query("
+                        INSERT INTO `pre_user_profile` (`user_id`) VALUES
+                        (10000);
+                    ");
+                ?>
+            </div>
+            <a href="index.php?step=4" class="btn btn-default pull-right">Next</a>
+        <?php endif; ?>
+    <?php elseif ($step == 4): ?>
+        <div class="alert alert-success"><strong>Success!</strong> Installation is completed.</div>
+        <p class="bg-warning">Delete or rename the install folder to prevent security risk.</p>
+        <p>If you want to reinstall, delete <code>common\config\db.php</code> </p>
     <?php endif; ?>
 <?php else: ?>
-    <div class="alert alert-success" data-dismiss="alert"><strong>Success!</strong> Installation is completed.</div>
+    <div class="alert alert-success"><strong>Success!</strong> Installation is completed.</div>
     <p class="bg-warning">Delete or rename the install folder to prevent security risk.</p>
     <p>If you want to reinstall, deleted <code>common\config\db.php</code> </p>
 <?php endif; ?>

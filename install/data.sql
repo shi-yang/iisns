@@ -30,9 +30,6 @@ CREATE TABLE IF NOT EXISTS `pre_auth_assignment` (
   PRIMARY KEY (`item_name`,`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `pre_auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
-('超级管理员', '10000', 1437549324);
-
 CREATE TABLE IF NOT EXISTS `pre_auth_item` (
   `name` varchar(64) NOT NULL,
   `type` int(11) NOT NULL,
@@ -46,19 +43,12 @@ CREATE TABLE IF NOT EXISTS `pre_auth_item` (
   KEY `idx-auth_item-type` (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `pre_auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
-('/*', 2, NULL, NULL, NULL, 1437549400, 1437549400),
-('超级管理员', 1, '拥有最高权限', NULL, NULL, 1437549293, 1437549293);
-
 CREATE TABLE IF NOT EXISTS `pre_auth_item_child` (
   `parent` varchar(64) NOT NULL,
   `child` varchar(64) NOT NULL,
   PRIMARY KEY (`parent`,`child`),
   KEY `child` (`child`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-INSERT INTO `pre_auth_item_child` (`parent`, `child`) VALUES
-('超级管理员', '/*');
 
 CREATE TABLE IF NOT EXISTS `pre_auth_rule` (
   `name` varchar(64) NOT NULL,
@@ -246,9 +236,6 @@ CREATE TABLE IF NOT EXISTS `pre_user_data` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10000 ;
 
-INSERT INTO `pre_user_data` (`user_id`) VALUES
-(10000);
-
 CREATE TABLE IF NOT EXISTS `pre_user_follow` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -284,9 +271,6 @@ CREATE TABLE IF NOT EXISTS `pre_user_profile` (
   PRIMARY KEY (`user_id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-INSERT INTO `pre_user_profile` (`user_id`) VALUES
-(10000);
 
 CREATE TABLE IF NOT EXISTS `pre_user_notice` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -360,10 +344,10 @@ ALTER TABLE `pre_user_message`
   ADD CONSTRAINT `pre_user_message_ibfk_3` FOREIGN KEY (`sendfrom`) REFERENCES `pre_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `pre_user_message_ibfk_4` FOREIGN KEY (`sendto`) REFERENCES `pre_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-/*
+
 ALTER TABLE `pre_user_profile`
-  ADD CONSTRAINT `pre_user_profile_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `pre_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-*/
+  ADD CONSTRAINT `pre_user_profile_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `pre_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
