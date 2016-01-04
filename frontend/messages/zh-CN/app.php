@@ -104,6 +104,7 @@ return [
 
     'Forum' => '论坛',
     'Forums' => '论坛',
+    'My forums' => '我的论坛',
     'Create Forum' => '创建论坛',
     'Forum Name' => '论坛名称',
     'Forum Description' => '论坛描述',
@@ -147,6 +148,7 @@ return [
     'Deleted successfully.' => '已删除',
     'Error. Delete failed.' => '删除失败',
     'Recommendation' => '推荐',
+    'Pending' => '待审核',
 
     'Nothing~' => '什么也没有～',
     'Are you sure you want to Log out?' => '你确定要退出？',

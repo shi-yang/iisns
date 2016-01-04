@@ -38,8 +38,15 @@ class ExploreController extends BaseController
             ->orderBy('id DESC');
         $forums = Yii::$app->tools->Pagination($forums);
 
+        if (!Yii::$app->user->isGuest) {
+            $myForums = Yii::$app->db->createCommand('SELECT forum_url, forum_name, forum_icon, status FROM {{%forum}} WHERE user_id=' . Yii::$app->user->id)->queryAll();
+        } else {
+            $myForums = null;
+        }
+
         return $this->render('index', [
-            'forums' => $forums
+            'forums' => $forums,
+            'myForums' => $myForums
         ]);
     }
 

@@ -11,13 +11,20 @@ if (!isset($this->title)) {
 if (Yii::$app->user->isGuest) {
     $this->beginContent(__DIR__.'/basic.php');
 } else {
-	$this->registerCssFile('@web/css/site.css');
     $this->beginContent('@app/modules/user/views/layouts/user.php');
+    $this->registerCssFile('@web/css/site.css');
+    $this->registerCss('
+        @media (min-width: 1200px) {
+          .container {
+            width: 970px;
+          }
+        }
+    ');
 }
 $this->registerMetaTag(['name' => 'keywords', 'content' => Yii::$app->setting->get('siteKeyword')]);
 $this->registerMetaTag(['name' => 'description', 'content' => Yii::$app->setting->get('siteDescription')]);
 $this->registerCss('
-.wrap {background-color: #FFF;}
+    .wrap {background-color: #FFF;}
 ');
 ?>
 <div class="wrap">
@@ -54,7 +61,7 @@ $this->registerCss('
     ]);
     NavBar::end();
     ?>
-    <div <?= (Yii::$app->user->isGuest) ? 'class="container"' : '' ?> >
+    <div <?= (Yii::$app->user->isGuest) ? 'class="container"' : 'style="padding: 0 20px;"' ?> >
         <?= Breadcrumbs::widget([
             'homeLink' => ['label' => Yii::t('app', 'Explore'), 'url' => ['/explore/index']],
             'links' => isset($this->params['breadcrumb']) ? $this->params['breadcrumb'] : [],
