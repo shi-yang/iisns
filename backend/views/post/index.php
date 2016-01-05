@@ -19,6 +19,7 @@ $this->title = Yii::$app->setting->get('siteTitle');
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
+            'options' => ['class' => 'table-responsive'],
             'columns' => [
                 [
                     'class' => 'yii\grid\CheckboxColumn',
