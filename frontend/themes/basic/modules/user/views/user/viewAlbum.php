@@ -2,17 +2,18 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use app\assets\LightBoxAsset;
 use shiyang\masonry\Masonry;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\home\models\Album */
 
+LightBoxAsset::register($this);
+
 $this->title = $model->name;
 $this->params['user'] = $user;
 $this->params['profile'] = $user->profile;
 $this->params['userData'] = $user->userData;
-$this->registerCssFile('@web/js/lightbox/css/lightbox.css');
-$this->registerJsFile('@web/js/lightbox/js/lightbox.min.js', ['depends' => ['yii\web\JqueryAsset'], 'position' => \yii\web\View::POS_END]);
 ?>
 
 <div class="album-view">

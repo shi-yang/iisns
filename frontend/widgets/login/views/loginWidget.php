@@ -22,7 +22,7 @@ $this->registerCss('
 <div class="panel panel-default">
   <div class="panel-heading"><?= $title ?></div>
   <div class="panel-body">
-    <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+    <?php $form = ActiveForm::begin(['id' => 'login-form', 'enableClientValidation' => false]); ?>
         <?= $form->field($user, 'username', [
             'template' => '<div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>{input}</div>{error}',
             'inputOptions' => [

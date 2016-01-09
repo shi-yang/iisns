@@ -1,4 +1,5 @@
 <?php
+
 use yii\helpers\Html;
 use yii\helpers\Url;
 use app\modules\forum\models\Board;
@@ -22,11 +23,11 @@ $columnsCount = $model->columns;
                     $counter = 0; 
                 ?>
                 <?php for ($i=0; $i < $rowsCount; $i++): ?>
-                    <tr class="boardinfo">
+                    <tr>
                         <?php for ($j=0; $j < $columnsCount; $j++): ?>
                             <?php if ($counter < $totalRecords): ?>
                                 <?php $subBoard = $subBoards[$counter]; ?>
-                                <td width="<?= (100.0 / $columnsCount) ?>%" onclick="window.location.href= '<?= Url::toRoute(['/forum/board/view', 'id' => $subBoard['id']]) ?>';return false">
+                                <td class="boardinfo" width="<?= (100.0 / $columnsCount) ?>%" onclick="window.location.href= '<?= Url::toRoute(['/forum/board/view', 'id' => $subBoard['id']]) ?>';return false">
                                     <div class="pull-left">
                                         <a href="<?= Url::toRoute(['/forum/board/view', 'id' => $subBoard['id']]) ?>">
                                             <img src="<?= Yii::getAlias('@forum_icon') . '../forum.gif' ?>">

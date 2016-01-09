@@ -2,16 +2,17 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use app\assets\LightBoxAsset;
 use shiyang\masonry\Masonry;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\home\models\Album */
 
+LightBoxAsset::register($this);
+
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'My Albums'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-$this->registerCssFile('@web/js/lightbox/css/lightbox.css');
-$this->registerJsFile('@web/js/lightbox/js/lightbox.min.js', ['depends' => ['yii\web\JqueryAsset'], 'position' => \yii\web\View::POS_END]);
 ?>
 
 <div class="album-view">

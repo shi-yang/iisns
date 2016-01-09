@@ -73,11 +73,8 @@ $this->registerCss('
 <footer class="footer">
     <div class="container">
         <p class="pull-left">&copy; <?= Html::a(Yii::$app->setting->get('siteName'), ['/site/index']) ?> <?= date('Y') ?>
-            <?= Html::a (' 中文简体 ', '?lang=zh-CN') . '| ' .
-            Html::a (' English ', '?lang=en') ;
-            ?>
+            <?= Html::a (' 中文简体 ', '?lang=zh-CN') . '| ' . Html::a (' English ', '?lang=en'); ?>
         </p>
-        <p class="pull-right"><?= Yii::powered() ?></p>
     </div>
 </footer>
 <?php endif; ?>

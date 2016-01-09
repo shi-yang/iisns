@@ -57,19 +57,7 @@ AppAsset::register($this);
                     </a>
                     <ul class="dropdown-menu message dropdown-1">
                         <li><a>You have <?= $unReadMessageCount ?> new unread messages</a></li>
-                        <li>
-                            <a class="clearfix" href="#">
-                                <img src="<?= Yii::getAlias('@avatar'). $user->avatar ?>" alt="User Avatar">
-                                <div class="detail">
-                                    <strong>John Doe</strong>
-                                    <p class="no-margin">
-                                        Lorem ipsum dolor sit amet...
-                                    </p>
-                                    <small class="text-muted"><i class="fa fa-check text-success"></i> 27m ago</small>
-                                </div>
-                            </a>
-                        </li>
-                        <li><a href="#">View all messages</a></li>
+                        <li><a href="<?= Url::toRoute(['/user/message']) ?>">View all messages</a></li>
                     </ul>
                 </li>
                 <li class="profile dropdown">
@@ -87,7 +75,7 @@ AppAsset::register($this);
                                 </div>
                             </a>
                         </li>
-                        <li><a tabindex="-1" href="<?= Url::toRoute(['/user/view', 'id' => $user->username]) ?>" class="main-link"><i class="glyphicon glyphicon-edit"></i> <?= Yii::t('app', 'Profile') ?></a></li>
+                        <li><a tabindex="-1" href="<?= Url::toRoute(['/user/view', 'id' => $user->username]) ?>" class="main-link" data-pjax="0"><i class="glyphicon glyphicon-edit"></i> <?= Yii::t('app', 'Profile') ?></a></li>
                         <li><a tabindex="-1" href="<?= Url::toRoute(['/user/setting']) ?>" class="theme-setting"><i class="glyphicon glyphicon-cog"></i> <?= Yii::t('app', 'Setting') ?></a></li>
                         <li class="divider"></li>
                         <li><a tabindex="-1" class="main-link" data-toggle="modal" data-target="#logoutConfirm"><i class="glyphicon glyphicon-log-out"></i> <?= Yii::t('app', 'Log out') ?></a></li>

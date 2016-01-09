@@ -9,6 +9,27 @@ use justinvoelker\tagging\TaggingWidget;
 
 $this->params['title'] = Yii::t('app', 'Explore') . ' - ' . Yii::t('app', 'Posts');
 $this->params['breadcrumb'][] = Yii::t('app', 'Posts');
+
+$this->registerCss('
+.tag-group-item {
+  list-style-type: none;
+}
+.tag-group-item {
+  display: inline-block;
+  min-width: 10px;
+  margin: 2px;
+  padding: 3px 7px;
+  font-size: 17px;
+  font-weight: bold;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  border-radius: 10px;
+  background-color: #F1F5FC;
+  color: #777;
+}
+');
 ?>
 <div class="row">
     <div class="col-md-9" id="home-post">
@@ -50,8 +71,8 @@ $this->params['breadcrumb'][] = Yii::t('app', 'Posts');
             'url' => ['/explore/posts'],
             'format' => 'ul',
             'urlParam' => 'tag',
-            'listOptions' => ['class' => 'list-group'],
-            'liOptions' => ['class' => 'list-group-item']
+            'listOptions' => ['class' => 'tag-group'],
+            'liOptions' => ['class' => 'tag-group-item']
         ]) ?>
     </div>
 </div>

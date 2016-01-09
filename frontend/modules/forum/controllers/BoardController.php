@@ -74,7 +74,8 @@ class BoardController extends BaseController
                     'updated_at' => time(),
                     'updated_by' => Yii::$app->user->id
                 ], 'id=:id', [':id' => $model->id])->execute();
-                return $this->refresh();
+                Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Create successfully.'));
+                return $this->redirect(['/forum/thread/view', 'id' => $newThread->id]);
             }
         }
         

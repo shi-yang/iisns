@@ -1,4 +1,5 @@
 <?php
+
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
@@ -11,7 +12,6 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
 ?>
 
 <div class="item widget-container share-widget fluid-height clearfix">
-
     <div class="widget-content padded">
         <?php $form = ActiveForm::begin([
             'enableClientValidation' => false,

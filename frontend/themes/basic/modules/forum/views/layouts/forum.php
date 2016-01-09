@@ -1,4 +1,5 @@
 <?php
+
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
@@ -127,7 +128,6 @@ AppAsset::register($this);
             Html::a (' English ', '?lang=en') ;  
             ?>
         </p>
-        <p class="pull-right"><?= Yii::powered() ?></p>
         </div>
     </footer>
     <?php $this->endBody() ?>

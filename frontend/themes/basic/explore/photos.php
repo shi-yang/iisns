@@ -2,15 +2,16 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use app\assets\LightBoxAsset;
 use shiyang\masonry\Masonry;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
+LightBoxAsset::register($this);
+
 $this->params['title'] = Yii::t('app', 'Explore') . ' - ' . Yii::t('app', 'Photos');
 $this->params['breadcrumb'][] = Yii::t('app', 'Photos');
-$this->registerCssFile('@web/js/lightbox/css/lightbox.css');
-$this->registerJsFile('@web/js/lightbox/js/lightbox.min.js', ['depends' => ['yii\web\JqueryAsset'], 'position' => \yii\web\View::POS_END]);
 $this->registerCss('
 .photo-index {
   padding:0

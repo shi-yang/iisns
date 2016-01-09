@@ -132,7 +132,6 @@ if ($done) {
             <p class="pull-left">&copy; iiSNS <?= date('Y') ?>
                 <?= Html::a(' 中文简体 ', '?lang=zh-CN') . '| ' . Html::a(' English ', '?lang=en') ?>
             </p>
-            <p class="pull-right"><?= Yii::powered() ?></p>
         </div>
     </footer>
     <?php $this->endBody() ?>

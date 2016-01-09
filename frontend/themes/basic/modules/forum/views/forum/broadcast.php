@@ -21,7 +21,7 @@ $this->params['forum'] = $model->toArray;
     <?php if ($model->broadcastCount >= 1): ?>
       <div class="thread-list">
         <?php foreach ($model->broadcasts['result'] as $broadcast):?>
-          <div class="thread-item" id="div<?php echo $broadcast['id']; ?>">
+          <div class="thread-item" id="div<?= $broadcast['id']; ?>">
             <div class="media">
               <div class="media-body">
                 <h4 class="media-heading">
@@ -60,7 +60,10 @@ $this->params['forum'] = $model->toArray;
   </div>
 </div>
 <div class="col-xs-12 col-sm-4 col-md-4">
-  <?= \app\widgets\login\Login::widget(['visible' => Yii::$app->user->isGuest]); ?>
+    <?= \app\widgets\login\Login::widget([
+        'title' => Yii::t('app', 'Log in'),
+        'visible' => Yii::$app->user->isGuest
+    ]); ?>
   <div class="panel panel-default">
     <div class="panel-heading">About</div>
     <div class="panel-body">

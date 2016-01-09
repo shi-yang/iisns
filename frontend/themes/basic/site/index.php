@@ -316,6 +316,5 @@ body {
         Html::a (' English ', '?lang=en') ;  
         ?>
     </p>
-    <p class="pull-right"><?= Yii::powered() ?></p>
     </div>
 </footer>
