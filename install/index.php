@@ -300,6 +300,6 @@ return [
 <?php else: ?>
     <div class="alert alert-success"><strong>Success!</strong> Installation is completed.</div>
     <p class="bg-warning">Delete or rename the install folder to prevent security risk.</p>
-    <p>If you want to reinstall, deleted <code>common\config\db.php</code> </p>
+    <p>If you want to reinstall, delete <code>common\config\db.php</code> </p>
 <?php endif; ?>
 <?php include_once('footer.php'); ?>

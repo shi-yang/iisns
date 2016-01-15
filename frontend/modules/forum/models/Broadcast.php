@@ -68,10 +68,10 @@ class Broadcast extends \yii\db\ActiveRecord
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)) {
-	        if ($this->isNewRecord) {
-    	        $this->user_id = Yii::$app->user->identity->id;
-    	        $this->created_at = time();
-	        }
+            if ($this->isNewRecord) {
+                $this->user_id = Yii::$app->user->identity->id;
+                $this->created_at = time();
+            }
             return true;
         } else {
             return false;

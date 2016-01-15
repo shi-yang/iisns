@@ -18,7 +18,7 @@ $this->registerCss('
     background: #f6f6f6;
     color: #444;
     cursor:pointer;
-    border: 1px solid #B9B9B9;
+    border: 1px solid #E8E8E8;
     overflow:hidden;
     text-overflow:ellipsis;
 }
