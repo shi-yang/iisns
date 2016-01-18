@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
     <?php else: ?>
-        <a href="<?= Url::toRoute(['/home/album/upload', 'id' => $model->id]) ?>" class="btn btn-default">
+        <a href="<?= Url::toRoute(['/home/album/upload', 'id' => $model->id]) ?>" class="btn btn-default" data-pjax="0">
             <span class="glyphicon glyphicon-plus"></span> <?= Yii::t('app', 'Upload a new photo') ?>
         </a>
         <div class="img-all row">

@@ -5,7 +5,7 @@
  * @license http://www.iisns.com/license/
  */
 
-namespace app\themes\basic\modules\user;
+namespace app\assets;
 
 use yii\web\AssetBundle;
 
@@ -13,20 +13,16 @@ use yii\web\AssetBundle;
  * @author Shiyang <dr@shiyang.me>
  * @since 2.0
  */
-class AppAsset extends AssetBundle
+class CommonAsset extends AssetBundle
 {
-    public $sourcePath = '@app/themes/basic/modules/user/assets';
+    public $sourcePath = '@app/assets/common';
     public $css = [
-        'css/user.css',
     ];
     public $js = [
-        //'//cdn.bootcss.com/modernizr/2.8.3/modernizr.min.js',
-        'js/modernizr.js',
-        'js/user.js'
+        'js/common.js'
     ];
     public $depends = [
-        'yii\web\YiiAsset',
+        'yii\web\JqueryAsset',
         'yii\bootstrap\BootstrapAsset',
-        'app\assets\CommonAsset'
     ];
 }
