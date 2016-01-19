@@ -10,7 +10,10 @@ $db = require(__DIR__ . '/../../common/config/db.php');
 return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => [
+        'log',
+        'assetsAutoCompress'
+    ],
     'controllerNamespace' => 'frontend\controllers',
     'defaultRoute' => 'user/dashboard',
     'modules' => [
@@ -39,6 +42,13 @@ return [
     ],
     'components' => [
         'db' => $db,
+        'assetsAutoCompress' => [
+            'class' => '\skeeks\yii2\assetsAuto\AssetsAutoCompressComponent',
+            'enabled' => true,
+            'jsCompress' => true,
+            'cssFileCompile' => true,
+            'jsFileCompile' => true,
+        ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'rules' => [

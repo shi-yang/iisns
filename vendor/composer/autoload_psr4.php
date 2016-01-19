@@ -15,6 +15,7 @@ return array(
     'yii\\codeception\\' => array($vendorDir . '/yiisoft/yii2-codeception'),
     'yii\\bootstrap\\' => array($vendorDir . '/yiisoft/yii2-bootstrap'),
     'yii\\' => array($vendorDir . '/yiisoft/yii2'),
+    'skeeks\\yii2\\assetsAuto\\' => array($vendorDir . '/skeeks/yii2-assets-auto-compress'),
     'shiyang\\umeditor\\' => array($vendorDir . '/shiyang/yii2-umeditor'),
     'shiyang\\masonry\\' => array($vendorDir . '/shiyang/yii2-masonry'),
     'shiyang\\infinitescroll\\' => array($vendorDir . '/shiyang/yii2-infinite-scroll'),

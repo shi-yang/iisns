@@ -111,4 +111,13 @@ return array (
       '@yii/debug' => $vendorDir . '/yiisoft/yii2-debug',
     ),
   ),
+  'skeeks/yii2-assets-auto-compress' => 
+  array (
+    'name' => 'skeeks/yii2-assets-auto-compress',
+    'version' => '1.0.3.0',
+    'alias' => 
+    array (
+      '@skeeks/yii2/assetsAuto' => $vendorDir . '/skeeks/yii2-assets-auto-compress',
+    ),
+  ),
 );

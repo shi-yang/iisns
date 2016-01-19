@@ -20,7 +20,8 @@
         "shiyang/yii2-infinite-scroll": "*",
         "shiyang/yii2-masonry": "*",
         "justinvoelker/yii2-tagging": "*",
-        "shiyang/yii2-umeditor": "^1.0"
+        "shiyang/yii2-umeditor": "^1.0",
+        "skeeks/yii2-assets-auto-compress": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
