@@ -40,15 +40,6 @@ function writable($var)
     }
     return $writeable;
 }
-function query($query) {
-    $result = mysql_query($query);
-    if (!$result) {
-        echo 'Could not run query:' . mysql_error() . '<br/>';
-        exit;
-    }
-    return $result;
-}
-
 $dirarray = array (
     'common/config',
     'common/cache',
@@ -220,6 +211,66 @@ foreach ($dirarray as $key => $dir) {
             </div>
             <div class="well" style="overflow-y:scroll;height:300px;width:100%;">
                 <?php
+                    $config = array(
+                        'class' => 'yii\db\Connection',
+                        'dsn' => "mysql:host={$dbHost};dbname={$dbName}",
+                        'username' => $dbUser,
+                        'password' => $dbPass,
+                        'charset' => 'utf8',
+                    );
+                    $db = Yii::createObject($config);
+                    $fp = fopen($sqlFile, 'rb');
+                    $sql = fread($fp, filesize($sqlFile));
+                    fclose($fp);
+                    foreach (explode(";\n", trim($sql)) as $query) {
+                        $query = trim($query);
+                        if ($query) {
+                            if (substr($query, 0, 12) == 'CREATE TABLE') {
+                                $name = preg_replace("/CREATE TABLE ([A-Z ]*)`([a-z0-9_]+)` .*/is", "\\2", $query);
+                                echo '<p>Create table '.$name.' ... <span class="label label-success">OK</span></p>';
+                                $db->createCommand($query)->execute();
+                            } else {
+                                $db->createCommand($query)->execute();
+                            }
+                        }
+                    }
+                    $now = time();
+                    $username = $adminUser;
+                    $password_hash = (new Security)->generatePasswordHash($adminPass);
+                    $auth_key = (new Security)->generateRandomString();
+                    $db->createCommand("
+                        INSERT INTO `pre_user` (`id`, `username`, `password_hash`, `auth_key`, `role`, `email`, `status`, `created_at`, `updated_at`, `avatar`) VALUES
+                        (10000, '{$username}', '{$password_hash}', '{$auth_key}', 10, '{$email}', 10, {$now}, {$now}, 'default/10.jpg');
+                    ")->execute();
+                    $db->createCommand("
+                        INSERT INTO `pre_auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
+                        ('/*', 2, NULL, NULL, NULL, {$now}, {$now}),
+                        ('超级管理员', 1, '拥有最高权限', NULL, NULL, {$now}, {$now});
+                        ")->execute();
+                    $db->createCommand("
+                        INSERT INTO `pre_auth_item_child` (`parent`, `child`) VALUES
+                        ('超级管理员', '/*');
+                        ")->execute();
+                    $db->createCommand("
+                        INSERT INTO `pre_auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
+                        ('超级管理员', '10000', {$now});
+                        ")->execute();
+                    $db->createCommand("
+                        INSERT INTO `pre_setting` (`key`, `value`) VALUES
+                        ('siteName', '{$siteName}'),
+                        ('siteTitle', '{$siteTitle}'),
+                        ('siteDescription', '{$siteDescription}'),
+                        ('version', '" . $iisnsVersion . "');
+                    ")->execute();
+                    $db->createCommand("
+                        INSERT INTO `pre_user_data` (`user_id`) VALUES
+                        (10000);
+                    ")->execute();
+                    $db->createCommand("
+                        INSERT INTO `pre_user_profile` (`user_id`) VALUES
+                        (10000);
+                    ")->execute();
+
                     $fp = @fopen("../common/config/db.php", "w");
                     fwrite($fp, "
 <?php
@@ -236,58 +287,6 @@ return [
 ];
 ");
                     fclose($fp);
-
-                    $fp = fopen($sqlFile, 'rb');
-                    $sql = fread($fp, filesize($sqlFile));
-                    fclose($fp);
-                    foreach (explode(";\n", trim($sql)) as $query) {
-                        $query = trim($query);
-                        if ($query) {
-                            if (substr($query, 0, 12) == 'CREATE TABLE') {
-                                $name = preg_replace("/CREATE TABLE ([A-Z ]*)`([a-z0-9_]+)` .*/is", "\\2", $query);
-                                echo '<p>Create table '.$name.' ... <span class="label label-success">OK</span></p>';
-                                query($query);
-                            } else {
-                                query($query);
-                            }
-                        }
-                    }
-                    $now = time();
-                    $username = $adminUser;
-                    $password_hash = (new Security)->generatePasswordHash($adminPass);
-                    $auth_key = (new Security)->generateRandomString();
-                    query("
-                        INSERT INTO `pre_user` (`id`, `username`, `password_hash`, `auth_key`, `role`, `email`, `status`, `created_at`, `updated_at`, `avatar`) VALUES
-                        (10000, '{$username}', '{$password_hash}', '{$auth_key}', 10, '{$email}', 10, {$now}, {$now}, 'default/10.jpg');
-                    ");
-                    query("
-                        INSERT INTO `pre_auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
-                        ('/*', 2, NULL, NULL, NULL, {$now}, {$now}),
-                        ('超级管理员', 1, '拥有最高权限', NULL, NULL, {$now}, {$now});
-                        ");
-                    query("
-                        INSERT INTO `pre_auth_item_child` (`parent`, `child`) VALUES
-                        ('超级管理员', '/*');
-                        ");
-                    query("
-                        INSERT INTO `pre_auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
-                        ('超级管理员', '10000', {$now});
-                        ");
-                    query("
-                        INSERT INTO `pre_setting` (`key`, `value`) VALUES
-                        ('siteName', '{$siteName}'),
-                        ('siteTitle', '{$siteTitle}'),
-                        ('siteDescription', '{$siteDescription}'),
-                        ('version', '" . $iisnsVersion . "');
-                    ");
-                    query("
-                        INSERT INTO `pre_user_data` (`user_id`) VALUES
-                        (10000);
-                    ");
-                    query("
-                        INSERT INTO `pre_user_profile` (`user_id`) VALUES
-                        (10000);
-                    ");
                 ?>
             </div>
             <a href="index.php?step=4" class="btn btn-default pull-right">Next</a>
