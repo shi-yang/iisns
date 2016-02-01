@@ -201,14 +201,3 @@ $(function() {
         return false;
     });
 }).call(this);
-
-$(window).scroll(function(){
-     var position = $(window).scrollTop();
-     //Display a scroll to top button
-     if(position >= 200)    {
-        $('#scroll-to-top').attr('style','bottom:16%;');    
-     }
-     else    {
-        $('#scroll-to-top').removeAttr('style');
-     }
-});

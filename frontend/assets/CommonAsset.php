@@ -17,6 +17,7 @@ class CommonAsset extends AssetBundle
 {
     public $sourcePath = '@app/assets/common';
     public $css = [
+        'css/common.css'
     ];
     public $js = [
         'js/common.js'
