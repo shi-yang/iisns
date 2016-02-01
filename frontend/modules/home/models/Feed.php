@@ -74,13 +74,14 @@ class Feed extends \yii\db\ActiveRecord
                 $this->type = 'post';
                 $this->user_id = Yii::$app->user->id;
                 $this->created_at = time();
+                Yii::$app->userData->updateKey('feed_count', Yii::$app->user->id);
             }
            return true;
        } else {
               return false;
        }
     }
-
+    
     public function scenarios()
     {
         return [
