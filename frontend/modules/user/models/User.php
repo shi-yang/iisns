@@ -125,7 +125,6 @@ class User extends \common\models\User
      */
     public function getPosts()
     {
-        //return $this->hasMany(Post::className(), ['user_id' => 'id'])->orderBy('id DESC');
         $query = Post::find()->where(['user_id' => $this->id])->orderBy('id desc');
         $countQuery = clone $query;
         $pages = new \yii\data\Pagination(['totalCount' => $countQuery->count()]);

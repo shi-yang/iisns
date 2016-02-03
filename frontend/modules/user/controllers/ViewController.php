@@ -15,7 +15,6 @@ use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use common\components\BaseController;
 use app\modules\user\models\User;
-use app\modules\user\models\UserSearch;
 use app\modules\home\models\Post;
 use app\modules\home\models\Album;
 
@@ -35,54 +34,40 @@ class ViewController extends BaseController
     {
         $model = $this->findModel($id);
 
-        if (Yii::$app->Request->isAjax) {
-            $avatar = Yii::getAlias('@avatar') . $model->avatar;
-            $username = $model->username;
-            $userUrl = Url::toRoute(['/user/view', 'id' => $username]);
-            $userData = Yii::$app->userData->getKey(true, null, $model->id);
-            $followUrl = Url::toRoute(['/user/user/follow', 'id' => $model->id]);
-
+        if (Yii::$app->request->isAjax && Yii::$app->request->get('card')) {
+            $user['avatar'] = Yii::getAlias('@avatar') . $model->avatar;
+            $user['username'] = $model->username;
+            $user['userUrl'] = Url::toRoute(['/user/view', 'id' => $model->username]);
+            $user['userData'] = Yii::$app->userData->getKey(true, null, $model->id);
+            $user['followUrl'] = Url::toRoute(['/user/user/follow', 'id' => $model->id]);
             //关注的文字
             if (User::getIsFollow($model->id)) {
-                $followBtn = '<span class="glyphicon glyphicon glyphicon-eye-close"></span> ' . Yii::t('app', 'Unfollow');
+                $user['followBtn'] = '<span class="glyphicon glyphicon glyphicon-eye-close"></span> ' . Yii::t('app', 'Unfollow');
             } else {
-                $followBtn = '<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'Follow');
+                $user['followBtn'] = '<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app', 'Follow');
             }
-
-            $html =<<<HTML
-              <div class="media">
-                <div class="media-left">
-                  <a href="{$userUrl}">
-                    <img width="50" height="50" class="media-object" src="{$avatar}" alt="{$username}">
-                  </a>
-                </div>
-                <div class="media-body">
-                  <h4 class="media-heading">$model->username</h4>
-                    <a class="btn btn-xs btn-success btn-follow" href="{$followUrl}">{$followBtn}</a>
-                </div>
-                <div class="media-footer">
-                <div class="row">
-                  <div class="col-xs-4 text-center">
-                    <span class="block font-14">{$userData['following_count']}</span><br>
-                    <small class="text-muted">关注</small>
-                  </div><!-- /.col -->
-                  <div class="col-xs-4 text-center">
-                    <span class="block font-14">{$userData['follower_count']}</span><br>
-                    <small class="text-muted">粉丝</small>
-                  </div><!-- /.col -->
-                  <div class="col-xs-4 text-center">
-                    <span class="block font-14">{$userData['feed_count']}</span><br>
-                    <small class="text-muted">文章</small>
-                  </div><!-- /.col -->
-                </div>
-              </div>
-HTML;
-            return $html;
+            return $this->renderAjax('/user/card', [
+                'user' => $user
+            ]);
         }
+
+        $query = (new Query)->select('id, content, template, feed_data, created_at')
+            ->from('{{%home_feed}}')
+            ->where('user_id=:user_id', [':user_id' => $model->id])
+            ->orderBy('created_at DESC');
+
+        $result = Yii::$app->tools->Pagination($query);
 
         return $this->render('/user/view', [
             'model' => $model,
+            'feeds' => $result['result'],
+            'pages' => $result['pages']
         ]);
+    }
+
+    public function actionCard($id)
+    {
+        $model = $this->findModel($id);
     }
 
     public function actionAlbum($id)

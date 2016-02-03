@@ -11,7 +11,7 @@ $(function() {
         var _this = this;
         $(this).popover('show');
         $.ajax({
-            url: $(this).attr('href'),
+            url: $(this).attr('href') + '?card=1',
             success: function(html){
                 $('.popover-user').html(html);
                 $('.popover .btn-success, .popover .btn-danger').click(function(){
