@@ -939,7 +939,7 @@ aside.skin-1 .main-menu > ul > li.display > a {
   background: #f9f9f9;
 }
 aside.skin-1 .main-menu > ul > li > a {
-  color: #FF7B4C;
+  color: #5677fc;
   font-weight: 700;
 }
 aside.skin-1 .main-menu > ul > li > a:hover,
@@ -947,7 +947,7 @@ aside.skin-1 .main-menu > ul > li > a:focus {
   background: #f9f9f9;
 }
 aside.skin-1 .main-menu > ul > li > a .menu-hover {
-  background: #FF7B4C;
+  background: #5677fc;
   box-shadow: 0 0 10px 0px #439bce;
   -moz-box-shadow: 0 0 10px 0px #439bce;
   -webkit-box-shadow: 0 0 10px 0px #439bce;
@@ -980,24 +980,24 @@ aside.skin-1 .main-menu > ul > li > .submenu  li.active a .submenu-label{
     } 
 }
 #top-nav.skin-1 {
-  background: #FF7B4C;
-  border-bottom-color: #FFA07E;
+  background: #5677fc;
+  border-bottom-color: #91a7ff;
 }
 #top-nav.skin-1 .navbar-toggle .icon-bar {
   background-color: #fff;
 }
 #top-nav.skin-1 .brand {
   color: #c3e3f5; 
-  background: #FF7B4C;
+  background: #5677fc;
 }
 #top-nav.skin-1 .page-title {
   color: #c3e3f5;
 }
 #top-nav.skin-1 .nav-notification > li.open {
-  background: #ff4401;
+  background: #4e6cef;
 }
 #top-nav.skin-1 .nav-notification > li:hover {
-  background: #ff4401;
+  background: #4e6cef;
 }
 #top-nav.skin-1 .nav-notification > li > a {
   color: #c3e3f5;
@@ -1367,7 +1367,7 @@ footer p {
 label,
 input,
 button,
-select,
+select
  {
   font-size: 12px;
 }
@@ -1925,8 +1925,27 @@ input[type="text"]:focus
 }
 
 /*
- * Post view
+ * Post
  */
+.post-list {
+  background: #fff;
+  padding: 25px;
+}
+.post-list .post-item {
+  width: 100%;
+  border-bottom: 2px dashed #f2f1f1;
+  position: relative;
+}
+.post-list .post-footer {
+  margin-bottom: 5px;
+  font-size: 13px;
+}
+.post-list .post-footer a {
+  color: #777;
+}
+.post-list .post-footer a:hover {
+  color: #5677fc;
+}
 .post-view {
     white-space: normal;
     word-break: break-all;
@@ -1955,7 +1974,7 @@ input[type="text"]:focus
 }
 @media (min-width: 992px) {
     .post-view .post-content {
-        padding: 14px 140px;
+        padding: 14px 188px;
     }
 }
 .post-content img {

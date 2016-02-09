@@ -13,7 +13,6 @@ use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use yii\helpers\Html;
 use app\modules\home\models\Post;
 use common\components\BaseController;
 use justinvoelker\tagging\TaggingQuery;

@@ -48,7 +48,7 @@ p {
   -moz-border-radius: 50em;
   -webkit-border-radius: 50em;
   padding: 10px 14px;
-  background: #FF7B4C;
+  background: #5677fc;
   transition: all 0.3s ease-in-out;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
@@ -58,7 +58,7 @@ p {
 #scroll-to-top:hover,
 #scroll-to-top:focus {
   text-decoration: none;
-  background: #f75733;
+  background: #4e6cef;
   color: #fff;
   transition: all 0.3s linear;
   -webkit-transition: all 0.3s linear;

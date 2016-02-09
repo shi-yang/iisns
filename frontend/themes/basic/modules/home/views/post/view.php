@@ -15,6 +15,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <articel class="post-view">
         <header>
             <h1 class="post-title">
+                <?php if ($model->status == 'private'): ?>
+                    <i class="glyphicon glyphicon-lock"></i>
+                <?php endif ?>
                 <?= Html::encode($model->title) ?>
                 <small><?= Html::a(Yii::t('app', 'Edit'), ['/home/post/update', 'id' => $model->id]) ?></small>
             </h1>

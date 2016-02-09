@@ -210,6 +210,7 @@ CREATE TABLE IF NOT EXISTS `pre_home_post` (
   `user_id` int(11) NOT NULL,
   `created_at` int(11) NOT NULL,
   `updated_at` int(11) NOT NULL,
+  `status` char(10) NOT NULL,
   `explore_status` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)

@@ -21,12 +21,16 @@ use yii\helpers\Html;
  * @property integer $created_at
  * @property integer $updated_at
  * @property integer $user_id
+ * @property string $status
+ * @property integer $explore_status
  *
  * @author Shiyang <dr@shiyang.me>
  * @since 2.0
  */
 class Post extends \yii\db\ActiveRecord
 {
+    const STATUS_PUBLIC = 'public';
+    const STATUS_PRIVATE = 'private';
     /**
      * @inheritdoc
      */
@@ -42,7 +46,7 @@ class Post extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'content'], 'required'],
-            [['content', 'tags'], 'string'],
+            [['content', 'tags', 'status'], 'string'],
             [['created_at', 'updated_at', 'user_id'], 'integer'],
             [['title'], 'string', 'max' => 80]
         ];
@@ -61,6 +65,7 @@ class Post extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app', 'Create Time'),
             'updated_at' => Yii::t('app', 'Update Time'),
             'user_id' => Yii::t('app', 'User ID'),
+            'status' => Yii::t('app', 'Status')
         ];
     }
 
