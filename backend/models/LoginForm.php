@@ -11,7 +11,8 @@ class LoginForm extends Model
 {
     public $username;
     public $password;
-    public $rememberMe = true;
+    public $rememberMe = false;
+    public $verifyCode;
 
     private $_user = false;
 
@@ -27,6 +28,20 @@ class LoginForm extends Model
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
+            ['verifyCode', 'required'],
+            ['verifyCode', 'captcha'],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'username' => Yii::t('app', 'Username or Email'),
+            'password' => Yii::t('app', 'Password'),
+            'rememberMe' => Yii::t('app', 'Remember Me'),
         ];
     }
 
@@ -40,9 +55,11 @@ class LoginForm extends Model
     public function validatePassword($attribute, $params)
     {
         if (!$this->hasErrors()) {
-            $password_hash = Yii::$app->setting->get('admin_password');
-            if (!Yii::$app->security->validatePassword($this->password, $password_hash)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+            $user = $this->getUser();
+            if (!$user) {
+                $this->addError('username', Yii::t('app', 'Username does not exist.'));
+            } elseif (!$user->validatePassword($this->password)) {
+                $this->addError('password', Yii::t('app', 'Incorrect password.'));
             }
         }
     }
@@ -54,11 +71,23 @@ class LoginForm extends Model
      */
     public function login()
     {
-        $administrator = Yii::$app->setting->get('administrator');
         if ($this->validate()) {
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
         } else {
             return false;
         }
+    }
+
+    /**
+     * Finds user by [[username]]
+     *
+     * @return User|null
+     */
+    public function getUser()
+    {
+        if ($this->_user === false) {
+            $this->_user = User::findByUsername($this->username);
+        }
+        return $this->_user;
     }
 }
