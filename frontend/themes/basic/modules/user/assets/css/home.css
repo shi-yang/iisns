@@ -28,14 +28,13 @@ ul {
   padding: 0;
 }
 a {
-  color: #f60;
-  text-decoration:none !important;
+    color: #007aff;
 }
-
-a:hover {
-  color: #ff7e51;
+a:hover,
+a:focus {
+    color: #666666;
+    text-decoration: none;
 }
-
 /*
  * Override Bootstrap's default container.
  */
@@ -122,7 +121,7 @@ a:hover {
 
 .post-view .post-content {
   font-size: 17px;
-  line-height: 28px;
+  line-height: 33px;
   color: #333;
 }
 

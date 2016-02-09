@@ -225,7 +225,7 @@ body {
               Version <?= Yii::$app->setting->get('version') ?> Alpha &nbsp;&nbsp;·&nbsp;&nbsp;
               <a href="https://github.com/shi-yang/iisns" target="_blank">
                 GitHub Project</a> &nbsp;&nbsp;·&nbsp;&nbsp;
-              Created by <a href="http://www.iisns.com/u/shiyang" target="_blank">Shiyang</a>
+              Created by <a href="http://www.iisns.com/shiyang" target="_blank">Shiyang</a>
             </p>
         </div>
     </div>

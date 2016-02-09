@@ -66,13 +66,18 @@ $this->registerCss('
         ]); ?>
     </div>
     <div class="col-md-3">
-        <?= TaggingWidget::widget([
-            'items' => $tags,
-            'url' => ['/explore/posts'],
-            'format' => 'ul',
-            'urlParam' => 'tag',
-            'listOptions' => ['class' => 'tag-group'],
-            'liOptions' => ['class' => 'tag-group-item']
-        ]) ?>
+        <div class="panel panel-default">
+            <div class="panel-heading"><?= Yii::t('app', 'Tags') ?></div>
+            <div class="panel-body">
+                <?= TaggingWidget::widget([
+                    'items' => $tags,
+                    'url' => ['/explore/posts'],
+                    'format' => 'ul',
+                    'urlParam' => 'tag',
+                    'listOptions' => ['class' => 'tag-group'],
+                    'liOptions' => ['class' => 'tag-group-item']
+                ]) ?>
+            </div>
+        </div>
     </div>
 </div>

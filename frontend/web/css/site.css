@@ -113,15 +113,6 @@ a.desc:after {
   margin: 0 auto 10px auto;
   font-size: 4em;
 }
-
-a {
-  color: #FF7B4C;
-  text-decoration: none;
-}
-a:hover {
-  color: #ff4a00;
-  text-decoration: none;
-}
 .content {
   margin: 0 auto;
   margin-bottom: 20px;

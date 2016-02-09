@@ -66,6 +66,9 @@ p {
   -ms-transition: all 0.3s linear;
   -o-transition: all 0.3s linear;
 }
+.tag-group {
+  padding: 0;
+}
 .tag-group-item {
   display: inline-block;
   background-color: #DDD;
