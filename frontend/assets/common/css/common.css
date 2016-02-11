@@ -1,8 +1,4 @@
 html, body {
-  padding-top: 0;
-  color: #777777;
-  background: #f9f9f9;
-  height: auto;
   font: 14px/1.5 arial,"Microsoft Yahei","Hiragino Sans GB",sans-serif;
 }
 ::-webkit-scrollbar {
