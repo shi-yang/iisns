@@ -1081,55 +1081,6 @@
         ]
     },
     {
-        "name": "yiisoft/yii2-composer",
-        "version": "2.0.3",
-        "version_normalized": "2.0.3.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/yiisoft/yii2-composer.git",
-            "reference": "ca8d23707ae47d20b0454e4b135c156f6da6d7be"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/ca8d23707ae47d20b0454e4b135c156f6da6d7be",
-            "reference": "ca8d23707ae47d20b0454e4b135c156f6da6d7be",
-            "shasum": ""
-        },
-        "require": {
-            "composer-plugin-api": "1.0.0"
-        },
-        "time": "2015-03-01 06:22:44",
-        "type": "composer-plugin",
-        "extra": {
-            "class": "yii\\composer\\Plugin",
-            "branch-alias": {
-                "dev-master": "2.0.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "yii\\composer\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Qiang Xue",
-                "email": "qiang.xue@gmail.com"
-            }
-        ],
-        "description": "The composer plugin for Yii extension installer",
-        "keywords": [
-            "composer",
-            "extension installer",
-            "yii2"
-        ]
-    },
-    {
         "name": "bower-asset/jquery.inputmask",
         "version": "3.1.63",
         "version_normalized": "3.1.63.0",
@@ -1402,49 +1353,6 @@
         ]
     },
     {
-        "name": "shiyang/yii2-umeditor",
-        "version": "v1.1",
-        "version_normalized": "1.1.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/shi-yang/yii2-umeditor.git",
-            "reference": "338ba1fba45b78d35326cb1452d95dca1d963e44"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/shi-yang/yii2-umeditor/zipball/338ba1fba45b78d35326cb1452d95dca1d963e44",
-            "reference": "338ba1fba45b78d35326cb1452d95dca1d963e44",
-            "shasum": ""
-        },
-        "require": {
-            "yiisoft/yii2": "*"
-        },
-        "time": "2015-07-20 06:20:46",
-        "type": "yii2-extension",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "shiyang\\umeditor\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Shiyang",
-                "email": "dr@shiyang.me"
-            }
-        ],
-        "description": "UMeditor is a simple version ueditor.",
-        "keywords": [
-            "extension",
-            "umeditor",
-            "yii2"
-        ]
-    },
-    {
         "name": "yiisoft/yii2-bootstrap",
         "version": "2.0.5",
         "version_normalized": "2.0.5.0",
@@ -1543,51 +1451,6 @@
             "debug",
             "debugger",
             "yii2"
-        ]
-    },
-    {
-        "name": "bower-asset/imagesloaded",
-        "version": "v4.0.0",
-        "version_normalized": "4.0.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/desandro/imagesloaded.git",
-            "reference": "c8b41695e9456db561426eb3f2a34ebb4cf52339"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/desandro/imagesloaded/zipball/c8b41695e9456db561426eb3f2a34ebb4cf52339",
-            "reference": "c8b41695e9456db561426eb3f2a34ebb4cf52339",
-            "shasum": ""
-        },
-        "require": {
-            "bower-asset/eventemitter": ">=4.2,<5.0"
-        },
-        "require-dev": {
-            "bower-asset/jquery": ">=1.9,<2.0",
-            "bower-asset/qunit": "~1.20.0"
-        },
-        "type": "bower-asset-library",
-        "extra": {
-            "bower-asset-main": "imagesloaded.js",
-            "bower-asset-ignore": [
-                "**/.*",
-                "test",
-                "package.json",
-                "node_modules",
-                "bower_components",
-                "tests",
-                "sandbox/",
-                "contributing.md"
-            ]
-        },
-        "installation-source": "dist",
-        "license": [
-            "MIT"
-        ],
-        "description": "JavaScript is all like _You images done yet or what?_",
-        "keywords": [
-            "images"
         ]
     },
     {
@@ -1845,18 +1708,110 @@
         ]
     },
     {
-        "name": "skeeks/yii2-assets-auto-compress",
-        "version": "1.0.3",
-        "version_normalized": "1.0.3.0",
+        "name": "yiisoft/yii2-composer",
+        "version": "2.0.4",
+        "version_normalized": "2.0.4.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/skeeks-semenov/yii2-assets-auto-compress.git",
-            "reference": "3f3b45074d79aee40c6dc1f08cb5b72f91a35575"
+            "url": "https://github.com/yiisoft/yii2-composer.git",
+            "reference": "7452fd908a5023b8bb5ea1b123a174ca080de464"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/skeeks-semenov/yii2-assets-auto-compress/zipball/3f3b45074d79aee40c6dc1f08cb5b72f91a35575",
-            "reference": "3f3b45074d79aee40c6dc1f08cb5b72f91a35575",
+            "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/7452fd908a5023b8bb5ea1b123a174ca080de464",
+            "reference": "7452fd908a5023b8bb5ea1b123a174ca080de464",
+            "shasum": ""
+        },
+        "require": {
+            "composer-plugin-api": "^1.0"
+        },
+        "time": "2016-02-06 00:49:24",
+        "type": "composer-plugin",
+        "extra": {
+            "class": "yii\\composer\\Plugin",
+            "branch-alias": {
+                "dev-master": "2.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "yii\\composer\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Qiang Xue",
+                "email": "qiang.xue@gmail.com"
+            }
+        ],
+        "description": "The composer plugin for Yii extension installer",
+        "keywords": [
+            "composer",
+            "extension installer",
+            "yii2"
+        ]
+    },
+    {
+        "name": "shiyang/yii2-umeditor",
+        "version": "v1.2",
+        "version_normalized": "1.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/shi-yang/yii2-umeditor.git",
+            "reference": "755c8139ff7a8fa04ba83bb03d7bfbb378509ea9"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/shi-yang/yii2-umeditor/zipball/755c8139ff7a8fa04ba83bb03d7bfbb378509ea9",
+            "reference": "755c8139ff7a8fa04ba83bb03d7bfbb378509ea9",
+            "shasum": ""
+        },
+        "require": {
+            "yiisoft/yii2": "*"
+        },
+        "time": "2016-02-01 10:47:37",
+        "type": "yii2-extension",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "shiyang\\umeditor\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Shiyang",
+                "email": "dr@shiyang.me"
+            }
+        ],
+        "description": "UMeditor is a simple version ueditor.",
+        "keywords": [
+            "extension",
+            "umeditor",
+            "yii2"
+        ]
+    },
+    {
+        "name": "skeeks/yii2-assets-auto-compress",
+        "version": "1.1.1",
+        "version_normalized": "1.1.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/skeeks-semenov/yii2-assets-auto-compress.git",
+            "reference": "00bdd8d7a89fdee8933ee28f172f9057b73945af"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/skeeks-semenov/yii2-assets-auto-compress/zipball/00bdd8d7a89fdee8933ee28f172f9057b73945af",
+            "reference": "00bdd8d7a89fdee8933ee28f172f9057b73945af",
             "shasum": ""
         },
         "require": {
@@ -1865,7 +1820,7 @@
             "tedivm/jshrink": "*",
             "yiisoft/yii2": "*"
         },
-        "time": "2015-08-12 12:31:50",
+        "time": "2016-02-11 15:27:08",
         "type": "yii2-extension",
         "installation-source": "dist",
         "autoload": {
@@ -1895,6 +1850,89 @@
             "framework",
             "skeeks",
             "yii"
+        ]
+    },
+    {
+        "name": "bower-asset/ev-emitter",
+        "version": "v1.0.1",
+        "version_normalized": "1.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/metafizzy/ev-emitter.git",
+            "reference": "a590dbd7be3ebe98a0bc8635938f666e2e8f13f7"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/metafizzy/ev-emitter/zipball/a590dbd7be3ebe98a0bc8635938f666e2e8f13f7",
+            "reference": "a590dbd7be3ebe98a0bc8635938f666e2e8f13f7",
+            "shasum": ""
+        },
+        "type": "bower-asset-library",
+        "extra": {
+            "bower-asset-main": "ev-emitter.js",
+            "bower-asset-ignore": [
+                "**/.*",
+                "node_modules",
+                "bower_components",
+                "test",
+                "tests",
+                "sandbox"
+            ]
+        },
+        "installation-source": "dist",
+        "license": [
+            "MIT"
+        ],
+        "description": "lil' event emitter",
+        "keywords": [
+            "emitter",
+            "event",
+            "pubsub"
+        ]
+    },
+    {
+        "name": "bower-asset/imagesloaded",
+        "version": "v4.1.0",
+        "version_normalized": "4.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/desandro/imagesloaded.git",
+            "reference": "eb483b9b5e1edcc06daa6bb980810b4accd406f0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/desandro/imagesloaded/zipball/eb483b9b5e1edcc06daa6bb980810b4accd406f0",
+            "reference": "eb483b9b5e1edcc06daa6bb980810b4accd406f0",
+            "shasum": ""
+        },
+        "require": {
+            "bower-asset/ev-emitter": "~1.0.0"
+        },
+        "require-dev": {
+            "bower-asset/jquery": ">=1.9,<4.0",
+            "bower-asset/qunit": "~1.20.0"
+        },
+        "type": "bower-asset-library",
+        "extra": {
+            "bower-asset-main": "imagesloaded.js",
+            "bower-asset-ignore": [
+                "**/.*",
+                "test",
+                "package.json",
+                "node_modules",
+                "bower_components",
+                "tests",
+                "sandbox/",
+                "contributing.md"
+            ]
+        },
+        "installation-source": "dist",
+        "license": [
+            "MIT"
+        ],
+        "description": "JavaScript is all like _You images done yet or what?_",
+        "keywords": [
+            "images"
         ]
     }
 ]

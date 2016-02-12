@@ -84,15 +84,6 @@ return array (
       '@justinvoelker/tagging' => $vendorDir . '/justinvoelker/yii2-tagging',
     ),
   ),
-  'shiyang/yii2-umeditor' => 
-  array (
-    'name' => 'shiyang/yii2-umeditor',
-    'version' => '1.1.0.0',
-    'alias' => 
-    array (
-      '@shiyang/umeditor' => $vendorDir . '/shiyang/yii2-umeditor',
-    ),
-  ),
   'yiisoft/yii2-bootstrap' => 
   array (
     'name' => 'yiisoft/yii2-bootstrap',
@@ -111,10 +102,19 @@ return array (
       '@yii/debug' => $vendorDir . '/yiisoft/yii2-debug',
     ),
   ),
+  'shiyang/yii2-umeditor' => 
+  array (
+    'name' => 'shiyang/yii2-umeditor',
+    'version' => '1.2.0.0',
+    'alias' => 
+    array (
+      '@shiyang/umeditor' => $vendorDir . '/shiyang/yii2-umeditor',
+    ),
+  ),
   'skeeks/yii2-assets-auto-compress' => 
   array (
     'name' => 'skeeks/yii2-assets-auto-compress',
-    'version' => '1.0.3.0',
+    'version' => '1.1.1.0',
     'alias' => 
     array (
       '@skeeks/yii2/assetsAuto' => $vendorDir . '/skeeks/yii2-assets-auto-compress',

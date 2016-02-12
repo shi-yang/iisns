@@ -30,6 +30,11 @@ class AssetsAutoCompressComponent extends Component implements BootstrapInterfac
      */
     public $enabled = true;
 
+    /**
+     * @var int время в секундах на чтение каждого файла
+     */
+    public $readFileTimeout = 3;
+
 
 
     /**
@@ -78,63 +83,6 @@ class AssetsAutoCompressComponent extends Component implements BootstrapInterfac
      * @var bool Перенос css файлов вниз страницы и их подгрузка при помощи js
      */
     public $cssFileBottomLoadOnJs = false;
-
-
-    /**
-     * @var bool Включить стандартную быструю предзагрузку.
-     */
-    public $enabledPreloader    = false;
-
-    /**
-     * Особенно актуально в момент переноса css файлов вниз страницы
-     * @var bool Если включена предыдущая опция, этот html код будет вставлен в начало страницы
-     */
-    public $preloaderBodyHtml   = <<<HTML
-<div class="sx-preloader">
-    <div id="sx-loaderImage"></div>
-</div>
-HTML
-;
-    /**
-     * Особенно актуально в момент переноса css файлов вниз страницы
-     * @var bool Если включена предыдущая опция, этот css код будет вставлен в начало страницы
-     */
-    public $preloaderBodyCss    = <<<CSS
-.sx-preloader{
-  display: table;
-  background: #1e1e1e;
-  z-index: 999999;
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  left: 0;
-  top: 0;
-}
-
-#sx-loaderImage {
-  display: table-cell;
-  vertical-align: middle;
-  overflow: hidden;
-  text-align: center;
-}
-
-
-#sx-canvas {
-  display: table-cell;
-  vertical-align: middle;
-  margin: 0 auto;
-}
-CSS
-;
-
-    public $preloaderBodyJs    = <<<JS
-	jQuery(window).load(function(){
-		jQuery('.sx-preloader').fadeOut('slow',function(){jQuery(this).remove();});
-	});
-JS
-;
-
-
 
 
 
@@ -199,20 +147,6 @@ JS
      */
     protected function _processing(View $view)
     {
-        //Стандартный прелоадер
-        if ($this->enabledPreloader)
-        {
-            if ($this->preloaderBodyCss)
-            {
-                $view->registerCss($this->preloaderBodyCss);
-            }
-
-            if ($this->preloaderBodyJs)
-            {
-                $view->registerJs($this->preloaderBodyJs);
-            }
-        }
-
         //Компиляция файлов js в один.
         if ($view->jsFiles && $this->jsFileCompile)
         {
@@ -313,29 +247,7 @@ JS
                 $view->cssFiles = [];
             }
 
-
-
-
             \Yii::endProfile('Moving css files bottom');
-        }
-
-
-
-        //Стандартный прелоадер
-        if ($this->enabledPreloader && $this->preloaderBodyHtml)
-        {
-            \Yii::beginProfile('Adding preloader html');
-
-            if (ArrayHelper::getValue($view->jsFiles, View::POS_BEGIN))
-            {
-                $view->jsFiles[View::POS_BEGIN] = ArrayHelper::merge($view->jsFiles[View::POS_BEGIN], $this->preloaderBodyHtml);
-
-            } else
-            {
-                $view->jsFiles[View::POS_BEGIN][] = $this->preloaderBodyHtml;
-            }
-
-            \Yii::endProfile('Adding preloader html');
         }
     }
 
@@ -400,13 +312,13 @@ JS
         {
             if (Url::isRelative($fileCode))
             {
-                $resultContent[] = trim(file_get_contents( Url::to(\Yii::getAlias('@web' . $fileCode), true) ));
+                $resultContent[] = trim($this->fileGetContents( Url::to(\Yii::getAlias('@web' . $fileCode), true) )) . "\n;";;
             } else
             {
                 if ($this->jsFileRemouteCompile)
                 {
                     //Пытаемся скачать удаленный файл
-                    $resultContent[] = trim(file_get_contents( $fileCode ));
+                    $resultContent[] = trim($this->fileGetContents( $fileCode ));
                 } else
                 {
                     $resultFiles[$fileCode] = $fileTag;
@@ -466,16 +378,17 @@ JS
 
             foreach ($files as $fileCode => $fileTag)
             {
-                if (!Url::isRelative($fileCode))
+                if (Url::isRelative($fileCode))
                 {
-                    $resultFiles[$fileCode] = $fileTag;
+
                 } else
                 {
-                    if ($this->cssFileRemouteCompile)
+                    if (!$this->cssFileRemouteCompile)
                     {
                         $resultFiles[$fileCode] = $fileTag;
                     }
                 }
+
             }
 
             $publicUrl                  = $publicUrl . "?v=" . filemtime($rootUrl);
@@ -489,7 +402,7 @@ JS
         {
             if (Url::isRelative($fileCode))
             {
-                $contentTmp         = trim(file_get_contents( Url::to(\Yii::getAlias('@web' . $fileCode), true) ));
+                $contentTmp         = trim($this->fileGetContents( Url::to(\Yii::getAlias('@web' . $fileCode), true) ));
 
                 $fileCodeTmp = explode("/", $fileCode);
                 unset($fileCodeTmp[count($fileCodeTmp) - 1]);
@@ -511,7 +424,7 @@ JS
                 if ($this->cssFileRemouteCompile)
                 {
                     //Пытаемся скачать удаленный файл
-                    $resultContent[] = trim(file_get_contents( $fileCode ));
+                    $resultContent[] = trim($this->fileGetContents( $fileCode ));
                 } else
                 {
                     $resultFiles[$fileCode] = $fileTag;
@@ -576,4 +489,37 @@ JS
     }
 
 
+    /**
+     * Read file contents
+     *
+     * @param $file
+     * @return string
+     */
+    public function fileGetContents($file)
+    {
+        if (function_exists('curl_init'))
+        {
+            $url     =   $file;
+            $ch      =   curl_init();
+            $timeout =   (int) $this->readFileTimeout;
+
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+
+            $result = curl_exec($ch);
+            curl_close($ch);
+
+            return $result;
+        } else
+        {
+            $ctx = stream_context_create(array('http'=>
+                array(
+                    'timeout' => (int) $this->readFileTimeout,  //3 Seconds
+                )
+            ));
+
+            return file_get_contents($file, false, $ctx);
+        }
+    }
 }
