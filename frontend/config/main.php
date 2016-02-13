@@ -12,7 +12,7 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => [
         'log',
-        'assetsAutoCompress'
+        'assetsCompress'
     ],
     'controllerNamespace' => 'frontend\controllers',
     'defaultRoute' => 'user/dashboard',
@@ -42,13 +42,13 @@ return [
     ],
     'components' => [
         'db' => $db,
-        'assetsAutoCompress' => [
-            'class' => '\skeeks\yii2\assetsAuto\AssetsAutoCompressComponent',
+        'assetsCompress' => [
+            'class' => '\iisns\assets\AssetsCompressComponent',
             'enabled' => true,
             'jsCompress' => true,
-            'jsFileCompress' => false,
             'cssFileCompile' => true,
             'jsFileCompile' => true,
+            'jsFileCompress' => false,
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,
