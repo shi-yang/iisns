@@ -1,8 +1,5 @@
 <?php 
-
-use shiyang\webuploader\Cropper;
-use yii\helpers\Url;
-
+use iisns\webuploader\Cropper;
 ?>
 <div class="row">
     <div class="col-md-6">

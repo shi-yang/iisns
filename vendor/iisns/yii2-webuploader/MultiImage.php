@@ -1,17 +1,19 @@
 <?php
 /**
- * @copyright Copyright (c) 2015 Shiyang
- * @link http://shiyang.me
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
  */
-namespace shiyang\webuploader;
+namespace iisns\webuploader;
 
 use Yii;
-use yii\base\Widget;
 
 /**
  * 多图上传
+ *
+ * @author Shiyang <dr@shiyang.me>
  */
-class MultiImage extends Widget
+class MultiImage extends WebUploader
 {
 	/**
 	 * @inheritdoc
@@ -36,7 +38,6 @@ class MultiImage extends Widget
 	protected function registerClientScript()
 	{
 		$view = $this->getView();
-
 		MultiImageAsset::register($view);
 	}
 }

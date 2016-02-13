@@ -1800,59 +1800,6 @@
         ]
     },
     {
-        "name": "skeeks/yii2-assets-auto-compress",
-        "version": "1.1.1",
-        "version_normalized": "1.1.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/skeeks-semenov/yii2-assets-auto-compress.git",
-            "reference": "00bdd8d7a89fdee8933ee28f172f9057b73945af"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/skeeks-semenov/yii2-assets-auto-compress/zipball/00bdd8d7a89fdee8933ee28f172f9057b73945af",
-            "reference": "00bdd8d7a89fdee8933ee28f172f9057b73945af",
-            "shasum": ""
-        },
-        "require": {
-            "mrclay/minify": "*",
-            "natxet/cssmin": "*",
-            "tedivm/jshrink": "*",
-            "yiisoft/yii2": "*"
-        },
-        "time": "2016-02-11 15:27:08",
-        "type": "yii2-extension",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "skeeks\\yii2\\assetsAuto\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Semenov Alexander",
-                "email": "semenov@skeeks.com"
-            }
-        ],
-        "description": "Automatically compile and merge files js + css",
-        "homepage": "http://www.skeeks.com/",
-        "keywords": [
-            "JS",
-            "Sx",
-            "app",
-            "assets",
-            "auto assets",
-            "css",
-            "framework",
-            "skeeks",
-            "yii"
-        ]
-    },
-    {
         "name": "bower-asset/ev-emitter",
         "version": "v1.0.1",
         "version_normalized": "1.0.1.0",
@@ -1933,6 +1880,99 @@
         "description": "JavaScript is all like _You images done yet or what?_",
         "keywords": [
             "images"
+        ]
+    },
+    {
+        "name": "iisns/yii2-assets-compress",
+        "version": "v1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/iisns/yii2-assets-compress.git",
+            "reference": "37009a8b0f4b3bcdd417b223db0d3fb6e9c26034"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/iisns/yii2-assets-compress/zipball/37009a8b0f4b3bcdd417b223db0d3fb6e9c26034",
+            "reference": "37009a8b0f4b3bcdd417b223db0d3fb6e9c26034",
+            "shasum": ""
+        },
+        "require": {
+            "mrclay/minify": "*",
+            "natxet/cssmin": "*",
+            "tedivm/jshrink": "*",
+            "yiisoft/yii2": "*"
+        },
+        "time": "2016-02-12 14:59:50",
+        "type": "yii2-extension",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "iisns\\assets\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Shiyang",
+                "email": "dr@shiyang.me"
+            }
+        ],
+        "description": "This solution enables you to dynamically combine js and css files to optimize the html page.",
+        "keywords": [
+            "JS",
+            "assets",
+            "compress",
+            "css",
+            "iisns",
+            "yii2"
+        ]
+    },
+    {
+        "name": "iisns/yii2-webuploader",
+        "version": "v1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/iisns/yii2-webuploader.git",
+            "reference": "b7d282aaf43f1fda098787db6fa4c9dba917169a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/iisns/yii2-webuploader/zipball/b7d282aaf43f1fda098787db6fa4c9dba917169a",
+            "reference": "b7d282aaf43f1fda098787db6fa4c9dba917169a",
+            "shasum": ""
+        },
+        "require": {
+            "yiisoft/yii2": "*"
+        },
+        "time": "2016-02-13 11:19:26",
+        "type": "yii2-extension",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "iisns\\webuploader\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Shiyang",
+                "email": "dr@shiyang.me"
+            }
+        ],
+        "description": "WebUploader是一个简单的以Html5为主，Flash为辅的现代文件上传组件。在现代的浏览器里面能充分发挥html5的优势，同时又不摒弃主流IE浏览器，延用原来的Flash运行时。两套运行时，同样的调用方式，可供用户任意选用。WebUploader采用大文件分片并发上传，极大的提高了文件上传效率。",
+        "keywords": [
+            "iisns",
+            "upload",
+            "webuploader",
+            "yii2"
         ]
     }
 ]

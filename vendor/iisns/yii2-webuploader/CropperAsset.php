@@ -1,15 +1,19 @@
 <?php
 /**
- * @copyright Copyright (c) 2015 Shiyang
- * @link http://shiyang.me
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
  */
-namespace shiyang\webuploader;
+namespace iisns\webuploader;
 
 use yii\web\AssetBundle;
 
+/**
+ * @author Shiyang <dr@shiyang.me>
+ */
 class CropperAsset extends AssetBundle
 {
-	public $sourcePath = '@vendor/shiyang/yii2-webuploader/assets';
+	public $sourcePath = '@vendor/iisns/yii2-webuploader/assets';
 
 	public $css = [
 	  	'webuploader.css',

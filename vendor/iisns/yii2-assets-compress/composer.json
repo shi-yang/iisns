@@ -1,0 +1,24 @@
+{
+    "name": "iisns/yii2-assets-compress",
+    "description": "This solution enables you to dynamically combine js and css files to optimize the html page.",
+    "keywords": ["yii2","assets","compress","js","css","iisns"],
+    "type": "yii2-extension",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Shiyang",
+            "email": "dr@shiyang.me"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*",
+        "tedivm/jshrink": "*",
+        "natxet/cssmin": "*",
+        "mrclay/minify": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "iisns\\assets\\": ""
+        }
+    }
+}

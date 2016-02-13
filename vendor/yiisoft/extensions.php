@@ -3,15 +3,6 @@
 $vendorDir = dirname(__DIR__);
 
 return array (
-  'shiyang/yii2-webuploader' => 
-  array (
-    'name' => 'shiyang/yii2-webuploader',
-    'version' => '9999999-dev',
-    'alias' => 
-    array (
-      '@shiyang/webuploader' => $vendorDir . '/shiyang/yii2-webuploader',
-    ),
-  ),
   'yiisoft/yii2-imagine' => 
   array (
     'name' => 'yiisoft/yii2-imagine',
@@ -111,13 +102,22 @@ return array (
       '@shiyang/umeditor' => $vendorDir . '/shiyang/yii2-umeditor',
     ),
   ),
-  'skeeks/yii2-assets-auto-compress' => 
+  'iisns/yii2-assets-compress' => 
   array (
-    'name' => 'skeeks/yii2-assets-auto-compress',
-    'version' => '1.1.1.0',
+    'name' => 'iisns/yii2-assets-compress',
+    'version' => '1.0.0.0',
     'alias' => 
     array (
-      '@skeeks/yii2/assetsAuto' => $vendorDir . '/skeeks/yii2-assets-auto-compress',
+      '@iisns/assets' => $vendorDir . '/iisns/yii2-assets-compress',
+    ),
+  ),
+  'iisns/yii2-webuploader' => 
+  array (
+    'name' => 'iisns/yii2-webuploader',
+    'version' => '1.0.0.0',
+    'alias' => 
+    array (
+      '@iisns/webuploader' => $vendorDir . '/iisns/yii2-webuploader',
     ),
   ),
 );

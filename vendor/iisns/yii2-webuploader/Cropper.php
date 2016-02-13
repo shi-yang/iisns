@@ -1,12 +1,12 @@
 <?php
 /**
- * @copyright Copyright (c) 2015 Shiyang
- * @link http://shiyang.me
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
  */
-namespace shiyang\webuploader;
+namespace iisns\webuploader;
 
 use Yii;
-use yii\base\Widget;
 
 /**
  * 图片裁剪上传
@@ -16,8 +16,10 @@ use yii\base\Widget;
  *  </div>
  * 在你想要出现“选择文件”的地方，放下如下代码：
  * <?= Cropper::widget() ?>
+ *
+ * @author Shiyang <dr@shiyang.me>
  */
-class Cropper extends Widget
+class Cropper extends WebUploader
 {
 	/**
 	 * @inheritdoc
