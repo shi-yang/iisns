@@ -91,6 +91,7 @@ class ViewController extends BaseController
         $query = (new Query)->select('*')
             ->from('{{%home_post}}')
             ->where('user_id=:user_id', [':user_id' => $model->id])
+            ->andWhere('status=:status', [':status' => Post::STATUS_PUBLIC])
             ->orderBy('created_at DESC');
 
         $posts = Yii::$app->tools->Pagination($query);
@@ -131,6 +132,9 @@ class ViewController extends BaseController
     {
         if (($model = Post::findOne($id)) === null) {
             throw new NotFoundHttpException('The requested page does not exist.');
+        }
+        if ($model->status !== Post::STATUS_PUBLIC || ($model->status !== Post::STATUS_PUBLIC && $model->user_id !== Yii::$app->user->id)) {
+            throw new ForbiddenHttpException('You are not allowed to perform this action.');
         }
 
         return $this->render('/user/viewPost', [

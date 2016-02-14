@@ -13,7 +13,9 @@ use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\helpers\Html;
 use app\modules\home\models\Post;
+use app\modules\home\models\Feed;
 use common\components\BaseController;
 use justinvoelker\tagging\TaggingQuery;
 
@@ -112,13 +114,15 @@ class PostController extends BaseController
         $model = new Post();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            //插入记录(Feed)
-            $title = Html::a(Html::encode($model->title), $model->url);
-            preg_match_all("/<[img|IMG].*?src=\"([^^]*?)\".*?>/", $model->content, $images);
-            $images = (isset($images[0][0])) ? $images[0][0] : '' ;
-            $content = mb_substr(strip_tags($model->content), 0, 140, 'utf-8') . '... ' . Html::a(Yii::t('app', 'View Details'), $model->url) . '<br>' . $images;
-            $postData = ['{title}' => $title, '{content}' => $content];
-            Feed::addFeed('blog', $postData);
+            if ($model->status == Post::STATUS_PUBLIC) {
+                //插入记录(Feed)
+                $title = Html::a(Html::encode($model->title), $model->url);
+                preg_match_all("/<[img|IMG].*?src=\"([^^]*?)\".*?>/", $model->content, $images);
+                $images = (isset($images[0][0])) ? $images[0][0] : '' ;
+                $content = mb_substr(strip_tags($model->content), 0, 140, 'utf-8') . '... ' . Html::a(Yii::t('app', 'View Details'), $model->url) . '<br>' . $images;
+                $postData = ['{title}' => $title, '{content}' => $content];
+                Feed::addFeed('blog', $postData);
+            }
             return $this->redirect(['/home/post']);
         }
         return $this->render('create', [

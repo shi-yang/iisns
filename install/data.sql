@@ -69,22 +69,6 @@ CREATE TABLE IF NOT EXISTS `pre_comment` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `pre_explore_recommend` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(128) NOT NULL,
-  `summary` text NOT NULL,
-  `content` text NOT NULL,
-  `view_count` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `origin` varchar(50) NOT NULL COMMENT '来源',
-  `username` varchar(60) NOT NULL,
-  `category` char(50) NOT NULL,
-  `table_id` int(11) DEFAULT NULL,
-  `table_name` char(30) NOT NULL,
-  `created_at` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='探索页面的推荐列表' AUTO_INCREMENT=1 ;
-
 CREATE TABLE IF NOT EXISTS `pre_forum` (
   `id` int(12) NOT NULL AUTO_INCREMENT,
   `forum_name` char(32) NOT NULL,
