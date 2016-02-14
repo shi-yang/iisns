@@ -14,7 +14,6 @@ use yii\base\Model;
  * ContactForm is the model behind the contact form.
  *
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class ContactForm extends Model
 {

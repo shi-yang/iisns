@@ -27,7 +27,6 @@ use yii\db\Query;
  * @property User $sendfrom0
  *
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class Message extends \yii\db\ActiveRecord
 {

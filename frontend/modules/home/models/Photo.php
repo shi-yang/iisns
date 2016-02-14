@@ -23,7 +23,6 @@ use Yii;
  * @property integer $is_cover
  *
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class Photo extends \yii\db\ActiveRecord
 {

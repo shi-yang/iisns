@@ -24,7 +24,6 @@ use yii\db\Query;
  * @property integer $user_id
  *
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class Board extends \yii\db\ActiveRecord
 {

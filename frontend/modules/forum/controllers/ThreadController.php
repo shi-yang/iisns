@@ -21,7 +21,6 @@ use yii\data\Pagination;
  * ThreadController implements the CRUD actions for Thread model.
  *
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class ThreadController extends BaseController
 {

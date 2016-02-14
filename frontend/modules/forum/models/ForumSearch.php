@@ -16,7 +16,6 @@ use app\modules\forum\models\Forum;
  * ForumSearch represents the model behind the search form about `app\modules\forum\models\Forum`.
  *
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class ForumSearch extends Forum
 {

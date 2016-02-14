@@ -23,7 +23,6 @@ use justinvoelker\tagging\TaggingQuery;
  * PostController implements the CRUD actions for Post model.
  *
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class PostController extends BaseController
 {

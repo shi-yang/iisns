@@ -14,7 +14,6 @@ use yii\base\Model;
  * Password reset request form
  *
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class PasswordResetRequestForm extends Model
 {

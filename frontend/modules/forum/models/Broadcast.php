@@ -21,7 +21,6 @@ use Yii;
  * @property integer $created_at
  *
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class Broadcast extends \yii\db\ActiveRecord
 {

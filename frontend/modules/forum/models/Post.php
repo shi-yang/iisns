@@ -21,7 +21,6 @@ use app\modules\forum\models\Thread;
  * @property integer $created_at
  *
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class Post extends \yii\db\ActiveRecord
 {

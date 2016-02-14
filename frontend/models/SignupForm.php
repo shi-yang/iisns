@@ -15,7 +15,6 @@ use Yii;
  * Signup form
  *
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class SignupForm extends Model
 {

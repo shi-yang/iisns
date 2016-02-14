@@ -20,7 +20,6 @@ use yii\filters\AccessControl;
  * AlbumController implements the CRUD actions for Album model.
  *
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class AlbumController extends BaseController
 {

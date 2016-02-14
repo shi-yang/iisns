@@ -20,7 +20,6 @@ use Yii;
  * @property User $people
  *
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class UserFollow extends \yii\db\ActiveRecord
 {

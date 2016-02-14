@@ -21,7 +21,6 @@ use Yii;
  * @property integer $user_id
  *
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class Comment extends \yii\db\ActiveRecord
 {

@@ -29,7 +29,6 @@ use app\modules\home\models\Feed;
  * @property string $avatar
  *
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class User extends \common\models\User
 {

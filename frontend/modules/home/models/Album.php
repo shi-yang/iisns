@@ -28,7 +28,6 @@ use app\components\Uploader;
  * @property string $status_answer
  *
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class Album extends \yii\db\ActiveRecord
 {

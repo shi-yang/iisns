@@ -18,7 +18,6 @@ use yii\filters\VerbFilter;
  * BroadcastController implements the CRUD actions for Broadcast model.
  *
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class BroadcastController extends BaseController
 {

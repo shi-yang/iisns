@@ -22,7 +22,6 @@ use common\components\BaseController;
  * FeedController implements the CRUD actions for Feed model.
  *
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class FeedController extends BaseController
 {

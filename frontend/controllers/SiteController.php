@@ -23,7 +23,6 @@ use yii\filters\AccessControl;
  * Site controller
  *
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class SiteController extends BaseController
 {

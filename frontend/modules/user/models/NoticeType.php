@@ -18,7 +18,6 @@ use Yii;
  * @property string $type_content
  *
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class NoticeType extends \yii\db\ActiveRecord
 {

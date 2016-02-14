@@ -22,7 +22,6 @@ use app\modules\user\models\Notice;
  * MessageController implements the CRUD actions for Message model.
  *
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class MessageController extends BaseController
 {

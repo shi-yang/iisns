@@ -22,7 +22,6 @@ use Yii;
  * @property User $user
  *
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class Profile extends \yii\db\ActiveRecord
 {

@@ -18,7 +18,6 @@ use common\components\BaseController;
  * ToduController implements the CRUD actions for Comment model.
  *
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class ToduController extends BaseController
 {

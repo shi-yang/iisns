@@ -16,7 +16,6 @@ use Yii;
  * Password reset form
  *
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class ResetPasswordForm extends Model
 {

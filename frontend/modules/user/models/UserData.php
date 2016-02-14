@@ -21,7 +21,6 @@ use Yii;
  * @property integer $unread_message_count
  *
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class UserData extends \yii\db\ActiveRecord
 {

@@ -13,7 +13,6 @@ use common\models\LoginForm;
  * LoginWidget is a widget that provides user login functionality.
  *
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class Login extends \yii\base\Widget
 {

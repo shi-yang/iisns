@@ -26,7 +26,6 @@ use app\modules\forum\models\Broadcast;
  * ForumController implements the CRUD actions for Forum model.
  *
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class ForumController extends BaseController
 {

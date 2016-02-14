@@ -23,7 +23,6 @@ use yii\db\Query;
  * @property integer $is_read
  *
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class Notice extends \yii\db\ActiveRecord
 {

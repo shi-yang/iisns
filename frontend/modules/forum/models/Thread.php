@@ -24,7 +24,6 @@ use yii\db\Query;
  * @property integer $post_count
  *
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class Thread extends \yii\db\ActiveRecord
 {

@@ -16,7 +16,6 @@ use common\components\BaseController;
 
 /** 
  *@author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class DashboardController extends BaseController
 {

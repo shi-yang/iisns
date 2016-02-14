@@ -11,7 +11,6 @@ use yii\web\AssetBundle;
 
 /**
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class LightBoxAsset extends AssetBundle
 {

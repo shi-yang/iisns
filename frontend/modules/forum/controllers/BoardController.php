@@ -20,7 +20,6 @@ use app\modules\forum\models\Thread;
  * BoardController implements the CRUD actions for Board model.
  *
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class BoardController extends BaseController
 {

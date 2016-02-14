@@ -20,7 +20,6 @@ use app\modules\home\models\Album;
 
 /**
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class ViewController extends BaseController
 {

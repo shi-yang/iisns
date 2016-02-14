@@ -16,7 +16,6 @@ use app\modules\forum\models\Thread;
  * ThreadSearch represents the model behind the search form about `app\modules\forum\models\Thread`.
  *
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class ThreadSearch extends Thread
 {

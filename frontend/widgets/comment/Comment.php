@@ -13,7 +13,6 @@ use yii\db\Query;
 
 /**
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class Comment extends Widget
 {

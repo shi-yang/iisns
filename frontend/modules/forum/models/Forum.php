@@ -25,7 +25,6 @@ use yii\helpers\ArrayHelper;
  * @property string $forum_icon
  *
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class Forum extends \yii\db\ActiveRecord
 {

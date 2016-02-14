@@ -25,7 +25,6 @@ use yii\helpers\Html;
  * @property integer $explore_status
  *
  * @author Shiyang <dr@shiyang.me>
- * @since 2.0
  */
 class Post extends \yii\db\ActiveRecord
 {
