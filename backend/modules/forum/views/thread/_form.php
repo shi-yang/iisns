@@ -12,9 +12,19 @@ use yii\bootstrap\ActiveForm;
     <?php if (!Yii::$app->user->isGuest) :?>
         <?php $form = ActiveForm::begin(); ?>
 
+        <?= $form->field($model, 'id', [
+            'template' => "<div class=\"input-group\"><span class=\"input-group-addon\">". Yii::t('app', 'Id') ."</span>{input}</div>",
+        ])->textInput(['maxlength' => 128, 'autocomplete'=>'off'])
+        ?>
+
+        <?= $form->field($model, 'board_id', [
+            'template' => "<div class=\"input-group\"><span class=\"input-group-addon\">". Yii::t('app', 'Board Id') ."</span>{input}</div>",
+        ])->textInput(['maxlength' => 128, 'autocomplete'=>'off'])
+        ?>
+
         <?= $form->field($model, 'title', [
             'template' => "<div class=\"input-group\"><span class=\"input-group-addon\">". Yii::t('app', 'Title') ."</span>{input}</div>",
-            ])->textInput(['maxlength' => 128, 'autocomplete'=>'off'])
+        ])->textInput(['maxlength' => 128, 'autocomplete'=>'off'])
         ?>
 
         <?= $form->field($model, 'content')->widget('shiyang\umeditor\UMeditor', [
