@@ -197,7 +197,7 @@ AppAsset::register($this);
                             </a>
                         </li>
                         <li>
-                            <a href="http://www.iisns.com/forum/iisns">
+                            <a href="http://www.iisns.com/@iisns">
                             <span class="menu-icon">
                                 <i class="glyphicon glyphicon-question-sign"></i>
                             </span>
