@@ -11,11 +11,11 @@ use frontend\widgets\Alert;
 AdminLteAsset::register($this);
 
 $this->registerCss('
-    .navbar .navbar-toggle {
+    .navbar #navbar-toggle-header {
         display: inline;
         float: left;
     }
-    .navbar .navbar-toggle .icon-bar {
+    .navbar #navbar-toggle-header .icon-bar {
         background-color: #fff;
     }
 ');
@@ -49,7 +49,7 @@ $this->registerCss('
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation">
                 <!-- Sidebar toggle button-->
-                <a href="#" class="navbar-toggle" data-toggle="offcanvas" role="button">
+                <a href="#" class="navbar-toggle" id="navbar-toggle-header" data-toggle="offcanvas" role="button">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
