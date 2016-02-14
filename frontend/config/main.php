@@ -47,7 +47,7 @@ return [
             'enabled' => true,
             'jsCompress' => true,
             'cssFileCompile' => true,
-            'jsFileCompile' => true,
+            'jsFileCompile' => false,
             'jsFileCompress' => false,
         ],
         'urlManager' => [
