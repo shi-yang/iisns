@@ -1,4 +1,9 @@
 <?php
+/**
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
+ */
 
 namespace app\modules\forum\controllers;
 
@@ -19,6 +24,8 @@ use app\modules\forum\models\Broadcast;
 
 /**
  * ForumController implements the CRUD actions for Forum model.
+ *
+ * @author Shiyang <dr@shiyang.me>
  */
 class ForumController extends BaseController
 {
@@ -81,8 +88,13 @@ class ForumController extends BaseController
     public function actionView($id)
     {
         $model = $this->findModel($id);
+        if ($model->status === Forum::STATUS_PENDING) {
+            return $this->render('status', [
+                'model' => $model
+            ]);
+        }
         //该论坛下只有一个版块，且该版块不是分类，则可以直接发帖
-        if ($model->boardCount == 1 && $model->boards[0]->parent_id == Board::AS_BOARD ) {
+        if ($model->boardCount == 1 && $model->boards[0]->parent_id == Board::AS_BOARD) {
             $newThread = $this->newThread($model->boards[0]->id);
         } else {
             $newThread = null;
@@ -97,6 +109,11 @@ class ForumController extends BaseController
     public function actionBroadcast($id)
     {
         $model = $this->findModel($id);
+        if ($model->status === Forum::STATUS_PENDING) {
+            return $this->render('status', [
+                'model' => $model
+            ]);
+        }
         $newBroadcast = $this->newBroadcast($model->id);
         return $this->render('broadcast', [
             'model' => $model,
@@ -115,6 +132,7 @@ class ForumController extends BaseController
         $model = new Forum();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Create successfully.'));
             return $this->redirect(['view', 'id' => $model->forum_url]);
         } else {
             return $this->render('create', [
@@ -135,6 +153,11 @@ class ForumController extends BaseController
         if ($model->user_id !== Yii::$app->user->id) {
             throw new ForbiddenHttpException('You are not allowed to perform this action.');
         }
+        if ($model->status === Forum::STATUS_PENDING) {
+            return $this->render('status', [
+                'model' => $model
+            ]);
+        }
 
         $newBoard = new Board();
         if ($newBoard->load(Yii::$app->request->post())) {
@@ -146,7 +169,7 @@ class ForumController extends BaseController
             }
         }
         
-        //上传上传图标
+        //上传图标
         Yii::setAlias('@upload', '@webroot/uploads/forum/icon/');
         if (Yii::$app->request->isPost && !empty($_FILES)) {
             $extension =  strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
@@ -163,6 +186,10 @@ class ForumController extends BaseController
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $cache = Yii::$app->cache;
+            $cachePrefix = Yii::$app->getModule('forum')->cachePrefix;
+            $cacheKey = $cachePrefix . $model->forum_url;
+            $cache->set($cacheKey, $model);
             Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Saved successfully'));
         }
         
@@ -182,10 +209,19 @@ class ForumController extends BaseController
      */
     protected function findModel($id)
     {
-        if (($model = Forum::findOne(['forum_url' => $id])) !== null) {
-            return $model;
+        $cache = Yii::$app->cache;
+        $cachePrefix = Yii::$app->getModule('forum')->cachePrefix;
+        $cacheKey = $cachePrefix . $id;
+        $model = $cache->get($cacheKey);
+        if ($model === false) {
+            if (($model = Forum::findOne(['forum_url' => $id])) !== null) {
+                $cache->set($cacheKey, $model);
+                return $model;
+            } else {
+                throw new NotFoundHttpException('The requested page does not exist.');
+            }
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            return $model;
         }
     }
     

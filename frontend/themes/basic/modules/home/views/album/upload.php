@@ -1,8 +1,5 @@
 <?php
-
-use yii\helpers\Html;
-use yii\helpers\Url;
-use shiyang\webuploader\MultiImage;
+use iisns\webuploader\MultiImage;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\home\models\Album */

@@ -64,6 +64,12 @@ class LogPanel extends Panel
     {
         $target = $this->module->logTarget;
         $messages = $target->filterMessages($target->messages, Logger::LEVEL_ERROR | Logger::LEVEL_INFO | Logger::LEVEL_WARNING | Logger::LEVEL_TRACE);
+        foreach($messages as &$message) {
+            // exceptions may not be serializable if in the call stack somewhere is a Closure
+            if ($message[0] instanceof \Exception) {
+                $message[0] = (string) $message[0];
+            }
+        }
         return ['messages' => $messages];
     }
 

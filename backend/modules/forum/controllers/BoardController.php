@@ -23,7 +23,7 @@ class BoardController extends BaseController
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['board'],
+                    'delete' => ['post'],
                 ],
             ],
         ];

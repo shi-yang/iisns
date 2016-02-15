@@ -1,50 +1,5 @@
-html, body {
-  padding-top: 0;
-  color: #777777;
-  background: #f9f9f9;
-  height: auto;
-  font: 14px/1.5 arial,"Microsoft Yahei","Hiragino Sans GB",sans-serif;
-}
-::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
-}
-::-webkit-scrollbar-thumb {
-  background-color: rgba(50, 50, 50, 0.3);
-}
-::-webkit-scrollbar-track {
-  background-color: rgba(50, 50, 50, 0.2);
-}
-ul {
-  padding: 0;
-}
-hr {
-  border-top-color: #eee;
-  border-bottom-color: #fff;
-}
-a {
-  color: #FF7B4C;
-  transition: all 0.2s ease;
-  -webkit-transition: all 0.2s ease;
-  -moz-transition: all 0.2s ease;
-  -ms-transition: all 0.2s ease;
-  -o-transition: all 0.2s ease;
-}
-p {
-  line-height: 28px;
-}
-a:hover,
-a:focus {
-  color: #ff4a00;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  -webkit-transition: all 0.2s ease;
-  -moz-transition: all 0.2s ease;
-  -ms-transition: all 0.2s ease;
-  -o-transition: all 0.2s ease;
-}
 .layout-boxed {
-  background: url('../img/boxed-bg.jpg') repeat fixed;
+  background: url('../img/boxed-bg.png') repeat fixed;
 }
 #top-nav {
   height: 45px;
@@ -984,7 +939,7 @@ aside.skin-1 .main-menu > ul > li.display > a {
   background: #f9f9f9;
 }
 aside.skin-1 .main-menu > ul > li > a {
-  color: #FF7B4C;
+  color: #5677fc;
   font-weight: 700;
 }
 aside.skin-1 .main-menu > ul > li > a:hover,
@@ -992,7 +947,7 @@ aside.skin-1 .main-menu > ul > li > a:focus {
   background: #f9f9f9;
 }
 aside.skin-1 .main-menu > ul > li > a .menu-hover {
-  background: #FF7B4C;
+  background: #5677fc;
   box-shadow: 0 0 10px 0px #439bce;
   -moz-box-shadow: 0 0 10px 0px #439bce;
   -webkit-box-shadow: 0 0 10px 0px #439bce;
@@ -1025,24 +980,24 @@ aside.skin-1 .main-menu > ul > li > .submenu  li.active a .submenu-label{
     } 
 }
 #top-nav.skin-1 {
-  background: #FF7B4C;
-  border-bottom-color: #FFA07E;
+  background: #5677fc;
+  border-bottom-color: #91a7ff;
 }
 #top-nav.skin-1 .navbar-toggle .icon-bar {
   background-color: #fff;
 }
 #top-nav.skin-1 .brand {
   color: #c3e3f5; 
-  background: #FF7B4C;
+  background: #5677fc;
 }
 #top-nav.skin-1 .page-title {
   color: #c3e3f5;
 }
 #top-nav.skin-1 .nav-notification > li.open {
-  background: #ff4401;
+  background: #4e6cef;
 }
 #top-nav.skin-1 .nav-notification > li:hover {
-  background: #ff4401;
+  background: #4e6cef;
 }
 #top-nav.skin-1 .nav-notification > li > a {
   color: #c3e3f5;
@@ -1095,39 +1050,6 @@ aside.skin-1 .main-menu > ul > li > .submenu  li.active a .submenu-label{
   color: #0f5d84;
   background: #b2d5dc;
   border: 1px solid #6bafbd;
-}
-.popover-user {
-  width: 244px;
-  height: 86px;
-}
-#scroll-to-top {
-  position: fixed;
-  cursor: pointer;
-  bottom: -1000px;
-  right: 8%;
-  color: #fff;
-  z-index: 1049;
-  border-radius: 50em;
-  -moz-border-radius: 50em;
-  -webkit-border-radius: 50em;
-  padding: 10px 14px;
-  background: #FF7B4C;
-  transition: all 0.3s ease-in-out;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -ms-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-}
-#scroll-to-top:hover,
-#scroll-to-top:focus {
-  text-decoration: none;
-  background: #f75733;
-  color: #fff;
-  transition: all 0.3s linear;
-  -webkit-transition: all 0.3s linear;
-  -moz-transition: all 0.3s linear;
-  -ms-transition: all 0.3s linear;
-  -o-transition: all 0.3s linear;
 }
 .notification-label {
   position: absolute;
@@ -1445,11 +1367,11 @@ footer p {
 label,
 input,
 button,
-select,
+select
  {
   font-size: 12px;
 }
-input[type="text"],
+input[type="text"]
  {
   font-size: 12px;
   border-radius: 4px;
@@ -1457,7 +1379,7 @@ input[type="text"],
   -webkit-border-radius: 4px;
   margin: 0;
 }
-input[type="text"]:focus,
+input[type="text"]:focus
  {
   border-color: rgba(250, 167, 34, 0.8);
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(250, 167, 34, 0.6);
@@ -2003,8 +1925,27 @@ input[type="text"]:focus,
 }
 
 /*
- * Post view
+ * Post
  */
+.post-list {
+  background: #fff;
+  padding: 25px;
+}
+.post-list .post-item {
+  width: 100%;
+  border-bottom: 2px dashed #f2f1f1;
+  position: relative;
+}
+.post-list .post-footer {
+  margin-bottom: 5px;
+  font-size: 13px;
+}
+.post-list .post-footer a {
+  color: #777;
+}
+.post-list .post-footer a:hover {
+  color: #5677fc;
+}
 .post-view {
     white-space: normal;
     word-break: break-all;
@@ -2033,7 +1974,7 @@ input[type="text"]:focus,
 }
 @media (min-width: 992px) {
     .post-view .post-content {
-        padding: 14px 140px;
+        padding: 14px 188px;
     }
 }
 .post-content img {

@@ -17,10 +17,13 @@ use yii\data\Pagination;
  * @property string $forum_url
  * @property integer $user_id
  * @property integer $created_at
+ * @property integer $status
  * @property string $forum_icon
  */
 class Forum extends \yii\db\ActiveRecord
 {
+    const STATUS_PENDING = 0;
+    const STATUS_APPROVED = 1;
     /**
      * @inheritdoc
      */
@@ -40,7 +43,7 @@ class Forum extends \yii\db\ActiveRecord
             [['forum_url'], 'string', 'min' => 5, 'max' => 32],
             [['forum_url'], 'match', 'pattern' => '/^(?!_)(?!.*?_$)(?!\d{5,32}$)[a-z\d_]{5,32}$/i'],
             [['forum_desc'], 'string'],
-            [['user_id', 'created_at'], 'integer'],
+            [['user_id', 'created_at', 'status'], 'integer'],
             [['forum_name'], 'string', 'max' => 32],
             [['forum_url'], 'string', 'min' => 5, 'max' => 32],
             [['forum_icon'], 'file', 'extensions' => 'jpg, png', 'mimeTypes' => 'image/jpeg, image/png',],
@@ -59,6 +62,7 @@ class Forum extends \yii\db\ActiveRecord
             'forum_url' => Yii::t('app', 'Forum Url'),
             'user_id' => Yii::t('app', 'User ID'),
             'created_at' => Yii::t('app', 'Create Time'),
+            'status' => Yii::t('app', 'Status'),
             'forum_icon' => Yii::t('app', 'Forum Icon'),
         ];
     }

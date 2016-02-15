@@ -1,4 +1,5 @@
 <?php
+
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
@@ -11,7 +12,6 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
 ?>
 
 <div class="item widget-container share-widget fluid-height clearfix">
-
     <div class="widget-content padded">
         <?php $form = ActiveForm::begin([
             'enableClientValidation' => false,
@@ -31,11 +31,11 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
             <div class="item widget-container fluid-height social-entry" id="<?= $feed['id'] ?>">
                 <div class="widget-content padded">
                     <div class="profile-info clearfix">
-                        <a class="pull-left" href="<?= Url::toRoute(['/user/view', 'id'=>$feed['username']]) ?>" rel="author">
+                        <a class="pull-left" href="<?= Url::toRoute(['/user/view', 'id'=>$feed['username']]) ?>" rel="author" data-pjax="0">
                             <img width="50" height="50" class="social-avatar" src="<?= Yii::getAlias('@avatar') . $feed['avatar'] ?>" alt="@<?= $feed['username'] ?>"/>
                         </a>
                         <div class="profile-details">
-                            <a class="user-name" href="<?= Url::toRoute(['/user/view', 'id'=>$feed['username']]) ?>" rel="author">
+                            <a class="user-name" href="<?= Url::toRoute(['/user/view', 'id'=>$feed['username']]) ?>" rel="author" data-pjax="0">
                                 <?= Html::encode($feed['username']) ?>
                             </a>
                             <p>

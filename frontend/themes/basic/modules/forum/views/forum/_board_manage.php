@@ -130,6 +130,7 @@ use app\modules\forum\models\Board;
             <label class="control-label" for="board-name"><?= Yii::t('app', 'Category Name') ?></label>
             <?= $form->field($newBoard, 'name')->textInput(['maxlength' => 32])->label(false) ?>
 
+            <?php $newBoard->columns = 1 ?>
             <?= $form->field($newBoard, 'columns', ['options'=>['id' => 'sub-column']])
                 ->radioList(
                     [
@@ -137,8 +138,7 @@ use app\modules\forum\models\Board;
                         2 => Yii::t('app', 'Two'), 
                         3 => Yii::t('app', 'Three'), 
                         4 => Yii::t('app', 'Four'), 
-                    ],
-                    ['unselect' => 1]
+                    ]
                 )
             ?>
 

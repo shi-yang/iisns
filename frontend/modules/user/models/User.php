@@ -1,4 +1,9 @@
 <?php
+/**
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
+ */
 
 namespace app\modules\user\models;
 
@@ -22,6 +27,8 @@ use app\modules\home\models\Feed;
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $avatar
+ *
+ * @author Shiyang <dr@shiyang.me>
  */
 class User extends \common\models\User
 {
@@ -117,7 +124,6 @@ class User extends \common\models\User
      */
     public function getPosts()
     {
-        //return $this->hasMany(Post::className(), ['user_id' => 'id'])->orderBy('id DESC');
         $query = Post::find()->where(['user_id' => $this->id])->orderBy('id desc');
         $countQuery = clone $query;
         $pages = new \yii\data\Pagination(['totalCount' => $countQuery->count()]);

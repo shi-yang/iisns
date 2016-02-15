@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </div><!-- /.login-logo -->
     <div class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>
-        <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+        <?php $form = ActiveForm::begin(['id' => 'login-form', 'enableClientValidation' => false]); ?>
             <?= $form->field($model, 'username', [
                 'inputOptions' => [
                     'placeholder' => $model->getAttributeLabel('username'),
@@ -27,12 +27,16 @@ $this->params['breadcrumbs'][] = $this->title;
                     'placeholder' => $model->getAttributeLabel('password'),
                 ]
             ])->passwordInput()->label(false); ?>
+
+            <?= $form->field($model, 'verifyCode')->widget(\yii\captcha\Captcha::classname(), [
+                // configure additional widget properties here
+            ]) ?>
+
             <div class="row">
                 <div class="col-xs-4">
                     <?= Html::submitButton('Sign me in', ['class' => 'btn btn-primary btn-block btn-flat', 'name' => 'login-button']) ?>
                 </div><!-- /.col -->
             </div>
         <?php ActiveForm::end(); ?>
-        <a href="#">I forgot my password</a><br>
     </div><!-- /.login-box-body -->
 </div>

@@ -2,10 +2,13 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use app\assets\LightBoxAsset;
 use shiyang\masonry\Masonry;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\home\models\Album */
+
+LightBoxAsset::register($this);
 
 $this->title = $model->name . '_' . Yii::$app->setting->get('siteName');
 $this->params['title'] = $model->name;
@@ -13,8 +16,6 @@ $this->params['breadcrumb'][] = ['label' => Yii::t('app', 'Photos'), 'url' => ['
 $this->params['breadcrumb'][] = $model->name;
 $this->registerMetaTag(['name' => 'keywords', 'content' => $model->name . Yii::$app->setting->get('siteKeyword')]);
 $this->registerMetaTag(['name' => 'description', 'content' => $model->description]);
-$this->registerCssFile('@web/js/lightbox/css/lightbox.css');
-$this->registerJsFile('@web/js/lightbox/js/lightbox.min.js', ['depends' => ['yii\web\JqueryAsset'], 'position' => \yii\web\View::POS_END]);
 $this->registerCss('
 .no-photo {
     padding: 50px 50px 150px;

@@ -393,120 +393,6 @@
         "installation-source": "dist"
     },
     {
-        "name": "bower-asset/imagesloaded",
-        "version": "v3.1.8",
-        "version_normalized": "3.1.8.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/desandro/imagesloaded.git",
-            "reference": "c0125592020bdbbb36f7506ea41dbdebad644a45"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/desandro/imagesloaded/zipball/c0125592020bdbbb36f7506ea41dbdebad644a45",
-            "reference": "c0125592020bdbbb36f7506ea41dbdebad644a45",
-            "shasum": ""
-        },
-        "require": {
-            "bower-asset/eventemitter": "dev-4.x,|4.x",
-            "bower-asset/eventie": ">=1.0.4,<2"
-        },
-        "require-dev": {
-            "bower-asset/jquery": ">=1.9,<2.0",
-            "bower-asset/qunit": ">=1.10"
-        },
-        "type": "bower-asset-library",
-        "extra": {
-            "bower-asset-main": "imagesloaded.js",
-            "bower-asset-ignore": [
-                "**/.*",
-                "test",
-                "component.json",
-                "imagesloaded.jquery.json",
-                "package.json"
-            ]
-        },
-        "installation-source": "dist",
-        "description": "JavaScript is all like _You images done yet or what?_"
-    },
-    {
-        "name": "justinvoelker/yii2-tagging",
-        "version": "1.0.1",
-        "version_normalized": "1.0.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/justinvoelker/yii2-tagging.git",
-            "reference": "f62002d52c71d37b5dcf3a7a0336669af1f5b109"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/justinvoelker/yii2-tagging/zipball/f62002d52c71d37b5dcf3a7a0336669af1f5b109",
-            "reference": "f62002d52c71d37b5dcf3a7a0336669af1f5b109",
-            "shasum": ""
-        },
-        "require": {
-            "yiisoft/yii2": "*"
-        },
-        "time": "2015-02-15 04:28:26",
-        "type": "yii2-extension",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "justinvoelker\\tagging\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Justin Voelker",
-                "email": "justin@justinvoelker.com"
-            }
-        ],
-        "description": "Turn delimited data into tags",
-        "keywords": [
-            "tag",
-            "yii2"
-        ]
-    },
-    {
-        "name": "bower-asset/yii2-pjax",
-        "version": "v2.0.4",
-        "version_normalized": "2.0.4.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/yiisoft/jquery-pjax.git",
-            "reference": "3f20897307cca046fca5323b318475ae9dac0ca0"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/yiisoft/jquery-pjax/zipball/3f20897307cca046fca5323b318475ae9dac0ca0",
-            "reference": "3f20897307cca046fca5323b318475ae9dac0ca0",
-            "shasum": ""
-        },
-        "require": {
-            "bower-asset/jquery": ">=1.8"
-        },
-        "type": "bower-asset-library",
-        "extra": {
-            "bower-asset-main": "./jquery.pjax.js",
-            "bower-asset-ignore": [
-                ".travis.yml",
-                "Gemfile",
-                "Gemfile.lock",
-                "vendor/",
-                "script/",
-                "test/"
-            ]
-        },
-        "installation-source": "dist",
-        "license": [
-            "MIT"
-        ]
-    },
-    {
         "name": "yiisoft/yii2-imagine",
         "version": "2.0.3",
         "version_normalized": "2.0.3.0",
@@ -687,48 +573,6 @@
         "keywords": [
             "ui",
             "utility"
-        ]
-    },
-    {
-        "name": "shiyang/yii2-login-widget",
-        "version": "v1.0",
-        "version_normalized": "1.0.0.0",
-        "source": {
-            "type": "git",
-            "url": "git@github.com:shiyangDR/yii2-login-widget.git",
-            "reference": "3ea8521104d46f62cac6dae09b424404d870a2b1"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/shiyangDR/yii2-login-widget/zipball/3ea8521104d46f62cac6dae09b424404d870a2b1",
-            "reference": "3ea8521104d46f62cac6dae09b424404d870a2b1",
-            "shasum": ""
-        },
-        "require": {
-            "yiisoft/yii2": "*"
-        },
-        "time": "2015-02-10 15:53:34",
-        "type": "yii2-extension",
-        "installation-source": "source",
-        "autoload": {
-            "psr-4": {
-                "shiyang\\login\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Shiyang",
-                "email": "dr@shiyang.me"
-            }
-        ],
-        "description": "This extension provides a login portlet  that provides user login functionality.",
-        "keywords": [
-            "extension",
-            "yii2"
         ]
     },
     {
@@ -1128,107 +972,6 @@
         ]
     },
     {
-        "name": "yiisoft/yii2-bootstrap",
-        "version": "2.0.4",
-        "version_normalized": "2.0.4.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/yiisoft/yii2-bootstrap.git",
-            "reference": "1b6b1e61cf91c3cdd517d6a7e71d30bb212e4af0"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap/zipball/1b6b1e61cf91c3cdd517d6a7e71d30bb212e4af0",
-            "reference": "1b6b1e61cf91c3cdd517d6a7e71d30bb212e4af0",
-            "shasum": ""
-        },
-        "require": {
-            "bower-asset/bootstrap": "3.3.* | 3.2.* | 3.1.*",
-            "yiisoft/yii2": ">=2.0.4"
-        },
-        "time": "2015-05-10 22:08:17",
-        "type": "yii2-extension",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.0.x-dev"
-            },
-            "asset-installer-paths": {
-                "npm-asset-library": "vendor/npm",
-                "bower-asset-library": "vendor/bower"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "yii\\bootstrap\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Qiang Xue",
-                "email": "qiang.xue@gmail.com"
-            }
-        ],
-        "description": "The Twitter Bootstrap extension for the Yii framework",
-        "keywords": [
-            "bootstrap",
-            "yii2"
-        ]
-    },
-    {
-        "name": "yiisoft/yii2-debug",
-        "version": "2.0.4",
-        "version_normalized": "2.0.4.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/yiisoft/yii2-debug.git",
-            "reference": "5c7081b2be71c61d3a50d978b31edc3e0b6f2f97"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/5c7081b2be71c61d3a50d978b31edc3e0b6f2f97",
-            "reference": "5c7081b2be71c61d3a50d978b31edc3e0b6f2f97",
-            "shasum": ""
-        },
-        "require": {
-            "yiisoft/yii2": ">=2.0.4",
-            "yiisoft/yii2-bootstrap": "*"
-        },
-        "time": "2015-05-10 22:08:56",
-        "type": "yii2-extension",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.0.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "yii\\debug\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Qiang Xue",
-                "email": "qiang.xue@gmail.com"
-            }
-        ],
-        "description": "The debugger extension for the Yii framework",
-        "keywords": [
-            "debug",
-            "debugger",
-            "yii2"
-        ]
-    },
-    {
         "name": "yiisoft/yii2-gii",
         "version": "2.0.4",
         "version_normalized": "2.0.4.0",
@@ -1338,55 +1081,6 @@
         ]
     },
     {
-        "name": "yiisoft/yii2-composer",
-        "version": "2.0.3",
-        "version_normalized": "2.0.3.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/yiisoft/yii2-composer.git",
-            "reference": "ca8d23707ae47d20b0454e4b135c156f6da6d7be"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/ca8d23707ae47d20b0454e4b135c156f6da6d7be",
-            "reference": "ca8d23707ae47d20b0454e4b135c156f6da6d7be",
-            "shasum": ""
-        },
-        "require": {
-            "composer-plugin-api": "1.0.0"
-        },
-        "time": "2015-03-01 06:22:44",
-        "type": "composer-plugin",
-        "extra": {
-            "class": "yii\\composer\\Plugin",
-            "branch-alias": {
-                "dev-master": "2.0.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "yii\\composer\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Qiang Xue",
-                "email": "qiang.xue@gmail.com"
-            }
-        ],
-        "description": "The composer plugin for Yii extension installer",
-        "keywords": [
-            "composer",
-            "extension installer",
-            "yii2"
-        ]
-    },
-    {
         "name": "bower-asset/jquery.inputmask",
         "version": "3.1.63",
         "version_normalized": "3.1.63.0",
@@ -1441,18 +1135,104 @@
         ]
     },
     {
-        "name": "yiisoft/yii2",
-        "version": "2.0.5",
-        "version_normalized": "2.0.5.0",
+        "name": "bower-asset/bootstrap",
+        "version": "v3.3.5",
+        "version_normalized": "3.3.5.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/yiisoft/yii2-framework.git",
-            "reference": "ea8c13b9f5cd437bd7bf73cad8a3457a155f3727"
+            "url": "https://github.com/twbs/bootstrap.git",
+            "reference": "16b48259a62f576e52c903c476bd42b90ab22482"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/ea8c13b9f5cd437bd7bf73cad8a3457a155f3727",
-            "reference": "ea8c13b9f5cd437bd7bf73cad8a3457a155f3727",
+            "url": "https://api.github.com/repos/twbs/bootstrap/zipball/16b48259a62f576e52c903c476bd42b90ab22482",
+            "reference": "16b48259a62f576e52c903c476bd42b90ab22482",
+            "shasum": ""
+        },
+        "require": {
+            "bower-asset/jquery": ">=1.9.1"
+        },
+        "type": "bower-asset-library",
+        "extra": {
+            "bower-asset-main": [
+                "less/bootstrap.less",
+                "dist/js/bootstrap.js"
+            ],
+            "bower-asset-ignore": [
+                "/.*",
+                "_config.yml",
+                "CNAME",
+                "composer.json",
+                "CONTRIBUTING.md",
+                "docs",
+                "js/tests",
+                "test-infra"
+            ]
+        },
+        "installation-source": "dist",
+        "license": [
+            "MIT"
+        ],
+        "description": "The most popular front-end framework for developing responsive, mobile first projects on the web.",
+        "keywords": [
+            "css",
+            "framework",
+            "front-end",
+            "js",
+            "less",
+            "mobile-first",
+            "responsive",
+            "web"
+        ]
+    },
+    {
+        "name": "bower-asset/yii2-pjax",
+        "version": "v2.0.5",
+        "version_normalized": "2.0.5.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yiisoft/jquery-pjax.git",
+            "reference": "6818718408086db6bdcf33649cecb86b6b4f9b67"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yiisoft/jquery-pjax/zipball/6818718408086db6bdcf33649cecb86b6b4f9b67",
+            "reference": "6818718408086db6bdcf33649cecb86b6b4f9b67",
+            "shasum": ""
+        },
+        "require": {
+            "bower-asset/jquery": ">=1.8"
+        },
+        "type": "bower-asset-library",
+        "extra": {
+            "bower-asset-main": "./jquery.pjax.js",
+            "bower-asset-ignore": [
+                ".travis.yml",
+                "Gemfile",
+                "Gemfile.lock",
+                "vendor/",
+                "script/",
+                "test/"
+            ]
+        },
+        "installation-source": "dist",
+        "license": [
+            "MIT"
+        ]
+    },
+    {
+        "name": "yiisoft/yii2",
+        "version": "2.0.6",
+        "version_normalized": "2.0.6.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yiisoft/yii2-framework.git",
+            "reference": "f42b2eb80f61992438661b01d0d74c6738e2ff38"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/f42b2eb80f61992438661b01d0d74c6738e2ff38",
+            "reference": "f42b2eb80f61992438661b01d0d74c6738e2ff38",
             "shasum": ""
         },
         "require": {
@@ -1467,7 +1247,7 @@
             "php": ">=5.4.0",
             "yiisoft/yii2-composer": "*"
         },
-        "time": "2015-07-11 02:37:59",
+        "time": "2015-08-05 22:00:30",
         "bin": [
             "yii"
         ],
@@ -1531,22 +1311,165 @@
         ]
     },
     {
-        "name": "bower-asset/outlayer",
-        "version": "v1.4.1",
-        "version_normalized": "1.4.1.0",
+        "name": "justinvoelker/yii2-tagging",
+        "version": "1.0.2",
+        "version_normalized": "1.0.2.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/metafizzy/outlayer.git",
-            "reference": "03e374cbad2239bd83bb81af2ff27b175c2c76d3"
+            "url": "https://github.com/justinvoelker/yii2-tagging.git",
+            "reference": "1e8a93e3a1e34e386bd0c48631fd06d54bb9e0c2"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/metafizzy/outlayer/zipball/03e374cbad2239bd83bb81af2ff27b175c2c76d3",
-            "reference": "03e374cbad2239bd83bb81af2ff27b175c2c76d3",
+            "url": "https://api.github.com/repos/justinvoelker/yii2-tagging/zipball/1e8a93e3a1e34e386bd0c48631fd06d54bb9e0c2",
+            "reference": "1e8a93e3a1e34e386bd0c48631fd06d54bb9e0c2",
             "shasum": ""
         },
         "require": {
-            "bower-asset/doc-ready": "dev-1.0.x,|1.0.x",
+            "yiisoft/yii2": "*"
+        },
+        "time": "2015-08-03 16:26:25",
+        "type": "yii2-extension",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "justinvoelker\\tagging\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Justin Voelker",
+                "email": "justin@justinvoelker.com"
+            }
+        ],
+        "description": "Turn delimited data into tags",
+        "keywords": [
+            "tag",
+            "yii2"
+        ]
+    },
+    {
+        "name": "yiisoft/yii2-bootstrap",
+        "version": "2.0.5",
+        "version_normalized": "2.0.5.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yiisoft/yii2-bootstrap.git",
+            "reference": "1464f93834b1d5edb1f5625f7ffd6c3723fa4923"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap/zipball/1464f93834b1d5edb1f5625f7ffd6c3723fa4923",
+            "reference": "1464f93834b1d5edb1f5625f7ffd6c3723fa4923",
+            "shasum": ""
+        },
+        "require": {
+            "bower-asset/bootstrap": "3.3.* | 3.2.* | 3.1.*",
+            "yiisoft/yii2": ">=2.0.6"
+        },
+        "time": "2015-09-23 17:48:24",
+        "type": "yii2-extension",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.0.x-dev"
+            },
+            "asset-installer-paths": {
+                "npm-asset-library": "vendor/npm",
+                "bower-asset-library": "vendor/bower"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "yii\\bootstrap\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Qiang Xue",
+                "email": "qiang.xue@gmail.com"
+            }
+        ],
+        "description": "The Twitter Bootstrap extension for the Yii framework",
+        "keywords": [
+            "bootstrap",
+            "yii2"
+        ]
+    },
+    {
+        "name": "yiisoft/yii2-debug",
+        "version": "2.0.5",
+        "version_normalized": "2.0.5.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yiisoft/yii2-debug.git",
+            "reference": "1b302e67521d46feb2413d9d96ca94ed82b39b0e"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/1b302e67521d46feb2413d9d96ca94ed82b39b0e",
+            "reference": "1b302e67521d46feb2413d9d96ca94ed82b39b0e",
+            "shasum": ""
+        },
+        "require": {
+            "yiisoft/yii2": ">=2.0.4",
+            "yiisoft/yii2-bootstrap": "*"
+        },
+        "time": "2015-08-06 16:14:06",
+        "type": "yii2-extension",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "yii\\debug\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Qiang Xue",
+                "email": "qiang.xue@gmail.com"
+            }
+        ],
+        "description": "The debugger extension for the Yii framework",
+        "keywords": [
+            "debug",
+            "debugger",
+            "yii2"
+        ]
+    },
+    {
+        "name": "bower-asset/outlayer",
+        "version": "v1.4.2",
+        "version_normalized": "1.4.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/metafizzy/outlayer.git",
+            "reference": "2c7f1108a3d906df7ef3f03cda0a3d76791f186b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/metafizzy/outlayer/zipball/2c7f1108a3d906df7ef3f03cda0a3d76791f186b",
+            "reference": "2c7f1108a3d906df7ef3f03cda0a3d76791f186b",
+            "shasum": ""
+        },
+        "require": {
+            "bower-asset/doc-ready": "dev-1.0.x|1.0.x",
             "bower-asset/eventemitter": ">=4.2,<5",
             "bower-asset/eventie": "~1.0.3",
             "bower-asset/fizzy-ui-utils": "~1.0.1",
@@ -1556,7 +1479,7 @@
         },
         "require-dev": {
             "bower-asset/jquery": ">=1.4.3,<2",
-            "bower-asset/jquery-bridget": "dev-1.x,|1.x",
+            "bower-asset/jquery-bridget": "dev-1.x|1.x",
             "bower-asset/qunit": ">=1.12.0,<2.0.0"
         },
         "type": "bower-asset-library",
@@ -1589,17 +1512,17 @@
     },
     {
         "name": "bower-asset/masonry",
-        "version": "v3.3.1",
-        "version_normalized": "3.3.1.0",
+        "version": "v3.3.2",
+        "version_normalized": "3.3.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/desandro/masonry.git",
-            "reference": "1e9d69774f11d86fb82e93f034804918259bfe94"
+            "reference": "556d44869268c5e308676386aa30bf4bad4c0a5a"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/desandro/masonry/zipball/1e9d69774f11d86fb82e93f034804918259bfe94",
-            "reference": "1e9d69774f11d86fb82e93f034804918259bfe94",
+            "url": "https://api.github.com/repos/desandro/masonry/zipball/556d44869268c5e308676386aa30bf4bad4c0a5a",
+            "reference": "556d44869268c5e308676386aa30bf4bad4c0a5a",
             "shasum": ""
         },
         "require": {
@@ -1608,9 +1531,9 @@
             "bower-asset/outlayer": "~1.4.0"
         },
         "require-dev": {
-            "bower-asset/doc-ready": "dev-1.x,|1.x",
+            "bower-asset/doc-ready": "dev-1.x|1.x",
             "bower-asset/jquery": ">=1.4.3,<2",
-            "bower-asset/jquery-bridget": "dev-1.1.x,|1.1.x",
+            "bower-asset/jquery-bridget": "dev-1.1.x|1.1.x",
             "bower-asset/qunit": ">=1.12.0,<2.0.0"
         },
         "type": "bower-asset-library",
@@ -1641,75 +1564,217 @@
         ]
     },
     {
-        "name": "bower-asset/bootstrap",
-        "version": "v3.3.5",
-        "version_normalized": "3.3.5.0",
+        "name": "mrclay/minify",
+        "version": "2.2.1",
+        "version_normalized": "2.2.1.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/twbs/bootstrap.git",
-            "reference": "16b48259a62f576e52c903c476bd42b90ab22482"
+            "url": "https://github.com/mrclay/minify.git",
+            "reference": "3c11ba8232a2155a1a29552aafc528be5fb0a662"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/twbs/bootstrap/zipball/16b48259a62f576e52c903c476bd42b90ab22482",
-            "reference": "16b48259a62f576e52c903c476bd42b90ab22482",
+            "url": "https://api.github.com/repos/mrclay/minify/zipball/3c11ba8232a2155a1a29552aafc528be5fb0a662",
+            "reference": "3c11ba8232a2155a1a29552aafc528be5fb0a662",
             "shasum": ""
         },
         "require": {
-            "bower-asset/jquery": ">=1.9.1"
+            "ext-pcre": "*",
+            "php": ">=5.2.1"
         },
-        "type": "bower-asset-library",
-        "extra": {
-            "bower-asset-main": [
-                "less/bootstrap.less",
-                "dist/js/bootstrap.js"
-            ],
-            "bower-asset-ignore": [
-                "/.*",
-                "_config.yml",
-                "CNAME",
-                "composer.json",
-                "CONTRIBUTING.md",
-                "docs",
-                "js/tests",
-                "test-infra"
+        "require-dev": {
+            "tubalmartin/cssmin": "~2.4.8"
+        },
+        "suggest": {
+            "tubalmartin/cssmin": "Support minify with CSSMin (YUI PHP port)"
+        },
+        "time": "2014-10-30 22:58:02",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "min/lib/"
             ]
         },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Stephen Clay",
+                "email": "steve@mrclay.org",
+                "role": "Developer"
+            }
+        ],
+        "description": "Minify is a PHP5 app that helps you follow several rules for client-side performance. It combines multiple CSS or Javascript files, removes unnecessary whitespace and comments, and serves them with gzip encoding and optimal client-side cache headers",
+        "homepage": "http://code.google.com/p/minify/"
+    },
+    {
+        "name": "natxet/CssMin",
+        "version": "v3.0.4",
+        "version_normalized": "3.0.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/natxet/CssMin.git",
+            "reference": "92de3fe3ccb4f8298d31952490ef7d5395855c39"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/natxet/CssMin/zipball/92de3fe3ccb4f8298d31952490ef7d5395855c39",
+            "reference": "92de3fe3ccb4f8298d31952490ef7d5395855c39",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.0"
+        },
+        "time": "2015-09-25 11:13:11",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.0-dev"
+            }
+        },
         "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "src/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
         "license": [
             "MIT"
         ],
-        "description": "The most popular front-end framework for developing responsive, mobile first projects on the web.",
+        "authors": [
+            {
+                "name": "Joe Scylla",
+                "email": "joe.scylla@gmail.com",
+                "homepage": "https://profiles.google.com/joe.scylla"
+            }
+        ],
+        "description": "Minifying CSS",
+        "homepage": "http://code.google.com/p/cssmin/",
         "keywords": [
             "css",
-            "framework",
-            "front-end",
-            "js",
-            "less",
-            "mobile-first",
-            "responsive",
-            "web"
+            "minify"
+        ]
+    },
+    {
+        "name": "tedivm/jshrink",
+        "version": "v1.1.0",
+        "version_normalized": "1.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/tedious/JShrink.git",
+            "reference": "688527a2e854d7935f24f24c7d5eb1b604742bf9"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/tedious/JShrink/zipball/688527a2e854d7935f24f24c7d5eb1b604742bf9",
+            "reference": "688527a2e854d7935f24f24c7d5eb1b604742bf9",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "fabpot/php-cs-fixer": "0.4.0",
+            "phpunit/phpunit": "4.0.*",
+            "satooshi/php-coveralls": "dev-master"
+        },
+        "time": "2015-07-04 07:35:09",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "JShrink": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Robert Hafner",
+                "email": "tedivm@tedivm.com"
+            }
+        ],
+        "description": "Javascript Minifier built in PHP",
+        "homepage": "http://github.com/tedious/JShrink",
+        "keywords": [
+            "javascript",
+            "minifier"
+        ]
+    },
+    {
+        "name": "yiisoft/yii2-composer",
+        "version": "2.0.4",
+        "version_normalized": "2.0.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yiisoft/yii2-composer.git",
+            "reference": "7452fd908a5023b8bb5ea1b123a174ca080de464"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/7452fd908a5023b8bb5ea1b123a174ca080de464",
+            "reference": "7452fd908a5023b8bb5ea1b123a174ca080de464",
+            "shasum": ""
+        },
+        "require": {
+            "composer-plugin-api": "^1.0"
+        },
+        "time": "2016-02-06 00:49:24",
+        "type": "composer-plugin",
+        "extra": {
+            "class": "yii\\composer\\Plugin",
+            "branch-alias": {
+                "dev-master": "2.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "yii\\composer\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Qiang Xue",
+                "email": "qiang.xue@gmail.com"
+            }
+        ],
+        "description": "The composer plugin for Yii extension installer",
+        "keywords": [
+            "composer",
+            "extension installer",
+            "yii2"
         ]
     },
     {
         "name": "shiyang/yii2-umeditor",
-        "version": "v1.0",
-        "version_normalized": "1.0.0.0",
+        "version": "v1.2",
+        "version_normalized": "1.2.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/shi-yang/yii2-umeditor.git",
-            "reference": "a509856623f7c874323f1a4edfdc196cf1f54301"
+            "reference": "755c8139ff7a8fa04ba83bb03d7bfbb378509ea9"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/shi-yang/yii2-umeditor/zipball/a509856623f7c874323f1a4edfdc196cf1f54301",
-            "reference": "a509856623f7c874323f1a4edfdc196cf1f54301",
+            "url": "https://api.github.com/repos/shi-yang/yii2-umeditor/zipball/755c8139ff7a8fa04ba83bb03d7bfbb378509ea9",
+            "reference": "755c8139ff7a8fa04ba83bb03d7bfbb378509ea9",
             "shasum": ""
         },
         "require": {
             "yiisoft/yii2": "*"
         },
-        "time": "2015-07-17 16:29:31",
+        "time": "2016-02-01 10:47:37",
         "type": "yii2-extension",
         "installation-source": "dist",
         "autoload": {
@@ -1731,6 +1796,182 @@
         "keywords": [
             "extension",
             "umeditor",
+            "yii2"
+        ]
+    },
+    {
+        "name": "bower-asset/ev-emitter",
+        "version": "v1.0.1",
+        "version_normalized": "1.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/metafizzy/ev-emitter.git",
+            "reference": "a590dbd7be3ebe98a0bc8635938f666e2e8f13f7"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/metafizzy/ev-emitter/zipball/a590dbd7be3ebe98a0bc8635938f666e2e8f13f7",
+            "reference": "a590dbd7be3ebe98a0bc8635938f666e2e8f13f7",
+            "shasum": ""
+        },
+        "type": "bower-asset-library",
+        "extra": {
+            "bower-asset-main": "ev-emitter.js",
+            "bower-asset-ignore": [
+                "**/.*",
+                "node_modules",
+                "bower_components",
+                "test",
+                "tests",
+                "sandbox"
+            ]
+        },
+        "installation-source": "dist",
+        "license": [
+            "MIT"
+        ],
+        "description": "lil' event emitter",
+        "keywords": [
+            "emitter",
+            "event",
+            "pubsub"
+        ]
+    },
+    {
+        "name": "bower-asset/imagesloaded",
+        "version": "v4.1.0",
+        "version_normalized": "4.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/desandro/imagesloaded.git",
+            "reference": "eb483b9b5e1edcc06daa6bb980810b4accd406f0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/desandro/imagesloaded/zipball/eb483b9b5e1edcc06daa6bb980810b4accd406f0",
+            "reference": "eb483b9b5e1edcc06daa6bb980810b4accd406f0",
+            "shasum": ""
+        },
+        "require": {
+            "bower-asset/ev-emitter": "~1.0.0"
+        },
+        "require-dev": {
+            "bower-asset/jquery": ">=1.9,<4.0",
+            "bower-asset/qunit": "~1.20.0"
+        },
+        "type": "bower-asset-library",
+        "extra": {
+            "bower-asset-main": "imagesloaded.js",
+            "bower-asset-ignore": [
+                "**/.*",
+                "test",
+                "package.json",
+                "node_modules",
+                "bower_components",
+                "tests",
+                "sandbox/",
+                "contributing.md"
+            ]
+        },
+        "installation-source": "dist",
+        "license": [
+            "MIT"
+        ],
+        "description": "JavaScript is all like _You images done yet or what?_",
+        "keywords": [
+            "images"
+        ]
+    },
+    {
+        "name": "iisns/yii2-assets-compress",
+        "version": "v1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/iisns/yii2-assets-compress.git",
+            "reference": "37009a8b0f4b3bcdd417b223db0d3fb6e9c26034"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/iisns/yii2-assets-compress/zipball/37009a8b0f4b3bcdd417b223db0d3fb6e9c26034",
+            "reference": "37009a8b0f4b3bcdd417b223db0d3fb6e9c26034",
+            "shasum": ""
+        },
+        "require": {
+            "mrclay/minify": "*",
+            "natxet/cssmin": "*",
+            "tedivm/jshrink": "*",
+            "yiisoft/yii2": "*"
+        },
+        "time": "2016-02-12 14:59:50",
+        "type": "yii2-extension",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "iisns\\assets\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Shiyang",
+                "email": "dr@shiyang.me"
+            }
+        ],
+        "description": "This solution enables you to dynamically combine js and css files to optimize the html page.",
+        "keywords": [
+            "JS",
+            "assets",
+            "compress",
+            "css",
+            "iisns",
+            "yii2"
+        ]
+    },
+    {
+        "name": "iisns/yii2-webuploader",
+        "version": "v1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/iisns/yii2-webuploader.git",
+            "reference": "b7d282aaf43f1fda098787db6fa4c9dba917169a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/iisns/yii2-webuploader/zipball/b7d282aaf43f1fda098787db6fa4c9dba917169a",
+            "reference": "b7d282aaf43f1fda098787db6fa4c9dba917169a",
+            "shasum": ""
+        },
+        "require": {
+            "yiisoft/yii2": "*"
+        },
+        "time": "2016-02-13 11:19:26",
+        "type": "yii2-extension",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "iisns\\webuploader\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Shiyang",
+                "email": "dr@shiyang.me"
+            }
+        ],
+        "description": "WebUploader是一个简单的以Html5为主，Flash为辅的现代文件上传组件。在现代的浏览器里面能充分发挥html5的优势，同时又不摒弃主流IE浏览器，延用原来的Flash运行时。两套运行时，同样的调用方式，可供用户任意选用。WebUploader采用大文件分片并发上传，极大的提高了文件上传效率。",
+        "keywords": [
+            "iisns",
+            "upload",
+            "webuploader",
             "yii2"
         ]
     }

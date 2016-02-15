@@ -1,4 +1,10 @@
 <?php
+/**
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
+ */
+ 
 namespace frontend\controllers;
 
 use Yii;
@@ -15,6 +21,8 @@ Yii::setAlias('photo', '@web/uploads/home/photo/');
 
 /**
  * Explore controller
+ *
+ * @author Shiyang <dr@shiyang.me>
  */
 class ExploreController extends BaseController
 {
@@ -22,46 +30,22 @@ class ExploreController extends BaseController
 
     public function actionIndex()
     {
-        $albums = new Query;
-        $albums = $albums->select('h.id, h.name')
-            ->from('{{%home_album}} as h')
-            ->join('LEFT JOIN','{{%explore_recommend}} as e', 'e.table_id=h.id')
-            ->where(['e.category' => 'album'])
-            ->all();
-
         $forums = new Query;
-        $forums->select('f.forum_name, f.forum_url, f.forum_desc, f.forum_icon')
-            ->from('{{%forum}} as f')
-            ->join('LEFT JOIN','{{%explore_recommend}} as e', 'e.table_id=f.id')
-            ->where(['e.category' => 'forum']);
+        $forums->select('forum_url,forum_name,forum_desc,forum_icon')
+            ->from('{{%forum}}')
+            ->where('status=1')
+            ->orderBy('id DESC');
         $forums = Yii::$app->tools->Pagination($forums);
 
-        $posts = new Query;
-        $posts->select('e.id, title, summary, content, view_count, e.created_at, e.username, u.username as author, table_id, table_name')
-            ->from('{{%explore_recommend}} as e')
-            ->join('LEFT JOIN','{{%user}} as u', 'u.id=e.user_id')
-            ->where(['category' => 'post'])
-            ->orderBy('e.id DESC');
-        $posts = Yii::$app->tools->Pagination($posts, 10);
+        if (!Yii::$app->user->isGuest) {
+            $myForums = Yii::$app->db->createCommand('SELECT forum_url, forum_name, forum_icon, status FROM {{%forum}} WHERE user_id=' . Yii::$app->user->id)->queryAll();
+        } else {
+            $myForums = null;
+        }
 
         return $this->render('index', [
             'forums' => $forums,
-            'albums' => $albums,
-            'posts' => $posts,
-        ]);
-    }
-
-    public function actionForums()
-    {
-        $query = new Query;
-        $query->select('forum_url,forum_name,forum_desc,forum_icon')
-            ->from('{{%forum}}')
-            ->orderBy('id DESC');
-        $forumResult = Yii::$app->tools->Pagination($query);
-
-        return $this->render('forums', [
-            'forums' => $forumResult['result'],
-            'pages' => $forumResult['pages'],
+            'myForums' => $myForums
         ]);
     }
 
@@ -71,11 +55,13 @@ class ExploreController extends BaseController
         $query->select('e.id, title, content, e.created_at, u.username, u.avatar')
             ->from('{{%home_post}} as e')
             ->join('LEFT JOIN','{{%user}} as u', 'u.id=e.user_id')
+            ->where('e.explore_status=1')
             ->orderBy('e.id DESC');
+            
         //按标签查询出文章
         if (Yii::$app->request->isGet) {
             $tag = Yii::$app->request->get('tag');
-            $query->where('tags LIKE :tag', [':tag' => '%' . $tag . '%']);
+            $query->where('tags LIKE :tag', [':tag' => '%' . $tag . '%'])->andWhere('explore_status=1');
         }
         $posts = Yii::$app->tools->Pagination($query, 10);
 
@@ -83,6 +69,7 @@ class ExploreController extends BaseController
         $query = new TaggingQuery;
         $tags = $query->select('tags')
             ->from('{{%home_post}}')
+            ->where('explore_status=1')
             ->limit(10)
             ->displaySort(['freq' => SORT_DESC])
             ->getTags();

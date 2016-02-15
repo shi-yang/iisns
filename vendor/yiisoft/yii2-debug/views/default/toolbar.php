@@ -29,7 +29,6 @@ $url = $firstPanel->getUrl();
     <div class="yii-debug-toolbar-block title">
         <a href="<?= Url::to(['index']) ?>">
             <img width="29" height="30" alt="" src="<?= \yii\debug\Module::getYiiLogo() ?>">
-            Yii Debugger
         </a>
     </div>
 

@@ -1,16 +1,22 @@
 <?php
+/**
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
+ */
 
 namespace app\modules\user\controllers;
 
 use Yii;
-use yii\data\Pagination;
 use yii\filters\AccessControl;
 use yii\db\Query;
 use app\modules\user\models\User;
-use app\modules\home\models\Post;
 use app\modules\home\models\Feed;
 use common\components\BaseController;
 
+/** 
+ *@author Shiyang <dr@shiyang.me>
+ */
 class DashboardController extends BaseController
 {
     public $layout='dashboard';
@@ -48,7 +54,6 @@ class DashboardController extends BaseController
         $newFeed = new Feed;
         $newFeed->setScenario('create');
         if ($newFeed->load(Yii::$app->request->post()) && $newFeed->save()) {
-            Yii::$app->userData->updateKey('feed_count', Yii::$app->user->id);
             return $this->refresh();
         }
 

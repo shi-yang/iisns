@@ -1,4 +1,9 @@
 <?php
+/**
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
+ */
 
 namespace frontend\models;
 
@@ -7,6 +12,8 @@ use yii\base\Model;
 
 /**
  * ContactForm is the model behind the contact form.
+ *
+ * @author Shiyang <dr@shiyang.me>
  */
 class ContactForm extends Model
 {

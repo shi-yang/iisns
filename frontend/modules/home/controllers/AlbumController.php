@@ -1,4 +1,9 @@
 <?php
+/**
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
+ */
 
 namespace app\modules\home\controllers;
 
@@ -13,6 +18,8 @@ use yii\filters\AccessControl;
 
 /**
  * AlbumController implements the CRUD actions for Album model.
+ *
+ * @author Shiyang <dr@shiyang.me>
  */
 class AlbumController extends BaseController
 {

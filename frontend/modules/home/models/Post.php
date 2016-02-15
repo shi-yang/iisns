@@ -1,9 +1,15 @@
 <?php
+/**
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
+ */
 
 namespace app\modules\home\models;
 
 use Yii;
 use yii\helpers\Url;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "{{%home_post}}".
@@ -15,9 +21,15 @@ use yii\helpers\Url;
  * @property integer $created_at
  * @property integer $updated_at
  * @property integer $user_id
+ * @property string $status
+ * @property integer $explore_status
+ *
+ * @author Shiyang <dr@shiyang.me>
  */
 class Post extends \yii\db\ActiveRecord
 {
+    const STATUS_PUBLIC = 'public';
+    const STATUS_PRIVATE = 'private';
     /**
      * @inheritdoc
      */
@@ -33,7 +45,7 @@ class Post extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'content'], 'required'],
-            [['content', 'tags'], 'string'],
+            [['content', 'tags', 'status'], 'string'],
             [['created_at', 'updated_at', 'user_id'], 'integer'],
             [['title'], 'string', 'max' => 80]
         ];
@@ -52,6 +64,7 @@ class Post extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app', 'Create Time'),
             'updated_at' => Yii::t('app', 'Update Time'),
             'user_id' => Yii::t('app', 'User ID'),
+            'status' => Yii::t('app', 'Status')
         ];
     }
 
@@ -65,6 +78,7 @@ class Post extends \yii\db\ActiveRecord
             if ($this->isNewRecord) {
                 $this->user_id = Yii::$app->user->id;
                 $this->created_at = time();
+                Yii::$app->userData->updateKey('post_count', Yii::$app->user->id);
             }
             //标签分割
             $tags = trim($this->tags);
@@ -82,7 +96,7 @@ class Post extends \yii\db\ActiveRecord
      */
     public function getUrl()
     {       
-        return Url::toRoute(['/user/view/post-view', 'id' => $this->id]);
+        return Url::toRoute(['/user/view/view-post', 'id' => $this->id]);
     }
 
     public function getUser()

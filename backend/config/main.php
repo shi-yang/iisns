@@ -57,6 +57,7 @@ return [
             'site/login',
             'site/logout',
             'site/error',
+            'site/captcha'
             //'rbac/*'
             // The actions listed here will be allowed to everyone including guests.
         ]

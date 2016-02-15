@@ -1,4 +1,9 @@
 <?php
+/**
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
+ */
 
 namespace app\modules\forum\controllers;
 
@@ -14,6 +19,8 @@ use yii\data\Pagination;
 
 /**
  * ThreadController implements the CRUD actions for Thread model.
+ *
+ * @author Shiyang <dr@shiyang.me>
  */
 class ThreadController extends BaseController
 {
@@ -117,9 +124,7 @@ class ThreadController extends BaseController
         if ($model->user_id === Yii::$app->user->id || $model->board['user_id'] == Yii::$app->user->id) {
             $board_id = $model->board_id;
             Post::deleteAll(['thread_id' => $model->id]);
-            $model->delete();
-            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Deleted successfully.'));
-            return $this->redirect(['/forum/board/view', 'id' => $board_id]);
+            return $model->delete();
         } else {
             throw new ForbiddenHttpException('You are not allowed to perform this action.');
         }

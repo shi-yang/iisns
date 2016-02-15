@@ -35,9 +35,25 @@ class PostController extends BaseController
         $searchModel = new PostSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        if (Yii::$app->request->isPost) {
+            $result = Yii::$app->request->post('selection');
+            foreach ($result as $v) {
+                $model = $this->findModel($v);
+                if (isset($_POST['review']) && $_POST['review'] == 'APPROVED') {
+                    $model->explore_status = Post::EXPLORE_STATUS_APPROVED;
+                    Yii::$app->getSession()->setFlash('success', '操作审核成功');
+                } else {
+                    $model->explore_status = Post::EXPLORE_STATUS_PENDING;
+                    Yii::$app->getSession()->setFlash('success', '下架成功');
+                }
+                $model->save(); 
+            }
+            return $this->redirect(['index']);
+        }
+
         return $this->render('index', [
-            'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 

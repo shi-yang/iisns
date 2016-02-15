@@ -1,4 +1,9 @@
 <?php
+/**
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
+ */
 
 namespace app\modules\user\models;
 
@@ -14,6 +19,8 @@ use Yii;
  * @property integer $follower_count
  * @property integer $unread_notice_count
  * @property integer $unread_message_count
+ *
+ * @author Shiyang <dr@shiyang.me>
  */
 class UserData extends \yii\db\ActiveRecord
 {

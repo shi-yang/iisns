@@ -1,4 +1,9 @@
 <?php
+/**
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
+ */
 
 namespace app\modules\forum\models;
 
@@ -17,6 +22,8 @@ use yii\db\Query;
  * @property integer $forum_id
  * @property integer $columns
  * @property integer $user_id
+ *
+ * @author Shiyang <dr@shiyang.me>
  */
 class Board extends \yii\db\ActiveRecord
 {
@@ -92,11 +99,6 @@ class Board extends \yii\db\ActiveRecord
         return Yii::$app->db
             ->createCommand("SELECT forum_url,forum_name,user_id FROM {{%forum}} WHERE id={$this->forum_id}")
             ->queryOne();
-    }
-
-    public function getForumModel()
-    {
-        return $this->hasOne(Forum::className(), ['id' => 'forum_id']);
     }
     
     public function isOneBoard()

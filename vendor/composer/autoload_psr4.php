@@ -17,9 +17,10 @@ return array(
     'yii\\' => array($vendorDir . '/yiisoft/yii2'),
     'shiyang\\umeditor\\' => array($vendorDir . '/shiyang/yii2-umeditor'),
     'shiyang\\masonry\\' => array($vendorDir . '/shiyang/yii2-masonry'),
-    'shiyang\\login\\' => array($vendorDir . '/shiyang/yii2-login-widget'),
     'shiyang\\infinitescroll\\' => array($vendorDir . '/shiyang/yii2-infinite-scroll'),
     'justinvoelker\\tagging\\' => array($vendorDir . '/justinvoelker/yii2-tagging'),
+    'iisns\\webuploader\\' => array($vendorDir . '/iisns/yii2-webuploader'),
+    'iisns\\assets\\' => array($vendorDir . '/iisns/yii2-assets-compress'),
     'cebe\\markdown\\' => array($vendorDir . '/cebe/markdown'),
     'Faker\\' => array($vendorDir . '/fzaninotto/faker/src/Faker'),
 );

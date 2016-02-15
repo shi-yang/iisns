@@ -1,5 +1,9 @@
 <?php
 /**
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
+ *
  * 一个 umeditor 上传类，用来上传文件
  * @see https://github.com/fex-team/umeditor/blob/dev/php/Uploader.class.php
  */

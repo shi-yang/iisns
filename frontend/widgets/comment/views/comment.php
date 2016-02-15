@@ -6,7 +6,7 @@ use yii\helpers\HtmlPurifier;
 use yii\widgets\LinkPager;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Comment */
+/* @var $model app\widgets\comment\models\Comment */
 /* @var $form yii\widgets\ActiveForm */
 
 $this->registerJs('
@@ -23,16 +23,23 @@ $this->registerJs('
         return false;
     });
 ');
-?>
-
-<style type="text/css">
+$this->registerCss('
     .comment-all {
-        padding: 10px;
+        padding: 20px;
         background-color: #fff;
     }
-</style>
+    .comment-all header {
+        margin-bottom: 21px;
+    }
+    .comment-all header span {
+        border-bottom:1px solid #ccc; line-height:22px;
+        font-size: 1.6em
+    }
+');
+?>
 
 <div class="comment-all">
+    <header><span><?= Yii::t('app', 'Comment') ?></span></header>
     <ul class="media-list">
         <?php foreach ($commentList as $comment): ?>
         <li class="media" data-key="<?= $comment['id'] ?>">
@@ -86,19 +93,19 @@ $this->registerJs('
             'pagination' => $pages
         ]) ?>
     </ul>
-</div>
-<div class="new-comment-form">
-    <?php $form = ActiveForm::begin(['enableClientValidation' => false]); ?>
-    <?= $form->field($newComment, 'content')->widget('shiyang\umeditor\UMeditor', [
-        'clientOptions' => [
-            'initialFrameHeight' => 100,
-            'toolbar' => ['emotion image video'],
-        ]
-    ])->label(false) ?>
-    <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Reply'), ['class' => 'btn btn-success']) ?>
+    <div class="new-comment-form">
+        <?php $form = ActiveForm::begin(['enableClientValidation' => false]); ?>
+        <?= $form->field($newComment, 'content')->widget('shiyang\umeditor\UMeditor', [
+            'clientOptions' => [
+                'initialFrameHeight' => 100,
+                'toolbar' => ['emotion image video'],
+            ]
+        ])->label(false) ?>
+        <div class="form-group">
+            <?= Html::submitButton(Yii::t('app', 'Reply'), ['class' => 'btn btn-success']) ?>
+        </div>
+        <?php ActiveForm::end(); ?>
     </div>
-    <?php ActiveForm::end(); ?>
 </div>
 <div class="comment-form hidden">
     <?php $form = ActiveForm::begin(['enableClientValidation' => false]); ?>

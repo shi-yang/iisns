@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
-use yii\bootstrap\Modal;
 
 /* @var $this yii\web\View */
 /* @var $profile app\modules\user\models\Profile */
@@ -55,7 +54,7 @@ use yii\bootstrap\Modal;
         <div class="clearfix"></div>
         <div class="form-group">
             <div class="col-md-12">
-                <?= \shiyang\webuploader\Cropper::widget() ?>
+                <?= \iisns\webuploader\Cropper::widget() ?>
             </div>
             <div class="col-md-12">
                 <a id="set-avatar" class="btn btn-success btn-lg" href="<?= Url::toRoute(['/user/setting/avatar']) ?>" onclick="return false;">

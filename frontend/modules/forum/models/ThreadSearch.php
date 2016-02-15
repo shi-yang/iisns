@@ -1,4 +1,9 @@
 <?php
+/**
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
+ */
 
 namespace app\modules\forum\models;
 
@@ -9,6 +14,8 @@ use app\modules\forum\models\Thread;
 
 /**
  * ThreadSearch represents the model behind the search form about `app\modules\forum\models\Thread`.
+ *
+ * @author Shiyang <dr@shiyang.me>
  */
 class ThreadSearch extends Thread
 {

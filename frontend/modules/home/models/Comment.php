@@ -1,4 +1,9 @@
 <?php
+/**
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
+ */
 
 namespace app\modules\home\models;
 
@@ -14,6 +19,8 @@ use Yii;
  * @property string $email
  * @property integer $post_id
  * @property integer $user_id
+ *
+ * @author Shiyang <dr@shiyang.me>
  */
 class Comment extends \yii\db\ActiveRecord
 {

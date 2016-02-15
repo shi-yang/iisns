@@ -1,4 +1,10 @@
 <?php
+/**
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
+ */
+ 
 namespace frontend\controllers;
 
 use Yii;
@@ -15,6 +21,8 @@ use yii\filters\AccessControl;
 
 /**
  * Site controller
+ *
+ * @author Shiyang <dr@shiyang.me>
  */
 class SiteController extends BaseController
 {
@@ -30,7 +38,7 @@ class SiteController extends BaseController
                 'only' => ['logout', 'signup'],
                 'rules' => [
                     [
-                        'actions' => ['signup', 'develop', 'help'],
+                        'actions' => ['signup', 'develop', 'help', 'captcha'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],

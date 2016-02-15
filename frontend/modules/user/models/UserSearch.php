@@ -1,4 +1,9 @@
 <?php
+/**
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
+ */
 
 namespace app\modules\user\models;
 
@@ -9,6 +14,8 @@ use common\models\User;
 
 /**
  * UserSearch represents the model behind the search form about `common\models\User`.
+ *
+ * @author Shiyang <dr@shiyang.me>
  */
 class UserSearch extends User
 {

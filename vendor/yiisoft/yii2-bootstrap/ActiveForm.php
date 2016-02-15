@@ -8,7 +8,6 @@
 namespace yii\bootstrap;
 
 use Yii;
-use yii\helpers\Html;
 use yii\base\InvalidConfigException;
 
 /**
@@ -97,5 +96,14 @@ class ActiveForm extends \yii\widgets\ActiveForm
             Html::addCssClass($this->options, 'form-' . $this->layout);
         }
         parent::init();
+    }
+
+    /**
+     * @inheritdoc
+     * @return ActiveField the created ActiveField object
+     */
+    public function field($model, $attribute, $options = [])
+    {
+        return parent::field($model, $attribute, $options);
     }
 }

@@ -1,4 +1,9 @@
 <?php
+/**
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
+ */
 
 namespace app\modules\user\models;
 
@@ -15,6 +20,8 @@ use Yii;
  * @property string $description
  *
  * @property User $user
+ *
+ * @author Shiyang <dr@shiyang.me>
  */
 class Profile extends \yii\db\ActiveRecord
 {

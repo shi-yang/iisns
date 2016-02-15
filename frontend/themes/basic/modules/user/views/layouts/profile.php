@@ -100,7 +100,7 @@ if ($done) {
                                     'items' => [
                                         [
                                             'label' => '<i class="glyphicon glyphicon-time"></i> ' . Yii::t('app', 'Timeline'),
-                                            'url' => ['/user/view/index', 'id' => $this->params['user']['id']]
+                                            'url' => ['/user/view/index', 'id' => $this->params['user']['username']]
                                         ],
                                         [
                                             'label' => '<i class="glyphicon glyphicon-picture"></i> ' . Yii::t('app', 'Photo'),
@@ -131,9 +131,7 @@ if ($done) {
         <div class="container">
             <p class="pull-left">&copy; iiSNS <?= date('Y') ?>
                 <?= Html::a(' 中文简体 ', '?lang=zh-CN') . '| ' . Html::a(' English ', '?lang=en') ?>
-                <?= Yii::$app->setting->get('thirdPartyStatisticalCode') ?>
             </p>
-            <p class="pull-right"><?= Yii::powered() ?></p>
         </div>
     </footer>
     <?php $this->endBody() ?>
@@ -156,6 +154,7 @@ if ($done) {
             return false;
         });
     </script>
+    <div style="display: none"><?= Yii::$app->setting->get('statisticsCode') ?></div>
     </body>
     </html>
 <?php $this->endPage() ?>

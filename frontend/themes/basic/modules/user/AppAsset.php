@@ -1,8 +1,8 @@
 <?php
 /**
- * @link http://www.yiiframework.com/
- * @copyright Copyright (c) 2008 Yii Software LLC
- * @license http://www.yiiframework.com/license/
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
  */
 
 namespace app\themes\basic\modules\user;
@@ -10,8 +10,7 @@ namespace app\themes\basic\modules\user;
 use yii\web\AssetBundle;
 
 /**
- * @author Qiang Xue <qiang.xue@gmail.com>
- * @since 2.0
+ * @author Shiyang <dr@shiyang.me>
  */
 class AppAsset extends AssetBundle
 {
@@ -20,11 +19,13 @@ class AppAsset extends AssetBundle
         'css/user.css',
     ];
     public $js = [
-        '//cdn.bootcss.com/modernizr/2.8.3/modernizr.min.js',
-        'js/user.js',
+        //'//cdn.bootcss.com/modernizr/2.8.3/modernizr.min.js',
+        'js/modernizr.js',
+        'js/user.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
+        'app\assets\CommonAsset'
     ];
 }

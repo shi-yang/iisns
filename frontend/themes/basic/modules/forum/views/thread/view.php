@@ -35,7 +35,8 @@ $this->params['breadcrumbs'][] = $user['username'];
                             <a href="<?= Url::toRoute(['/forum/thread/update', 'id' => $model['id']]) ?>">
                                 <span class="glyphicon glyphicon-pencil"></span> <?= Yii::t('app', 'Update') ?>
                             </a>
-                            &nbsp;<a href="<?= Url::toRoute(['/forum/thread/delete', 'id' => $model['id']]) ?>"  data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="post">
+                            &nbsp;
+                            <a href="<?= Url::toRoute(['/forum/thread/delete', 'id' => $model['id']]) ?>"  data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="post">
                                 <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
                             </a>
                         <?php endif; ?>

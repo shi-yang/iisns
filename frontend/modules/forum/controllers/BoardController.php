@@ -1,4 +1,9 @@
 <?php
+/**
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
+ */
 
 namespace app\modules\forum\controllers;
 
@@ -13,6 +18,8 @@ use app\modules\forum\models\Thread;
 
 /**
  * BoardController implements the CRUD actions for Board model.
+ *
+ * @author Shiyang <dr@shiyang.me>
  */
 class BoardController extends BaseController
 {
@@ -51,7 +58,7 @@ class BoardController extends BaseController
         if ($model->parent_id == Board::AS_CATEGORY) {
             return $this->render('boards', [
                 'model' => $model,
-                'forum' => $model->forumModel,
+                'forum' => $model->forum,
                 'parentId' => $model->id,
             ]);
         }
@@ -66,7 +73,8 @@ class BoardController extends BaseController
                     'updated_at' => time(),
                     'updated_by' => Yii::$app->user->id
                 ], 'id=:id', [':id' => $model->id])->execute();
-                return $this->refresh();
+                Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Create successfully.'));
+                return $this->redirect(['/forum/thread/view', 'id' => $newThread->id]);
             }
         }
         

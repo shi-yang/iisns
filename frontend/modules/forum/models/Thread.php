@@ -1,4 +1,9 @@
 <?php
+/**
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
+ */
 
 namespace app\modules\forum\models;
 
@@ -17,6 +22,8 @@ use yii\db\Query;
  * @property integer $user_id
  * @property integer $board_id
  * @property integer $post_count
+ *
+ * @author Shiyang <dr@shiyang.me>
  */
 class Thread extends \yii\db\ActiveRecord
 {

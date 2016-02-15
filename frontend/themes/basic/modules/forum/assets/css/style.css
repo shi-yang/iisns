@@ -76,15 +76,6 @@ strong {
     font-weight: 700;
 }
 
-a {
-    color: #f60;
-}
-
-a:hover {
-    color: #ff7e51;
-    text-decoration: none;
-}
-
 ul.no-style {
     list-style: none;
     padding: 0;
@@ -400,7 +391,7 @@ blockquote.pull-right {
     padding: 10px 15px 9px;
     font-size: 12px;
     font-weight: 400;
-    color: #FF812C;
+    color: #999;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     transition: all 0.3s;
@@ -421,7 +412,7 @@ blockquote.pull-right {
 }
 
 .navbar .container.main-nav .nav-collapse .nav > li > a.current {
-    color: #f22d00;
+    color: #007AFF;
 }
 
 .navbar .container.main-nav .nav-collapse .nav > li > a.current span {
@@ -785,14 +776,14 @@ blockquote.pull-right {
 .dropdown-menu > li > a {
     padding: 10px 15px 10px 2px;
     border-bottom: 1px solid #e2e2e2;
-    color: #FF812C;
+    color: #5677fc;
     font-size: 12px;
     margin-left: 14px;
 }
 
 .dropdown-menu > li > a:hover, .dropdown-menu > li > a.current {
-    border-bottom-color: #f60;
-    color: #f60;
+    border-bottom-color: #455ede;
+    color: #455ede;
     background: transparent;
 }
 

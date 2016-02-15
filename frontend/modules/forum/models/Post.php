@@ -1,4 +1,9 @@
 <?php
+/**
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
+ */
 
 namespace app\modules\forum\models;
 
@@ -14,6 +19,8 @@ use app\modules\forum\models\Thread;
  * @property integer $user_id
  * @property integer $thread_id
  * @property integer $created_at
+ *
+ * @author Shiyang <dr@shiyang.me>
  */
 class Post extends \yii\db\ActiveRecord
 {

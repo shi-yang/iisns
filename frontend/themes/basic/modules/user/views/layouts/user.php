@@ -1,4 +1,5 @@
 <?php
+
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\Modal;
@@ -25,8 +26,6 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
@@ -58,19 +57,7 @@ AppAsset::register($this);
                     </a>
                     <ul class="dropdown-menu message dropdown-1">
                         <li><a>You have <?= $unReadMessageCount ?> new unread messages</a></li>
-                        <li>
-                            <a class="clearfix" href="#">
-                                <img src="<?= Yii::getAlias('@avatar'). $user->avatar ?>" alt="User Avatar">
-                                <div class="detail">
-                                    <strong>John Doe</strong>
-                                    <p class="no-margin">
-                                        Lorem ipsum dolor sit amet...
-                                    </p>
-                                    <small class="text-muted"><i class="fa fa-check text-success"></i> 27m ago</small>
-                                </div>
-                            </a>
-                        </li>
-                        <li><a href="#">View all messages</a></li>
+                        <li><a href="<?= Url::toRoute(['/user/message']) ?>">View all messages</a></li>
                     </ul>
                 </li>
                 <li class="profile dropdown">
@@ -88,7 +75,7 @@ AppAsset::register($this);
                                 </div>
                             </a>
                         </li>
-                        <li><a tabindex="-1" href="<?= Url::toRoute(['/user/view', 'id' => $user->username]) ?>" class="main-link"><i class="glyphicon glyphicon-edit"></i> <?= Yii::t('app', 'Profile') ?></a></li>
+                        <li><a tabindex="-1" href="<?= Url::toRoute(['/user/view', 'id' => $user->username]) ?>" class="main-link" data-pjax="0"><i class="glyphicon glyphicon-edit"></i> <?= Yii::t('app', 'Profile') ?></a></li>
                         <li><a tabindex="-1" href="<?= Url::toRoute(['/user/setting']) ?>" class="theme-setting"><i class="glyphicon glyphicon-cog"></i> <?= Yii::t('app', 'Setting') ?></a></li>
                         <li class="divider"></li>
                         <li><a tabindex="-1" class="main-link" data-toggle="modal" data-target="#logoutConfirm"><i class="glyphicon glyphicon-log-out"></i> <?= Yii::t('app', 'Log out') ?></a></li>
@@ -114,7 +101,7 @@ AppAsset::register($this);
                     <div class="detail">
                         <ul class="list-inline">
                             <li>
-                                <a href="<?= Url::toRoute(['/user/view', 'id' => $user->username]) ?>">
+                                <a href="<?= Url::toRoute(['/user/view', 'id' => $user->username]) ?>" data-pjax="0">
                                     <i class="glyphicon glyphicon-new-window"></i> <strong><?= Html::encode($user->username) ?></strong>
                                 </a>
                             </li>
@@ -175,7 +162,7 @@ AppAsset::register($this);
                                 <span class="menu-hover"></span>
                             </a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="<?= Url::toRoute('/home/todu/music') ?>">
                             <span class="menu-icon">
                                 <i class="glyphicon glyphicon-music"></i>
@@ -196,7 +183,7 @@ AppAsset::register($this);
                             </span>
                                 <span class="menu-hover"></span>
                             </a>
-                        </li>
+                        </li> -->
                         <li>
                             <a href="<?= Url::toRoute(['/user/message']) ?>">
                             <span class="menu-icon">
@@ -210,7 +197,7 @@ AppAsset::register($this);
                             </a>
                         </li>
                         <li>
-                            <a href="http://www.iisns.com/forum/iisns">
+                            <a href="http://www.iisns.com/@iisns">
                             <span class="menu-icon">
                                 <i class="glyphicon glyphicon-question-sign"></i>
                             </span>
@@ -225,6 +212,7 @@ AppAsset::register($this);
             </div>
             <!-- /sidebar-inner -->
         </aside>
+        <?php \yii\widgets\Pjax::begin(['linkSelector' => 'a']) ?>
         <div id="main-container">
             <div id="breadcrumb">
                 <?= Breadcrumbs::widget([
@@ -240,12 +228,12 @@ AppAsset::register($this);
                 </div>
             </div><!-- /.padding-md -->
         </div>
+        <?php \yii\widgets\Pjax::end() ?>
         <footer>
             <div class="row">
                 <div class="col-sm-6">
                     <p class="no-margin">
                         &copy; <?= date('Y') ?> <strong><?= Html::a(Yii::$app->setting->get('siteName'), ['/site/index']) ?></strong>. ALL Rights Reserved.
-                        <?= Yii::$app->setting->get('thirdPartyStatisticalCode') ?>
                     </p>
                 </div><!-- /.col -->
             </div><!-- /.row-->
@@ -262,6 +250,7 @@ AppAsset::register($this);
       Modal::end();
     ?>
     <?php $this->endBody() ?>
+    <div style="display: none"><?= Yii::$app->setting->get('statisticsCode') ?></div>
 </body>
 </html>
 <?php $this->endPage() ?>

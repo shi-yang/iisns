@@ -1,16 +1,14 @@
 {
-    "name": "yiisoft/yii2-app-advanced",
-    "description": "Yii 2 Advanced Application Template",
-    "keywords": ["yii2", "framework", "advanced", "application template"],
-    "homepage": "http://www.yiiframework.com/",
-    "type": "project",
-    "license": "BSD-3-Clause",
+    "name": "shiyang/iisns",
+    "description": "A forum and a sns system based on yii2",
+    "keywords": ["yii2", "sns", "blog", "forum"],
+    "homepage": "http://www.iisns.com/",
+    "license": "MIT License",
     "support": {
-        "issues": "https://github.com/yiisoft/yii2/issues?state=open",
-        "forum": "http://www.yiiframework.com/forum/",
-        "wiki": "http://www.yiiframework.com/wiki/",
-        "irc": "irc://irc.freenode.net/yii",
-        "source": "https://github.com/yiisoft/yii2"
+        "issues": "https://github.com/shi-yang/iisns/issues?state=open",
+        "forum": "http://www.iisns.com/forum/iisns",
+        "wiki": "https://github.com/shi-yang/iisns/wiki",
+        "source": "https://github.com/shi-yang/iisns"
     },
     "minimum-stability": "stable",
     "require": {
@@ -19,11 +17,12 @@
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
         "yiisoft/yii2-imagine": "*",
-        "shiyang/yii2-login-widget": "*",
         "shiyang/yii2-infinite-scroll": "*",
         "shiyang/yii2-masonry": "*",
         "justinvoelker/yii2-tagging": "*",
-        "shiyang/yii2-umeditor": "^1.0"
+        "shiyang/yii2-umeditor": "^1.0",
+        "iisns/yii2-assets-compress": "^1.0",
+        "iisns/yii2-webuploader": "^1.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

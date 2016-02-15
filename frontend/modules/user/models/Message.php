@@ -1,4 +1,9 @@
 <?php
+/**
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
+ */
 
 namespace app\modules\user\models;
 
@@ -18,9 +23,10 @@ use yii\db\Query;
  * @property integer $inbox
  * @property integer $outbox
  * @property integer $post_id
- *
  * @property User $sendto0
  * @property User $sendfrom0
+ *
+ * @author Shiyang <dr@shiyang.me>
  */
 class Message extends \yii\db\ActiveRecord
 {

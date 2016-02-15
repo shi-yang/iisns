@@ -9,7 +9,6 @@ namespace yii\bootstrap;
 
 use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
-use yii\helpers\Html;
 
 /**
  * Collapse renders an accordion bootstrap javascript component.
@@ -61,12 +60,11 @@ class Collapse extends Widget
      * - label: string, required, the group header label.
      * - encode: boolean, optional, whether this label should be HTML-encoded. This param will override
      *   global `$this->encodeLabels` param.
-     * - content: array|string, required, the content (HTML) of the group
+     * - content: array|string|object, required, the content (HTML) of the group
      * - options: array, optional, the HTML attributes of the group
      * - contentOptions: optional, the HTML attributes of the group's content
      */
     public $items = [];
-
     /**
      * @var boolean whether the labels for header items should be HTML-encoded.
      */
@@ -79,7 +77,7 @@ class Collapse extends Widget
     public function init()
     {
         parent::init();
-        Html::addCssClass($this->options, 'panel-group');
+        Html::addCssClass($this->options, ['widget' => 'panel-group']);
     }
 
     /**
@@ -110,7 +108,7 @@ class Collapse extends Widget
             }
             $header = $item['label'];
             $options = ArrayHelper::getValue($item, 'options', []);
-            Html::addCssClass($options, 'panel panel-default');
+            Html::addCssClass($options, ['panel' => 'panel', 'widget' => 'panel-default']);
             $items[] = Html::tag('div', $this->renderItem($header, $item, ++$index), $options);
         }
 
@@ -131,7 +129,7 @@ class Collapse extends Widget
             $id = $this->options['id'] . '-collapse' . $index;
             $options = ArrayHelper::getValue($item, 'contentOptions', []);
             $options['id'] = $id;
-            Html::addCssClass($options, 'panel-collapse collapse');
+            Html::addCssClass($options, ['widget' => 'panel-collapse', 'collapse' => 'collapse']);
 
             $encodeLabel = isset($item['encode']) ? $item['encode'] : $this->encodeLabels;
             if ($encodeLabel) {
@@ -146,7 +144,7 @@ class Collapse extends Widget
 
             $header = Html::tag('h4', $headerToggle, ['class' => 'panel-title']);
 
-            if (is_string($item['content'])) {
+            if (is_string($item['content']) || is_object($item['content'])) {
                 $content = Html::tag('div', $item['content'], ['class' => 'panel-body']) . "\n";
             } elseif (is_array($item['content'])) {
                 $content = Html::ul($item['content'], [
@@ -160,7 +158,7 @@ class Collapse extends Widget
                     $content .= Html::tag('div', $item['footer'], ['class' => 'panel-footer']) . "\n";
                 }
             } else {
-                throw new InvalidConfigException('The "content" option should be a string or array.');
+                throw new InvalidConfigException('The "content" option should be a string, array or object.');
             }
         } else {
             throw new InvalidConfigException('The "content" option is required.');

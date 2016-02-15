@@ -1,14 +1,24 @@
 <?php
-use backend\assets\AppAsset;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
+use backend\assets\AdminLteAsset;
 use frontend\widgets\Alert;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-AppAsset::register($this);
+AdminLteAsset::register($this);
+
+$this->registerCss('
+    .navbar #navbar-toggle-header {
+        display: inline;
+        float: left;
+    }
+    .navbar #navbar-toggle-header .icon-bar {
+        background-color: #fff;
+    }
+');
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -27,7 +37,7 @@ AppAsset::register($this);
         <![endif]-->
         <?php $this->head() ?>
     </head>
-    <body class="sidebar-mini skin-blue-light">
+    <body class="sidebar-mini skin-blue">
     <?php $this->beginBody() ?>
     <div class="wrapper">
         <!-- header logo: style can be found in header.less -->
@@ -39,7 +49,7 @@ AppAsset::register($this);
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation">
                 <!-- Sidebar toggle button-->
-                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <a href="#" class="navbar-toggle" id="navbar-toggle-header" data-toggle="offcanvas" role="button">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -56,7 +66,7 @@ AppAsset::register($this);
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header bg-light-blue">
-                                    <img src="<?= Yii::getAlias('@web/adminlte/img/user2-160x160.jpg') ?>" class="img-circle" alt="User Image" />
+                                    <img src="<?= Yii::getAlias('@web/images/user2-160x160.jpg') ?>" class="img-circle" alt="User Image" />
                                     <p>
                                         Jane Doe - Web Developer
                                         <small>Member since Nov. 2012</small>
@@ -97,7 +107,7 @@ AppAsset::register($this);
                 <!-- Sidebar user panel -->
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="<?= Yii::getAlias('@web/adminlte/img/user2-160x160.jpg') ?>" class="img-circle" alt="User Image" />
+                        <img src="<?= Yii::getAlias('@web/images/user2-160x160.jpg') ?>" class="img-circle" alt="User Image" />
                     </div>
                     <div class="pull-left info">
                         <p>Hello, <?= Yii::$app->user->identity->username ?></p>
@@ -176,7 +186,6 @@ AppAsset::register($this);
                     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                 ]) ?>
             </section>
-
             <!-- Main content -->
             <section class="content">
                 <?= Alert::widget() ?>
@@ -188,3 +197,4 @@ AppAsset::register($this);
     </body>
 </html>
 <?php $this->endPage() ?>
+

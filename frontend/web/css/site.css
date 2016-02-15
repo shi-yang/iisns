@@ -4,6 +4,12 @@ body {
     background-color: #eef0f3;
 }
 
+#header {
+    background-color: #EEF0F3;
+    margin-bottom: 0px;
+    border: medium none;
+}
+
 .wrap {
     min-height: 100%;
     height: auto;
@@ -106,15 +112,6 @@ a.desc:after {
   opacity: .46;
   margin: 0 auto 10px auto;
   font-size: 4em;
-}
-
-a {
-  color: #FF7B4C;
-  text-decoration: none;
-}
-a:hover {
-  color: #ff4a00;
-  text-decoration: none;
 }
 .content {
   margin: 0 auto;

@@ -10,7 +10,10 @@ $db = require(__DIR__ . '/../../common/config/db.php');
 return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => [
+        'log',
+        'assetsCompress'
+    ],
     'controllerNamespace' => 'frontend\controllers',
     'defaultRoute' => 'user/dashboard',
     'modules' => [
@@ -39,11 +42,20 @@ return [
     ],
     'components' => [
         'db' => $db,
+        'assetsCompress' => [
+            'class' => '\iisns\assets\AssetsCompressComponent',
+            'enabled' => true,
+            'jsCompress' => true,
+            'cssFileCompile' => true,
+            'jsFileCompile' => false,
+            'jsFileCompress' => false,
+        ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'rules' => [
-                'u/<id:[\x{4e00}-\x{9fa5}a-zA-Z0-9_]*>' => 'user/view',
-                'forum/<id:[\x{4e00}-\x{9fa5}a-zA-Z0-9_]*>' => 'forum/forum/view',
+                '/' => '/user/dashboard/index',
+                '<id:[\x{4e00}-\x{9fa5}a-zA-Z0-9_]*>' => 'user/view',
+                '@<id:[\x{4e00}-\x{9fa5}a-zA-Z0-9_]*>' => 'forum/forum/view',
                 'thread/<id:\d+>' => 'forum/thread/view',
                 'p/<id:\d+>' => 'user/view/view-post'
             ],

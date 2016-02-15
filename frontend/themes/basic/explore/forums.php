@@ -5,8 +5,8 @@ use shiyang\masonry\Masonry;
 
 /* @var $this yii\web\View */
 
-$this->params['title'] = Yii::t('app', 'Explore') . ' - ' . Yii::t('app', 'Forums');
-$this->params['breadcrumb'][] = Yii::t('app', 'Forums');
+// $this->params['title'] = Yii::t('app', 'Explore') . ' - ' . Yii::t('app', 'Forums');
+// $this->params['breadcrumb'][] = Yii::t('app', 'Forums');
 $this->registerMetaTag(['name' => 'keywords', 'content' => Yii::$app->setting->get('siteKeyword')]);
 $this->registerMetaTag(['name' => 'description', 'content' => Yii::$app->setting->get('siteDescription')]);
 $this->registerCss('
@@ -18,7 +18,7 @@ $this->registerCss('
     background: #f6f6f6;
     color: #444;
     cursor:pointer;
-    border: 1px solid #B9B9B9;
+    border: 1px solid #E8E8E8;
     overflow:hidden;
     text-overflow:ellipsis;
 }
@@ -50,12 +50,6 @@ word-wrap: break-word;
 ');
 ?>
 <div class="forum-index">
-    <?php if (!Yii::$app->user->isGuest): ?>
-        <p>
-            <?= Html::a(Yii::t('app', 'Create Forum'), ['/forum/forum/create'], ['class' => 'btn btn-success']) ?>
-        </p>
-    <?php endif ?>
-
     <div class="forum-all">
         <?php Masonry::begin([
             'options' => [

@@ -21,6 +21,8 @@ $domain = Yii::$app->request->hostInfo;
         'template' => "<div class=\"input-group\"><span class=\"input-group-addon\">{$domain}/forum/</span>{input}</div>{error}",
     ])->textInput(['maxlength' => 32, 'autocomplete'=>'off']) ?>
 
+    <?= $form->field($model, 'user_id')->textInput() ?>
+
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

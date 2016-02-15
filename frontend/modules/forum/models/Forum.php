@@ -1,4 +1,9 @@
 <?php
+/**
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
+ */
 
 namespace app\modules\forum\models;
 
@@ -6,7 +11,6 @@ use Yii;
 use app\modules\forum\models\Board;
 use yii\db\Query;
 use yii\helpers\ArrayHelper;
-use yii\data\Pagination;
 
 /**
  * This is the model class for table "{{%forum}}".
@@ -17,10 +21,15 @@ use yii\data\Pagination;
  * @property string $forum_url
  * @property integer $user_id
  * @property integer $created_at
+ * @property integer $status
  * @property string $forum_icon
+ *
+ * @author Shiyang <dr@shiyang.me>
  */
 class Forum extends \yii\db\ActiveRecord
 {
+    const STATUS_PENDING = 0;
+    const STATUS_APPROVED = 1;
     /**
      * @inheritdoc
      */
@@ -40,7 +49,7 @@ class Forum extends \yii\db\ActiveRecord
             [['forum_url'], 'string', 'min' => 5, 'max' => 32],
             [['forum_url'], 'match', 'pattern' => '/^(?!_)(?!.*?_$)(?!\d{5,32}$)[a-z\d_]{5,32}$/i'],
             [['forum_desc'], 'string'],
-            [['user_id', 'created_at'], 'integer'],
+            [['user_id', 'created_at', 'status'], 'integer'],
             [['forum_name'], 'string', 'max' => 32],
             [['forum_url'], 'string', 'min' => 5, 'max' => 32],
             [['forum_icon'], 'file', 'extensions' => 'jpg, png', 'mimeTypes' => 'image/jpeg, image/png',],
@@ -59,6 +68,7 @@ class Forum extends \yii\db\ActiveRecord
             'forum_url' => Yii::t('app', 'Forum Url'),
             'user_id' => Yii::t('app', 'User ID'),
             'created_at' => Yii::t('app', 'Create Time'),
+            'status' => Yii::t('app', 'Status'),
             'forum_icon' => Yii::t('app', 'Forum Icon'),
         ];
     }
@@ -74,6 +84,7 @@ class Forum extends \yii\db\ActiveRecord
                 $this->user_id = Yii::$app->user->identity->id;
                 $this->created_at = time();
                 $this->forum_icon = 'default/' . rand(1, 11) . '.png';
+                $this->status = Forum::STATUS_PENDING;
             }
             return true;
         } else {
@@ -147,7 +158,7 @@ class Forum extends \yii\db\ActiveRecord
             ->where('forum_id=:forum_id', [':forum_id' => $this->id])
             ->orderBy('created_at DESC');
             
-        return \app\components\Yii::$app->tools->Pagination($query);
+        return Yii::$app->tools->Pagination($query);
     }
 
     public function getBroadcastCount()

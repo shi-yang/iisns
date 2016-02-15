@@ -1,4 +1,9 @@
 <?php
+/**
+ * @link http://www.iisns.com/
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
+ */
 
 namespace app\widgets\comment;
 
@@ -6,6 +11,9 @@ use Yii;
 use yii\base\Widget;
 use yii\db\Query;
 
+/**
+ * @author Shiyang <dr@shiyang.me>
+ */
 class Comment extends Widget
 {
     /**

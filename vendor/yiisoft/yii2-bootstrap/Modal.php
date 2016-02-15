@@ -9,7 +9,6 @@ namespace yii\bootstrap;
 
 use Yii;
 use yii\helpers\ArrayHelper;
-use yii\helpers\Html;
 
 /**
  * Modal renders a modal window that can be toggled by clicking on a button.
@@ -137,7 +136,7 @@ class Modal extends Widget
             $this->header = $button . "\n" . $this->header;
         }
         if ($this->header !== null) {
-            Html::addCssClass($this->headerOptions, 'modal-header');
+            Html::addCssClass($this->headerOptions, ['widget' => 'modal-header']);
             return Html::tag('div', "\n" . $this->header . "\n", $this->headerOptions);
         } else {
             return null;
@@ -169,7 +168,7 @@ class Modal extends Widget
     protected function renderFooter()
     {
         if ($this->footer !== null) {
-            Html::addCssClass($this->footerOptions, 'modal-footer');
+            Html::addCssClass($this->footerOptions, ['widget' => 'modal-footer']);
             return Html::tag('div', "\n" . $this->footer . "\n", $this->footerOptions);
         } else {
             return null;
@@ -225,7 +224,7 @@ class Modal extends Widget
             'role' => 'dialog',
             'tabindex' => -1,
         ], $this->options);
-        Html::addCssClass($this->options, 'modal');
+        Html::addCssClass($this->options, ['widget' => 'modal']);
 
         if ($this->clientOptions !== false) {
             $this->clientOptions = array_merge(['show' => false], $this->clientOptions);

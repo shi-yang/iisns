@@ -2,16 +2,17 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use app\assets\LightBoxAsset;
 use shiyang\masonry\Masonry;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\home\models\Album */
 
+LightBoxAsset::register($this);
+
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'My Albums'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-$this->registerCssFile('@web/js/lightbox/css/lightbox.css');
-$this->registerJsFile('@web/js/lightbox/js/lightbox.min.js', ['depends' => ['yii\web\JqueryAsset'], 'position' => \yii\web\View::POS_END]);
 ?>
 
 <div class="album-view">
@@ -24,7 +25,7 @@ $this->registerJsFile('@web/js/lightbox/js/lightbox.min.js', ['depends' => ['yii
                 <div><?= Yii::t('app', 'No photo in this album, click "Upload new photo" to make up your album.') ?></div>
                 <div class="button">
                     <div class="bigbutton">
-                        <a href="<?= Url::toRoute(['/home/album/upload', 'id' => $model->id]) ?>" class="btn btn-default">
+                        <a href="<?= Url::toRoute(['/home/album/upload', 'id' => $model->id]) ?>" class="btn btn-default" data-pjax="0">
                             <span class="glyphicon glyphicon-plus"></span> <?= Yii::t('app', 'Upload a new photo') ?>
                         </a>
                     </div>
@@ -32,7 +33,7 @@ $this->registerJsFile('@web/js/lightbox/js/lightbox.min.js', ['depends' => ['yii
             </div>
         </div>
     <?php else: ?>
-        <a href="<?= Url::toRoute(['/home/album/upload', 'id' => $model->id]) ?>" class="btn btn-default">
+        <a href="<?= Url::toRoute(['/home/album/upload', 'id' => $model->id]) ?>" class="btn btn-default" data-pjax="0">
             <span class="glyphicon glyphicon-plus"></span> <?= Yii::t('app', 'Upload a new photo') ?>
         </a>
         <div class="img-all row">
