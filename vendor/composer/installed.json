@@ -612,52 +612,6 @@
         ]
     },
     {
-        "name": "bower-asset/jquery",
-        "version": "2.1.4",
-        "version_normalized": "2.1.4.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/jquery/jquery.git",
-            "reference": "7751e69b615c6eca6f783a81e292a55725af6b85"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/jquery/jquery/zipball/7751e69b615c6eca6f783a81e292a55725af6b85",
-            "reference": "7751e69b615c6eca6f783a81e292a55725af6b85",
-            "shasum": ""
-        },
-        "require-dev": {
-            "bower-asset/qunit": "1.14.0",
-            "bower-asset/requirejs": "2.1.10",
-            "bower-asset/sinon": "1.8.1",
-            "bower-asset/sizzle": "2.1.1-patch2"
-        },
-        "type": "bower-asset-library",
-        "extra": {
-            "bower-asset-main": "dist/jquery.js",
-            "bower-asset-ignore": [
-                "**/.*",
-                "build",
-                "dist/cdn",
-                "speed",
-                "test",
-                "*.md",
-                "AUTHORS.txt",
-                "Gruntfile.js",
-                "package.json"
-            ]
-        },
-        "installation-source": "dist",
-        "license": [
-            "MIT"
-        ],
-        "keywords": [
-            "javascript",
-            "jquery",
-            "library"
-        ]
-    },
-    {
         "name": "shiyang/yii2-infinite-scroll",
         "version": "v1.2",
         "version_normalized": "1.2.0.0",
@@ -1081,60 +1035,6 @@
         ]
     },
     {
-        "name": "bower-asset/jquery.inputmask",
-        "version": "3.1.63",
-        "version_normalized": "3.1.63.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/RobinHerbots/jquery.inputmask.git",
-            "reference": "c40c7287eadc31e341ebbf0c02352eb55b9cbc48"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/c40c7287eadc31e341ebbf0c02352eb55b9cbc48",
-            "reference": "c40c7287eadc31e341ebbf0c02352eb55b9cbc48",
-            "shasum": ""
-        },
-        "require": {
-            "bower-asset/jquery": ">=1.7"
-        },
-        "type": "bower-asset-library",
-        "extra": {
-            "bower-asset-main": [
-                "./dist/inputmask/jquery.inputmask.js",
-                "./dist/inputmask/jquery.inputmask.extensions.js",
-                "./dist/inputmask/jquery.inputmask.date.extensions.js",
-                "./dist/inputmask/jquery.inputmask.numeric.extensions.js",
-                "./dist/inputmask/jquery.inputmask.phone.extensions.js",
-                "./dist/inputmask/jquery.inputmask.regex.extensions.js"
-            ],
-            "bower-asset-ignore": [
-                "**/.*",
-                "qunit/",
-                "nuget/",
-                "tools/",
-                "js/",
-                "*.md",
-                "build.properties",
-                "build.xml",
-                "jquery.inputmask.jquery.json"
-            ]
-        },
-        "installation-source": "dist",
-        "license": [
-            "http://opensource.org/licenses/mit-license.php"
-        ],
-        "description": "jquery.inputmask is a jquery plugin which create an input mask.",
-        "keywords": [
-            "form",
-            "input",
-            "inputmask",
-            "jquery",
-            "mask",
-            "plugins"
-        ]
-    },
-    {
         "name": "bower-asset/bootstrap",
         "version": "v3.3.5",
         "version_normalized": "3.3.5.0",
@@ -1218,96 +1118,6 @@
         "installation-source": "dist",
         "license": [
             "MIT"
-        ]
-    },
-    {
-        "name": "yiisoft/yii2",
-        "version": "2.0.6",
-        "version_normalized": "2.0.6.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/yiisoft/yii2-framework.git",
-            "reference": "f42b2eb80f61992438661b01d0d74c6738e2ff38"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/f42b2eb80f61992438661b01d0d74c6738e2ff38",
-            "reference": "f42b2eb80f61992438661b01d0d74c6738e2ff38",
-            "shasum": ""
-        },
-        "require": {
-            "bower-asset/jquery": "2.1.*@stable | 1.11.*@stable",
-            "bower-asset/jquery.inputmask": "3.1.*",
-            "bower-asset/punycode": "1.3.*",
-            "bower-asset/yii2-pjax": ">=2.0.1",
-            "cebe/markdown": "~1.0.0 | ~1.1.0",
-            "ext-mbstring": "*",
-            "ezyang/htmlpurifier": "4.6.*",
-            "lib-pcre": "*",
-            "php": ">=5.4.0",
-            "yiisoft/yii2-composer": "*"
-        },
-        "time": "2015-08-05 22:00:30",
-        "bin": [
-            "yii"
-        ],
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.0.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "yii\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Qiang Xue",
-                "email": "qiang.xue@gmail.com",
-                "homepage": "http://www.yiiframework.com/",
-                "role": "Founder and project lead"
-            },
-            {
-                "name": "Alexander Makarov",
-                "email": "sam@rmcreative.ru",
-                "homepage": "http://rmcreative.ru/",
-                "role": "Core framework development"
-            },
-            {
-                "name": "Maurizio Domba",
-                "homepage": "http://mdomba.info/",
-                "role": "Core framework development"
-            },
-            {
-                "name": "Carsten Brandt",
-                "email": "mail@cebe.cc",
-                "homepage": "http://cebe.cc/",
-                "role": "Core framework development"
-            },
-            {
-                "name": "Timur Ruziev",
-                "email": "resurtm@gmail.com",
-                "homepage": "http://resurtm.com/",
-                "role": "Core framework development"
-            },
-            {
-                "name": "Paul Klimov",
-                "email": "klimov.paul@gmail.com",
-                "role": "Core framework development"
-            }
-        ],
-        "description": "Yii PHP Framework Version 2",
-        "homepage": "http://www.yiiframework.com/",
-        "keywords": [
-            "framework",
-            "yii2"
         ]
     },
     {
@@ -1800,44 +1610,6 @@
         ]
     },
     {
-        "name": "bower-asset/ev-emitter",
-        "version": "v1.0.1",
-        "version_normalized": "1.0.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/metafizzy/ev-emitter.git",
-            "reference": "a590dbd7be3ebe98a0bc8635938f666e2e8f13f7"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/metafizzy/ev-emitter/zipball/a590dbd7be3ebe98a0bc8635938f666e2e8f13f7",
-            "reference": "a590dbd7be3ebe98a0bc8635938f666e2e8f13f7",
-            "shasum": ""
-        },
-        "type": "bower-asset-library",
-        "extra": {
-            "bower-asset-main": "ev-emitter.js",
-            "bower-asset-ignore": [
-                "**/.*",
-                "node_modules",
-                "bower_components",
-                "test",
-                "tests",
-                "sandbox"
-            ]
-        },
-        "installation-source": "dist",
-        "license": [
-            "MIT"
-        ],
-        "description": "lil' event emitter",
-        "keywords": [
-            "emitter",
-            "event",
-            "pubsub"
-        ]
-    },
-    {
         "name": "bower-asset/imagesloaded",
         "version": "v4.1.0",
         "version_normalized": "4.1.0.0",
@@ -1973,6 +1745,221 @@
             "upload",
             "webuploader",
             "yii2"
+        ]
+    },
+    {
+        "name": "bower-asset/jquery",
+        "version": "2.2.0",
+        "version_normalized": "2.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/jquery/jquery-dist.git",
+            "reference": "6fc01e29bdad0964f62ef56d01297039cdcadbe5"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/6fc01e29bdad0964f62ef56d01297039cdcadbe5",
+            "reference": "6fc01e29bdad0964f62ef56d01297039cdcadbe5",
+            "shasum": ""
+        },
+        "type": "bower-asset-library",
+        "extra": {
+            "bower-asset-main": "dist/jquery.js",
+            "bower-asset-ignore": [
+                "package.json"
+            ]
+        },
+        "installation-source": "dist",
+        "license": [
+            "MIT"
+        ],
+        "keywords": [
+            "browser",
+            "javascript",
+            "jquery",
+            "library"
+        ]
+    },
+    {
+        "name": "bower-asset/jquery.inputmask",
+        "version": "3.2.7",
+        "version_normalized": "3.2.7.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/RobinHerbots/jquery.inputmask.git",
+            "reference": "5a72c563b502b8e05958a524cdfffafe9987be38"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/5a72c563b502b8e05958a524cdfffafe9987be38",
+            "reference": "5a72c563b502b8e05958a524cdfffafe9987be38",
+            "shasum": ""
+        },
+        "require": {
+            "bower-asset/jquery": ">=1.7"
+        },
+        "type": "bower-asset-library",
+        "extra": {
+            "bower-asset-main": [
+                "./dist/inputmask/inputmask.js"
+            ],
+            "bower-asset-ignore": [
+                "**/*",
+                "!dist/*",
+                "!dist/inputmask/*",
+                "!dist/min/*",
+                "!dist/min/inputmask/*",
+                "!extra/bindings/*",
+                "!extra/dependencyLibs/*",
+                "!extra/phone-codes/*"
+            ]
+        },
+        "installation-source": "dist",
+        "license": [
+            "http://opensource.org/licenses/mit-license.php"
+        ],
+        "description": "jquery.inputmask is a jquery plugin which create an input mask.",
+        "keywords": [
+            "form",
+            "input",
+            "inputmask",
+            "jquery",
+            "mask",
+            "plugins"
+        ]
+    },
+    {
+        "name": "yiisoft/yii2",
+        "version": "2.0.7",
+        "version_normalized": "2.0.7.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yiisoft/yii2-framework.git",
+            "reference": "f45651582cb853b4326730d9d187a0f7a44a45a3"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/f45651582cb853b4326730d9d187a0f7a44a45a3",
+            "reference": "f45651582cb853b4326730d9d187a0f7a44a45a3",
+            "shasum": ""
+        },
+        "require": {
+            "bower-asset/jquery": "2.2.*@stable | 2.1.*@stable | 1.11.*@stable",
+            "bower-asset/jquery.inputmask": "~3.2.2",
+            "bower-asset/punycode": "1.3.*",
+            "bower-asset/yii2-pjax": "~2.0.1",
+            "cebe/markdown": "~1.0.0 | ~1.1.0",
+            "ext-ctype": "*",
+            "ext-mbstring": "*",
+            "ezyang/htmlpurifier": "4.6.*",
+            "lib-pcre": "*",
+            "php": ">=5.4.0",
+            "yiisoft/yii2-composer": "~2.0.4"
+        },
+        "time": "2016-02-14 14:45:55",
+        "bin": [
+            "yii"
+        ],
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "yii\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Qiang Xue",
+                "email": "qiang.xue@gmail.com",
+                "homepage": "http://www.yiiframework.com/",
+                "role": "Founder and project lead"
+            },
+            {
+                "name": "Alexander Makarov",
+                "email": "sam@rmcreative.ru",
+                "homepage": "http://rmcreative.ru/",
+                "role": "Core framework development"
+            },
+            {
+                "name": "Maurizio Domba",
+                "homepage": "http://mdomba.info/",
+                "role": "Core framework development"
+            },
+            {
+                "name": "Carsten Brandt",
+                "email": "mail@cebe.cc",
+                "homepage": "http://cebe.cc/",
+                "role": "Core framework development"
+            },
+            {
+                "name": "Timur Ruziev",
+                "email": "resurtm@gmail.com",
+                "homepage": "http://resurtm.com/",
+                "role": "Core framework development"
+            },
+            {
+                "name": "Paul Klimov",
+                "email": "klimov.paul@gmail.com",
+                "role": "Core framework development"
+            },
+            {
+                "name": "Dmitry Naumenko",
+                "email": "d.naumenko.a@gmail.com",
+                "role": "Core framework development"
+            }
+        ],
+        "description": "Yii PHP Framework Version 2",
+        "homepage": "http://www.yiiframework.com/",
+        "keywords": [
+            "framework",
+            "yii2"
+        ]
+    },
+    {
+        "name": "bower-asset/ev-emitter",
+        "version": "v1.0.2",
+        "version_normalized": "1.0.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/metafizzy/ev-emitter.git",
+            "reference": "e1f8d670f76749aff783ad5e2f27d7294c2c679e"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/metafizzy/ev-emitter/zipball/e1f8d670f76749aff783ad5e2f27d7294c2c679e",
+            "reference": "e1f8d670f76749aff783ad5e2f27d7294c2c679e",
+            "shasum": ""
+        },
+        "type": "bower-asset-library",
+        "extra": {
+            "bower-asset-main": "ev-emitter.js",
+            "bower-asset-ignore": [
+                "**/.*",
+                "node_modules",
+                "bower_components",
+                "test",
+                "tests",
+                "sandbox"
+            ]
+        },
+        "installation-source": "dist",
+        "license": [
+            "MIT"
+        ],
+        "description": "lil' event emitter",
+        "keywords": [
+            "emitter",
+            "event",
+            "pubsub"
         ]
     }
 ]

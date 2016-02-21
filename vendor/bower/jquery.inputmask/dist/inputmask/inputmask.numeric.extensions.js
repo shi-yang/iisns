@@ -1,9 +1,9 @@
 /*!
 * inputmask.numeric.extensions.js
 * http://github.com/RobinHerbots/jquery.inputmask
-* Copyright (c) 2010 - 2015 Robin Herbots
+* Copyright (c) 2010 - 2016 Robin Herbots
 * Licensed under the MIT license (http://www.opensource.org/licenses/mit-license.php)
-* Version: 3.2.5
+* Version: 3.2.7
 */
 !function(factory) {
     "function" == typeof define && define.amd ? define([ "inputmask.dependencyLib", "inputmask" ], factory) : "object" == typeof exports ? module.exports = factory(require("./inputmask.dependencyLib.jquery"), require("./inputmask")) : factory(window.dependencyLib || jQuery, window.Inputmask);
@@ -27,7 +27,7 @@
                 opts.placeholder.length > 1 && (opts.placeholder = opts.placeholder.charAt(0)), 
                 opts.radixFocus = opts.radixFocus && "" !== opts.placeholder && opts.integerOptional === !0, 
                 opts.definitions[";"] = opts.definitions["~"], opts.definitions[";"].definitionSymbol = "~", 
-                opts.numericInput === !0 && (opts.radixFocus = !1, opts.digitsOptional = !1, isNaN(opts.digits) && (opts.digits = 2), 
+                1 == opts.numericInput && (opts.radixFocus = !1, opts.digitsOptional = !1, isNaN(opts.digits) && (opts.digits = 2), 
                 opts.decimalProtect = !1);
                 var mask = autoEscape(opts.prefix);
                 return mask += "[+]", mask += opts.integerOptional === !0 ? "~{1," + opts.integerDigits + "}" : "~{" + opts.integerDigits + "}", 
@@ -241,19 +241,17 @@
                 }
                 return !0;
             },
-            postValidation: function(buffer, opts) {
-                var isValid = !0, maskedValue = buffer.join(""), processValue = maskedValue.replace(opts.prefix, "");
+            postValidation: function(buffer, currentResult, opts) {
+                var isValid = !0, maskedValue = opts.numericInput ? buffer.slice().reverse().join("") : buffer.join(""), processValue = maskedValue.replace(opts.prefix, "");
                 return processValue = processValue.replace(opts.suffix, ""), processValue = processValue.replace(new RegExp(Inputmask.escapeRegex(opts.groupSeparator), "g"), ""), 
                 "," === opts.radixPoint && (processValue = processValue.replace(Inputmask.escapeRegex(opts.radixPoint), ".")), 
                 processValue = processValue.replace(new RegExp("^" + Inputmask.escapeRegex(opts.negationSymbol.front)), "-"), 
                 processValue = processValue.replace(new RegExp(Inputmask.escapeRegex(opts.negationSymbol.back) + "$"), ""), 
                 processValue = processValue === opts.negationSymbol.front ? processValue + "0" : processValue, 
-                isFinite(processValue) && (null !== opts.max && isFinite(opts.max) && (isValid = parseFloat(processValue) <= parseFloat(opts.max)), 
-                isValid && null !== opts.min && isFinite(opts.min) && (0 >= processValue || processValue.toString().length >= opts.min.toString().length) && (isValid = parseFloat(processValue) >= parseFloat(opts.min), 
-                isValid || (isValid = $.extend(!0, {
-                    refreshFromBuffer: !0,
-                    buffer: (opts.prefix + opts.min).split("")
-                }, opts.postFormat((opts.prefix + opts.min).split(""), 0, !0, opts)), isValid.refreshFromBuffer = !0))), 
+                isFinite(processValue) && (null !== opts.max && isFinite(opts.max) && (processValue = parseFloat(processValue) > parseFloat(opts.max) ? opts.max : processValue, 
+                isValid = opts.postFormat((opts.prefix + processValue).split(""), 0, !0, opts)), 
+                null !== opts.min && isFinite(opts.min) && (processValue = parseFloat(processValue) < parseFloat(opts.min) ? opts.min : processValue, 
+                isValid = opts.postFormat((opts.prefix + processValue).split(""), 0, !0, opts))), 
                 isValid;
             },
             definitions: {
@@ -391,11 +389,11 @@
                 var $input = $(this);
                 if (e.ctrlKey) switch (e.keyCode) {
                   case Inputmask.keyCode.UP:
-                    $input.val(parseFloat(this.inputmask.unmaskedvalue()) + parseInt(opts.step)), $input.trigger("setvalue.inputmask");
+                    $input.val(parseFloat(this.inputmask.unmaskedvalue()) + parseInt(opts.step)), $input.trigger("setvalue");
                     break;
 
                   case Inputmask.keyCode.DOWN:
-                    $input.val(parseFloat(this.inputmask.unmaskedvalue()) - parseInt(opts.step)), $input.trigger("setvalue.inputmask");
+                    $input.val(parseFloat(this.inputmask.unmaskedvalue()) - parseInt(opts.step)), $input.trigger("setvalue");
                 }
             }
         },

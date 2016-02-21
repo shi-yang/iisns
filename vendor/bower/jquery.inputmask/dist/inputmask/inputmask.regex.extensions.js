@@ -1,9 +1,9 @@
 /*!
 * inputmask.regex.extensions.js
 * http://github.com/RobinHerbots/jquery.inputmask
-* Copyright (c) 2010 - 2015 Robin Herbots
+* Copyright (c) 2010 - 2016 Robin Herbots
 * Licensed under the MIT license (http://www.opensource.org/licenses/mit-license.php)
-* Version: 3.2.5
+* Version: 3.2.7
 */
 !function(factory) {
     "function" == typeof define && define.amd ? define([ "inputmask.dependencyLib", "inputmask" ], factory) : "object" == typeof exports ? module.exports = factory(require("./inputmask.dependencyLib.jquery"), require("./inputmask")) : factory(window.dependencyLib || jQuery, window.Inputmask);
@@ -99,9 +99,9 @@
                             }
                             return fromGroup && (regexPart += ")", openGroupCount--), isvalid;
                         }
-                        var groupToken, cbuffer = maskset.buffer.slice(), regexPart = "", isValid = !1, openGroupCount = 0;
-                        null === opts.regexTokens && analyseRegex(), cbuffer.splice(pos, 0, chrs);
-                        for (var bufferStr = cbuffer.join(""), i = 0; i < opts.regexTokens.length; i++) {
+                        var bufferStr, groupToken, cbuffer = maskset.buffer.slice(), regexPart = "", isValid = !1, openGroupCount = 0;
+                        null === opts.regexTokens && analyseRegex(), cbuffer.splice(pos, 0, chrs), bufferStr = cbuffer.join("");
+                        for (var i = 0; i < opts.regexTokens.length; i++) {
                             var regexToken = opts.regexTokens[i];
                             if (isValid = validateRegexToken(regexToken, regexToken.isGroup)) break;
                         }
