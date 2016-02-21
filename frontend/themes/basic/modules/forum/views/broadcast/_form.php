@@ -7,11 +7,11 @@ use yii\helpers\Html;
     <?php $form = ActiveForm::begin(); ?>
       <span class="create-thread"><?= Yii::t('app', "What's Happening!");?></span>
 
-      <?= $form->field($newBroadcast, 'title', [
+      <?= $form->field($model, 'title', [
         'template' => '<div class="input-group"><span class="input-group-addon">' . Yii::t('app', 'Title') . '</span>{input}</div>',
       ])->textInput(['maxlength' => 128, 'autocomplete'=>'off']) ?>
 
-      <?= $form->field($newBroadcast, 'content')->widget('shiyang\umeditor\UMeditor', [
+      <?= $form->field($model, 'content')->widget('shiyang\umeditor\UMeditor', [
           'clientOptions' => [
               'initialFrameHeight' => 100,
               'toolbar' => [
@@ -25,7 +25,7 @@ use yii\helpers\Html;
       ])->label(false) ?>
 
       <div class="buttons">
-        <?php echo Html::submitButton(Yii::t('app','Create'), array('class'=>'btn btn-success')); ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary', 'autocomplete'=>'off']) ?>
       </div>
     <?php ActiveForm::end(); ?>
   </div>

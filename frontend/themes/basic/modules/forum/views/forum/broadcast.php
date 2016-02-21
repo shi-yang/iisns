@@ -15,7 +15,7 @@ $this->params['forum'] = $model->toArray;
 
 <div class="col-xs-12 col-sm-8 col-md-8">
   <?php if ($model->user_id === Yii::$app->user->id) :?>
-    <?= $this->render('/broadcast/_form', ['newBroadcast' => $newBroadcast]) ?>
+    <?= $this->render('/broadcast/_form', ['model' => $newBroadcast]) ?>
   <?php endif; ?>
   <div class="widget-container">
     <?php if ($model->broadcastCount >= 1): ?>
@@ -24,19 +24,25 @@ $this->params['forum'] = $model->toArray;
           <div class="thread-item" id="div<?= $broadcast['id']; ?>">
             <div class="media">
               <div class="media-body">
-                <h4 class="media-heading">
+                <div class="media-heading">
+                  <div class="pull-left">
+                    <h3 class="media-title" style="margin: 0;"><?= Html::encode($broadcast['title']) ?></h3>
+                  </div>
                   <div class="pull-right">
                     <?php if ($model->user_id == Yii::$app->user->id) :?>
-                    <a href="<?= Url::toRoute(['/forum/broadcast/delete', 'id' => $broadcast['id']]) ?>"  data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="broadcast">
-                      <span class="glyphicon glyphicon-remove-circle"></span>
-                    </a>
+                      <a href="<?= Url::toRoute(['/forum/broadcast/update', 'id' => $broadcast['id']]) ?>">
+                        <span class="glyphicon glyphicon-edit"></span>
+                      </a>
+                      <a href="<?= Url::toRoute(['/forum/broadcast/delete', 'id' => $broadcast['id']]) ?>"  data-confirm="<?= Yii::t('app', 'Are you sure to delete it?') ?>" data-method="broadcast">
+                        <span class="glyphicon glyphicon-remove-circle"></span>
+                      </a>
                     <?php endif; ?>
                   </div>
-                </h4>
-                <a><h3 class="media-title"><?= Html::encode($broadcast['title']) ?></h3></a>
-                <span class="thread-time">
-                  <span class="glyphicon glyphicon-time"></span> <?= Yii::$app->formatter->asRelativeTime($broadcast['created_at']) ?>
-                </span>
+                  <div class="clearfix"></div>
+                  <span style="color: #aaa; font-size: 12px;">
+                    <span class="glyphicon glyphicon-time"></span> <?= Yii::$app->formatter->asRelativeTime($broadcast['created_at']) ?>
+                  </span>
+                </div>
                 <div class="media-content">
                     <?php echo $broadcast['content']; ?>
                 </div>

@@ -41,6 +41,23 @@ class BroadcastController extends BaseController
             ]
         ];
     }
+
+    public function actionUpdate($id)
+    {
+        $this->layout = 'forum';
+        $model = $this->findModel($id);
+
+        if ($model->user_id === Yii::$app->user->id) {
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Saved successfully'));
+            }
+            return $this->render('update', [
+                'model' => $model
+            ]);
+        } else {
+            throw new ForbiddenHttpException('You are not allowed to perform this action.');
+        }
+    }
     
     /**
      * 删除广播

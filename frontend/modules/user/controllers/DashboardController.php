@@ -49,29 +49,30 @@ class DashboardController extends BaseController
     {
         if (Yii::$app->user->isGuest) {
             $this->redirect(['/explore/index']);
-        }
-        $model = $this->findModel();
-        $newFeed = new Feed;
-        $newFeed->setScenario('create');
-        if ($newFeed->load(Yii::$app->request->post()) && $newFeed->save()) {
-            return $this->refresh();
-        }
+        } else {
+            $model = $this->findModel();
+            $newFeed = new Feed;
+            $newFeed->setScenario('create');
+            if ($newFeed->load(Yii::$app->request->post()) && $newFeed->save()) {
+                return $this->refresh();
+            }
 
-        $query = new Query;
-        $query = $query->select('p.id, p.user_id, p.content, p.feed_data, p.template, p.created_at, u.username, u.avatar')
-            ->from('{{%home_feed}} as p')
-            ->join('LEFT JOIN','{{%user_follow}} as f', 'p.user_id=f.people_id AND f.user_id=:user_id')
-            ->join('LEFT JOIN','{{%user}} as u', 'u.id=p.user_id')
-            ->where('p.user_id=:user_id OR f.user_id=:user_id', [':user_id' => $model->id])
-            ->orderBy('p.created_at DESC');
+            $query = new Query;
+            $query = $query->select('p.id, p.user_id, p.content, p.feed_data, p.template, p.created_at, u.username, u.avatar')
+                ->from('{{%home_feed}} as p')
+                ->join('LEFT JOIN','{{%user_follow}} as f', 'p.user_id=f.people_id AND f.user_id=:user_id')
+                ->join('LEFT JOIN','{{%user}} as u', 'u.id=p.user_id')
+                ->where('p.user_id=:user_id OR f.user_id=:user_id', [':user_id' => $model->id])
+                ->orderBy('p.created_at DESC');
 
-        $pages = Yii::$app->tools->Pagination($query);
-        return $this->render('index', [
-            'model' => $model,
-            'newFeed' => $newFeed,
-            'feeds' => $pages['result'],
-            'pages' => $pages['pages']
-        ]);
+            $pages = Yii::$app->tools->Pagination($query);
+            return $this->render('index', [
+                'model' => $model,
+                'newFeed' => $newFeed,
+                'feeds' => $pages['result'],
+                'pages' => $pages['pages']
+            ]);
+        }
     }
 
     public function actionFollowing()

@@ -76,4 +76,11 @@ class Broadcast extends \yii\db\ActiveRecord
             return false;
         }
     }
+
+    public function getForum()
+    {
+        return Yii::$app->db
+            ->createCommand("SELECT forum_url,forum_name,user_id FROM {{%forum}} WHERE id={$this->forum_id}")
+            ->queryOne();
+    }
 }
