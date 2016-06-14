@@ -6,7 +6,6 @@ html, body {
 }
 
 body {
-  font-family: 'Microsoft Yahei', 'Simsun',Helvetica,Arial,sans-serif !important;
   background-color: #eee !important;
   color: #555;
   line-height: 21px;
@@ -19,7 +18,6 @@ h4, .h4,
 h5, .h5,
 h6, .h6 {
   margin-top: 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal;
   color: #333;
 }
