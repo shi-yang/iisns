@@ -35,20 +35,21 @@ class DashboardController extends BaseController
                         'allow' => true,
                         'roles' => ['@'],
                     ],
+                    [
+                        'actions' => ['index'],
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
                 ],
             ],
         ];
     }
 
-    public function beforeAction()
-    {
-        if (Yii::$app->user->isGuest) {
-            $this->redirect(['/explore/index']);
-        }
-    }
-
     public function actionIndex()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(['/explore/index']);
+        }
         $model = $this->findModel();
         $newFeed = new Feed;
         $newFeed->setScenario('create');

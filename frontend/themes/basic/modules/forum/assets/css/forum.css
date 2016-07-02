@@ -212,6 +212,7 @@ float: right; position: relative; line-height: 45px;color: #596F37;
 	-moz-transition: background-color .2s;
 	-webkit-transition: background-color .2s;
 	transition: background-color .2s;
+    border-bottom: 1px solid #ddd;
 }
 .tbox .board {
 	cursor:pointer;

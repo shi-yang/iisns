@@ -16,7 +16,6 @@ use frontend\models\ContactForm;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 use common\components\BaseController;
-use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
 /**
@@ -188,7 +187,7 @@ class SiteController extends BaseController
             Yii::setAlias('avatar', '@web/uploads/user/avatar/');
             $this->layout = '@app/modules/user/views/layouts/user.php';
         }
-        
+
         return $this->render('develop');
     }
 }

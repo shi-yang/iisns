@@ -12,7 +12,7 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => [
         'log',
-        'assetsCompress'
+    //    'assetsCompress'
     ],
     'controllerNamespace' => 'frontend\controllers',
     'defaultRoute' => 'user/dashboard',
@@ -42,14 +42,14 @@ return [
     ],
     'components' => [
         'db' => $db,
-        'assetsCompress' => [
-            'class' => '\iisns\assets\AssetsCompressComponent',
-            'enabled' => true,
-            'jsCompress' => true,
-            'cssFileCompile' => true,
-            'jsFileCompile' => false,
-            'jsFileCompress' => false,
-        ],
+//        'assetsCompress' => [
+//            'class' => '\iisns\assets\AssetsCompressComponent',
+//            'enabled' => true,
+//            'jsCompress' => true,
+//            'cssFileCompile' => true,
+//            'jsFileCompile' => false,
+//            'jsFileCompress' => false,
+//        ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'rules' => [

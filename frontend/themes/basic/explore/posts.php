@@ -11,23 +11,39 @@ $this->params['title'] = Yii::t('app', 'Explore') . ' - ' . Yii::t('app', 'Posts
 $this->params['breadcrumb'][] = Yii::t('app', 'Posts');
 
 $this->registerCss('
-.tag-group-item {
-  list-style-type: none;
+.widget {
+    position: relative;
+    margin-bottom: 20px;
+	position: relative;
+	margin-bottom: 15px;
+	background-color: #fff;
+	overflow: hidden;
+ 	clear: both;
 }
-.tag-group-item {
-  display: inline-block;
-  min-width: 10px;
-  margin: 2px;
-  padding: 3px 7px;
-  font-size: 17px;
-  font-weight: bold;
-  line-height: 1;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  border-radius: 10px;
-  background-color: #F1F5FC;
-  color: #777;
+.widget .panel-heading, .widget .panel-body {
+    padding: 0px;
+}
+.widget .panel-heading{
+	position: relative;
+}
+.widget .panel-heading:after{
+	content: "";
+    width: 67px;
+    height: 1px;
+    background: #007aff;
+    position: absolute;
+    left: 0;
+    bottom: 10px;
+}
+.widget h3 {
+	width: 100%;
+	color:#666; /*#666#1FA756*/
+	font-size: 16px;
+	font-weight: normal;
+	padding: 11px 15px 5px 0;
+	margin: 0px 0px 10px;
+    border-bottom: 1px solid #DFDFDF;
+    line-height: 26px;
 }
 ');
 ?>
@@ -66,9 +82,11 @@ $this->registerCss('
         ]); ?>
     </div>
     <div class="col-md-3">
-        <div class="panel panel-default">
-            <div class="panel-heading"><?= Yii::t('app', 'Tags') ?></div>
-            <div class="panel-body">
+        <section class="widget widget-tag">
+            <header class="panel-heading">
+                <h3 class="widget-tit">热门标签</h3>
+            </header>
+            <section class="panel-body">
                 <?= TaggingWidget::widget([
                     'items' => $tags,
                     'url' => ['/explore/posts'],
@@ -77,7 +95,7 @@ $this->registerCss('
                     'listOptions' => ['class' => 'tag-group'],
                     'liOptions' => ['class' => 'tag-group-item']
                 ]) ?>
-            </div>
-        </div>
+            </section>
+        </section>
     </div>
 </div>
