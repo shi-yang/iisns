@@ -272,8 +272,7 @@ foreach ($dirarray as $key => $dir) {
                     ")->execute();
 
                     $fp = @fopen("../common/config/db.php", "w");
-                    fwrite($fp, "
-<?php
+                    fwrite($fp, "<?php
 ////////////////////
 // This file contains the database access information.
 // This file is needed to establish a connection to MySQL

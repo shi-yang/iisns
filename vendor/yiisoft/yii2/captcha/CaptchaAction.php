@@ -135,7 +135,6 @@ class CaptchaAction extends Action
                 'url' => Url::to([$this->id, 'v' => uniqid()]),
             ];
         } else {
-            ob_clean();
             $this->setHttpHeaders();
             Yii::$app->response->format = Response::FORMAT_RAW;
             return $this->renderImage($this->getVerifyCode());
