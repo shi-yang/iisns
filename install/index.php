@@ -8,7 +8,9 @@
  */
 
 error_reporting(0);
-set_time_limit(600);
+set_time_limit(0);
+ob_end_clean();
+ob_implicit_flush(1);
 
 define('IISNS_ROOT', str_replace('\\', '/', substr(dirname(__FILE__), 0, -7)));
 
@@ -197,13 +199,16 @@ foreach ($dirarray as $key => $dir) {
         <?php elseif (strlen($adminPass) < 5): ?>
             <div class="alert alert-danger" role="alert"><strong>Error.</strong> Password must be at least 5 characters.</div>
             <a href="index.php?step=2" class="btn btn-default">Previous</a>
-        <?php elseif (!@mysql_connect($dbHost, $dbUser, $dbPass)): ?>
-            <div class="alert alert-danger" role="alert"><strong>Error.</strong> Your Database details are incorrect.</div>
-            <a href="index.php?step=2" class="btn btn-default">Previous</a>
-        <?php elseif (!mysql_select_db($dbName, @mysql_connect($dbHost, $dbUser, $dbPass))): ?>
-            <div class="alert alert-danger" role="alert"><strong>Error.</strong> Your Database details are incorrect.</div>
-            <a href="index.php?step=2" class="btn btn-default">Previous</a>
         <?php else: ?>
+            <?php
+                try {
+                    $dbh = new PDO($dsn, $user, $password);
+                } catch (PDOException $e) {
+                    echo 'Connection failed: ' . $e->getMessage();
+                    echo "<br>";
+                    echo '<a href="index.php?step=2" class="btn btn-default">Previous</a>';
+                }
+            ?>
             <div class="progress">
                 <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 66.6%;">
                     Third
@@ -294,10 +299,14 @@ return [
         <div class="alert alert-success"><strong>Success!</strong> Installation is completed.</div>
         <p class="bg-warning">Delete or rename the install folder to prevent security risk.</p>
         <p>If you want to reinstall, delete <code>common\config\db.php</code> </p>
+        <p><a href="../frontend/web">Frontend</a></p>
+        <p><a href="../backend/web">Backend</a></p>
     <?php endif; ?>
 <?php else: ?>
     <div class="alert alert-success"><strong>Success!</strong> Installation is completed.</div>
     <p class="bg-warning">Delete or rename the install folder to prevent security risk.</p>
     <p>If you want to reinstall, delete <code>common\config\db.php</code> </p>
+    <p><a href="../frontend/web">Frontend</a></p>
+    <p><a href="../backend/web">Backend</a></p>
 <?php endif; ?>
 <?php include_once('footer.php'); ?>
