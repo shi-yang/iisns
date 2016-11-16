@@ -42,21 +42,29 @@ return [
     'components' => [
         'view' => [
             'class' => '\rmrevin\yii\minify\View',
-            'enableMinify' => !YII_DEBUG,
+            //'enableMinify' => !YII_DEBUG,
+            'enableMinify' => true,
             'concatCss' => true, // concatenate css
             'minifyCss' => true, // minificate css
             'concatJs' => true, // concatenate js
             'minifyJs' => true, // minificate js
             'minifyOutput' => true, // minificate result html page
-            'web_path' => '@waeb', // path alias to web base
+            'web_path' => '@web', // path alias to web base
             'base_path' => '@webroot', // path alias to web base
-            'minify_path' => '@webroot/minify', // path alias to save minify result
+            'minify_path' => '@webroot/assets', // path alias to save minify result
             'js_position' => [ \yii\web\View::POS_END ], // positions of js files to be minified
             'force_charset' => 'UTF-8', // charset forcibly assign, otherwise will use all of the files found charset
             'expand_imports' => true, // whether to change @import on content
             'compress_options' => ['extra' => true], // options for compress
             'excludeBundles' => [
                 \shiyang\umeditor\UMeditorAsset::class
+            ],
+
+            'theme' => [
+                'pathMap' => [
+                    '@app/views' => '@app/themes/basic',
+                    '@app/modules' => '@app/themes/basic/modules',
+                ],
             ],
         ],
         'db' => $db,
@@ -77,14 +85,7 @@ return [
         'userData' => [
             'class' => 'app\modules\user\models\UserData',
         ],
-        'view' => [
-            'theme' => [
-                'pathMap' => [
-                    '@app/views' => '@app/themes/basic',
-                    '@app/modules' => '@app/themes/basic/modules',
-                ],
-            ],
-        ],
+
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
