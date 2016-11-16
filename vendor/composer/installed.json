@@ -700,103 +700,6 @@
         ]
     },
     {
-        "name": "natxet/CssMin",
-        "version": "v3.0.4",
-        "version_normalized": "3.0.4.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/natxet/CssMin.git",
-            "reference": "92de3fe3ccb4f8298d31952490ef7d5395855c39"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/natxet/CssMin/zipball/92de3fe3ccb4f8298d31952490ef7d5395855c39",
-            "reference": "92de3fe3ccb4f8298d31952490ef7d5395855c39",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.0"
-        },
-        "time": "2015-09-25 11:13:11",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "3.0-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "src/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Joe Scylla",
-                "email": "joe.scylla@gmail.com",
-                "homepage": "https://profiles.google.com/joe.scylla"
-            }
-        ],
-        "description": "Minifying CSS",
-        "homepage": "http://code.google.com/p/cssmin/",
-        "keywords": [
-            "css",
-            "minify"
-        ]
-    },
-    {
-        "name": "tedivm/jshrink",
-        "version": "v1.1.0",
-        "version_normalized": "1.1.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/tedious/JShrink.git",
-            "reference": "688527a2e854d7935f24f24c7d5eb1b604742bf9"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/tedious/JShrink/zipball/688527a2e854d7935f24f24c7d5eb1b604742bf9",
-            "reference": "688527a2e854d7935f24f24c7d5eb1b604742bf9",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.0"
-        },
-        "require-dev": {
-            "fabpot/php-cs-fixer": "0.4.0",
-            "phpunit/phpunit": "4.0.*",
-            "satooshi/php-coveralls": "dev-master"
-        },
-        "time": "2015-07-04 07:35:09",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "JShrink": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Robert Hafner",
-                "email": "tedivm@tedivm.com"
-            }
-        ],
-        "description": "Javascript Minifier built in PHP",
-        "homepage": "http://github.com/tedious/JShrink",
-        "keywords": [
-            "javascript",
-            "minifier"
-        ]
-    },
-    {
         "name": "yiisoft/yii2-composer",
         "version": "2.0.4",
         "version_normalized": "2.0.4.0",
@@ -885,55 +788,6 @@
         "keywords": [
             "extension",
             "umeditor",
-            "yii2"
-        ]
-    },
-    {
-        "name": "iisns/yii2-assets-compress",
-        "version": "v1.0.0",
-        "version_normalized": "1.0.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/iisns/yii2-assets-compress.git",
-            "reference": "37009a8b0f4b3bcdd417b223db0d3fb6e9c26034"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/iisns/yii2-assets-compress/zipball/37009a8b0f4b3bcdd417b223db0d3fb6e9c26034",
-            "reference": "37009a8b0f4b3bcdd417b223db0d3fb6e9c26034",
-            "shasum": ""
-        },
-        "require": {
-            "mrclay/minify": "*",
-            "natxet/cssmin": "*",
-            "tedivm/jshrink": "*",
-            "yiisoft/yii2": "*"
-        },
-        "time": "2016-02-12 14:59:50",
-        "type": "yii2-extension",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "iisns\\assets\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Shiyang",
-                "email": "dr@shiyang.me"
-            }
-        ],
-        "description": "This solution enables you to dynamically combine js and css files to optimize the html page.",
-        "keywords": [
-            "JS",
-            "assets",
-            "compress",
-            "css",
-            "iisns",
             "yii2"
         ]
     },
@@ -1460,53 +1314,6 @@
         ]
     },
     {
-        "name": "mrclay/minify",
-        "version": "2.3.0",
-        "version_normalized": "2.3.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/mrclay/minify.git",
-            "reference": "f4cb31135d288f951bb0af1f23a03d4c00ba9446"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/mrclay/minify/zipball/f4cb31135d288f951bb0af1f23a03d4c00ba9446",
-            "reference": "f4cb31135d288f951bb0af1f23a03d4c00ba9446",
-            "shasum": ""
-        },
-        "require": {
-            "ext-pcre": "*",
-            "php": ">=5.2.1"
-        },
-        "require-dev": {
-            "tubalmartin/cssmin": "~2.4.8"
-        },
-        "suggest": {
-            "tubalmartin/cssmin": "Support minify with CSSMin (YUI PHP port)"
-        },
-        "time": "2016-03-08 11:49:57",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "min/lib/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Stephen Clay",
-                "email": "steve@mrclay.org",
-                "role": "Developer"
-            }
-        ],
-        "description": "Minify is a PHP5 app that helps you follow several rules for client-side performance. It combines multiple CSS or Javascript files, removes unnecessary whitespace and comments, and serves them with gzip encoding and optimal client-side cache headers",
-        "homepage": "http://code.google.com/p/minify/"
-    },
-    {
         "name": "swiftmailer/swiftmailer",
         "version": "v5.4.3",
         "version_normalized": "5.4.3.0",
@@ -1962,6 +1769,100 @@
             "mobile-first",
             "responsive",
             "web"
+        ]
+    },
+    {
+        "name": "mrclay/minify",
+        "version": "2.3.0",
+        "version_normalized": "2.3.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/mrclay/minify.git",
+            "reference": "f4cb31135d288f951bb0af1f23a03d4c00ba9446"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/mrclay/minify/zipball/f4cb31135d288f951bb0af1f23a03d4c00ba9446",
+            "reference": "f4cb31135d288f951bb0af1f23a03d4c00ba9446",
+            "shasum": ""
+        },
+        "require": {
+            "ext-pcre": "*",
+            "php": ">=5.2.1"
+        },
+        "require-dev": {
+            "tubalmartin/cssmin": "~2.4.8"
+        },
+        "suggest": {
+            "tubalmartin/cssmin": "Support minify with CSSMin (YUI PHP port)"
+        },
+        "time": "2016-03-08 11:49:57",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "min/lib/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Stephen Clay",
+                "email": "steve@mrclay.org",
+                "role": "Developer"
+            }
+        ],
+        "description": "Minify is a PHP5 app that helps you follow several rules for client-side performance. It combines multiple CSS or Javascript files, removes unnecessary whitespace and comments, and serves them with gzip encoding and optimal client-side cache headers",
+        "homepage": "http://code.google.com/p/minify/"
+    },
+    {
+        "name": "rmrevin/yii2-minify-view",
+        "version": "1.13.0",
+        "version_normalized": "1.13.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/rmrevin/yii2-minify-view.git",
+            "reference": "8137b1cd531406e0889a78c2881926aa723f7d60"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/rmrevin/yii2-minify-view/zipball/8137b1cd531406e0889a78c2881926aa723f7d60",
+            "reference": "8137b1cd531406e0889a78c2881926aa723f7d60",
+            "shasum": ""
+        },
+        "require": {
+            "mrclay/minify": "~2.2",
+            "yiisoft/yii2": "2.0.*"
+        },
+        "time": "2016-10-26 10:37:54",
+        "type": "yii2-extension",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "rmrevin\\yii\\minify\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Revin Roman",
+                "email": "roman@rmrevin.com",
+                "homepage": "https://rmrevin.com/"
+            }
+        ],
+        "description": "Yii2 View component with minification css & js",
+        "keywords": [
+            "JS",
+            "css",
+            "minify",
+            "view",
+            "yii2"
         ]
     }
 ]

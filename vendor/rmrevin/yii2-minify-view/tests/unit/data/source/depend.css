@@ -1,0 +1,12 @@
+/** depend css */
+
+@charset "UTF-8";
+
+@import url(//fonts.googleapis.com/css?family=Open+Sans);
+
+.depend {
+  background: url('image.png');
+  /*width*/
+}
+
+.depend { background: url('http://hello'); }

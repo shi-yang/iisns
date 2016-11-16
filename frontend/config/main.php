@@ -12,7 +12,6 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => [
         'log',
-    //    'assetsCompress'
     ],
     'controllerNamespace' => 'frontend\controllers',
     'defaultRoute' => 'user/dashboard',
@@ -41,15 +40,26 @@ return [
         ],
     ],
     'components' => [
+        'view' => [
+            'class' => '\rmrevin\yii\minify\View',
+            'enableMinify' => !YII_DEBUG,
+            'concatCss' => true, // concatenate css
+            'minifyCss' => true, // minificate css
+            'concatJs' => true, // concatenate js
+            'minifyJs' => true, // minificate js
+            'minifyOutput' => true, // minificate result html page
+            'web_path' => '@waeb', // path alias to web base
+            'base_path' => '@webroot', // path alias to web base
+            'minify_path' => '@webroot/minify', // path alias to save minify result
+            'js_position' => [ \yii\web\View::POS_END ], // positions of js files to be minified
+            'force_charset' => 'UTF-8', // charset forcibly assign, otherwise will use all of the files found charset
+            'expand_imports' => true, // whether to change @import on content
+            'compress_options' => ['extra' => true], // options for compress
+            'excludeBundles' => [
+                \shiyang\umeditor\UMeditorAsset::class
+            ],
+        ],
         'db' => $db,
-//        'assetsCompress' => [
-//            'class' => '\iisns\assets\AssetsCompressComponent',
-//            'enabled' => true,
-//            'jsCompress' => true,
-//            'cssFileCompile' => true,
-//            'jsFileCompile' => false,
-//            'jsFileCompress' => false,
-//        ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'rules' => [

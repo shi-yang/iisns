@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7d6da5c82eaaad9d156b857e19d8cc00",
-    "content-hash": "b14a7df2e024b18a3b318f2879125d1a",
+    "hash": "94dd4f1649af39dd4df9346f10d70e4e",
+    "content-hash": "61a1df162e509832cf9642d3ab0ad8ae",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -787,53 +787,6 @@
             "time": "2016-07-16 12:58:58"
         },
         {
-            "name": "iisns/yii2-assets-compress",
-            "version": "v1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/iisns/yii2-assets-compress.git",
-                "reference": "37009a8b0f4b3bcdd417b223db0d3fb6e9c26034"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/iisns/yii2-assets-compress/zipball/37009a8b0f4b3bcdd417b223db0d3fb6e9c26034",
-                "reference": "37009a8b0f4b3bcdd417b223db0d3fb6e9c26034",
-                "shasum": ""
-            },
-            "require": {
-                "mrclay/minify": "*",
-                "natxet/cssmin": "*",
-                "tedivm/jshrink": "*",
-                "yiisoft/yii2": "*"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "iisns\\assets\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Shiyang",
-                    "email": "dr@shiyang.me"
-                }
-            ],
-            "description": "This solution enables you to dynamically combine js and css files to optimize the html page.",
-            "keywords": [
-                "JS",
-                "assets",
-                "compress",
-                "css",
-                "iisns",
-                "yii2"
-            ],
-            "time": "2016-02-12 14:59:50"
-        },
-        {
             "name": "iisns/yii2-webuploader",
             "version": "v1.0.0",
             "source": {
@@ -1013,32 +966,28 @@
             "time": "2016-03-08 11:49:57"
         },
         {
-            "name": "natxet/CssMin",
-            "version": "v3.0.4",
+            "name": "rmrevin/yii2-minify-view",
+            "version": "1.13.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/natxet/CssMin.git",
-                "reference": "92de3fe3ccb4f8298d31952490ef7d5395855c39"
+                "url": "https://github.com/rmrevin/yii2-minify-view.git",
+                "reference": "8137b1cd531406e0889a78c2881926aa723f7d60"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/natxet/CssMin/zipball/92de3fe3ccb4f8298d31952490ef7d5395855c39",
-                "reference": "92de3fe3ccb4f8298d31952490ef7d5395855c39",
+                "url": "https://api.github.com/repos/rmrevin/yii2-minify-view/zipball/8137b1cd531406e0889a78c2881926aa723f7d60",
+                "reference": "8137b1cd531406e0889a78c2881926aa723f7d60",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.0"
+                "mrclay/minify": "~2.2",
+                "yiisoft/yii2": "2.0.*"
             },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.0-dev"
-                }
-            },
+            "type": "yii2-extension",
             "autoload": {
-                "classmap": [
-                    "src/"
-                ]
+                "psr-4": {
+                    "rmrevin\\yii\\minify\\": ""
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1046,18 +995,20 @@
             ],
             "authors": [
                 {
-                    "name": "Joe Scylla",
-                    "email": "joe.scylla@gmail.com",
-                    "homepage": "https://profiles.google.com/joe.scylla"
+                    "name": "Revin Roman",
+                    "email": "roman@rmrevin.com",
+                    "homepage": "https://rmrevin.com/"
                 }
             ],
-            "description": "Minifying CSS",
-            "homepage": "http://code.google.com/p/cssmin/",
+            "description": "Yii2 View component with minification css & js",
             "keywords": [
+                "JS",
                 "css",
-                "minify"
+                "minify",
+                "view",
+                "yii2"
             ],
-            "time": "2015-09-25 11:13:11"
+            "time": "2016-10-26 10:37:54"
         },
         {
             "name": "shiyang/yii2-infinite-scroll",
@@ -1246,52 +1197,6 @@
                 "mailer"
             ],
             "time": "2016-07-08 11:51:25"
-        },
-        {
-            "name": "tedivm/jshrink",
-            "version": "v1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/tedious/JShrink.git",
-                "reference": "688527a2e854d7935f24f24c7d5eb1b604742bf9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tedious/JShrink/zipball/688527a2e854d7935f24f24c7d5eb1b604742bf9",
-                "reference": "688527a2e854d7935f24f24c7d5eb1b604742bf9",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "fabpot/php-cs-fixer": "0.4.0",
-                "phpunit/phpunit": "4.0.*",
-                "satooshi/php-coveralls": "dev-master"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "JShrink": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Robert Hafner",
-                    "email": "tedivm@tedivm.com"
-                }
-            ],
-            "description": "Javascript Minifier built in PHP",
-            "homepage": "http://github.com/tedious/JShrink",
-            "keywords": [
-                "javascript",
-                "minifier"
-            ],
-            "time": "2015-07-04 07:35:09"
         },
         {
             "name": "yiisoft/yii2",
@@ -1740,6 +1645,7 @@
                 "codeception",
                 "yii2"
             ],
+            "abandoned": "codeception/codeception",
             "time": "2016-03-17 03:41:26"
         },
         {

@@ -48,15 +48,6 @@ return array (
       '@shiyang/umeditor' => $vendorDir . '/shiyang/yii2-umeditor',
     ),
   ),
-  'iisns/yii2-assets-compress' => 
-  array (
-    'name' => 'iisns/yii2-assets-compress',
-    'version' => '1.0.0.0',
-    'alias' => 
-    array (
-      '@iisns/assets' => $vendorDir . '/iisns/yii2-assets-compress',
-    ),
-  ),
   'iisns/yii2-webuploader' => 
   array (
     'name' => 'iisns/yii2-webuploader',
@@ -118,6 +109,15 @@ return array (
     'alias' => 
     array (
       '@yii/imagine' => $vendorDir . '/yiisoft/yii2-imagine',
+    ),
+  ),
+  'rmrevin/yii2-minify-view' => 
+  array (
+    'name' => 'rmrevin/yii2-minify-view',
+    'version' => '1.13.0.0',
+    'alias' => 
+    array (
+      '@rmrevin/yii/minify' => $vendorDir . '/rmrevin/yii2-minify-view',
     ),
   ),
 );
