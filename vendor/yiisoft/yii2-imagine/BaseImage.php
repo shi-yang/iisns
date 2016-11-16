@@ -10,11 +10,12 @@ namespace yii\imagine;
 use Yii;
 use Imagine\Image\Box;
 use Imagine\Image\BoxInterface;
-use Imagine\Image\Color;
 use Imagine\Image\ImageInterface;
 use Imagine\Image\ImagineInterface;
 use Imagine\Image\ManipulatorInterface;
 use Imagine\Image\Point;
+use Imagine\Image\Palette\RGB;
+use Imagine\Filter\Basic\Autorotate;
 use yii\base\InvalidConfigException;
 use yii\base\InvalidParamException;
 use yii\helpers\ArrayHelper;
@@ -118,7 +119,32 @@ class BaseImage
                     throw new InvalidConfigException("Unknown driver: $driver");
             }
         }
-        throw new InvalidConfigException("Your system does not support any of these drivers: " . implode(',', (array) static::$driver));
+        throw new InvalidConfigException('Your system does not support any of these drivers: ' . implode(',', (array) static::$driver));
+    }
+
+    /**
+     * Takes either file path or ImageInterface. In case of file path, creates an instance of ImageInterface from it.
+     *
+     * @param string|resource|ImageInterface $image
+     * @return ImageInterface
+     * @throws \yii\base\InvalidParamException
+     * @since 2.1.0
+     */
+    protected static function ensureImageInterfaceInstance($image)
+    {
+        if ($image instanceof ImageInterface) {
+            return $image;
+        }
+
+        if (is_resource($image)) {
+            return static::getImagine()->read($image);
+        }
+
+        if (is_string($image)) {
+            return static::getImagine()->open(Yii::getAlias($image));
+        }
+
+        throw new InvalidParamException('File should be either ImageInterface, resource or a string containing file path.');
     }
 
     /**
@@ -133,25 +159,37 @@ class BaseImage
      * $obj->crop('path\to\image.jpg', 200, 200, $point);
      * ~~~
      *
-     * @param string $filename the image file path or path alias.
-     * @param integer $width the crop width
-     * @param integer $height the crop height
+     * @param string|resource|ImageInterface $image either ImageInterface, resource or a string containing file path
+     * @param int $width the crop width
+     * @param int $height the crop height
      * @param array $start the starting point. This must be an array with two elements representing `x` and `y` coordinates.
      * @return ImageInterface
      * @throws InvalidParamException if the `$start` parameter is invalid
      */
-    public static function crop($filename, $width, $height, array $start = [0, 0])
+    public static function crop($image, $width, $height, array $start = [0, 0])
     {
         if (!isset($start[0], $start[1])) {
             throw new InvalidParamException('$start must be an array of two elements.');
         }
 
-        return static::getImagine()
-            ->open(Yii::getAlias($filename))
+        return static::ensureImageInterfaceInstance($image)
             ->copy()
             ->crop(new Point($start[0], $start[1]), new Box($width, $height));
     }
-
+    
+    /**
+     * Rotates an image automatically based on EXIF information.
+     *
+     * @param string|resource|ImageInterface $image either ImageInterface, resource or a string containing file path
+     * @param string $color
+     * @return \Imagine\Image\ImageInterface
+     * @since 2.1.0
+     */
+    public static function autorotate($image, $color = '000000')
+    {
+    	return (new Autorotate($color))->apply(static::ensureImageInterfaceInstance($image));
+    }
+    
     /**
      * Creates a thumbnail image.
      *
@@ -170,16 +208,17 @@ class BaseImage
      * contained within the thumbnail dimensions. The rest is filled with background that could be configured via
      * [[Image::$thumbnailBackgroundColor]] and [[Image::$thumbnailBackgroundAlpha]].
      *
-     * @param string $filename the image file path or path alias.
-     * @param integer $width the width in pixels to create the thumbnail
-     * @param integer $height the height in pixels to create the thumbnail
+     * @param string|resource|ImageInterface $image either ImageInterface, resource or a string containing file path
+     * @param int $width the width in pixels to create the thumbnail
+     * @param int $height the height in pixels to create the thumbnail
      * @param string $mode mode of resizing original image to use in case both width and height specified
      * @return ImageInterface
      */
-    public static function thumbnail($filename, $width, $height, $mode = ManipulatorInterface::THUMBNAIL_OUTBOUND)
+    public static function thumbnail($image, $width, $height, $mode = ManipulatorInterface::THUMBNAIL_OUTBOUND)
     {
-        $img = static::getImagine()->open(Yii::getAlias($filename));
+        $img = self::ensureImageInterfaceInstance($image);
 
+        /** @var BoxInterface $sourceBox */
         $sourceBox = $img->getSize();
         $thumbnailBox = static::getThumbnailBox($sourceBox, $width, $height);
 
@@ -199,8 +238,11 @@ class BaseImage
             return $img;
         }
 
+        $palette = new RGB();
+        $color = $palette->color(static::$thumbnailBackgroundColor, static::$thumbnailBackgroundAlpha);
+        
         // create empty image to preserve aspect ratio of thumbnail
-        $thumb = static::getImagine()->create($thumbnailBox, new Color(static::$thumbnailBackgroundColor, static::$thumbnailBackgroundAlpha));
+        $thumb = static::getImagine()->create($thumbnailBox, $color);
 
         // calculate points
         $startX = 0;
@@ -219,20 +261,20 @@ class BaseImage
 
     /**
      * Adds a watermark to an existing image.
-     * @param string $filename the image file path or path alias.
-     * @param string $watermarkFilename the file path or path alias of the watermark image.
+     * @param string|resource|ImageInterface $image either ImageInterface, resource or a string containing file path
+     * @param string|resource|ImageInterface $watermarkImage either ImageInterface, resource or a string containing watermark file path
      * @param array $start the starting point. This must be an array with two elements representing `x` and `y` coordinates.
      * @return ImageInterface
      * @throws InvalidParamException if `$start` is invalid
      */
-    public static function watermark($filename, $watermarkFilename, array $start = [0, 0])
+    public static function watermark($image, $watermarkImage, array $start = [0, 0])
     {
         if (!isset($start[0], $start[1])) {
             throw new InvalidParamException('$start must be an array of two elements.');
         }
 
-        $img = static::getImagine()->open(Yii::getAlias($filename));
-        $watermark = static::getImagine()->open(Yii::getAlias($watermarkFilename));
+        $img = self::ensureImageInterfaceInstance($image);
+        $watermark = self::ensureImageInterfaceInstance($watermarkImage);
         $img->paste($watermark, new Point($start[0], $start[1]));
 
         return $img;
@@ -240,7 +282,7 @@ class BaseImage
 
     /**
      * Draws a text string on an existing image.
-     * @param string $filename the image file path or path alias.
+     * @param string|resource|ImageInterface $image either ImageInterface, resource or a string containing file path
      * @param string $text the text to write to the image
      * @param string $fontFile the file path or path alias
      * @param array $start the starting position of the text. This must be an array with two elements representing `x` and `y` coordinates.
@@ -253,7 +295,7 @@ class BaseImage
      * @return ImageInterface
      * @throws InvalidParamException if `$fontOptions` is invalid
      */
-    public static function text($filename, $text, $fontFile, array $start = [0, 0], array $fontOptions = [])
+    public static function text($image, $text, $fontFile, array $start = [0, 0], array $fontOptions = [])
     {
         if (!isset($start[0], $start[1])) {
             throw new InvalidParamException('$start must be an array of two elements.');
@@ -263,8 +305,11 @@ class BaseImage
         $fontColor = ArrayHelper::getValue($fontOptions, 'color', 'fff');
         $fontAngle = ArrayHelper::getValue($fontOptions, 'angle', 0);
 
-        $img = static::getImagine()->open(Yii::getAlias($filename));
-        $font = static::getImagine()->font(Yii::getAlias($fontFile), $fontSize, new Color($fontColor));
+        $palette = new RGB();
+        $color = $palette->color($fontColor);
+        
+        $img = self::ensureImageInterfaceInstance($image);
+        $font = static::getImagine()->font(Yii::getAlias($fontFile), $fontSize, $color);
 
         $img->draw()->text($text, $font, new Point($start[0], $start[1]), $fontAngle);
 
@@ -273,28 +318,30 @@ class BaseImage
 
     /**
      * Adds a frame around of the image. Please note that the image size will increase by `$margin` x 2.
-     * @param string $filename the full path to the image file
-     * @param integer $margin the frame size to add around the image
+     * @param string|resource|ImageInterface $image either ImageInterface, resource or a string containing file path
+     * @param int $margin the frame size to add around the image
      * @param string $color the frame color
-     * @param integer $alpha the alpha value of the frame.
+     * @param int $alpha the alpha value of the frame.
      * @return ImageInterface
      */
-    public static function frame($filename, $margin = 20, $color = '666', $alpha = 100)
+    public static function frame($image, $margin = 20, $color = '666', $alpha = 100)
     {
-        $img = static::getImagine()->open(Yii::getAlias($filename));
+        $img = static::getImagine()->open(Yii::getAlias($image));
 
         $size = $img->getSize();
 
         $pasteTo = new Point($margin, $margin);
-        $padColor = new Color($color, $alpha);
+
+        $palette = new RGB();
+        $color = $palette->color($color, $alpha);
 
         $box = new Box($size->getWidth() + ceil($margin * 2), $size->getHeight() + ceil($margin * 2));
 
-        $image = static::getImagine()->create($box, $padColor);
+        $finalImage = static::getImagine()->create($box, $color);
 
-        $image->paste($img, $pasteTo);
+        $finalImage->paste($img, $pasteTo);
 
-        return $image;
+        return $finalImage;
     }
     
     /**
@@ -302,8 +349,8 @@ class BaseImage
      * automatically based on width to height ratio of original image box.
      *
      * @param BoxInterface $sourceBox original image box
-     * @param integer $width thumbnail width
-     * @param integer $height thumbnail height
+     * @param int $width thumbnail width
+     * @param int $height thumbnail height
      * @return BoxInterface thumbnail box
      *
      * @since 2.0.4
