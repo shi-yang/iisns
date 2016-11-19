@@ -41,7 +41,7 @@ class ExploreController extends BaseController
         //按标签查询出文章
         if (Yii::$app->request->isGet) {
             $tag = Yii::$app->request->get('tag');
-            $query->andWhere('tags LIKE :tag', [':tag' => '%' . $tag . '%']);
+            $query->andWhere('tags LIKE :tag', [':tag' => '%' . $tag . '%'])->where('e.explore_status=1');
         }
         $posts = Yii::$app->tools->Pagination($query, 10);
         $tags = Explore::getPostTags();
