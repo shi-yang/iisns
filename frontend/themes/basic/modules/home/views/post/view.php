@@ -42,6 +42,5 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 <?= Comment::widget([
-    'tableId' => $model->id,
-    'tableName' => $model->tableName(),
+    'model' => $model,
 ]) ?>
