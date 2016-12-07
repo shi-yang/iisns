@@ -45,7 +45,7 @@ return [
             //'enableMinify' => !YII_DEBUG,
             'enableMinify' => true,
             'concatCss' => true, // concatenate css
-            'minifyCss' => true, // minificate css
+            'minigfyCss' => true, // minificate css
             'concatJs' => true, // concatenate js
             'minifyJs' => true, // minificate js
             'minifyOutput' => true, // minificate result html page
@@ -57,7 +57,8 @@ return [
             'expand_imports' => true, // whether to change @import on content
             'compress_options' => ['extra' => true], // options for compress
             'excludeBundles' => [
-                \shiyang\umeditor\UMeditorAsset::class
+                \shiyang\umeditor\UMeditorAsset::class,
+                \common\widgets\laydate\LayDateAsset::class
             ],
 
             'theme' => [
