@@ -45,7 +45,7 @@ return [
             //'enableMinify' => !YII_DEBUG,
             'enableMinify' => true,
             'concatCss' => true, // concatenate css
-            'minigfyCss' => true, // minificate css
+            'minifyCss' => true, // minificate css
             'concatJs' => true, // concatenate js
             'minifyJs' => true, // minificate js
             'minifyOutput' => true, // minificate result html page
