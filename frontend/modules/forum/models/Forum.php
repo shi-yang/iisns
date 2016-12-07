@@ -103,7 +103,7 @@ class Forum extends \yii\db\ActiveRecord
     }
     
     /**
-     * @return yii\db\ActiveQuery
+     * @return array|yii/db/ActiveRecord[] the query results.
      */
     public function getBoards()
     {
