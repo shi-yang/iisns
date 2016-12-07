@@ -10,7 +10,7 @@ namespace app\modules\user\controllers;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\ForbiddenHttpException;
-use yii\imagine\Image;
+use yii\web\NotFoundHttpException;
 use app\modules\user\models\User;
 use app\modules\user\models\Profile;
 use common\components\BaseController;
@@ -49,19 +49,8 @@ class SettingController extends BaseController
         $profile = Profile::find()->where(['user_id' => $model->id])->one();
 
         //上传头像
-        Yii::setAlias('@upload', '@webroot/uploads/user/avatar/');
         if (Yii::$app->request->isPost && !empty($_FILES)) {
-            $extension =  strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
-            $fileName = $model->id . '_' . time() . rand(1 , 10000) . '.' . $extension;
-
-            Image::thumbnail($_FILES['file']['tmp_name'], 160, 160)->save(Yii::getAlias('@upload') . $fileName, ['quality' => 80]);
-            
-            //删除旧头像
-            if (file_exists(Yii::getAlias('@upload').$model->avatar) && (strpos($model->avatar, 'default') === false))
-                @unlink(Yii::getAlias('@upload').$model->avatar); 
-
-            $model->avatar = $fileName;
-            $model->update();
+            $model->saveAvatar();
         }
 
         if ($profile->load(Yii::$app->request->post()) && $profile->save()) {
@@ -119,7 +108,7 @@ class SettingController extends BaseController
                         'avatar' => 'default/' . $name . '.jpg',
                     ], 'id=:id', [':id' => Yii::$app->user->id])->execute();
                 } else {
-                    throw new CHttpException(404,'The requested page does not exist.');
+                    throw new NotFoundHttpException('The requested page does not exist.');
                 }
             } else {
                 return $this->renderAjax('avatar');

@@ -13,11 +13,7 @@ use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
-use yii\data\ActiveDataProvider;
-use yii\imagine\Image;
-use yii\db\Query;
 use app\modules\forum\models\Forum;
-use app\modules\forum\models\ForumSearch;
 use app\modules\forum\models\Board;
 use app\modules\forum\models\Thread;
 use app\modules\forum\models\Broadcast;
@@ -158,19 +154,8 @@ class ForumController extends BaseController
         }
         
         //上传图标
-        Yii::setAlias('@upload', '@webroot/uploads/forum/icon/');
         if (Yii::$app->request->isPost && !empty($_FILES)) {
-            $extension =  strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
-            $fileName = $model->id . '_' . time() . rand(1 , 10000) . '.' . $extension;
-
-            Image::thumbnail($_FILES['file']['tmp_name'], 160, 160)->save(Yii::getAlias('@upload') . $fileName, ['quality' => 80]);
-            
-            //删除旧图标
-            if (file_exists(Yii::getAlias('@upload').$model->forum_icon) && (strpos($model->forum_icon, 'default') === false))
-                @unlink(Yii::getAlias('@upload').$model->forum_icon); 
-
-            $model->forum_icon = $fileName;
-            $model->update();
+            $model->saveIcon();
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
