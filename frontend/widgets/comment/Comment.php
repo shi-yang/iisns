@@ -9,7 +9,6 @@ namespace app\widgets\comment;
 
 use Yii;
 use yii\base\Widget;
-use yii\db\Query;
 
 /**
  * @author Shiyang <dr@shiyang.me>
@@ -17,36 +16,40 @@ use yii\db\Query;
 class Comment extends Widget
 {
     /**
-     * @var integer 评论所属表的 ID
+     * @var \yii\db\ActiveRecord|null Widget model
      */
-    public $tableId;
+    public $model;
     /**
-     * @var string 评论所属表名，为 [[yii\db\ActiveRecord::tableName()]]
+     * @var string hash(crc32) from class name of the widget model
      */
-    public $tableName;
+    protected $entity;
+    /**
+     * @var integer primary key value of the widget model
+     */
+    protected $entityId;
+
+    /**
+     * Initializes the widget params.
+     */
+    public function init()
+    {
+        if (empty($this->model)) {
+            throw new InvalidConfigException(Yii::t('app', 'The "model" property must be set.'));
+        }
+
+        $this->entity = hash('crc32', get_class($this->model));
+        $this->entityId = $this->model->id;
+    }
 
     public function run()
     {
-        $commentList = $this->getCommentList();
+        $commentList = \app\widgets\comment\models\Comment::getCommentList($this->entity, $this->entityId);
         $newComment = $this->newComment();
         return $this->render('comment', [
             'commentList' => $commentList['result'],
             'pages' => $commentList['pages'],
             'newComment' => $newComment,
         ]);
-    }
-
-    /**
-     * 获取评论列表
-     * @return array
-     */
-    public function getCommentList()
-    {
-        $query =  (new Query)->select('c.id, c.content, c.parent_id, u.username, u.avatar')
-            ->from('{{%comment}} as c')
-            ->join('LEFT JOIN','{{%user}} as u', 'u.id=c.user_id')
-            ->where('table_id=:tableId AND table_name=:tableName AND parent_id = 0', [':tableId' => $this->tableId, 'tableName' => $this->tableName]);
-        return Yii::$app->tools->Pagination($query, 15);
     }
 
     /**
@@ -61,11 +64,12 @@ class Comment extends Widget
                 Yii::$app->getSession()->setFlash('info', Yii::t('app', 'You need to sign in or sign up before continuing.'));
                 return Yii::$app->getResponse()->redirect(['/site/login']);
             }
-            $newComment->table_id = $this->tableId;
-            $newComment->table_name = $this->tableName;
+            $newComment->entity = $this->entity;
+            $newComment->entity_id = $this->entityId;
             if ($newComment->save()) {
                 Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Create successfully.'));
-                return Yii::$app->getResponse()->refresh();
+                Yii::$app->getResponse()->refresh()->send();
+                exit();
             } else {
                 print_r($newComment->getErrors());
             }

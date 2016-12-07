@@ -60,8 +60,8 @@ CREATE TABLE IF NOT EXISTS `pre_auth_rule` (
 
 CREATE TABLE IF NOT EXISTS `pre_comment` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `table_name` char(26) NOT NULL,
-  `table_id` int(11) NOT NULL,
+  `entity` char(8) NOT NULL,
+  `entity_id` bigint(20) NOT NULL,
   `content` text NOT NULL,
   `parent_id` bigint(20) NOT NULL,
   `user_id` int(11) NOT NULL,
