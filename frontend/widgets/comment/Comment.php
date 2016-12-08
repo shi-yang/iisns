@@ -9,6 +9,7 @@ namespace app\widgets\comment;
 
 use Yii;
 use yii\base\Widget;
+use app\widgets\comment\models\Comment as CommentModel;
 
 /**
  * @author Shiyang <dr@shiyang.me>
@@ -43,7 +44,7 @@ class Comment extends Widget
 
     public function run()
     {
-        $commentList = \app\widgets\comment\models\Comment::getCommentList($this->entity, $this->entityId);
+        $commentList = CommentModel::getCommentList($this->entity, $this->entityId);
         $newComment = $this->newComment();
         return $this->render('comment', [
             'commentList' => $commentList['result'],
@@ -58,7 +59,7 @@ class Comment extends Widget
      */
     public function newComment()
     {
-        $newComment = new \app\widgets\comment\models\Comment();
+        $newComment = new CommentModel;
         if ($newComment->load(Yii::$app->request->post())) {
             if (Yii::$app->user->isGuest) {
                 Yii::$app->getSession()->setFlash('info', Yii::t('app', 'You need to sign in or sign up before continuing.'));
