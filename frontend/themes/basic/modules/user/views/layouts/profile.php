@@ -5,7 +5,7 @@ use yii\helpers\Url;
 use yii\bootstrap\Nav;
 use yii\widgets\Breadcrumbs;
 use app\themes\basic\modules\user\ProfileAsset;
-use frontend\widgets\Alert;
+use common\widgets\Alert;
 
 /* @var $this \yii\web\View */
 /* @var $content string */

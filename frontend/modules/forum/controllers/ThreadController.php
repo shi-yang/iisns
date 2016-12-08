@@ -60,7 +60,7 @@ class ThreadController extends BaseController
         if ($newPost->load(Yii::$app->request->post())) {
             $newPost->thread_id = $model->id;
             if ($newPost->save()){
-                Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Create successfully.'));
+                $this->success(Yii::t('app', 'Create successfully.'));
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } 
@@ -103,7 +103,7 @@ class ThreadController extends BaseController
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Saved successfully'));
+            $this->success(Yii::t('app', 'Saved successfully.'));
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [

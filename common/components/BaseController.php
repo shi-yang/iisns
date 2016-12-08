@@ -9,6 +9,7 @@ namespace common\components;
 
 use Yii;
 use yii\web\Controller;
+use common\traits\FlashTrait;
 
 /**
  * @author Shiyang <dr@shiyang.me>
@@ -16,6 +17,8 @@ use yii\web\Controller;
  */
 class BaseController extends Controller
 {
+    use FlashTrait;
+
     public function init()
     {
         $this->setLanguage();

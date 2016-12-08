@@ -116,7 +116,7 @@ class ForumController extends BaseController
         $model = new Forum();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Create successfully.'));
+            $this->success(Yii::t('app', 'Create successfully.'));
             return $this->redirect(['view', 'id' => $model->forum_url]);
         } else {
             return $this->render('create', [
@@ -147,9 +147,9 @@ class ForumController extends BaseController
         if ($newBoard->load(Yii::$app->request->post())) {
             $newBoard->forum_id = $model->id;
             if ($newBoard->save()) {
-                Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Create successfully.'));
+                $this->success(Yii::t('app', 'Saved successfully.'));
             } else {
-                Yii::$app->getSession()->setFlash('error', 'Server error.');
+                $this->error(Yii::t('app', 'Server error.'));
             }
         }
         
@@ -163,7 +163,7 @@ class ForumController extends BaseController
             $cachePrefix = Yii::$app->getModule('forum')->cachePrefix;
             $cacheKey = $cachePrefix . $model->forum_url;
             $cache->set($cacheKey, $model);
-            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Saved successfully'));
+            $this->success(Yii::t('app', 'Saved successfully.'));
         }
         
         return $this->render('update', [

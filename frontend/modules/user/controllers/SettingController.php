@@ -54,7 +54,7 @@ class SettingController extends BaseController
         }
 
         if ($profile->load(Yii::$app->request->post()) && $profile->save()) {
-            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Saved successfully'));
+            $this->success(Yii::t('app', 'Saved successfully.'));
         }
         return $this->render('profile', [
             'profile' => $profile,
@@ -66,7 +66,7 @@ class SettingController extends BaseController
     {
         $model = $this->findModel();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Saved successfully'));
+            $this->success(Yii::t('app', 'Saved successfully.'));
         }
 
         return $this->render('account', [
@@ -82,7 +82,9 @@ class SettingController extends BaseController
             if ($model->validate()) {
                 $model->setPassword($model->newPassword);
                 if ($model->save()) {
-                    Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Saved successfully'));
+                    $this->success(Yii::t('app', 'Saved successfully.'));
+                } else {
+                    $this->error('Can not save, Server error');
                 }
             }
         }

@@ -122,6 +122,7 @@ class PostController extends BaseController
                 $postData = ['{title}' => $title, '{content}' => $content];
                 Feed::addFeed('blog', $postData);
             }
+            $this->success(Yii::t('app', 'Create successfully.'));
             return $this->redirect(['/home/post']);
         }
         return $this->render('create', [
