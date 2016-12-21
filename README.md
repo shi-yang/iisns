@@ -1,10 +1,16 @@
 iisns - 地球村入口
 ------------------
+> This project is only my spare time developed to learn yii2, will be submitted code from time to time. Have any questions can contact me. My e-mail address can be obtained from my GitHub homepage.Welcome to contribute your code. ^_^
+
+> 这个项目只是我业余时间开发用来学习 yii2 的，会不定期提交代码。有什么问题都可以联系我。可以通过我的 GitHub 主页获取我的邮箱地址。欢迎贡献代码～ ^_^
+
+**iiSNS is the SNS community system based on yii2, a one-stop solution to community stations. Can write articles, do records, upload pictures, forums. But also can be used for content management system (CMS). iiSNS is a free open source project licensed under the MIT license.**
 
 **iiSNS 是基于 yii2 的 SNS 社区系统，一站式解决社区建站。可以写文章，做记录，上传图片，论坛聊天等。还可以用来做内容管理系统（CMS）。iiSNS 是一个免费的开源项目，在 MIT 许可证下授权发布。**
 
+
 特点与功能特性
------
+------------
 前后台分离，单入口应用程序，可创建主题，遵循 MVC 模式，按需加载功能，输入验证及输出过滤，模块化开发，兼容移动端（响应式布局），丰富的扩展库且易扩展，易使用易二次开发，国际化（I18N，目前支持中文、英文，通过添加语言文件还可支持更多语言）
 
 前台
@@ -22,29 +28,28 @@ iisns - 地球村入口
 - 新媒体行业
 - 企业文化建设
 
-更多用途，等你来发掘。演示:[www.iisns.com](http://www.iisns.com)
+等等。演示： [www.iisns.com](http://www.iisns.com)
 
 
 文档
 --------
-[安装教程](https://github.com/shi-yang/iisns/wiki/iiSNS-%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B) | 
-[目录结构](https://github.com/shi-yang/iisns/wiki/iiSNS-%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84)
+你可以点击下面的链接来查看开发和安装 iiSNS 的文档
 
-更多帮助文档将会在Wiki上放出: [https://github.com/shi-yang/iisns/wiki](https://github.com/shi-yang/iisns/wiki)
+[https://github.com/shi-yang/iisns/wiki](https://github.com/shi-yang/iisns/wiki)
 
 获取支持与帮助
 ----------
 提交问题：[Git issues](https://github.com/shi-yang/iisns/issues)
 
-到 iiSNS 论坛上提出: [http://www.iisns.com/forum/iisns](http://www.iisns.com/forum/iisns)
+到 iiSNS 论坛上提出: [http://www.iisns.com/@iisns](http://www.iisns.com/@iisns)
 
 参与贡献代码
---------
+----------
 
 您参与的iisns的发展是非常欢迎！您可以以下几种方式参与：
 
 - [报告问题](https://github.com/shi-yang/iisns/issues)
-- [提供反馈意见或设计讨论](http://www.iisns.com/index.php/forum/iisns)
+- [提供反馈意见或设计讨论](http://www.iisns.com/@iisns)
 - 贡献核心代码或修复的bug
 
 许可
@@ -60,4 +65,3 @@ iiSNS 的发布是遵循 [The MIT License](https://github.com/shi-yang/iisns/blo
 ![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns_v2.1.2/Screen-shot 2015-06-20 11.30.19.png)
 ![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns_v2.1.2/Screen-shot 2015-06-20 11.36.42.png)
 ![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns_v2.1.2/Screen-shot 2015-06-20 11.41.22.png)
-
