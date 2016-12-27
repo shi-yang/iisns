@@ -11,7 +11,7 @@ use yii\helpers\Html;
         'template' => '<div class="input-group"><span class="input-group-addon">' . Yii::t('app', 'Title') . '</span>{input}</div>',
       ])->textInput(['maxlength' => 128, 'autocomplete'=>'off']) ?>
 
-      <?= $form->field($model, 'content')->widget('shiyang\umeditor\UMeditor', [
+      <?= $form->field($model, 'content')->widget('common\widgets\umeditor\UMeditor', [
           'clientOptions' => [
               'initialFrameHeight' => 100,
               'toolbar' => [

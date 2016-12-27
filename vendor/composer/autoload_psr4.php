@@ -14,7 +14,6 @@ return array(
     'yii\\composer\\' => array($vendorDir . '/yiisoft/yii2-composer'),
     'yii\\bootstrap\\' => array($vendorDir . '/yiisoft/yii2-bootstrap'),
     'yii\\' => array($vendorDir . '/yiisoft/yii2'),
-    'shiyang\\umeditor\\' => array($vendorDir . '/shiyang/yii2-umeditor'),
     'shiyang\\masonry\\' => array($vendorDir . '/shiyang/yii2-masonry'),
     'shiyang\\infinitescroll\\' => array($vendorDir . '/shiyang/yii2-infinite-scroll'),
     'rmrevin\\yii\\minify\\' => array($vendorDir . '/rmrevin/yii2-minify-view'),

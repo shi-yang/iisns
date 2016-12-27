@@ -190,6 +190,7 @@ CREATE TABLE IF NOT EXISTS `pre_home_post` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(128) NOT NULL,
   `content` text NOT NULL,
+  `markdown` text NOT NULL,
   `tags` text DEFAULT NULL,
   `user_id` int(11) NOT NULL,
   `created_at` int(11) NOT NULL,

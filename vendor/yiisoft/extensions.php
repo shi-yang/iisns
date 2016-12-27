@@ -39,15 +39,6 @@ return array (
       '@justinvoelker/tagging' => $vendorDir . '/justinvoelker/yii2-tagging',
     ),
   ),
-  'shiyang/yii2-umeditor' => 
-  array (
-    'name' => 'shiyang/yii2-umeditor',
-    'version' => '1.2.0.0',
-    'alias' => 
-    array (
-      '@shiyang/umeditor' => $vendorDir . '/shiyang/yii2-umeditor',
-    ),
-  ),
   'iisns/yii2-webuploader' => 
   array (
     'name' => 'iisns/yii2-webuploader',

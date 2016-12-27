@@ -53,7 +53,7 @@ class MessageController extends BaseController
     {
         return [
             'upload' => [
-                'class' => 'shiyang\umeditor\UMeditorAction',
+                'class' => 'common\widgets\umeditor\UMeditorAction',
             ]
         ];
     }

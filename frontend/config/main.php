@@ -42,8 +42,7 @@ return [
     'components' => [
         'view' => [
             'class' => '\rmrevin\yii\minify\View',
-            //'enableMinify' => !YII_DEBUG,
-            'enableMinify' => true,
+            'enableMinify' => !YII_DEBUG,
             'concatCss' => true, // concatenate css
             'minifyCss' => true, // minificate css
             'concatJs' => true, // concatenate js
@@ -57,7 +56,7 @@ return [
             'expand_imports' => true, // whether to change @import on content
             'compress_options' => ['extra' => true], // options for compress
             'excludeBundles' => [
-                \shiyang\umeditor\UMeditorAsset::class,
+                \common\widgets\umeditor\UMeditorAsset::class,
                 \common\widgets\laydate\LayDateAsset::class
             ],
 

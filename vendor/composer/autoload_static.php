@@ -27,7 +27,6 @@ class ComposerStaticInitb188f018e94fdef38c03bed878d18e4e
         ),
         's' => 
         array (
-            'shiyang\\umeditor\\' => 17,
             'shiyang\\masonry\\' => 16,
             'shiyang\\infinitescroll\\' => 23,
         ),
@@ -124,10 +123,6 @@ class ComposerStaticInitb188f018e94fdef38c03bed878d18e4e
         'yii\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2',
-        ),
-        'shiyang\\umeditor\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/shiyang/yii2-umeditor',
         ),
         'shiyang\\masonry\\' => 
         array (
