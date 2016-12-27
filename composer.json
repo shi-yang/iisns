@@ -22,10 +22,10 @@
         "justinvoelker/yii2-tagging": "*",
         "shiyang/yii2-umeditor": "^1.0",
         "iisns/yii2-webuploader": "^1.0",
-        "rmrevin/yii2-minify-view": "^1.13"
+        "rmrevin/yii2-minify-view": "^1.13",
+        "codeception/base": "^2.2"
     },
     "require-dev": {
-        "yiisoft/yii2-codeception": "*",
         "yiisoft/yii2-debug": "*",
         "yiisoft/yii2-gii": "*",
         "yiisoft/yii2-faker": "*"
