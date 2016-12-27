@@ -57,6 +57,7 @@ return [
             'compress_options' => ['extra' => true], // options for compress
             'excludeBundles' => [
                 \common\widgets\umeditor\UMeditorAsset::class,
+                \common\widgets\editormd\EditormdAsset::class,
                 \common\widgets\laydate\LayDateAsset::class
             ],
 
