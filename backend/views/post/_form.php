@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'content', [
         'template' => '{input}{error}{hint}'
-    ])->widget('shiyang\umeditor\UMeditor', [
+    ])->widget('common\widgets\umeditor\UMeditor', [
         'clientOptions' => [
             'initialFrameHeight' => 100,
             'toolbar' => [
