@@ -40,7 +40,7 @@ class PostController extends BaseController
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['create', 'update', 'view', 'upload', 'index', 'delete'],
+                        'actions' => ['create', 'update', 'view', 'umeditor_upload', 'editormd_upload', 'index', 'delete'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -57,8 +57,11 @@ class PostController extends BaseController
     public function actions()
     {
         return [
-            'upload' => [
+            'umeditor_upload' => [
                 'class' => 'common\widgets\umeditor\UMeditorAction',
+            ],
+            'editormd_upload' =>  [
+                'class' => 'common\widgets\editormd\EditormdAction',
             ]
         ];
     }
@@ -106,6 +109,7 @@ class PostController extends BaseController
     /**
      * Creates a new Post model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     * @param string $editor
      * @return mixed
      */
     public function actionCreate($editor = 'html')
@@ -126,6 +130,7 @@ class PostController extends BaseController
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
+     * @throws ForbiddenHttpException if the model cannot be request
      */
     public function actionUpdate($id, $editor = 'html')
     {
@@ -154,6 +159,7 @@ class PostController extends BaseController
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
+     * @throws ForbiddenHttpException if the model cannot be request
      */
     public function actionDelete($id)
     {

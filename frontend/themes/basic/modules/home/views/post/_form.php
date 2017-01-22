@@ -1,11 +1,13 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\home\models\Post */
 /* @var $form yii\widgets\ActiveForm */
+/* @var $editor app\modules\home\controllers\PostController */
 
 $model->status = 'public';
 ?>
@@ -29,13 +31,16 @@ $model->status = 'public';
                     'insertorderedlist insertunorderedlist |' ,
                     'horizontal preview fullscreen',
                 ],
+                'imageUrl' => Url::to(['umeditor_upload']),
             ]
         ])->label(false);
     } else {
         echo $form->field($model, 'markdown')->widget('common\widgets\editormd\Editormd', [
             'clientOptions' => [
                 'placeholder' => '',
-                'height' => 640
+                'height' => 640,
+                'imageUpload' => true,
+                'imageUploadURL' => Url::to(['editormd_upload']),
             ]
         ])->label(false);
     } ?>

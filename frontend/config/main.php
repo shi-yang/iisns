@@ -14,7 +14,6 @@ return [
         'log',
     ],
     'controllerNamespace' => 'frontend\controllers',
-    'defaultRoute' => 'user/dashboard',
     'modules' => [
         'forum' => [
             'class' => 'app\modules\forum\ForumModule',
@@ -72,7 +71,7 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'rules' => [
-                '/' => '/user/dashboard/index',
+                '/' => '/explore/index',
                 '<id:[\x{4e00}-\x{9fa5}a-zA-Z0-9_]*>' => 'user/view',
                 '@<id:[\x{4e00}-\x{9fa5}a-zA-Z0-9_]*>' => 'forum/forum/view',
                 'thread/<id:\d+>' => 'forum/thread/view',
