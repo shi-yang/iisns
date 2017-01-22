@@ -113,4 +113,13 @@ class Setting extends Component
         $settings = Yii::$app->db->createCommand("SELECT * FROM {{%setting}}")->queryAll();
         return \yii\helpers\ArrayHelper::map($settings, 'key', 'value');
     }
+
+    /**
+     * Returns a string representing the current version of the iisns.
+     * @return string the version of iisns
+     */
+    public static function getVersion()
+    {
+        return '0.6.0';
+    }
 }

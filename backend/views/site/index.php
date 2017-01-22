@@ -115,7 +115,7 @@ $this->title = Yii::$app->setting->get('siteName');
                     <tbody>
                         <tr>
                             <td>iiSNS version</td>
-                            <td><?= Yii::$app->setting->get('version') ?></td>
+                            <td><?= Yii::$app->setting->getVersion() ?></td>
                         </tr>
                         <tr>
                             <td>The operating system</td>

@@ -217,12 +217,12 @@ body {
             <h1><?= Yii::t('app', 'Everyone is an artist') ?></h1>
             <p class="lead">I hope you like it.</p>
             <p>
-              <a class="btn btn-lg btn-success" href="https://github.com/shi-yang/iisns/archive/v<?= Yii::$app->setting->get('version') ?>.zip">
+              <a class="btn btn-lg btn-success" href="https://github.com/shi-yang/iisns/archive/v<?= Yii::$app->setting->getVersion() ?>.zip">
                 <span class="glyphicon glyphicon-download-alt"></span> <?= Yii::t('app', 'Download Source') ?>
               </a>
             </p>
             <p id="version">
-              Version <?= Yii::$app->setting->get('version') ?> Alpha &nbsp;&nbsp;·&nbsp;&nbsp;
+              Version <?= Yii::$app->setting->getVersion() ?> Alpha &nbsp;&nbsp;·&nbsp;&nbsp;
               <a href="https://github.com/shi-yang/iisns" target="_blank">
                 GitHub Project</a> &nbsp;&nbsp;·&nbsp;&nbsp;
               Created by <a href="http://www.iisns.com/shiyang" target="_blank">Shiyang</a>
@@ -306,7 +306,6 @@ body {
         <hr class="featurette-divider">
     <!-- /END THE FEATURETTES -->
     </div><!-- /.container -->
-
 
 </div>
 <footer class="footer">

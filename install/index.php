@@ -20,7 +20,6 @@ require(__DIR__ . '/../vendor/yiisoft/yii2/Yii.php');
 use yii\base\Security;
 
 $sqlFile = 'data.sql';
-$iisnsVersion = '2.1.3';
 
 header('Content-Type: text/html; charset=utf-8');
 $PHP_SELF = addslashes(htmlspecialchars($_SERVER['PHP_SELF'] ? $_SERVER['PHP_SELF'] : $_SERVER['SCRIPT_NAME']));
@@ -265,7 +264,6 @@ foreach ($dirarray as $key => $dir) {
                         ('siteName', '{$siteName}'),
                         ('siteTitle', '{$siteTitle}'),
                         ('siteDescription', '{$siteDescription}'),
-                        ('version', '" . $iisnsVersion . "');
                     ")->execute();
                     $db->createCommand("
                         INSERT INTO `pre_user_data` (`user_id`) VALUES
