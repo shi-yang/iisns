@@ -52,11 +52,12 @@ class SiteController extends BaseController
 
     public function actionIndex()
     {
-        $userCount = Yii::$app->db->createCommand("SELECT count(*) as num FROM {{%user}}")->queryScalar();
-        $postCount = Yii::$app->db->createCommand("SELECT count(*) as num FROM {{%forum_post}}")->queryScalar();
+        $statistics['userCount'] = Yii::$app->db->createCommand("SELECT count(*) as num FROM {{%user}}")->queryScalar();
+        $statistics['postCount'] = Yii::$app->db->createCommand("SELECT count(*) as num FROM {{%home_post}}")->queryScalar();
+        $statistics['photoCount'] = Yii::$app->db->createCommand("SELECT count(*) as num FROM {{%home_photo}}")->queryScalar();
+        $statistics['userCount'] = Yii::$app->db->createCommand("SELECT count(*) as num FROM {{%forum}}")->queryScalar();
         return $this->render('index',[
-            'userCount' => $userCount,
-            'postCount' => $postCount,
+            'statistics' => $statistics,
         ]);
     }
 
