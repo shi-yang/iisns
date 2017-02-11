@@ -269,6 +269,7 @@ foreach ($dirarray as $key => $dir) {
                         INSERT INTO `pre_user_profile` (`user_id`) VALUES
                         (10000);
                     ");
+                    mysqli_close($link);
 
                     $fp = @fopen("../common/config/db.php", "w");
                     fwrite($fp, "<?php
