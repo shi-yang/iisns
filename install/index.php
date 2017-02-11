@@ -7,36 +7,31 @@
  * @author  Shiyang <dr@shiyang.me>
  */
 
-error_reporting(0);
+ini_set("display_errors", "On");
+error_reporting(E_ALL | E_STRICT);
+
 set_time_limit(0);
 ob_end_clean();
 ob_implicit_flush(1);
-
 define('IISNS_ROOT', str_replace('\\', '/', substr(dirname(__FILE__), 0, -7)));
-
 include_once('header.php');
 require(__DIR__ . '/../vendor/yiisoft/yii2/Yii.php');
 
 use yii\base\Security;
-
 $sqlFile = 'data.sql';
-
-header('Content-Type: text/html; charset=utf-8');
 $PHP_SELF = addslashes(htmlspecialchars($_SERVER['PHP_SELF'] ? $_SERVER['PHP_SELF'] : $_SERVER['SCRIPT_NAME']));
-
 @extract($_POST);
 @extract($_GET);
-
 function writable($var)
 {
-    $writeable = FALSE;
+    $writeable = false;
     $var = IISNS_ROOT . $var;
     if (is_dir($var)) {
         $var .= '/temp.txt';
         if (($fp = @fopen($var, 'w')) && (fwrite($fp, 'iisns'))) {
             fclose($fp);
             @unlink($var);
-            $writeable = TRUE;
+            $writeable = true;
         }
     }
     return $writeable;
@@ -51,13 +46,14 @@ $dirarray = array (
     'backend/web/assets',
 );
 $writeable = array();
+$quit = false;
 foreach ($dirarray as $key => $dir) {
     $writeable[$key]['name'] = $dir;
     if (writable($dir)) {
         $writeable[$key]['status'] = 'OK';
     } else {
         $writeable[$key]['status'] = 'False';
-        $quit = TRUE;
+        $quit = true;
     }
 }
 ?>
@@ -200,12 +196,16 @@ foreach ($dirarray as $key => $dir) {
             <a href="index.php?step=2" class="btn btn-default">Previous</a>
         <?php else: ?>
             <?php
-                try {
-                    $dbh = new PDO($dsn, $user, $password);
-                } catch (PDOException $e) {
-                    echo 'Connection failed: ' . $e->getMessage();
+                $link = mysqli_connect($dbHost, $dbUser, $dbPass);
+                if (mysqli_connect_errno()) {
+                    echo '<div class="alert alert-danger" role="alert">Connection failed: ' . mysqli_connect_error() . '</div>';
                     echo "<br>";
                     echo '<a href="index.php?step=2" class="btn btn-default">Previous</a>';
+                    exit();
+                }
+                if (mysqli_select_db($link, $dbName) === false) {
+                    mysqli_query($link, "CREATE DATABASE {$dbName}");
+                    mysqli_select_db($link, $dbName);
                 }
             ?>
             <div class="progress">
@@ -215,26 +215,22 @@ foreach ($dirarray as $key => $dir) {
             </div>
             <div class="well" style="overflow-y:scroll;height:300px;width:100%;">
                 <?php
-                    $config = array(
-                        'class' => 'yii\db\Connection',
-                        'dsn' => "mysql:host={$dbHost};dbname={$dbName}",
-                        'username' => $dbUser,
-                        'password' => $dbPass,
-                        'charset' => 'utf8',
-                    );
-                    $db = Yii::createObject($config);
                     $fp = fopen($sqlFile, 'rb');
                     $sql = fread($fp, filesize($sqlFile));
                     fclose($fp);
                     foreach (explode(";\n", trim($sql)) as $query) {
                         $query = trim($query);
                         if ($query) {
-                            if (substr($query, 0, 12) == 'CREATE TABLE') {
-                                $name = preg_replace("/CREATE TABLE ([A-Z ]*)`([a-z0-9_]+)` .*/is", "\\2", $query);
-                                echo '<p>Create table '.$name.' ... <span class="label label-success">OK</span></p>';
-                                $db->createCommand($query)->execute();
+                            if (mysqli_query($link, $query) === TRUE) {
+                                if (substr($query, 0, 12) == 'CREATE TABLE') {
+                                    $name = preg_replace("/CREATE TABLE ([A-Z ]*)`([a-z0-9_]+)` .*/is", "\\2", $query);
+                                    echo '<p>Create table '.$name.' ... <span class="label label-success">OK</span></p>';
+                                }
                             } else {
-                                $db->createCommand($query)->execute();
+                                if (substr($query, 0, 12) == 'CREATE TABLE') {
+                                    $name = preg_replace("/CREATE TABLE ([A-Z ]*)`([a-z0-9_]+)` .*/is", "\\2", $query);
+                                    echo '<p>Create table '.$name.' ... <span class="label label-error">Failed</span></p>';
+                                }
                             }
                         }
                     }
@@ -242,37 +238,37 @@ foreach ($dirarray as $key => $dir) {
                     $username = $adminUser;
                     $password_hash = (new Security)->generatePasswordHash($adminPass);
                     $auth_key = (new Security)->generateRandomString();
-                    $db->createCommand("
+                    mysqli_query($link, "
                         INSERT INTO `pre_user` (`id`, `username`, `password_hash`, `auth_key`, `role`, `email`, `status`, `created_at`, `updated_at`, `avatar`) VALUES
                         (10000, '{$username}', '{$password_hash}', '{$auth_key}', 10, '{$email}', 10, {$now}, {$now}, 'default/10.jpg');
-                    ")->execute();
-                    $db->createCommand("
+                    ");
+                    mysqli_query($link, "
                         INSERT INTO `pre_auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
                         ('/*', 2, NULL, NULL, NULL, {$now}, {$now}),
                         ('超级管理员', 1, '拥有最高权限', NULL, NULL, {$now}, {$now});
-                        ")->execute();
-                    $db->createCommand("
+                    ");
+                    mysqli_query($link, "
                         INSERT INTO `pre_auth_item_child` (`parent`, `child`) VALUES
                         ('超级管理员', '/*');
-                        ")->execute();
-                    $db->createCommand("
+                    ");
+                    mysqli_query($link, "
                         INSERT INTO `pre_auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
                         ('超级管理员', '10000', {$now});
-                        ")->execute();
-                    $db->createCommand("
+                    ");
+                    mysqli_query($link, "
                         INSERT INTO `pre_setting` (`key`, `value`) VALUES
                         ('siteName', '{$siteName}'),
                         ('siteTitle', '{$siteTitle}'),
-                        ('siteDescription', '{$siteDescription}'),
-                    ")->execute();
-                    $db->createCommand("
+                        ('siteDescription', '{$siteDescription}');
+                    ");
+                    mysqli_query($link, "
                         INSERT INTO `pre_user_data` (`user_id`) VALUES
                         (10000);
-                    ")->execute();
-                    $db->createCommand("
+                    ");
+                    mysqli_query($link, "
                         INSERT INTO `pre_user_profile` (`user_id`) VALUES
                         (10000);
-                    ")->execute();
+                    ");
 
                     $fp = @fopen("../common/config/db.php", "w");
                     fwrite($fp, "<?php
