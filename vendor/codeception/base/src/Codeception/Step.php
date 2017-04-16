@@ -4,7 +4,6 @@ namespace Codeception;
 use Codeception\Lib\ModuleContainer;
 use Codeception\Step\Meta as MetaStep;
 use Codeception\Util\Locator;
-use Codeception\Lib\Console\Message;
 
 abstract class Step
 {
@@ -87,6 +86,11 @@ abstract class Step
         return $this->failed;
     }
 
+    public function getArguments()
+    {
+        return $this->arguments;
+    }
+
     public function getArgumentsAsString($maxLength = 200)
     {
         $arguments = $this->arguments;
@@ -100,7 +104,7 @@ abstract class Step
             $totalLength += mb_strlen($stringifiedArgument, 'utf-8');
         }
 
-        if ($totalLength > $maxLength) {
+        if ($totalLength > $maxLength && $maxLength > 0) {
             //sort arguments from shortest to longest
             uasort($arguments, function ($arg1, $arg2) {
                 $length1 = mb_strlen($arg1, 'utf-8');
@@ -283,7 +287,7 @@ abstract class Step
         while (isset($stack[$i])) {
             $step = $stack[$i];
             $i--;
-            if (!isset($step['file']) or !isset($step['function'])) {
+            if (!isset($step['file']) or !isset($step['function']) or !isset($step['class'])) {
                 continue;
             }
 

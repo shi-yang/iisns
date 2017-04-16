@@ -11,9 +11,10 @@
 
 namespace Symfony\Component\DomCrawler\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DomCrawler\Crawler;
 
-class CrawlerTest extends \PHPUnit_Framework_TestCase
+class CrawlerTest extends TestCase
 {
     public function testConstructor()
     {
@@ -30,14 +31,14 @@ class CrawlerTest extends \PHPUnit_Framework_TestCase
     public function testGetUri()
     {
         $uri = 'http://symfony.com';
-        $crawler = new Crawler(null,  $uri);
+        $crawler = new Crawler(null, $uri);
         $this->assertEquals($uri, $crawler->getUri());
     }
 
     public function testGetBaseHref()
     {
         $baseHref = 'http://symfony.com';
-        $crawler = new Crawler(null,  null, $baseHref);
+        $crawler = new Crawler(null, null, $baseHref);
         $this->assertEquals($baseHref, $crawler->getBaseHref());
     }
 
@@ -995,6 +996,8 @@ HTML;
             $crawler = new Crawler('<p></p>');
             $crawler->filter('p')->children();
             $this->assertTrue(true, '->children() does not trigger a notice if the node has no children');
+        } catch (\PHPUnit\Framework\Error\Notice $e) {
+            $this->fail('->children() does not trigger a notice if the node has no children');
         } catch (\PHPUnit_Framework_Error_Notice $e) {
             $this->fail('->children() does not trigger a notice if the node has no children');
         }

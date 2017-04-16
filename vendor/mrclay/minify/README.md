@@ -12,14 +12,10 @@ The stats above are from a [brief walkthrough](http://mrclay.org/index.php/2008/
 
 Relative URLs in CSS files are rewritten to compensate for being served from a different directory.
 
-Wordpress User?
----------------
+News
+----
 
-Consider instead using a dedicated WordPress plugin for more deep integration and simpler installation. E.g.:
-- [BWP Minify](http://wordpress.org/extend/plugins/bwp-minify/)
-- [W3 Total Cache](http://wordpress.org/extend/plugins/w3-total-cache/)
-
-Unfortunately we can't support the WordPress plugins here.
+Version [2.3.0](https://github.com/mrclay/minify/releases/tag/2.3.0) was released, mainly to deprecate some classes that will be removed in 3.0.
 
 Installation
 ------------
@@ -76,4 +72,4 @@ Acknowledgments
 
 Minify was inspired by [jscsscomp](http://code.google.com/p/jscsscomp/) by Maxim Martynyuk and by the article [Supercharged JavaScript](http://www.hunlock.com/blogs/Supercharged_Javascript) by Patrick Hunlock.
 
-The [JSMin library](http://www.crockford.com/javascript/jsmin.html) used for !JavaScript minification was originally written by Douglas Crockford and was [ported to PHP](https://github.com/mrclay/jsmin-php) by Ryan Grove specifically for use in Minify.
+The [JSMin library](http://www.crockford.com/javascript/jsmin.html) used for JavaScript minification was originally written by Douglas Crockford and was [ported to PHP](https://github.com/mrclay/jsmin-php) by Ryan Grove specifically for use in Minify.

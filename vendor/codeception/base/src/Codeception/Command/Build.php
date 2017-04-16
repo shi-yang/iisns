@@ -6,7 +6,6 @@ use Codeception\Lib\Generator\Actions as ActionsGenerator;
 use Codeception\Lib\Generator\Actor as ActorGenerator;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -34,14 +33,11 @@ class Build extends Command
         return 'Generates base classes for all suites';
     }
 
-    protected function configure()
-    {
-    }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->output = $output;
-        $this->buildActorsForConfig($input->getOption('config'));
+        $this->buildActorsForConfig();
     }
     
     private function buildActor(array $settings)
@@ -77,14 +73,14 @@ class Build extends Command
         return $this->save($file, $content, true);
     }
 
-    private function buildSuiteActors($configFile)
+    private function buildSuiteActors()
     {
-        $suites = $this->getSuites($configFile);
+        $suites = $this->getSuites();
         if (!empty($suites)) {
             $this->output->writeln("<info>Building Actor classes for suites: " . implode(', ', $suites) . '</info>');
         }
         foreach ($suites as $suite) {
-            $settings = $this->getSuiteConfig($suite, $configFile);
+            $settings = $this->getSuiteConfig($suite);
             $this->buildActions($settings);
             $actorBuilt = $this->buildActor($settings);
             
@@ -94,17 +90,16 @@ class Build extends Command
         }
     }
     
-    protected function buildActorsForConfig($configFile)
+    protected function buildActorsForConfig($configFile = null)
     {
         $config = $this->getGlobalConfig($configFile);
         
-        $path = pathinfo($configFile);
-        $dir = isset($path['dirname']) ? $path['dirname'] : getcwd();
+        $dir = Configuration::projectDir();
+        $this->buildSuiteActors();
 
         foreach ($config['include'] as $subConfig) {
-            $this->output->writeln("<comment>Included Configuration: $subConfig</comment>");
+            $this->output->writeln("\n<comment>Included Configuration: $subConfig</comment>");
             $this->buildActorsForConfig($dir . DIRECTORY_SEPARATOR . $subConfig);
         }
-        $this->buildSuiteActors($configFile);
     }
 }

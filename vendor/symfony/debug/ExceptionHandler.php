@@ -50,7 +50,7 @@ class ExceptionHandler
      * @param string|null $charset        The charset used by exception messages
      * @param string|null $fileLinkFormat The IDE link template
      *
-     * @return ExceptionHandler The registered exception handler
+     * @return static
      */
     public static function register($debug = true, $charset = null, $fileLinkFormat = null)
     {
@@ -83,7 +83,7 @@ class ExceptionHandler
     /**
      * Sets the format for links to source files.
      *
-     * @param string|FileLinkFormatter $format The format for links to source files
+     * @param string|FileLinkFormatter $fileLinkFormat The format for links to source files
      *
      * @return string The previous file link format
      */

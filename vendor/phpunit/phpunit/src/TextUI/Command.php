@@ -11,8 +11,6 @@
 /**
  * A TestRunner for the Command Line Interface (CLI)
  * PHP SAPI Module.
- *
- * @since Class available since Release 3.0.0
  */
 class PHPUnit_TextUI_Command
 {
@@ -192,10 +190,14 @@ class PHPUnit_TextUI_Command
 
         $return = PHPUnit_TextUI_TestRunner::FAILURE_EXIT;
 
-        if (isset($result) && $result->wasSuccessful()) {
+        if (isset($result) && $result->wasSuccessful(false)) {
             $return = PHPUnit_TextUI_TestRunner::SUCCESS_EXIT;
         } elseif (!isset($result) || $result->errorCount() > 0) {
             $return = PHPUnit_TextUI_TestRunner::EXCEPTION_EXIT;
+        }
+
+        if ($exit) {
+            exit($return);
         }
 
         return $return;
@@ -205,8 +207,6 @@ class PHPUnit_TextUI_Command
      * Create a TestRunner, override in subclasses.
      *
      * @return PHPUnit_TextUI_TestRunner
-     *
-     * @since Method available since Release 3.6.0
      */
     protected function createRunner()
     {
@@ -640,6 +640,7 @@ class PHPUnit_TextUI_Command
                 default:
                     $optionName = str_replace('--', '', $option[0]);
 
+                    $handler = null;
                     if (isset($this->longOptions[$optionName])) {
                         $handler = $this->longOptions[$optionName];
                     } elseif (isset($this->longOptions[$optionName . '='])) {
@@ -860,7 +861,7 @@ class PHPUnit_TextUI_Command
      * @param string $printerClass
      * @param string $printerFile
      *
-     * @return PHPUnit_Util_Printer
+     * @return PHPUnit_Util_Printer|string
      */
     protected function handlePrinter($printerClass, $printerFile = '')
     {
@@ -916,9 +917,6 @@ class PHPUnit_TextUI_Command
         }
     }
 
-    /**
-     * @since Method available since Release 4.0.0
-     */
     protected function handleSelfUpdate($upgrade = false)
     {
         $this->printVersionString();
@@ -1007,9 +1005,6 @@ class PHPUnit_TextUI_Command
         exit(PHPUnit_TextUI_TestRunner::SUCCESS_EXIT);
     }
 
-    /**
-     * @since Method available since Release 4.8.0
-     */
     protected function handleVersionCheck()
     {
         $this->printVersionString();
@@ -1062,7 +1057,7 @@ Logging Options:
 Test Selection Options:
 
   --filter <pattern>        Filter which tests to run.
-  --testsuite <pattern>     Filter which testsuite to run.
+  --testsuite <name>        Filter which testsuite to run.
   --group ...               Only runs tests from the specified group(s).
   --exclude-group ...       Exclude tests from the specified group(s).
   --list-groups             List available test groups.
@@ -1150,6 +1145,7 @@ EOT;
     }
 
     /**
+     * @param string $message
      */
     private function showError($message)
     {

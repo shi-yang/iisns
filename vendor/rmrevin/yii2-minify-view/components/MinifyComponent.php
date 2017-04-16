@@ -38,7 +38,7 @@ abstract class MinifyComponent
      */
     protected function getAbsoluteFilePath($file)
     {
-        return \Yii::getAlias($this->view->base_path) . str_replace(\Yii::getAlias($this->view->web_path), '', $this->cleanFileName($file));
+        return \Yii::getAlias($this->view->basePath) . str_replace(\Yii::getAlias($this->view->webPath), '', $this->cleanFileName($file));
     }
 
     /**
@@ -47,7 +47,9 @@ abstract class MinifyComponent
      */
     protected function cleanFileName($file)
     {
-        return (strpos($file, '?')) ? parse_url($file, PHP_URL_PATH) : $file;
+        return (strpos($file, '?'))
+            ? parse_url($file, PHP_URL_PATH)
+            : $file;
     }
 
     /**
@@ -57,7 +59,9 @@ abstract class MinifyComponent
      */
     protected function thisFileNeedMinify($file, $html)
     {
-        return !$this->isUrl($file, false) && !$this->isContainsConditionalComment($html);
+        return !$this->isUrl($file, false)
+        && !$this->isContainsConditionalComment($html)
+        && !$this->isExcludedFile($file);
     }
 
     /**
@@ -89,12 +93,34 @@ abstract class MinifyComponent
     }
 
     /**
+     * @param string $file
+     * @return bool
+     */
+    protected function isExcludedFile($file)
+    {
+        $result = false;
+
+        if (!empty($this->view->excludeFiles)) {
+            foreach ((array)$this->view->excludeFiles as $excludedFile) {
+                $reg = sprintf('!%s!i', $excludedFile);
+
+                if (preg_match($reg, $file)) {
+                    $result = true;
+                    break;
+                }
+            }
+        }
+
+        return $result;
+    }
+
+    /**
      * @param string $resultFile
      * @return string
      */
     protected function prepareResultFile($resultFile)
     {
-        $file = sprintf('%s%s', \Yii::getAlias($this->view->web_path), str_replace(\Yii::getAlias($this->view->base_path), '', $resultFile));
+        $file = sprintf('%s%s', \Yii::getAlias($this->view->webPath), str_replace(\Yii::getAlias($this->view->basePath), '', $resultFile));
 
         $AssetManager = $this->view->getAssetManager();
 

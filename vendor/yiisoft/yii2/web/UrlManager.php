@@ -11,6 +11,7 @@ use Yii;
 use yii\base\Component;
 use yii\base\InvalidConfigException;
 use yii\caching\Cache;
+use yii\helpers\Url;
 
 /**
  * UrlManager handles HTTP request parsing and creation of URLs based on a set of rules.
@@ -31,8 +32,13 @@ use yii\caching\Cache;
  * ]
  * ```
  *
+ * Rules are classes implementing the [[UrlRuleInterface]], by default that is [[UrlRule]].
+ * For nesting rules, there is also a [[GroupUrlRule]] class.
+ *
+ * For more details and usage information on UrlManager, see the [guide article on routing](guide:runtime-routing).
+ *
  * @property string $baseUrl The base URL that is used by [[createUrl()]] to prepend to created URLs.
- * @property string $hostInfo The host info (e.g. "http://www.example.com") that is used by
+ * @property string $hostInfo The host info (e.g. `http://www.example.com`) that is used by
  * [[createAbsoluteUrl()]] to prepend to created URLs.
  * @property string $scriptUrl The entry script URL that is used by [[createUrl()]] to prepend to created
  * URLs.
@@ -43,14 +49,14 @@ use yii\caching\Cache;
 class UrlManager extends Component
 {
     /**
-     * @var boolean whether to enable pretty URLs. Instead of putting all parameters in the query
+     * @var bool whether to enable pretty URLs. Instead of putting all parameters in the query
      * string part of a URL, pretty URLs allow using path info to represent some of the parameters
      * and can thus produce more user-friendly URLs, such as "/news/Yii-is-released", instead of
      * "/index.php?r=news%2Fview&id=100".
      */
     public $enablePrettyUrl = false;
     /**
-     * @var boolean whether to enable strict parsing. If strict parsing is enabled, the incoming
+     * @var bool whether to enable strict parsing. If strict parsing is enabled, the incoming
      * requested URL must match at least one of the [[rules]] in order to be treated as a valid request.
      * Otherwise, the path info part of the request will be treated as the requested route.
      * This property is used only when [[enablePrettyUrl]] is `true`.
@@ -103,7 +109,7 @@ class UrlManager extends Component
      */
     public $suffix;
     /**
-     * @var boolean whether to show entry script name in the constructed URL. Defaults to `true`.
+     * @var bool whether to show entry script name in the constructed URL. Defaults to `true`.
      * This property is used only if [[enablePrettyUrl]] is `true`.
      */
     public $showScriptName = true;
@@ -199,7 +205,7 @@ class UrlManager extends Component
      *
      * @param array $rules the new rules to be added. Each array element represents a single rule declaration.
      * Please refer to [[rules]] for the acceptable rule format.
-     * @param boolean $append whether to add the new rules by appending them to the end of the existing rules.
+     * @param bool $append whether to add the new rules by appending them to the end of the existing rules.
      */
     public function addRules($rules, $append = true)
     {
@@ -252,7 +258,7 @@ class UrlManager extends Component
     /**
      * Parses the user request.
      * @param Request $request the request component
-     * @return array|boolean the route and the associated parameters. The latter is always empty
+     * @return array|bool the route and the associated parameters. The latter is always empty
      * if [[enablePrettyUrl]] is `false`. `false` is returned if the current request cannot be successfully parsed.
      */
     public function parseRequest($request)
@@ -260,7 +266,15 @@ class UrlManager extends Component
         if ($this->enablePrettyUrl) {
             /* @var $rule UrlRule */
             foreach ($this->rules as $rule) {
-                if (($result = $rule->parseRequest($this, $request)) !== false) {
+                $result = $rule->parseRequest($this, $request);
+                if (YII_DEBUG) {
+                    Yii::trace([
+                        'rule' => method_exists($rule, '__toString') ? $rule->__toString() : get_class($rule),
+                        'match' => $result !== false,
+                        'parent' => null
+                    ], __METHOD__);
+                }
+                if ($result !== false) {
                     return $result;
                 }
             }
@@ -382,7 +396,14 @@ class UrlManager extends Component
                     } else {
                         return $url . $baseUrl . $anchor;
                     }
+                } elseif (strpos($url, '//') === 0) {
+                    if ($baseUrl !== '' && ($pos = strpos($url, '/', 2)) !== false) {
+                        return substr($url, 0, $pos) . $baseUrl . substr($url, $pos) . $anchor;
+                    } else {
+                        return $url . $baseUrl . $anchor;
+                    }
                 } else {
+                    $url = ltrim($url, '/');
                     return "$baseUrl/{$url}{$anchor}";
                 }
             }
@@ -394,6 +415,7 @@ class UrlManager extends Component
                 $route .= '?' . $query;
             }
 
+            $route = ltrim($route, '/');
             return "$baseUrl/{$route}{$anchor}";
         } else {
             $url = "$baseUrl?{$this->routeParam}=" . urlencode($route);
@@ -410,7 +432,7 @@ class UrlManager extends Component
      * @param string $cacheKey generated cache key to store data.
      * @param string $route the route (e.g. `site/index`).
      * @param array $params rule params.
-     * @return boolean|string the created URL
+     * @return bool|string the created URL
      * @see createUrl()
      * @since 2.0.8
      */
@@ -450,8 +472,9 @@ class UrlManager extends Component
      *
      * @param string|array $params use a string to represent a route (e.g. `site/index`),
      * or an array to represent a route with query parameters (e.g. `['site/index', 'param1' => 'value1']`).
-     * @param string $scheme the scheme to use for the url (either `http` or `https`). If not specified
-     * the scheme of the current request will be used.
+     * @param string|null $scheme the scheme to use for the URL (either `http`, `https` or empty string
+     * for protocol-relative URL).
+     * If not specified the scheme of the current request will be used.
      * @return string the created URL
      * @see createUrl()
      */
@@ -460,13 +483,15 @@ class UrlManager extends Component
         $params = (array) $params;
         $url = $this->createUrl($params);
         if (strpos($url, '://') === false) {
-            $url = $this->getHostInfo() . $url;
-        }
-        if (is_string($scheme) && ($pos = strpos($url, '://')) !== false) {
-            $url = $scheme . substr($url, $pos);
+            $hostInfo = $this->getHostInfo();
+            if (strpos($url, '//') === 0) {
+                $url = substr($hostInfo, 0, strpos($hostInfo, '://')) . ':' . $url;
+            } else {
+                $url = $hostInfo . $url;
+            }
         }
 
-        return $url;
+        return Url::ensureScheme($url, $scheme);
     }
 
     /**
@@ -533,7 +558,7 @@ class UrlManager extends Component
 
     /**
      * Returns the host info that is used by [[createAbsoluteUrl()]] to prepend to created URLs.
-     * @return string the host info (e.g. "http://www.example.com") that is used by [[createAbsoluteUrl()]] to prepend to created URLs.
+     * @return string the host info (e.g. `http://www.example.com`) that is used by [[createAbsoluteUrl()]] to prepend to created URLs.
      * @throws InvalidConfigException if running in console application and [[hostInfo]] is not configured.
      */
     public function getHostInfo()

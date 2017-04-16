@@ -5,7 +5,6 @@ use Codeception\Lib\Generator\Cest as CestGenerator;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -40,7 +39,7 @@ class GenerateCest extends Command
         $suite = $input->getArgument('suite');
         $class = $input->getArgument('class');
 
-        $config = $this->getSuiteConfig($suite, $input->getOption('config'));
+        $config = $this->getSuiteConfig($suite);
         $className = $this->getClassName($class);
         $path = $this->buildPath($config['path'], $class);
 

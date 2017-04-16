@@ -28,13 +28,13 @@ The preferred way to install this extension is through [composer](https://getcom
 Either run
 
 ```bash
-composer require "rmrevin/yii2-minify-view:~1.13"
+composer require "rmrevin/yii2-minify-view:~1.14"
 ```
 
 or add
 
 ```
-"rmrevin/yii2-minify-view": "~2.13",
+"rmrevin/yii2-minify-view": "~1.14",
 ```
 
 to the `require` section of your `composer.json` file.
@@ -56,16 +56,20 @@ return [
 			'concatJs' => true, // concatenate js
 			'minifyJs' => true, // minificate js
 			'minifyOutput' => true, // minificate result html page
-			'web_path' => '@web', // path alias to web base
-			'base_path' => '@webroot', // path alias to web base
-			'minify_path' => '@webroot/minify', // path alias to save minify result
-			'js_position' => [ \yii\web\View::POS_END ], // positions of js files to be minified
-			'force_charset' => 'UTF-8', // charset forcibly assign, otherwise will use all of the files found charset
-			'expand_imports' => true, // whether to change @import on content
-			'compress_options' => ['extra' => true], // options for compress
-			'excludeBundles' => [
-			    \dev\hellowrld\AssetBundle::class, // exclude this bundle from minification
-			],
+			'webPath' => '@web', // path alias to web base
+			'basePath' => '@webroot', // path alias to web base
+			'minifyPath' => '@webroot/minify', // path alias to save minify result
+			'jsPosition' => [ \yii\web\View::POS_END ], // positions of js files to be minified
+			'forceCharset' => 'UTF-8', // charset forcibly assign, otherwise will use all of the files found charset
+			'expandImports' => true, // whether to change @import on content
+			'compressOptions' => ['extra' => true], // options for compress
+			'excludeFiles' => [
+            	'jquery.js', // exclude this file from minification
+            	'app-[^.].js', // you may use regexp
+            ],
+            'excludeBundles' => [
+            	\dev\helloworld\AssetBundle::class, // exclude this bundle from minification
+            ],
 		]
 	]
 ];

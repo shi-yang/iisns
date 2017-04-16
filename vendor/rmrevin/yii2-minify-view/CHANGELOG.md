@@ -1,3 +1,26 @@
+2017-01-19 - 1.14.4
+-------------------
+* Changed the regular expression when checking the excluded files.
+
+2017-01-19 - 1.14.3
+-------------------
+* Disable ssl verification in expand css imports.
+
+2017-01-19 - 1.14.2
+-------------------
+* Add `jsOptions` option.
+
+2016-12-23 - 1.14.1
+-------------------
+* Improved mechanism exclude files from minification.
+* Update readme.
+
+2016-12-23 - 1.14.0
+-------------------
+* Improved mechanism exclude files from minification.
+* Refactoring.
+* Update readme.
+
 2016-10-26 - 1.13.0
 -------------------
 * Property `rmrevin\yii\minify\View::$compress_output` is now deprecated. User `rmrevin\yii\minify\View::$minifyOutput`.

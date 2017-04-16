@@ -244,7 +244,7 @@ class RestTest extends \PHPUnit_Framework_TestCase
         $this->module->seeHttpHeaderOnce('Cache-Control');
     }
 
-    public function testArrayJsonPathAndXPath()
+    public function testSeeResponseJsonMatchesXpath()
     {
         $this->setStubResponse(
             '[{"user":"Blacknoir","age":27,"tags":["wed-dev","php"]},'
@@ -252,9 +252,45 @@ class RestTest extends \PHPUnit_Framework_TestCase
         );
         $this->module->seeResponseIsJson();
         $this->module->seeResponseJsonMatchesXpath('//user');
+    }
+
+    public function testSeeResponseJsonMatchesJsonPath()
+    {
+        $this->setStubResponse(
+            '[{"user":"Blacknoir","age":27,"tags":["wed-dev","php"]},'
+            . '{"user":"John Doe","age":27,"tags":["web-dev","java"]}]'
+        );
         $this->module->seeResponseJsonMatchesJsonPath('$[*].user');
         $this->module->seeResponseJsonMatchesJsonPath('$[1].tags');
+    }
+
+
+    public function testDontSeeResponseJsonMatchesJsonPath()
+    {
+        $this->setStubResponse(
+            '[{"user":"Blacknoir","age":27,"tags":["wed-dev","php"]},'
+            . '{"user":"John Doe","age":27,"tags":["web-dev","java"]}]'
+        );
         $this->module->dontSeeResponseJsonMatchesJsonPath('$[*].profile');
+    }
+
+    public function testDontSeeResponseJsonMatchesXpath()
+    {
+        $this->setStubResponse(
+            '[{"user":"Blacknoir","age":27,"tags":["wed-dev","php"]},'
+            . '{"user":"John Doe","age":27,"tags":["web-dev","java"]}]'
+        );
+        $this->module->dontSeeResponseJsonMatchesXpath('//status');
+    }
+
+    public function testDontSeeResponseJsonMatchesXpathFails()
+    {
+        $this->shouldFail();
+        $this->setStubResponse(
+            '[{"user":"Blacknoir","age":27,"tags":["wed-dev","php"]},'
+            . '{"user":"John Doe","age":27,"tags":["web-dev","java"]}]'
+        );
+        $this->module->dontSeeResponseJsonMatchesXpath('//user');
     }
 
     /**
@@ -268,7 +304,7 @@ class RestTest extends \PHPUnit_Framework_TestCase
     }
 
     
-    public function testArrayJsonPathFails()
+    public function testSeeResponseJsonMatchesJsonPathFails()
     {
         $this->shouldFail();
         $this->setStubResponse(
@@ -359,6 +395,37 @@ class RestTest extends \PHPUnit_Framework_TestCase
         $this->module->seeResponseIsJson();
     }
 
+    public function testSeeResponseJsonMatchesXpathCanHandleResponseWithOneElement()
+    {
+        $this->setStubResponse('{"success": 1}');
+        $this->module->seeResponseJsonMatchesXpath('//success');
+    }
+
+    public function testSeeResponseJsonMatchesXpathCanHandleResponseWithTwoElements()
+    {
+        $this->setStubResponse('{"success": 1, "info": "test"}');
+        $this->module->seeResponseJsonMatchesXpath('//success');
+    }
+
+    public function testSeeResponseJsonMatchesXpathCanHandleResponseWithOneSubArray()
+    {
+        $this->setStubResponse('{"array": {"success": 1}}');
+        $this->module->seeResponseJsonMatchesXpath('//array/success');
+    }
+
+    public function testSeeBinaryResponseEquals()
+    {
+        $data = base64_decode('/9j/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/yQALCAABAAEBAREA/8wABgAQEAX/2gAIAQEAAD8A0s8g/9k=');
+        $this->setStubResponse($data);
+        $this->module->seeBinaryResponseEquals(md5($data));
+    }
+
+    public function testDontSeeBinaryResponseEquals()
+    {
+        $data = base64_decode('/9j/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/yQALCAABAAEBAREA/8wABgAQEAX/2gAIAQEAAD8A0s8g/9k=');
+        $this->setStubResponse($data);
+        $this->module->dontSeeBinaryResponseEquals('024f615102cdb3c8c7cf75cdc5a83d15');
+    }
 
     protected function shouldFail()
     {

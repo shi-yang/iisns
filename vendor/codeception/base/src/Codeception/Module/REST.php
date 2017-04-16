@@ -15,7 +15,6 @@ use Codeception\Lib\Interfaces\PartedModule;
 use Codeception\Util\JsonArray;
 use Codeception\Util\JsonType;
 use Codeception\Util\XmlStructure;
-use Symfony\Component\BrowserKit\Cookie;
 use Codeception\Util\Soap as XmlUtils;
 
 /**
@@ -58,8 +57,7 @@ use Codeception\Util\Soap as XmlUtils;
 class REST extends CodeceptionModule implements DependsOnModule, PartedModule, API, ConflictsWithModule
 {
     protected $config = [
-        'url' => '',
-        'xdebug_remote' => false
+        'url' => ''
     ];
 
     protected $dependencyMessage = <<<EOF
@@ -92,15 +90,6 @@ EOF;
     {
         $this->client = &$this->connectionModule->client;
         $this->resetVariables();
-
-        if ($this->config['xdebug_remote']
-            && function_exists('xdebug_is_enabled')
-            && ini_get('xdebug.remote_enable')
-            && !$this->isFunctional
-        ) {
-            $cookie = new Cookie('XDEBUG_SESSION', $this->config['xdebug_remote'], null, '/');
-            $this->client->getCookieJar()->set($cookie);
-        }
     }
 
     protected function resetVariables()
@@ -182,6 +171,8 @@ EOF;
      * ```
      *
      * @param string $name the name of the header to delete.
+     * @part json
+     * @part xml
      */
     public function deleteHeader($name)
     {
@@ -499,15 +490,39 @@ EOF;
             $this->response = (string)$this->connectionModule->_request($method, $url, $parameters, $files);
         } else {
             $requestData = $parameters;
-            if (!ctype_print($requestData) && false === mb_detect_encoding($requestData, mb_detect_order(), true)) {
-                // if the request data has non-printable bytes and it is not a valid unicode string, reformat the
-                // display string to signify the presence of request data
-                $requestData = '[binary-data length:' . strlen($requestData) . ' md5:' . md5($requestData) . ']';
+            if ($this->isBinaryData($requestData)) {
+                $requestData = $this->binaryToDebugString($requestData);
             }
             $this->debugSection("Request", "$method $url " . $requestData);
             $this->response = (string)$this->connectionModule->_request($method, $url, [], $files, [], $parameters);
         }
-        $this->debugSection("Response", $this->response);
+        $printedResponse = $this->response;
+        if ($this->isBinaryData($printedResponse)) {
+            $printedResponse = $this->binaryToDebugString($printedResponse);
+        }
+        $this->debugSection("Response", $printedResponse);
+    }
+
+    /**
+     * Check if data has non-printable bytes and it is not a valid unicode string
+     *
+     * @param string $data the text or binary data string
+     * @return boolean
+     */
+    protected function isBinaryData($data)
+    {
+        return !ctype_print($data) && false === mb_detect_encoding($data, mb_detect_order(), true);
+    }
+
+    /**
+     * Format a binary string for debug printing
+     *
+     * @param string $data the binary data string
+     * @return string the debug string
+     */
+    protected function binaryToDebugString($data)
+    {
+        return '[binary-data length:' . strlen($data) . ' md5:' . md5($data) . ']';
     }
 
     protected function encodeApplicationJson($method, $parameters)
@@ -762,6 +777,7 @@ EOF;
      * $I->seeResponseJsonMatchesXpath('/store//price');
      * ?>
      * ```
+     * @param string $xpath
      * @part json
      * @version 2.0.9
      */
@@ -772,6 +788,22 @@ EOF;
             0,
             (new JsonArray($response))->filterByXPath($xpath)->length,
             "Received JSON did not match the XPath `$xpath`.\nJson Response: \n" . $response
+        );
+    }
+
+    /**
+     * Opposite to seeResponseJsonMatchesXpath
+     *
+     * @param string $xpath
+     * @part json
+     */
+    public function dontSeeResponseJsonMatchesXpath($xpath)
+    {
+        $response = $this->connectionModule->_getResponseContent();
+        $this->assertEquals(
+            0,
+            (new JsonArray($response))->filterByXPath($xpath)->length,
+            "Received JSON matched the XPath `$xpath`.\nJson Response: \n" . $response
         );
     }
 
@@ -816,6 +848,7 @@ EOF;
      * ?>
      * ```
      *
+     * @param string $jsonPath
      * @part json
      * @version 2.0.9
      */
@@ -824,14 +857,14 @@ EOF;
         $response = $this->connectionModule->_getResponseContent();
         $this->assertNotEmpty(
             (new JsonArray($response))->filterByJsonPath($jsonPath),
-            "Received JSON did not match the JsonPath provided\n" . $response
+            "Received JSON did not match the JsonPath `$jsonPath`.\nJson Response: \n" . $response
         );
     }
 
     /**
      * Opposite to seeResponseJsonMatchesJsonPath
      *
-     * @param array $jsonPath
+     * @param string $jsonPath
      * @part json
      */
     public function dontSeeResponseJsonMatchesJsonPath($jsonPath)
@@ -839,7 +872,7 @@ EOF;
         $response = $this->connectionModule->_getResponseContent();
         $this->assertEmpty(
             (new JsonArray($response))->filterByJsonPath($jsonPath),
-            "Received JSON did (but should not) match the JsonPath provided\n" . $response
+            "Received JSON matched the JsonPath `$jsonPath`.\nJson Response: \n" . $response
         );
     }
 
@@ -1183,6 +1216,68 @@ EOF;
             XmlUtils::toXml($this->connectionModule->_getResponseContent())->C14N(),
             "found in XML Response"
         );
+    }
+
+    /**
+     * Checks if the hash of a binary response is exactly the same as provided.
+     * Parameter can be passed as any hash string supported by hash(), with an
+     * optional second parameter to specify the hash type, which defaults to md5.
+     *
+     * Example: Using md5 hash key
+     *
+     * ```php
+     * <?php
+     * $I->seeBinaryResponseEquals("8c90748342f19b195b9c6b4eff742ded");
+     * ?>
+     * ```
+     *
+     * Example: Using md5 for a file contents
+     *
+     * ```php
+     * <?php
+     * $fileData = file_get_contents("test_file.jpg");
+     * $I->seeBinaryResponseEquals(md5($fileData));
+     * ?>
+     * ```
+     * Example: Using sha256 hsah
+     *
+     * ```php
+     * <?php
+     * $fileData = '/9j/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/yQALCAABAAEBAREA/8wABgAQEAX/2gAIAQEAAD8A0s8g/9k='; // very small jpeg
+     * $I->seeBinaryResponseEquals(hash("sha256", base64_decode($fileData)), 'sha256');
+     * ?>
+     * ```
+     *
+     * @param $hash the hashed data response expected
+     * @param $algo the hash algorithm to use. Default md5.
+     * @part json
+     * @part xml
+     */
+    public function seeBinaryResponseEquals($hash, $algo = 'md5')
+    {
+        $responseHash = hash($algo, $this->connectionModule->_getResponseContent());
+        $this->assertEquals($hash, $responseHash);
+    }
+
+    /**
+     * Checks if the hash of a binary response is not the same as provided.
+     *
+     * ```php
+     * <?php
+     * $I->dontSeeBinaryResponseEquals("8c90748342f19b195b9c6b4eff742ded");
+     * ?>
+     * ```
+     * Opposite to `seeBinaryResponseEquals`
+     *
+     * @param $hash the hashed data response expected
+     * @param $algo the hash algorithm to use. Default md5.
+     * @part json
+     * @part xml
+     */
+    public function dontSeeBinaryResponseEquals($hash, $algo = 'md5')
+    {
+        $responseHash = hash($algo, $this->connectionModule->_getResponseContent());
+        $this->assertNotEquals($hash, $responseHash);
     }
 
     /**

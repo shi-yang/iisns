@@ -57,15 +57,6 @@ return array (
       '@yii/bootstrap' => $vendorDir . '/yiisoft/yii2-bootstrap',
     ),
   ),
-  'yiisoft/yii2-debug' => 
-  array (
-    'name' => 'yiisoft/yii2-debug',
-    'version' => '2.0.6.0',
-    'alias' => 
-    array (
-      '@yii/debug' => $vendorDir . '/yiisoft/yii2-debug',
-    ),
-  ),
   'yiisoft/yii2-gii' => 
   array (
     'name' => 'yiisoft/yii2-gii',
@@ -84,15 +75,6 @@ return array (
       '@yii/swiftmailer' => $vendorDir . '/yiisoft/yii2-swiftmailer',
     ),
   ),
-  'rmrevin/yii2-minify-view' => 
-  array (
-    'name' => 'rmrevin/yii2-minify-view',
-    'version' => '1.13.0.0',
-    'alias' => 
-    array (
-      '@rmrevin/yii/minify' => $vendorDir . '/rmrevin/yii2-minify-view',
-    ),
-  ),
   'yiisoft/yii2-imagine' => 
   array (
     'name' => 'yiisoft/yii2-imagine',
@@ -100,6 +82,24 @@ return array (
     'alias' => 
     array (
       '@yii/imagine' => $vendorDir . '/yiisoft/yii2-imagine',
+    ),
+  ),
+  'rmrevin/yii2-minify-view' => 
+  array (
+    'name' => 'rmrevin/yii2-minify-view',
+    'version' => '1.14.4.0',
+    'alias' => 
+    array (
+      '@rmrevin/yii/minify' => $vendorDir . '/rmrevin/yii2-minify-view',
+    ),
+  ),
+  'yiisoft/yii2-debug' => 
+  array (
+    'name' => 'yiisoft/yii2-debug',
+    'version' => '2.0.9.0',
+    'alias' => 
+    array (
+      '@yii/debug' => $vendorDir . '/yiisoft/yii2-debug',
     ),
   ),
 );

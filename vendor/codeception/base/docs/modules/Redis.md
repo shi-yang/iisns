@@ -42,7 +42,7 @@ to interact with a Redis server.
  
 Delete all the keys in the Redis database
 
- * `throws`  ModuleException
+@throws ModuleException
 
 
 ### dontSeeInRedis
@@ -155,7 +155,7 @@ $I->grabFromRedis('example:hash', 'foo');
  * `param string` $key The key name
 
 
- * `throws`  ModuleException if the key does not exist
+@throws ModuleException if the key does not exist
 
 
 ### haveInRedis
@@ -181,7 +181,7 @@ $I->haveInRedis('list', ['riri', 'fifi', 'loulou']);
 $I->haveInRedis('set', ['riri', 'fifi', 'loulou']);
 
 // ZSets: $value must be an associative array with scores
-$I->haveInRedis('set', ['riri' => 1, 'fifi' => 2, 'loulou' => 3]);
+$I->haveInRedis('zset', ['riri' => 1, 'fifi' => 2, 'loulou' => 3]);
 
 // Hashes: $value must be an associative array
 $I->haveInRedis('hash', ['obladi' => 'oblada']);
@@ -191,7 +191,7 @@ $I->haveInRedis('hash', ['obladi' => 'oblada']);
  * `param string` $key   The key name
  * `param mixed`  $value The value
 
- * `throws`  ModuleException
+@throws ModuleException
 
 
 ### seeInRedis

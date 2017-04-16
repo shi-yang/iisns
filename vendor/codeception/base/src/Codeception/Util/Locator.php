@@ -1,6 +1,7 @@
 <?php
 namespace Codeception\Util;
 
+use Facebook\WebDriver\WebDriverBy;
 use Symfony\Component\CssSelector\CssSelectorConverter;
 use Symfony\Component\CssSelector\Exception\ParseException;
 use Symfony\Component\CssSelector\XPath\Translator;
@@ -38,9 +39,12 @@ class Locator
      * As a result the Locator will produce a mixed XPath value that will be used in fillField action.
      *
      * @static
+     *
      * @param $selector1
      * @param $selector2
+     *
      * @throws \Exception
+     *
      * @return string
      */
     public static function combine($selector1, $selector2)
@@ -67,7 +71,9 @@ class Locator
      * ```
      *
      * @static
+     *
      * @param $url
+     *
      * @return string
      */
     public static function href($url)
@@ -91,7 +97,9 @@ class Locator
      * ```
      *
      * @static
+     *
      * @param $index
+     *
      * @return string
      */
     public static function tabIndex($index)
@@ -172,6 +180,7 @@ class Locator
      * ```
      *
      * @param $selector
+     *
      * @return bool
      */
     public static function isCSS($selector)
@@ -195,6 +204,7 @@ class Locator
      * ```
      *
      * @param $locator
+     *
      * @return bool
      */
     public static function isXPath($locator)
@@ -205,13 +215,26 @@ class Locator
     }
 
     /**
-     * Checks that string and CSS selector for element by ID
+     * Checks that a string is valid CSS ID
+     *
      * @param $id
+     *
      * @return bool
      */
     public static function isID($id)
     {
         return (bool)preg_match('~^#[\w\.\-\[\]\=\^\~\:]+$~', $id);
+    }
+
+    /**
+     * Checks that a string is valid CSS class
+     *
+     * @param $class
+     * @return bool
+     */
+    public static function isClass($class)
+    {
+        return (bool)preg_match('~^\.[\w\.\-\[\]\=\^\~\:]+$~', $class);
     }
 
     /**
@@ -228,6 +251,7 @@ class Locator
      *
      * @param $element
      * @param $text
+     *
      * @return string
      */
     public static function contains($element, $text)
@@ -251,8 +275,9 @@ class Locator
      * Locator::elementAt('table#grind>tr', -2); // previous than last row
      * ```
      *
-     * @param $element CSS or XPath locator
-     * @param $position xpath index
+     * @param string $element CSS or XPath locator
+     * @param int $position xpath index
+     *
      * @return mixed
      */
     public static function elementAt($element, $position)
@@ -282,6 +307,7 @@ class Locator
      * ```
      *
      * @param $element
+     *
      * @return mixed
      */
     public static function firstElement($element)
@@ -302,6 +328,7 @@ class Locator
      * ```
      *
      * @param $element
+     *
      * @return mixed
      */
     public static function lastElement($element)
@@ -313,6 +340,7 @@ class Locator
      * Transforms strict locator, \Facebook\WebDriver\WebDriverBy into a string represenation
      *
      * @param $selector
+     *
      * @return string
      */
     public static function humanReadableString($selector)
@@ -326,7 +354,7 @@ class Locator
             return "$type '$locator'";
         }
         if (class_exists('\Facebook\WebDriver\WebDriverBy')) {
-            if ($selector instanceof \Facebook\WebDriver\WebDriverBy) {
+            if ($selector instanceof WebDriverBy) {
                 $type = $selector->getMechanism();
                 $locator = $selector->getValue();
                 return "$type '$locator'";

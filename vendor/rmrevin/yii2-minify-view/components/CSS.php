@@ -56,7 +56,7 @@ class CSS extends MinifyComponent
      */
     protected function process(array $files)
     {
-        $resultFile = $this->view->minify_path . DIRECTORY_SEPARATOR . $this->_getSummaryFilesHash($files) . '.css';
+        $resultFile = $this->view->minifyPath . DIRECTORY_SEPARATOR . $this->_getSummaryFilesHash($files) . '.css';
 
         if (!file_exists($resultFile)) {
             $css = '';
@@ -105,11 +105,11 @@ class CSS extends MinifyComponent
 
             if ($this->view->minifyCss) {
                 $css = (new \CSSmin())
-                    ->run($css, $this->view->css_linebreak_pos);
+                    ->run($css, $this->view->cssLinebreakPos);
             }
 
-            $charsets = false !== $this->view->force_charset
-                ? ('@charset "' . (string)$this->view->force_charset . '";' . "\n")
+            $charsets = false !== $this->view->forceCharset
+                ? ('@charset "' . (string)$this->view->forceCharset . '";' . "\n")
                 : $this->collectCharsets($css);
 
             $imports = $this->collectImports($css);
@@ -117,8 +117,8 @@ class CSS extends MinifyComponent
 
             file_put_contents($resultFile, $charsets . $imports . $fonts . $css);
 
-            if (false !== $this->view->file_mode) {
-                @chmod($resultFile, $this->view->file_mode);
+            if (false !== $this->view->fileMode) {
+                @chmod($resultFile, $this->view->fileMode);
             }
         }
 
@@ -142,7 +142,7 @@ class CSS extends MinifyComponent
      */
     protected function expandImports(&$code)
     {
-        if (true === $this->view->expand_imports) {
+        if (true === $this->view->expandImports) {
             preg_match_all('|\@import\s([^;]+);|is', str_replace('&amp;', '&', $code), $m);
 
             if (!empty($m[0])) {
@@ -233,10 +233,17 @@ class CSS extends MinifyComponent
 
             if (!empty($url)) {
                 if (!in_array(mb_substr($url, 0, 4), ['http', 'ftp:'], true)) {
-                    $url = \Yii::getAlias($this->view->base_path . $url);
+                    $url = \Yii::getAlias($this->view->basePath . $url);
                 }
 
-                $result = file_get_contents($url);
+                $context = [
+                    'ssl' => [
+                        'verify_peer' => false,
+                        'verify_peer_name' => false,
+                    ],
+                ];
+
+                $result = file_get_contents($url, null, stream_context_create($context));
             }
         }
 

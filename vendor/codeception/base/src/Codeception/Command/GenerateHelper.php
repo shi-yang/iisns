@@ -6,7 +6,6 @@ use Codeception\Lib\Generator\Helper;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -36,7 +35,7 @@ class GenerateHelper extends Command
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $name = ucfirst($input->getArgument('name'));
-        $config = Configuration::config($input->getOption('config'));
+        $config = $this->getGlobalConfig();
 
         $path = $this->buildPath(Configuration::supportDir() . 'Helper', $name);
         $filename = $path . $this->getClassName($name) . '.php';

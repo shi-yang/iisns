@@ -9,7 +9,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Yaml\Yaml;
-use Symfony\Component\Console\Question\Question;
 
 /**
  * Creates default config, tests directory and sample suites for current project.
@@ -141,16 +140,6 @@ class Bootstrap extends Command
             ],
             'extensions' => [
                 'enabled' => ['Codeception\Extension\RunFailed']
-            ],
-            'modules'  => [
-                'config' => [
-                    'Db' => [
-                        'dsn'      => '',
-                        'user'     => '',
-                        'password' => '',
-                        'dump'     => 'tests/_data/dump.sql'
-                    ]
-                ]
             ]
         ];
 

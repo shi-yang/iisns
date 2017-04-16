@@ -3,7 +3,6 @@ namespace Codeception\Lib;
 
 use Codeception\Configuration;
 use Codeception\Test\Interfaces\Reported;
-use Codeception\Test\Interfaces\Configurable;
 use Codeception\Test\Descriptor;
 use Codeception\TestInterface;
 use Symfony\Component\Finder\Finder;
@@ -43,14 +42,13 @@ class GroupManager
             }
             $files = Finder::create()->files()
                 ->name(basename($pattern))
-                ->path(dirname($pattern))
                 ->sortByName()
-                ->in(Configuration::projectDir());
+                ->in(Configuration::projectDir().dirname($pattern));
 
             $i = 1;
             foreach ($files as $file) {
                 /** @var SplFileInfo $file * */
-                $this->configuredGroups[str_replace('*', $i, $group)] = $file->getRelativePathname();
+                $this->configuredGroups[str_replace('*', $i, $group)] = dirname($pattern).DIRECTORY_SEPARATOR.$file->getRelativePathname();
                 $i++;
             }
             unset($this->configuredGroups[$group]);

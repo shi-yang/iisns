@@ -30,6 +30,14 @@ class Oci extends Db
                           END LOOP;
                       END;"
         );
+        $this->dbh->exec(
+            "BEGIN
+                        FOR i IN (SELECT view_name FROM user_views)
+                          LOOP
+                            EXECUTE IMMEDIATE('DROP VIEW ' || user || '.' || i.view_name);
+                          END LOOP;
+                      END;"
+        );
     }
 
     /**
@@ -61,10 +69,13 @@ class Oci extends Db
             $query .= "\n" . rtrim($sqlLine);
 
             if (substr($query, -1 * $delimiterLength, $delimiterLength) == $delimiter) {
-                $this->sqlToRun = substr($query, 0, -1 * $delimiterLength);
-                $this->sqlQuery($this->sqlToRun);
+                $this->sqlQuery(substr($query, 0, -1 * $delimiterLength));
                 $query = "";
             }
+        }
+
+        if ($query !== '') {
+            $this->sqlQuery($query);
         }
     }
 
@@ -88,7 +99,7 @@ class Oci extends Db
             $columns = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
             foreach ($columns as $column) {
-                $primaryKey []= $column['column_name'];
+                $primaryKey []= $column['COLUMN_NAME'];
             }
             $this->primaryKeys[$tableName] = $primaryKey;
         }

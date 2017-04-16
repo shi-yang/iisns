@@ -6,7 +6,6 @@ use Codeception\Lib\Generator\Group as GroupGenerator;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -33,7 +32,7 @@ class GenerateGroup extends Command
 
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $config = $this->getGlobalConfig($input->getOption('config'));
+        $config = $this->getGlobalConfig();
         $group = $input->getArgument('group');
 
         $class = ucfirst($group);

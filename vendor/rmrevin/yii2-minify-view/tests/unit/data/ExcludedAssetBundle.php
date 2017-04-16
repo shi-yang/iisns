@@ -18,6 +18,10 @@ class ExcludedAssetBundle extends \yii\web\AssetBundle
         'excluded.css',
     ];
 
+    public $js = [
+        'excluded.js',
+    ];
+
     public function init()
     {
         $this->sourcePath = __DIR__ . '/source';

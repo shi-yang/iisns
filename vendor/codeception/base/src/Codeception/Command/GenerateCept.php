@@ -5,7 +5,6 @@ use Codeception\Lib\Generator\Cept;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -39,7 +38,7 @@ class GenerateCept extends Command
         $suite = $input->getArgument('suite');
         $filename = $input->getArgument('test');
 
-        $config = $this->getSuiteConfig($suite, $input->getOption('config'));
+        $config = $this->getSuiteConfig($suite);
         $this->buildPath($config['path'], $filename);
 
         $filename = $this->completeSuffix($filename, 'Cept');

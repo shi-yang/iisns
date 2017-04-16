@@ -170,11 +170,34 @@ class ViewTest extends minify\tests\unit\TestCase
         $view->endPage(false);
     }
 
-    public function testExcludeBundle()
+    public function testExcludeBundles()
     {
         $view = $this->getView();
         $view->excludeBundles = [
             minify\tests\unit\data\ExcludedAssetBundle::className(),
+        ];
+
+        $view->init();
+
+        minify\tests\unit\data\TestAssetBundle::register($view);
+        minify\tests\unit\data\ExcludedAssetBundle::register($view);
+
+        ob_start();
+        echo '<html>This is test page versioning</html>';
+
+        $view->endBody();
+
+        $this->assertEquals(2, count($view->cssFiles));
+        $this->assertEquals(3, count($view->jsFiles));
+
+        $view->endPage(false);
+    }
+
+    public function testExcludeFiles()
+    {
+        $view = $this->getView();
+        $view->excludeFiles = [
+            'excluded.css',
         ];
 
         minify\tests\unit\data\TestAssetBundle::register($view);
@@ -186,6 +209,7 @@ class ViewTest extends minify\tests\unit\TestCase
         $view->endBody();
 
         $this->assertEquals(2, count($view->cssFiles));
+        $this->assertEquals(3, count($view->jsFiles));
 
         $view->endPage(false);
     }
@@ -193,7 +217,7 @@ class ViewTest extends minify\tests\unit\TestCase
     /**
      * @return minify\View
      */
-    private function getView()
+    protected function getView()
     {
         return \Yii::$app->getView();
     }

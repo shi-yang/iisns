@@ -76,9 +76,7 @@ class CommandTester
         }
 
         $this->output = new StreamOutput(fopen('php://memory', 'w', false));
-        if (isset($options['decorated'])) {
-            $this->output->setDecorated($options['decorated']);
-        }
+        $this->output->setDecorated(isset($options['decorated']) ? $options['decorated'] : false);
         if (isset($options['verbosity'])) {
             $this->output->setVerbosity($options['verbosity']);
         }
@@ -155,7 +153,7 @@ class CommandTester
     {
         $stream = fopen('php://memory', 'r+', false);
 
-        fputs($stream, implode(PHP_EOL, $inputs));
+        fwrite($stream, implode(PHP_EOL, $inputs));
         rewind($stream);
 
         return $stream;
