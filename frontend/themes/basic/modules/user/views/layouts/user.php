@@ -130,7 +130,7 @@ AppAsset::register($this);
                             </a>
                         </li>
                         <li>
-                            <a href="<?= Url::toRoute('/explore/index') ?>">
+                            <a href="<?= Url::toRoute('/explore/index') ?>" data-pjax="0">
                             <span class="menu-icon">
                                 <i class="glyphicon glyphicon-globe"></i>
                             </span>

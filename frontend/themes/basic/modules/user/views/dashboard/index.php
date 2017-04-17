@@ -56,11 +56,13 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Home');
                 <div class="widget-footer">
                     <div class="footer-detail">
                         <?php if(Yii::$app->user->id == $feed['user_id']): ?>
-                            &nbsp;
+                            <a href="<?= Url::toRoute(['/home/feed/update', 'id' => $feed['id']]) ?>">
+                                <span class="glyphicon glyphicon-edit"></span> <?= Yii::t('app', 'Edit') ?>
+                            </a>
+                            <span class="item-line"></span>
                             <a href="<?= Url::toRoute(['/home/feed/delete', 'id' => $feed['id']]) ?>" data-clicklog="delete" onclick="return false;" title="<?= Yii::t('app', 'Are you sure to delete it?') ?>">
                                 <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
                             </a>
-                            &nbsp;
                             <span class="item-line"></span>
                         <?php endif ?>
                         <a href="javascript:;" onclick="setRepostFormAction(<?= $feed['id'] ?>)" data-toggle="modal" data-target="#repost-modal">

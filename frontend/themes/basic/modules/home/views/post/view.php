@@ -8,7 +8,7 @@ use app\widgets\comment\Comment;
 /* @var $model app\modules\home\models\Post */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Blog'), 'url' => ['/home/post/index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Blog'), 'url' => ['/home/post/index'], ['data-pjax' => 0]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="panel">
