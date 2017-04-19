@@ -41,6 +41,9 @@ $model->status = 'public';
                 'height' => 640,
                 'imageUpload' => true,
                 'imageUploadURL' => Url::to(['editormd_upload']),
+                'tex' => true,
+                'flowChart' => true,
+                'sequenceDiagram' => true
             ]
         ])->label(false);
     } ?>
