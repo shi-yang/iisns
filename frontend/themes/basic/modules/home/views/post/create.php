@@ -9,9 +9,9 @@ $this->title = Yii::t('app', 'Create Post');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Posts'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 if ($editor == 'html')
-    $url = Html::a('切换到MarkDown编辑器', ['editor' => 'markdown'], ['data-pjax' => 0]);
+    $url = Html::a('切换到MarkDown编辑器', ['/home/post/create', 'editor' => 'markdown'], ['data-pjax' => 0]);
 else
-    $url = Html::a('切换到Html编辑器', ['editor' => 'html'], ['data-pjax' => 0]);
+    $url = Html::a('切换到Html编辑器', ['/home/post/create', 'editor' => 'html'], ['data-pjax' => 0]);
 ?>
 <div class="post-create">
 
