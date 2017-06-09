@@ -41,9 +41,9 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
     /**
      * Constructor.
      *
-     * @param string $certificate
-     * @param string $privateKey
-     * @param string $encryptCertificate
+     * @param string|null $signCertificate
+     * @param string|null $signPrivateKey
+     * @param string|null $encryptCertificate
      */
     public function __construct($signCertificate = null, $signPrivateKey = null, $encryptCertificate = null)
     {
@@ -84,7 +84,7 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
     /**
      * Set the certificate location to use for signing.
      *
-     * @link http://www.php.net/manual/en/openssl.pkcs7.flags.php
+     * @see http://www.php.net/manual/en/openssl.pkcs7.flags.php
      *
      * @param string       $certificate
      * @param string|array $privateKey  If the key needs an passphrase use array('file-location', 'passphrase') instead
@@ -117,8 +117,8 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
     /**
      * Set the certificate location to use for encryption.
      *
-     * @link http://www.php.net/manual/en/openssl.pkcs7.flags.php
-     * @link http://nl3.php.net/manual/en/openssl.ciphers.php
+     * @see http://www.php.net/manual/en/openssl.pkcs7.flags.php
+     * @see http://nl3.php.net/manual/en/openssl.ciphers.php
      *
      * @param string|array $recipientCerts Either an single X.509 certificate, or an assoc array of X.509 certificates.
      * @param int          $cipher
@@ -167,7 +167,7 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
      * But some older mail clients, namely Microsoft Outlook 2000 will work when the message first encrypted.
      * As this goes against the official specs, its recommended to only use 'encryption -> signing' when specifically targeting these 'broken' clients.
      *
-     * @param string $signThenEncrypt
+     * @param bool $signThenEncrypt
      *
      * @return Swift_Signers_SMimeSigner
      */
@@ -400,7 +400,6 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
             }
 
             $boundary = trim($contentTypeData['1'], '"');
-            $boundaryLen = strlen($boundary);
 
             // Skip the header and CRLF CRLF
             $fromStream->setReadPointer($headersPosEnd + 4);

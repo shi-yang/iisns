@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<phpunit bootstrap="./tests/unit/bootstrap.php"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         stopOnFailure="false">
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./components</directory>
+            <file>HtmlCompressor.php</file>
+            <file>Exception.php</file>
+            <file>View.php</file>
+        </whitelist>
+    </filter>
+    <testsuites>
+        <testsuite name="Test Suite">
+            <directory>./tests/unit/view</directory>
+        </testsuite>
+    </testsuites>
+    <logging>
+        <log type="coverage-html" target="./coverage"/>
+    </logging>
+</phpunit>

@@ -1,6 +1,76 @@
 Yii Framework 2 debug extension Change Log
 ==========================================
 
+2.0.10 under development
+------------------------
+
+- no changes in this release.
+
+
+2.0.9 February 21, 2017
+-----------------------
+
+- Bug #195: Fixed failure when user model has timestamp behavior attached (sam002)
+- Bug #199: Do not use user panel in case component isn't properly defined in the application (samdark)
+- Bug #200: Fixed error in user panel when RBAC role or permission contains non-string data (samdark)
+
+
+2.0.8 February 19, 2017
+-----------------------
+
+- Bug #82: Fixed debug crashing when there's a closure in log message (samdark)
+- Bug #176: Use module's real ID instead of hardcoded "debug" (samdark)
+- Enh #34: Added memory graph to timeline panel (bashkarev)
+- Enh #174: Added routing panel (bashkarev, samdark)
+- Enh #179: Increased request time logging accuracy and precision (samdark)
+- Enh #181: Added user panel (pana1990)
+- Enh #185: Added meta tag to prevent indexing of debug by search engines in case it's exposed (aminkt, samdark)
+- Enh #196: Added language information to config panel (cebe)
+
+
+2.0.7 November 24, 2016
+-----------------------
+
+- Bug #61: Fixed toolbar not to be cached by using renderDynamic (dynasource)
+- Bug #93: Fixed `AssetPanel` error when bundle `$js` or `$css` contained `jsOptions` overrides (Razzwan, samdark)
+- Bug #99: Avoid serializing php7 errors (zuozp8)
+- Bug #111: Fixed `LogTarget` to work properly when tests are ran via Codeception (samdark, nlmedina)
+- Bug #120: Fixed toolbar height changing when opened/closed and when using bootstrap (nkovacs)
+- Bug #148: Don't animate iframe needlessly when window is resized. (nkovacs)
+- Bug #150: Fixed "Cannot read property 'replaceChild' of null" error (BetsuNo)
+- Bug #152: Fixed log search to work with non-scalar values (samdark)
+- Bug #160: Remove height as it prevents the background from stretching, causing unreadable overlapping texts over background (dynasource)
+- Bug #168: Fixed wrong toggle button direction (fps01)
+- Enh #8: Added ability to configure default sorting and filtering for Database panel (laszlovl)
+- Enh #27: Adjusted sorting defaults, removed row numbers from database, log and profiling panels (samdark)
+- Enh #58: Added timeline panel (bashkarev)
+- Enh #97: Added AJAX requests handling (bashkarev)
+- Enh #105: Enhanced `ConfigPanel` to detect and report memcached extension presence (samdark)
+- Enh #115: Make the default panel configurable and set it to `log` (mikehaertl)
+- Enh #117: Added ability to customize the logo with `Module::setYiiLogo()` (brandonkelly)
+- Enh #143: Added application version display at `ConfigPanel` (klimov-paul)
+- Enh #145: The error and warning labels of the log section on the summary bar now link directly to the log page filtered by log level type (rhertogh)
+- Enh #162: Added ability to config the trace file and line number (thiagotalma)
+- Enh: Mouse wheel click, or Ctrl+Click opens debugger in new tab (silverfire)
+- Enh: `yii\debug\Module::defaultVersion()` implemented to pick up 'yiisoft/yii2-debug' extension version (klimov-paul)
+
+
+2.0.6 March 17, 2016
+--------------------
+
+- Bug #41: Debug toolbar was unable to work without asset manager, removed `ToolbarAsset` class (samdark)
+- Bug #51: Explain wasn't displayig all data available (lichunqiang)
+- Bug #66: Fixed debug panel not working inside applications with response format different from HTML (creocoder, cebe)
+- Bug #70: Exception was throwed when `UrlManager::ruleConfig` class was setted with `yii\rest\UrlRule` (lichunqiang)
+- Bug: Fixed error when `Yii::$app->db` is not an instance of `yii\db\Connection` (cebe, jafaripur)
+- Bug: Fixed exception when no data was recorded for db and profiling panel (cebe, jafaripur)
+- Enh #44: Improved display of memory usage to use 3 decimals (dynasource)
+- Enh #47: LogTarget storage directory is now created recursively if it does not exist (thiagotalma)
+- Enh #63: Enhanced reliablity of request panel in case session is misconfigured (arisk)
+- Enh #67: Ability to change permissions for debugger data files and directories (mg-code)
+- Enh #83: Debug toolbar now works at the page in async manner (JiLiZART)
+
+
 2.0.5 August 06, 2015
 ---------------------
 

@@ -27,7 +27,7 @@ use yii\bootstrap\ActiveForm;
         ])->textInput(['maxlength' => 128, 'autocomplete'=>'off'])
         ?>
 
-        <?= $form->field($model, 'content')->widget('shiyang\umeditor\UMeditor', [
+        <?= $form->field($model, 'content')->widget('common\widgets\umeditor\UMeditor', [
             'clientOptions' => [
                 'initialFrameHeight' => 100,
                 'toolbar' => [

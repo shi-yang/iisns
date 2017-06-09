@@ -106,7 +106,7 @@ class FeedController extends BaseController
                 '{template}' => $feed['template']
             ];
             Feed::addFeed('repost', $postData);
-            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Create successfully.'));
+            $this->success(Yii::t('app', 'Create successfully.'));
             return $this->redirect(['/user/dashboard']);
         }
 

@@ -11,6 +11,7 @@ use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\debug\models\search\Debug;
+use yii\web\Response;
 
 /**
  * Debugger controller
@@ -47,6 +48,12 @@ class DefaultController extends Controller
         return $actions;
     }
 
+    public function beforeAction($action)
+    {
+        Yii::$app->response->format = Response::FORMAT_HTML;
+        return parent::beforeAction($action);
+    }
+
     public function actionIndex()
     {
         $searchModel = new Debug();
@@ -75,7 +82,7 @@ class DefaultController extends Controller
         if (isset($this->module->panels[$panel])) {
             $activePanel = $this->module->panels[$panel];
         } else {
-            $activePanel = $this->module->panels['request'];
+            $activePanel = $this->module->panels[$this->module->defaultPanel];
         }
 
         return $this->render('view', [
@@ -106,7 +113,7 @@ class DefaultController extends Controller
             throw new NotFoundHttpException('Mail file not found');
         }
 
-        Yii::$app->response->sendFile($filePath);
+        return Yii::$app->response->sendFile($filePath);
     }
 
     private $_manifest;

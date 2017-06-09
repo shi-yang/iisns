@@ -95,7 +95,7 @@ $this->registerCss('
     </ul>
     <div class="new-comment-form">
         <?php $form = ActiveForm::begin(['enableClientValidation' => false]); ?>
-        <?= $form->field($newComment, 'content')->widget('shiyang\umeditor\UMeditor', [
+        <?= $form->field($newComment, 'content')->widget('common\widgets\umeditor\UMeditor', [
             'clientOptions' => [
                 'initialFrameHeight' => 100,
                 'toolbar' => ['emotion image video'],

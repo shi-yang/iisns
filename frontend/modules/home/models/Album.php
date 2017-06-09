@@ -9,7 +9,7 @@ namespace app\modules\home\models;
 
 use Yii;
 use yii\db\Query;
-use app\components\Uploader;
+use common\components\Uploader;
 
 /**
  * This is the model class for table "{{%home_album}}".
@@ -137,6 +137,7 @@ class Album extends \yii\db\ActiveRecord
      * 本来只要一个相册id也是可以的，但为减少查询，故同时要 $id, $cover_id
      * @param integer $id 相册id
      * @param integer $cover_id 封面id
+     * @return string $path
      */
     public static function getCoverPhoto($id = null, $cover_id = null)
     {

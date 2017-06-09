@@ -41,12 +41,16 @@ class PostController extends BaseController
                 $model = $this->findModel($v);
                 if (isset($_POST['review']) && $_POST['review'] == 'APPROVED') {
                     $model->explore_status = Post::EXPLORE_STATUS_APPROVED;
-                    Yii::$app->getSession()->setFlash('success', '操作审核成功');
+                    $message = "#{$v}: 操作审核成功";
                 } else {
                     $model->explore_status = Post::EXPLORE_STATUS_PENDING;
-                    Yii::$app->getSession()->setFlash('success', '下架成功');
+                    $message = "#{$v}: 下架成功";
                 }
-                $model->save(); 
+                if ($model->update()) {
+                    $this->success($message);
+                } else {
+                    $this->error("#{$v}: Error");
+                }
             }
             return $this->redirect(['index']);
         }

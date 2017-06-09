@@ -21,7 +21,7 @@ use yii\widgets\ActiveForm;
         'template' => "<div class=\"input-group\"><span class=\"input-group-addon\">" . Yii::t('app', 'Subject') . "</span>{input}</div>{error}",
     ])->textInput(['maxlength' => 32, 'autocomplete'=>'off']) ?>
 
-    <?= $form->field($model, 'content')->widget('shiyang\umeditor\UMeditor', [
+    <?= $form->field($model, 'content')->widget('common\widgets\umeditor\UMeditor', [
         'clientOptions' => [
             'initialFrameHeight' => 230,
             'toolbar' => [

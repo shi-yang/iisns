@@ -8,8 +8,10 @@
 namespace app\modules\home\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 use yii\helpers\Url;
 use yii\helpers\Html;
+use yii\helpers\Markdown;
 
 /**
  * This is the model class for table "{{%home_post}}".
@@ -17,6 +19,7 @@ use yii\helpers\Html;
  * @property integer $id
  * @property string $title
  * @property string $content
+ * @property string $markdown
  * @property string $tags
  * @property integer $created_at
  * @property integer $updated_at
@@ -26,7 +29,7 @@ use yii\helpers\Html;
  *
  * @author Shiyang <dr@shiyang.me>
  */
-class Post extends \yii\db\ActiveRecord
+class Post extends ActiveRecord
 {
     const STATUS_PUBLIC = 'public';
     const STATUS_PRIVATE = 'private';
@@ -44,8 +47,8 @@ class Post extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'content'], 'required'],
-            [['content', 'tags', 'status'], 'string'],
+            [['title'], 'required'],
+            [['content', 'tags', 'status', 'markdown'], 'string'],
             [['created_at', 'updated_at', 'user_id'], 'integer'],
             [['title'], 'string', 'max' => 80]
         ];
@@ -78,6 +81,17 @@ class Post extends \yii\db\ActiveRecord
             if ($this->isNewRecord) {
                 $this->user_id = Yii::$app->user->id;
                 $this->created_at = time();
+
+                if ($this->status == Post::STATUS_PUBLIC) {
+                    //插入记录(Feed)
+                    $title = Html::a(Html::encode($this->title), $this->url);
+                    preg_match_all("/<[img|IMG].*?src=\"([^^]*?)\".*?>/", $this->content, $images);
+                    $images = (isset($images[0][0])) ? $images[0][0] : '' ;
+                    $content = mb_substr(strip_tags($this->content), 0, 140, 'utf-8') . '... ' . Html::a(Yii::t('app', 'View Details'), $this->url) . '<br>' . $images;
+                    $postData = ['{title}' => $title, '{content}' => $content];
+                    Feed::addFeed('blog', $postData);
+                }
+
                 Yii::$app->userData->updateKey('post_count', Yii::$app->user->id);
             }
             //标签分割
@@ -85,6 +99,10 @@ class Post extends \yii\db\ActiveRecord
             $explodeTags = array_unique(explode(',', str_replace('，', ',', $tags)));
             $explodeTags = array_slice($explodeTags, 0, 10);
             $this->tags = implode(',', $explodeTags);
+
+            if (!empty($this->markdown)) {
+                $this->content = Markdown::process($this->markdown, 'gfm');
+            }
             return true;
         } else {
             return false;

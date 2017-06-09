@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `pre_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` char(32) NOT NULL,
   `password_hash` char(60) NOT NULL,
-  `password_reset_token` char(43) NOT NULL,
+  `password_reset_token` char(43) NOT NULL  DEFAULT '0',
   `auth_key` char(32) NOT NULL,
   `role` tinyint(2) NOT NULL,
   `email` char(64) NOT NULL,
@@ -60,8 +60,8 @@ CREATE TABLE IF NOT EXISTS `pre_auth_rule` (
 
 CREATE TABLE IF NOT EXISTS `pre_comment` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `table_name` char(26) NOT NULL,
-  `table_id` int(11) NOT NULL,
+  `entity` char(8) NOT NULL,
+  `entity_id` bigint(20) NOT NULL,
   `content` text NOT NULL,
   `parent_id` bigint(20) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -86,10 +86,10 @@ CREATE TABLE IF NOT EXISTS `pre_forum_board` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parent_id` int(11) NOT NULL DEFAULT '0',
   `name` char(32) NOT NULL,
-  `description` varchar(128) NOT NULL,
+  `description` varchar(128) DEFAULT NULL,
   `columns` tinyint(4) NOT NULL DEFAULT '1',
   `updated_at` int(10) DEFAULT NULL,
-  `updated_by` int(11) NOT NULL,
+  `updated_by` int(11) DEFAULT NULL,
   `forum_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
@@ -103,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `pre_forum_broadcast` (
   `content` text NOT NULL,
   `forum_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `thread_id` int(11) NOT NULL,
+  `thread_id` int(11) DEFAULT NULL,
   `created_at` int(10) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
@@ -138,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `pre_forum_thread` (
   `updated_at` int(10) NOT NULL,
   `user_id` int(11) NOT NULL,
   `board_id` int(11) NOT NULL,
-  `post_count` int(11) NOT NULL,
+  `post_count` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `board_id` (`board_id`)
@@ -147,16 +147,16 @@ CREATE TABLE IF NOT EXISTS `pre_forum_thread` (
 CREATE TABLE IF NOT EXISTS `pre_home_album` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) NOT NULL,
-  `description` varchar(128) NOT NULL,
-  `cover_id` bigint(20) NOT NULL,
+  `description` varchar(128) DEFAULT NULL,
+  `cover_id` bigint(20) DEFAULT NULL,
   `created_at` int(10) NOT NULL,
-  `updated_at` int(10) NOT NULL,
+  `updated_at` int(10) DEFAULT NULL,
   `created_by` int(11) NOT NULL,
   `enable_comment` tinyint(4) NOT NULL DEFAULT '1',
   `status` tinyint(1) NOT NULL DEFAULT '0',
-  `status_password` char(60) NOT NULL,
-  `status_question` varchar(255) NOT NULL,
-  `status_answer` varchar(255) NOT NULL,
+  `status_password` char(60) DEFAULT NULL,
+  `status_question` varchar(255) DEFAULT NULL,
+  `status_answer` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;
 
@@ -164,7 +164,7 @@ CREATE TABLE IF NOT EXISTS `pre_home_photo` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `album_id` bigint(20) NOT NULL,
   `name` varchar(100) NOT NULL COMMENT '图片名称',
-  `thumb` varchar(255) NOT NULL,
+  `thumb` varchar(255) DEFAULT NULL,
   `path` varchar(255) NOT NULL COMMENT '文件保存路径',
   `store_name` varchar(255) NOT NULL COMMENT '文件保存的名称',
   `created_at` int(11) NOT NULL,
@@ -176,11 +176,11 @@ CREATE TABLE IF NOT EXISTS `pre_home_photo` (
 CREATE TABLE IF NOT EXISTS `pre_home_feed` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` char(50) NOT NULL,
-  `content` text NOT NULL,
-  `template` text NOT NULL,
-  `comment_count` int(11) NOT NULL,
-  `repost_count` int(11) NOT NULL,
-  `feed_data` text NOT NULL,
+  `content` text DEFAULT NULL,
+  `template` text DEFAULT NULL,
+  `comment_count` int(11) NOT NULL DEFAULT '0',
+  `repost_count` int(11) NOT NULL DEFAULT '0',
+  `feed_data` text DEFAULT NULL,
   `user_id` int(11) NOT NULL,
   `created_at` int(11) NOT NULL,
   PRIMARY KEY (`id`)
@@ -190,12 +190,13 @@ CREATE TABLE IF NOT EXISTS `pre_home_post` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(128) NOT NULL,
   `content` text NOT NULL,
-  `tags` text NOT NULL,
+  `markdown` text NOT NULL,
+  `tags` text DEFAULT NULL,
   `user_id` int(11) NOT NULL,
   `created_at` int(11) NOT NULL,
-  `updated_at` int(11) NOT NULL,
+  `updated_at` int(11) DEFAULT NULL,
   `status` char(10) NOT NULL,
-  `explore_status` tinyint(1) NOT NULL,
+  `explore_status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;
@@ -212,12 +213,12 @@ INSERT INTO `pre_setting` (`key`, `value`) VALUES
 
 CREATE TABLE IF NOT EXISTS `pre_user_data` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
-  `post_count` int(11) NOT NULL,
-  `feed_count` int(11) NOT NULL,
-  `following_count` int(11) NOT NULL,
-  `follower_count` int(11) NOT NULL,
-  `unread_notice_count` int(11) NOT NULL,
-  `unread_message_count` int(11) NOT NULL,
+  `post_count` int(11) NOT NULL DEFAULT '0',
+  `feed_count` int(11) NOT NULL DEFAULT '0',
+  `following_count` int(11) NOT NULL DEFAULT '0',
+  `follower_count` int(11) NOT NULL DEFAULT '0',
+  `unread_notice_count` int(11) NOT NULL DEFAULT '0',
+  `unread_message_count` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10000 ;
 
@@ -240,7 +241,7 @@ CREATE TABLE IF NOT EXISTS `pre_user_message` (
   `read_indicator` tinyint(1) NOT NULL DEFAULT '0',
   `inbox` tinyint(1) NOT NULL DEFAULT '1',
   `outbox` tinyint(1) NOT NULL DEFAULT '1',
-  `post_id` int(11) NOT NULL,
+  `post_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `sendfrom` (`sendfrom`),
   KEY `sendto` (`sendto`)
@@ -248,11 +249,11 @@ CREATE TABLE IF NOT EXISTS `pre_user_message` (
 
 CREATE TABLE IF NOT EXISTS `pre_user_profile` (
   `user_id` int(11) NOT NULL,
-  `gender` tinyint(1) NOT NULL,
+  `gender` tinyint(1) NOT NULL DEFAULT '0',
   `birthdate` date DEFAULT NULL,
-  `signature` varchar(120) NOT NULL,
-  `address` text NOT NULL,
-  `description` text NOT NULL,
+  `signature` varchar(120) DEFAULT NULL,
+  `address` text DEFAULT NULL,
+  `description` text DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -8,9 +8,9 @@
 namespace app\modules\forum\models;
 
 use Yii;
-use app\modules\forum\models\Board;
 use yii\db\Query;
 use yii\helpers\ArrayHelper;
+use yii\imagine\Image;
 
 /**
  * This is the model class for table "{{%forum}}".
@@ -103,7 +103,7 @@ class Forum extends \yii\db\ActiveRecord
     }
     
     /**
-     * @return yii\db\ActiveQuery
+     * @return array|yii/db/ActiveRecord[] the query results.
      */
     public function getBoards()
     {
@@ -166,5 +166,24 @@ class Forum extends \yii\db\ActiveRecord
         return Yii::$app->db
             ->createCommand('SELECT count(*) FROM {{%forum_broadcast}} WHERE forum_id='. $this->id)
             ->queryScalar();
+    }
+
+    /**
+     * @return bool
+     */
+    public function saveIcon()
+    {
+        Yii::setAlias('@upload', '@webroot/uploads/forum/icon/');
+        $extension =  strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
+        $fileName = $this->id . '_' . time() . rand(1 , 10000) . '.' . $extension;
+
+        Image::thumbnail($_FILES['file']['tmp_name'], 160, 160)->save(Yii::getAlias('@upload') . $fileName, ['quality' => 80]);
+
+        //删除旧图标
+        if (file_exists(Yii::getAlias('@upload') . $this->forum_icon) && (strpos($this->forum_icon, 'default') === false))
+            @unlink(Yii::getAlias('@upload') .  $this->forum_icon);
+
+        $this->forum_icon = $fileName;
+        return $this->update();
     }
 }

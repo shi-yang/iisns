@@ -17,7 +17,7 @@ $user = Yii::$app->user->identity;
 <div class="post-index">
     <h1><?= Html::encode($this->title) ?></h1>
     <p>
-        <?= Html::a(Yii::t('app', 'Create Post'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Post'), ['create'], ['class' => 'btn btn-success', 'data-pjax' => 0]) ?>
     </p>
 </div>
 <div class="row">
@@ -31,20 +31,17 @@ $user = Yii::$app->user->identity;
                                 <?php if ($post['status'] == 'private'): ?>
                                     <i class="glyphicon glyphicon-lock"></i>
                                 <?php endif ?>
-                                <?= Html::a(Html::encode($post['title']), ['/home/post/view', 'id' => $post['id']]) ?>
+                                <?= Html::a(Html::encode($post['title']), ['/home/post/view', 'id' => $post['id']], ['data-pjax' => 0]) ?>
                             </h3>
                         </header>
                         <div class="post-footer">
-                            &nbsp;
                             <a href="<?= Url::toRoute(['/home/post/delete', 'id' => $post['id']]) ?>" data-clicklog="delete" onclick="return false;" title="<?= Yii::t('app', 'Are you sure to delete it?') ?>">
                                 <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
                             </a>
-                            &nbsp;
                             <span class="item-line"></span>
-                            <a href="<?= Url::toRoute(['/home/post/update', 'id' => $post['id']]) ?>">
+                            <a href="<?= Url::toRoute(['/home/post/update', 'id' => $post['id']]) ?>" data-pjax="0">
                                 <span class="glyphicon glyphicon-edit"></span> <?= Yii::t('app', 'Edit') ?>
                             </a>
-                            &nbsp;
                             <span class="item-line"></span>
                             <span class="glyphicon glyphicon-time"></span> <?= Yii::$app->formatter->asRelativeTime($post['created_at']) ?>
                         </div>

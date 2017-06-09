@@ -9,6 +9,7 @@ namespace yii\debug;
 
 use Yii;
 use yii\base\InvalidConfigException;
+use yii\helpers\FileHelper;
 use yii\log\Target;
 
 /**
@@ -44,9 +45,7 @@ class LogTarget extends Target
     public function export()
     {
         $path = $this->module->dataPath;
-        if (!is_dir($path)) {
-            mkdir($path);
-        }
+        FileHelper::createDirectory($path, $this->module->dirMode);
 
         $summary = $this->collectSummary();
         $dataFile = "$path/{$this->tag}.data";
@@ -56,6 +55,9 @@ class LogTarget extends Target
         }
         $data['summary'] = $summary;
         file_put_contents($dataFile, serialize($data));
+        if ($this->module->fileMode !== null) {
+            @chmod($dataFile, $this->module->fileMode);
+        }
 
         $indexFile = "$path/index.data";
         $this->updateIndexFile($indexFile, $summary);
@@ -95,6 +97,10 @@ class LogTarget extends Target
 
         @flock($fp, LOCK_UN);
         @fclose($fp);
+
+        if ($this->module->fileMode !== null) {
+            @chmod($indexFile, $this->module->fileMode);
+        }
     }
 
     /**
@@ -103,7 +109,7 @@ class LogTarget extends Target
      * And if requested, it will also export the filtering result to specific medium (e.g. email).
      * @param array $messages log messages to be processed. See [[\yii\log\Logger::messages]] for the structure
      * of each message.
-     * @param boolean $final whether this method is called at the end of the current application
+     * @param bool $final whether this method is called at the end of the current application
      */
     public function collect($messages, $final)
     {
@@ -134,6 +140,10 @@ class LogTarget extends Target
      */
     protected function collectSummary()
     {
+        if (Yii::$app === null) {
+            return '';
+        }
+
         $request = Yii::$app->getRequest();
         $response = Yii::$app->getResponse();
         $summary = [
@@ -142,7 +152,7 @@ class LogTarget extends Target
             'ajax' => (int) $request->getIsAjax(),
             'method' => $request->getMethod(),
             'ip' => $request->getUserIP(),
-            'time' => time(),
+            'time' => $_SERVER['REQUEST_TIME_FLOAT'],
             'statusCode' => $response->statusCode,
             'sqlCount' => $this->getSqlTotalCount(),
         ];
@@ -157,7 +167,7 @@ class LogTarget extends Target
     /**
      * Returns total sql count executed in current request. If database panel is not configured
      * returns 0.
-     * @return integer
+     * @return int
      */
     protected function getSqlTotalCount()
     {

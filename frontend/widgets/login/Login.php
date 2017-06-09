@@ -31,7 +31,8 @@ class Login extends \yii\base\Widget
         if($this->visible) {
             $user = new LoginForm;
             if ($user->load(\Yii::$app->request->post()) && $user->login()) {
-                return \Yii::$app->getResponse()->refresh();
+                \Yii::$app->getResponse()->refresh()->send();
+                exit;
             } else {
                 return $this->render('loginWidget', [
                     'user' => $user,

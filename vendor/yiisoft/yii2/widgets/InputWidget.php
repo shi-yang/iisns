@@ -20,8 +20,8 @@ use yii\helpers\Html;
  * or a name and a value. If the former, the name and the value will
  * be generated automatically.
  *
- * Classes extending from this widget can be used in an [[yii\widgets\ActiveForm|ActiveForm]]
- * using the [[yii\widgets\ActiveField::widget()|widget()]] method, for example like this:
+ * Classes extending from this widget can be used in an [[\yii\widgets\ActiveForm|ActiveForm]]
+ * using the [[\yii\widgets\ActiveField::widget()|widget()]] method, for example like this:
  *
  * ```php
  * <?= $form->field($model, 'from_date')->widget('WidgetClassName', [
@@ -29,11 +29,19 @@ use yii\helpers\Html;
  * ]) ?>
  * ```
  *
+ * For more details and usage information on InputWidget, see the [guide article on forms](guide:input-forms).
+ *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
 class InputWidget extends Widget
 {
+    /**
+     * @var \yii\widgets\ActiveField active input field, which triggers this widget rendering.
+     * This field will be automatically filled up in case widget instance is created via [[\yii\widgets\ActiveField::widget()]].
+     * @since 2.0.11
+     */
+    public $field;
     /**
      * @var Model the data model that this widget is associated with.
      */
@@ -73,7 +81,7 @@ class InputWidget extends Widget
     }
 
     /**
-     * @return boolean whether this widget is associated with a data model.
+     * @return bool whether this widget is associated with a data model.
      */
     protected function hasModel()
     {

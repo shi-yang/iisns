@@ -13,11 +13,7 @@ use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
-use yii\data\ActiveDataProvider;
-use yii\imagine\Image;
-use yii\db\Query;
 use app\modules\forum\models\Forum;
-use app\modules\forum\models\ForumSearch;
 use app\modules\forum\models\Board;
 use app\modules\forum\models\Thread;
 use app\modules\forum\models\Broadcast;
@@ -36,7 +32,7 @@ class ForumController extends BaseController
     {
         return [
             'upload' => [
-                'class' => 'shiyang\umeditor\UMeditorAction',
+                'class' => 'common\widgets\umeditor\UMeditorAction',
             ]
         ];
     }
@@ -63,18 +59,6 @@ class ForumController extends BaseController
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
-                ],
-            ],
-            'cache' => [
-                'class' => 'yii\filters\PageCache',
-                'only' => ['index'],
-                'duration' => 60,
-                'variations' => [
-                    \Yii::$app->language,
-                ],
-                'dependency' => [
-                    'class' => 'yii\caching\DbDependency',
-                    'sql' => 'SELECT COUNT(*) FROM {{%forum}}',
                 ],
             ],
         ];
@@ -132,7 +116,7 @@ class ForumController extends BaseController
         $model = new Forum();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Create successfully.'));
+            $this->success(Yii::t('app', 'Create successfully.'));
             return $this->redirect(['view', 'id' => $model->forum_url]);
         } else {
             return $this->render('create', [
@@ -163,26 +147,15 @@ class ForumController extends BaseController
         if ($newBoard->load(Yii::$app->request->post())) {
             $newBoard->forum_id = $model->id;
             if ($newBoard->save()) {
-                Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Create successfully.'));
+                $this->success(Yii::t('app', 'Saved successfully.'));
             } else {
-                Yii::$app->getSession()->setFlash('error', 'Server error.');
+                $this->error(Yii::t('app', 'Server error.'));
             }
         }
         
         //上传图标
-        Yii::setAlias('@upload', '@webroot/uploads/forum/icon/');
         if (Yii::$app->request->isPost && !empty($_FILES)) {
-            $extension =  strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
-            $fileName = $model->id . '_' . time() . rand(1 , 10000) . '.' . $extension;
-
-            Image::thumbnail($_FILES['file']['tmp_name'], 160, 160)->save(Yii::getAlias('@upload') . $fileName, ['quality' => 80]);
-            
-            //删除旧图标
-            if (file_exists(Yii::getAlias('@upload').$model->forum_icon) && (strpos($model->forum_icon, 'default') === false))
-                @unlink(Yii::getAlias('@upload').$model->forum_icon); 
-
-            $model->forum_icon = $fileName;
-            $model->update();
+            $model->saveIcon();
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -190,7 +163,7 @@ class ForumController extends BaseController
             $cachePrefix = Yii::$app->getModule('forum')->cachePrefix;
             $cacheKey = $cachePrefix . $model->forum_url;
             $cache->set($cacheKey, $model);
-            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Saved successfully'));
+            $this->success(Yii::t('app', 'Saved successfully.'));
         }
         
         return $this->render('update', [

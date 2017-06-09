@@ -19,7 +19,7 @@ $listView->sorter = ['options' => ['class' => 'mail-sorter']];
 
 <div class="row">
     <div class="col-lg-2">
-        <?= Html::button('Form filtering', ['class' => 'btn btn-default', 'onclick' => '$("#email-form").toggle();']) ?>
+        <?= Html::button('Form filtering', ['class' => 'btn btn-default', 'onclick' => 'jQuery("#email-form").toggle();']) ?>
     </div>
     <div class="row col-lg-10">
         <?= $listView->renderSorter() ?>
@@ -29,7 +29,7 @@ $listView->sorter = ['options' => ['class' => 'mail-sorter']];
 <div id="email-form" style="display: none;">
     <?php $form = ActiveForm::begin([
             'method' => 'get',
-            'action' => ['/debug/default/view', 'tag' => Yii::$app->request->get('tag'), 'panel' => 'mail'],
+            'action' => ['default/view', 'tag' => Yii::$app->request->get('tag'), 'panel' => 'mail'],
     ]); ?>
     <div class="row">
         <?= $form->field($searchModel, 'from', ['options' => ['class' => 'col-lg-6']])->textInput() ?>

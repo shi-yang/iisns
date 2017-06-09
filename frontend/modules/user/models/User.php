@@ -9,6 +9,7 @@ namespace app\modules\user\models;
 
 use Yii;
 use yii\db\Query;
+use yii\imagine\Image;
 use app\modules\home\models\Post;
 use app\modules\home\models\Feed;
 
@@ -226,5 +227,25 @@ class User extends \common\models\User
             ->createCommand("SELECT 1 FROM {{%user_follow}} WHERE user_id=:user_id AND people_id=:id LIMIT 1")
             ->bindValues([':user_id' => Yii::$app->user->id, ':id' => intval($id)])->queryScalar();
         return ($done) ? true : false ;
+    }
+
+    /**
+     * 保存用户头像
+     * @return bool
+     */
+    public function saveAvatar()
+    {
+        Yii::setAlias('@upload', '@webroot/uploads/user/avatar/');
+        $extension =  strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
+        $fileName = $this->id . '_' . time() . rand(1 , 10000) . '.' . $extension;
+
+        Image::thumbnail($_FILES['file']['tmp_name'], 160, 160)->save(Yii::getAlias('@upload') . $fileName, ['quality' => 80]);
+
+        //删除旧头像
+        if (file_exists(Yii::getAlias('@upload').$this->avatar) && (strpos($this->avatar, 'default') === false))
+            @unlink(Yii::getAlias('@upload').$this->avatar);
+
+        $this->avatar = $fileName;
+        return $this->update();
     }
 }

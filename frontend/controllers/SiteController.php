@@ -16,7 +16,6 @@ use frontend\models\ContactForm;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 use common\components\BaseController;
-use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
 /**
@@ -146,11 +145,10 @@ class SiteController extends BaseController
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
-                Yii::$app->getSession()->setFlash('success', 'Check your email for further instructions.');
-
+                $this->success('Check your email for further instructions.');
                 return $this->goHome();
             } else {
-                Yii::$app->getSession()->setFlash('error', 'Sorry, we are unable to reset password for email provided.');
+                $this->error('Sorry, we are unable to reset password for email provided.');
             }
         }
 
@@ -168,7 +166,7 @@ class SiteController extends BaseController
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
-            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'New password was saved.'));
+            $this->success(Yii::t('app', 'New password was saved.'));
             return $this->redirect(['/site/login']);
         }
 
@@ -188,7 +186,7 @@ class SiteController extends BaseController
             Yii::setAlias('avatar', '@web/uploads/user/avatar/');
             $this->layout = '@app/modules/user/views/layouts/user.php';
         }
-        
+
         return $this->render('develop');
     }
 }

@@ -3,16 +3,18 @@
 use yii\helpers\Html;
 use yii\helpers\HtmlPurifier;
 use app\widgets\comment\Comment;
+use app\assets\MathJaxAsset;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\home\models\Post */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Blog'), 'url' => ['/home/post/index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Blog'), 'url' => ['/home/post/index'], ['data-pjax' => 0]];
 $this->params['breadcrumbs'][] = $this->title;
+MathJaxAsset::register($this);
 ?>
 <div class="panel">
-    <articel class="post-view">
+    <article class="post-view">
         <header>
             <h1 class="post-title">
                 <?php if ($model->status == 'private'): ?>
@@ -38,10 +40,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 </p>
             <?php endif ?>
         </div>
-    </articel>
+    </article>
 </div>
 
 <?= Comment::widget([
-    'tableId' => $model->id,
-    'tableName' => $model->tableName(),
+    'model' => $model,
 ]) ?>

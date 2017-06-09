@@ -39,7 +39,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                 </div>
                                 <div class="widget-footer">
                                     <div class="footer-detail">
-                                        &nbsp;
+                                        <a href="<?= Url::toRoute(['/home/feed/update', 'id' => $feed['id']]) ?>">
+                                            <span class="glyphicon glyphicon-edit"></span> <?= Yii::t('app', 'Edit') ?>
+                                        </a>
                                         <a href="<?= Url::toRoute(['/home/feed/delete', 'id' => $feed['id']]) ?>" data-clicklog="delete" onclick="return false;" title="<?= Yii::t('app', 'Are you sure to delete it?') ?>">
                                             <span class="glyphicon glyphicon-trash"></span> <?= Yii::t('app', 'Delete') ?>
                                         </a>

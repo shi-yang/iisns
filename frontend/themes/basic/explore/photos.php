@@ -78,9 +78,9 @@ $this->registerCss('
         'options' => [
           'id' => 'photos'
         ],
-        'pagination' => $pages
+        'pagination' => $photos['pages']
     ]); ?>
-    <?php foreach ($photos as $model): ?>
+    <?php foreach ($photos['result'] as $model): ?>
         <?php
             $albumUrl = Url::toRoute(['/explore/view-album', 'id' => $model['id']]);
             $src = (empty($model['path'])) ? Yii::getAlias('@web/images/pic-none.png') : $model['path'] ;

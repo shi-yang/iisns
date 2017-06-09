@@ -147,7 +147,7 @@ return [
     'Just now' => '刚刚',
     'More' => '更多',
     'Create successfully.' => '创建成功',
-    'Saved successfully' => '保存成功',
+    'Saved successfully.' => '保存成功',
     'Deleted successfully.' => '已删除',
     'Error. Delete failed.' => '删除失败',
     'Recommendation' => '推荐',

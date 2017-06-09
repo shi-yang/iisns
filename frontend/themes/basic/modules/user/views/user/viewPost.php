@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\HtmlPurifier;
+use app\assets\MathJaxAsset;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\home\models\Post */
@@ -10,6 +11,7 @@ $this->title = $model->title . '_' . $model->user['username'];
 $this->params['user'] = $model->user;
 $this->params['profile'] = $model->userProfile;
 $this->params['userData'] = $model->userData;
+MathJaxAsset::register($this);
 ?>
 <div class="post-view">
     <h1 class="post-title"><?= Html::encode($model->title) ?></h1>
@@ -29,6 +31,5 @@ $this->params['userData'] = $model->userData;
     <?php endif;?>
 </div>
 <?= app\widgets\comment\Comment::widget([
-    'tableId' => $model->id,
-    'tableName' => $model->tableName(),
+    'model' => $model,
 ]) ?>

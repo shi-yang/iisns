@@ -388,11 +388,6 @@ aside .sidebar-inner .user-block img {
   border-radius: 50em;
   -moz-border-radius: 50em;
   -webkit-border-radius: 50em;
-  animation: fadeInRotate 0.9s ease;
-  -webkit-animation: fadeInRotate 0.9s ease;
-  -moz-animation: fadeInRotate 0.9s ease;
-  -ms-animation: fadeInRotate 0.9s ease;
-  -o-animation: fadeInRotate 0.9s ease;
 }
 aside .sidebar-inner .user-block .detail {
   float: left;

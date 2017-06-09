@@ -2,7 +2,7 @@
 
 use yii\widgets\Breadcrumbs;
 use yii\helpers\Url;
-use frontend\widgets\Alert;
+use common\widgets\Alert;
 
 ?>
 

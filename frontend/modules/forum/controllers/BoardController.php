@@ -41,7 +41,7 @@ class BoardController extends BaseController
     {
         return [
             'upload' => [
-                'class' => 'shiyang\umeditor\UMeditorAction',
+                'class' => 'common\widgets\umeditor\UMeditorAction',
             ]
         ];
     }
@@ -73,7 +73,7 @@ class BoardController extends BaseController
                     'updated_at' => time(),
                     'updated_by' => Yii::$app->user->id
                 ], 'id=:id', [':id' => $model->id])->execute();
-                Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Create successfully.'));
+                $this->success(Yii::t('app', 'Create successfully.'));
                 return $this->redirect(['/forum/thread/view', 'id' => $newThread->id]);
             }
         }
@@ -97,7 +97,7 @@ class BoardController extends BaseController
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Saved successfully'));
+            $this->success(Yii::t('app', 'Saved successfully.'));
         }
 
         return $this->render('update', [
@@ -119,8 +119,7 @@ class BoardController extends BaseController
             $forum_url = $model->forum['forum_url'];
             Thread::deleteAll(['board_id' => $model->id]);
             $model->delete();
-            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Deleted successfully.'));
-
+            $this->success(Yii::t('app', 'Deleted successfully.'));
             return $this->redirect(['/forum/forum/update', 'id' => $forum_url, 'action' => 'board']);
         } else {
             throw new ForbiddenHttpException('You are not allowed to perform this action.');

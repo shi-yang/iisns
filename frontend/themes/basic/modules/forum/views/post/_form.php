@@ -23,7 +23,7 @@ use yii\widgets\ActiveForm;
         <div class="post-form col-sm-10">
             <?php if (!Yii::$app->user->isGuest) :?>
                 <?php $form = ActiveForm::begin(); ?>
-                <?= $form->field($model, 'content')->widget('shiyang\umeditor\UMeditor', [
+                <?= $form->field($model, 'content')->widget('common\widgets\umeditor\UMeditor', [
                     'clientOptions' => [
                         'initialFrameHeight' => 100,
                         'toolbar' => [

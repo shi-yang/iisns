@@ -12,10 +12,8 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => [
         'log',
-        'assetsCompress'
     ],
     'controllerNamespace' => 'frontend\controllers',
-    'defaultRoute' => 'user/dashboard',
     'modules' => [
         'forum' => [
             'class' => 'app\modules\forum\ForumModule',
@@ -41,19 +39,39 @@ return [
         ],
     ],
     'components' => [
-        'db' => $db,
-        'assetsCompress' => [
-            'class' => '\iisns\assets\AssetsCompressComponent',
-            'enabled' => true,
-            'jsCompress' => true,
-            'cssFileCompile' => true,
-            'jsFileCompile' => false,
-            'jsFileCompress' => false,
+        'view' => [
+            'class' => '\rmrevin\yii\minify\View',
+            'enableMinify' => !YII_DEBUG,
+            'concatCss' => true, // concatenate css
+            'minifyCss' => true, // minificate css
+            'concatJs' => true, // concatenate js
+            'minifyJs' => true, // minificate js
+            'minifyOutput' => true, // minificate result html page
+            'web_path' => '@web', // path alias to web base
+            'base_path' => '@webroot', // path alias to web base
+            'minify_path' => '@webroot/assets', // path alias to save minify result
+            'js_position' => [ \yii\web\View::POS_END ], // positions of js files to be minified
+            'force_charset' => 'UTF-8', // charset forcibly assign, otherwise will use all of the files found charset
+            'expand_imports' => true, // whether to change @import on content
+            'compress_options' => ['extra' => true], // options for compress
+            'excludeBundles' => [
+                \common\widgets\umeditor\UMeditorAsset::class,
+                \common\widgets\editormd\EditormdAsset::class,
+                \common\widgets\laydate\LayDateAsset::class
+            ],
+
+            'theme' => [
+                'pathMap' => [
+                    '@app/views' => '@app/themes/basic',
+                    '@app/modules' => '@app/themes/basic/modules',
+                ],
+            ],
         ],
+        'db' => $db,
         'urlManager' => [
             'enablePrettyUrl' => true,
             'rules' => [
-                '/' => '/user/dashboard/index',
+                '/' => '/explore/index',
                 '<id:[\x{4e00}-\x{9fa5}a-zA-Z0-9_]*>' => 'user/view',
                 '@<id:[\x{4e00}-\x{9fa5}a-zA-Z0-9_]*>' => 'forum/forum/view',
                 'thread/<id:\d+>' => 'forum/thread/view',
@@ -67,14 +85,7 @@ return [
         'userData' => [
             'class' => 'app\modules\user\models\UserData',
         ],
-        'view' => [
-            'theme' => [
-                'pathMap' => [
-                    '@app/views' => '@app/themes/basic',
-                    '@app/modules' => '@app/themes/basic/modules',
-                ],
-            ],
-        ],
+
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [

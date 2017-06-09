@@ -53,7 +53,7 @@ class MessageController extends BaseController
     {
         return [
             'upload' => [
-                'class' => 'shiyang\umeditor\UMeditorAction',
+                'class' => 'common\widgets\umeditor\UMeditorAction',
             ]
         ];
     }
@@ -141,7 +141,7 @@ class MessageController extends BaseController
         $model = new Message();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Sent successfully'));
+            $this->success(Yii::t('app', 'Sent successfully.'));
             return $this->refresh();
         } else {
             return $this->render('create', [
