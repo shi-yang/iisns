@@ -56,7 +56,7 @@ foreach ($dirarray as $key => $dir) {
 ?>
 
 <?php if (!file_exists('../common/config/db.php')): ?>
-    <?php if (!$step): ?>
+    <?php if (!isset($step)): ?>
         <div class="progress">
             <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 33.3%;">
                 First
