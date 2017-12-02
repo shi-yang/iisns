@@ -8,7 +8,7 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Setting');
       <?= Nav::widget([
           'encodeLabels' => false,
           'items' => [
-              ['label' => '<span class="glyphicon glyphicon-home"></span> ' . Yii::t('app', 'Profile'), 'url' => ['setting/profile']],
+              ['label' => '<span class="glyphicon glyphicon-home"></span> ' . Yii::t('app', 'Profile'), 'url' => ['setting/profile'], 'linkOptions' => ['data-pjax' => 0]],
               ['label' => '<span class="glyphicon glyphicon-user"></span> ' . Yii::t('app', 'Account'), 'url' => ['setting/account']],
               ['label' => '<span class="glyphicon glyphicon-cog"></span> ' . Yii::t('app', 'Security'), 'url' => ['setting/security']],
           ],
@@ -21,3 +21,4 @@ $this->title=Yii::$app->user->identity->username.' - '.Yii::t('app', 'Setting');
         <?php echo $content; ?>
       </div>
 <?php $this->endContent(); ?>
+

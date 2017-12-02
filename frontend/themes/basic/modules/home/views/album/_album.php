@@ -9,7 +9,7 @@ $name = Html::encode($model['name']);
 $status = ($model['status'] != Album::TYPE_PUBLIC) ? '<i class="glyphicon glyphicon-lock"></i>' : '';
 ?>
 <div class="album-img">
-    <a href="<?= $albumUrl ?>">
+    <a href="<?= $albumUrl ?>" data-pjax="0">
         <img src="<?= $src ?>" class="album-cover" alt="album-cover">
     </a>
 </div>
@@ -17,7 +17,7 @@ $status = ($model['status'] != Album::TYPE_PUBLIC) ? '<i class="glyphicon glyphi
 	<div class="album-desc">
 		<div class="album-desc-side"><?= $status ?></div>
 		<div class="album-tit">
-			<?= Html::a($name, $albumUrl, ['class' => 'album-name']) ?>
+			<?= Html::a($name, $albumUrl, ['class' => 'album-name', 'data-pjax' => 0]) ?>
 		</div>
 	</div>
 </div>

@@ -119,7 +119,7 @@ AppAsset::register($this);
                 <div class="main-menu">
                     <ul>
                         <li>
-                            <a href="<?= Url::toRoute(['/user/dashboard']) ?>">
+                            <a href="<?= Url::toRoute(['/user/dashboard']) ?>" data-pjax="0">
                             <span class="menu-icon">
                                 <i class="glyphicon glyphicon-home"></i>
                             </span>
