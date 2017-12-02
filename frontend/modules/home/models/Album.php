@@ -141,31 +141,17 @@ class Album extends \yii\db\ActiveRecord
      */
     public static function getCoverPhoto($id = null, $cover_id = null)
     {
-        if ($id == null) {
-            if ($this->cover_id == self::COVER_NONE) {
-                if ($this->photoCount == 0) {
-                    return '/images/pic-none.png';
-                } else {
-                    $path = $this->photos[0]['path'];
-                }
-            } else {
-                $path = Yii::$app->db
-                ->createCommand('SELECT path FROM {{%home_photo}} WHERE id='.$this->cover_id)
+        if ($cover_id == self::COVER_NONE) {
+            $path = Yii::$app->db
+                ->createCommand('SELECT path FROM {{%home_photo}} WHERE album_id='.$id)
                 ->queryScalar();
+            if (empty($path)) {
+                return Yii::getAlias('@web') . '/images/pic-none.png';
             }
         } else {
-            if ($cover_id == self::COVER_NONE) {
-                $path = Yii::$app->db
-                    ->createCommand('SELECT path FROM {{%home_photo}} WHERE album_id='.$id)
-                    ->queryScalar();
-                if (empty($path)) {
-                    return Yii::getAlias('@web') . '/images/pic-none.png';
-                }
-            } else {
-                $path = Yii::$app->db
-                    ->createCommand('SELECT path FROM {{%home_photo}} WHERE id='.$cover_id)
-                    ->queryScalar();
-            }
+            $path = Yii::$app->db
+                ->createCommand('SELECT path FROM {{%home_photo}} WHERE id='.$cover_id)
+                ->queryScalar();
         }
         return $path;
     }
