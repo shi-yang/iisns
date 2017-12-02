@@ -1,8 +1,10 @@
 <?php
 /**
  * @link http://www.iisns.com/
- * @copyright Copyright (c) iiSNS
+ * @copyright Copyright (c) 2015 iiSNS
+ * @license http://www.iisns.com/license/
  */
+
 namespace common\widgets\laydate;
 
 use yii\helpers\Html;
@@ -55,7 +57,7 @@ class LayDate extends InputWidget
         LayDateAsset::register($view);
         $id = $this->options['id'];
         $jsOptions = Json::encode(ArrayHelper::merge(['elem' => "#{$id}"], $this->clientOptions));
-        $script = "laydate({$jsOptions});";
+        $script = "laydate.render({$jsOptions});";
         $view->registerJs($script, $view::POS_READY);
     }
 }
