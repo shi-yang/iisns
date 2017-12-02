@@ -59,9 +59,9 @@ iiSNS 的发布是遵循 [The MIT License](https://github.com/shi-yang/iisns/blo
 预览
 -------
 
-![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns_v2.1.2/Screen-shot 2015-06-20 11.50.17.png)
-![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns_v2.1.2/Screen-shot 2015-06-20 11.17.52.png)
-![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns_v2.1.2/Screen-shot 2015-06-20 11.26.56.png)
-![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns_v2.1.2/Screen-shot 2015-06-20 11.30.19.png)
-![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns_v2.1.2/Screen-shot 2015-06-20 11.36.42.png)
-![iiSNS](https://github.com/shi-yang/preview/blob/master/iisns_v2.1.2/Screen-shot 2015-06-20 11.41.22.png)
+![iiSNS](docs/images/v0.7.0/1.png)
+![iiSNS](docs/images/v0.7.0/2.png)
+![iiSNS](docs/images/v0.7.0/3.png)
+![iiSNS](docs/images/v0.7.0/4.png)
+![iiSNS](docs/images/v0.7.0/5.png)
+![iiSNS](docs/images/v0.7.0/6.png)
