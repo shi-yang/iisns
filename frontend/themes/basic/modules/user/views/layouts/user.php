@@ -76,7 +76,7 @@ AppAsset::register($this);
                             </a>
                         </li>
                         <li><a tabindex="-1" href="<?= Url::toRoute(['/user/view', 'id' => $user->username]) ?>" class="main-link" data-pjax="0"><i class="glyphicon glyphicon-edit"></i> <?= Yii::t('app', 'Profile') ?></a></li>
-                        <li><a tabindex="-1" href="<?= Url::toRoute(['/user/setting']) ?>" class="theme-setting"><i class="glyphicon glyphicon-cog"></i> <?= Yii::t('app', 'Setting') ?></a></li>
+                        <li><a tabindex="-1" href="<?= Url::toRoute(['/user/setting']) ?>" class="theme-setting" data-pjax="0"><i class="glyphicon glyphicon-cog"></i> <?= Yii::t('app', 'Setting') ?></a></li>
                         <li class="divider"></li>
                         <li><a tabindex="-1" class="main-link" data-toggle="modal" data-target="#logoutConfirm"><i class="glyphicon glyphicon-log-out"></i> <?= Yii::t('app', 'Log out') ?></a></li>
                     </ul>
