@@ -6,7 +6,7 @@ modules:
       url: http://localhost:8000
       browser: firefox
       window_size: 1200x768
-      restart: true
+      restart: true # Use a new browser window for each test (to isolate test cases from each other)
 env:
   fast:
     modules:
@@ -24,3 +24,24 @@ env:
       config:
         WebDriver:
           browser: chrome
+  headless:
+    modules:
+      config:
+        WebDriver:
+          browser: chrome
+          window_size: false
+          capabilities:
+            chromeOptions:
+              args: ["--headless", "--disable-gpu", "--disable-extensions"]
+              binary: "/usr/bin/google-chrome"
+  chromedriver:
+    modules:
+      config:
+        WebDriver:
+          browser: chrome
+          port: 9515 # ChromeDriver port
+          window_size: false
+          capabilities:
+            chromeOptions:
+              args: ["--headless", "--disable-gpu"]
+              binary: "/usr/bin/google-chrome"

@@ -24,12 +24,24 @@
     }
   ],
   "require": {
-    "yiisoft/yii2": "2.0.*",
-    "mrclay/minify": "~2.2"
+    "yiisoft/yii2": "^2.0",
+    "mrclay/minify": "^3.0"
   },
   "autoload": {
     "psr-4": {
       "rmrevin\\yii\\minify\\": ""
+    }
+  },
+  "config": {
+    "fxp-asset": {
+      "installer-paths": {
+        "npm-asset-library": "vendor/npm",
+        "bower-asset-library": "vendor/bower"
+      },
+      "vcs-driver-options": {
+        "github-no-api": true
+      },
+      "pattern-skip-version": "(-build|-patch)"
     }
   }
 }

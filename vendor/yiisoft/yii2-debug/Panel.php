@@ -50,6 +50,12 @@ class Panel extends Component
      */
     public $actions = [];
 
+    /**
+     * @var FlattenException|null Error while saving the panel
+     * @since 2.0.10
+     */
+    protected $error;
+
 
     /**
      * @return string name of the panel
@@ -129,10 +135,47 @@ class Panel extends Component
         $traceLine = $this->module->traceLine;
         if ($traceLine === false) {
             return $options['text'];
-        } else {
-            $options['file'] = str_replace('\\', '/', $options['file']);
-            $rawLink = $traceLine instanceof \Closure ? call_user_func($traceLine, $options, $this) : $traceLine;
-            return strtr($rawLink, ['{file}' => $options['file'], '{line}' => $options['line'], '{text}' => $options['text']]);
         }
+
+        $options['file'] = str_replace('\\', '/', $options['file']);
+        $rawLink = $traceLine instanceof \Closure ? $traceLine($options, $this) : $traceLine;
+        return strtr($rawLink, ['{file}' => $options['file'], '{line}' => $options['line'], '{text}' => $options['text']]);
+    }
+
+    /**
+     * @param FlattenException $error
+     * @since 2.0.10
+     */
+    public function setError(FlattenException $error)
+    {
+        $this->error = $error;
+    }
+
+    /**
+     * @return FlattenException|null
+     * @since 2.0.10
+     */
+    public function getError()
+    {
+        return $this->error;
+    }
+
+    /**
+     * @return bool
+     * @since 2.0.10
+     */
+    public function hasError()
+    {
+        return $this->error !== null;
+    }
+
+    /**
+     * Is the panel enabled?
+     * @return bool
+     * @since 2.0.10
+     */
+    public function isEnabled()
+    {
+        return true;
     }
 }

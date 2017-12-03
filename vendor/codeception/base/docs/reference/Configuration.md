@@ -82,7 +82,7 @@ settings:
     log_incomplete_skipped: false
 ```
 
-* `modules`: allows to create shared module configuration for all included suites. By default sample configuration for Db module is included.
+* `modules`: allows to create shared module configuration for all included suites.
 
 ```yaml
 modules:
@@ -104,7 +104,7 @@ modules:
 
 Each generated suite have its own configuration inside directory set by `paths: tests: ` configuration option in `codeception.yml`. Each suite configuration is named like `suitename.suite.yml`. It allows to enable and configure modules, and more.
 
-* `class_name`: name of the actor class for current suite. 
+* `actor`: name of the actor class for current suite. 
 * `modules`: list of enabled modules with their configuration.
 
 ```yaml
@@ -136,6 +136,7 @@ modules:
 
 
 * `namespace`: default namespace of actor, support classes and tests.
+* `suite_namespace`: default namespace for new tests of this suite (ignores `namespace` option)
 * `env`: override any configuration per [environment](http://codeception.com/docs/07-AdvancedUsage#Environments).
 * `groups`: [groups](http://codeception.com/docs/07-AdvancedUsage#Groups) with the list of tests of for corresponding group.
 * `coverage`: pre suite [CodeCoverage](http://codeception.com/docs/11-Codecoverage#Configuration) settings.

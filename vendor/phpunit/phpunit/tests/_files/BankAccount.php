@@ -14,7 +14,6 @@ class BankAccountException extends RuntimeException
 
 /**
  * A bank account.
- *
  */
 class BankAccount
 {

@@ -72,9 +72,17 @@ class ToggleButtonGroup extends InputWidget
         }
         switch ($this->type) {
             case 'checkbox':
-                return Html::activeCheckboxList($this->model, $this->attribute, $this->items, $this->options);
+                if ($this->hasModel()) {
+                    return Html::activeCheckboxList($this->model, $this->attribute, $this->items, $this->options);
+                } else {
+                    return Html::checkboxList($this->name, $this->value, $this->items, $this->options);
+                }
             case 'radio':
-                return Html::activeRadioList($this->model, $this->attribute, $this->items, $this->options);
+                if ($this->hasModel()) {
+                    return Html::activeRadioList($this->model, $this->attribute, $this->items, $this->options); 
+                } else {
+                    return Html::radioList($this->name, $this->value, $this->items, $this->options); 
+                }
             default:
                 throw new InvalidConfigException("Unsupported type '{$this->type}'");
         }
@@ -82,10 +90,10 @@ class ToggleButtonGroup extends InputWidget
 
     /**
      * Default callback for checkbox/radio list item rendering.
-     * @param integer $index item index.
+     * @param int $index item index.
      * @param string $label item label.
      * @param string $name input name.
-     * @param boolean $checked whether value is checked or not.
+     * @param bool $checked whether value is checked or not.
      * @param string $value input value.
      * @return string generated HTML.
      * @see Html::checkbox()

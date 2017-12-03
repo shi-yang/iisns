@@ -8,7 +8,11 @@
  * file that was distributed with this source code.
  */
 
-class ExceptionMessageTest extends PHPUnit_Framework_TestCase
+namespace PHPUnit\Framework\Constraint;
+
+use PHPUnit\Framework\TestCase;
+
+class ExceptionMessageTest extends TestCase
 {
     /**
      * @expectedException \Exception
@@ -16,7 +20,7 @@ class ExceptionMessageTest extends PHPUnit_Framework_TestCase
      */
     public function testLiteralMessage()
     {
-        throw new Exception('A literal exception message');
+        throw new \Exception('A literal exception message');
     }
 
     /**
@@ -25,7 +29,7 @@ class ExceptionMessageTest extends PHPUnit_Framework_TestCase
      */
     public function testPartialMessageBegin()
     {
-        throw new Exception('A partial exception message');
+        throw new \Exception('A partial exception message');
     }
 
     /**
@@ -34,7 +38,7 @@ class ExceptionMessageTest extends PHPUnit_Framework_TestCase
      */
     public function testPartialMessageMiddle()
     {
-        throw new Exception('A partial exception message');
+        throw new \Exception('A partial exception message');
     }
 
     /**
@@ -43,6 +47,6 @@ class ExceptionMessageTest extends PHPUnit_Framework_TestCase
      */
     public function testPartialMessageEnd()
     {
-        throw new Exception('A partial exception message');
+        throw new \Exception('A partial exception message');
     }
 }

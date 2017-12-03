@@ -128,6 +128,6 @@ class Debug extends Base
      */
     public function isCodeCritical($code)
     {
-        return in_array($code, $this->criticalCodes);
+        return in_array($code, $this->criticalCodes, false);
     }
 }

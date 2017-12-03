@@ -8,6 +8,8 @@
  * file that was distributed with this source code.
  */
 
-class PHPUnit_Framework_CodeCoverageException extends PHPUnit_Framework_Exception
+namespace PHPUnit\Framework;
+
+class CodeCoverageException extends Exception
 {
 }

@@ -23,7 +23,7 @@ Modules are attached to the Actor classes in the suite configuration.
 For example, in `tests/functional.suite.yml` we should see:
 
 ```yaml
-class_name: FunctionalTester
+actor: FunctionalTester
 modules:
     enabled:
         - PhpBrowser:
@@ -114,7 +114,7 @@ The REST module has parts for `Xml` and `Json` in the same way. If you are testi
 you can enable just the JSON part of this module:
 
 ```yaml
-class_name: ApiTester
+actor: ApiTester
 modules:
     enabled:
         - REST:
@@ -264,46 +264,6 @@ In this helper you can replace the parent's methods with your own implementation
 You can also replace the `_before` and `_after` hooks, which might be an option
 when you need to customize starting and stopping of a testing session.
 
-If some of the methods of the parent class should not be used in a child module, you can disable them.
-Codeception has several options for this:
-
-```php
-<?php
-namespace Helper;
-
-class MyExtendedSelenium extends \Codeception\Module\WebDriver
-{
-    // disable all inherited actions
-    public static $includeInheritedActions = false;
-
-    // include only "see" and "click" actions
-    public static $onlyActions = ['see','click'];
-
-    // exclude "seeElement" action
-    public static $excludeActions = ['seeElement'];
-}
-```
-
-Setting `$includeInheritedActions` to `false` adds the ability to create aliases for parent methods.
-It also allows you to resolve conflicts between modules. Let's say we want to use the `Db` module with our `SecondDbHelper`
-that actually inherits from `Db`. How can we use the `seeInDatabase` methods from both modules? Let's find out:
-
-```php
-<?php
-namespace Helper;
-
-class SecondDb extends \Codeception\Module\Db
-{
-    public static $includeInheritedActions = false;
-
-    public function seeInSecondDb($table, $data)
-    {
-        $this->seeInDatabase($table, $data);
-    }
-}
-```
-
-Setting `$includeInheritedActions` to false won't include the methods from parent classes into the generated Actor.
 
 ### Hooks
 
@@ -318,39 +278,43 @@ All hooks are defined in [Codeception\Module](http://codeception.com/docs/refere
 <?php
 
     // HOOK: used after configuration is loaded
-    public function _initialize() {
-    }
-
-    // HOOK: on every Actor class initialization
-    public function _cleanup() {
+    public function _initialize() 
+    {
     }
 
     // HOOK: before each suite
-    public function _beforeSuite($settings = array()) {
+    public function _beforeSuite($settings = array()) 
+    {
     }
 
     // HOOK: after suite
-    public function _afterSuite() {
+    public function _afterSuite() 
+    {
     }
 
     // HOOK: before each step
-    public function _beforeStep(\Codeception\Step $step) {
+    public function _beforeStep(\Codeception\Step $step) 
+    {
     }
 
     // HOOK: after each step
-    public function _afterStep(\Codeception\Step $step) {
+    public function _afterStep(\Codeception\Step $step) 
+    {
     }
 
     // HOOK: before test
-    public function _before(\Codeception\TestInterface $test) {
+    public function _before(\Codeception\TestInterface $test) 
+    {
     }
 
     // HOOK: after test
-    public function _after(\Codeception\TestInterface $test) {
+    public function _after(\Codeception\TestInterface $test) 
+    {
     }
 
     // HOOK: on fail
-    public function _failed(\Codeception\TestInterface $test, $fail) {
+    public function _failed(\Codeception\TestInterface $test, $fail) 
+    {
     }
 ```
 
@@ -498,13 +462,58 @@ module:
 If you want to reconfigure a module at runtime, you can use the `_reconfigure` method of the module.
 You may call it from a helper class and pass in all the fields you want to change.
 
+In this case configuration will be changed instantly. In next example we change root URL for PhpBrowser to point to the admin area,
+ so next `amOnPage('/')` will open `/admin/` page.
+
 ```php
 <?php
-$this->getModule('WebDriver')->_reconfigure(array('browser' => 'chrome'));
+$this->getModule('PhpBrowser')->_reconfigure(array('url' => 'http://localhost/admin'));
 ```
 
-At the end of a test, all your changes will be rolled back to the original configuration values.
+However, in WebDriver configuration changes can't be applied that easily. For instance, if you change the browser you need to close the current browser session and start a new one.
+For that WebDriver module provides `_restart` method which takes an array with config and restarts the browser. 
 
+```php
+<?php
+// start chrome
+$this->getModule('WebDriver')->_restart(['browser' => 'chrome']);
+// or just restart browser
+$this->getModule('WebDriver')->_restart();
+```
+
+At the end of a test all configuration changes will be rolled back to the original configuration values.
+
+### Runtime Configuration of a Test
+
+Sometimes it is needed to set custom configuration for a specific test only.
+For [Cest](http://codeception.com/docs/07-AdvancedUsage#Cest-Classes) and [Test\Unit](http://codeception.com/docs/05-UnitTests) 
+formats you can use `@prepare` annotation which can execute the code before other hooks are executed. This allows `@prepare`
+to change the module configuration in runtime. `@prepare` uses [dependency injection](http://codeception.com/docs/07-AdvancedUsage#Dependency-Injection)
+to automatically inject required modules into a method.
+
+To run a specific test only in Chrome browser, you can call `_reconfigure` from WebDriver module for a test itself using `@prepare`. 
+
+```php
+<?php
+/**
+ * @prepare useChrome
+ */
+public function chromeSpecificTest()
+{
+    // ...    
+}
+
+protected function useChrome(\Codeception\Module\WebDriver $webdriver)
+{
+    // WebDriver was injected by the class name
+    $webdriver->_reconfigure(['browser' => 'chrome']);
+}
+```
+
+Prepare methods can invoke all methods of a module, as well as hidden API methods (starting with `_`). Use them to customize the module setup for a specific test.
+
+To change module configuration for a specific group of tests use [GroupObjects](http://codeception.com/docs/08-Customization#Group-Objects).
+ 
 ## Conclusion
 
 

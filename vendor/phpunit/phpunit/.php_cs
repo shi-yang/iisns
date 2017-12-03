@@ -18,7 +18,15 @@ return PhpCsFixer\Config::create()
                 'align_equals' => true
             ],
             'blank_line_after_namespace' => true,
-            'blank_line_before_return' => true,
+            'blank_line_before_statement' => [
+                'statements' => [
+                    'break',
+                    'continue',
+                    'return',
+                    'throw',
+                    'try',
+                ],
+            ],
             'braces' => true,
             'cast_spaces' => true,
             'concat_space' => ['spacing' => 'one'],
@@ -32,6 +40,7 @@ return PhpCsFixer\Config::create()
             'lowercase_constants' => true,
             'lowercase_keywords' => true,
             'method_argument_space' => true,
+            'native_function_invocation' => true,
             'no_alias_functions' => true,
             'no_blank_lines_after_class_opening' => true,
             'no_blank_lines_after_phpdoc' => true,

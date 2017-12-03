@@ -69,6 +69,26 @@ Adds HTTP authentication via username/password.
  * `[Part]` xml
 
 
+### amNTLMAuthenticated
+ 
+Adds NTLM authentication via username/password.
+Requires client to be Guzzle >=6.3.0
+Out of scope for functional modules.
+
+Example:
+```php
+<?php
+$I->amNTLMAuthenticated('jon_snow', 'targaryen');
+?>
+```
+
+ * `param` $username
+ * `param` $password
+@throws ModuleException
+ * `[Part]` json
+ * `[Part]` xml
+
+
 ### deleteHeader
  
 Deletes the header with the passed name.  Subsequent requests
@@ -202,7 +222,7 @@ Parameter can be passed either as XmlBuilder, DOMDocument, DOMNode, XML string, 
 
 ### dontSeeXmlResponseMatchesXpath
  
-Checks wheather XML response does not match XPath
+Checks whether XML response does not match XPath
 
 ```php
 <?php
@@ -338,7 +358,7 @@ $fileData = file_get_contents("test_file.jpg");
 $I->seeBinaryResponseEquals(md5($fileData));
 ?>
 ```
-Example: Using sha256 hsah
+Example: Using sha256 hash
 
 ```php
 <?php
@@ -593,7 +613,7 @@ $I->seeResponseMatchesJsonType([
 ?>
 ```
 
-You can also apply filters to check values. Filter can be applied with `:` char after the type declatation.
+You can also apply filters to check values. Filter can be applied with `:` char after the type declaration.
 
 Here is the list of possible filters:
 
@@ -661,7 +681,7 @@ $I->seeXmlResponseIncludes("<result>1</result>");
 
 ### seeXmlResponseMatchesXpath
  
-Checks wheather XML response matches XPath
+Checks whether XML response matches XPath
 
 ```php
 <?php
@@ -739,13 +759,35 @@ Sends PATCH request to given uri.
 
 ### sendPOST
  
-Sends a POST request to given uri.
+Sends a POST request to given uri. Parameters and files can be provided separately.
 
-Parameters and files (as array of filenames) can be provided.
+Example:
+```php
+<?php
+//simple POST call
+$I->sendPOST('/message', ['subject' => 'Read this!', 'to' => 'johndoe@example.com']);
+//simple upload method
+$I->sendPOST('/message/24', ['inline' => 0], ['attachmentFile' => codecept_data_dir('sample_file.pdf')]);
+//uploading a file with a custom name and mime-type. This is also useful to simulate upload errors.
+$I->sendPOST('/message/24', ['inline' => 0], [
+    'attachmentFile' => [
+         'name' => 'document.pdf',
+         'type' => 'application/pdf',
+         'error' => UPLOAD_ERR_OK,
+         'size' => filesize(codecept_data_dir('sample_file.pdf')),
+         'tmp_name' => codecept_data_dir('sample_file.pdf')
+    ]
+]);
+```
 
  * `param` $url
  * `param array|\JsonSerializable` $params
- * `param array` $files
+ * `param array` $files A list of filenames or "mocks" of $_FILES (each entry being an array with the following
+                    keys: name, type, error, size, tmp_name (pointing to the real file path). Each key works
+                    as the "name" attribute of a file input field.
+
+@see http://php.net/manual/en/features.file-upload.post-method.php
+@see codecept_data_dir()
  * `[Part]` json
  * `[Part]` xml
 
@@ -798,4 +840,4 @@ $I->stopFollowingRedirects();
  * `[Part]` xml
  * `[Part]` json
 
-<p>&nbsp;</p><div class="alert alert-warning">Module reference is taken from the source code. <a href="https://github.com/Codeception/Codeception/tree/2.2/src/Codeception/Module/REST.php">Help us to improve documentation. Edit module reference</a></div>
+<p>&nbsp;</p><div class="alert alert-warning">Module reference is taken from the source code. <a href="https://github.com/Codeception/Codeception/tree/2.3/src/Codeception/Module/REST.php">Help us to improve documentation. Edit module reference</a></div>

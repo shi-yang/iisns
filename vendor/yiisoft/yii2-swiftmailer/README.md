@@ -1,7 +1,12 @@
-SwiftMailer Extension for Yii 2
-===============================
+<p align="center">
+    <a href="https://swiftmailer.symfony.com/" target="_blank" rel="external">
+        <img src="https://swiftmailer.symfony.com/images/logo.png" height="68px" style="background-color:#2a4fb7">
+    </a>
+    <h1 align="center">SwiftMailer Extension for Yii 2</h1>
+    <br>
+</p>
 
-This extension provides a [SwiftMailer](http://swiftmailer.org/) mail solution for [Yii framework 2.0](http://www.yiiframework.com).
+This extension provides a [SwiftMailer](https://swiftmailer.symfony.com/) mail solution for [Yii framework 2.0](http://www.yiiframework.com).
 
 For license information check the [LICENSE](LICENSE.md)-file.
 
@@ -23,7 +28,7 @@ php composer.phar require --prefer-dist yiisoft/yii2-swiftmailer
 or add
 
 ```json
-"yiisoft/yii2-swiftmailer": "~2.0.0"
+"yiisoft/yii2-swiftmailer": "~2.1.0"
 ```
 
 to the require section of your composer.json.

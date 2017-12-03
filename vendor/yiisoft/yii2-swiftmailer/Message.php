@@ -20,8 +20,9 @@ use yii\mail\BaseMessage;
  *
  * @method Mailer getMailer() returns mailer instance.
  *
- * @property integer $priority Priority value as integer in range: `1..5`, where 1 is the highest priority and
- * 5 is the lowest.
+ * @property array $headers Headers in format: `[name => value]`. This property is write-only.
+ * @property int $priority Priority value as integer in range: `1..5`, where 1 is the highest priority and 5
+ * is the lowest.
  * @property string $readReceiptTo Receipt receive email addresses. Note that the type of this property
  * differs in getter and setter. See [[getReadReceiptTo()]] and [[setReadReceiptTo()]] for details.
  * @property string $returnPath The bounce email address.
@@ -43,6 +44,18 @@ class Message extends BaseMessage
      */
     private $signers = [];
 
+
+    /**
+     * This method is called after the object is created by cloning an existing one.
+     * It ensures [[swiftMessage]] is also cloned.
+     * @since 2.0.7
+     */
+    public function __clone()
+    {
+        if (is_object($this->_swiftMessage)) {
+            $this->_swiftMessage = clone $this->_swiftMessage;
+        }
+    }
 
     /**
      * @return \Swift_Message Swift message instance.
@@ -270,7 +283,7 @@ class Message extends BaseMessage
      */
     public function attachContent($content, array $options = [])
     {
-        $attachment = \Swift_Attachment::newInstance($content);
+        $attachment = new \Swift_Attachment($content);
         if (!empty($options['fileName'])) {
             $attachment->setFilename($options['fileName']);
         }
@@ -303,7 +316,7 @@ class Message extends BaseMessage
      */
     public function embedContent($content, array $options = [])
     {
-        $embedFile = \Swift_EmbeddedFile::newInstance($content);
+        $embedFile = new \Swift_EmbeddedFile($content);
         if (!empty($options['fileName'])) {
             $embedFile->setFilename($options['fileName']);
         }
@@ -479,6 +492,20 @@ class Message extends BaseMessage
         return $headers;
     }
 
+    /**
+     * Sets custom header values to the message.
+     * @param array $headers headers in format: `[name => value]`.
+     * @return $this self reference.
+     * @since 2.0.7
+     */
+    public function setHeaders($headers)
+    {
+        foreach ($headers as $name => $value) {
+            $this->setHeader($name, $value);
+        }
+        return $this;
+    }
+
     // SwiftMessage shortcuts :
 
     /**
@@ -505,7 +532,7 @@ class Message extends BaseMessage
 
     /**
      * Set the priority of this message.
-     * @param integer $priority priority value, should be an integer in range: `1..5`,
+     * @param int $priority priority value, should be an integer in range: `1..5`,
      * where 1 is the highest priority and 5 is the lowest.
      * @return $this self reference.
      * @since 2.0.6
@@ -518,7 +545,7 @@ class Message extends BaseMessage
 
     /**
      * Returns the priority of this message.
-     * @return integer priority value as integer in range: `1..5`,
+     * @return int priority value as integer in range: `1..5`,
      * where 1 is the highest priority and 5 is the lowest.
      * @since 2.0.6
      */

@@ -1,6 +1,6 @@
 {
   "name": "yii2-pjax",
-  "version": "2.0.6",
+  "version": "2.0.7.1",
   "main": "jquery.pjax.js",
   "repository": "yiisoft/jquery-pjax",
   "licenses": [
@@ -12,5 +12,11 @@
   "files" : [
     "LICENSE",
     "jquery.pjax.js"
-  ]
+  ],
+  "devDependencies": {
+    "eslint": "^3.19.0"
+  },
+  "scripts": {
+    "test": "./script/test"
+  }
 }

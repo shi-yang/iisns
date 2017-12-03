@@ -10,7 +10,6 @@
 
 /**
  * A book.
- *
  */
 class Book
 {

@@ -52,10 +52,10 @@ php: |
 test: Forcing Strings
 brief: >
     Any YAML type can be forced into a string using the
-    explicit !str method.
+    explicit !!str method.
 yaml: |
-    date string: !str 2001-08-01
-    number string: !str 192
+    date string: !!str 2001-08-01
+    number string: !!str 192
 php: |
     array(
       'date string' => '2001-08-01',
@@ -208,20 +208,6 @@ yaml: |
 php: |
     array(
       'negative one-thousand' => -1000.0
-    )
----
-test: Integers as Map Keys
-brief: >
-    An integer can be used a dictionary key.
-yaml: |
-    1: one
-    2: two
-    3: three
-php: |
-    array(
-        1 => 'one',
-        2 => 'two',
-        3 => 'three'
     )
 ---
 test: Floats

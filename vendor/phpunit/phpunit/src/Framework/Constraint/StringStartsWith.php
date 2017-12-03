@@ -7,12 +7,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace PHPUnit\Framework\Constraint;
 
 /**
  * Constraint that asserts that the string it is evaluated for begins with a
  * given prefix.
  */
-class PHPUnit_Framework_Constraint_StringStartsWith extends PHPUnit_Framework_Constraint
+class StringStartsWith extends Constraint
 {
     /**
      * @var string
@@ -38,7 +39,7 @@ class PHPUnit_Framework_Constraint_StringStartsWith extends PHPUnit_Framework_Co
      */
     protected function matches($other)
     {
-        return strpos($other, $this->prefix) === 0;
+        return \strpos($other, $this->prefix) === 0;
     }
 
     /**

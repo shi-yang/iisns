@@ -1,7 +1,22 @@
 yii-pjax Change Log
 ===================
 
-2.0.6 Mar 4, 2015
+v2.0.7.1 under development
+------------------------
+- Bug #61: Restore the last semicolon for Yii asset/compress (tanakahisateru)
+
+2.0.7 Sep 27, 2017
+-----------------
+- Bug #46: Allow "data-pjax" attribute with no value in `handleClick` function (arogachev)
+- Bug #52: Fixed form submit handling to prevent submit when event result is `false` (derekisbusy)
+- Bug #52: Fixed PJAX initialization to prevent multiple PJAX handlers attachment on the same element (derekisbusy, silverfire)
+- Bug #54: Fixed PJAX initialization not to modify history, when it is disabled (silverfire)
+- Enh #57: jQuery 3.x compatibility (a761208, silverfire)
+- Enh #51: Added `scrollOffset` option, updated `scrollTo` to support callback (derekisbusy)
+- Bug: Fixed stylesheets loading to prevent styles override (voskobovich, silverfire)
+- Merged updates from upstream. The update contains backward-incompatible changes, see [changes list](https://github.com/yiisoft/jquery-pjax/issues/55#issuecomment-310109608) to adjust your application accordingly. (silverfire)
+
+2.0.6 Mar 4, 2016
 -----------------
 - Bug #15: Fixed duplication of `_pjax` GET variable (Alex-Code)
 - Bug #21: Fixed non-persistence of `cache` option after backward navigation (nkovacs)
@@ -30,3 +45,4 @@ yii-pjax Change Log
 ------------------
 - Bug: Fixed avoid duplicates of _pjax parameter (tof06)
 - Bug: Fixed Pjax/GridView and back button (klevron, tof06, tonydspaniard)
+

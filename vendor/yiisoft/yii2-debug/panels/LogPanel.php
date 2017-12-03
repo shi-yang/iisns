@@ -99,7 +99,7 @@ class LogPanel extends Panel
                     'message' => $message[0],
                     'level' => $message[1],
                     'category' => $message[2],
-                    'time' => ($message[3] * 1000), // time in milliseconds
+                    'time' => $message[3] * 1000, // time in milliseconds
                     'trace' => $message[4]
                 ];
             }

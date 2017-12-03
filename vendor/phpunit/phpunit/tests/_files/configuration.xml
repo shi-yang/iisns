@@ -7,6 +7,7 @@
          columns="80"
          colors="false"
          stderr="false"
+         convertDeprecationsToExceptions="true"
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
@@ -16,8 +17,9 @@
          failOnWarning="false"
          failOnRisky="false"
          extensionsDirectory="/tmp"
-         printerClass="PHPUnit_TextUI_ResultPrinter"
-         testSuiteLoaderClass="PHPUnit_Runner_StandardTestSuiteLoader"
+         printerClass="PHPUnit\TextUI\ResultPrinter"
+         testSuiteLoaderClass="PHPUnit\Runner\StandardTestSuiteLoader"
+         defaultTestSuite="My Test Suite"
          beStrictAboutChangesToGlobalState="false"
          beStrictAboutOutputDuringTests="false"
          beStrictAboutResourceUsageDuringSmallTests="false"
@@ -25,6 +27,7 @@
          beStrictAboutTodoAnnotatedTests="false"
          beStrictAboutCoversAnnotation="false"
          enforceTimeLimit="false"
+         ignoreDeprecatedCodeUnitsFromCodeCoverage="false"
          timeoutForSmallTests="1"
          timeoutForMediumTests="10"
          timeoutForLargeTests="60"
@@ -96,7 +99,7 @@
     <log type="json" target="/tmp/logfile.json"/>
     <log type="plain" target="/tmp/logfile.txt"/>
     <log type="tap" target="/tmp/logfile.tap"/>
-    <log type="junit" target="/tmp/logfile.xml" logIncompleteSkipped="false"/>
+    <log type="junit" target="/tmp/logfile.xml"/>
     <log type="testdox-html" target="/tmp/testdox.html"/>
     <log type="testdox-text" target="/tmp/testdox.txt"/>
     <log type="testdox-xml" target="/tmp/testdox.xml"/>
@@ -110,6 +113,8 @@
     <const name="BAR" value="true"/>
     <var name="foo" value="false"/>
     <env name="foo" value="true"/>
+    <env name="foo_force" value="forced" force="true"/>
+    <env name="bar" value="true" verbatim="true"/>
     <post name="foo" value="bar"/>
     <get name="foo" value="bar"/>
     <cookie name="foo" value="bar"/>

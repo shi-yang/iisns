@@ -19,8 +19,14 @@
     ],
     "require": {
         "yiisoft/yii2": "~2.0.4",
-        "swiftmailer/swiftmailer": "~5.0"
+        "swiftmailer/swiftmailer": "~6.0"
     },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ],
     "autoload": {
         "psr-4": { "yii\\swiftmailer\\": "" }
     },

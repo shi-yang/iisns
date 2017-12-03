@@ -1,15 +1,19 @@
 <?php
-class ClonedDependencyTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class ClonedDependencyTest extends TestCase
 {
     private static $dependency;
 
     public static function setUpBeforeClass()
     {
-        self::$dependency = new StdClass;
+        self::$dependency = new stdClass;
     }
 
     public function testOne()
     {
+        $this->assertTrue(true);
+
         return self::$dependency;
     }
 

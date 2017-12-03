@@ -7,6 +7,7 @@
 
 namespace rmrevin\yii\minify\components;
 
+use tubalmartin\CssMin\Minifier as CSSmin;
 use yii\helpers\Html;
 
 /**
@@ -104,7 +105,7 @@ class CSS extends MinifyComponent
             $this->removeCssComments($css);
 
             if ($this->view->minifyCss) {
-                $css = (new \CSSmin())
+                $css = (new CSSmin())
                     ->run($css, $this->view->cssLinebreakPos);
             }
 
@@ -238,7 +239,7 @@ class CSS extends MinifyComponent
 
                 $context = [
                     'ssl' => [
-                        'verify_peer' => false,
+                        'verify_peer'      => false,
                         'verify_peer_name' => false,
                     ],
                 ];

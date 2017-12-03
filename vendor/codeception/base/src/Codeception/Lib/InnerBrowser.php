@@ -54,6 +54,8 @@ class InnerBrowser extends Module implements Web, PageSourceSaver, ElementLocato
 
     protected $internalDomains = null;
 
+    private $baseUrl;
+
     public function _failed(TestInterface $test, $fail)
     {
         if (!$this->client || !$this->client->getInternalResponse()) {
@@ -153,7 +155,7 @@ class InnerBrowser extends Module implements Web, PageSourceSaver, ElementLocato
 
         foreach ($this->headers as $header => $val) { // moved from REST module
 
-            if (!$val) {
+            if ($val === null || $val === '') {
                 continue;
             }
 
@@ -237,6 +239,7 @@ class InnerBrowser extends Module implements Web, PageSourceSaver, ElementLocato
         $content = null
     ) {
         $this->crawler = $this->clientRequest($method, $uri, $parameters, $files, $server, $content);
+        $this->baseUrl = $this->retrieveBaseUrl();
         $this->forms = [];
     }
 
@@ -287,8 +290,19 @@ class InnerBrowser extends Module implements Web, PageSourceSaver, ElementLocato
      * Example:
      * ```php
      * <?php
-     * $I->setHeader('X-Requested-With', 'Codeception');
+     * $I->haveHttpHeader('X-Requested-With', 'Codeception');
      * $I->amOnPage('test-headers.php');
+     * ?>
+     * ```
+     *
+     * To use special chars in Header Key use HTML Character Entities:
+     * Example:
+     * Header with underscore - 'Client_Id'
+     * should be represented as - 'Client&#x0005F;Id' or 'Client&#95;Id'
+     *
+     * ```php
+     * <?php
+     * $I->haveHttpHeader('Client&#95;Id', 'Codeception');
      * ?>
      * ```
      *
@@ -434,6 +448,11 @@ class InnerBrowser extends Module implements Web, PageSourceSaver, ElementLocato
 
     private function getBaseUrl()
     {
+        return $this->baseUrl;
+    }
+
+    private function retrieveBaseUrl()
+    {
         $baseUrl = '';
 
         $baseHref = $this->crawler->filter('base');
@@ -490,6 +509,7 @@ class InnerBrowser extends Module implements Web, PageSourceSaver, ElementLocato
                 $this->fail("No links containing text '$text' and URL '$url' were found in page " . $this->_getCurrentUri());
             }
         }
+        $this->assertTrue(true);
     }
 
     public function dontSeeLink($text, $url = null)
@@ -601,17 +621,19 @@ class InnerBrowser extends Module implements Web, PageSourceSaver, ElementLocato
         if ($form->count() === 0) {
             throw new ElementNotFound($formSelector, 'Form');
         }
+
+        $fields = [];
         foreach ($params as $name => $values) {
-            $field = $form->filterXPath(sprintf('.//*[@name=%s]', Crawler::xpathLiteral($name)));
-            if ($field->count() === 0) {
-                throw new ElementNotFound(
-                    sprintf('//*[@name=%s]', Crawler::xpathLiteral($name)),
-                    'Form'
-                );
-            }
+            $this->pushFormField($fields, $form, $name, $values);
+        }
+
+        foreach ($fields as $element) {
+            list($field, $values) = $element;
+
             if (!is_array($values)) {
                 $values = [$values];
             }
+
             foreach ($values as $value) {
                 $ret = $this->proceedSeeInField($field, $value);
                 if ($assertNot) {
@@ -623,9 +645,37 @@ class InnerBrowser extends Module implements Web, PageSourceSaver, ElementLocato
         }
     }
 
+    /**
+     * Map an array element passed to seeInFormFields to its corresponding field,
+     * recursing through array values if the field is not found.
+     *
+     * @param array $fields The previously found fields.
+     * @param Crawler $form The form in which to search for fields.
+     * @param string $name The field's name.
+     * @param mixed $values
+     * @return void
+     */
+    protected function pushFormField(&$fields, $form, $name, $values)
+    {
+        $field = $form->filterXPath(sprintf('.//*[@name=%s]', Crawler::xpathLiteral($name)));
+
+        if ($field->count()) {
+            $fields[] = [$field, $values];
+        } elseif (is_array($values)) {
+            foreach ($values as $key => $value) {
+                $this->pushFormField($fields, $form, "{$name}[$key]", $value);
+            }
+        } else {
+            throw new ElementNotFound(
+                sprintf('//*[@name=%s]', Crawler::xpathLiteral($name)),
+                'Form'
+            );
+        }
+    }
+
     protected function proceedSeeInField(Crawler $fields, $value)
     {
-        $testValues = $this->proceedGetValueFromField($fields);
+        $testValues = $this->getValueAndTextFromField($fields);
         if (!is_array($testValues)) {
             $testValues = [$testValues];
         }
@@ -645,6 +695,60 @@ class InnerBrowser extends Module implements Web, PageSourceSaver, ElementLocato
                 var_export($testValues, true)
             )
         ];
+    }
+
+    /**
+     * Get the values of a set of fields and also the texts of selected options.
+     *
+     * @param Crawler $nodes
+     * @return array|mixed|string
+     */
+    protected function getValueAndTextFromField(Crawler $nodes)
+    {
+        if ($nodes->filter('textarea')->count()) {
+            return (new TextareaFormField($nodes->filter('textarea')->getNode(0)))->getValue();
+        }
+
+        $input = $nodes->filter('input');
+        if ($input->count()) {
+            return $this->getInputValue($input);
+        }
+
+        if ($nodes->filter('select')->count()) {
+            $options = $nodes->filter('option[selected]');
+            $values = [];
+
+            foreach ($options as $option) {
+                $values[] = $option->getAttribute('value');
+                $values[] = $option->textContent;
+                $values[] = trim($option->textContent);
+            }
+
+            return $values;
+        }
+
+        $this->fail("Element $nodes is not a form field or does not contain a form field");
+    }
+
+    /**
+     * Get the values of a set of input fields.
+     *
+     * @param Crawler $input
+     * @return array|string
+     */
+    protected function getInputValue($input)
+    {
+        if ($input->attr('type') == 'checkbox' or $input->attr('type') == 'radio') {
+            $values = [];
+
+            foreach ($input->filter(':checked') as $checkbox) {
+                $values[] = $checkbox->getAttribute('value');
+            }
+
+            return $values;
+        }
+
+        return (new InputFormField($input->getNode(0)))->getValue();
     }
 
     /**
@@ -685,17 +789,17 @@ class InnerBrowser extends Module implements Web, PageSourceSaver, ElementLocato
             $pos = (!isset($chFoundByName[$fieldName])) ? 0 : $chFoundByName[$fieldName];
             $skip = (!isset($params[$fieldName]))
                 || (!is_array($params[$fieldName]) && !is_bool($params[$fieldName]))
-                || ($pos >= count($params[$fieldName])
+                || (is_array($params[$fieldName]) && $pos >= count($params[$fieldName])
                 || (is_array($params[$fieldName]) && !is_bool($params[$fieldName][$pos])));
             if ($skip) {
                 continue;
             }
             $values = $params[$fieldName];
             if ($values === true) {
-                $params[$fieldName] = $box->getAttribute('value');
+                $params[$fieldName] = $box->hasAttribute('value') ? $box->getAttribute('value') : 'on';
                 $chFoundByName[$fieldName] = $pos + 1;
             } elseif ($values[$pos] === true) {
-                $params[$fieldName][$pos] = $box->getAttribute('value');
+                $params[$fieldName][$pos] = $box->hasAttribute('value') ? $box->getAttribute('value') : 'on';
                 $chFoundByName[$fieldName] = $pos + 1;
             } elseif (is_array($values)) {
                 array_splice($params[$fieldName], $pos, 1);
@@ -824,7 +928,7 @@ class InnerBrowser extends Module implements Web, PageSourceSaver, ElementLocato
         $action = (string)$this->getFormUrl($form);
         $cloned = new Crawler($node, $action, $this->getBaseUrl());
         $shouldDisable = $cloned->filter(
-            'input:disabled:not([disabled]),select option:disabled,select optgroup:disabled option:not([disabled])'
+            'input:disabled:not([disabled]),select option:disabled,select optgroup:disabled option:not([disabled]),textarea:disabled:not([disabled]),select:disabled:not([disabled])'
         );
         foreach ($shouldDisable as $field) {
             $field->parentNode->removeChild($field);
@@ -1050,17 +1154,21 @@ class InnerBrowser extends Module implements Web, PageSourceSaver, ElementLocato
     public function attachFile($field, $filename)
     {
         $form = $this->getFormFor($field = $this->getFieldByLabelOrCss($field));
-        $path = Configuration::dataDir() . $filename;
-        $name = $field->attr('name');
-        if (!is_readable($path)) {
-            $this->fail("file $filename not found in Codeception data path. Only files stored in data path accepted");
+        $filePath = codecept_data_dir() . $filename;
+        if (!file_exists($filePath)) {
+            throw new \InvalidArgumentException("File does not exist: $filePath");
         }
+        if (!is_readable($filePath)) {
+            throw new \InvalidArgumentException("File is not readable: $filePath");
+        }
+
+        $name = $field->attr('name');
         $formField = $this->matchFormField($name, $form, new FileFormField($field->getNode(0)));
         if (is_array($formField)) {
             $this->fail("Field $name is ignored on upload, field $name is treated as array.");
         }
 
-        $formField->upload($path);
+        $formField->upload($filePath);
     }
 
     /**
@@ -1257,41 +1365,29 @@ class InnerBrowser extends Module implements Web, PageSourceSaver, ElementLocato
         if (!$nodes->count()) {
             throw new ElementNotFound($field, 'Field');
         }
-        return $this->proceedGetValueFromField($nodes);
-    }
 
-    /**
-     * @param Crawler $nodes
-     * @return array|mixed|string
-     */
-    protected function proceedGetValueFromField(Crawler $nodes)
-    {
-        $values = [];
         if ($nodes->filter('textarea')->count()) {
             return (new TextareaFormField($nodes->filter('textarea')->getNode(0)))->getValue();
         }
 
-        if ($nodes->filter('input')->count()) {
-            $input = $nodes->filter('input');
-            if ($input->attr('type') == 'checkbox' or $input->attr('type') == 'radio') {
-                $values = [];
-                $input = $nodes->filter('input:checked');
-                foreach ($input as $checkbox) {
-                    $values[] = $checkbox->getAttribute('value');
-                }
-                return $values;
-            }
-            return (new InputFormField($nodes->filter('input')->getNode(0)))->getValue();
+        $input = $nodes->filter('input');
+        if ($input->count()) {
+            return $this->getInputValue($input);
         }
+
         if ($nodes->filter('select')->count()) {
             $field = new ChoiceFormField($nodes->filter('select')->getNode(0));
             $options = $nodes->filter('option[selected]');
+            $values = [];
+
             foreach ($options as $option) {
                 $values[] = $option->getAttribute('value');
             }
+
             if (!$field->isMultiple()) {
                 return reset($values);
             }
+
             return $values;
         }
 
@@ -1326,6 +1422,18 @@ class InnerBrowser extends Module implements Web, PageSourceSaver, ElementLocato
             return null;
         }
         return $cookies->getValue();
+    }
+
+    /**
+     * Grabs current page source code.
+     *
+     * @throws ModuleException if no page was opened.
+     *
+     * @return string Current page source code.
+     */
+    public function grabPageSource()
+    {
+        return $this->_getResponseContent();
     }
 
     public function seeCookie($cookie, array $params = [])
@@ -1609,6 +1717,13 @@ class InnerBrowser extends Module implements Web, PageSourceSaver, ElementLocato
         foreach ($requestParams as $name => $value) {
             $qs = http_build_query([$name => $value], '', '&');
             if (!empty($qs)) {
+                // If the field's name is of the form of "array[key]",
+                // we'll remove it from the request parameters
+                // and set the "array" key instead which will contain the actual array.
+                if (strpos($name, '[') && strpos($name, ']') > strpos($name, '[')) {
+                    unset($requestParams[$name]);
+                }
+
                 parse_str($qs, $expandedValue);
                 $varName = substr($name, 0, strlen(key($expandedValue)));
                 $requestParams = array_replace_recursive($requestParams, [$varName => current($expandedValue)]);

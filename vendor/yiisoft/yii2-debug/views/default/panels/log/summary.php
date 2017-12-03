@@ -17,7 +17,7 @@ if ($errorCount) {
 }
 
 if ($warningCount) {
-    $titles['warnings'] = Yii::$app->i18n->format('{n,plural,=1{1 warning} other{# warnings}}', ['n' => $warningCount], 'en-US');;
+    $titles['warnings'] = Yii::$app->i18n->format('{n,plural,=1{1 warning} other{# warnings}}', ['n' => $warningCount], 'en-US');
 }
 ?>
 

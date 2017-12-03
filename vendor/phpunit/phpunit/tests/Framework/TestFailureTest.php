@@ -8,14 +8,34 @@
  * file that was distributed with this source code.
  */
 
-class Framework_TestFailureTest extends PHPUnit_Framework_TestCase
+namespace PHPUnit\Framework;
+
+class TestFailureTest extends TestCase
 {
     public function testToString()
     {
         $test      = new self(__FUNCTION__);
-        $exception = new PHPUnit_Framework_Exception('message');
-        $failure   = new PHPUnit_Framework_TestFailure($test, $exception);
+        $exception = new Exception('message');
+        $failure   = new TestFailure($test, $exception);
 
         $this->assertEquals(__METHOD__ . ': message', $failure->toString());
+    }
+
+    public function testToStringForError()
+    {
+        $test      = new self(__FUNCTION__);
+        $exception = new \Error('message');
+        $failure   = new TestFailure($test, $exception);
+
+        $this->assertEquals(__METHOD__ . ': message', $failure->toString());
+    }
+
+    public function testgetExceptionAsString()
+    {
+        $test      = new self(__FUNCTION__);
+        $exception = new \Error('message');
+        $failure   = new TestFailure($test, $exception);
+
+        $this->assertEquals("Error: message\n", $failure->getExceptionAsString());
     }
 }

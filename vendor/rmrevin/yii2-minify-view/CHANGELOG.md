@@ -1,3 +1,11 @@
+2017-06-09 - 1.15.1
+-------------------
+* Update cssmin package to version 4
+
+2017-05-31 - 1.15.0
+-------------------
+* Update minify package to version 3
+
 2017-01-19 - 1.14.4
 -------------------
 * Changed the regular expression when checking the excluded files.

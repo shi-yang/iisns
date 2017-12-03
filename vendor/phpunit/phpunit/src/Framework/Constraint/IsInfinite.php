@@ -7,11 +7,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace PHPUnit\Framework\Constraint;
 
 /**
  * Constraint that accepts infinite.
  */
-class PHPUnit_Framework_Constraint_IsInfinite extends PHPUnit_Framework_Constraint
+class IsInfinite extends Constraint
 {
     /**
      * Evaluates the constraint for parameter $other. Returns true if the
@@ -23,7 +24,7 @@ class PHPUnit_Framework_Constraint_IsInfinite extends PHPUnit_Framework_Constrai
      */
     protected function matches($other)
     {
-        return is_infinite($other);
+        return \is_infinite($other);
     }
 
     /**

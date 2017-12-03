@@ -38,8 +38,9 @@ class Dropdown extends Widget
      * @var array list of menu items in the dropdown. Each array element can be either an HTML string,
      * or an array representing a single menu with the following structure:
      *
-     * - label: string, required, the label of the item link
-     * - url: string|array, optional, the url of the item link. This will be processed by [[Url::to()]].
+     * - label: string, required, the label of the item link.
+     * - encode: boolean, optional, whether to HTML-encode item label.
+     * - url: string|array, optional, the URL of the item link. This will be processed by [[\yii\helpers\Url::to()]].
      *   If not set, the item will be treated as a menu header when the item has no sub-menu.
      * - visible: boolean, optional, whether this menu item is visible. Defaults to true.
      * - linkOptions: array, optional, the HTML attributes of the item link.
@@ -101,11 +102,11 @@ class Dropdown extends Widget
     {
         $lines = [];
         foreach ($items as $item) {
-            if (isset($item['visible']) && !$item['visible']) {
-                continue;
-            }
             if (is_string($item)) {
                 $lines[] = $item;
+                continue;
+            }
+            if (isset($item['visible']) && !$item['visible']) {
                 continue;
             }
             if (!array_key_exists('label', $item)) {

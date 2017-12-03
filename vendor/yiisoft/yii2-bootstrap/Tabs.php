@@ -44,6 +44,10 @@ use yii\helpers\ArrayHelper;
  *                      'label' => 'DropdownB',
  *                      'content' => 'DropdownB, Anim pariatur cliche...',
  *                  ],
+ *                  [
+ *                      'label' => 'External Link',
+ *                      'url' => 'http://www.example.com',
+ *                  ],
  *             ],
  *         ],
  *     ],
@@ -114,6 +118,17 @@ class Tabs extends Widget
      * @since 2.0.1
      */
     public $renderTabContent = true;
+    /**
+     * @var array list of HTML attributes for the `tab-content` container. This will always contain the CSS class `tab-content`.
+     * @see \yii\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
+     * @since 2.0.7
+     */
+    public $tabContentOptions = [];
+    /**
+     * @var string name of a class to use for rendering dropdowns withing this widget. Defaults to [[Dropdown]].
+     * @since 2.0.7
+     */
+    public $dropdownClass = 'yii\bootstrap\Dropdown';
 
 
     /**
@@ -123,6 +138,7 @@ class Tabs extends Widget
     {
         parent::init();
         Html::addCssClass($this->options, ['widget' => 'nav', $this->navType]);
+        Html::addCssClass($this->tabContentOptions, 'tab-content');
     }
 
     /**
@@ -144,8 +160,8 @@ class Tabs extends Widget
         $headers = [];
         $panes = [];
 
-        if (!$this->hasActiveTab() && !empty($this->items)) {
-            $this->items[0]['active'] = true;
+        if (!$this->hasActiveTab()) {
+            $this->activateFirstVisibleTab();
         }
 
         foreach ($this->items as $n => $item) {
@@ -172,8 +188,10 @@ class Tabs extends Widget
                 if (!isset($linkOptions['data-toggle'])) {
                     $linkOptions['data-toggle'] = 'dropdown';
                 }
+                /** @var Widget $dropdownClass */
+                $dropdownClass = $this->dropdownClass;
                 $header = Html::a($label, "#", $linkOptions) . "\n"
-                    . Dropdown::widget(['items' => $item['items'], 'clientOptions' => false, 'view' => $this->getView()]);
+                    . $dropdownClass::widget(['items' => $item['items'], 'clientOptions' => false, 'view' => $this->getView()]);
             } else {
                 $options = array_merge($this->itemOptions, ArrayHelper::getValue($item, 'options', []));
                 $options['id'] = ArrayHelper::getValue($options, 'id', $this->options['id'] . '-tab' . $n);
@@ -202,12 +220,11 @@ class Tabs extends Widget
             $headers[] = Html::tag('li', $header, $headerOptions);
         }
 
-        return Html::tag('ul', implode("\n", $headers), $this->options)
-        . ($this->renderTabContent ? "\n" . Html::tag('div', implode("\n", $panes), ['class' => 'tab-content']) : '');
+        return Html::tag('ul', implode("\n", $headers), $this->options) . $this->renderPanes($panes);
     }
 
     /**
-     * @return boolean if there's active tab defined
+     * @return bool if there's active tab defined
      */
     protected function hasActiveTab()
     {
@@ -221,12 +238,31 @@ class Tabs extends Widget
     }
 
     /**
+     * Sets the first visible tab as active.
+     *
+     * This method activates the first tab that is visible and
+     * not explicitly set to inactive (`'active' => false`).
+     * @since 2.0.7
+     */
+    protected function activateFirstVisibleTab()
+    {
+        foreach ($this->items as $i => $item) {
+            $active = ArrayHelper::getValue($item, 'active', null);
+            $visible = ArrayHelper::getValue($item, 'visible', true);
+            if ($visible && $active !== false) {
+                $this->items[$i]['active'] = true;
+                return;
+            }
+        }
+    }
+
+    /**
      * Normalizes dropdown item options by removing tab specific keys `content` and `contentOptions`, and also
      * configure `panes` accordingly.
      * @param string $itemNumber number of the item
      * @param array $items the dropdown items configuration.
      * @param array $panes the panes reference array.
-     * @return boolean whether any of the dropdown items is `active` or not.
+     * @return bool whether any of the dropdown items is `active` or not.
      * @throws InvalidConfigException
      */
     protected function renderDropdown($itemNumber, &$items, &$panes)
@@ -240,8 +276,11 @@ class Tabs extends Widget
             if (isset($item['visible']) && !$item['visible']) {
                 continue;
             }
-            if (!array_key_exists('content', $item)) {
-                throw new InvalidConfigException("The 'content' option is required.");
+            if (!(array_key_exists('content', $item) xor array_key_exists('url', $item))) {
+                throw new InvalidConfigException("Either the 'content' or the 'url' option is required, but only one can be set.");
+            }
+            if (array_key_exists('url', $item)) {
+                continue;
             }
 
             $content = ArrayHelper::remove($item, 'content');
@@ -264,5 +303,17 @@ class Tabs extends Widget
         }
 
         return $itemActive;
+    }
+
+    /**
+     * Renders tab panes.
+     *
+     * @param array $panes
+     * @return string the rendering result.
+     * @since 2.0.7
+     */
+    public function renderPanes($panes)
+    {
+        return $this->renderTabContent ? "\n" . Html::tag('div', implode("\n", $panes), $this->tabContentOptions) : '';
     }
 }

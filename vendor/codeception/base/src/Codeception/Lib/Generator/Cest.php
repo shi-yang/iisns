@@ -1,6 +1,7 @@
 <?php
 namespace Codeception\Lib\Generator;
 
+use Codeception\Exception\ConfigurationException;
 use Codeception\Util\Shared\Namespaces;
 use Codeception\Util\Template;
 
@@ -42,10 +43,20 @@ EOF;
 
     public function produce()
     {
-        $actor = $this->settings['class_name'];
-        $namespace = rtrim($this->settings['namespace'], '\\');
+        $actor = $this->settings['actor'];
+        if (!$actor) {
+            throw new ConfigurationException("Cept can't be created for suite without an actor. Add `actor: SomeTester` to suite config");
+        }
+
+        if (array_key_exists('suite_namespace', $this->settings)) {
+            $namespace = rtrim($this->settings['suite_namespace'], '\\');
+        } else {
+            $namespace = rtrim($this->settings['namespace'], '\\');
+        }
+
         $ns = $this->getNamespaceHeader($namespace.'\\'.$this->name);
-        if ($ns) {
+
+        if ($namespace) {
             $ns .= "use ".$this->settings['namespace'].'\\'.$actor.";";
         }
 

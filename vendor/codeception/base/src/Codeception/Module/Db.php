@@ -7,15 +7,14 @@ use Codeception\Exception\ModuleException;
 use Codeception\Exception\ModuleConfigException;
 use Codeception\Lib\Interfaces\Db as DbInterface;
 use Codeception\Lib\Driver\Db as Driver;
+use Codeception\Lib\DbPopulator;
 use Codeception\TestInterface;
 
 /**
- * Works with SQL database.
+ * Access a database.
  *
  * The most important function of this module is to clean a database before each test.
- * That's why this module was added to the global configuration file `codeception.yml`.
- * To have your database properly cleaned you should configure it to access the database.
- * This module also provides actions to perform checks in a database.
+ * This module also provides actions to perform checks in a database, e.g. [seeInDatabase()](http://codeception.com/docs/modules/Db#seeInDatabase)
  *
  * In order to have your database populated with data you need a raw SQL dump.
  * Simply put the dump in the `tests/_data` directory (by default) and specify the path in the config.
@@ -25,38 +24,26 @@ use Codeception\TestInterface;
  * Supported and tested databases are:
  *
  * * MySQL
- * * SQLite (only file)
+ * * SQLite (i.e. just one file)
  * * PostgreSQL
  *
- * Supported but not tested.
+ * Also available:
  *
- * * MSSQL
+ * * MS SQL
  * * Oracle
  *
  * Connection is done by database Drivers, which are stored in the `Codeception\Lib\Driver` namespace.
- * [Check out the drivers](https://github.com/Codeception/Codeception/tree/2.1/src/Codeception/Lib/Driver)
+ * [Check out the drivers](https://github.com/Codeception/Codeception/tree/2.3/src/Codeception/Lib/Driver)
  * if you run into problems loading dumps and cleaning databases.
- *
- * ## Status
- *
- * * Maintainer: **Gintautas Miselis**
- * * stability:
- *     - Mysql: **stable**
- *     - SQLite: **stable**
- *     - Postgres: **beta**
- *     - MSSQL: **alpha**
- *     - Oracle: **alpha**
- *
- * *Please review the code of non-stable modules and provide patches if you have issues.*
  *
  * ## Config
  *
  * * dsn *required* - PDO DSN
- * * user *required* - user to access database
+ * * user *required* - username to access database
  * * password *required* - password
  * * dump - path to database dump
- * * populate: true - whether the the dump should be loaded before the test suite is started
- * * cleanup: true - whether the dump should be reloaded before each test
+ * * populate: false - whether the the dump should be loaded before the test suite is started
+ * * cleanup: false - whether the dump should be reloaded before each test
  * * reconnect: false - whether the module should reconnect to the database before each test
  *
  * ## Example
@@ -69,11 +56,78 @@ use Codeception\TestInterface;
  *              password: ''
  *              dump: 'tests/_data/dump.sql'
  *              populate: true
- *              cleanup: false
+ *              cleanup: true
  *              reconnect: true
  *
  * ## SQL data dump
  *
+ * There are two ways of loading the dump into your database:
+ *
+ * ### Populator
+ *
+ * The recommended approach is to configure a `populator`, an external command to load a dump. Command parameters like host, username, password, database
+ * can be obtained from the config and inserted into placeholders:
+ *
+ * For MySQL:
+ *
+ * ```yaml
+ * modules:
+ *    enabled:
+ *       - Db:
+ *          dsn: 'mysql:host=localhost;dbname=testdb'
+ *          user: 'root'
+ *          password: ''
+ *          dump: 'tests/_data/dump.sql'
+ *          populate: true # run populator before all tests
+ *          cleanup: true # run populator before each test
+ *          populator: 'mysql -u $user -h $host $dbname < $dump'
+ * ```
+ *
+ * For PostgreSQL (using pg_restore)
+ *
+ * ```
+ * modules:
+ *    enabled:
+ *       - Db:
+ *          dsn: 'pgsql:host=localhost;dbname=testdb'
+ *          user: 'root'
+ *          password: ''
+ *          dump: 'tests/_data/db_backup.dump'
+ *          populate: true # run populator before all tests
+ *          cleanup: true # run populator before each test
+ *          populator: 'pg_restore -u $user -h $host -D $dbname < $dump'
+ * ```
+ *
+ *  Variable names are being taken from config and DSN which has a `keyword=value` format, so you should expect to have a variable named as the
+ *  keyword with the full value inside it.
+ *
+ *  PDO dsn elements for the supported drivers:
+ *  * MySQL: [PDO_MYSQL DSN](https://secure.php.net/manual/en/ref.pdo-mysql.connection.php)
+ *  * SQLite: [PDO_SQLITE DSN](https://secure.php.net/manual/en/ref.pdo-sqlite.connection.php)
+ *  * PostgreSQL: [PDO_PGSQL DSN](https://secure.php.net/manual/en/ref.pdo-pgsql.connection.php)
+ *  * MSSQL: [PDO_SQLSRV DSN](https://secure.php.net/manual/en/ref.pdo-sqlsrv.connection.php)
+ *  * Oracle: [PDO_OCI DSN](https://secure.php.net/manual/en/ref.pdo-oci.connection.php)
+ *
+ * ### Dump
+ *
+ * Db module by itself can load SQL dump without external tools by using current database connection.
+ * This approach is system-independent, however, it is slower than using a populator and may have parsing issues (see below).
+ *
+ * Provide a path to SQL file in `dump` config option:
+ *
+ * ```yaml
+ * modules:
+ *    enabled:
+ *       - Db:
+ *          dsn: 'mysql:host=localhost;dbname=testdb'
+ *          user: 'root'
+ *          password: ''
+ *          populate: true # load dump before all tests
+ *          cleanup: true # load dump for each test
+ *          dump: 'tests/_data/dump.sql'
+ * ```
+ *
+ *  To parse SQL Db file, it should follow this specification:
  *  * Comments are permitted.
  *  * The `dump.sql` may contain multiline statements.
  *  * The delimiter, a semi-colon in this case, must be on the same line as the last statement:
@@ -89,7 +143,7 @@ use Codeception\TestInterface;
  * ```
  * ## Query generation
  *
- * seeInDatabase, dontSeeInDatabase, seeNumRecords, grabFromDatabase and grabNumRecords methods
+ * `seeInDatabase`, `dontSeeInDatabase`, `seeNumRecords`, `grabFromDatabase` and `grabNumRecords` methods
  * accept arrays as criteria. WHERE condition is generated using item key as a field name and
  * item value as a field value.
  *
@@ -104,9 +158,8 @@ use Codeception\TestInterface;
  * ```sql
  * SELECT COUNT(*) FROM `users` WHERE `name` = 'Davert' AND `email` = 'davert@mail.com'
  * ```
- * New addition to 2.1.9 is ability to use LIKE in condition. It is achieved by adding ' like' to column name.
+ * Since version 2.1.9 it's possible to use LIKE in a condition, as shown here:
  *
- * Example:
  * ```php
  * <?php
  * $I->seeInDatabase('users', array('name' => 'Davert', 'email like' => 'davert%'));
@@ -139,10 +192,11 @@ class Db extends CodeceptionModule implements DbInterface
      * @var array
      */
     protected $config = [
-        'populate' => true,
-        'cleanup' => true,
+        'populate' => false,
+        'cleanup' => false,
         'reconnect' => false,
-        'dump' => null
+        'dump' => null,
+        'populator' => null,
     ];
 
     /**
@@ -167,7 +221,15 @@ class Db extends CodeceptionModule implements DbInterface
 
     public function _initialize()
     {
-        if ($this->config['dump'] && ($this->config['cleanup'] or ($this->config['populate']))) {
+        $this->connect();
+    }
+
+    public function _beforeSuite($settings = [])
+    {
+        if (!$this->config['populator']
+            && $this->config['dump']
+            &&  ($this->config['cleanup'] || ($this->config['populate']))
+        ) {
             $this->readSql();
         }
 
@@ -176,10 +238,9 @@ class Db extends CodeceptionModule implements DbInterface
         // starting with loading dump
         if ($this->config['populate']) {
             if ($this->config['cleanup']) {
-                $this->cleanup();
+                $this->_cleanup();
             }
-            $this->loadDump();
-            $this->populated = true;
+            $this->_loadDump();
         }
 
         if ($this->config['reconnect']) {
@@ -222,12 +283,13 @@ class Db extends CodeceptionModule implements DbInterface
 
             throw new ModuleException(__CLASS__, $message . ' while creating PDO connection');
         }
-
+        $this->debugSection('Db', 'Connected to ' . $this->driver->getDb());
         $this->dbh = $this->driver->getDbh();
     }
 
     private function disconnect()
     {
+        $this->debugSection('Db', 'Disconnected');
         $this->dbh = null;
         $this->driver = null;
     }
@@ -238,15 +300,14 @@ class Db extends CodeceptionModule implements DbInterface
             $this->connect();
         }
         if ($this->config['cleanup'] && !$this->populated) {
-            $this->cleanup();
-            $this->loadDump();
+            $this->_cleanup();
+            $this->_loadDump();
         }
         parent::_before($test);
     }
 
     public function _after(TestInterface $test)
     {
-        $this->populated = false;
         $this->removeInserted();
         if ($this->config['reconnect']) {
             $this->disconnect();
@@ -264,9 +325,10 @@ class Db extends CodeceptionModule implements DbInterface
             }
         }
         $this->insertedRows = [];
+        $this->populated = false;
     }
 
-    protected function cleanup()
+    public function _cleanup()
     {
         $dbh = $this->driver->getDbh();
         if (!$dbh) {
@@ -281,24 +343,40 @@ class Db extends CodeceptionModule implements DbInterface
                 return;
             }
             $this->driver->cleanup();
+            $this->populated = false;
         } catch (\Exception $e) {
             throw new ModuleException(__CLASS__, $e->getMessage());
         }
     }
 
-    protected function loadDump()
+    public function isPopulated()
     {
-        if (!$this->sql) {
+        return $this->populated;
+    }
+
+    public function _loadDump()
+    {
+        if ($this->config['populator']) {
+            $this->loadDumpUsingPopulator();
             return;
         }
-        try {
-            $this->driver->load($this->sql);
-        } catch (\PDOException $e) {
-            throw new ModuleException(
-                __CLASS__,
-                $e->getMessage() . "\nSQL query being executed: " . $this->driver->sqlToRun
-            );
+        $this->loadDumpUsingDriver();
+    }
+
+    protected function loadDumpUsingPopulator()
+    {
+        $populator = new DbPopulator($this->config);
+        $this->populated = $populator->run();
+    }
+
+    protected function loadDumpUsingDriver()
+    {
+        if (!$this->sql) {
+            $this->debugSection('Db', 'No SQL loaded, loading dump skipped');
+            return;
         }
+        $this->driver->load($this->sql);
+        $this->populated = true;
     }
 
     /**
@@ -317,6 +395,15 @@ class Db extends CodeceptionModule implements DbInterface
      */
     public function haveInDatabase($table, array $data)
     {
+        $lastInsertId = $this->_insertInDatabase($table, $data);
+
+        $this->addInsertedRow($table, $data, $lastInsertId);
+
+        return $lastInsertId;
+    }
+    
+    public function _insertInDatabase($table, array $data)
+    {
         $query = $this->driver->insert($table, $data);
         $parameters = array_values($data);
         $this->debugSection('Query', $query);
@@ -330,9 +417,6 @@ class Db extends CodeceptionModule implements DbInterface
             // such as tables without _id_seq in PGSQL
             $lastInsertId = 0;
         }
-
-        $this->addInsertedRow($table, $data, $lastInsertId);
-
         return $lastInsertId;
     }
 
@@ -439,6 +523,32 @@ class Db extends CodeceptionModule implements DbInterface
         return $sth->fetchColumn();
     }
 
+    /**
+     * Fetches all values from the column in database.
+     * Provide table name, desired column and criteria.
+     *
+     * ``` php
+     * <?php
+     * $mails = $I->grabColumnFromDatabase('users', 'email', array('name' => 'RebOOter'));
+     * ```
+     *
+     * @param string $table
+     * @param string $column
+     * @param array $criteria
+     *
+     * @return array
+     */
+    public function grabColumnFromDatabase($table, $column, array $criteria = [])
+    {
+        $query      = $this->driver->select($column, $table, $criteria);
+        $parameters = array_values($criteria);
+        $this->debugSection('Query', $query);
+        $this->debugSection('Parameters', $parameters);
+        $sth = $this->driver->executeQuery($query, $parameters);
+        
+        return $sth->fetchAll(\PDO::FETCH_COLUMN, 0);
+    }
+
     public function grabFromDatabase($table, $column, $criteria = [])
     {
         return $this->proceedSeeInDatabase($table, $column, $criteria);
@@ -455,5 +565,29 @@ class Db extends CodeceptionModule implements DbInterface
     public function grabNumRecords($table, array $criteria = [])
     {
         return $this->countInDatabase($table, $criteria);
+    }
+
+    /**
+     * Update an SQL record into a database.
+     *
+     * ```php
+     * <?php
+     * $I->updateInDatabase('users', array('isAdmin' => true), array('email' => 'miles@davis.com'));
+     * ?>
+     * ```
+     *
+     * @param string $table
+     * @param array $data
+     * @param array $criteria
+     */
+    public function updateInDatabase($table, array $data, array $criteria = [])
+    {
+        $query = $this->driver->update($table, $data, $criteria);
+        $parameters = array_merge(array_values($data), array_values($criteria));
+        $this->debugSection('Query', $query);
+        if (!empty($parameters)) {
+            $this->debugSection('Parameters', $parameters);
+        }
+        $this->driver->executeQuery($query, $parameters);
     }
 }

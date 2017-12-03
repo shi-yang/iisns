@@ -34,7 +34,7 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
     protected $replacementFactory;
 
     /**
-     * @var Swift_Mime_HeaderFactory
+     * @var Swift_Mime_SimpleHeaderFactory
      */
     protected $headerFactory;
 
@@ -59,26 +59,7 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
             ->lookup('transport.replacementfactory');
 
         $this->signOptions = PKCS7_DETACHED;
-
-        // Supported since php5.4
-        if (defined('OPENSSL_CIPHER_AES_128_CBC')) {
-            $this->encryptCipher = OPENSSL_CIPHER_AES_128_CBC;
-        } else {
-            $this->encryptCipher = OPENSSL_CIPHER_RC2_128;
-        }
-    }
-
-    /**
-     * Returns an new Swift_Signers_SMimeSigner instance.
-     *
-     * @param string $certificate
-     * @param string $privateKey
-     *
-     * @return Swift_Signers_SMimeSigner
-     */
-    public static function newInstance($certificate = null, $privateKey = null)
-    {
-        return new self($certificate, $privateKey);
+        $this->encryptCipher = OPENSSL_CIPHER_AES_128_CBC;
     }
 
     /**
@@ -91,7 +72,7 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
      * @param int          $signOptions Bitwise operator options for openssl_pkcs7_sign()
      * @param string       $extraCerts  A file containing intermediate certificates needed by the signing certificate
      *
-     * @return Swift_Signers_SMimeSigner
+     * @return $this
      */
     public function setSignCertificate($certificate, $privateKey = null, $signOptions = PKCS7_DETACHED, $extraCerts = null)
     {
@@ -123,7 +104,7 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
      * @param string|array $recipientCerts Either an single X.509 certificate, or an assoc array of X.509 certificates.
      * @param int          $cipher
      *
-     * @return Swift_Signers_SMimeSigner
+     * @return $this
      */
     public function setEncryptCertificate($recipientCerts, $cipher = null)
     {
@@ -169,7 +150,7 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
      *
      * @param bool $signThenEncrypt
      *
-     * @return Swift_Signers_SMimeSigner
+     * @return $this
      */
     public function setSignThenEncrypt($signThenEncrypt = true)
     {
@@ -189,7 +170,7 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
     /**
      * Resets internal states.
      *
-     * @return Swift_Signers_SMimeSigner
+     * @return $this
      */
     public function reset()
     {
@@ -201,7 +182,7 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
      *
      * @param Swift_Message $message
      *
-     * @return Swift_Signers_SMimeSigner
+     * @return $this
      */
     public function signMessage(Swift_Message $message)
     {
@@ -297,7 +278,7 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
             $args[] = $this->extraCerts;
         }
 
-        if (!call_user_func_array('openssl_pkcs7_sign', $args)) {
+        if (!openssl_pkcs7_sign(...$args)) {
             throw new Swift_IoException(sprintf('Failed to sign S/Mime message. Error: "%s".', openssl_error_string()));
         }
 

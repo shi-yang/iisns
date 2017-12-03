@@ -27,20 +27,12 @@ use Symfony\Component\Console\Exception\RuntimeException;
  */
 abstract class Input implements InputInterface, StreamableInputInterface
 {
-    /**
-     * @var InputDefinition
-     */
     protected $definition;
     protected $stream;
     protected $options = array();
     protected $arguments = array();
     protected $interactive = true;
 
-    /**
-     * Constructor.
-     *
-     * @param InputDefinition|null $definition A InputDefinition instance
-     */
     public function __construct(InputDefinition $definition = null)
     {
         if (null === $definition) {
@@ -158,7 +150,7 @@ abstract class Input implements InputInterface, StreamableInputInterface
             throw new InvalidArgumentException(sprintf('The "%s" option does not exist.', $name));
         }
 
-        return isset($this->options[$name]) ? $this->options[$name] : $this->definition->getOption($name)->getDefault();
+        return array_key_exists($name, $this->options) ? $this->options[$name] : $this->definition->getOption($name)->getDefault();
     }
 
     /**

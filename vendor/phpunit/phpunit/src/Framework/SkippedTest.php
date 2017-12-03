@@ -8,9 +8,8 @@
  * file that was distributed with this source code.
  */
 
-/**
- * A marker interface for marking a unit test as being skipped.
- */
-interface PHPUnit_Framework_SkippedTest
+namespace PHPUnit\Framework;
+
+interface SkippedTest
 {
 }

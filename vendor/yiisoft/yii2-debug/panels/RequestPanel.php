@@ -20,6 +20,14 @@ use yii\debug\Panel;
 class RequestPanel extends Panel
 {
     /**
+     * @var array list of the PHP predefined variables that are allowed to be displayed in the request panel.
+     * Note that a variable must be accessible via `$GLOBALS`. Otherwise it won't be displayed.
+     * @since 2.0.10
+     */
+    public $displayVars = ['_SERVER', '_GET', '_POST', '_COOKIE', '_FILES', '_SESSION'];
+
+
+    /**
      * @inheritdoc
      */
     public function getName()
@@ -86,7 +94,7 @@ class RequestPanel extends Panel
             $action = null;
         }
 
-        return [
+        $data = [
             'flashes' => $this->getFlashes(),
             'statusCode' => Yii::$app->getResponse()->getStatusCode(),
             'requestHeaders' => $requestHeaders,
@@ -99,13 +107,13 @@ class RequestPanel extends Panel
                 'Raw' => Yii::$app->getRequest()->getRawBody(),
                 'Decoded to Params' => Yii::$app->getRequest()->getBodyParams(),
             ],
-            'SERVER' => empty($_SERVER) ? [] : $_SERVER,
-            'GET' => empty($_GET) ? [] : $_GET,
-            'POST' => empty($_POST) ? [] : $_POST,
-            'COOKIE' => empty($_COOKIE) ? [] : $_COOKIE,
-            'FILES' => empty($_FILES) ? [] : $_FILES,
-            'SESSION' => empty($_SESSION) ? [] : $_SESSION,
         ];
+
+        foreach ($this->displayVars as $name) {
+            $data[trim($name, '_')] = empty($GLOBALS[$name]) ? [] : $GLOBALS[$name];
+        }
+
+        return $data;
     }
 
     /**

@@ -18,7 +18,7 @@ echo GridView::widget([
     'options' => ['class' => 'detail-grid-view table-responsive'],
     'filterModel' => $searchModel,
     'filterUrl' => $panel->getUrl(),
-    'rowOptions' => function ($model, $key, $index, $grid) {
+    'rowOptions' => function ($model) {
         switch ($model['level']) {
             case Logger::LEVEL_ERROR : return ['class' => 'danger'];
             case Logger::LEVEL_WARNING : return ['class' => 'warning'];
@@ -63,7 +63,7 @@ echo GridView::widget([
                             return '<li>' . $panel->getTraceLine($trace) . '</li>';
                         }
                     ]);
-                };
+                }
                 return $message;
             },
             'format' => 'raw',

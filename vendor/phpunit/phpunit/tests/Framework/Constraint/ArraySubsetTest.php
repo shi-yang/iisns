@@ -8,18 +8,23 @@
  * file that was distributed with this source code.
  */
 
-class PHPUnit_Framework_Constraint_ArraySubsetTest extends PHPUnit_Framework_TestCase
+namespace PHPUnit\Framework\Constraint;
+
+use PHPUnit\Framework\ExpectationFailedException;
+use PHPUnit\Framework\TestCase;
+
+class ArraySubsetTest extends TestCase
 {
     /**
-     * @param bool              $expected
-     * @param array|Traversable $subset
-     * @param array|Traversable $other
-     * @param bool              $strict
+     * @param bool               $expected
+     * @param array|\Traversable $subset
+     * @param array|\Traversable $other
+     * @param bool               $strict
      * @dataProvider evaluateDataProvider
      */
     public function testEvaluate($expected, $subset, $other, $strict)
     {
-        $constraint = new PHPUnit_Framework_Constraint_ArraySubset($subset, $strict);
+        $constraint = new ArraySubset($subset, $strict);
 
         $this->assertSame($expected, $constraint->evaluate($other, '', true));
     }
@@ -42,12 +47,12 @@ class PHPUnit_Framework_Constraint_ArraySubsetTest extends PHPUnit_Framework_Tes
             'loose array subset and ArrayObject other' => [
                 'expected' => true,
                 'subset'   => ['bar' => 0],
-                'other'    => new ArrayObject(['foo' => '', 'bar' => '0']),
+                'other'    => new \ArrayObject(['foo' => '', 'bar' => '0']),
                 'strict'   => false
             ],
             'strict ArrayObject subset and array other' => [
                 'expected' => true,
-                'subset'   => new ArrayObject(['bar' => 0]),
+                'subset'   => new \ArrayObject(['bar' => 0]),
                 'other'    => ['foo' => '', 'bar' => 0],
                 'strict'   => true
             ],
@@ -56,10 +61,25 @@ class PHPUnit_Framework_Constraint_ArraySubsetTest extends PHPUnit_Framework_Tes
 
     public function testEvaluateWithArrayAccess()
     {
-        $arrayAccess = new ArrayAccessible(['foo' => 'bar']);
+        $arrayAccess = new \ArrayAccessible(['foo' => 'bar']);
 
-        $constraint = new PHPUnit_Framework_Constraint_ArraySubset(['foo' => 'bar']);
+        $constraint = new ArraySubset(['foo' => 'bar']);
 
         $this->assertTrue($constraint->evaluate($arrayAccess, '', true));
+    }
+
+    public function testEvaluateFailMessage()
+    {
+        $constraint = new ArraySubset(['foo' => 'bar']);
+
+        try {
+            $constraint->evaluate(['baz' => 'bar'], '', false);
+            $this->fail(\sprintf('Expected %s to be thrown.', ExpectationFailedException::class));
+        } catch (ExpectationFailedException $expectedException) {
+            $comparisonFailure = $expectedException->getComparisonFailure();
+            $this->assertNotNull($comparisonFailure);
+            $this->assertContains('[foo] => bar', $comparisonFailure->getExpectedAsString());
+            $this->assertContains('[baz] => bar', $comparisonFailure->getActualAsString());
+        }
     }
 }

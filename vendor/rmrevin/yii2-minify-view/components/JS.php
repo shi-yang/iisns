@@ -7,6 +7,7 @@
 
 namespace rmrevin\yii\minify\components;
 
+use JSMin\JSMin;
 use yii\helpers\Html;
 
 /**
@@ -95,7 +96,7 @@ class JS extends MinifyComponent
             $this->removeJsComments($js);
 
             if ($this->view->minifyJs) {
-                $js = (new \JSMin($js))
+                $js = (new JSMin($js))
                     ->min();
             }
 

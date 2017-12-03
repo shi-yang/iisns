@@ -40,12 +40,12 @@ class Yii1 extends Client
      */
     public function doRequest($request)
     {
-        $this->headers = array();
+        $this->headers = [];
         $_COOKIE        = array_merge($_COOKIE, $request->getCookies());
         $_SERVER        = array_merge($_SERVER, $request->getServer());
         $_FILES         = $this->remapFiles($request->getFiles());
         $_REQUEST       = $this->remapRequestParameters($request->getParameters());
-        $_POST          = $_GET = array();
+        $_POST          = $_GET = [];
 
         if (strtoupper($request->getMethod()) == 'GET') {
             $_GET = $_REQUEST;
@@ -54,7 +54,7 @@ class Yii1 extends Client
         }
 
         // Parse url parts
-        $uriPath = trim(parse_url($request->getUri(), PHP_URL_PATH), '/');
+        $uriPath = ltrim(parse_url($request->getUri(), PHP_URL_PATH), '/');
         $uriQuery = ltrim(parse_url($request->getUri(), PHP_URL_QUERY), '?');
         $scriptName = trim(parse_url($this->url, PHP_URL_PATH), '/');
         if (!empty($uriQuery)) {
@@ -67,7 +67,7 @@ class Yii1 extends Client
         }
 
         // Add script name to request if none
-        if (strpos($uriPath, $scriptName) === false) {
+        if ($scriptName and strpos($uriPath, $scriptName) === false) {
             $uriPath = "/{$scriptName}/{$uriPath}";
         }
 

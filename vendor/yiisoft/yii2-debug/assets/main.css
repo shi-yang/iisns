@@ -152,3 +152,7 @@ a.desc:after {
 .nowrap {
     white-space: nowrap;
 }
+
+.table-pointer tbody tr {
+    cursor: pointer;
+}

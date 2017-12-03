@@ -7,6 +7,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace PHPUnit\Framework;
+
+use SebastianBergmann\Comparator\ComparisonFailure;
 
 /**
  * Exception for expectations which failed their check.
@@ -15,14 +18,16 @@
  * SebastianBergmann\Comparator\ComparisonFailure which is used to
  * generate diff output of the failed expectations.
  */
-class PHPUnit_Framework_ExpectationFailedException extends PHPUnit_Framework_AssertionFailedError
+class ExpectationFailedException extends AssertionFailedError
 {
-    /**
-     * @var SebastianBergmann\Comparator\ComparisonFailure
-     */
     protected $comparisonFailure;
 
-    public function __construct($message, SebastianBergmann\Comparator\ComparisonFailure $comparisonFailure = null, Exception $previous = null)
+    /**
+     * @param string                 $message
+     * @param ComparisonFailure|null $comparisonFailure
+     * @param \Exception|null        $previous
+     */
+    public function __construct($message, ComparisonFailure $comparisonFailure = null, \Exception $previous = null)
     {
         $this->comparisonFailure = $comparisonFailure;
 
@@ -30,7 +35,7 @@ class PHPUnit_Framework_ExpectationFailedException extends PHPUnit_Framework_Ass
     }
 
     /**
-     * @return SebastianBergmann\Comparator\ComparisonFailure
+     * @return null|ComparisonFailure
      */
     public function getComparisonFailure()
     {

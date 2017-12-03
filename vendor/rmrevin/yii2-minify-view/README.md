@@ -28,13 +28,13 @@ The preferred way to install this extension is through [composer](https://getcom
 Either run
 
 ```bash
-composer require "rmrevin/yii2-minify-view:~1.14"
+composer require rmrevin/yii2-minify-view
 ```
 
 or add
 
 ```
-"rmrevin/yii2-minify-view": "~1.14",
+"rmrevin/yii2-minify-view": "^1.15",
 ```
 
 to the `require` section of your `composer.json` file.

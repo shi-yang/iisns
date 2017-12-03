@@ -1,5 +1,5 @@
 <?php
-class Issue2137Test extends PHPUnit_Framework_TestCase
+class Issue2137Test extends PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider provideBrandService

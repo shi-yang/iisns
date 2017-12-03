@@ -68,7 +68,7 @@ class MailPanel extends Panel
                     foreach ($parts as $part) {
                         if (!($part instanceof \Swift_Mime_Attachment)) {
                             /* @var $part \Swift_Mime_MimePart */
-                            if ($part->getContentType() == 'text/plain') {
+                            if ($part->getContentType() === 'text/plain') {
                                 $messageData['charset'] = $part->getCharset();
                                 $body = $part->getBody();
                                 break;
@@ -142,6 +142,10 @@ class MailPanel extends Panel
         return $this->_messages;
     }
 
+    /**
+     * @param mixed $attr
+     * @return string
+     */
     private function convertParams($attr)
     {
         if (is_array($attr)) {

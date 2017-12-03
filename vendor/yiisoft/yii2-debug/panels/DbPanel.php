@@ -8,6 +8,7 @@
 namespace yii\debug\panels;
 
 use Yii;
+use yii\base\InvalidConfigException;
 use yii\debug\Panel;
 use yii\log\Logger;
 use yii\debug\models\search\Db;
@@ -243,6 +244,19 @@ class DbPanel extends Panel
             },
             []
         );
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function isEnabled()
+    {
+        try {
+            $this->getDb();
+        } catch (InvalidConfigException $exception) {
+            return false;
+        }
+        return true;
     }
 
     /**

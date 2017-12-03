@@ -7,6 +7,7 @@ use Codeception\Lib\Connector\Laravel5 as LaravelConnector;
 use Codeception\Lib\Framework;
 use Codeception\Lib\Interfaces\ActiveRecord;
 use Codeception\Lib\Interfaces\PartedModule;
+use Codeception\Lib\Shared\LaravelCommon;
 use Codeception\Lib\ModuleContainer;
 use Codeception\Subscriber\ErrorHandler;
 use Codeception\Util\ReflectionHelper;
@@ -16,29 +17,12 @@ use Illuminate\Support\Collection;
 
 /**
  *
- * This module allows you to run functional tests for Laravel 5.
+ * This module allows you to run functional tests for Laravel 5.1+
  * It should **not** be used for acceptance tests.
  * See the Acceptance tests section below for more details.
  *
- * As of Codeception 2.2 this module only works for Laravel 5.1 and later releases.
- * If you want to test a Laravel 5.0 application you have to use Codeception 2.1.
- * You can also upgrade your Laravel application to 5.1, for more details check the Laravel Upgrade Guide
- * at <https://laravel.com/docs/master/upgrade>.
- *
  * ## Demo project
- * <https://github.com/janhenkgerritsen/codeception-laravel5-sample>
- *
- * ## Status
- *
- * * Maintainer: **Jan-Henk Gerritsen**
- * * Stability: **stable**
- *
- * ## Example
- *
- *     modules:
- *         enabled:
- *             - Laravel5:
- *                 environment_file: .env.testing
+ * <https://github.com/codeception/codeception-laravel5-sample>
  *
  * ## Config
  *
@@ -59,6 +43,27 @@ use Illuminate\Support\Collection;
  * * disable_model_events: `boolean`, default `false` - disable model events.
  * * url: `string`, default `` - the application URL.
  *
+ * ### Example #1 (`functional.suite.yml`)
+ *
+ * Enabling module:
+ *
+ * ```yml
+ * modules:
+ *     enabled:
+ *         - Laravel5
+ * ```
+ *
+ * ### Example #2 (`functional.suite.yml`)
+ *
+ * Enabling module with custom .env file
+ *
+ * ```yml
+ * modules:
+ *     enabled:
+ *         - Laravel5:
+ *             environment_file: .env.testing
+ * ```
+ *
  * ## API
  *
  * * app - `Illuminate\Foundation\Application`
@@ -77,20 +82,25 @@ use Illuminate\Support\Collection;
  * ## Acceptance tests
  *
  * You should not use this module for acceptance tests.
- * If you want to use Laravel functionality with your acceptance tests,
- * for example to do test setup, you can initialize the Laravel functionality
- * by adding the following lines of code to the `_bootstrap.php` file of your test suite:
+ * If you want to use Eloquent within your acceptance tests (paired with WebDriver) enable only
+ * ORM part of this module:
  *
- *     require 'bootstrap/autoload.php';
- *     $app = require 'bootstrap/app.php';
- *     $app->loadEnvironmentFrom('.env.testing');
- *     $app->instance('request', new \Illuminate\Http\Request);
- *     $app->make('Illuminate\Contracts\Http\Kernel')->bootstrap();
+ * ### Example (`acceptance.suite.yml`)
  *
- *
+ * ```yaml
+ * modules:
+ *     enabled:
+ *         - WebDriver:
+ *             browser: chrome
+ *             url: http://127.0.0.1:8000
+ *         - Laravel5:
+ *             part: ORM
+ *             environment_file: .env.testing
+ * ```
  */
 class Laravel5 extends Framework implements ActiveRecord, PartedModule
 {
+    use LaravelCommon;
 
     /**
      * @var \Illuminate\Foundation\Application
@@ -173,6 +183,7 @@ class Laravel5 extends Framework implements ActiveRecord, PartedModule
 
         if ($this->applicationUsesDatabase() && $this->config['cleanup']) {
             $this->app['db']->beginTransaction();
+            $this->debugSection('Database', 'Transaction started');
         }
 
         if ($this->config['run_database_seeder']) {
@@ -193,6 +204,7 @@ class Laravel5 extends Framework implements ActiveRecord, PartedModule
             if ($db instanceof \Illuminate\Database\DatabaseManager) {
                 if ($this->config['cleanup']) {
                     $db->rollback();
+                    $this->debugSection('Database', 'Transaction cancelled; all changes reverted.');
                 }
 
                 /**
@@ -245,12 +257,12 @@ class Laravel5 extends Framework implements ActiveRecord, PartedModule
 
     /**
      * Revert back to the Codeception error handler,
-     * becauses Laravel registers it's own error handler.
+     * because Laravel registers it's own error handler.
      */
     protected function revertErrorHandler()
     {
         $handler = new ErrorHandler();
-        set_error_handler(array($handler, 'errorHandler'));
+        set_error_handler([$handler, 'errorHandler']);
     }
 
     /**
@@ -829,117 +841,6 @@ class Laravel5 extends Framework implements ActiveRecord, PartedModule
         return $this->app[$class];
     }
 
-    /**
-     * Add a binding to the Laravel service container.
-     * (https://laravel.com/docs/master/container)
-     *
-     * ``` php
-     * <?php
-     * $I->haveBinding('My\Interface', 'My\Implementation');
-     * ?>
-     * ```
-     *
-     * @param $abstract
-     * @param $concrete
-     */
-    public function haveBinding($abstract, $concrete)
-    {
-        $this->client->haveBinding($abstract, $concrete);
-    }
-
-    /**
-     * Add a singleton binding to the Laravel service container.
-     * (https://laravel.com/docs/master/container)
-     *
-     * ``` php
-     * <?php
-     * $I->haveSingleton('My\Interface', 'My\Singleton');
-     * ?>
-     * ```
-     *
-     * @param $abstract
-     * @param $concrete
-     */
-    public function haveSingleton($abstract, $concrete)
-    {
-        $this->client->haveBinding($abstract, $concrete, true);
-    }
-
-    /**
-     * Add a contextual binding to the Laravel service container.
-     * (https://laravel.com/docs/master/container)
-     *
-     * ``` php
-     * <?php
-     * $I->haveContextualBinding('My\Class', '$variable', 'value');
-     *
-     * // This is similar to the following in your Laravel application
-     * $app->when('My\Class')
-     *     ->needs('$variable')
-     *     ->give('value');
-     * ?>
-     * ```
-     *
-     * @param $concrete
-     * @param $abstract
-     * @param $implementation
-     */
-    public function haveContextualBinding($concrete, $abstract, $implementation)
-    {
-        $this->client->haveContextualBinding($concrete, $abstract, $implementation);
-    }
-
-    /**
-     * Add an instance binding to the Laravel service container.
-     * (https://laravel.com/docs/master/container)
-     *
-     * ``` php
-     * <?php
-     * $I->haveInstance('My\Class', new My\Class());
-     * ?>
-     * ```
-     *
-     * @param $abstract
-     * @param $instance
-     */
-    public function haveInstance($abstract, $instance)
-    {
-        $this->client->haveInstance($abstract, $instance);
-    }
-
-    /**
-     * Register a handler than can be used to modify the Laravel application object after it is initialized.
-     * The Laravel application object will be passed as an argument to the handler.
-     *
-     * ``` php
-     * <?php
-     * $I->haveApplicationHandler(function($app) {
-     *     $app->make('config')->set(['test_value' => '10']);
-     * });
-     * ?>
-     * ```
-     *
-     * @param $handler
-     */
-    public function haveApplicationHandler($handler)
-    {
-        $this->client->haveApplicationHandler($handler);
-    }
-
-    /**
-     * Clear the registered application handlers.
-     *
-     * ``` php
-     * <?php
-     * $I->clearApplicationHandlers();
-     * ?>
-     * ```
-     *
-     */
-    public function clearApplicationHandlers()
-    {
-        $this->client->clearApplicationHandlers();
-    }
 
     /**
      * Inserts record into the database.

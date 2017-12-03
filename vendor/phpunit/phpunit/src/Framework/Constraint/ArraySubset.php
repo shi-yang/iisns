@@ -7,6 +7,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace PHPUnit\Framework\Constraint;
+
+use PHPUnit\Framework\ExpectationFailedException;
+use SebastianBergmann\Comparator\ComparisonFailure;
 
 /**
  * Constraint that asserts that the array it is evaluated for has a specified subset.
@@ -14,10 +18,10 @@
  * Uses array_replace_recursive() to check if a key value subset is part of the
  * subject array.
  */
-class PHPUnit_Framework_Constraint_ArraySubset extends PHPUnit_Framework_Constraint
+class ArraySubset extends Constraint
 {
     /**
-     * @var array|Traversable
+     * @var array|\Traversable
      */
     protected $subset;
 
@@ -27,37 +31,63 @@ class PHPUnit_Framework_Constraint_ArraySubset extends PHPUnit_Framework_Constra
     protected $strict;
 
     /**
-     * @param array|Traversable $subset
-     * @param bool              $strict Check for object identity
+     * @param array|\Traversable $subset
+     * @param bool               $strict Check for object identity
      */
     public function __construct($subset, $strict = false)
     {
         parent::__construct();
+
         $this->strict = $strict;
         $this->subset = $subset;
     }
 
     /**
-     * Evaluates the constraint for parameter $other. Returns true if the
-     * constraint is met, false otherwise.
+     * Evaluates the constraint for parameter $other
      *
-     * @param array|Traversable $other Array or Traversable object to evaluate.
+     * If $returnResult is set to false (the default), an exception is thrown
+     * in case of a failure. null is returned otherwise.
      *
-     * @return bool
+     * If $returnResult is true, the result of the evaluation is returned as
+     * a boolean value instead: true in case of success, false in case of a
+     * failure.
+     *
+     * @param mixed  $other        Value or object to evaluate.
+     * @param string $description  Additional information about the test
+     * @param bool   $returnResult Whether to return a result or throw an exception
+     *
+     * @return mixed
+     *
+     * @throws ExpectationFailedException
      */
-    protected function matches($other)
+    public function evaluate($other, $description = '', $returnResult = false)
     {
         //type cast $other & $this->subset as an array to allow
         //support in standard array functions.
         $other        = $this->toArray($other);
         $this->subset = $this->toArray($this->subset);
 
-        $patched = array_replace_recursive($other, $this->subset);
+        $patched = \array_replace_recursive($other, $this->subset);
 
         if ($this->strict) {
-            return $other === $patched;
+            $result = $other === $patched;
         } else {
-            return $other == $patched;
+            $result = $other == $patched;
+        }
+
+        if ($returnResult) {
+            return $result;
+        }
+
+        if (!$result) {
+            $f = new ComparisonFailure(
+                $patched,
+                $other,
+                \print_r($patched, true),
+                \print_r($other, true)
+            );
+
+            $this->fail($other, $description, $f);
         }
     }
 
@@ -87,18 +117,22 @@ class PHPUnit_Framework_Constraint_ArraySubset extends PHPUnit_Framework_Constra
     }
 
     /**
-     * @param array|Traversable $other
+     * @param array|\Traversable $other
      *
      * @return array
      */
     private function toArray($other)
     {
-        if (is_array($other)) {
+        if (\is_array($other)) {
             return $other;
-        } elseif ($other instanceof ArrayObject) {
+        }
+
+        if ($other instanceof \ArrayObject) {
             return $other->getArrayCopy();
-        } elseif ($other instanceof Traversable) {
-            return iterator_to_array($other);
+        }
+
+        if ($other instanceof \Traversable) {
+            return \iterator_to_array($other);
         }
 
         // Keep BC even if we know that array would not be the expected one

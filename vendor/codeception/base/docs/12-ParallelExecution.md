@@ -236,7 +236,7 @@ Tasks from `\Codeception\Task\SplitTestsByGroups` will generate non-intersecting
 <?php
     function parallelSplitTests()
     {
-        // Slip your tests by files
+        // Split your tests by files
         $this->taskSplitTestFilesByGroups(5)
             ->projectRoot('.')
             ->testsFrom('tests/acceptance')
@@ -244,7 +244,7 @@ Tasks from `\Codeception\Task\SplitTestsByGroups` will generate non-intersecting
             ->run();
             
         /*
-        // Slip your tests by single tests (alternatively)
+        // Split your tests by single tests (alternatively)
         $this->taskSplitTestsByGroups(5)
             ->projectRoot('.')
             ->testsFrom('tests/acceptance')
@@ -332,7 +332,7 @@ In case you don't use containers you can isolate processes by starting different
 We can define different databases for different processes. This can be done using [Environments](http://codeception.com/docs/07-AdvancedUsage#Environments). Let's define 5 new environments in `acceptance.suite.yml`:
 
 ```yaml
-class_name: AcceptanceTester
+actor: AcceptanceTester
 modules:
     enabled:
         - Db:

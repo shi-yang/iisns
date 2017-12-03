@@ -8,6 +8,7 @@ use Codeception\Lib\Connector\Lumen as LumenConnector;
 use Codeception\Lib\Framework;
 use Codeception\Lib\Interfaces\ActiveRecord;
 use Codeception\Lib\Interfaces\PartedModule;
+use Codeception\Lib\Shared\LaravelCommon;
 use Codeception\Lib\ModuleContainer;
 use Codeception\TestInterface;
 use Codeception\Util\ReflectionHelper;
@@ -54,6 +55,8 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
  */
 class Lumen extends Framework implements ActiveRecord, PartedModule
 {
+    use LaravelCommon;
+
     /**
      * @var \Laravel\Lumen\Application
      */
@@ -73,13 +76,13 @@ class Lumen extends Framework implements ActiveRecord, PartedModule
     public function __construct(ModuleContainer $container, $config = null)
     {
         $this->config = array_merge(
-            array(
+            [
                 'cleanup' => true,
                 'bootstrap' => 'bootstrap' . DIRECTORY_SEPARATOR . 'app.php',
                 'root' => '',
                 'packages' => 'workbench',
                 'url' => 'http://localhost',
-            ),
+            ],
             (array)$config
         );
 
@@ -263,7 +266,7 @@ class Lumen extends Framework implements ActiveRecord, PartedModule
     {
         if (!$user instanceof Authenticatable) {
             $this->fail(
-                'The user passed to amLoggedAs() should be an instance of \\Illuminate\\Contracts\\Auth\\Authenticable'
+                'The user passed to amLoggedAs() should be an instance of \\Illuminate\\Contracts\\Auth\\Authenticatable'
             );
         }
 
