@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `pre_user` (
   `status` tinyint(2) NOT NULL,
   `created_at` int(10) NOT NULL,
   `updated_at` int(10) NOT NULL,
-  `avatar` char(24) NOT NULL,
+  `avatar` varchar(64) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10000 ;
