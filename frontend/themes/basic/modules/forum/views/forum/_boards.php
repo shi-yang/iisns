@@ -2,6 +2,8 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use app\modules\forum\models\Board;
+
+/* @var $boards app\modules\forum\models\Board */
 ?>
 <?php if ($this->beginCache(Yii::$app->getModule('forum')->cachePrefix . $forum->forum_name)): ?>
     <?php foreach($boards as $board): ?>

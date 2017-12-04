@@ -68,11 +68,6 @@ class BoardController extends BaseController
         if ($newThread->load(Yii::$app->request->post())) {
             $newThread->board_id = $model->id;
             if ($newThread->save()) {
-                //更新该版块最后回复信息
-                Yii::$app->db->createCommand()->update('{{%forum_board}}', [
-                    'updated_at' => time(),
-                    'updated_by' => Yii::$app->user->id
-                ], 'id=:id', [':id' => $model->id])->execute();
                 $this->success(Yii::t('app', 'Create successfully.'));
                 return $this->redirect(['/forum/thread/view', 'id' => $newThread->id]);
             }
@@ -87,6 +82,7 @@ class BoardController extends BaseController
     /**
      * Updates an existing Board model.
      * @param integer $id
+     * @throws ForbiddenHttpException if the model cannot be viewed
      * @return mixed
      */
     public function actionUpdate($id)
@@ -110,6 +106,7 @@ class BoardController extends BaseController
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
+     * @throws ForbiddenHttpException if the model cannot be viewed
      */
     public function actionDelete($id)
     {

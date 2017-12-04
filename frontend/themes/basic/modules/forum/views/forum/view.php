@@ -5,26 +5,27 @@ use app\modules\forum\models\Board;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\forum\models\Forum */
+/* @var $newThread app\modules\forum\models\Thread */
 
 $this->title = $model->forum_name;
 $this->registerMetaTag(['name' => 'keywords', 'content' => $model->forum_name]);
 $this->registerMetaTag(['name' => 'description', 'content' => $model->forum_desc]);
 $this->params['forum'] = $model->toArray;
+
+$boardCount = $model->getBoardCount();
 ?>
 
 <div class="col-xs-12 col-sm-8 col-md-8">
-    <?php if ($model->boardCount > 1): ?>
+    <?php if ($boardCount > 1): ?>
         <?= $this->render('_boards',[
             'forum' => $model,
             'boards' => $model->boards,
         ]); ?>
-    <?php elseif ($model->boardCount == 1 && $model->boards[0]->parent_id != Board::AS_CATEGORY): ?>
+    <?php elseif ($boardCount == 1 && $model->boards[0]->parent_id != Board::AS_CATEGORY): ?>
         <?= $this->render('/board/view', [
-                    'model'=>$model->boards[0], 
-                    'newThread'=>$newThread,
-                ]
-            );
-        ?>
+            'model'=>$model->boards[0],
+            'newThread'=>$newThread,
+        ]); ?>
     <?php else: ?>
         <div class="jumbotron">
             <h2><?= Yii::t('app', 'No board!'); ?></h2>

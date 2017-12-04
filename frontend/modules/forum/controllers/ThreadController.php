@@ -93,11 +93,14 @@ class ThreadController extends BaseController
      * Updates an existing Thread model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
+     * @throws ForbiddenHttpException if the model cannot be viewed
      * @return mixed
      */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+
+        // 是否有权修改
         if ($model->user_id !== Yii::$app->user->id) {
             throw new ForbiddenHttpException('You are not allowed to perform this action.');
         }
@@ -116,6 +119,7 @@ class ThreadController extends BaseController
      * Deletes an existing Thread model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
+     * @throws ForbiddenHttpException if the model cannot be viewed
      * @return mixed
      */
     public function actionDelete($id)

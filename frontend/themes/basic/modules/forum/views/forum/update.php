@@ -5,6 +5,7 @@ use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\forum\models\Forum */
+/* @var $action string */
 
 $this->title = $model->forum_name;
 $this->params['forum'] = $model->toArray;

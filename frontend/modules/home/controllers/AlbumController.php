@@ -80,6 +80,7 @@ class AlbumController extends BaseController
     /**
      * 上传图片到相册
      * @param integer $id 相册ID
+     * @return mixed
      */
     public function actionUpload($id)
     {

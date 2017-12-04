@@ -81,6 +81,22 @@ class Thread extends \yii\db\ActiveRecord
             return false;
         }
     }
+
+    /**
+     * @param boolean $insert
+     * @param array $changedAttributes
+     * @return bool
+     */
+    public function afterSave($insert, $changedAttributes)
+    {
+        //更新该版块最后回复信息
+        Yii::$app->db->createCommand()->update('{{%forum_board}}', [
+            'updated_at' => time(),
+            'updated_by' => Yii::$app->user->id
+        ], 'id=:id', [':id' => $this->id])->execute();
+
+        return parent::afterSave($insert, $changedAttributes);
+    }
     
     /**
      *string the URL that shows the detail of the thread

@@ -72,12 +72,15 @@ class ForumController extends BaseController
     public function actionView($id)
     {
         $model = $this->findModel($id);
+
+        // 是否已经审核
         if ($model->status === Forum::STATUS_PENDING) {
             return $this->render('status', [
                 'model' => $model
             ]);
         }
-        //该论坛下只有一个版块，且该版块不是分类，则可以直接发帖
+
+        // 该论坛下只有一个版块，且该版块不是分类，则可以直接发帖
         if ($model->boardCount == 1 && $model->boards[0]->parent_id == Board::AS_BOARD) {
             $newThread = $this->newThread($model->boards[0]->id);
         } else {
@@ -93,11 +96,14 @@ class ForumController extends BaseController
     public function actionBroadcast($id)
     {
         $model = $this->findModel($id);
+
+        // 是否已经审核
         if ($model->status === Forum::STATUS_PENDING) {
             return $this->render('status', [
                 'model' => $model
             ]);
         }
+
         $newBroadcast = $this->newBroadcast($model->id);
         return $this->render('broadcast', [
             'model' => $model,
@@ -129,14 +135,20 @@ class ForumController extends BaseController
      * Updates an existing Forum model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
+     * @param string $action
+     * @throws ForbiddenHttpException if the model cannot be viewed
      * @return mixed
      */
     public function actionUpdate($id, $action='dashboard')
     {
         $model = $this->findModel($id);
+
+        // 是否有权修改
         if ($model->user_id !== Yii::$app->user->id) {
             throw new ForbiddenHttpException('You are not allowed to perform this action.');
         }
+
+        // 是否已经审核
         if ($model->status === Forum::STATUS_PENDING) {
             return $this->render('status', [
                 'model' => $model
@@ -159,13 +171,9 @@ class ForumController extends BaseController
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $cache = Yii::$app->cache;
-            $cachePrefix = Yii::$app->getModule('forum')->cachePrefix;
-            $cacheKey = $cachePrefix . $model->forum_url;
-            $cache->set($cacheKey, $model);
             $this->success(Yii::t('app', 'Saved successfully.'));
         }
-        
+
         return $this->render('update', [
             'model' => $model,
             'newBoard' => $newBoard,
@@ -182,19 +190,10 @@ class ForumController extends BaseController
      */
     protected function findModel($id)
     {
-        $cache = Yii::$app->cache;
-        $cachePrefix = Yii::$app->getModule('forum')->cachePrefix;
-        $cacheKey = $cachePrefix . $id;
-        $model = $cache->get($cacheKey);
-        if ($model === false) {
-            if (($model = Forum::findOne(['forum_url' => $id])) !== null) {
-                $cache->set($cacheKey, $model);
-                return $model;
-            } else {
-                throw new NotFoundHttpException('The requested page does not exist.');
-            }
-        } else {
+        if (($model = Forum::findOne(['forum_url' => $id])) !== null) {
             return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
     
