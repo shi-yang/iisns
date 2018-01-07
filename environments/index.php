@@ -37,6 +37,8 @@ return [
             'backend/web/assets',
             'frontend/runtime',
             'frontend/web/assets',
+            'frontend/web/upload/user',
+            'frontend/web/upload/forum/icon',
         ],
         'setExecutable' => [
             'yii',
@@ -55,6 +57,8 @@ return [
             'backend/web/assets',
             'frontend/runtime',
             'frontend/web/assets',
+            'frontend/web/upload/user',
+            'frontend/web/upload/forum/icon',
         ],
         'setExecutable' => [
             'yii',
