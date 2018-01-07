@@ -30,6 +30,17 @@ iisns - 地球村入口
 
 等等。演示： [www.iisns.com](http://www.iisns.com)
 
+安装
+----
+1. 初始化配置：运行 `./init` 来初始化项目。
+
+![iiSNS](docs/images/install1.png)
+
+2. 配置数据库：在 `common/config/db.php` 文件中配置数据库信息。然后运行 `./yii migrate` 来导入数据表。
+
+![iiSNS](docs/images/install2.png)
+
+3. 前台 Web 入口：`frontend/web`；后台 Web 入口：`backend/web`。
 
 文档
 --------
@@ -40,17 +51,6 @@ iisns - 地球村入口
 获取支持与帮助
 ----------
 提交问题：[Git issues](https://github.com/shi-yang/iisns/issues)
-
-到 iiSNS 论坛上提出: [http://www.iisns.com/@iisns](http://www.iisns.com/@iisns)
-
-参与贡献代码
-----------
-
-您参与的iisns的发展是非常欢迎！您可以以下几种方式参与：
-
-- [报告问题](https://github.com/shi-yang/iisns/issues)
-- [提供反馈意见或设计讨论](http://www.iisns.com/@iisns)
-- 贡献核心代码或修复的bug
 
 许可
 -----
