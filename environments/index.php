@@ -32,6 +32,7 @@ return [
     'Development' => [
         'path' => 'dev',
         'setWritable' => [
+            'common/cache',
             'backend/runtime',
             'backend/web/assets',
             'frontend/runtime',
@@ -49,6 +50,7 @@ return [
     'Production' => [
         'path' => 'prod',
         'setWritable' => [
+            'common/cache',
             'backend/runtime',
             'backend/web/assets',
             'frontend/runtime',

@@ -1,3 +1,8 @@
+# yii console commands
+tests
+/yii_test
+/yii_test.bat
+
 backend/runtime/*
 !backend/runtime/.gitignore
 frontend/runtime/*
