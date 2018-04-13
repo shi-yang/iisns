@@ -11,39 +11,25 @@
 namespace SebastianBergmann\CodeCoverage\Report;
 
 use SebastianBergmann\CodeCoverage\CodeCoverage;
-use SebastianBergmann\CodeCoverage\InvalidArgumentException;
 use SebastianBergmann\CodeCoverage\Node\File;
+use SebastianBergmann\CodeCoverage\RuntimeException;
 
-class Crap4j
+final class Crap4j
 {
     /**
      * @var int
      */
     private $threshold;
 
-    /**
-     * @param int $threshold
-     */
-    public function __construct($threshold = 30)
+    public function __construct(int $threshold = 30)
     {
-        if (!\is_int($threshold)) {
-            throw InvalidArgumentException::create(
-                1,
-                'integer'
-            );
-        }
-
         $this->threshold = $threshold;
     }
 
     /**
-     * @param CodeCoverage $coverage
-     * @param string       $target
-     * @param string       $name
-     *
-     * @return string
+     * @throws \RuntimeException
      */
-    public function process(CodeCoverage $coverage, $target = null, $name = null)
+    public function process(CodeCoverage $coverage, ?string $target = null, ?string $name = null): string
     {
         $document               = new \DOMDocument('1.0', 'UTF-8');
         $document->formatOutput = true;
@@ -117,10 +103,10 @@ class Crap4j
         $stats->appendChild($document->createElement('crapLoad', \round($fullCrapLoad)));
         $stats->appendChild($document->createElement('totalCrap', $fullCrap));
 
+        $crapMethodPercent = 0;
+
         if ($fullMethodCount > 0) {
             $crapMethodPercent = $this->roundValue((100 * $fullCrapMethodCount) / $fullMethodCount);
-        } else {
-            $crapMethodPercent = 0;
         }
 
         $stats->appendChild($document->createElement('crapMethodPercent', $crapMethodPercent));
@@ -131,11 +117,18 @@ class Crap4j
         $buffer = $document->saveXML();
 
         if ($target !== null) {
-            if (!\is_dir(\dirname($target))) {
-                \mkdir(\dirname($target), 0777, true);
+            if (!@\mkdir(\dirname($target), 0777, true) && !\is_dir(\dirname($target))) {
+                throw new \RuntimeException(\sprintf('Directory "%s" was not created', \dirname($target)));
             }
 
-            \file_put_contents($target, $buffer);
+            if (@\file_put_contents($target, $buffer) === false) {
+                throw new RuntimeException(
+                    \sprintf(
+                        'Could not write to "%s',
+                        $target
+                    )
+                );
+            }
         }
 
         return $buffer;
@@ -148,7 +141,7 @@ class Crap4j
      *
      * @return float
      */
-    private function getCrapLoad($crapValue, $cyclomaticComplexity, $coveragePercent)
+    private function getCrapLoad($crapValue, $cyclomaticComplexity, $coveragePercent): float
     {
         $crapLoad = 0;
 
@@ -165,7 +158,7 @@ class Crap4j
      *
      * @return float
      */
-    private function roundValue($value)
+    private function roundValue($value): float
     {
         return \round($value, 2);
     }

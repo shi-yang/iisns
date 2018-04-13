@@ -1,0 +1,27 @@
+{
+    "name": "codeception/phpunit-wrapper",
+    "description": "PHPUnit classes used by Codeception",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Davert",
+            "email": "davert.php@resend.cc"
+        }
+    ],
+    "require": {
+        "phpunit/phpunit": "^7.1",
+        "phpunit/php-code-coverage": "^6.0",
+        "sebastian/comparator": "^2.0",
+        "sebastian/diff": "^3.0"
+    },
+    "autoload":{
+        "psr-4":{
+            "Codeception\\PHPUnit\\": "src\\"
+        }
+    },
+    "require-dev": {
+        "vlucas/phpdotenv": "^2.4",
+        "codeception/specify": "*"
+    }
+}

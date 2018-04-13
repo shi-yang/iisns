@@ -1,5 +1,10 @@
-Yii 2 Composer Installer
-========================
+<p align="center">
+    <a href="https://getcomposer.org/" target="_blank" rel="external">
+        <img src="https://getcomposer.org/img/logo-composer-transparent3.png" height="178px">
+    </a>
+    <h1 align="center">Yii 2 Composer Installer</h1>
+    <br>
+</p>
 
 This is the composer installer for [Yii framework 2.0](http://www.yiiframework.com) extensions.
 It implements a new composer package type named `yii2-extension`,
@@ -9,6 +14,7 @@ For license information check the [LICENSE](LICENSE.md)-file.
 
 [![Latest Stable Version](https://poser.pugx.org/yiisoft/yii2-composer/v/stable.png)](https://packagist.org/packages/yiisoft/yii2-composer)
 [![Total Downloads](https://poser.pugx.org/yiisoft/yii2-composer/downloads.png)](https://packagist.org/packages/yiisoft/yii2-composer)
+[![Build Status](https://travis-ci.org/yiisoft/yii2-composer.svg?branch=master)](https://travis-ci.org/yiisoft/yii2-composer)
 
 
 Usage

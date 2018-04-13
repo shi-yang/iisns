@@ -19,8 +19,8 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "yiisoft/yii2": ">=2.0.4",
-        "yiisoft/yii2-bootstrap": "~2.0",
+        "yiisoft/yii2": "~2.0.13",
+        "yiisoft/yii2-bootstrap": "~2.0.0",
         "phpspec/php-diff": ">=1.0.2",
         "bower-asset/typeahead.js": "0.10.* | ~0.11.0"
     },
@@ -37,5 +37,11 @@
             "npm-asset-library": "vendor/npm",
             "bower-asset-library": "vendor/bower"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ]
 }

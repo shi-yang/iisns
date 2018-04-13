@@ -12,29 +12,29 @@ namespace PHPUnit\TextUI;
 
 use File_Iterator_Facade;
 use PharIo\Manifest\ApplicationName;
+use PharIo\Manifest\Exception as ManifestException;
 use PharIo\Manifest\ManifestLoader;
 use PharIo\Version\Version as PharIoVersion;
-use PharIo\Manifest\Exception as ManifestException;
 use PHPUnit\Framework\Exception;
-use PHPUnit\Framework\TestSuite;
 use PHPUnit\Framework\Test;
 use PHPUnit\Framework\TestListener;
+use PHPUnit\Framework\TestSuite;
 use PHPUnit\Runner\PhptTestCase;
 use PHPUnit\Runner\StandardTestSuiteLoader;
-use PHPUnit\Runner\Version;
 use PHPUnit\Runner\TestSuiteLoader;
+use PHPUnit\Runner\Version;
 use PHPUnit\Util\Configuration;
 use PHPUnit\Util\ConfigurationGenerator;
-use PHPUnit\Util\Fileloader;
+use PHPUnit\Util\FileLoader;
 use PHPUnit\Util\Filesystem;
 use PHPUnit\Util\Getopt;
 use PHPUnit\Util\Log\TeamCity;
-use PHPUnit\Util\TestDox\TextResultPrinter;
 use PHPUnit\Util\Printer;
+use PHPUnit\Util\TestDox\CliTestDoxPrinter;
 use PHPUnit\Util\TextTestListRenderer;
 use PHPUnit\Util\XmlTestListRenderer;
 use ReflectionClass;
-use SebastianBergmann\CodeCoverage\Report\PHP;
+
 use Throwable;
 
 /**
@@ -139,9 +139,12 @@ class Command
     private $versionStringPrinted = false;
 
     /**
-     * @param bool $exit
+     * @throws \RuntimeException
+     * @throws \ReflectionException
+     * @throws \PHPUnit\Framework\Exception
+     * @throws \InvalidArgumentException
      */
-    public static function main($exit = true)
+    public static function main(bool $exit = true): int
     {
         $command = new static;
 
@@ -149,12 +152,12 @@ class Command
     }
 
     /**
-     * @param array $argv
-     * @param bool  $exit
-     *
-     * @return int
+     * @throws \RuntimeException
+     * @throws \ReflectionException
+     * @throws \InvalidArgumentException
+     * @throws Exception
      */
-    public function run(array $argv, $exit = true)
+    public function run(array $argv, bool $exit = true): int
     {
         $this->handleArguments($argv);
 
@@ -214,10 +217,8 @@ class Command
 
     /**
      * Create a TestRunner, override in subclasses.
-     *
-     * @return TestRunner
      */
-    protected function createRunner()
+    protected function createRunner(): TestRunner
     {
         return new TestRunner($this->arguments['loader']);
     }
@@ -265,9 +266,9 @@ class Command
      * }
      * </code>
      *
-     * @param array $argv
+     * @throws Exception
      */
-    protected function handleArguments(array $argv)
+    protected function handleArguments(array $argv): void
     {
         try {
             $this->options = Getopt::getopt(
@@ -548,7 +549,7 @@ class Command
                     break;
 
                 case '--testdox':
-                    $this->arguments['printer'] = TextResultPrinter::class;
+                    $this->arguments['printer'] = CliTestDoxPrinter::class;
 
                     break;
 
@@ -693,6 +694,7 @@ class Command
                     $optionName = \str_replace('--', '', $option[0]);
 
                     $handler = null;
+
                     if (isset($this->longOptions[$optionName])) {
                         $handler = $this->longOptions[$optionName];
                     } elseif (isset($this->longOptions[$optionName . '='])) {
@@ -834,7 +836,7 @@ class Command
             }
 
             if (!isset($this->arguments['test'])) {
-                $testSuite = $configuration->getTestSuiteConfiguration($this->arguments['testsuite'] ?? null);
+                $testSuite = $configuration->getTestSuiteConfiguration($this->arguments['testsuite'] ?? '');
 
                 if ($testSuite !== null) {
                     $this->arguments['test'] = $testSuite;
@@ -864,13 +866,8 @@ class Command
 
     /**
      * Handles the loading of the PHPUnit\Runner\TestSuiteLoader implementation.
-     *
-     * @param string $loaderClass
-     * @param string $loaderFile
-     *
-     * @return TestSuiteLoader|null
      */
-    protected function handleLoader($loaderClass, $loaderFile = '')
+    protected function handleLoader(string $loaderClass, string $loaderFile = ''): ?TestSuiteLoader
     {
         if (!\class_exists($loaderClass, false)) {
             if ($loaderFile == '') {
@@ -896,7 +893,7 @@ class Command
         }
 
         if ($loaderClass == StandardTestSuiteLoader::class) {
-            return;
+            return null;
         }
 
         $this->exitWithErrorMessage(
@@ -905,17 +902,16 @@ class Command
                 $loaderClass
             )
         );
+
+        return null;
     }
 
     /**
      * Handles the loading of the PHPUnit\Util\Printer implementation.
      *
-     * @param string $printerClass
-     * @param string $printerFile
-     *
-     * @return Printer|string|null
+     * @return null|Printer|string
      */
-    protected function handlePrinter($printerClass, $printerFile = '')
+    protected function handlePrinter(string $printerClass, string $printerFile = '')
     {
         if (!\class_exists($printerClass, false)) {
             if ($printerFile == '') {
@@ -982,19 +978,17 @@ class Command
 
     /**
      * Loads a bootstrap file.
-     *
-     * @param string $filename
      */
-    protected function handleBootstrap($filename)
+    protected function handleBootstrap(string $filename): void
     {
         try {
-            Fileloader::checkAndLoad($filename);
+            FileLoader::checkAndLoad($filename);
         } catch (Exception $e) {
             $this->exitWithErrorMessage($e->getMessage());
         }
     }
 
-    protected function handleVersionCheck()
+    protected function handleVersionCheck(): void
     {
         $this->printVersionString();
 
@@ -1017,7 +1011,7 @@ class Command
     /**
      * Show the help message.
      */
-    protected function showHelp()
+    protected function showHelp(): void
     {
         $this->printVersionString();
 
@@ -1121,11 +1115,11 @@ EOT;
     /**
      * Custom callback for test suite discovery.
      */
-    protected function handleCustomTestSuite()
+    protected function handleCustomTestSuite(): void
     {
     }
 
-    private function printVersionString()
+    private function printVersionString(): void
     {
         if ($this->versionStringPrinted) {
             return;
@@ -1136,10 +1130,7 @@ EOT;
         $this->versionStringPrinted = true;
     }
 
-    /**
-     * @param string $message
-     */
-    private function exitWithErrorMessage($message)
+    private function exitWithErrorMessage(string $message): void
     {
         $this->printVersionString();
 
@@ -1148,10 +1139,7 @@ EOT;
         exit(TestRunner::FAILURE_EXIT);
     }
 
-    /**
-     * @param string $directory
-     */
-    private function handleExtensions($directory)
+    private function handleExtensions(string $directory): void
     {
         $facade = new File_Iterator_Facade;
 

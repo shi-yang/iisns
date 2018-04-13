@@ -49,7 +49,7 @@ abstract class Generator extends Model
      */
     public $template = 'default';
     /**
-     * @var boolean whether the strings will be generated using `Yii::t()` or normal strings.
+     * @var bool whether the strings will be generated using `Yii::t()` or normal strings.
      */
     public $enableI18N = false;
     /**
@@ -262,7 +262,7 @@ abstract class Generator extends Model
      * @param array $answers
      * @param string $results this parameter receives a value from this method indicating the log messages
      * generated while saving the code files.
-     * @return boolean whether files are successfully saved without any error.
+     * @return bool whether files are successfully saved without any error.
      */
     public function save($files, $answers, &$results)
     {
@@ -330,7 +330,7 @@ abstract class Generator extends Model
         } else {
             $templatePath = $this->templates[$this->template];
             foreach ($this->requiredTemplates() as $template) {
-                if (!is_file($templatePath . '/' . $template)) {
+                if (!is_file(Yii::getAlias($templatePath . '/' . $template))) {
                     $this->addError('template', "Unable to find the required code template file '$template'.");
                 }
             }
@@ -396,7 +396,7 @@ abstract class Generator extends Model
 
     /**
      * @param string $value the attribute to be validated
-     * @return boolean whether the value is a reserved PHP keyword.
+     * @return bool whether the value is a reserved PHP keyword.
      */
     public function isReservedKeyword($value)
     {

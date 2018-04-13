@@ -7,7 +7,13 @@ echo '<h1>Request</h1>';
 
 $items = [];
 
-$parametersContent = $this->render('table', [
+$parametersContent = '';
+
+if (isset($panel->data['general'])) {
+    $parametersContent .= $this->render('table', ['caption' => 'General Info', 'values' => $panel->data['general']]);
+}
+
+$parametersContent .= $this->render('table', [
     'caption' => 'Routing',
     'values' => [
         'Route' => $panel->data['route'],

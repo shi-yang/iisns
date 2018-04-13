@@ -9,6 +9,7 @@ namespace yii\gii;
 
 use Yii;
 use yii\base\BootstrapInterface;
+use yii\helpers\Json;
 use yii\web\ForbiddenHttpException;
 
 /**
@@ -66,13 +67,13 @@ class Module extends \yii\base\Module implements BootstrapInterface
      */
     public $generators = [];
     /**
-     * @var integer the permission to be set for newly generated code files.
+     * @var int the permission to be set for newly generated code files.
      * This value will be used by PHP chmod function.
      * Defaults to 0666, meaning the file is read-writable by all users.
      */
     public $newFileMode = 0666;
     /**
-     * @var integer the permission to be set for newly generated directories.
+     * @var int the permission to be set for newly generated directories.
      * This value will be used by PHP chmod function.
      * Defaults to 0777, meaning the directory can be read, written and executed by all users.
      */
@@ -136,7 +137,7 @@ class Module extends \yii\base\Module implements BootstrapInterface
     }
 
     /**
-     * @return boolean whether the module can be accessed by the current user
+     * @return int whether the module can be accessed by the current user
      */
     protected function checkAccess()
     {
@@ -165,5 +166,19 @@ class Module extends \yii\base\Module implements BootstrapInterface
             'module' => ['class' => 'yii\gii\generators\module\Generator'],
             'extension' => ['class' => 'yii\gii\generators\extension\Generator'],
         ];
+    }
+
+    /**
+     * @inheritdoc
+     * @since 2.0.6
+     */
+    protected function defaultVersion()
+    {
+        $packageInfo = Json::decode(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'composer.json'));
+        $extensionName = $packageInfo['name'];
+        if (isset(Yii::$app->extensions[$extensionName])) {
+            return Yii::$app->extensions[$extensionName]['version'];
+        }
+        return parent::defaultVersion();
     }
 }

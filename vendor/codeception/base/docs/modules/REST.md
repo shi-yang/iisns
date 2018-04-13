@@ -37,8 +37,32 @@ This module requires PHPBrowser or any of Framework modules enabled.
 Conflicts with SOAP module
 
 
-
 ## Actions
+
+### amAWSAuthenticated
+ 
+Allows to send REST request using AWS Authorization
+Only works with PhpBrowser
+Example
+Config -
+
+modules:
+     enabled:
+         - REST:
+             aws:
+                 key: accessKey
+                 secret: accessSecret
+                 service: awsService
+                 region: awsRegion
+
+```php
+<?php
+$I->amAWSAuthenticated();
+?>
+```
+ * `param array` $additionalAWSConfig
+@throws ModuleException
+
 
 ### amBearerAuthenticated
  
@@ -840,4 +864,4 @@ $I->stopFollowingRedirects();
  * `[Part]` xml
  * `[Part]` json
 
-<p>&nbsp;</p><div class="alert alert-warning">Module reference is taken from the source code. <a href="https://github.com/Codeception/Codeception/tree/2.3/src/Codeception/Module/REST.php">Help us to improve documentation. Edit module reference</a></div>
+<p>&nbsp;</p><div class="alert alert-warning">Module reference is taken from the source code. <a href="https://github.com/Codeception/Codeception/tree/2.4/src/Codeception/Module/REST.php">Help us to improve documentation. Edit module reference</a></div>

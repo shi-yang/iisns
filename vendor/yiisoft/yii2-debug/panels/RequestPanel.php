@@ -102,6 +102,13 @@ class RequestPanel extends Panel
             'route' => Yii::$app->requestedAction ? Yii::$app->requestedAction->getUniqueId() : Yii::$app->requestedRoute,
             'action' => $action,
             'actionParams' => Yii::$app->requestedParams,
+            'general' => [
+                'method' => Yii::$app->getRequest()->getMethod(),
+                'isAjax' => Yii::$app->getRequest()->getIsAjax(),
+                'isPjax' => Yii::$app->getRequest()->getIsPjax(),
+                'isFlash' => Yii::$app->getRequest()->getIsFlash(),
+                'isSecureConnection' => Yii::$app->getRequest()->getIsSecureConnection(),
+            ],
             'requestBody' => Yii::$app->getRequest()->getRawBody() == '' ? [] : [
                 'Content Type' => Yii::$app->getRequest()->getContentType(),
                 'Raw' => Yii::$app->getRequest()->getRawBody(),

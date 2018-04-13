@@ -28,7 +28,7 @@ class ActiveField extends \yii\widgets\ActiveField
     public function init()
     {
         $stickyAttributes = $this->model->stickyAttributes();
-        if (in_array($this->attribute, $stickyAttributes)) {
+        if (in_array($this->attribute, $stickyAttributes, true)) {
             $this->sticky();
         }
         $hints = $this->model->hints();

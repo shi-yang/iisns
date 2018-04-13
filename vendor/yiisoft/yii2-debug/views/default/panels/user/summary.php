@@ -8,7 +8,7 @@
         <?php if (!isset($panel->data['id'])): ?>
             <span class="yii-debug-toolbar__label">Guest</span>
         <?php else: ?>
-            <?php if (Yii::$app->getUser()->isGuest || $panel->userSwitch->isMainUser()): ?>
+            <?php if ($panel->getUser()->isGuest || $panel->userSwitch->isMainUser()): ?>
                 User <span
                         class="yii-debug-toolbar__label yii-debug-toolbar__label_info"><?= $panel->data['id'] ?></span>
             <?php else: ?>

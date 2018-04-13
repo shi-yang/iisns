@@ -14,11 +14,11 @@ use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\TestSuite;
 use PHPUnit\Runner\PhptTestCase;
 
-class XmlTestListRenderer
+final class XmlTestListRenderer
 {
     public function render(TestSuite $suite): string
     {
-        $writer = new \XmlWriter;
+        $writer = new \XMLWriter;
 
         $writer->openMemory();
         $writer->setIndent(true);

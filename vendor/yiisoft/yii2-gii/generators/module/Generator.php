@@ -16,7 +16,7 @@ use yii\helpers\StringHelper;
  * This generator will generate the skeleton code needed by a module.
  *
  * @property string $controllerNamespace The controller namespace of the module. This property is read-only.
- * @property boolean $modulePath The directory that contains the module class. This property is read-only.
+ * @property bool $modulePath The directory that contains the module class. This property is read-only.
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
@@ -153,7 +153,7 @@ EOD;
     }
 
     /**
-     * @return boolean the directory that contains the module class
+     * @return bool the directory that contains the module class
      */
     public function getModulePath()
     {

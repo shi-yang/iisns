@@ -175,6 +175,12 @@ class Plugin implements PluginInterface, EventSubscriberInterface
      */
     private function findUpgradeNotes($packageName, $fromVersion)
     {
+        if (preg_match('/^([0-9]\.[0-9]+\.?[0-9]*)/', $fromVersion, $m)) {
+            $fromVersionMajor = $m[1];
+        } else {
+            $fromVersionMajor = $fromVersion;
+        }
+
         $upgradeFile = $this->_vendorDir . '/' . $packageName . '/UPGRADE.md';
         if (!is_file($upgradeFile) || !is_readable($upgradeFile)) {
             return false;
@@ -182,9 +188,14 @@ class Plugin implements PluginInterface, EventSubscriberInterface
         $lines = preg_split('~\R~', file_get_contents($upgradeFile));
         $relevantLines = [];
         $consuming = false;
+        // whether an exact match on $fromVersion has been encountered
+        $foundExactMatch = false;
         foreach($lines as $line) {
-            if (preg_match('/^Upgrade from Yii ([0-9]\.[0-9]+\.?[0-9]*)/i', $line, $matches)) {
-                if (version_compare($matches[1], $fromVersion, '<')) {
+            if (preg_match('/^Upgrade from Yii ([0-9]\.[0-9]+\.?[0-9\.]*)/i', $line, $matches)) {
+                if ($matches[1] === $fromVersion) {
+                    $foundExactMatch = true;
+                }
+                if (version_compare($matches[1], $fromVersion, '<') && ($foundExactMatch || version_compare($matches[1], $fromVersionMajor, '<'))) {
                     break;
                 }
                 $consuming = true;
@@ -199,10 +210,10 @@ class Plugin implements PluginInterface, EventSubscriberInterface
     /**
      * Check whether a version is numeric, e.g. 2.0.10.
      * @param string $version
-     * @return int|false
+     * @return bool
      */
     private function isNumericVersion($version)
     {
-        return preg_match('~^([0-9]\.[0-9]+\.?[0-9]*)~', $version);
+        return (bool) preg_match('~^([0-9]\.[0-9]+\.?[0-9\.]*)~', $version);
     }
 }

@@ -61,7 +61,7 @@ TimelineAsset::register($this);
         <?php Pjax::begin(['formSelector' => '#debug-timeline-search', 'linkSelector' => false, 'options' => ['id' => 'debug-timeline-panel__pjax']]); ?>
         <?php if (($models = $dataProvider->models) === []): ?>
             <div class="debug-timeline-panel__item empty">
-                <span><?= Yii::t('yii', 'No results found.'); ?></span>
+                <span>No results found.</span>
             </div>
         <?php else: ?>
             <?php foreach ($models as $key => $model): ?>

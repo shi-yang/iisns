@@ -156,7 +156,6 @@ abstract class TestsForDb extends \Codeception\Test\Unit
         $this->assertEquals($num, 0);
     }
 
-
     public function testLoadWithPopulator()
     {
         $this->module->_cleanup();

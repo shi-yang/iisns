@@ -12,7 +12,7 @@ echo "<?php\n";
 /* @var $this yii\web\View */
 <?= "?>" ?>
 
-<h1><?= $generator->getControllerID() . '/' . $action ?></h1>
+<h1><?= $generator->getControllerSubPath() . $generator->getControllerID() . '/' . $action ?></h1>
 
 <p>
     You may change the content of this page by modifying

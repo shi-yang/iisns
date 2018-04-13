@@ -15,6 +15,10 @@
         {
             "name": "Qiang Xue",
             "email": "qiang.xue@gmail.com"
+        },
+        {
+            "name": "Carsten Brandt",
+            "email": "mail@cebe.cc"
         }
     ],
     "require": {
@@ -25,6 +29,9 @@
     },
     "autoload": {
         "psr-4": { "yii\\composer\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "tests\\": "tests" }
     },
     "extra": {
         "class": "yii\\composer\\Plugin",

@@ -11,7 +11,7 @@ use yii\widgets\DetailView;
 <h1>User</h1>
 
 <?php
-if (isset($panel->data['identity'], $panel->data['attributes'])) {
+if (isset($panel->data['identity'])) {
     $items = [
         [
             'label'   => 'User',

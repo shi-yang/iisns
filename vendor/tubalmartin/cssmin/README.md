@@ -258,11 +258,16 @@ Values & notes: [pcre.recursion_limit documentation](http://php.net/manual/en/pc
 * [Minify](https://github.com/mrclay/minify) Minify is an HTTP content server. It compresses sources of content (usually files), combines the result and serves it with appropriate HTTP headers.
 * [Autoptimize](http://wordpress.org/plugins/autoptimize/) is a Wordpress plugin. Autoptimize speeds up your website and helps you save bandwidth by aggregating and minimizing JS, CSS and HTML.
 * [IMPRESSPAGES](http://www.impresspages.org/) PHP framework with content editor.
-* Other dependent Composer packages.
+* [Other dependent Composer packages](https://packagist.org/packages/tubalmartin/cssmin/dependents).
 
 <a name="changelog"></a>
 
 ## 6. Changelog
+
+### v4.1.1 15 Jan 2018
+
+FIXED:
+* Breakage when minifying at-import rule with unquoted urls containing semicolons [#45](https://github.com/tubalmartin/YUI-CSS-compressor-PHP-port/issues/45)
 
 ### v4.1.0 16 May 2017
 
@@ -282,6 +287,10 @@ NEW:
   * Modified: `run()` method signature. It only accepts one argument now.
   * Added: `removeImportantComments()` method & `--keep-important-comments` CLI argument.
 * Important comments `/*! ... */` can be optionally removed from output too calling `removeImportantComments()` method.
+
+### v3.3.1 16 May 2017
+
+* Backported performance improvements made in v4.1.0
 
 ### v3.3.0 13 May 2017
 

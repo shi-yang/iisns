@@ -8,7 +8,7 @@
 namespace yii\gii;
 
 use Yii;
-use yii\base\Object;
+use yii\base\BaseObject;
 use yii\gii\components\DiffRendererHtmlInline;
 use yii\helpers\Html;
 
@@ -22,7 +22,7 @@ use yii\helpers\Html;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class CodeFile extends Object
+class CodeFile extends BaseObject
 {
     /**
      * The code file is new.
@@ -59,9 +59,12 @@ class CodeFile extends Object
      * Constructor.
      * @param string $path the file path that the new code should be saved to.
      * @param string $content the newly generated code content.
+     * @param array $config name-value pairs that will be used to initialize the object properties
      */
-    public function __construct($path, $content)
+    public function __construct($path, $content, $config = [])
     {
+        parent::__construct($config);
+
         $this->path = strtr($path, '/\\', DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR);
         $this->content = $content;
         $this->id = md5($this->path);
@@ -74,7 +77,7 @@ class CodeFile extends Object
 
     /**
      * Saves the code into the file specified by [[path]].
-     * @return string|boolean the error occurred while saving the code file, or true if no error.
+     * @return string|bool the error occurred while saving the code file, or true if no error.
      */
     public function save()
     {
@@ -128,7 +131,7 @@ class CodeFile extends Object
     /**
      * Returns preview or false if it cannot be rendered
      *
-     * @return boolean|string
+     * @return bool|string
      */
     public function preview()
     {
@@ -150,7 +153,7 @@ class CodeFile extends Object
     /**
      * Returns diff or false if it cannot be calculated
      *
-     * @return boolean|string
+     * @return bool|string
      */
     public function diff()
     {

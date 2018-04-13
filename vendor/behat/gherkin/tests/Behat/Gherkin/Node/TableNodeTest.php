@@ -18,6 +18,27 @@ class TableNodeTest extends \PHPUnit_Framework_TestCase
         ));
     }
 
+    public function constructorTestDataProvider() {
+        return array(
+            'One-dimensional array' => array(
+                array('everzet', 'antono')
+            ),
+            'Three-dimensional array' => array(
+                array(array(array('everzet', 'antono')))
+            )
+        );
+    }
+
+    /**
+     * @dataProvider constructorTestDataProvider
+     * @expectedException \Behat\Gherkin\Exception\NodeException
+     * @expectedExceptionMessage Table is not two-dimensional.
+     */
+    public function testConstructorExpectsTwoDimensionalArrays($table)
+    {
+        new TableNode($table);
+    }
+
     public function testHashTable()
     {
         $table = new TableNode(array(
@@ -219,4 +240,30 @@ class TableNodeTest extends \PHPUnit_Framework_TestCase
 TABLE;
         $this->assertEquals($expected, $table->getTableAsString());
     }
+
+    public function testFromList()
+    {
+        $table = TableNode::fromList(array(
+            'everzet',
+            'antono'
+        ));
+
+        $expected = new TableNode(array(
+            array('everzet'),
+            array('antono'),
+        ));
+        $this->assertEquals($expected, $table);
+    }
+
+    /**
+     * @expectedException \Behat\Gherkin\Exception\NodeException
+     */
+    public function testGetTableFromListWithMultidimensionalArrayArgument()
+    {
+        TableNode::fromList(array(
+            array(1, 2, 3),
+            array(4, 5, 6)
+        ));
+    }
+
 }

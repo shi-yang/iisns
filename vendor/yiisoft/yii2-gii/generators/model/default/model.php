@@ -9,6 +9,7 @@
 /* @var $className string class name */
 /* @var $queryClassName string query class name */
 /* @var $tableSchema yii\db\TableSchema */
+/* @var $properties array list of properties (property => [type, name. comment]) */
 /* @var $labels string[] list of attribute labels (name => label) */
 /* @var $rules string[] list of validation rules */
 /* @var $relations array list of relations (name => relation declaration) */
@@ -23,8 +24,8 @@ use Yii;
 /**
  * This is the model class for table "<?= $generator->generateTableName($tableName) ?>".
  *
-<?php foreach ($tableSchema->columns as $column): ?>
- * @property <?= "{$column->phpType} \${$column->name}\n" ?>
+<?php foreach ($properties as $property => $data): ?>
+ * @property <?= "{$data['type']} \${$property}"  . ($data['comment'] ? ' ' . strtr($data['comment'], ["\n" => ' ']) : '') . "\n" ?>
 <?php endforeach; ?>
 <?php if (!empty($relations)): ?>
  *
@@ -58,7 +59,7 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
      */
     public function rules()
     {
-        return [<?= "\n            " . implode(",\n            ", $rules) . ",\n        " ?>];
+        return [<?= empty($rules) ? '' : ("\n            " . implode(",\n            ", $rules) . ",\n        ") ?>];
     }
 
     /**

@@ -2,6 +2,7 @@ yii.gii = (function ($) {
 
     var $clipboardContainer = $("#clipboard-container"),
     valueToCopy = '',
+    ajaxRequest = null,
 
     onKeydown = function(e) {
         var $target;
@@ -63,12 +64,11 @@ yii.gii = (function ($) {
         });
     };
 
-    var fillModal = function(data) {
+    var fillModal = function($link, data) {
         var $modal = $('#preview-modal'),
-         $link = $(this),
          $modalBody = $modal.find('.modal-body');
         if (!$link.hasClass('modal-refresh')) {
-            var filesSelector = 'a.' + $modal.data('action');
+            var filesSelector = 'a.' + $modal.data('action') + ':visible';
             var $files = $(filesSelector);
             var index = $files.filter('[href="' + $link.attr('href') + '"]').index(filesSelector);
             var $prev = $files.eq(index - 1);
@@ -78,12 +78,18 @@ yii.gii = (function ($) {
             $modal.find('.modal-next').attr('href', $next.attr('href')).data('title', $next.data('title'));
         }
         $modalBody.html(data);
-        valueToCopy = $("<div/>").html(data.replace(/(<(br[^>]*)>)/ig, '\n')).text().trim() + '\n';
+        valueToCopy = $("<div/>").html(data.replace(/(<(br[^>]*)>)/ig, '\n').replace(/&nbsp;/ig, ' ')).text().trim() + '\n';
         $modal.find('.content').css('max-height', ($(window).height() - 200) + 'px');
     };
 
     var initPreviewDiffLinks = function () {
         $('.preview-code, .diff-code, .modal-refresh, .modal-previous, .modal-next').on('click', function () {
+            if (ajaxRequest !== null) {
+                if ($.isFunction(ajaxRequest.abort)) {
+                    ajaxRequest.abort();
+                }
+            }
+            var that = this;
             var $modal = $('#preview-modal');
             var $link = $(this);
             $modal.find('.modal-refresh').attr('href', $link.attr('href'));
@@ -102,13 +108,14 @@ yii.gii = (function ($) {
                 $modal.find('.modal-checkbox').addClass('disabled');
             }
             $modal.find('.modal-checkbox span').toggleClass('glyphicon-check', checked).toggleClass('glyphicon-unchecked', !checked);
-            $.ajax({
+
+            ajaxRequest = $.ajax({
                 type: 'POST',
                 cache: false,
                 url: $link.prop('href'),
                 data: $('.default-view form').serializeArray(),
                 success: function (data) {
-                    fillModal(data);
+                    fillModal($(that), data);
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     $modal.find('.modal-body').html('<div class="error">' + XMLHttpRequest.responseText + '</div>');
@@ -136,7 +143,7 @@ yii.gii = (function ($) {
         var $modal = $('#preview-modal');
         var $checkbox = $modal.data('current').closest('tr').find('input');
         var checked = !$checkbox.prop('checked');
-        $checkbox.prop('checked', checked);
+        $checkbox.trigger('click');
         $modal.find('.modal-checkbox span').toggleClass('glyphicon-check', checked).toggleClass('glyphicon-unchecked', !checked);
         return false;
     };
@@ -157,10 +164,31 @@ yii.gii = (function ($) {
     };
 
     var initToggleActions = function () {
-        $('#action-toggle :input').change(function () {
+        $('#action-toggle').find(':input').change(function () {
             $(this).parent('label').toggleClass('active', this.checked);
-            $('.' + this.value, '.default-view-files table').toggle(this.checked).find('.check input').attr('disabled', !this.checked);
+            var $rows = $('.' + this.value, '.default-view-files table').toggleClass('action-hidden', !this.checked);
+            if (this.checked) {
+                $rows.not('.filter-hidden').show();
+            } else {
+                $rows.hide();
+            }
+            $rows.find('.check input').attr('disabled', !this.checked);
             checkAllToggle();
+        });
+    };
+
+    var initFilterRows = function () {
+        $('#filter-input').on('input', function () {
+            var that = this,
+            $rows = $('#files-body').find('tr');
+
+            $rows.hide().toggleClass('filter-hidden', true).filter(function () {
+                return $(this).text().toUpperCase().indexOf(that.value.toUpperCase()) > -1;
+            }).toggleClass('filter-hidden', false).not('.action-hidden').show();
+
+            $rows.find('input').each(function(){
+                $(this).prop('disabled', $(this).is(':hidden'));
+            });
         });
     };
 
@@ -188,6 +216,7 @@ yii.gii = (function ($) {
             initPreviewDiffLinks();
             initConfirmationCheckboxes();
             initToggleActions();
+            initFilterRows();
 
             // model generator: hide class name inputs when table name input contains *
             $('#model-generator #generator-tablename').change(function () {
@@ -211,7 +240,7 @@ yii.gii = (function ($) {
                 }
                 if ($('#generator-modelclass').val() === '' && tableName && tableName.indexOf('*') === -1) {
                     var modelClass = '';
-                    $.each(tableName.split('_'), function() {
+                    $.each(tableName.split(/\.|\_/), function() {
                         if(this.length>0)
                             modelClass+=this.substring(0,1).toUpperCase()+this.substring(1);
                     });
@@ -247,6 +276,7 @@ yii.gii = (function ($) {
                 $('form .field-generator-queryns').toggle($(this).is(':checked'));
                 $('form .field-generator-queryclass').toggle($(this).is(':checked'));
                 $('form .field-generator-querybaseclass').toggle($(this).is(':checked'));
+                $('#generator-queryclass').prop('disabled', $(this).is(':not(:checked)'));
             }).change();
 
             // hide message category when I18N is disabled
@@ -255,7 +285,7 @@ yii.gii = (function ($) {
             }).change();
 
             // hide Generate button if any input is changed
-            $('.default-view .form-group input,select,textarea').change(function () {
+            $('#form-fields').find('input,select,textarea').change(function () {
                 $('.default-view-results,.default-view-files').hide();
                 $('.default-view button[name="generate"]').hide();
             });

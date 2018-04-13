@@ -10,7 +10,7 @@ use yii\gii\CodeFile;
 /* @var $id string panel ID */
 /* @var $form yii\widgets\ActiveForm */
 /* @var $results string */
-/* @var $hasError boolean */
+/* @var $hasError bool */
 /* @var $files CodeFile[] */
 /* @var $answers array */
 
@@ -31,7 +31,7 @@ foreach ($generator->templates as $name => $path) {
         'fieldConfig' => ['class' => ActiveField::className()],
     ]); ?>
         <div class="row">
-            <div class="col-lg-8 col-md-10">
+            <div class="col-lg-8 col-md-10" id="form-fields">
                 <?= $this->renderFile($generator->formView(), [
                     'generator' => $generator,
                     'form' => $form,

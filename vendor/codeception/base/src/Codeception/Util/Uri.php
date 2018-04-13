@@ -20,6 +20,13 @@ class Uri
     {
         $base = new Psr7Uri($baseUri);
         $parts = parse_url($uri);
+
+        //If the relative URL does not parse, attempt to parse the entire URL.
+        //PHP Known bug ( https://bugs.php.net/bug.php?id=70942 )
+        if ($parts === false) {
+            $parts = parse_url($base.$uri);
+        }
+        
         if ($parts === false) {
             throw new \InvalidArgumentException("Invalid URI $uri");
         }
@@ -101,8 +108,8 @@ class Uri
 
         if ($path === '' || $path[0] === '#') {
             return $cutUrl . $path;
-        } else {
-            return rtrim($cutUrl, '/') . '/'  . ltrim($path, '/');
         }
+
+        return rtrim($cutUrl, '/') . '/'  . ltrim($path, '/');
     }
 }

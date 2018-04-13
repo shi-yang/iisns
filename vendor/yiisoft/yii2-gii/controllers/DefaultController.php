@@ -10,6 +10,7 @@ namespace yii\gii\controllers;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
 
 /**
  * @author Qiang Xue <qiang.xue@gmail.com>
@@ -26,6 +27,16 @@ class DefaultController extends Controller
      * @var \yii\gii\Generator
      */
     public $generator;
+
+
+    /**
+     * @inheritdoc
+     */
+    public function beforeAction($action)
+    {
+        Yii::$app->response->format = Response::FORMAT_HTML;
+        return parent::beforeAction($action);
+    }
 
 
     public function actionIndex()
@@ -69,7 +80,7 @@ class DefaultController extends Controller
                 if ($f->id === $file) {
                     $content = $f->preview();
                     if ($content !== false) {
-                        return  '<div class="content">' . $content . '</content>';
+                        return  '<div class="content">' . $content . '</div>';
                     } else {
                         return '<div class="error">Preview is not available for this file type.</div>';
                     }

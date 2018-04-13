@@ -34,6 +34,12 @@ class UserSwitch extends Model
 
 
     /**
+     * @var string|User ID of the user component or a user object
+     * @since 2.0.13
+     */
+    public $userComponent = 'user';
+
+    /**
      * @inheritdoc
      */
     public function rules()
@@ -61,7 +67,8 @@ class UserSwitch extends Model
     public function getUser()
     {
         if ($this->_user === null) {
-            $this->_user = Yii::$app->get('user');
+            /* @var $user User */
+            $this->_user = is_string($this->userComponent) ? Yii::$app->get($this->userComponent, false) : $this->userComponent;
         }
         return $this->_user;
     }
@@ -100,7 +107,7 @@ class UserSwitch extends Model
         // Check if user is currently active one
         $isCurrent = ($user->getId() === $this->getMainUser()->getId());
         // Switch identity
-        Yii::$app->getUser()->switchIdentity($user->identity);
+        $this->getUser()->switchIdentity($user->identity);
         if (!$isCurrent) {
             Yii::$app->getSession()->set('main_user', $this->getMainUser()->getId());
         } else {

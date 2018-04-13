@@ -7,7 +7,7 @@
 
 namespace yii\debug\models\timeline;
 
-use yii\base\Object;
+use yii\base\BaseObject;
 use yii\debug\panels\TimelinePanel;
 use yii\helpers\StringHelper;
 
@@ -17,7 +17,7 @@ use yii\helpers\StringHelper;
  * @author Dmitriy Bashkarev <dmitriy@bashkarev.com>
  * @since 2.0.8
  */
-class Svg extends Object
+class Svg extends BaseObject
 {
     /**
      * @var int Max X coordinate

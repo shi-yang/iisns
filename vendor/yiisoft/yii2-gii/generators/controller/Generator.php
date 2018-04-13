@@ -20,6 +20,7 @@ use yii\helpers\StringHelper;
  * @property string $controllerFile The controller class file path. This property is read-only.
  * @property string $controllerID The controller ID. This property is read-only.
  * @property string $controllerNamespace The namespace of the controller class. This property is read-only.
+ * @property string $controllerSubPath The controller sub path. This property is read-only.
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
@@ -137,15 +138,28 @@ class Generator extends \yii\gii\Generator
      */
     public function successMessage()
     {
-        $actions = $this->getActionIDs();
-        if (in_array('index', $actions)) {
-            $route = $this->getControllerID() . '/index';
-        } else {
-            $route = $this->getControllerID() . '/' . reset($actions);
-        }
-        $link = Html::a('try it now', Yii::$app->getUrlManager()->createUrl($route), ['target' => '_blank']);
+        return 'The controller has been generated successfully.' . $this->getLinkToTry();
+    }
 
-        return "The controller has been generated successfully. You may $link.";
+    /**
+     * This method returns a link to try controller generated
+     * @see https://github.com/yiisoft/yii2-gii/issues/182
+     * @return string
+     * @since 2.0.6
+     */
+    private function getLinkToTry()
+    {
+        if (strpos($this->controllerNamespace, Yii::$app->controllerNamespace) !== 0) {
+            return '';
+        }
+
+        $actions = $this->getActionIDs();
+        if (in_array('index', $actions, true)) {
+            $route = $this->getControllerSubPath() . $this->getControllerID() . '/index';
+        } else {
+            $route = $this->getControllerSubPath() . $this->getControllerID() . '/' . reset($actions);
+        }
+        return ' You may ' . Html::a('try it now', Yii::$app->getUrlManager()->createUrl($route), ['target' => '_blank', 'rel' => 'noopener noreferrer']) . '.';
     }
 
     /**
@@ -200,16 +214,34 @@ class Generator extends \yii\gii\Generator
     }
 
     /**
+     * This method will return sub path for controller if it
+     * is located in subdirectory of application controllers dir
+     * @see https://github.com/yiisoft/yii2-gii/issues/182
+     * @since 2.0.6
+     * @return string the controller sub path
+     */
+    public function getControllerSubPath()
+    {
+        $subPath = '';
+        $controllerNamespace = $this->getControllerNamespace();
+        if (strpos($controllerNamespace, Yii::$app->controllerNamespace) === 0) {
+            $subPath = substr($controllerNamespace, strlen(Yii::$app->controllerNamespace));
+            $subPath = ($subPath !== '') ? str_replace('\\', '/', substr($subPath, 1)) . '/' : '';
+        }
+        return $subPath;
+    }
+
+    /**
      * @param string $action the action ID
      * @return string the action view file path
      */
     public function getViewFile($action)
     {
         if (empty($this->viewPath)) {
-            return Yii::getAlias('@app/views/' . $this->getControllerID() . "/$action.php");
-        } else {
-            return Yii::getAlias($this->viewPath . "/$action.php");
+            return Yii::getAlias('@app/views/' . $this->getControllerSubPath() . $this->getControllerID() . "/$action.php");
         }
+
+        return Yii::getAlias(str_replace('\\', '/', $this->viewPath) . "/$action.php");
     }
 
     /**

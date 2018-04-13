@@ -38,7 +38,6 @@ Please try it and leave your feedback.
     * seeRecord
     * dontSeeRecord
 
-
 ## Actions
 
 ### _findElements
@@ -595,7 +594,6 @@ Fails if element is not found.
 $I->grabAttributeFrom('#tooltip', 'title');
 ?>
 ```
-
 
  * `param` $cssOrXpath
  * `param` $attribute
@@ -1556,4 +1554,4 @@ $I->uncheckOption('#notify');
 
  * `param` $option
 
-<p>&nbsp;</p><div class="alert alert-warning">Module reference is taken from the source code. <a href="https://github.com/Codeception/Codeception/tree/2.3/src/Codeception/Module/Lumen.php">Help us to improve documentation. Edit module reference</a></div>
+<p>&nbsp;</p><div class="alert alert-warning">Module reference is taken from the source code. <a href="https://github.com/Codeception/Codeception/tree/2.4/src/Codeception/Module/Lumen.php">Help us to improve documentation. Edit module reference</a></div>

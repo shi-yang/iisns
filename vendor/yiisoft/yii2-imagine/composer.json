@@ -19,16 +19,22 @@
     ],
     "require": {
         "yiisoft/yii2": "~2.0.0",
-        "imagine/imagine": "~0.6.0"
+        "imagine/imagine": "~0.6.0 | ~0.7.1"
     },
     "autoload": {
         "psr-4": {
-            "yii\\imagine\\": ""
+            "yii\\imagine\\": "src"
         }
     },
     "extra": {
         "branch-alias": {
             "dev-master": "2.0.x-dev"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ]
 }

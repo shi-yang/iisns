@@ -17,7 +17,7 @@ use SebastianBergmann\CodeCoverage\RuntimeException;
 /**
  * Generates an HTML report from a code coverage object.
  */
-class Facade
+final class Facade
 {
     /**
      * @var string
@@ -39,14 +39,7 @@ class Facade
      */
     private $highLowerBound;
 
-    /**
-     * Constructor.
-     *
-     * @param int    $lowUpperBound
-     * @param int    $highLowerBound
-     * @param string $generator
-     */
-    public function __construct($lowUpperBound = 50, $highLowerBound = 90, $generator = '')
+    public function __construct(int $lowUpperBound = 50, int $highLowerBound = 90, string $generator = '')
     {
         $this->generator      = $generator;
         $this->highLowerBound = $highLowerBound;
@@ -55,14 +48,14 @@ class Facade
     }
 
     /**
-     * @param CodeCoverage $coverage
-     * @param string       $target
+     * @throws RuntimeException
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
      */
-    public function process(CodeCoverage $coverage, $target)
+    public function process(CodeCoverage $coverage, string $target): void
     {
         $target = $this->getDirectory($target);
         $report = $coverage->getReport();
-        unset($coverage);
 
         if (!isset($_SERVER['REQUEST_TIME'])) {
             $_SERVER['REQUEST_TIME'] = \time();
@@ -101,8 +94,8 @@ class Facade
             $id = $node->getId();
 
             if ($node instanceof DirectoryNode) {
-                if (!\file_exists($target . $id)) {
-                    \mkdir($target . $id, 0777, true);
+                if (!@\mkdir($target . $id, 0777, true) && !\is_dir($target . $id)) {
+                    throw new \RuntimeException(\sprintf('Directory "%s" was not created', $target . $id));
                 }
 
                 $directory->render($node, $target . $id . '/index.html');
@@ -110,8 +103,8 @@ class Facade
             } else {
                 $dir = \dirname($target . $id);
 
-                if (!\file_exists($dir)) {
-                    \mkdir($dir, 0777, true);
+                if (!@\mkdir($dir, 0777, true) && !\is_dir($dir)) {
+                    throw new \RuntimeException(\sprintf('Directory "%s" was not created', $dir));
                 }
 
                 $file->render($node, $target . $id . '.html');
@@ -122,9 +115,9 @@ class Facade
     }
 
     /**
-     * @param string $target
+     * @throws RuntimeException
      */
-    private function copyFiles($target)
+    private function copyFiles(string $target): void
     {
         $dir = $this->getDirectory($target . '.css');
 
@@ -160,31 +153,23 @@ class Facade
     }
 
     /**
-     * @param string $directory
-     *
-     * @return string
-     *
      * @throws RuntimeException
      */
-    private function getDirectory($directory)
+    private function getDirectory(string $directory): string
     {
         if (\substr($directory, -1, 1) != DIRECTORY_SEPARATOR) {
             $directory .= DIRECTORY_SEPARATOR;
         }
 
-        if (\is_dir($directory)) {
-            return $directory;
+        if (!@\mkdir($directory, 0777, true) && !\is_dir($directory)) {
+            throw new RuntimeException(
+                \sprintf(
+                    'Directory "%s" does not exist.',
+                    $directory
+                )
+            );
         }
 
-        if (@\mkdir($directory, 0777, true)) {
-            return $directory;
-        }
-
-        throw new RuntimeException(
-            \sprintf(
-                'Directory "%s" does not exist.',
-                $directory
-            )
-        );
+        return $directory;
     }
 }

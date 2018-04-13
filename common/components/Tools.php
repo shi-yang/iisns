@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /**
 * public function
 */
-class Tools extends \yii\base\Object
+class Tools extends \yii\base\BaseObject
 {
     /**
       * Time format. Output as the first few seconds or a few minutes ago.

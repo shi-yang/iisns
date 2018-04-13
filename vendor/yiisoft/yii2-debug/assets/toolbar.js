@@ -300,14 +300,23 @@
         var originalFetch = window.fetch;
 
         window.fetch = function(input, init) {
-            var method = (init && init.method) || 'GET';
+            var method;
+            var url;
+            if (typeof input === "string") {
+                method = (init && init.method) || 'GET';
+                url = input;
+            } else if (window.Request && input instanceof Request) {
+                method = input.method;
+                url = input.url;
+            }
             var promise = originalFetch(input, init);
+
             /* prevent logging AJAX calls to static and inline files, like templates */
-            if (input.substr(0, 1) === '/' && !input.match(new RegExp("{{ excluded_ajax_paths }}"))) {
+            if (url.substr(0, 1) === '/' && !url.match(new RegExp("{{ excluded_ajax_paths }}"))) {
                 var stackElement = {
                     loading: true,
                     error: false,
-                    url: input,
+                    url: url,
                     method: method,
                     start: new Date()
                 };
@@ -318,10 +327,16 @@
                     stackElement.statusCode = response.status;
                     stackElement.error = response.status < 200 || response.status >= 400;
                     stackElement.profile = response.headers.get("X-Debug-Tag");
-                    stackElement.profilerinput = response.headers.get("X-Debug-Link");
+                    stackElement.profilerUrl = response.headers.get("X-Debug-Link");
                     renderAjaxRequests();
 
                     return response;
+                }).catch(function(error) {
+                    stackElement.loading = false;
+                    stackElement.error = true;
+                    renderAjaxRequests();
+
+                    throw error;
                 });
                 renderAjaxRequests();
             }

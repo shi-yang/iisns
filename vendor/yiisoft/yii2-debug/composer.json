@@ -19,7 +19,7 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "yiisoft/yii2": "~2.0.11",
+        "yiisoft/yii2": "~2.0.13",
         "yiisoft/yii2-bootstrap": "~2.0.0"
     },
     "autoload": {

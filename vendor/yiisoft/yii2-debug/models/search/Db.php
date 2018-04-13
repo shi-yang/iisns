@@ -62,7 +62,7 @@ class Db extends Base
             'allModels' => $models,
             'pagination' => false,
             'sort' => [
-                'attributes' => ['duration', 'seq', 'type', 'query'],
+                'attributes' => ['duration', 'seq', 'type', 'query', 'duplicate'],
             ],
         ]);
 

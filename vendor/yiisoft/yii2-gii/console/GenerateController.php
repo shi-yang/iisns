@@ -32,7 +32,7 @@ class GenerateController extends Controller
      */
     public $module;
     /**
-     * @var boolean whether to overwrite all existing code files when in non-interactive mode.
+     * @var bool whether to overwrite all existing code files when in non-interactive mode.
      * Defaults to false, meaning none of the existing code files will be overwritten.
      * This option is used only when `--interactive=0`.
      */

@@ -1,6 +1,12 @@
 Yii Framework 2 composer extension Change Log
 =============================================
 
+2.0.6 March 21, 2018
+--------------------
+
+- Bug #16: Upgrade notes were not shown when upgrading from a patch version (cebe)
+
+
 2.0.5 December 20, 2016
 -----------------------
 

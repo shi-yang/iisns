@@ -36,10 +36,10 @@ use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Helper\FormatterHelper;
 use Symfony\Component\Console\Event\ConsoleCommandEvent;
 use Symfony\Component\Console\Event\ConsoleErrorEvent;
-use Symfony\Component\Console\Event\ConsoleExceptionEvent;
 use Symfony\Component\Console\Event\ConsoleTerminateEvent;
 use Symfony\Component\Console\Exception\CommandNotFoundException;
 use Symfony\Component\Console\Exception\LogicException;
+use Symfony\Component\Debug\ErrorHandler;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -80,7 +80,7 @@ class Application
      * @param string $name    The name of the application
      * @param string $version The version of the application
      */
-    public function __construct($name = 'UNKNOWN', $version = 'UNKNOWN')
+    public function __construct(string $name = 'UNKNOWN', string $version = 'UNKNOWN')
     {
         $this->name = $name;
         $this->version = $version;
@@ -118,28 +118,35 @@ class Application
             $output = new ConsoleOutput();
         }
 
-        if (null !== $this->dispatcher && $this->dispatcher->hasListeners(ConsoleEvents::EXCEPTION)) {
-            @trigger_error(sprintf('The "ConsoleEvents::EXCEPTION" event is deprecated since Symfony 3.3 and will be removed in 4.0. Listen to the "ConsoleEvents::ERROR" event instead.'), E_USER_DEPRECATED);
-        }
-
-        $this->configureIO($input, $output);
-
-        try {
-            $e = null;
-            $exitCode = $this->doRun($input, $output);
-        } catch (\Exception $e) {
-        }
-
-        if (null !== $e) {
-            if (!$this->catchExceptions) {
-                throw $e;
+        $renderException = function ($e) use ($output) {
+            if (!$e instanceof \Exception) {
+                $e = class_exists(FatalThrowableError::class) ? new FatalThrowableError($e) : new \ErrorException($e->getMessage(), $e->getCode(), E_ERROR, $e->getFile(), $e->getLine());
             }
-
             if ($output instanceof ConsoleOutputInterface) {
                 $this->renderException($e, $output->getErrorOutput());
             } else {
                 $this->renderException($e, $output);
             }
+        };
+        if ($phpHandler = set_exception_handler($renderException)) {
+            restore_exception_handler();
+            if (!is_array($phpHandler) || !$phpHandler[0] instanceof ErrorHandler) {
+                $debugHandler = true;
+            } elseif ($debugHandler = $phpHandler[0]->setExceptionHandler($renderException)) {
+                $phpHandler[0]->setExceptionHandler($debugHandler);
+            }
+        }
+
+        $this->configureIO($input, $output);
+
+        try {
+            $exitCode = $this->doRun($input, $output);
+        } catch (\Exception $e) {
+            if (!$this->catchExceptions) {
+                throw $e;
+            }
+
+            $renderException($e);
 
             $exitCode = $e->getCode();
             if (is_numeric($exitCode)) {
@@ -149,6 +156,20 @@ class Application
                 }
             } else {
                 $exitCode = 1;
+            }
+        } finally {
+            // if the exception handler changed, keep it
+            // otherwise, unregister $renderException
+            if (!$phpHandler) {
+                if (set_exception_handler($renderException) === $renderException) {
+                    restore_exception_handler();
+                }
+                restore_exception_handler();
+            } elseif (!$debugHandler) {
+                $finalHandler = $phpHandler[0]->setExceptionHandler(null);
+                if ($finalHandler !== $renderException) {
+                    $phpHandler[0]->setExceptionHandler($finalHandler);
+                }
             }
         }
 
@@ -198,21 +219,19 @@ class Application
         }
 
         try {
-            $e = $this->runningCommand = null;
+            $this->runningCommand = null;
             // the command name MUST be the first element of the input
             $command = $this->find($name);
-        } catch (\Exception $e) {
         } catch (\Throwable $e) {
-        }
-        if (null !== $e) {
             if (null !== $this->dispatcher) {
                 $event = new ConsoleErrorEvent($input, $output, $e);
                 $this->dispatcher->dispatch(ConsoleEvents::ERROR, $event);
-                $e = $event->getError();
 
                 if (0 === $event->getExitCode()) {
                     return 0;
                 }
+
+                $e = $event->getError();
             }
 
             throw $e;
@@ -562,6 +581,7 @@ class Application
     {
         $this->init();
 
+        $aliases = array();
         $allCommands = $this->commandLoader ? array_merge($this->commandLoader->getNames(), array_keys($this->commands)) : array_keys($this->commands);
         $expr = preg_replace_callback('{([^:]+|)}', function ($matches) { return preg_quote($matches[1]).'[^:]*'; }, $name);
         $commands = preg_grep('{^'.$expr.'}', $allCommands);
@@ -594,14 +614,15 @@ class Application
         // filter out aliases for commands which are already on the list
         if (count($commands) > 1) {
             $commandList = $this->commandLoader ? array_merge(array_flip($this->commandLoader->getNames()), $this->commands) : $this->commands;
-            $commands = array_unique(array_filter($commands, function ($nameOrAlias) use ($commandList, $commands) {
+            $commands = array_unique(array_filter($commands, function ($nameOrAlias) use ($commandList, $commands, &$aliases) {
                 $commandName = $commandList[$nameOrAlias] instanceof Command ? $commandList[$nameOrAlias]->getName() : $nameOrAlias;
+                $aliases[$nameOrAlias] = $commandName;
 
                 return $commandName === $nameOrAlias || !in_array($commandName, $commands);
             }));
         }
 
-        $exact = in_array($name, $commands, true);
+        $exact = in_array($name, $commands, true) || isset($aliases[$name]);
         if (count($commands) > 1 && !$exact) {
             $usableWidth = $this->terminal->getWidth() - 10;
             $abbrevs = array_values($commands);
@@ -718,10 +739,6 @@ class Application
             }
 
             $width = $this->terminal->getWidth() ? $this->terminal->getWidth() - 1 : PHP_INT_MAX;
-            // HHVM only accepts 32 bits integer in str_split, even when PHP_INT_MAX is a 64 bit integer: https://github.com/facebook/hhvm/issues/1327
-            if (defined('HHVM_VERSION') && $width > 1 << 31) {
-                $width = 1 << 31;
-            }
             $lines = array();
             foreach ('' !== $message ? preg_split('/\r?\n/', $message) : array() as $line) {
                 foreach ($this->splitStringByWidth($line, $width - 4) as $line) {
@@ -771,70 +788,6 @@ class Application
     }
 
     /**
-     * Tries to figure out the terminal width in which this application runs.
-     *
-     * @return int|null
-     *
-     * @deprecated since version 3.2, to be removed in 4.0. Create a Terminal instance instead.
-     */
-    protected function getTerminalWidth()
-    {
-        @trigger_error(sprintf('%s is deprecated as of 3.2 and will be removed in 4.0. Create a Terminal instance instead.', __METHOD__), E_USER_DEPRECATED);
-
-        return $this->terminal->getWidth();
-    }
-
-    /**
-     * Tries to figure out the terminal height in which this application runs.
-     *
-     * @return int|null
-     *
-     * @deprecated since version 3.2, to be removed in 4.0. Create a Terminal instance instead.
-     */
-    protected function getTerminalHeight()
-    {
-        @trigger_error(sprintf('%s is deprecated as of 3.2 and will be removed in 4.0. Create a Terminal instance instead.', __METHOD__), E_USER_DEPRECATED);
-
-        return $this->terminal->getHeight();
-    }
-
-    /**
-     * Tries to figure out the terminal dimensions based on the current environment.
-     *
-     * @return array Array containing width and height
-     *
-     * @deprecated since version 3.2, to be removed in 4.0. Create a Terminal instance instead.
-     */
-    public function getTerminalDimensions()
-    {
-        @trigger_error(sprintf('%s is deprecated as of 3.2 and will be removed in 4.0. Create a Terminal instance instead.', __METHOD__), E_USER_DEPRECATED);
-
-        return array($this->terminal->getWidth(), $this->terminal->getHeight());
-    }
-
-    /**
-     * Sets terminal dimensions.
-     *
-     * Can be useful to force terminal dimensions for functional tests.
-     *
-     * @param int $width  The width
-     * @param int $height The height
-     *
-     * @return $this
-     *
-     * @deprecated since version 3.2, to be removed in 4.0. Set the COLUMNS and LINES env vars instead.
-     */
-    public function setTerminalDimensions($width, $height)
-    {
-        @trigger_error(sprintf('%s is deprecated as of 3.2 and will be removed in 4.0. Set the COLUMNS and LINES env vars instead.', __METHOD__), E_USER_DEPRECATED);
-
-        putenv('COLUMNS='.$width);
-        putenv('LINES='.$height);
-
-        return $this;
-    }
-
-    /**
      * Configures the input and output instances based on the user arguments and options.
      */
     protected function configureIO(InputInterface $input, OutputInterface $output)
@@ -852,12 +805,6 @@ class Application
 
             if ($input instanceof StreamableInputInterface) {
                 $inputStream = $input->getStream();
-            }
-
-            // This check ensures that calling QuestionHelper::setInputStream() works
-            // To be removed in 4.0 (in the same time as QuestionHelper::setInputStream)
-            if (!$inputStream && $this->getHelperSet()->has('question')) {
-                $inputStream = $this->getHelperSet()->get('question')->getInputStream(false);
             }
 
             if (!@posix_isatty($inputStream) && false === getenv('SHELL_INTERACTIVE')) {
@@ -937,19 +884,7 @@ class Application
             } else {
                 $exitCode = ConsoleCommandEvent::RETURN_CODE_DISABLED;
             }
-        } catch (\Exception $e) {
         } catch (\Throwable $e) {
-        }
-        if (null !== $e) {
-            if ($this->dispatcher->hasListeners(ConsoleEvents::EXCEPTION)) {
-                $x = $e instanceof \Exception ? $e : new FatalThrowableError($e);
-                $event = new ConsoleExceptionEvent($command, $input, $output, $x, $x->getCode());
-                $this->dispatcher->dispatch(ConsoleEvents::EXCEPTION, $event);
-
-                if ($x !== $event->getException()) {
-                    $e = $event->getException();
-                }
-            }
             $event = new ConsoleErrorEvent($input, $output, $e, $command);
             $this->dispatcher->dispatch(ConsoleEvents::ERROR, $event);
             $e = $event->getError();

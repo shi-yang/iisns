@@ -15,7 +15,7 @@ use yii\gii\CodeFile;
  *
  * @property string $keywordsArrayJson A json encoded array with the given keywords. This property is
  * read-only.
- * @property boolean $outputPath The directory that contains the module class. This property is read-only.
+ * @property bool $outputPath The directory that contains the module class. This property is read-only.
  *
  * @author Tobias Munk <schmunk@usrbin.de>
  * @since 2.0
@@ -86,8 +86,8 @@ class Generator extends \yii\gii\Generator
                 [
                     ['namespace'],
                     'match',
-                    'pattern' => '/^[a-zA-Z0-9\\\]+\\\$/',
-                    'message' => 'Only letters, numbers and backslashes are allowed. PSR-4 namespaces must end with a namespace separator.'
+                    'pattern' => '/^[a-zA-Z0-9_\\\]+\\\$/',
+                    'message' => 'Only letters, numbers, underscores and backslashes are allowed. PSR-4 namespaces must end with a namespace separator.'
                 ],
             ]
         );
@@ -219,11 +219,11 @@ EOD;
     }
 
     /**
-     * @return boolean the directory that contains the module class
+     * @return bool the directory that contains the module class
      */
     public function getOutputPath()
     {
-        return Yii::getAlias($this->outputPath);
+        return Yii::getAlias(str_replace('\\', '/', $this->outputPath));
     }
 
     /**

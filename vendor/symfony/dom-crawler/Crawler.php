@@ -59,7 +59,7 @@ class Crawler implements \Countable, \IteratorAggregate
      * @param string $uri      The current URI
      * @param string $baseHref The base href value
      */
-    public function __construct($node = null, $uri = null, $baseHref = null)
+    public function __construct($node = null, string $uri = null, string $baseHref = null)
     {
         $this->uri = $uri;
         $this->baseHref = $baseHref ?: $uri;
@@ -648,7 +648,7 @@ class Crawler implements \Countable, \IteratorAggregate
                 }
             }
 
-            $data[] = $count > 1 ? $elements : $elements[0];
+            $data[] = 1 === $count ? $elements[0] : $elements;
         }
 
         return $data;
@@ -691,8 +691,8 @@ class Crawler implements \Countable, \IteratorAggregate
      */
     public function filter($selector)
     {
-        if (!class_exists('Symfony\\Component\\CssSelector\\CssSelectorConverter')) {
-            throw new \RuntimeException('Unable to filter with a CSS selector as the Symfony CssSelector 2.8+ is not installed (you can use filterXPath instead).');
+        if (!class_exists(CssSelectorConverter::class)) {
+            throw new \RuntimeException('To filter with a CSS selector, install the CssSelector component ("composer require symfony/css-selector"). Or use filterXpath instead.');
         }
 
         $converter = new CssSelectorConverter($this->isHtml);
@@ -958,12 +958,8 @@ class Crawler implements \Countable, \IteratorAggregate
      *
      * The returned XPath will match elements matching the XPath inside the current crawler
      * when running in the context of a node of the crawler.
-     *
-     * @param string $xpath
-     *
-     * @return string
      */
-    private function relativize($xpath)
+    private function relativize(string $xpath): string
     {
         $expressions = array();
 
@@ -1095,14 +1091,9 @@ class Crawler implements \Countable, \IteratorAggregate
     }
 
     /**
-     * @param \DOMDocument $document
-     * @param array        $prefixes
-     *
-     * @return \DOMXPath
-     *
      * @throws \InvalidArgumentException
      */
-    private function createDOMXPath(\DOMDocument $document, array $prefixes = array())
+    private function createDOMXPath(\DOMDocument $document, array $prefixes = array()): \DOMXPath
     {
         $domxpath = new \DOMXPath($document);
 
@@ -1117,14 +1108,9 @@ class Crawler implements \Countable, \IteratorAggregate
     }
 
     /**
-     * @param \DOMXPath $domxpath
-     * @param string    $prefix
-     *
-     * @return string
-     *
      * @throws \InvalidArgumentException
      */
-    private function discoverNamespace(\DOMXPath $domxpath, $prefix)
+    private function discoverNamespace(\DOMXPath $domxpath, string $prefix): ?string
     {
         if (isset($this->namespaces[$prefix])) {
             return $this->namespaces[$prefix];
@@ -1136,14 +1122,11 @@ class Crawler implements \Countable, \IteratorAggregate
         if ($node = $namespaces->item(0)) {
             return $node->nodeValue;
         }
+
+        return null;
     }
 
-    /**
-     * @param string $xpath
-     *
-     * @return array
-     */
-    private function findNamespacePrefixes($xpath)
+    private function findNamespacePrefixes(string $xpath): array
     {
         if (preg_match_all('/(?P<prefix>[a-z_][a-z_0-9\-\.]*+):[^"\/:]/i', $xpath, $matches)) {
             return array_unique($matches['prefix']);
