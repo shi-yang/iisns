@@ -4,21 +4,13 @@ use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
 use backend\assets\AdminLteAsset;
 use common\widgets\Alert;
+use backend\assets\AppAsset;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+AppAsset::register($this);
 AdminLteAsset::register($this);
-
-$this->registerCss('
-    .navbar #navbar-toggle-header {
-        display: inline;
-        float: left;
-    }
-    .navbar #navbar-toggle-header .icon-bar {
-        background-color: #fff;
-    }
-');
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -37,159 +29,146 @@ $this->registerCss('
         <![endif]-->
         <?php $this->head() ?>
     </head>
-    <body class="sidebar-mini skin-blue">
+    <body class="sidebar-mini" style="height: auto">
     <?php $this->beginBody() ?>
     <div class="wrapper">
-        <!-- header logo: style can be found in header.less -->
-        <header class="main-header">
-            <a href="#" class="logo">
-                <!-- Add the class icon to your logo image or logo icon to add the margining -->
-                iiSNS AdminLTE
+        <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="/" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="#" class="nav-link">Contact</a>
+                </li>
+            </ul>
+
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+                <!-- Messages Dropdown Menu -->
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= Url::toRoute(['/site/logout']) ?>">
+                        <i class="fa fa-comments-o"></i>
+                        <?= Yii::t('app', 'Logout') ?>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <aside class="main-sidebar sidebar-dark-primary elevation-4" style="min-height: 846px;">
+            <!-- Brand Logo -->
+            <a href="index3.html" class="brand-link">
+                <img src="<?= Yii::getAlias('@web/images/logo.jpg') ?>" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">Backend</span>
             </a>
-            <!-- Header Navbar: style can be found in header.less -->
-            <nav class="navbar navbar-static-top" role="navigation">
-                <!-- Sidebar toggle button-->
-                <a href="#" class="navbar-toggle" id="navbar-toggle-header" data-toggle="offcanvas" role="button">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-                <div class="navbar-custom-menu">
-                    <ul class="nav navbar-nav">
-                        <!-- User Account: style can be found in dropdown.less -->
-                        <li class="dropdown user user-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="glyphicon glyphicon-user"></i>
-                                <span><?= Yii::$app->user->identity->username ?><i class="caret"></i></span>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user panel (optional) -->
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="info color-palette bg-success">
+                        Hello, <a href="#"><?= Yii::$app->user->identity->username ?></a>
+                    </div>
+                </div>
+
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+                             with font-awesome or any other icon font library -->
+                        <li class="nav-item">
+                            <a href="<?= Url::toRoute(['/site/index']) ?>" class="nav-link">
+                                <i class="nav-icon fa fa-dashboard"></i>
+                                <p>
+                                    <?= Yii::t('app', 'Dashboard'); ?>
+                                </p>
                             </a>
-                            <ul class="dropdown-menu">
-                                <!-- User image -->
-                                <li class="user-header bg-light-blue">
-                                    <img src="<?= Yii::getAlias('@web/images/user2-160x160.jpg') ?>" class="img-circle" alt="User Image" />
-                                    <p>
-                                        Jane Doe - Web Developer
-                                        <small>Member since Nov. 2012</small>
-                                    </p>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= Url::toRoute(['/explore/index']) ?>" class="nav-link">
+                                <i class="nav-icon fa fa-th"></i>
+                                <p>
+                                    <?= Yii::t('app', 'Explore') ?>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= Url::toRoute(['/setting/default']) ?>" class="nav-link">
+                                <i class="nav-icon fa fa-th"></i>
+                                <p>
+                                    <?= Yii::t('app', 'Setting') ?>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-pie-chart"></i>
+                                <p>
+                                    <?= Yii::t('app', 'Content') ?>
+                                    <i class="right fa fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="<?= Url::toRoute(['/user']) ?>" class="nav-link">
+                                        <i class="fa fa-users nav-icon"></i>
+                                        <p><?= Yii::t('app', 'User') ?></p>
+                                    </a>
                                 </li>
-                                <!-- Menu Body -->
-                                <li class="user-body">
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Followers</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Sales</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Friends</a>
-                                    </div>
+                                <li class="nav-item">
+                                    <a href="<?= Url::toRoute(['/forum/forum/index']) ?>" class="nav-link">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p><?= Yii::t('app', 'Forum') ?></p>
+                                    </a>
                                 </li>
-                                <!-- Menu Footer-->
-                                <li class="user-footer">
-                                    <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                    </div>
-                                    <div class="pull-right">
-                                        <a href="<?= URL::toRoute(['/site/logout']) ?>" class="btn btn-default btn-flat">Sign out</a>
-                                    </div>
+                                <li class="nav-item">
+                                    <a href="<?= Url::toRoute(['/post/index']) ?>" class="nav-link">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p><?= Yii::t('app', 'Blog') ?></p>
+                                    </a>
                                 </li>
                             </ul>
                         </li>
+                        <li class="nav-item">
+                            <a href="<?= Url::toRoute(['/rbac']) ?>" class="nav-link">
+                                <i class="nav-icon fa fa-th"></i>
+                                <p>
+                                    <?= Yii::t('app', 'RBAC') ?>
+                                </p>
+                            </a>
+                        </li>
                     </ul>
-                </div>
-            </nav>
-        </header>
-
-        <!-- Left side column. contains the logo and sidebar -->
-        <aside class="main-sidebar">
-            <!-- sidebar: style can be found in sidebar.less -->
-            <section class="sidebar" style="height: auto;">
-                <!-- Sidebar user panel -->
-                <div class="user-panel">
-                    <div class="pull-left image">
-                        <img src="<?= Yii::getAlias('@web/images/user2-160x160.jpg') ?>" class="img-circle" alt="User Image" />
-                    </div>
-                    <div class="pull-left info">
-                        <p>Hello, <?= Yii::$app->user->identity->username ?></p>
-
-                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                    </div>
-                </div>
-                <!-- search form -->
-                <form action="#" method="get" class="sidebar-form">
-                    <div class="input-group">
-                        <input type="text" name="q" class="form-control" placeholder="Search..."/>
-                            <span class="input-group-btn">
-                                <button type='submit' name='seach' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
-                            </span>
-                    </div>
-                </form>
-                <!-- /.search form -->
-                <!-- sidebar menu: : style can be found in sidebar.less -->
-                <ul class="sidebar-menu">
-                    <li>
-                        <a href="<?= Url::toRoute('/site/index') ?>">
-                            <i class="glyphicon glyphicon-dashboard"></i> <span><?= Yii::t('app', 'Dashboard') ?></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?= Url::toRoute('/explore/index') ?>">
-                            <i class="glyphicon glyphicon-globe"></i> <span><?= Yii::t('app', 'Explore') ?></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?= Url::toRoute('/setting/default') ?>">
-                            <i class="glyphicon glyphicon-cog"></i> <span><?= Yii::t('app', 'Setting') ?></span>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="glyphicon glyphicon-hdd"></i>
-                            <span><?= Yii::t('app', 'Content') ?></span>
-                            <i class="glyphicon glyphicon-menu-down pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="<?= Url::toRoute('/user') ?>"><i class="glyphicon glyphicon-menu-right"></i> <?= Yii::t('app', 'User') ?></a></li>
-                            <li><a href="<?= Url::toRoute('/forum/forum/index') ?>"><i class="glyphicon glyphicon-menu-right"></i> <?= Yii::t('app', 'Forum') ?></a></li>
-                            <li><a href="<?= Url::toRoute('/post') ?>"><i class="glyphicon glyphicon-menu-right"></i> <?= Yii::t('app', 'Blog') ?></a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="<?= Url::toRoute(['/rbac']) ?>">
-                            <i class="glyphicon glyphicon-wrench"></i> <span><?= Yii::t('app', 'RBAC') ?></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?= Url::toRoute(['/site/cache']) ?>">
-                            <i class="glyphicon glyphicon-road"></i> <span><?= Yii::t('app', 'Cache') ?></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?= Url::toRoute(['/site/phpinfo']) ?>">
-                            <i class="glyphicon glyphicon-info-sign"></i> <span>PHPinfo</span>
-                        </a>
-                    </li>
-                </ul>
-            </section>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
             <!-- /.sidebar -->
         </aside>
 
-        <!-- Right side column. Contains the navbar and content of the page -->
-        <div class="content-wrapper">
+        <div class="content-wrapper" style="min-height: 846px;">
             <!-- Content Header (Page header) -->
             <section class="content-header">
-                <h1>
-                    <?= \Yii::$app->controller->module->id ?>
-                    <small>Preview page</small>
-                </h1>
-                <?= Breadcrumbs::widget([
-                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                ]) ?>
+                <div class="container-fluid">
+                    <h1>
+                        <?= \Yii::$app->controller->module->id ?>
+                    </h1>
+                    <?= Breadcrumbs::widget([
+                        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                        'options' => ['class' => 'breadcrumb float-sm-right'],
+                        'tag' => 'ol',
+                        'itemTemplate' => '<li class="breadcrumb-item">{link}</li>',
+                        'activeItemTemplate' => '<li class="breadcrumb-item active">{link}</li>'
+                    ]) ?>
+                </div>
             </section>
             <!-- Main content -->
             <section class="content">
-                <?= Alert::widget() ?>
-                <?= $content ?>
+                <div class="container-fluid">
+                    <?= Alert::widget() ?>
+                    <?= $content ?>
+                </div>
             </section><!-- /.content -->
         </div><!-- /.right-side -->
     </div>

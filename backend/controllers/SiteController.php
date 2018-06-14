@@ -5,6 +5,7 @@ use Yii;
 use yii\filters\AccessControl;
 use common\components\BaseController;
 use backend\models\LoginForm;
+use backend\components\SystemInfo;
 
 /**
  * Site controller
@@ -56,7 +57,34 @@ class SiteController extends BaseController
         $statistics['postCount'] = Yii::$app->db->createCommand("SELECT count(*) as num FROM {{%home_post}}")->queryScalar();
         $statistics['photoCount'] = Yii::$app->db->createCommand("SELECT count(*) as num FROM {{%home_photo}}")->queryScalar();
         $statistics['forumCount'] = Yii::$app->db->createCommand("SELECT count(*) as num FROM {{%forum}}")->queryScalar();
-        return $this->render('index',[
+        if (Yii::$app->request->get('method') == 'sysinfo') {
+            return json_encode([
+                'stat' => SystemInfo::getStat(),
+                'stime' => date('Y-m-d H:i:s'),
+                'uptime' => SystemInfo::getUpTime(),
+                'tempinfo' => SystemInfo::getTempInfo(),
+                'meminfo' => SystemInfo::getMemInfo(),
+                'loadavg' => SystemInfo::getLoadAvg(),
+                'diskinfo' => SystemInfo::getDiskInfo(),
+                'netdev' => SystemInfo::getNetDev()
+            ]);
+        }
+        return $this->render('index', [
+            'time_start' => microtime(true),
+            'stat' => SystemInfo::getStat(),
+            'LC_CTYPE' => setlocale(LC_CTYPE, 0),
+            'uname' => php_uname(),
+            'stime' => date('Y-m-d H:i:s'),
+            'distname' => SystemInfo::getDistName(),
+            'server_addr' => SystemInfo::getServerAddr(),
+            'remote_addr' => SystemInfo::getRemoteAddr(),
+            'uptime' => SystemInfo::getUpTime(),
+            'cpuinfo' => SystemInfo::getCpuInfo(),
+            'tempinfo' => SystemInfo::getTempInfo(),
+            'meminfo' => SystemInfo::getMemInfo(),
+            'loadavg' => SystemInfo::getLoadAvg(),
+            'diskinfo' => SystemInfo::getDiskInfo(),
+            'netdev' => SystemInfo::getNetDev(),
             'statistics' => $statistics,
         ]);
     }

@@ -16,15 +16,15 @@ class AdminLteAsset extends AssetBundle
 {
     public $sourcePath = '@app/assets/adminlte';
     public $css = [
-        'css/AdminLTE.min.css',
+        'css/adminlte.min.css',
         'css/skins/skin-blue.min.css',
+        'https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css',
     ];
     public $js = [
-        'js/app.min.js',
+        'js/adminlte.js',
+        'js/plugins/bootstrap/js/bootstrap.bundle.min.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
-        'yii\bootstrap\BootstrapPluginAsset',
     ];
 }

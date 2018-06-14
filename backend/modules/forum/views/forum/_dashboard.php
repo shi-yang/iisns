@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-use shiyang\webuploader\Cropper;
+use iisns\webuploader\Cropper;
 use yii\helpers\Url;
 
 ?>
